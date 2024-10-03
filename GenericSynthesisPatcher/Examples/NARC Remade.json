@@ -1,0 +1,222 @@
+[
+  {
+    "types": [
+      "Faction"
+    ],
+    "formID": [
+      "000013:Skyrim.esm",
+      "01C4ED:Skyrim.esm",
+      "02997F:Skyrim.esm",
+      "02E893:Skyrim.esm",
+      "02E894:Skyrim.esm",
+      "032D9C:Skyrim.esm",
+      "0330B1:Skyrim.esm",
+      "03C9A8:Skyrim.esm",
+      "03E096:Skyrim.esm",
+      "03E691:Skyrim.esm",
+      "0418EA:Skyrim.esm",
+      "043596:Skyrim.esm",
+      "04359D:Skyrim.esm",
+      "04359F:Skyrim.esm",
+      "0435A0:Skyrim.esm",
+      "0435A2:Skyrim.esm",
+      "0490F1:Skyrim.esm",
+      "04C1D0:Skyrim.esm",
+      "04E849:Skyrim.esm",
+      "05A837:Skyrim.esm",
+      "068D78:Skyrim.esm",
+      "08E4FA:Skyrim.esm",
+      "08E4FB:Skyrim.esm",
+      "09A741:Skyrim.esm",
+      "09A7B2:Skyrim.esm",
+      "09F336:Skyrim.esm",
+      "09F808:Skyrim.esm",
+      "0A2C8D:Skyrim.esm",
+      "0A3087:Skyrim.esm",
+      "0B2849:Skyrim.esm",
+      "0C6472:Skyrim.esm",
+      "0F1ABC:Skyrim.esm",
+      "01AA75:Dawnguard.esm",
+      "017960:Dragonborn.esm",
+      "017964:Dragonborn.esm",
+      "017EBD:Dragonborn.esm",
+      "018421:Dragonborn.esm",
+      "02507C:Dragonborn.esm",
+      "031846:Dragonborn.esm",
+      "049341:BSHeartland.esm",
+      "049342:BSHeartland.esm",
+      "05EF0D:BSHeartland.esm",
+      "062708:BSHeartland.esm",
+      "06DA79:BSHeartland.esm",
+      "08B602:BSHeartland.esm",
+      "0D51B9:BSHeartland.esm",
+      "0D51BD:BSHeartland.esm",
+      "0D6C71:BSHeartland.esm",
+      "084BA7:ForgottenCity.esp"
+    ],
+    "fill": {
+      "flags": [
+        "IgnoreMurder",
+        "IgnoreAssault",
+        "IgnoreStealing",
+        "IgnoreTrespass",
+        "DoNotReportCrimesAgainstMembers",
+        "IgnorePickpocket",
+        "IgnoreWerewolf"
+      ]
+    }
+  },
+  {
+    "types": [
+      "Faction"
+    ],
+    "formID": [
+      "01BCC0:Skyrim.esm",
+      "025F95:Skyrim.esm",
+      "03D729:Skyrim.esm",
+      "088EE4:Skyrim.esm",
+      "08E764:Skyrim.esm",
+      "09CAC0:Skyrim.esm",
+      "09F811:Skyrim.esm",
+      "09F817:Skyrim.esm",
+      "0AE026:Skyrim.esm",
+      "0B8CAB:Skyrim.esm",
+      "0C0160:Skyrim.esm",
+      "0E0CD9:Skyrim.esm",
+      "10FBDB:Skyrim.esm",
+      "0D791D:BSHeartland.esm",
+      "03AF85:ForgottenCity.esp"
+    ],
+    "fill": {
+      "flags": [
+        "IgnoreMurder",
+        "IgnoreAssault",
+        "IgnoreStealing",
+        "IgnoreTrespass",
+        "IgnorePickpocket",
+        "-IgnoreWerewolf"
+      ]
+    }
+  },
+  {
+    "types": [
+      "Faction"
+    ],
+    "formID": [
+      "02430D:Skyrim.esm",
+      "02997E:Skyrim.esm",
+      "02B0E5:Skyrim.esm",
+      "02D1DF:Skyrim.esm",
+      "03997D:Skyrim.esm",
+      "03D4D3:Skyrim.esm",
+      "03D72A:Skyrim.esm",
+      "03D72F:Skyrim.esm",
+      "03D732:Skyrim.esm",
+      "03E093:Skyrim.esm",
+      "03E094:Skyrim.esm",
+      "03E095:Skyrim.esm",
+      "03F9EE:Skyrim.esm",
+      "043597:Skyrim.esm",
+      "043598:Skyrim.esm",
+      "04359A:Skyrim.esm",
+      "04359B:Skyrim.esm",
+      "04359E:Skyrim.esm",
+      "0435A1:Skyrim.esm",
+      "044243:Skyrim.esm",
+      "044CCD:Skyrim.esm",
+      "044CCE:Skyrim.esm",
+      "044CCF:Skyrim.esm",
+      "04E9BF:Skyrim.esm",
+      "054883:Skyrim.esm",
+      "054D00:Skyrim.esm",
+      "072AB9:Skyrim.esm",
+      "084C1B:Skyrim.esm",
+      "086DDB:Skyrim.esm",
+      "09A9CC:Skyrim.esm",
+      "09CAC1:Skyrim.esm",
+      "09F335:Skyrim.esm",
+      "09F338:Skyrim.esm",
+      "09F33A:Skyrim.esm",
+      "09F33C:Skyrim.esm",
+      "09F33D:Skyrim.esm",
+      "0A0717:Skyrim.esm",
+      "0A88C6:Skyrim.esm",
+      "0ABA9D:Skyrim.esm",
+      "0BC033:Skyrim.esm",
+      "0BFB4F:Skyrim.esm",
+      "0BFB69:Skyrim.esm",
+      "0C19E7:Skyrim.esm",
+      "0C1A08:Skyrim.esm",
+      "0D33A2:Skyrim.esm",
+      "0D8B88:Skyrim.esm",
+      "0E0CD8:Skyrim.esm",
+      "0E0CDB:Skyrim.esm",
+      "0EC6FC:Skyrim.esm",
+      "0FBBF3:Skyrim.esm",
+      "105EDF:Skyrim.esm",
+      "106643:Skyrim.esm",
+      "10BEDA:Skyrim.esm",
+      "011BE2:Dawnguard.esm",
+      "01A52C:Dawnguard.esm",
+      "017785:Dragonborn.esm",
+      "01B63B:Dragonborn.esm",
+      "01D750:Dragonborn.esm",
+      "01D9C9:Dragonborn.esm",
+      "01E8BD:Dragonborn.esm",
+      "01EEC4:Dragonborn.esm",
+      "01FB95:Dragonborn.esm",
+      "0208D9:Dragonborn.esm",
+      "02655F:Dragonborn.esm",
+      "02856C:Dragonborn.esm",
+      "061800:BSHeartland.esm",
+      "08BB70:BSHeartland.esm",
+      "08BBFC:BSHeartland.esm",
+      "0AB490:BSHeartland.esm",
+      "0B555A:BSHeartland.esm",
+      "0B555B:BSHeartland.esm",
+      "0D6C65:BSHeartland.esm",
+      "0D6C72:BSHeartland.esm",
+      "0CC60F:ForgottenCity.esp",
+      "0CC610:ForgottenCity.esp"
+    ],
+    "fill": {
+      "flags": [
+        "IgnoreMurder",
+        "IgnoreAssault",
+        "IgnoreStealing",
+        "IgnoreTrespass",
+        "IgnorePickpocket",
+        "IgnoreWerewolf"
+      ]
+    }
+  },
+  {
+    "types": [
+      "Faction"
+    ],
+    "formID": [
+      "029DA9:Skyrim.esm"
+    ],
+    "fill": {
+      "flags": [
+        "-IgnoreAssault",
+        "IgnoreStealing",
+        "IgnoreTrespass",
+        "IgnorePickpocket"
+      ]
+    }
+  },
+  {
+    "types": [
+      "Faction"
+    ],
+    "formID": [
+      "01DC62:Dragonborn.esm"
+    ],
+    "fill": {
+      "flags": [
+        "IgnoreWerewolf"
+      ]
+    }
+  }
+]
