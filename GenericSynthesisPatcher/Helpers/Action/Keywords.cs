@@ -17,11 +17,12 @@ using Mutagen.Bethesda.Skyrim;
 using Noggog;
 
 using static GenericSynthesisPatcher.Json.Data.GSPRule;
+using static GenericSynthesisPatcher.Program;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     // Log Codes: 0x2xx
-    internal static class Keyword
+    public class Keywords : IAction
     {
         private static Dictionary<string, IKeywordGetter>? keywords;
         private static IKeywordGetter? GetKeyword ( string name )
@@ -38,7 +39,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x21x
-        public static bool FillKeywords ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, string propertyName )
+        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
         {
             IKeyworded<IKeywordGetter>? patch = null;
 
@@ -46,7 +47,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as keywords don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
                     return false;
                 }
 
@@ -79,16 +80,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
             else
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, propertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x211);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x211);
             }
 
             if (patch != null)
-                LogHelper.Log(LogLevel.Debug, context, propertyName, "Updated.");
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
             return patch != null;
         }
 
         // Log Codes: 0x22x
-        public static bool ForwardKeywords ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, string propertyName )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
         {
             IKeyworded<IKeywordGetter>? patch = null;
 
@@ -96,13 +97,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 if (forward.Keywords.SequenceEqualNullable(record.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as already matches forwarding record");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as already matches forwarding record");
                     return false;
                 }
 
                 if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as keywords don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
                     return false;
                 }
 
@@ -115,13 +116,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
             else
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, propertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x221);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x221);
             }
 
             if (patch != null)
-                LogHelper.Log(LogLevel.Debug, context, propertyName, "Updated.");
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
 
             return patch != null;
         }
+
+        public static bool CanFill () => true;
+        public static bool CanForward () => true;
     }
 }

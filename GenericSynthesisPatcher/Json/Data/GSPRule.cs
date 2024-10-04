@@ -36,7 +36,7 @@ namespace GenericSynthesisPatcher.Json.Data
         public readonly struct ValueKey ( ActionType actionType, string key )
         {
             public readonly ActionType ActionType = actionType;
-            public readonly string Key = key;
+            public readonly string Key = key.ToLower();
 
             public override bool Equals ( [NotNullWhen(true)] object? obj )
                 => obj is ValueKey key
