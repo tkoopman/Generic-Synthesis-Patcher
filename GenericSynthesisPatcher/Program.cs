@@ -19,13 +19,11 @@ using NexusMods.Paths.Trees.Traits;
 using GenericSynthesisPatcher.Helpers.Action;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace GenericSynthesisPatcher
 {
     // Log Codes: 0x0xx
-    public partial class Program
+    public class Program
     {
         public static async Task<int> Main ( string[] args ) => await SynthesisPipeline.Instance
                 .AddPatch<ISkyrimMod, ISkyrimModGetter>(RunPatch)
@@ -39,7 +37,7 @@ namespace GenericSynthesisPatcher
             Global.State = state;
 
             var Rules = LoadRules();
-            if (Rules.Count == 0)
+            if ( Rules.Count == 0 ) 
                 return;
 
             uint total = 0, updated = 0, changes = 0;
@@ -166,35 +164,51 @@ namespace GenericSynthesisPatcher
                 LogHelper.LogInvalidTypeFound(LogLevel.Trace, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name, 0x011);
                 return false;
             }
-
-            var rcd = FindRecordCallData(context, valueKey.Key);
-
-            if (rcd != null && rcd.CanFill())
-                return rcd.Fill(context, origin, rule, valueKey, rcd);
-
-            LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for fill action: {valueKey.Key}", 0x012);
-            return false;
-        }
-
-        private static RecordCallData? FindRecordCallData ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, string valueKey )
-        {
-            RecordCallData? rcd = null;
-            foreach (var r in RecordCallDataMapping)
+            
+            switch (valueKey.Key.ToLower())
             {
-                int c = r.Key.JsonKey.CompareTo(valueKey);
-
-                if (c == 0 && (r.Key.RecordType == null || r.Key.RecordType.IsAssignableFrom(context.Record.GetType())))
-                {
-                    rcd = r.Value;
-                    break;
-                }
-
-                // No need to keep searching sorted list if we already after where a match would be
-                if (c == 1)
+                case "damage":
+                case "dmg":
+                    return Generic.Fill<float>(context, origin, rule, valueKey, "Damage");
+                case "desc":
+                case "description":
+                    return Helpers.Action.String.FillString(context, origin, rule, valueKey, "Description");
+                case "effects":
+                    return Effects.FillEffects(context, origin, rule, valueKey, "Effects");
+                case "enchantmentamount":
+                case "eamt":
+                    return Generic.Fill<ushort>(context, origin, rule, valueKey, "EnchantmentAmount");
+                case "objecteffect":
+                case "eitm":
+                    return FormLink.FillFormLink<IEffectRecordGetter>(context, origin, rule, valueKey, "ObjectEffect");
+                case "flags":
+                    return Flags.FillFlags(context, origin, rule, valueKey, "Flags");
+                case "items":
+                    return FormLink.FillFormLinks<IOutfitTargetGetter>(context, origin, rule, valueKey, "Items");
+                case "kwda":
+                case "keywords":
+                    return Helpers.Action.Keyword.FillKeywords(context, origin, rule, valueKey, "Keywords");
+                case "location":
+                case "xlcn":
+                    return FormLink.FillFormLink<ILocationGetter>(context, origin, rule, valueKey, "Location");
+                case "majorflags":
+                    return Flags.FillFlags(context, origin, rule, valueKey, "MajorFlags");
+                case "full":
+                case "name":
+                    return Helpers.Action.String.FillString(context, origin, rule, valueKey, "Name");
+                case "value":
+                    return Generic.Fill<uint>(context, origin, rule, valueKey, "Value");
+                case "weight":
+                    return Generic.Fill<float>(context, origin, rule, valueKey, "Weight");
+                case "water":
+                case "xcwt":
+                    return FormLink.FillFormLink<IWaterGetter>(context, origin, rule, valueKey, "Water");
+                default:
+                    LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for fill action: {valueKey.Key}", 0x012);
                     break;
             }
 
-            return rcd;
+            return false;
         }
 
         // Log Code: 0x02x
@@ -223,14 +237,66 @@ namespace GenericSynthesisPatcher
             uint changed = 0;
             foreach (string forwardField in forwardFields)
             {
-                var rcd = FindRecordCallData(context, forwardField);
-
-                if (rcd != null && rcd.CanForward())
+                switch (forwardField.ToLower())
                 {
-                    if (rcd.Forward(context, origin, rule, forwardRecord, rcd))
-                        changed++;
-                    else
+                    case "damage":
+                    case "dmg":
+                        if (Generic.Forward<float>(context, origin, rule, forwardRecord, "Damage"))
+                            changed++;
+                        break;
+                    case "desc":
+                    case "description":
+                        if (Helpers.Action.String.ForwardString(context, origin, rule, forwardRecord, "Description"))
+                            changed++;
+                        break;
+                    case "effects":
+                        if (Effects.ForwardEffects(context, origin, rule, forwardRecord, "Effects"))
+                            changed++;
+                        break;
+                    case "enchantmentamount":
+                    case "eamt":
+                        if (Generic.Forward<ushort>(context, origin, rule, forwardRecord, "EnchantmentAmount"))
+                            changed++;
+                        break;
+                    case "objecteffect":
+                    case "eitm":
+                        if (FormLink.ForwardFormLink<IEffectRecordGetter>(context, origin, rule, forwardRecord, "ObjectEffect"))
+                            changed++;
+                        break;
+                    case "items":
+                        if (FormLink.ForwardFormLinks<IOutfitTargetGetter>(context, origin, rule, forwardRecord, "Items"))
+                            changed++;
+                        break;
+                    case "keywords":
+                        if (Helpers.Action.Keyword.ForwardKeywords(context, origin, rule, forwardRecord, "Keywords"))
+                            changed++;
+                        break;
+                    case "location":
+                    case "xlcn":
+                        if (FormLink.ForwardFormLink<ILocationGetter>(context, origin, rule, forwardRecord, "Location"))
+                            changed++;
+                        break;
+                    case "full":
+                    case "name":
+                        if (Helpers.Action.String.ForwardString(context, origin, rule, forwardRecord, "Name"))
+                            changed++;
+                        break;
+                    case "value":
+                        if (Generic.Forward<uint>(context, origin, rule, forwardRecord, "Value"))
+                            changed++;
+                        break;
+                    case "weight":
+                        if (Generic.Forward<float>(context, origin, rule, forwardRecord, "Weight"))
+                            changed++;
+                        break;
+                    case "water":
+                    case "xcwt":
+                        if (FormLink.ForwardFormLink<IWaterGetter>(context, origin, rule, forwardRecord, "Water"))
+                            changed++;
+                        break;
+                    default:
                         LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {forwardField}", 0x024);
+                        break;
                 }
             }
 

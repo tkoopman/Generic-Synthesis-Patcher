@@ -1,4 +1,7 @@
 <!--- cSpell:enable --->
+<a id="readme-top"></a>
+
+<!-- GETTING STARTED -->
 ## About
 
 Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types. It has a number of ways to filter for records to match and also 2 main actions.
@@ -7,13 +10,14 @@ Fill action will apply static changes to the winning record. Could be used to re
 
 Forward action will find matching parent record and forward only the selected fields to the winning record. This is useful when you have multiple patches for the one record all for different fields.
 
-Note: This is not meant to be a replacer for more specific Synthesis patchers. I wrote this to help when a Synthesis patcher for what I need didn't exist and it was just a simple fill or forward.
-Also to replace some SkyPatcher patches as personally I don't like to use them as when I am manually resolving conflicts, it's hard to remember / trust I'm getting what I want when I can't see the result in xEdit.
+Note: This is not meant to be a replacer for more specific Synthesis patchers. I wrote this to help when no Synthesis patcher for what I need didn't exist and it was just a simple fill or forward.
+Also to replace some SkyPatcher patches as personally I don't like to use them as when I am manually resolving conflicts, it hard to remember / trust you getting what I want when I can't see the result in xEdit.
 
 ### Prerequisites
 
 This of course requires [Synthesis](https://github.com/Mutagen-Modding/Synthesis)
 
+<!-- USAGE EXAMPLES -->
 ## Configuration
 
 Config files are to be located in a subfolder of the game's Data folder, called "GSP". This directory can be changed in settings.  
@@ -95,7 +99,7 @@ At least 1 action must exist. If both provided then both will be applied.
 #### Implemented Fields *WIP*
 
 Fields that are invalid for a record that matches your filter will just be ignored for those records.  
-NOTE: Not all implemented fields listed here yet. Check Examples folder for more or look in [Program.RecordCallDataMapping.cs](GenericSynthesisPatcher/Program.RecordCallDataMapping.cs)
+NOTE: Not all implemented fields listed here yet. Check Examples folder for more.
 
 ##### Name (String)
 Pretty self-explanatory. Set the name of matching records.

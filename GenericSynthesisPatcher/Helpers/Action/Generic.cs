@@ -6,28 +6,26 @@ using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-using static GenericSynthesisPatcher.Program;
-
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     // Log Codes: 0x6xx
-    internal class Generic<T>: IAction
+    internal static class Generic
     {
         // Log Codes: 0x61x
-        private static bool Get ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out T? value )
+        private static bool Get<T> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, string propertyName, out T? value )
         {
             value = default;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
+            var property = record.GetType().GetProperty(propertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Failed to find property. Skipping.", 0x611);
+                LogHelper.Log(LogLevel.Debug, context, propertyName, $"Failed to find property. Skipping.", 0x611);
                 return false;
             }
 
             object? _value = property.GetValue(record);
             if (_value == null || _value is not T __value)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, typeof(T).Name, _value?.GetType().Name ?? "?", 0x612);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, propertyName, typeof(T).Name, _value?.GetType().Name ?? "?", 0x612);
                 return false;
             }
 
@@ -37,7 +35,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x62x
-        private static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, RecordCallData rcd, T? curValue, T? newValue )
+        private static bool Fill<T> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, string propertyName, T? curValue, T? newValue )
         {
             if (curValue == null && newValue == null)
                 return false;
@@ -46,50 +44,48 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (rule.OnlyIfDefault && origin != null)
             {
-                if (Get(context, origin, rcd, out var originValue))
+                if (Get<T>(context, origin, propertyName, out var originValue))
                 {
                     if ((curValue != null || originValue != null) && (curValue == null || originValue == null || !curValue.Equals(originValue)))
                     {
-                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as property doesn't match origin");
+                        LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as property doesn't match origin");
                         return false;
                     }
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find origin property to check.", 0x621);
+                    LogHelper.Log(LogLevel.Error, context, propertyName, $"Unable to find origin property to check.", 0x621);
                     return false;
                 }
             }
 
             var patch = context.GetOrAddAsOverride(Global.State.PatchMod);
 
-            var setProperty = patch.GetType().GetProperty(rcd.PropertyName);
+            var setProperty = patch.GetType().GetProperty(propertyName);
             if (setProperty == null)
             {
-                LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find property to set new value to.", 0x622);
+                LogHelper.Log(LogLevel.Error, context, propertyName, $"Unable to find property to set new value to.", 0x622);
                 return false;
             }
 
             setProperty.SetValue(patch, newValue);
-            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Set to {newValue}.");
+            LogHelper.Log(LogLevel.Debug, context, propertyName, $"Set to {newValue}.");
             return true;
         }
 
-        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
+        public static bool Fill<T> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, string propertyName )
         {
-            if (!Get(context, context.Record, rcd, out var curValue))
+            if (!Get<T>(context, context.Record, propertyName, out var curValue))
                 return false;
             
             var newValue = rule.GetValueAs<T>(valueKey);
 
-            return Fill(context, origin, rule, rcd, curValue, newValue);
+            return Fill(context, origin, rule, propertyName, curValue, newValue);
         }
 
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd ) 
-            => Get(context, context.Record, rcd, out var curValue) 
-            && Get(context, forwardRecord, rcd, out var newValue)
-            && Fill(context, origin, rule, rcd, curValue, newValue);
-        public static bool CanFill () => true;
-        public static bool CanForward () => true;
+        public static bool Forward<T> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, string propertyName ) 
+            => Get<T>(context, context.Record, propertyName, out var curValue) 
+            && Get<T>(context, forwardRecord, propertyName, out var newValue)
+            && Fill(context, origin, rule, propertyName, curValue, newValue);
     }
 }
