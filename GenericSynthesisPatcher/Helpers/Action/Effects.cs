@@ -10,14 +10,18 @@ using Mutagen.Bethesda.Skyrim;
 using Noggog;
 
 using static GenericSynthesisPatcher.Json.Data.GSPRule;
+using static GenericSynthesisPatcher.Program;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     // Log Codes: 0x4xx
-    internal static class Effects
+    public class Effects : IAction
     {
+        public static bool CanFill () => true;
+        public static bool CanForward () => true;
+
         // Log Codes: 0x41x
-        public static bool FillEffects ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, string propertyName )
+        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
         {
             IIngestible? patch = null;
 
@@ -26,7 +30,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 var effectActions = rule.GetValueAs<List<GSPRule.EffectAction>>(valueKey);
                 if (rule.OnlyIfDefault && origin != null && origin is IIngestibleGetter originIG && !record.Effects.SequenceEqualNullable(originIG.Effects))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as effects don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as effects don't match origin");
                     return false;
                 }
 
@@ -69,28 +73,28 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
             else
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, propertyName, "IIngestibleGetter", context.Record.GetType().Name, 0x412);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IIngestibleGetter", context.Record.GetType().Name, 0x412);
             }
 
             if (patch != null)
-                LogHelper.Log(LogLevel.Debug, context, propertyName, "Updated.");
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
             return patch != null;
         }
 
         // Log Codes: 0x42x
-        public static bool ForwardEffects ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, string propertyName )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
         {
             if (context.Record is IIngestibleGetter record && forwardRecord is IIngestibleGetter forward)
             {
                 if (forward.Effects.SequenceEqualNullable(record.Effects))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as already matches forwarding record");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as already matches forwarding record");
                     return false;
                 }
 
                 if (rule.OnlyIfDefault && origin != null && origin is IIngestibleGetter originGetter && !record.Effects.SequenceEqualNullable(originGetter.Effects))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, propertyName, "Skipping as keywords don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
                     return false;
                 }
 
@@ -119,11 +123,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     }
                 }
 
-                LogHelper.Log(LogLevel.Debug, context, propertyName, "Updated.");
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
                 return true;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, propertyName, "IIngestibleGetter", context.Record.GetType().Name, 0x422);
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IIngestibleGetter", context.Record.GetType().Name, 0x422);
             return false;
         }
     }
