@@ -34,9 +34,9 @@ namespace GenericSynthesisPatcher.Helpers
         /// </summary>
         /// <param name="context"></param>
         /// <param name="modFileName"></param>
-        /// <returns>Record Getter if found.</returns>
+        /// <returns>Record Getter with Context if found.</returns>
         /// Log Code: 0x71x
-        public static IMajorRecordGetter? GetModRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, string modFileName )
+        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>? GetModRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, string modFileName )
         {
             var modGetter = TryGetOverridingMod(context, modFileName);
             if (modGetter == null)
@@ -48,7 +48,7 @@ namespace GenericSynthesisPatcher.Helpers
             if ((modGetter.Mod?.ToImmutableLinkCache().TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var forwardContext) ?? false) && forwardContext != null)
             {
                 LogHelper.Log(LogLevel.Trace, context, $"Found matching record in forwarding mod {modFileName}.", 0x712);
-                return forwardContext.Record;
+                return forwardContext;
             }
 
             LogHelper.Log(LogLevel.Trace, context, $"No matching record in forwarding mod {modFileName} of type {context.Record.Registration.GetterType.Name}.", 0x713);

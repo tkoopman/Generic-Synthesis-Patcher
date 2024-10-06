@@ -15,6 +15,8 @@ namespace GenericSynthesisPatcher.Json
 
             if (objectType == typeof(FormKey))
                 contract.Converter = new FormKeyConverter();
+            if (objectType == typeof(ModKey))
+                contract.Converter = new ModKeyConverter();
 
             return contract;
         }

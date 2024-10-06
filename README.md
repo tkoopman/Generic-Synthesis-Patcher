@@ -10,9 +10,17 @@ Forward action will find matching parent record and forward only the selected fi
 Note: This is not meant to be a replacer for more specific Synthesis patchers. I wrote this to help when a Synthesis patcher for what I need didn't exist and it was just a simple fill or forward.
 Also to replace some SkyPatcher patches as personally I don't like to use them as when I am manually resolving conflicts, it's hard to remember / trust I'm getting what I want when I can't see the result in xEdit.
 
+I have only tested this with latest Skyrim SE however it should work on other versions. Fallout however I am not sure on. I am guessing I would probably need to make some modifications to properly work for Fallout.
+
 ### Prerequisites
 
 This of course requires [Synthesis](https://github.com/Mutagen-Modding/Synthesis)
+
+## Bugs, Requests and Contributions
+
+Please log any bugs or requests you may have via [GitHub Issues](https://github.com/tkoopman/Generic-Synthesis-Patcher/issues).  
+While I make no guarantee to fixing or implementing new requests due to other commitments, I will try especially fixing bugs.  
+Also if you want to contribute please do, even if you don't known how to program, just improving my awful documentation would help others.
 
 ## Configuration
 
@@ -41,89 +49,4 @@ Configuration files in this directory must end in .json with the following forma
       }
     ]
 
-### Configuration fields
-**Priority**: All matching rules will be applied to a record in ascending priority. Default: 0  
-Matching priority will be applied in random order so be carful.
-
-**Base Filters**
-
-At least 1 base filter must be applied. If multiple filters provided then the logic is **Type AND (EditorID OR FormID)**  
-All filters can be either single value or array of possible values.
-
-- **types**: List valid types for this rule. If no types provided then can match any type. Types are case insensitive.
-- **editorID**: EditorID to match. Can be a regular expression if starts and ends with /. Example "editorID": "/.\*fur.\*/"
-- **formID**: FormID to match in above format. Can exclude leading 0s.
-
-**Exclude Filters**
-
-These can be single values or array of values to exclude.
-
-- **-editorID**: EditorID to exclude from matches. Can be a regular expression if starts and ends with /. Example "-editorID": "/.\*fur.\*/"
-- **-formID**: FormID to exclude from matches in above format.
-- **OnlyIfDefault**: False by default. If set to True will only apply action if the winning record's field value matches the original value set by the master record.  
-Good for example if you want to forward one patches changes, but only if a later patch set the value back to the default, so protecting other winning patches.
-
-**Advanced Filters**
-
-- **InFaction**: Only valid if Type set to only NPC. NPC will need to belong to one of the listed factions. Factions listed by FormID.
-- **InFactionAnd**: False by default. Setting to True will mean NPC must belong to all factions listed in InFaction.
-
-**Actions**
-
-At least 1 action must exist. If both provided then both will be applied.
-
-- **Fill**: This will just apply the changes to all listed fields.
-- **Forward**: This will forward fields from a parent that this winning record overrode.
-
-#### Implemented Types
-| Type | Synonyms       |
-| ---- | -------------- |
-| ALCH | Ingestible     |
-| AMMO | Ammunition     |
-| ARMO | Armor          |
-| BOOK |
-| CELL |
-| FACT | Faction        |
-| INGR | Ingredient     |
-| KEYM | Key            |
-| MISC | MiscItem       |
-| NPC  |
-| OTFT | Outfit         |
-| SCRL | Scroll         |
-| WEAP | Weapon         |
-
-#### Implemented Fields *WIP*
-
-Fields that are invalid for a record that matches your filter will just be ignored for those records.  
-NOTE: Not all implemented fields listed here yet. Check Examples folder for more or look in [Program.RecordCallDataMapping.cs](GenericSynthesisPatcher/Program.RecordCallDataMapping.cs)
-
-##### Name (String)
-Pretty self-explanatory. Set the name of matching records.
-
-##### Keywords (String or Array of strings)
-Add (+) or remove (-) keywords depending on prefix. No prefix will default to adding that keyword.
-
-##### Flags (String or Array of strings)
-Add (+) or remove (-) flags depending on prefix. No prefix will default to adding that keyword.  
-These are the Data Record Flags. Flags vary depending on record type.
-- ALCH: NoAutoCalc, FoodItem, Medicine, Poison
-- AMMO: IgnoresNormalWeaponResistance, NonBolt, NotPlayable
-- BOOK: CantBeTaken
-- FACT: HiddenFromPC, SpecialCombat, TrackCrime, IgnoreMurder, IgnoreAssault, IgnoreStealing, IgnoreTrespass, DoNotReportCrimesAgainstMembers, CrimeGoldUseDefaults, IgnorePickpocket, Vendor, CanBeOwner, IgnoreWerewolf
-- INGR: NoAutoCalculation, FoodItem, ReferencesPersist
-
-##### MajorFlags (String or Array of strings)
-Major Flags. Same as Flags but this is the major record flags this time. Flags vary depending on record type.
-- ALCH: Medicine
-- AMMO: NonPlayable
-- ARMO: NonPlayable, Shield
-- KEYM: NonPlayable
-- MISC: NonPlayable
-- NPC: BleedoutOverride
-- WEAP: NonPlayable
-
-##### Value (Number)
-Also pretty self-explanatory. Set the value of matching items.
-
-##### Weight (Float / Decimal)
-You guessed it, pretty self-explanatory. Set the weight of matching items.
+[Available Rule Settings](docs/Settings.md)

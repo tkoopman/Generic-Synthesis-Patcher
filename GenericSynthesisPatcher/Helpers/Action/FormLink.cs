@@ -116,14 +116,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x57x
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
                 if (!GetFormLink<IFormLinkGetter<T>>(context, context.Record, rcd, out var curValue))
                     return false;
 
-                if (!GetFormLink<IFormLinkGetter<T>>(context, forwardRecord, rcd, out var newValue))
+                if (!GetFormLink<IFormLinkGetter<T>>(context, forwardContext.Record, rcd, out var newValue))
                     return false;
 
                 return Fill(context, origin, rule, rcd, curValue, newValue);

@@ -1,7 +1,11 @@
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 
+using Microsoft.Extensions.Logging;
+
+using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -54,42 +58,60 @@ namespace GenericSynthesisPatcher.Json.Data
         private Dictionary<ValueKey, object>? cache = null;
 
         [DefaultValue(0)]
-        [JsonProperty(PropertyName = "priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int Priority;
 
         [JsonProperty(PropertyName = "Types", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<GSPRule.Type>))]
         public List<GSPRule.Type>? Types;
 
-        [JsonProperty(PropertyName = "formID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
         public List<FormKey>? FormID;
 
-        [JsonProperty(PropertyName = "editorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
         public List<string>? EditorID;
 
-        [JsonProperty(PropertyName = "masters", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? Masters;
+        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
+        public List<ModKey>? Masters;
 
-        [JsonProperty(PropertyName = "-formID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
         public List<FormKey>? NotFormID;
 
-        [JsonProperty(PropertyName = "-editorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
         public List<string>? NotEditorID;
 
-        [JsonProperty(PropertyName = "inFaction", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? InFaction;
+        [JsonProperty(PropertyName = "Factions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FilterFormLinks>))]
+        public List<FilterFormLinks>? Factions;
 
-        [JsonProperty(PropertyName = "inFactionAnd", NullValueHandling = NullValueHandling.Ignore)]
-        public bool InFactionAnd;
+        [JsonProperty(PropertyName = "FactionsOp", NullValueHandling = NullValueHandling.Ignore)]
+        public Operation FactionsOp;
+
+        [JsonProperty(PropertyName = "Keywords", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
+        public List<string>? Keywords;
+
+        [JsonProperty(PropertyName = "KeywordsOp", NullValueHandling = NullValueHandling.Ignore)]
+        public Operation KeywordsOp;
 
         [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
         public bool OnlyIfDefault { get; set; }
+
+        /// <summary>
+        /// ForwardType can change how Forwarding actions work.
+        /// Default: Will replace winning with value from forwarding mod.
+        /// SelfMasterOnly: This  is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.
+        ///                 It will only add new FormIDs to lists if FormID is from the same Forwarding Mod.
+        ///                 It will not remove any current items from winning records.
+        ///                 Other field types will just behave like they do in Default.
+        /// </summary>
+        [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
+        public ForwardTypes ForwardType { get; set; }
 
         /// <summary>
         /// Add Forward action(s) to this rule.
@@ -131,7 +153,7 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns>Cleaned List.</returns>
-        private static List<T>? ValidateList<T> ( List<T>? list ) => list != null && list.Count != 0 ? list.Distinct().ToList() : null;
+        private static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list.Distinct().ToList() : null;
 
         /// <summary>
         /// Create new rule, and validates it meets basic needs.
@@ -144,12 +166,13 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <param name="notEditorID"></param>
         /// <param name="fill"></param>
         /// <param name="forward"></param>
-        /// <param name="inFaction"></param>
-        /// <param name="inFactionAnd"></param>
+        /// <param name="factions"></param>
+        /// <param name="factionsOp"></param>
         /// <exception cref="JsonSerializationException"></exception>
-        public GSPRule ( int priority, List<GSPRule.Type>? types, List<FormKey>? formID, List<string>? editorID, List<FormKey>? notFormID, List<string>? notEditorID, JObject? fill, JObject? forward, List<FormKey>? inFaction, bool? inFactionAnd, List<string>? masters )
+        public GSPRule ( int priority, List<GSPRule.Type>? types, List<FormKey>? formID, List<string>? editorID, List<FormKey>? notFormID, List<string>? notEditorID, JObject? fill, JObject? forward, List<FilterFormLinks>? factions, Operation? factionsOp, List<ModKey>? masters, ForwardTypes forwardType, List<string>? keywords, Operation? keywordsOp )
         {
             jsonValues = [];
+
             Priority = priority;
             Types = ValidateList(types);
             FormID = ValidateList(formID);
@@ -158,62 +181,19 @@ namespace GenericSynthesisPatcher.Json.Data
             NotEditorID = ValidateList(notEditorID);
             Fill = fill;
             Forward = forward;
-            InFaction = ValidateList(inFaction);
-            InFactionAnd = inFactionAnd != null && (bool)inFactionAnd;
+            Factions = ValidateList(factions);
+            FactionsOp = (factionsOp == null) ? Operation.OR : (Operation)factionsOp;
             Masters = ValidateList(masters);
+            ForwardType = forwardType;
+            Keywords = ValidateList(keywords);
+            KeywordsOp = (keywordsOp == null) ? Operation.OR : (Operation)keywordsOp;
 
             if (types == null && formID == null && editorID == null)
-                throw new JsonSerializationException("Each Json record must contain at least one filter (types, editorID or formID)");
+                throw new JsonSerializationException("Each Json record must contain at least one basic filter (types, editorID or formID)");
 
-            if (inFaction != null && (types == null || types.Count != 1 || !types.Contains(GSPRule.Type.NPC)))
+            if (factions != null && (types == null || types.Count != 1 || !types.Contains(GSPRule.Type.NPC)))
                 throw new JsonSerializationException("When using inFaction Type must = \"NPC\" only.");
         }
-
-        /// <summary>
-        /// Return GSP rule type as string for a record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static string GetGSPRuleTypeAsString ( IMajorRecordGetter record ) => record switch
-        {
-            IIngestibleGetter => "ALCH",
-            IAmmunitionGetter => "AMMO",
-            IArmorGetter => "ARMO",
-            IBookGetter => "BOOK",
-            ICellGetter => "CELL",
-            IFactionGetter => "FACT",
-            IIngredientGetter => "INGR",
-            IKeyGetter => "KEYM",
-            IMiscItemGetter => "MISC",
-            INpcGetter => "NPC",
-            IOutfitGetter => "OTFT",
-            IScrollGetter => "SCRL",
-            IWeaponGetter => "WEAP",
-            _ => "UNKNOWN"
-        };
-
-        /// <summary>
-        /// Return GSP rule type for a record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static GSPRule.Type GetGSPRuleType ( IMajorRecordGetter record ) => record switch
-        {
-            IIngestibleGetter => GSPRule.Type.ALCH,
-            IAmmunitionGetter => GSPRule.Type.AMMO,
-            IArmorGetter => GSPRule.Type.ARMO,
-            IBookGetter => GSPRule.Type.BOOK,
-            ICellGetter => GSPRule.Type.CELL,
-            IFactionGetter => GSPRule.Type.FACT,
-            IIngredientGetter => GSPRule.Type.INGR,
-            IKeyGetter => GSPRule.Type.KEYM,
-            IMiscItemGetter => GSPRule.Type.MISC,
-            INpcGetter => GSPRule.Type.NPC,
-            IOutfitGetter => GSPRule.Type.OTFT,
-            IScrollGetter => GSPRule.Type.SCRL,
-            IWeaponGetter => GSPRule.Type.WEAP,
-            _ => GSPRule.Type.UNKNOWN
-        };
 
         /// <summary>
         /// Checks if rule filter(s) match current context's record.
@@ -223,50 +203,32 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <returns></returns>
         public bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, out IMajorRecordGetter? Origin )
         {
-            bool matches = MatchesRefined(context);
+            bool matches = MatchesBasicFilters(context)
+                        && MatchesExtraFilters(context)
+                        && MatchesFactions(context)
+                        && MatchesKeywords(context);
 
             Origin = (matches && OnlyIfDefault) ? Mod.FindOrigin(context) : null;
+
+            if (Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey))
+            {
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesBasicFilters: {MatchesBasicFilters(context)} HasTypes: {Types != null} HasEditorID: {EditorID != null} HasFormID: {FormID != null}");
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesExtraFilters: {MatchesExtraFilters(context)} HasNotEditorID: {NotEditorID != null} HasNotFormID: {NotFormID != null} HasMasters: {Masters != null}");
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesFactions: {MatchesFactions(context)} HasFactions: {Factions != null}");
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesKeywords: {MatchesKeywords(context)} HasKeywords: {Keywords != null}");
+                LogHelper.Log(LogLevel.Trace, context, $"HasOrigin: {Origin != null} OnlyIfDefault: {OnlyIfDefault}");
+            }
 
             return matches;
         }
 
         /// <summary>
-        /// Checks if more refined rule filter(s) match current context's record.
+        /// Checks basic filters.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="Origin"></param>
-        /// <returns></returns>
-        private bool MatchesRefined ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
-        {
-            bool matches = MatchesBaseFilters(context);
-
-            if (!matches || InFaction == null)
-                return matches;
-
-            // Must have only matched NPCs due to validation in constructor
-            var npc = (INpcGetter)context.Record;
-            int inAnd = 0;
-            foreach (var faction in npc.Factions)
-            {
-                if (InFaction.Contains(faction.Faction.FormKey))
-                {
-                    if (InFactionAnd)
-                        inAnd++;
-                    else
-                        return true;
-                }
-            }
-
-            return InFactionAnd && inAnd == InFaction.Count;
-        }
-
-        /// <summary>
-        /// Checks if base rule filter(s) match current context's record.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="Origin"></param>
-        /// <returns></returns>
-        private bool MatchesBaseFilters ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        /// <returns>Returns true if context matches basic filters.</returns>
+        private bool MatchesBasicFilters ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
         {
             var recordType = GetGSPRuleType(context.Record);
             if (recordType == GSPRule.Type.UNKNOWN)
@@ -275,10 +237,40 @@ namespace GenericSynthesisPatcher.Json.Data
             if (Types != null && !Types.Contains(recordType))
                 return false;
 
-            if (Masters != null && !Masters.Contains(context.Record.FormKey.ModKey.FileName.String))
+            if (FormID != null && !FormID.Contains(context.Record.FormKey))
                 return false;
 
-            if (FormID != null && !FormID.Contains(context.Record.FormKey))
+            // Can assume true if no EditorID filter as GSPRule MUST contain 1 filter
+            // Which means one of the above checks must of have contained a matching value
+            if (EditorID == null)
+                return true;
+
+            foreach (string editorID in EditorID)
+            {
+                if (editorID.StartsWith('/') && editorID.EndsWith('/'))
+                {
+                    var matchedRegex = new Regex(editorID.Trim('/'));
+                    if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
+                        return true;
+                }
+                else if (editorID.Equals(context.Record.EditorID))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks Extra filters.
+        /// Excludes OnlyIfDefault as that must be checked by the appropriate Actions if all other filters match.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Return true if context matches any defined extra filters.</returns>
+        private bool MatchesExtraFilters ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        {
+            if (Masters != null && !Masters.Contains(context.Record.FormKey.ModKey))
                 return false;
 
             if (NotFormID != null && NotFormID.Contains(context.Record.FormKey))
@@ -306,20 +298,65 @@ namespace GenericSynthesisPatcher.Json.Data
                 }
             }
 
-            // Can assume true if no EditorID filter as GSPRule MUST contain 1 filter
-            // Which means one of the above checks must of have contained a matching value
-            if (EditorID == null)
+            return true;
+        }
+
+        /// <summary>
+        /// Checks is matches and faction filters.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="Origin"></param>
+        /// <returns></returns>
+        private bool MatchesFactions ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        {
+            if (Factions == null)
                 return true;
 
-            foreach (string editorID in EditorID)
+            // Must have only matched NPCs due to validation in constructor
+            if (context.Record is not INpcGetter record)
+                return false;
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (var check in Factions)
             {
-                if (editorID.StartsWith('/') && editorID.EndsWith('/'))
+                if (!check.Neg)
+                    includesChecked++;
+
+                if (MatchesFaction(record, check))
                 {
-                    var matchedRegex = new Regex(editorID.Trim('/'));
-                    if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
+                    if (check.Neg)
+                        return false;
+
+                    if (FactionsOp == Operation.OR)
                         return true;
+
+                    matchedCount++;
                 }
-                else if (editorID.Equals(context.Record.EditorID))
+                else if (!check.Neg && FactionsOp == Operation.AND)
+                {
+                    return false;
+                }
+            }
+
+            return FactionsOp switch
+            {
+                Operation.OR => includesChecked == 0,
+                Operation.AND => true,
+                _ => matchedCount == 1 // XOR
+            };
+        }
+
+        private bool MatchesFaction ( INpcGetter record, FilterFormLinks check )
+        {
+            // If no factions on record return result based on if +/-
+            if (!record.Factions.SafeAny())
+                return false;
+
+            foreach (var f in record.Factions)
+            {
+                if (f.Faction.Equals(check.FormKey))
                 {
                     return true;
                 }
@@ -329,17 +366,76 @@ namespace GenericSynthesisPatcher.Json.Data
         }
 
         /// <summary>
+        /// Checks is matches and keyword filters.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="Origin"></param>
+        /// <returns></returns>
+        private bool MatchesKeywords ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        {
+            if (Keywords == null)
+                return true;
+
+            // Must be Keyworded for Keywords to match
+            if (context.Record is not IKeywordedGetter record)
+                return false;
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (string check in Keywords)
+            {
+                bool neg = check.StartsWith('-');
+                if (!neg)
+                    includesChecked++;
+
+                if (MatchesKeyword(record, check, neg))
+                {
+                    if (neg)
+                        return false;
+
+                    if (KeywordsOp == Operation.OR)
+                        return true;
+
+                    matchedCount++;
+                }
+                else if (!neg && KeywordsOp == Operation.AND)
+                {
+                    return false;
+                }
+            }
+
+            return KeywordsOp switch
+            {
+                Operation.OR => includesChecked == 0,
+                Operation.AND => true,
+                _ => matchedCount == 1 // XOR
+            };
+        }
+        private bool MatchesKeyword ( IKeywordedGetter record, string check, bool neg )
+        {
+            // If no keywords on record return result based on if +/-
+            if (!record.Keywords.SafeAny())
+                return false;
+
+            string keywordStr = (neg || check.StartsWith('+'))? check[1..] : check;
+            var keyword = Helpers.Action.Keywords.GetKeyword(keywordStr);
+
+            return keyword != null && record.Keywords.Contains(keyword);
+        }
+
+        /// <summary>
         /// Get the raw string value data for a selected rule's action value key.
         /// </summary>
         /// <param name="key"></param>
         /// <returns>string</returns>
         /// <exception cref="InvalidOperationException"></exception>
         public string? GetValueAsString ( ValueKey key )
-            => jsonValues.TryGetValue(key, out var jsonValue)
-                  ? jsonValue.Type == JTokenType.String
-                      ? jsonValue.ToString()
-                      : throw new InvalidOperationException($"Invalid value type returned for {key.Key}")
-                  : null;
+        => jsonValues.TryGetValue(key, out var jsonValue)
+              ? jsonValue.Type == JTokenType.String
+                  ? jsonValue.ToString()
+                  : throw new InvalidOperationException($"Invalid value type returned for {key.Key}")
+              : null;
 
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.

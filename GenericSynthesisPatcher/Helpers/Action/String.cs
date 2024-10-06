@@ -113,9 +113,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         }
 
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
             => GetString(context, context.Record, rcd, out string? curValue)
-            && GetString(context, forwardRecord, rcd, out string? newValue)
+            && GetString(context, forwardContext.Record, rcd, out string? newValue)
             && FillString(context, origin, rule, rcd, curValue, newValue);
         public static bool CanFill () => true;
         public static bool CanForward () => true;

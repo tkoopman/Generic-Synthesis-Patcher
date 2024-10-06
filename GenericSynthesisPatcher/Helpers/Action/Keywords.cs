@@ -1,8 +1,8 @@
-using System.Data;
-using System.Linq;
 using System.Xml.Linq;
 
 using DynamicData;
+
+using EnumsNET;
 
 using GenericSynthesisPatcher.Json.Data;
 
@@ -17,7 +17,6 @@ using Mutagen.Bethesda.Skyrim;
 using Noggog;
 
 using static GenericSynthesisPatcher.Json.Data.GSPRule;
-using static GenericSynthesisPatcher.Program;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -25,7 +24,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
     public class Keywords : IAction
     {
         private static Dictionary<string, IKeywordGetter>? keywords;
-        private static IKeywordGetter? GetKeyword ( string name )
+        public static IKeywordGetter? GetKeyword ( string name )
         {
             if (keywords == null)
             {
@@ -89,11 +88,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x22x
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
         {
             IKeyworded<IKeywordGetter>? patch = null;
 
-            if (context.Record is IKeywordedGetter<IKeywordGetter> record && forwardRecord is IKeywordedGetter<IKeywordGetter> forward)
+            if (context.Record is IKeywordedGetter<IKeywordGetter> record && forwardContext.Record is IKeywordedGetter<IKeywordGetter> forward)
             {
                 if (forward.Keywords.SequenceEqualNullable(record.Keywords))
                 {
@@ -106,13 +105,33 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
                     return false;
                 }
+                
+                if (rule.ForwardType.GetFlags().Contains(ForwardTypes.SelfMasterOnly))
+                {
+                    if (forward.Keywords == null)
+                        return false;
 
-                patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
+                    foreach (var item in forward.Keywords)
+                    {
+                        if (item.FormKey.ModKey == forwardContext.ModKey)
+                        {
+                            if (record.Keywords == null || !record.Keywords.Contains(item))
+                            {
+                                patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
+                                patch.Keywords?.Add(item);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
 
-                _ = patch.Keywords?.RemoveAll(_ => true);
+                    _ = patch.Keywords?.RemoveAll(_ => true);
 
-                if (forward.Keywords != null)
-                    patch.Keywords?.AddRange(forward.Keywords);
+                    if (forward.Keywords != null)
+                        patch.Keywords?.AddRange(forward.Keywords);
+                }
             }
             else
             {

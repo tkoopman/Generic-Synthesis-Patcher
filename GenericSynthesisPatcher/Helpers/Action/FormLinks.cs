@@ -6,15 +6,13 @@ using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
-using static GenericSynthesisPatcher.Program;
-using static NexusMods.Paths.Delegates;
+using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -130,14 +128,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x53x
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
         {
             if (context.Record is IFormLinkContainerGetter record)
             {
                 if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, context.Record, rcd, out var curValue))
                     return false;
 
-                if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, forwardRecord, rcd, out var newValue))
+                if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, forwardContext.Record, rcd, out var newValue))
                     return false;
 
                 if (curValue.SequenceEqualNullable(newValue))
@@ -163,18 +161,51 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     }
                 }
 
-                var patch = context.GetOrAddAsOverride(Global.State.PatchMod);
+                ISkyrimMajorRecord? patch = null;
+                ExtendedList<IFormLinkGetter<T>>? patchValueLinks = null;
 
-                if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, patch, rcd, out var patchValue) || patchValue is not ExtendedList<IFormLinkGetter<T>> patchValueLinks)
-                    return false;
+                if (rule.ForwardType.GetFlags().Contains(ForwardTypes.SelfMasterOnly))
+                {
+                    if (newValue == null)
+                        return false;
+                    
+                    foreach (var item in newValue)
+                    {
+                        if (item.FormKey.ModKey == forwardContext.ModKey)
+                        {
+                            if (curValue == null || !curValue.Contains(item))
+                            {
+                                if (patchValueLinks == null)
+                                {
+                                    patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                                    if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, patch, rcd, out var patchValue) || patchValue is not ExtendedList<IFormLinkGetter<T>> pvl)
+                                        return false;
 
-                _ = patchValueLinks.RemoveAll(_ => true);
+                                    patchValueLinks = pvl;
+                                }
 
-                if (newValue != null)
-                    patchValueLinks.AddRange(newValue);
+                                patchValueLinks.Add(item);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    patch = context.GetOrAddAsOverride(Global.State.PatchMod);
 
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
-                return true;
+                    if (!GetFormLinks<IReadOnlyList<IFormLinkGetter<T>>>(context, patch, rcd, out var patchValue) || patchValue is not ExtendedList<IFormLinkGetter<T>> pvl)
+                        return false;
+
+                    _ = pvl.RemoveAll(_ => true);
+
+                    if (newValue != null)
+                        pvl.AddRange(newValue);
+                }
+
+                if (patch != null)
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
+
+                return patch != null;
             }
 
             LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name, 0x535);

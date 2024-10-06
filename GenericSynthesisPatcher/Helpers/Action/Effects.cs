@@ -82,9 +82,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         // Log Codes: 0x42x
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd )
+        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
         {
-            if (context.Record is IIngestibleGetter record && forwardRecord is IIngestibleGetter forward)
+            if (context.Record is IIngestibleGetter record && forwardContext.Record is IIngestibleGetter forward)
             {
                 if (forward.Effects.SequenceEqualNullable(record.Effects))
                 {

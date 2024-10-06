@@ -10,9 +10,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
     public interface IAction
     {
         public static abstract bool CanFill ();
-        public static abstract bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd );
+        public static abstract bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
+                                           IMajorRecordGetter? origin,
+                                           GSPRule rule,
+                                           GSPRule.ValueKey valueKey,
+                                           RecordCallData rcd );
 
         public static abstract bool CanForward ();
-        public static abstract bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IMajorRecordGetter forwardRecord, RecordCallData rcd );
+        public static abstract bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
+                                              IMajorRecordGetter? origin,
+                                              GSPRule rule,
+                                              IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext,
+                                              RecordCallData rcd );
     }
 }

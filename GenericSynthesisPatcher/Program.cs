@@ -21,6 +21,8 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using NexusMods.Paths.Utilities;
+using System.Linq;
 
 namespace GenericSynthesisPatcher
 {
@@ -38,16 +40,21 @@ namespace GenericSynthesisPatcher
         {
             Global.State = state;
 
+            if (Global.Settings.Value.LogLevel != LogLevel.Trace)
+                Global.Settings.Value.TraceFormKey = null;
+            else
+                LogHelper.Log(LogLevel.Trace, "Extra logging for FormKey: " + ((Global.Settings.Value.TraceFormKey == null) ? "null" : Global.Settings.Value.TraceFormKey));
+
             var Rules = LoadRules();
             if (Rules.Count == 0)
                 return;
 
             uint total = 0, updated = 0, changes = 0;
-            SortedDictionary<string, (uint, uint, uint)> subTotals = [];
+            SortedDictionary<GSPRule.Type, (uint, uint, uint)> subTotals = [];
 
             foreach (var context in state.LoadOrder.PriorityOrder.SkyrimMajorRecord().WinningContextOverrides(state.LinkCache))
             {
-                string recordType = GSPRule.GetGSPRuleTypeAsString(context.Record);
+                var recordType = GSPRule.GetGSPRuleType(context.Record);
                 if (!subTotals.ContainsKey(recordType))
                     subTotals.Add(recordType, (0, 0, 0));
                 subTotals[recordType] = (subTotals[recordType].Item1 + 1, subTotals[recordType].Item2, subTotals[recordType].Item3);
@@ -94,12 +101,20 @@ namespace GenericSynthesisPatcher
                 });
             }
 
-            LogHelper.Log(LogLevel.Information, $"Completed. Applied {changes:N0} changes to {updated:N0} of {total:N0} records.");
+            LogHelper.Log(LogLevel.Information, $"Completed. Applied {changes:N0} changes over {updated:N0} updated records.");
 
             Console.WriteLine($"Record Type Totals");
             Console.WriteLine($"{"Type",-10} {"Total",10} {"Matched",10} {"Updated",10}");
-            foreach (var t in subTotals)
-                Console.WriteLine($"{t.Key,-10} {t.Value.Item1,10:N0} {t.Value.Item2,10:N0} {t.Value.Item3,10:N0}");
+
+            foreach (var t in from t in subTotals
+                              where t.Key != GSPRule.Type.UNKNOWN
+                              select t)
+            {
+                Console.WriteLine($"{Enum.GetName(t.Key),-10} {t.Value.Item1,10:N0} {t.Value.Item2,10:N0} {t.Value.Item3,10:N0}");
+            }
+
+            if (subTotals.TryGetValue(GSPRule.Type.UNKNOWN, out var value))
+                Console.WriteLine($"{Enum.GetName(GSPRule.Type.UNKNOWN),-10} {value.Item1,10:N0} {value.Item2,10:N0} {value.Item3,10:N0}");
         }
         private static List<GSPRule> LoadRules ()
         {
@@ -194,6 +209,9 @@ namespace GenericSynthesisPatcher
                     break;
             }
 
+            if (rcd == null)
+                LogHelper.Log(LogLevel.Trace, context, $"No RCD found - {valueKey}");
+
             return rcd;
         }
 
@@ -223,14 +241,16 @@ namespace GenericSynthesisPatcher
             uint changed = 0;
             foreach (string forwardField in forwardFields)
             {
-                var rcd = FindRecordCallData(context, forwardField);
+                var rcd = FindRecordCallData(context, forwardField.ToLower());
 
                 if (rcd != null && rcd.CanForward())
                 {
                     if (rcd.Forward(context, origin, rule, forwardRecord, rcd))
                         changed++;
-                    else
-                        LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {forwardField}", 0x024);
+                }
+                else
+                {
+                    LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {forwardField}", 0x024);
                 }
             }
 
