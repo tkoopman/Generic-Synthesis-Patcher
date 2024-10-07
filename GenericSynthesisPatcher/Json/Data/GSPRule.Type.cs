@@ -13,6 +13,7 @@ namespace GenericSynthesisPatcher.Json.Data
             ARMO,
             BOOK,
             CELL,
+            CONT,
             FACT,
             INGR,
             KEYM,
@@ -24,6 +25,7 @@ namespace GenericSynthesisPatcher.Json.Data
             WRLD,
             Ammunition = AMMO,
             Armor = ARMO,
+            Container = CONT,
             Faction = FACT,
             Ingestible = ALCH,
             Ingredient = INGR,
@@ -34,30 +36,6 @@ namespace GenericSynthesisPatcher.Json.Data
             Weapon = WEAP,
             Worldspace = WRLD
         }
-
-        /// <summary>
-        /// Return GSP rule type as string for a record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static string GetGSPRuleTypeAsString ( IMajorRecordGetter record ) => record switch
-        {
-            IIngestibleGetter => "ALCH",
-            IAmmunitionGetter => "AMMO",
-            IArmorGetter => "ARMO",
-            IBookGetter => "BOOK",
-            ICellGetter => "CELL",
-            IFactionGetter => "FACT",
-            IIngredientGetter => "INGR",
-            IKeyGetter => "KEYM",
-            IMiscItemGetter => "MISC",
-            INpcGetter => "NPC",
-            IOutfitGetter => "OTFT",
-            IScrollGetter => "SCRL",
-            IWeaponGetter => "WEAP",
-            IWorldspaceGetter => "WRLD",
-            _ => "UNKNOWN"
-        };
 
         /// <summary>
         /// Return GSP rule type for a record.
@@ -71,6 +49,7 @@ namespace GenericSynthesisPatcher.Json.Data
             IArmorGetter => GSPRule.Type.ARMO,
             IBookGetter => GSPRule.Type.BOOK,
             ICellGetter => GSPRule.Type.CELL,
+            IContainerGetter => GSPRule.Type.CONT,
             IFactionGetter => GSPRule.Type.FACT,
             IIngredientGetter => GSPRule.Type.INGR,
             IKeyGetter => GSPRule.Type.KEYM,
@@ -81,6 +60,31 @@ namespace GenericSynthesisPatcher.Json.Data
             IWeaponGetter => GSPRule.Type.WEAP,
             IWorldspaceGetter => GSPRule.Type.WRLD,
             _ => GSPRule.Type.UNKNOWN
+        };
+
+        /// <summary>
+        /// Return GSP rule type as string for a record.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public static string GetGSPRuleTypeAsString ( IMajorRecordGetter record ) => record switch
+        {
+            IIngestibleGetter => "ALCH",
+            IAmmunitionGetter => "AMMO",
+            IArmorGetter => "ARMO",
+            IBookGetter => "BOOK",
+            ICellGetter => "CELL",
+            IContainerGetter => "CONT",
+            IFactionGetter => "FACT",
+            IIngredientGetter => "INGR",
+            IKeyGetter => "KEYM",
+            IMiscItemGetter => "MISC",
+            INpcGetter => "NPC",
+            IOutfitGetter => "OTFT",
+            IScrollGetter => "SCRL",
+            IWeaponGetter => "WEAP",
+            IWorldspaceGetter => "WRLD",
+            _ => "UNKNOWN"
         };
     }
 }

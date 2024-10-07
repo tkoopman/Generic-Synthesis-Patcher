@@ -17,33 +17,12 @@ using static GenericSynthesisPatcher.Json.Data.GSPRule;
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     // Log Codes: 0x5xx
-    public class FormLinks<T>: IAction where T : class, IMajorRecordGetter
+    public class FormLinks<T> : IAction
+        where T : class, IMajorRecordGetter
     {
-        // 0x51x
-        private static bool GetFormLinks<LT> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out LT? value ) where LT : class, IEnumerable<IFormLinkGetter<IMajorRecordGetter>>
-        {
-            value = null;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
-            if (property == null)
-            {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Failed to find property. Skipping.", 0x511);
-                return false;
-            }
+        public static bool CanFill () => true;
 
-            object? _value = property.GetValue(record);
-            if (_value == null)
-                return true;
-
-            if (_value is not LT __value)
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, typeof(LT).Name, _value.GetType().Name, 0x512);
-                return false;
-            }
-
-            value = __value;
-
-            return true;
-        }
+        public static bool CanForward () => true;
 
         // Log Codes: 0x52x
         public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
@@ -61,13 +40,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     {
                         if (!curValue.SequenceEqualNullable(originValue))
                         {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as property doesn't match origin");
+                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
                             return false;
                         }
                     }
                     else
                     {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find origin property to check.", 0x521);
+                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x521);
                         return false;
                     }
                 }
@@ -84,14 +63,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         var setProperty = patch.GetType().GetProperty(rcd.PropertyName);
                         if (setProperty == null)
                         {
-                            LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find property to set new value to.", 0x522);
+                            LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x522);
                             return false;
                         }
 
                         object? _setList = setProperty.GetValue(patch);
                         if (_setList == null)
                         {
-                            LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find property to set new value to.", 0x523);
+                            LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x523);
                             return false;
                         }
 
@@ -140,7 +119,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 if (curValue.SequenceEqualNullable(newValue))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as already matches forwarding record");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual);
                     return false;
                 }
 
@@ -150,13 +129,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     {
                         if (!curValue.SequenceEqualNullable(originValue))
                         {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as property doesn't match origin");
+                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
                             return false;
                         }
                     }
                     else
                     {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find origin property to check.", 0x531);
+                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x531);
                         return false;
                     }
                 }
@@ -168,7 +147,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     if (newValue == null)
                         return false;
-                    
+
                     foreach (var item in newValue)
                     {
                         if (item.FormKey.ModKey == forwardContext.ModKey)
@@ -212,7 +191,31 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return false;
         }
-        public static bool CanFill () => true;
-        public static bool CanForward () => true;
+
+        // 0x51x
+        private static bool GetFormLinks<LT> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out LT? value ) where LT : class, IEnumerable<IFormLinkGetter<IMajorRecordGetter>>
+        {
+            value = null;
+            var property = record.GetType().GetProperty(rcd.PropertyName);
+            if (property == null)
+            {
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x511);
+                return false;
+            }
+
+            object? _value = property.GetValue(record);
+            if (_value == null)
+                return true;
+
+            if (_value is not LT __value)
+            {
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, typeof(LT).Name, _value.GetType().Name, 0x512);
+                return false;
+            }
+
+            value = __value;
+
+            return true;
+        }
     }
 }

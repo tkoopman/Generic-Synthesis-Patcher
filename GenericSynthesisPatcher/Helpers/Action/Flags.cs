@@ -9,34 +9,15 @@ using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-using static GenericSynthesisPatcher.Program;
-
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     // Log Codes: 0x3xx
     internal class Flags : IAction
     {
-        // Log Codes: 0x31x
-        private static bool GetFlags ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out Enum? value )
-        {
-            value = null;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
-            if (property == null)
-            {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Failed to find property. Skipping.", 0x311);
-                return false;
-            }
+        public static bool CanFill () => true;
 
-            object? _value = property.GetValue(record);
-            if (_value == null || !FlagEnums.IsFlagEnum(_value.GetType()))
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "FlagEnums", _value?.GetType().Name ?? "?", 0x312);
-                return false;
-            }
+        public static bool CanForward () => false;
 
-            value = (Enum)_value;
-            return true;
-        }
         // Log Codes: 0x32x
         public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
         {
@@ -56,7 +37,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     if (curValue != originValue)
                     {
-                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
+                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
                         return false;
                     }
                 }
@@ -100,7 +81,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 var setFlagProp = patch.GetType().GetProperty(rcd.PropertyName);
                 if (setFlagProp == null)
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Failed to find property. Skipping.", 0x322);
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x322);
                     return false;
                 }
 
@@ -112,8 +93,28 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return false;
         }
 
-        public static bool CanFill () => true;
-        public static bool CanForward () => false;
         public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd ) => throw new NotImplementedException();
+
+        // Log Codes: 0x31x
+        private static bool GetFlags ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out Enum? value )
+        {
+            value = null;
+            var property = record.GetType().GetProperty(rcd.PropertyName);
+            if (property == null)
+            {
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x311);
+                return false;
+            }
+
+            object? _value = property.GetValue(record);
+            if (_value == null || !FlagEnums.IsFlagEnum(_value.GetType()))
+            {
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "FlagEnums", _value?.GetType().Name ?? "?", 0x312);
+                return false;
+            }
+
+            value = (Enum)_value;
+            return true;
+        }
     }
 }

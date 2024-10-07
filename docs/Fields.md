@@ -60,20 +60,37 @@ You can use either the full field name or Alt name when available.
 | Cell | SkyAndWeatherFromRegion | XCCM |
 | Cell | Water | XCWT |
 | Cell | WaterEnvironmentMap | XWEM |
+| Container | Name |  |
+| Container | Items |  |
+| Container | Flags |  |
+| Container | Weight |  |
+| Container | OpenSound | SNAM |
+| Container | CloseSound | QNAM |
+| Container | MajorFlags | RecordFlags |
+| Faction | ExteriorJailMarker | JAIL |
+| Faction | FollowerWaitMarker | WAIT |
+| Faction | JailOutfit | JOUT |
+| Faction | MerchantContainer | VENC |
+| Faction | PlayerInventoryContainer | PLCN |
+| Faction | SharedCrimeFactionList |  |
+| Faction | StolenGoodsContainer |  |
+| Faction | VendorBuySellList |  |
 | Factions | Flags |  |
 | Factions | Name |  |
-| Indigestible | Description |  |
-| Indigestible | Effects |  |
-| Indigestible | EquipmentType | ETYP |
-| Indigestible | Flags |  |
-| Indigestible | Keywords | KWDA |
-| Indigestible | MajorFlags | RecordFlags |
-| Indigestible | Name |  |
-| Indigestible | PickUpSound | YNAM |
-| Indigestible | PutDownSound | ZNAM |
-| Indigestible | Value |  |
-| Indigestible | Weight |  |
-| Ingredient | Effects |  |
+| Ingestible | Addiction |  |
+| Ingestible | AddictionChance |  |
+| Ingestible | ConsumeSound |  |
+| Ingestible | Description |  |
+| Ingestible | Effects |  |
+| Ingestible | EquipmentType | ETYP |
+| Ingestible | Flags |  |
+| Ingestible | Keywords | KWDA |
+| Ingestible | MajorFlags | RecordFlags |
+| Ingestible | Name |  |
+| Ingestible | PickUpSound | YNAM |
+| Ingestible | PutDownSound | ZNAM |
+| Ingestible | Value |  |
+| Ingestible | Weight |  |
 | Ingredient | EquipType |  |
 | Ingredient | Flags |  |
 | Ingredient | IngredientValue |  |
@@ -128,7 +145,6 @@ You can use either the full field name or Alt name when available.
 | NPC | WornArmor |  |
 | Outfit | Items |  |
 | Scroll | Description |  |
-| Scroll | Effects |  |
 | Scroll | EquipmentType | ETYP |
 | Scroll | Flags |  |
 | Scroll | Keywords | KWDA |

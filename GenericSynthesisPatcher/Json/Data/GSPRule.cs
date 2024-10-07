@@ -23,39 +23,39 @@ namespace GenericSynthesisPatcher.Json.Data
 {
     public partial class GSPRule
     {
-        /// <summary>
-        /// What action to take.
-        /// </summary>
-        public enum ActionType
-        {
-            Fill,
-            Forward
-        }
+        [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
+        public List<string>? EditorID;
 
-        /// <summary>
-        /// Key used for storing actions.
-        /// </summary>
-        /// <param name="actionType"></param>
-        /// <param name="key"></param>
-        public readonly struct ValueKey ( ActionType actionType, string key )
-        {
-            public readonly ActionType ActionType = actionType;
-            public readonly string Key = key.ToLower();
+        [JsonProperty(PropertyName = "Factions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FilterFormLinks>))]
+        public List<FilterFormLinks>? Factions;
 
-            public override bool Equals ( [NotNullWhen(true)] object? obj )
-                => obj is ValueKey key
-                   && ActionType == key.ActionType
-                   && Key.Equals(key.Key);
+        [JsonProperty(PropertyName = "FactionsOp", NullValueHandling = NullValueHandling.Ignore)]
+        public Operation FactionsOp;
 
-            public override readonly int GetHashCode () => Key.GetHashCode();
+        [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
+        public List<FormKey>? FormID;
 
-            public static bool operator == ( ValueKey left, ValueKey right ) => left.Equals(right);
+        [JsonProperty(PropertyName = "Keywords", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
+        public List<string>? Keywords;
 
-            public static bool operator != ( ValueKey left, ValueKey right ) => !(left == right);
-        }
+        [JsonProperty(PropertyName = "KeywordsOp", NullValueHandling = NullValueHandling.Ignore)]
+        public Operation KeywordsOp;
 
-        internal Dictionary<ValueKey, JToken> jsonValues;
-        private Dictionary<ValueKey, object>? cache = null;
+        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
+        public List<ModKey>? Masters;
+
+        [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
+        public List<string>? NotEditorID;
+
+        [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
+        public List<FormKey>? NotFormID;
 
         [DefaultValue(0)]
         [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -65,110 +65,13 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonConverter(typeof(SingleOrArrayConverter<GSPRule.Type>))]
         public List<GSPRule.Type>? Types;
 
-        [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? FormID;
+        internal Dictionary<ValueKey, JToken> jsonValues;
 
-        [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? EditorID;
-
-        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
-        public List<ModKey>? Masters;
-
-        [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? NotFormID;
-
-        [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? NotEditorID;
-
-        [JsonProperty(PropertyName = "Factions", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FilterFormLinks>))]
-        public List<FilterFormLinks>? Factions;
-
-        [JsonProperty(PropertyName = "FactionsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation FactionsOp;
-
-        [JsonProperty(PropertyName = "Keywords", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? Keywords;
-
-        [JsonProperty(PropertyName = "KeywordsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation KeywordsOp;
-
-        [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
-        public bool OnlyIfDefault { get; set; }
-
-        /// <summary>
-        /// ForwardType can change how Forwarding actions work.
-        /// Default: Will replace winning with value from forwarding mod.
-        /// SelfMasterOnly: This  is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.
-        ///                 It will only add new FormIDs to lists if FormID is from the same Forwarding Mod.
-        ///                 It will not remove any current items from winning records.
-        ///                 Other field types will just behave like they do in Default.
-        /// </summary>
-        [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
-        public ForwardTypes ForwardType { get; set; }
-
-        /// <summary>
-        /// Add Forward action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
-        /// </summary>
-        [JsonProperty(PropertyName = "forward", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Forward
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        jsonValues.Add(new ValueKey(ActionType.Forward, x.Key), x.Value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add Fill action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
-        /// </summary>
-        [JsonProperty(PropertyName = "fill", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Fill
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        jsonValues.Add(new ValueKey(ActionType.Fill, x.Key), x.Value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Validates Lists to make sure it is null if list contains 0 entries and no duplicates.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns>Cleaned List.</returns>
-        private static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list.Distinct().ToList() : null;
+        private Dictionary<ValueKey, object>? cache = null;
 
         /// <summary>
         /// Create new rule, and validates it meets basic needs.
         /// </summary>
-        /// <param name="priority"></param>
-        /// <param name="types"></param>
-        /// <param name="formID"></param>
-        /// <param name="editorID"></param>
-        /// <param name="notFormID"></param>
-        /// <param name="notEditorID"></param>
-        /// <param name="fill"></param>
-        /// <param name="forward"></param>
-        /// <param name="factions"></param>
-        /// <param name="factionsOp"></param>
-        /// <exception cref="JsonSerializationException"></exception>
         public GSPRule ( int priority, List<GSPRule.Type>? types, List<FormKey>? formID, List<string>? editorID, List<FormKey>? notFormID, List<string>? notEditorID, JObject? fill, JObject? forward, List<FilterFormLinks>? factions, Operation? factionsOp, List<ModKey>? masters, ForwardTypes forwardType, List<string>? keywords, Operation? keywordsOp )
         {
             jsonValues = [];
@@ -196,6 +99,103 @@ namespace GenericSynthesisPatcher.Json.Data
         }
 
         /// <summary>
+        /// What action to take.
+        /// </summary>
+        public enum ActionType
+        {
+            Fill,
+            Forward
+        }
+
+        /// <summary>
+        /// Add Fill action(s) to this rule.
+        /// This is only used for adding to joint Fill/Forward store.
+        /// </summary>
+        [JsonProperty(PropertyName = "fill", NullValueHandling = NullValueHandling.Ignore)]
+        public JObject? Fill
+        {
+            set
+            {
+                foreach (var x in value ?? [])
+                {
+                    if (x.Value != null)
+                        jsonValues.Add(new ValueKey(ActionType.Fill, x.Key), x.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add Forward action(s) to this rule.
+        /// This is only used for adding to joint Fill/Forward store.
+        /// </summary>
+        [JsonProperty(PropertyName = "forward", NullValueHandling = NullValueHandling.Ignore)]
+        public JObject? Forward
+        {
+            set
+            {
+                foreach (var x in value ?? [])
+                {
+                    if (x.Value != null)
+                        jsonValues.Add(new ValueKey(ActionType.Forward, x.Key), x.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// ForwardType can change how Forwarding actions work.
+        /// Default: Will replace winning with value from forwarding mod.
+        /// SelfMasterOnly: This  is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.
+        ///                 It will only add new FormIDs to lists if FormID is from the same Forwarding Mod.
+        ///                 It will not remove any current items from winning records.
+        ///                 Other field types will just behave like they do in Default.
+        /// </summary>
+        [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
+        public ForwardTypes ForwardType { get; set; }
+
+        [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
+        public bool OnlyIfDefault { get; set; }
+
+        /// <summary>
+        /// Get the value data for a selected rule's action value key parsed to selected class type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public T? GetValueAs<T> ( ValueKey key )
+        {
+            cache ??= [];
+            if (cache.TryGetValue(key, out object? value))
+            {
+                return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
+            }
+
+            if (jsonValues.TryGetValue(key, out var jsonValue))
+            {
+                if (JsonConvert.DeserializeObject<T>(jsonValue.ToString(), Global.SerializerSettings) is T value2)
+                {
+                    cache.Add(key, value2);
+                    return value2;
+                }
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Get the raw string value data for a selected rule's action value key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>string</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public string? GetValueAsString ( ValueKey key )
+        => jsonValues.TryGetValue(key, out var jsonValue)
+              ? jsonValue.Type == JTokenType.String
+                  ? jsonValue.ToString()
+                  : throw new InvalidOperationException($"Invalid value type returned for {key.Key}")
+              : null;
+
+        /// <summary>
         /// Checks if rule filter(s) match current context's record.
         /// </summary>
         /// <param name="context"></param>
@@ -221,6 +221,43 @@ namespace GenericSynthesisPatcher.Json.Data
 
             return matches;
         }
+
+        private static bool MatchesFaction ( INpcGetter record, FilterFormLinks check )
+        {
+            // If no factions on record return result based on if +/-
+            if (!record.Factions.SafeAny())
+                return false;
+
+            foreach (var f in record.Factions)
+            {
+                if (f.Faction.Equals(check.FormKey))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool MatchesKeyword ( IKeywordedGetter record, string check, bool neg )
+        {
+            // If no keywords on record return result based on if +/-
+            if (!record.Keywords.SafeAny())
+                return false;
+
+            string keywordStr = (neg || check.StartsWith('+'))? check[1..] : check;
+            var keyword = Helpers.Action.Keywords.GetKeyword(keywordStr);
+
+            return keyword != null && record.Keywords.Contains(keyword);
+        }
+
+        /// <summary>
+        /// Validates Lists to make sure it is null if list contains 0 entries and no duplicates.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns>Cleaned List.</returns>
+        private static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list.Distinct().ToList() : null;
 
         /// <summary>
         /// Checks basic filters.
@@ -348,23 +385,6 @@ namespace GenericSynthesisPatcher.Json.Data
             };
         }
 
-        private bool MatchesFaction ( INpcGetter record, FilterFormLinks check )
-        {
-            // If no factions on record return result based on if +/-
-            if (!record.Factions.SafeAny())
-                return false;
-
-            foreach (var f in record.Factions)
-            {
-                if (f.Faction.Equals(check.FormKey))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         /// <summary>
         /// Checks is matches and keyword filters.
         /// </summary>
@@ -412,56 +432,27 @@ namespace GenericSynthesisPatcher.Json.Data
                 _ => matchedCount == 1 // XOR
             };
         }
-        private bool MatchesKeyword ( IKeywordedGetter record, string check, bool neg )
-        {
-            // If no keywords on record return result based on if +/-
-            if (!record.Keywords.SafeAny())
-                return false;
-
-            string keywordStr = (neg || check.StartsWith('+'))? check[1..] : check;
-            var keyword = Helpers.Action.Keywords.GetKeyword(keywordStr);
-
-            return keyword != null && record.Keywords.Contains(keyword);
-        }
 
         /// <summary>
-        /// Get the raw string value data for a selected rule's action value key.
+        /// Key used for storing actions.
         /// </summary>
+        /// <param name="actionType"></param>
         /// <param name="key"></param>
-        /// <returns>string</returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public string? GetValueAsString ( ValueKey key )
-        => jsonValues.TryGetValue(key, out var jsonValue)
-              ? jsonValue.Type == JTokenType.String
-                  ? jsonValue.ToString()
-                  : throw new InvalidOperationException($"Invalid value type returned for {key.Key}")
-              : null;
-
-        /// <summary>
-        /// Get the value data for a selected rule's action value key parsed to selected class type.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public T? GetValueAs<T> ( ValueKey key )
+        public readonly struct ValueKey ( ActionType actionType, string key )
         {
-            cache ??= [];
-            if (cache.TryGetValue(key, out object? value))
-            {
-                return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
-            }
+            public readonly ActionType ActionType = actionType;
+            public readonly string Key = key.ToLower();
 
-            if (jsonValues.TryGetValue(key, out var jsonValue))
-            {
-                if (JsonConvert.DeserializeObject<T>(jsonValue.ToString(), Global.SerializerSettings) is T value2)
-                {
-                    cache.Add(key, value2);
-                    return value2;
-                }
-            }
+            public static bool operator != ( ValueKey left, ValueKey right ) => !(left == right);
 
-            return default;
+            public static bool operator == ( ValueKey left, ValueKey right ) => left.Equals(right);
+
+            public override bool Equals ( [NotNullWhen(true)] object? obj )
+                                        => obj is ValueKey key
+                   && ActionType == key.ActionType
+                   && Key.Equals(key.Key);
+
+            public override readonly int GetHashCode () => Key.GetHashCode();
         }
     }
 }

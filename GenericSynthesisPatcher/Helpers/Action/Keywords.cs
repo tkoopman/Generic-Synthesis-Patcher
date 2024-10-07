@@ -24,18 +24,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
     public class Keywords : IAction
     {
         private static Dictionary<string, IKeywordGetter>? keywords;
-        public static IKeywordGetter? GetKeyword ( string name )
-        {
-            if (keywords == null)
-            {
-                keywords = [];
-                Global.State.LoadOrder.PriorityOrder.Keyword().WinningOverrides().ForEach(k => keywords[k.EditorID ?? ""] = k);
-                LogHelper.Log(LogLevel.Information, $"{keywords.Count} keywords loaded into cache.");
-            }
 
-            _ = keywords.TryGetValue(name, out var value);
-            return value;
-        }
+        public static bool CanFill () => true;
+
+        public static bool CanForward () => true;
 
         // Log Codes: 0x21x
         public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
@@ -46,7 +38,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
                     return false;
                 }
 
@@ -96,16 +88,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 if (forward.Keywords.SequenceEqualNullable(record.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as already matches forwarding record");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual);
                     return false;
                 }
 
                 if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Skipping as keywords don't match origin");
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
                     return false;
                 }
-                
+
                 if (rule.ForwardType.GetFlags().Contains(ForwardTypes.SelfMasterOnly))
                 {
                     if (forward.Keywords == null)
@@ -144,7 +136,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return patch != null;
         }
 
-        public static bool CanFill () => true;
-        public static bool CanForward () => true;
+        public static IKeywordGetter? GetKeyword ( string name )
+        {
+            if (keywords == null)
+            {
+                keywords = [];
+                Global.State.LoadOrder.PriorityOrder.Keyword().WinningOverrides().ForEach(k => keywords[k.EditorID ?? ""] = k);
+                LogHelper.Log(LogLevel.Information, $"{keywords.Count} keywords loaded into cache.");
+            }
+
+            _ = keywords.TryGetValue(name, out var value);
+            return value;
+        }
     }
 }

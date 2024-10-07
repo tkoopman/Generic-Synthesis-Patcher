@@ -1,10 +1,9 @@
-using System;
-using System.Text.RegularExpressions;
-
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
+using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins.Aspects;
+using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using String = GenericSynthesisPatcher.Helpers.Action.String;
@@ -13,84 +12,92 @@ namespace GenericSynthesisPatcher
 {
     public partial class Program
     {
-        private static readonly RecordCallData RcdAcousticSpace                      = new RecordCallData<FormLink<IAcousticSpaceGetter>>     ( "AcousticSpace"                      );
-        private static readonly RecordCallData RcdActorEffect                        = new RecordCallData<FormLinks<ISpellRecordGetter>>      ( "ActorEffect"                        );
-        private static readonly RecordCallData RcdAddiction                          = new RecordCallData<FormLink<ISkyrimMajorRecordGetter>> ( "Addiction"                          );
-        private static readonly RecordCallData RcdAddictionChance                    = new RecordCallData<Generic<float>>                     ( "AddictionChance"                    );
-        private static readonly RecordCallData RcdAlternateBlockMaterial             = new RecordCallData<FormLink<IMaterialTypeGetter>>      ( "AlternateBlockMaterial"             );
-        private static readonly RecordCallData RcdArmature                           = new RecordCallData<FormLinks<IArmorAddonGetter>>       ( "Armature"                           );
-        private static readonly RecordCallData RcdArmorRating                        = new RecordCallData<Generic<float>>                     ( "ArmorRating"                        );
-        private static readonly RecordCallData RcdAttackRace                         = new RecordCallData<FormLink<IRaceGetter>>              ( "AttackRace"                         );
-        private static readonly RecordCallData RcdBashImpactDataSet                  = new RecordCallData<FormLink<IImpactDataSetGetter>>     ( "BashImpactDataSet"                  );
-        private static readonly RecordCallData RcdBookText                           = new RecordCallData<String>                             ( "BookText"                           );
-        private static readonly RecordCallData RcdClass                              = new RecordCallData<FormLink<IClassGetter>>             ( "Class"                              );
-        private static readonly RecordCallData RcdClimate                            = new RecordCallData<FormLink<IClimateGetter>>           ( "Climate"                            );
-        private static readonly RecordCallData RcdCombatOverridePackageList          = new RecordCallData<FormLink<IFormListGetter>>          ( "CombatOverridePackageList"          );
-        private static readonly RecordCallData RcdCombatStyle                        = new RecordCallData<FormLink<ICombatStyleGetter>>       ( "CombatStyle"                        );
-        private static readonly RecordCallData RcdConsumeSound                       = new RecordCallData<FormLink<ISoundDescriptorGetter>>   ( "ConsumeSound"                       );
-        private static readonly RecordCallData RcdCrimeFaction                       = new RecordCallData<FormLink<IFactionGetter>>           ( "CrimeFaction"                       );
-        private static readonly RecordCallData RcdDamage                             = new RecordCallData<Generic<float>>                     ( "Damage"                             );
-        private static readonly RecordCallData RcdDeathItem                          = new RecordCallData<FormLink<ILeveledItemGetter>>       ( "DeathItem"                          );
-        private static readonly RecordCallData RcdDefaultOutfit                      = new RecordCallData<FormLink<IOutfitGetter>>            ( "DefaultOutfit"                      );
-        private static readonly RecordCallData RcdDefaultPackageList                 = new RecordCallData<FormLink<IFormListGetter>>          ( "DefaultPackageList"                 );
-        private static readonly RecordCallData RcdDescription                        = new RecordCallData<String>                             ( "Description"                        );
-        private static readonly RecordCallData RcdDistantLodMultiplier               = new RecordCallData<Generic<float>>                     ( "DistantLodMultiplier"               );
-        private static readonly RecordCallData RcdEffects                            = new RecordCallData<Effects>                            ( "Effects"                            );
-        private static readonly RecordCallData RcdEnchantmentAmount                  = new RecordCallData<Generic<ushort>>                    ( "EnchantmentAmount"                  );
-        private static readonly RecordCallData RcdEncounterZone                      = new RecordCallData<FormLink<IEncounterZoneGetter>>     ( "EncounterZone"                      );
-        private static readonly RecordCallData RcdEquipmentType                      = new RecordCallData<FormLink<IEquipTypeGetter>>         ( "EquipmentType"                      );
-        private static readonly RecordCallData RcdEquipType                          = new RecordCallData<FormLink<IEquipTypeGetter>>         ( "EquipType"                          );
-        private static readonly RecordCallData RcdExteriorJailMarker                 = new RecordCallData<FormLink<IPlacedObjectGetter>>      ( "ExteriorJailMarker"                 );
-        private static readonly RecordCallData RcdFarAwayModel                       = new RecordCallData<FormLink<IArmorGetter>>             ( "FarAwayModel"                       );
-        private static readonly RecordCallData RcdFlags                              = new RecordCallData<Flags>                              ( "Flags"                              );
-        private static readonly RecordCallData RcdFollowerWaitMarker                 = new RecordCallData<FormLink<IPlacedObjectGetter>>      ( "FollowerWaitMarker"                 );
-        private static readonly RecordCallData RcdGiftFilter                         = new RecordCallData<FormLink<IFormListGetter>>          ( "GiftFilter"                         );
-        private static readonly RecordCallData RcdGuardWarnOverridePackageList       = new RecordCallData<FormLink<IFormListGetter>>          ( "GuardWarnOverridePackageList"       );
-        private static readonly RecordCallData RcdHairColor                          = new RecordCallData<FormLink<IColorRecordGetter>>       ( "HairColor"                          );
-        private static readonly RecordCallData RcdHeadParts                          = new RecordCallData<FormLinks<IHeadPartGetter>>         ( "HeadParts"                          );
-        private static readonly RecordCallData RcdHeadTexture                        = new RecordCallData<FormLink<ITextureSetGetter>>        ( "HeadTexture"                        );
-        private static readonly RecordCallData RcdHeight                             = new RecordCallData<Generic<float>>                     ( "Height"                             );
-        private static readonly RecordCallData RcdImageSpace                         = new RecordCallData<FormLink<IImageSpaceGetter>>        ( "ImageSpace"                         );
-        private static readonly RecordCallData RcdIngredientValue                    = new RecordCallData<Generic<int>>                       ( "IngredientValue"                    );
-        private static readonly RecordCallData RcdInteriorLighting                   = new RecordCallData<FormLink<ILightingTemplateGetter>>  ( "InteriorLighting"                   );
-        private static readonly RecordCallData RcdInventoryArt                       = new RecordCallData<FormLink<IStaticGetter>>            ( "InventoryArt"                       );
-        private static readonly RecordCallData RcdItems                              = new RecordCallData<FormLinks<IOutfitTargetGetter>>     ( "Items"                              );
-        private static readonly RecordCallData RcdJailOutfit                         = new RecordCallData<FormLink<IOutfitGetter>>            ( "JailOutfit"                         );
-        private static readonly RecordCallData RcdKeywords                           = new RecordCallData<Keywords>                           ( "Keywords"                           );
-        private static readonly RecordCallData RcdLightingTemplate                   = new RecordCallData<FormLink<ILightingTemplateGetter>>  ( "LightingTemplate"                   );
-        private static readonly RecordCallData RcdLocation                           = new RecordCallData<FormLink<ILocationGetter>>          ( "Location"                           );
-        private static readonly RecordCallData RcdLockList                           = new RecordCallData<FormLink<ILockListGetter>>          ( "LockList"                           );
-        private static readonly RecordCallData RcdLodWater                           = new RecordCallData<FormLink<IWaterGetter>>             ( "LodWater"                           );
-        private static readonly RecordCallData RcdLodWaterHeight                     = new RecordCallData<Generic<float>>                     ( "LodWaterHeight"                     );
-        private static readonly RecordCallData RcdMajorFlags                         = new RecordCallData<Flags>                              ( "MajorFlags"                         );
-        private static readonly RecordCallData RcdMerchantContainer                  = new RecordCallData<FormLink<IPlacedObjectGetter>>      ( "MerchantContainer"                  );
-        private static readonly RecordCallData RcdMusic                              = new RecordCallData<FormLink<IMusicTypeGetter>>         ( "Music"                              );
-        private static readonly RecordCallData RcdName                               = new RecordCallData<String>                             ( "Name"                               );
-        private static readonly RecordCallData RcdObjectEffect                       = new RecordCallData<FormLink<IEffectRecordGetter>>      ( "ObjectEffect"                       );
-        private static readonly RecordCallData RcdObserveDeadBodyOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>          ( "ObserveDeadBodyOverridePackageList" );
-        private static readonly RecordCallData RcdOwner                              = new RecordCallData<FormLink<IOwnerGetter>>             ( "Owner"                              );
-        private static readonly RecordCallData RcdPackages                           = new RecordCallData<FormLinks<IPackageGetter>>          ( "Packages"                           );
-        private static readonly RecordCallData RcdPickUpSound                        = new RecordCallData<FormLink<ISoundDescriptorGetter>>   ( "PickUpSound"                        );
-        private static readonly RecordCallData RcdPlayerInventoryContainer           = new RecordCallData<FormLink<IPlacedObjectGetter>>      ( "PlayerInventoryContainer"           );
-        private static readonly RecordCallData RcdProjectile                         = new RecordCallData<FormLink<IProjectileGetter>>        ( "Projectile"                         );
-        private static readonly RecordCallData RcdPutDownSound                       = new RecordCallData<FormLink<ISoundDescriptorGetter>>   ( "PutDownSound"                       );
-        private static readonly RecordCallData RcdRace                               = new RecordCallData<FormLink<IRaceGetter>>              ( "Race"                               );
-        private static readonly RecordCallData RcdRagdollConstraintTemplate          = new RecordCallData<String>                             ( "RagdollConstraintTemplate"          );
-        private static readonly RecordCallData RcdSharedCrimeFactionList             = new RecordCallData<FormLink<IFormListGetter>>          ( "SharedCrimeFactionList"             );
-        private static readonly RecordCallData RcdShortName                          = new RecordCallData<String>                             ( "ShortName"                          );
-        private static readonly RecordCallData RcdSkyAndWeatherFromRegion            = new RecordCallData<FormLink<IRegionGetter>>            ( "SkyAndWeatherFromRegion"            );
-        private static readonly RecordCallData RcdSleepingOutfit                     = new RecordCallData<FormLink<IOutfitGetter>>            ( "SleepingOutfit"                     );
-        private static readonly RecordCallData RcdSpectatorOverridePackageList       = new RecordCallData<FormLink<IFormListGetter>>          ( "SpectatorOverridePackageList"       );
-        private static readonly RecordCallData RcdStolenGoodsContainer               = new RecordCallData<FormLink<IPlacedObjectGetter>>      ( "StolenGoodsContainer"               );
-        private static readonly RecordCallData RcdTemplate                           = new RecordCallData<FormLink<INpcSpawnGetter>>          ( "Template"                           );
-        private static readonly RecordCallData RcdTemplateArmor                      = new RecordCallData<FormLink<IArmorGetter>>             ( "TemplateArmor"                      );
-        private static readonly RecordCallData RcdValue                              = new RecordCallData<Generic<uint>>                      ( "Value"                              );
-        private static readonly RecordCallData RcdVendorBuySellList                  = new RecordCallData<FormLink<IFormListGetter>>          ( "VendorBuySellList"                  );
-        private static readonly RecordCallData RcdVoice                              = new RecordCallData<FormLink<IVoiceTypeGetter>>         ( "Voice"                              );
-        private static readonly RecordCallData RcdWater                              = new RecordCallData<FormLink<IWaterGetter>>             ( "Water"                              );
-        private static readonly RecordCallData RcdWaterEnvironmentMap                = new RecordCallData<String>                             ( "WaterEnvironmentMap"                );
-        private static readonly RecordCallData RcdWeight                             = new RecordCallData<Generic<float>>                     ( "Weight"                             );
-        private static readonly RecordCallData RcdWornArmor                          = new RecordCallData<FormLink<IArmorGetter>>             ( "WornArmor"                          );
+        // This just to make sorting mappings easier by placing null after typeof alphabetically
+        private const Type? zzNull = null;
+
+        private static readonly RecordCallData RcdAcousticSpace = new RecordCallData<FormLink<IAcousticSpaceGetter>>("AcousticSpace");
+        private static readonly RecordCallData RcdActorEffect = new RecordCallData<FormLinks<ISpellRecordGetter>>("ActorEffect");
+        private static readonly RecordCallData RcdAddiction = new RecordCallData<FormLink<ISkyrimMajorRecordGetter>>("Addiction");
+        private static readonly RecordCallData RcdAddictionChance = new RecordCallData<Generic<float>>("AddictionChance");
+        private static readonly RecordCallData RcdAlternateBlockMaterial = new RecordCallData<FormLink<IMaterialTypeGetter>>("AlternateBlockMaterial");
+        private static readonly RecordCallData RcdArmature = new RecordCallData<FormLinks<IArmorAddonGetter>>("Armature");
+        private static readonly RecordCallData RcdArmorRating = new RecordCallData<Generic<float>>("ArmorRating");
+        private static readonly RecordCallData RcdAttackRace = new RecordCallData<FormLink<IRaceGetter>>("AttackRace");
+        private static readonly RecordCallData RcdBashImpactDataSet = new RecordCallData<FormLink<IImpactDataSetGetter>>("BashImpactDataSet");
+        private static readonly RecordCallData RcdBookText = new RecordCallData<String>("BookText");
+        private static readonly RecordCallData RcdClass = new RecordCallData<FormLink<IClassGetter>>("Class");
+        private static readonly RecordCallData RcdClimate = new RecordCallData<FormLink<IClimateGetter>>("Climate");
+        private static readonly RecordCallData RcdCloseSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("CloseSound");
+        private static readonly RecordCallData RcdCombatOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("CombatOverridePackageList");
+        private static readonly RecordCallData RcdCombatStyle = new RecordCallData<FormLink<ICombatStyleGetter>>("CombatStyle");
+        private static readonly RecordCallData RcdConsumeSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("ConsumeSound");
+        private static readonly RecordCallData RcdContainerItems = new RecordCallData<FormLinksWithData<ContainerItemsAction>>("Items");
+        private static readonly RecordCallData RcdCrimeFaction = new RecordCallData<FormLink<IFactionGetter>>("CrimeFaction");
+        private static readonly RecordCallData RcdDamage = new RecordCallData<Generic<float>>("Damage");
+        private static readonly RecordCallData RcdDeathItem = new RecordCallData<FormLink<ILeveledItemGetter>>("DeathItem");
+        private static readonly RecordCallData RcdDefaultOutfit = new RecordCallData<FormLink<IOutfitGetter>>("DefaultOutfit");
+        private static readonly RecordCallData RcdDefaultPackageList = new RecordCallData<FormLink<IFormListGetter>>("DefaultPackageList");
+        private static readonly RecordCallData RcdDescription = new RecordCallData<String>("Description");
+        private static readonly RecordCallData RcdDistantLodMultiplier = new RecordCallData<Generic<float>>("DistantLodMultiplier");
+        private static readonly RecordCallData RcdEnchantmentAmount = new RecordCallData<Generic<ushort>>("EnchantmentAmount");
+        private static readonly RecordCallData RcdEncounterZone = new RecordCallData<FormLink<IEncounterZoneGetter>>("EncounterZone");
+        private static readonly RecordCallData RcdEquipmentType = new RecordCallData<FormLink<IEquipTypeGetter>>("EquipmentType");
+        private static readonly RecordCallData RcdEquipType = new RecordCallData<FormLink<IEquipTypeGetter>>("EquipType");
+        private static readonly RecordCallData RcdExteriorJailMarker = new RecordCallData<FormLink<IPlacedObjectGetter>>("ExteriorJailMarker");
+        private static readonly RecordCallData RcdFarAwayModel = new RecordCallData<FormLink<IArmorGetter>>("FarAwayModel");
+        private static readonly RecordCallData RcdFlags = new RecordCallData<Flags>("Flags");
+        private static readonly RecordCallData RcdFollowerWaitMarker = new RecordCallData<FormLink<IPlacedObjectGetter>>("FollowerWaitMarker");
+        private static readonly RecordCallData RcdGiftFilter = new RecordCallData<FormLink<IFormListGetter>>("GiftFilter");
+        private static readonly RecordCallData RcdGuardWarnOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("GuardWarnOverridePackageList");
+        private static readonly RecordCallData RcdHairColor = new RecordCallData<FormLink<IColorRecordGetter>>("HairColor");
+        private static readonly RecordCallData RcdHeadParts = new RecordCallData<FormLinks<IHeadPartGetter>>("HeadParts");
+        private static readonly RecordCallData RcdHeadTexture = new RecordCallData<FormLink<ITextureSetGetter>>("HeadTexture");
+        private static readonly RecordCallData RcdHeight = new RecordCallData<Generic<float>>("Height");
+        private static readonly RecordCallData RcdImageSpace = new RecordCallData<FormLink<IImageSpaceGetter>>("ImageSpace");
+        private static readonly RecordCallData RcdIngestibleEffects = new RecordCallData<FormLinksWithData<IngestibleEffectsAction>>("Effects");
+        private static readonly RecordCallData RcdIngredientValue = new RecordCallData<Generic<int>>("IngredientValue");
+        private static readonly RecordCallData RcdInteriorLighting = new RecordCallData<FormLink<ILightingTemplateGetter>>("InteriorLighting");
+        private static readonly RecordCallData RcdInventoryArt = new RecordCallData<FormLink<IStaticGetter>>("InventoryArt");
+        private static readonly RecordCallData RcdItems = new RecordCallData<FormLinks<IOutfitTargetGetter>>("Items");
+        private static readonly RecordCallData RcdJailOutfit = new RecordCallData<FormLink<IOutfitGetter>>("JailOutfit");
+        private static readonly RecordCallData RcdKeywords = new RecordCallData<Keywords>("Keywords");
+        private static readonly RecordCallData RcdLightingTemplate = new RecordCallData<FormLink<ILightingTemplateGetter>>("LightingTemplate");
+        private static readonly RecordCallData RcdLocation = new RecordCallData<FormLink<ILocationGetter>>("Location");
+        private static readonly RecordCallData RcdLockList = new RecordCallData<FormLink<ILockListGetter>>("LockList");
+        private static readonly RecordCallData RcdLodWater = new RecordCallData<FormLink<IWaterGetter>>("LodWater");
+        private static readonly RecordCallData RcdLodWaterHeight = new RecordCallData<Generic<float>>("LodWaterHeight");
+        private static readonly RecordCallData RcdMajorFlags = new RecordCallData<Flags>("MajorFlags");
+        private static readonly RecordCallData RcdMerchantContainer = new RecordCallData<FormLink<IPlacedObjectGetter>>("MerchantContainer");
+        private static readonly RecordCallData RcdMusic = new RecordCallData<FormLink<IMusicTypeGetter>>("Music");
+        private static readonly RecordCallData RcdName = new RecordCallData<String>("Name");
+        private static readonly RecordCallData RcdObjectEffect = new RecordCallData<FormLink<IEffectRecordGetter>>("ObjectEffect");
+        private static readonly RecordCallData RcdObserveDeadBodyOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("ObserveDeadBodyOverridePackageList");
+        private static readonly RecordCallData RcdOpenSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("OpenSound");
+        private static readonly RecordCallData RcdOwner = new RecordCallData<FormLink<IOwnerGetter>>("Owner");
+        private static readonly RecordCallData RcdPackages = new RecordCallData<FormLinks<IPackageGetter>>("Packages");
+        private static readonly RecordCallData RcdPickUpSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("PickUpSound");
+        private static readonly RecordCallData RcdPlayerInventoryContainer = new RecordCallData<FormLink<IPlacedObjectGetter>>("PlayerInventoryContainer");
+        private static readonly RecordCallData RcdProjectile = new RecordCallData<FormLink<IProjectileGetter>>("Projectile");
+        private static readonly RecordCallData RcdPutDownSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("PutDownSound");
+        private static readonly RecordCallData RcdRace = new RecordCallData<FormLink<IRaceGetter>>("Race");
+        private static readonly RecordCallData RcdRagdollConstraintTemplate = new RecordCallData<String>("RagdollConstraintTemplate");
+        private static readonly RecordCallData RcdSharedCrimeFactionList = new RecordCallData<FormLink<IFormListGetter>>("SharedCrimeFactionList");
+        private static readonly RecordCallData RcdShortName = new RecordCallData<String>("ShortName");
+        private static readonly RecordCallData RcdSkyAndWeatherFromRegion = new RecordCallData<FormLink<IRegionGetter>>("SkyAndWeatherFromRegion");
+        private static readonly RecordCallData RcdSleepingOutfit = new RecordCallData<FormLink<IOutfitGetter>>("SleepingOutfit");
+        private static readonly RecordCallData RcdSpectatorOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("SpectatorOverridePackageList");
+        private static readonly RecordCallData RcdStolenGoodsContainer = new RecordCallData<FormLink<IPlacedObjectGetter>>("StolenGoodsContainer");
+        private static readonly RecordCallData RcdTemplate = new RecordCallData<FormLink<INpcSpawnGetter>>("Template");
+        private static readonly RecordCallData RcdTemplateArmor = new RecordCallData<FormLink<IArmorGetter>>("TemplateArmor");
+        private static readonly RecordCallData RcdValue = new RecordCallData<Generic<uint>>("Value");
+        private static readonly RecordCallData RcdVendorBuySellList = new RecordCallData<FormLink<IFormListGetter>>("VendorBuySellList");
+        private static readonly RecordCallData RcdVoice = new RecordCallData<FormLink<IVoiceTypeGetter>>("Voice");
+        private static readonly RecordCallData RcdWater = new RecordCallData<FormLink<IWaterGetter>>("Water");
+        private static readonly RecordCallData RcdWaterEnvironmentMap = new RecordCallData<String>("WaterEnvironmentMap");
+        private static readonly RecordCallData RcdWeight = new RecordCallData<Generic<float>>("Weight");
+        private static readonly RecordCallData RcdWornArmor = new RecordCallData<FormLink<IArmorGetter>>("WornArmor");
+
+        #region RCD Mapping
 
         /// <summary>
         /// This list is what directs each field update to the correct function.
@@ -115,6 +122,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("BookText"                           , typeof(IBookGetter)       ) , RcdBookText                           },
                 { new RecordCallKey("Class"                              , typeof(INpcGetter)        ) , RcdClass                              },
                 { new RecordCallKey("Climate"                            , typeof(IWorldspaceGetter) ) , RcdClimate                            },
+                { new RecordCallKey("CloseSound"                         , typeof(IContainerGetter)  ) , RcdCloseSound                         },
                 { new RecordCallKey("CNAM"                               , typeof(IBookGetter)       ) , RcdDescription                        },
                 { new RecordCallKey("CNAM"                               , typeof(INpcGetter)        ) , RcdClass                              },
                 { new RecordCallKey("CNAM"                               , typeof(IWorldspaceGetter) ) , RcdClimate                            },
@@ -139,7 +147,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("DPLT"                               , typeof(INpcGetter)        ) , RcdDefaultPackageList                 },
                 { new RecordCallKey("EAMT"                               , zzNull                    ) , RcdEnchantmentAmount                  },
                 { new RecordCallKey("ECOR"                               , typeof(INpcGetter)        ) , RcdCombatOverridePackageList          },
-                { new RecordCallKey("Effects"                            , zzNull                    ) , RcdEffects                            },
+                { new RecordCallKey("Effects"                            , typeof(IIngestibleGetter) ) , RcdIngestibleEffects                  },
                 { new RecordCallKey("EITM"                               , zzNull                    ) , RcdObjectEffect                       },
                 { new RecordCallKey("EnchantmentAmount"                  , zzNull                    ) , RcdEnchantmentAmount                  },
                 { new RecordCallKey("EncounterZone"                      , zzNull                    ) , RcdEncounterZone                      },
@@ -166,6 +174,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("IngredientValue"                    , typeof(IIngredientGetter) ) , RcdIngredientValue                    },
                 { new RecordCallKey("InteriorLighting"                   , typeof(IWorldspaceGetter) ) , RcdInteriorLighting                   },
                 { new RecordCallKey("InventoryArt"                       , zzNull                    ) , RcdInventoryArt                       },
+                { new RecordCallKey("Items"                              , typeof(IContainerGetter)  ) , RcdContainerItems                     },
                 { new RecordCallKey("Items"                              , typeof(IOutfitGetter)     ) , RcdItems                              },
                 { new RecordCallKey("JAIL"                               , typeof(IFactionGetter)    ) , RcdExteriorJailMarker                 },
                 { new RecordCallKey("JailOutfit"                         , typeof(IFactionGetter)    ) , RcdJailOutfit                         },
@@ -191,6 +200,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("ObserveDeadBodyOverridePackageList" , typeof(INpcGetter)        ) , RcdObserveDeadBodyOverridePackageList },
                 { new RecordCallKey("OCOR"                               , typeof(INpcGetter)        ) , RcdObserveDeadBodyOverridePackageList },
                 { new RecordCallKey("ONAM"                               , zzNull                    ) , RcdShortName                          },
+                { new RecordCallKey("OpenSound"                          , typeof(IContainerGetter)  ) , RcdOpenSound                          },
                 { new RecordCallKey("Owner"                              , typeof(ICellGetter)       ) , RcdOwner                              },
                 { new RecordCallKey("Packages"                           , typeof(INpcGetter)        ) , RcdPackages                           },
                 { new RecordCallKey("PickUpSound"                        , zzNull                    ) , RcdPickUpSound                        },
@@ -198,6 +208,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("PLCN"                               , typeof(IFactionGetter)    ) , RcdPlayerInventoryContainer           },
                 { new RecordCallKey("Projectile"                         , zzNull                    ) , RcdProjectile                         },
                 { new RecordCallKey("PutDownSound"                       , zzNull                    ) , RcdPutDownSound                       },
+                { new RecordCallKey("QNAM"                               , typeof(IContainerGetter)  ) , RcdCloseSound                         },
                 { new RecordCallKey("Race"                               , zzNull                    ) , RcdRace                               },
                 { new RecordCallKey("RagdollConstraintTemplate"          , zzNull                    ) , RcdRagdollConstraintTemplate          },
                 { new RecordCallKey("RecordFlags"                        , zzNull                    ) , RcdMajorFlags                         },
@@ -206,6 +217,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("ShortName"                          , zzNull                    ) , RcdShortName                          },
                 { new RecordCallKey("SkyAndWeatherFromRegion"            , typeof(ICellGetter)       ) , RcdSkyAndWeatherFromRegion            },
                 { new RecordCallKey("SleepingOutfit"                     , typeof(INpcGetter)        ) , RcdSleepingOutfit                     },
+                { new RecordCallKey("SNAM"                               , typeof(IContainerGetter)  ) , RcdOpenSound                          },
                 { new RecordCallKey("SOFT"                               , typeof(INpcGetter)        ) , RcdSleepingOutfit                     },
                 { new RecordCallKey("SpectatorOverridePackageList"       , typeof(INpcGetter)        ) , RcdSpectatorOverridePackageList       },
                 { new RecordCallKey("SPOR"                               , typeof(INpcGetter)        ) , RcdSpectatorOverridePackageList       },
@@ -223,6 +235,7 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("WAIT"                               , typeof(IFactionGetter)    ) , RcdFollowerWaitMarker                 },
                 { new RecordCallKey("Water"                              , zzNull                    ) , RcdWater                              },
                 { new RecordCallKey("WaterEnvironmentMap"                , typeof(ICellGetter)       ) , RcdWaterEnvironmentMap                },
+                { new RecordCallKey("Weight"                             , typeof(IContainerGetter)  ) , RcdWeight                             },
                 { new RecordCallKey("Weight"                             , typeof(INpcGetter)        ) , RcdWeight                             },
                 { new RecordCallKey("Weight"                             , typeof(IWeightValueGetter)) , RcdWeight                             },
                 { new RecordCallKey("WNAM"                               , typeof(INpcGetter)        ) , RcdWornArmor                          },
@@ -242,7 +255,6 @@ namespace GenericSynthesisPatcher
                 { new RecordCallKey("ZNAM"                               , zzNull                    ) , RcdPutDownSound                       },
         };
 
-        // This just to make sorting mappings easier by placing null after typeof alphabetically
-        private const Type? zzNull = null;
+        #endregion RCD Mapping
     }
 }

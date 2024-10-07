@@ -9,6 +9,7 @@ You can use either the short type name or synonyms when listing types.
 | ARMO | Armor          |
 | BOOK |
 | CELL |
+| CONT | Container      |
 | FACT | Faction        |
 | INGR | Ingredient     |
 | KEYM | Key            |
@@ -17,3 +18,4 @@ You can use either the short type name or synonyms when listing types.
 | OTFT | Outfit         |
 | SCRL | Scroll         |
 | WEAP | Weapon         |
+| WRLD | Worldspace     |
