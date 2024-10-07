@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Plugins.Records;
@@ -15,6 +16,8 @@ namespace GenericSynthesisPatcher.Helpers
     // Log Code: 0x7xx
     internal static class Mod
     {
+        private static readonly Dictionary<(FileName, string), IModListing<ISkyrimModGetter>?> ModCache = [];
+
         /// <summary>
         /// Finds the master record of the current context record.
         /// </summary>
@@ -26,8 +29,6 @@ namespace GenericSynthesisPatcher.Helpers
                     ? null
                     : o
                 : null;
-
-        private static readonly Dictionary<(FileName, string), IModListing<ISkyrimModGetter>?> ModCache = [];
 
         /// <summary>
         /// Find overwritten version of context's record from provided mod file name if it exists.
@@ -47,8 +48,14 @@ namespace GenericSynthesisPatcher.Helpers
 
             if ((modGetter.Mod?.ToImmutableLinkCache().TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var forwardContext) ?? false) && forwardContext != null)
             {
-                LogHelper.Log(LogLevel.Trace, context, $"Found matching record in forwarding mod {modFileName}.", 0x712);
-                return forwardContext;
+                if (modFileName.Equals(forwardContext.ModKey.FileName.String, StringComparison.OrdinalIgnoreCase))
+                {
+                    LogHelper.Log(LogLevel.Trace, context, $"Found matching record in forwarding mod {modFileName}.", 0x712);
+                    return forwardContext;
+                }
+
+                LogHelper.Log(LogLevel.Trace, context, $"Found incorrect matching record in forwarding mod {modFileName} != {forwardContext.ModKey.FileName.String}.", 0x714);
+                return null;
             }
 
             LogHelper.Log(LogLevel.Trace, context, $"No matching record in forwarding mod {modFileName} of type {context.Record.Registration.GetterType.Name}.", 0x713);
@@ -60,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers
         ///   File exists in load order and
         ///   is after the Master mod for the context record
         ///   else returns null
-        /// 
+        ///
         /// Caches results for context record's mod and file name combination.
         /// </summary>
         /// <param name="context">Current record's context to make sure master is before mod you looking for.</param>

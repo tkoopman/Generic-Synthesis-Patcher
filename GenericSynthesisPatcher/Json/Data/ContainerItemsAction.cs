@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public class ContainerItemsAction ( FilterFormLinks formKey, int count ) : IFormLinksWithData<ContainerItemsAction, IContainerEntryGetter>, IFormLinksWithData<ContainerItemsAction, IFormLinkContainerGetter>
+    public class ContainerItemsAction ( FilterFormLinks formKey, int count ) : IFormLinksWithData<ContainerItemsAction>
     {
         [JsonProperty(PropertyName = "count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [System.ComponentModel.DefaultValue(1)]
@@ -35,6 +35,10 @@ namespace GenericSynthesisPatcher.Json.Data
 
             return true;
         }
+
+        public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right ) => left is IContainerEntryGetter l && right is IContainerEntryGetter r && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey) && l.Item.Count == r.Item.Count;
+
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
 
         public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
@@ -88,8 +92,6 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public bool DataEquals ( IFormLinkContainerGetter other ) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.FormKey) && otherContainer.Item.Count == Count;
 
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(FormKey.FormKey), null);
-
-        IContainerEntryGetter? IFormLinksWithData<ContainerItemsAction, IContainerEntryGetter>.Find ( IEnumerable<IFormLinkContainerGetter>? list ) => (IContainerEntryGetter?)list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(FormKey.FormKey), null);
+        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.FormKey);
     }
 }

@@ -15,7 +15,7 @@ using static Mutagen.Bethesda.Skyrim.Furniture;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public class IngestibleEffectsAction ( FilterFormLinks formKey, int area, int duration, float magnitude ) : IFormLinksWithData<IngestibleEffectsAction, IEffectGetter>, IFormLinksWithData<IngestibleEffectsAction, IFormLinkContainerGetter>
+    public class IngestibleEffectsAction ( FilterFormLinks formKey, int area, int duration, float magnitude ) : IFormLinksWithData<IngestibleEffectsAction>
     {
         [JsonProperty(PropertyName = "area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
@@ -57,6 +57,18 @@ namespace GenericSynthesisPatcher.Json.Data
 
             return true;
         }
+
+        public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right )
+            => left is IEffectGetter l
+            && right is IEffectGetter r
+            && l.BaseEffect.FormKey.Equals(r.BaseEffect.FormKey)
+            && ((l.Data != null && r.Data != null
+            && l.Data.Area == r.Data.Area
+            && l.Data.Duration == r.Data.Duration
+            && l.Data.Magnitude == r.Data.Magnitude)
+            || (l.Data == null && r.Data == null));
+
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
 
         public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
@@ -123,14 +135,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public bool DataEquals ( IFormLinkContainerGetter other )
             => other is IEffectGetter effect
-            && effect.BaseEffect.Equals(FormKey.FormKey)
+            && effect.BaseEffect.FormKey.Equals(FormKey.FormKey)
             && effect.Data != null
             && effect.Data.Area == Area
             && effect.Data.Duration == Duration
             && effect.Data.Magnitude == Magnitude;
 
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(FormKey.FormKey), null);
-
-        IEffectGetter? IFormLinksWithData<IngestibleEffectsAction, IEffectGetter>.Find ( IEnumerable<IFormLinkContainerGetter>? list ) => (IEffectGetter?)list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(FormKey.FormKey), null);
+        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.FormKey);
     }
 }

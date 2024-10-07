@@ -17,7 +17,7 @@ using static GenericSynthesisPatcher.Json.Data.GSPRule;
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     public class FormLinksWithData<T> : IAction
-        where T : class, IFormLinksWithData<T, IFormLinkContainerGetter>
+        where T : class, IFormLinksWithData<T>
     {
         public static bool CanFill () => true;
 
@@ -114,12 +114,20 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     foreach (var item in newList)
                     {
-                        if (T.GetFormKey(item).ModKey == forwardContext.ModKey)
+                        var key = T.GetFormKey(item);
+                        if (key.ModKey == forwardContext.ModKey)
                         {
-                            if (curList == null || !curList.Contains(item))
+                            var i = T.Find(curList, key);
+                            bool eq = i != null && T.DataEquals(item, i);
+
+                            if (i != null && !eq)
                             {
+                                _ = T.Remove(context, ref patch, i);
                                 _ = T.Add(context, ref patch, item);
                             }
+
+                            if (i == null)
+                                _ = T.Add(context, ref patch, item);
                         }
                     }
                 }

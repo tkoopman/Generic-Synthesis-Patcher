@@ -64,6 +64,7 @@ namespace GenericSynthesisPatcher
             uint changed = 0;
             foreach (string forwardField in forwardFields)
             {
+                LogHelper.Log(LogLevel.Trace, context, $"Attempt forward field {forwardField} for {context.Record.FormKey}");
                 var rcd = FindRecordCallData(context, forwardField.ToLower());
 
                 if (rcd != null && rcd.CanForward())

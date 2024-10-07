@@ -9,13 +9,16 @@ using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public interface IFormLinksWithData<T, S>
-        where T : class, IFormLinksWithData<T, S>
-        where S : class, IFormLinkContainerGetter
+    public interface IFormLinksWithData<T>
+        where T : class, IFormLinksWithData<T>
     {
         public FilterFormLinks FormKey { get; }
 
         public abstract static bool Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref IMajorRecordGetter? patch, IFormLinkContainerGetter source );
+
+        public abstract static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right );
+
+        public abstract static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key );
 
         public abstract static FormKey GetFormKey ( IFormLinkContainerGetter from );
 
@@ -29,6 +32,6 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public bool DataEquals ( IFormLinkContainerGetter other );
 
-        public S? Find ( IEnumerable<IFormLinkContainerGetter>? list );
+        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list );
     }
 }
