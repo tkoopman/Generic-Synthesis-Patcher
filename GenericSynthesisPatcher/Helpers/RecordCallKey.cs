@@ -30,7 +30,9 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         public override bool Equals ( object? obj ) => obj is RecordCallKey key && Equals(key);
+
         public bool Equals ( RecordCallKey? other ) => other != null && JsonKey == other.JsonKey && EqualityComparer<System.Type>.Default.Equals(RecordType, other.RecordType);
+
         public override int GetHashCode () => HashCode.Combine(JsonKey, RecordType);
     }
 }

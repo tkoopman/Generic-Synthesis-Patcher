@@ -9,6 +9,7 @@ namespace GenericSynthesisPatcher.Json
     public class ContractResolver : DefaultContractResolver
     {
         public static readonly ContractResolver Instance = new();
+
         protected override JsonContract CreateContract ( Type objectType )
         {
             var contract = base.CreateContract(objectType);

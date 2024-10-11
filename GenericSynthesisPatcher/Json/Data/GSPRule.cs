@@ -1,3 +1,7 @@
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 
@@ -15,59 +19,125 @@ using Newtonsoft.Json.Linq;
 
 using Noggog;
 
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
-
 namespace GenericSynthesisPatcher.Json.Data
 {
     public partial class GSPRule
     {
+        internal Dictionary<ValueKey, JToken> jsonValues;
+        private const int ClassLogPrefix = 0xA00;
+        private Dictionary<ValueKey, object>? cache = null;
+        private bool forwardIndexedByField;
+        private ForwardTypes forwardType;
+
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? EditorID;
+        public List<string>? EditorID { get; set; }
 
         [JsonProperty(PropertyName = "Factions", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FilterFormLinks>))]
-        public List<FilterFormLinks>? Factions;
+        public List<FilterFormLinks>? Factions { get; set; }
 
         [JsonProperty(PropertyName = "FactionsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation FactionsOp;
+        public Operation FactionsOp { get; set; }
+
+        /// <summary>
+        /// Add Fill action(s) to this rule.
+        /// This is only used for adding to joint Fill/Forward store.
+        /// </summary>
+        [JsonProperty(PropertyName = "Fill", NullValueHandling = NullValueHandling.Ignore)]
+        public JObject? Fill
+        {
+            set
+            {
+                foreach (var x in value ?? [])
+                {
+                    if (x.Value != null)
+                        jsonValues.Add(new ValueKey(ActionType.Fill, x.Key), x.Value);
+                }
+            }
+        }
 
         [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? FormID;
+        public List<FormKey>? FormID { get; set; }
+
+        /// <summary>
+        /// Add Forward action(s) to this rule.
+        /// This is only used for adding to joint Fill/Forward store.
+        /// </summary>
+        [JsonProperty(PropertyName = "Forward", NullValueHandling = NullValueHandling.Ignore)]
+        public JObject? Forward
+        {
+            set
+            {
+                foreach (var x in value ?? [])
+                {
+                    if (x.Value != null)
+                        jsonValues.Add(new ValueKey(ActionType.Forward, x.Key), x.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Changes JSON format for Forward from being the default "mod.esp" : [ "field1", "field2" ]
+        /// to be "field": [ "Mod1.esp", "Mod2.esp" ]
+        /// </summary>
+        [JsonProperty(PropertyName = "ForwardIndexedByField", NullValueHandling = NullValueHandling.Ignore)]
+        public bool ForwardIndexedByField
+        {
+            get => forwardIndexedByField;
+            set
+            {
+                if (ForwardType == ForwardTypes.DefaultThenSelfMasterOnly && !value)
+                    throw new ArgumentException("", "ForwardIndexedByField");
+                forwardIndexedByField = value;
+            }
+        }
+
+        /// <summary>
+        /// ForwardType can change how Forwarding actions work.
+        /// </summary>
+        [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
+        public ForwardTypes ForwardType
+        {
+            get => forwardType;
+            set
+            {
+                forwardType = value;
+                if (value == ForwardTypes.DefaultThenSelfMasterOnly)
+                    forwardIndexedByField = true;
+            }
+        }
 
         [JsonProperty(PropertyName = "Keywords", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? Keywords;
+        public List<string>? Keywords { get; set; }
 
         [JsonProperty(PropertyName = "KeywordsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation KeywordsOp;
+        public Operation KeywordsOp { get; set; }
 
         [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
-        public List<ModKey>? Masters;
+        public List<ModKey>? Masters { get; set; }
 
         [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? NotEditorID;
+        public List<string>? NotEditorID { get; set; }
 
         [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? NotFormID;
+        public List<FormKey>? NotFormID { get; set; }
+
+        [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
+        public bool OnlyIfDefault { get; set; }
 
         [DefaultValue(0)]
         [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Priority;
+        public int Priority { get; set; }
 
         [JsonProperty(PropertyName = "Types", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<GSPRule.Type>))]
-        public List<GSPRule.Type>? Types;
-
-        internal Dictionary<ValueKey, JToken> jsonValues;
-
-        private Dictionary<ValueKey, object>? cache = null;
+        public List<GSPRule.Type>? Types { get; set; }
 
         /// <summary>
         /// Create new rule, and validates it meets basic needs.
@@ -82,14 +152,14 @@ namespace GenericSynthesisPatcher.Json.Data
             EditorID = ValidateList(editorID);
             NotFormID = ValidateList(notFormID);
             NotEditorID = ValidateList(notEditorID);
+            Masters = ValidateList(masters);
+            Keywords = ValidateList(keywords);
+            Factions = ValidateList(factions);
+            KeywordsOp = (keywordsOp == null) ? Operation.OR : (Operation)keywordsOp;
+            FactionsOp = (factionsOp == null) ? Operation.OR : (Operation)factionsOp;
             Fill = fill;
             Forward = forward;
-            Factions = ValidateList(factions);
-            FactionsOp = (factionsOp == null) ? Operation.OR : (Operation)factionsOp;
-            Masters = ValidateList(masters);
             ForwardType = forwardType;
-            Keywords = ValidateList(keywords);
-            KeywordsOp = (keywordsOp == null) ? Operation.OR : (Operation)keywordsOp;
 
             if (types == null && formID == null && editorID == null)
                 throw new JsonSerializationException("Each Json record must contain at least one basic filter (types, editorID or formID)");
@@ -106,54 +176,6 @@ namespace GenericSynthesisPatcher.Json.Data
             Fill,
             Forward
         }
-
-        /// <summary>
-        /// Add Fill action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
-        /// </summary>
-        [JsonProperty(PropertyName = "fill", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Fill
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        jsonValues.Add(new ValueKey(ActionType.Fill, x.Key), x.Value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add Forward action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
-        /// </summary>
-        [JsonProperty(PropertyName = "forward", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Forward
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        jsonValues.Add(new ValueKey(ActionType.Forward, x.Key), x.Value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// ForwardType can change how Forwarding actions work.
-        /// Default: Will replace winning with value from forwarding mod.
-        /// SelfMasterOnly: This  is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.
-        ///                 It will only add new FormIDs to lists if FormID is from the same Forwarding Mod.
-        ///                 It will not remove any current items from winning records.
-        ///                 Other field types will just behave like they do in Default.
-        /// </summary>
-        [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
-        public ForwardTypes ForwardType { get; set; }
-
-        [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
-        public bool OnlyIfDefault { get; set; }
 
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.
@@ -212,11 +234,11 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey))
             {
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesBasicFilters: {MatchesBasicFilters(context)} HasTypes: {Types != null} HasEditorID: {EditorID != null} HasFormID: {FormID != null}");
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesExtraFilters: {MatchesExtraFilters(context)} HasNotEditorID: {NotEditorID != null} HasNotFormID: {NotFormID != null} HasMasters: {Masters != null}");
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesFactions: {MatchesFactions(context)} HasFactions: {Factions != null}");
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesKeywords: {MatchesKeywords(context)} HasKeywords: {Keywords != null}");
-                LogHelper.Log(LogLevel.Trace, context, $"HasOrigin: {Origin != null} OnlyIfDefault: {OnlyIfDefault}");
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesBasicFilters: {MatchesBasicFilters(context)} HasTypes: {Types != null} HasEditorID: {EditorID != null} HasFormID: {FormID != null}", ClassLogPrefix | 0x11);
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesExtraFilters: {MatchesExtraFilters(context)} HasNotEditorID: {NotEditorID != null} HasNotFormID: {NotFormID != null} HasMasters: {Masters != null}", ClassLogPrefix | 0x12);
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesFactions: {MatchesFactions(context)} HasFactions: {Factions != null}", ClassLogPrefix | 0x13);
+                LogHelper.Log(LogLevel.Trace, context, $"MatchesKeywords: {MatchesKeywords(context)} HasKeywords: {Keywords != null}", ClassLogPrefix | 0x14);
+                LogHelper.Log(LogLevel.Trace, context, $"HasOrigin: {Origin != null} OnlyIfDefault: {OnlyIfDefault}", ClassLogPrefix | 0x15);
             }
 
             return matches;

@@ -4,47 +4,48 @@ using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    // Log Codes: 0x3xx
     internal class Flags : IAction
     {
+        private const int ClassLogPrefix = 0x400;
+
         public static bool CanFill () => true;
 
         public static bool CanForward () => false;
 
-        // Log Codes: 0x32x
-        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
+        public static bool CanForwardSelfOnly () => false;
+
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             var flags = rule.GetValueAs<List<string>>(valueKey);
             if (context.Record == null || flags == null)
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "No flags to set.");
-                return false;
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "No flags to set.", ClassLogPrefix | 0x11);
+                return -1;
             }
 
-            if (!GetFlags(context, context.Record, rcd, out var curValue) || curValue == null)
-                return false;
+            if (!GetFlags(context, patchedRecord ?? context.Record, rcd, out var curValue) || curValue == null)
+                return -1;
 
-            if (rule.OnlyIfDefault && origin != null)
+            if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
             {
                 if (GetFlags(context, origin, rcd, out var originValue))
                 {
                     if (curValue != originValue)
                     {
-                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
-                        return false;
+                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x12);
+                        return -1;
                     }
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find origin keywords to check.", 0x321);
-                    return false;
+                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, $"Unable to find origin keywords to check.", ClassLogPrefix | 0x13);
+                    return -1;
                 }
             }
 
@@ -77,39 +78,40 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (curValue != newFlags)
             {
-                var patch = (INamed)context.GetOrAddAsOverride(Global.State.PatchMod);
-                var setFlagProp = patch.GetType().GetProperty(rcd.PropertyName);
+                patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                var setFlagProp = patchedRecord.GetType().GetProperty(rcd.PropertyName);
                 if (setFlagProp == null)
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x322);
-                    return false;
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x14);
+                    return -1;
                 }
 
-                setFlagProp.SetValue(patch, newFlags);
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
-                return true;
+                setFlagProp.SetValue(patchedRecord, newFlags);
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.", ClassLogPrefix | 0x15);
+                return 1;
             }
 
-            return false;
+            return 0;
         }
 
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd ) => throw new NotImplementedException();
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
 
-        // Log Codes: 0x31x
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+
         private static bool GetFlags ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out Enum? value )
         {
             value = null;
             var property = record.GetType().GetProperty(rcd.PropertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x311);
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x21);
                 return false;
             }
 
             object? _value = property.GetValue(record);
             if (_value == null || !FlagEnums.IsFlagEnum(_value.GetType()))
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "FlagEnums", _value?.GetType().Name ?? "?", 0x312);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "FlagEnums", _value?.GetType().Name ?? "?", ClassLogPrefix | 0x22);
                 return false;
             }
 

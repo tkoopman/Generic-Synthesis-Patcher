@@ -2,9 +2,12 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Converters
 {
-    class SingleOrArrayConverter<T> : JsonConverter
+    internal class SingleOrArrayConverter<T> : JsonConverter
     {
+        public override bool CanWrite => false;
+
         public override bool CanConvert ( Type objectType ) => objectType == typeof(T) || objectType == typeof(List<T>);
+
         public override object? ReadJson ( JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer ) => reader.TokenType switch
         {
             JsonToken.Null => null,
@@ -13,7 +16,7 @@ namespace GenericSynthesisPatcher.Json.Converters
             JsonToken.String => [serializer.Deserialize<T>(reader)],
             _ => throw new JsonSerializationException("Invalid Json object")
         };
-        public override bool CanWrite => false;
+
         public override void WriteJson ( JsonWriter writer, object? value, JsonSerializer serializer ) => throw new NotImplementedException();
     }
 }

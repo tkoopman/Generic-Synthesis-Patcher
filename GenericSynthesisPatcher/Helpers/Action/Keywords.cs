@@ -20,28 +20,30 @@ using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    // Log Codes: 0x2xx
     public class Keywords : IAction
     {
+        private const int ClassLogPrefix = 0x800;
         private static Dictionary<string, IKeywordGetter>? keywords;
 
         public static bool CanFill () => true;
 
         public static bool CanForward () => true;
 
-        // Log Codes: 0x21x
-        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
-        {
-            IKeyworded<IKeywordGetter>? patch = null;
+        public static bool CanForwardSelfOnly () => true;
 
-            if (context.Record is IKeywordedGetter<IKeywordGetter> record)
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        {
+            var baseRecord = patchedRecord ?? context.Record;
+
+            if (baseRecord is IKeywordedGetter<IKeywordGetter> record)
             {
-                if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
+                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
-                    return false;
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
+                    return -1;
                 }
 
+                int changes = 0;
                 foreach (string c in rule.GetValueAs<List<string>>(valueKey) ?? [])
                 {
                     string s = c;
@@ -51,8 +53,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         var remove = GetKeyword(s);
                         if (remove != null && record.HasKeyword(remove))
                         {
-                            patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
-                            patch.Keywords?.Remove(remove);
+                            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Remove(remove);
+                            changes++;
                         }
 
                         continue;
@@ -64,76 +67,100 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     var add = GetKeyword(s);
                     if (add != null && !record.HasKeyword(add))
                     {
-                        patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
-                        patch.Keywords?.Add(add);
+                        patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                        ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(add);
+                        changes++;
                     }
                 }
+
+                if (changes > 0)
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{changes} change(s).", ClassLogPrefix | 0x12);
+                return changes;
             }
             else
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x211);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, ClassLogPrefix | 0x13);
+                return -1;
             }
-
-            if (patch != null)
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
-            return patch != null;
         }
 
-        // Log Codes: 0x22x
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
-            IKeyworded<IKeywordGetter>? patch = null;
+            var baseRecord = patchedRecord ?? context.Record;
 
-            if (context.Record is IKeywordedGetter<IKeywordGetter> record && forwardContext.Record is IKeywordedGetter<IKeywordGetter> forward)
+            if (baseRecord is IKeywordedGetter<IKeywordGetter> record && forwardContext.Record is IKeywordedGetter<IKeywordGetter> forward)
             {
                 if (forward.Keywords.SequenceEqualNullable(record.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual);
-                    return false;
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x21);
+                    return 0;
                 }
 
-                if (rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
+                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
-                    return false;
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
+                    return -1;
                 }
 
-                if (rule.ForwardType.GetFlags().Contains(ForwardTypes.SelfMasterOnly))
-                {
-                    if (forward.Keywords == null)
-                        return false;
+                patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                int changes = ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.RemoveAll(_ => true) ?? 0;
 
-                    foreach (var item in forward.Keywords)
+                if (forward.Keywords.SafeAny())
+                {
+                    ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.AddRange(forward.Keywords);
+                    changes += forward.Keywords.Count;
+                }
+
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{changes} change(s).", ClassLogPrefix | 0x23);
+                return changes;
+            }
+
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, ClassLogPrefix | 0x24);
+            return -1;
+        }
+
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        {
+            var baseRecord = patchedRecord ?? context.Record;
+
+            if (baseRecord is IKeywordedGetter<IKeywordGetter> record && forwardContext.Record is IKeywordedGetter<IKeywordGetter> forward)
+            {
+                if (!forward.Keywords.SafeAny())
+                    return 0;
+
+                if (forward.Keywords.SequenceEqualNullable(record.Keywords))
+                {
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x31);
+                    return 0;
+                }
+
+                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
+                {
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
+                    return -1;
+                }
+
+                int changes = 0;
+
+                foreach (var item in forward.Keywords)
+                {
+                    if (item.FormKey.ModKey == forwardContext.ModKey)
                     {
-                        if (item.FormKey.ModKey == forwardContext.ModKey)
+                        if (record.Keywords == null || !record.Keywords.Contains(item))
                         {
-                            if (record.Keywords == null || !record.Keywords.Contains(item))
-                            {
-                                patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
-                                patch.Keywords?.Add(item);
-                            }
+                            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(item);
+                            changes++;
                         }
                     }
                 }
-                else
-                {
-                    patch ??= (IKeyworded<IKeywordGetter>)context.GetOrAddAsOverride(Global.State.PatchMod);
 
-                    _ = patch.Keywords?.RemoveAll(_ => true);
-
-                    if (forward.Keywords != null)
-                        patch.Keywords?.AddRange(forward.Keywords);
-                }
-            }
-            else
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, 0x221);
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{changes} change(s).", ClassLogPrefix | 0x33);
+                return changes;
             }
 
-            if (patch != null)
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.");
-
-            return patch != null;
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IKeywordedGetter", context.Record.GetType().Name, ClassLogPrefix | 0x34);
+            return -1;
         }
 
         public static IKeywordGetter? GetKeyword ( string name )
@@ -142,7 +169,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 keywords = [];
                 Global.State.LoadOrder.PriorityOrder.Keyword().WinningOverrides().ForEach(k => keywords[k.EditorID ?? ""] = k);
-                LogHelper.Log(LogLevel.Information, $"{keywords.Count} keywords loaded into cache.");
+                LogHelper.Log(LogLevel.Information, $"{keywords.Count} keywords loaded into cache.", ClassLogPrefix | 0x41);
             }
 
             _ = keywords.TryGetValue(name, out var value);

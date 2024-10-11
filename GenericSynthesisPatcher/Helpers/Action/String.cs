@@ -9,75 +9,78 @@ using Mutagen.Bethesda.Strings;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    // Log Codes 0x1xx
     public class String : IAction
     {
+        private const int ClassLogPrefix = 0x200;
+
         public static bool CanFill () => true;
 
         public static bool CanForward () => true;
 
-        // Log Codes: 0x13x
-        public static bool Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd )
+        public static bool CanForwardSelfOnly () => false;
+
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
-            if (!GetString(context, context.Record, rcd, out string? curValue))
-                return false;
+            if (!GetString(context, patchedRecord ?? context.Record, rcd, out string? curValue))
+                return -1;
 
             string? newValue = rule.GetValueAsString(valueKey);
 
-            return FillString(context, origin, rule, rcd, curValue, newValue);
+            return FillString(context, origin, rule, rcd, curValue, newValue, ref patchedRecord);
         }
 
-        public static bool Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd )
-                    => GetString(context, context.Record, rcd, out string? curValue)
-                    && GetString(context, forwardContext.Record, rcd, out string? newValue)
-                    && FillString(context, origin, rule, rcd, curValue, newValue);
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+                    => (GetString(context, patchedRecord ?? context.Record, rcd, out string? curValue)
+                     && GetString(context, forwardContext.Record, rcd, out string? newValue))
+                        ? FillString(context, origin, rule, rcd, curValue, newValue, ref patchedRecord)
+                        : -1;
 
-        // Log Codes: 0x12x
-        private static bool FillString ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, RecordCallData rcd, string? curValue, string? newValue )
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+
+        private static int FillString ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, RecordCallData rcd, string? curValue, string? newValue, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (curValue == null && newValue == null)
-                return false;
+                return 0;
             if (curValue != null && newValue != null && curValue.Equals(newValue))
-                return false;
+                return 0;
 
-            if (rule.OnlyIfDefault && origin != null)
+            if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
             {
                 if (GetString(context, origin, rcd, out string? originValue))
                 {
                     if (curValue != originValue)
                     {
-                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch);
-                        return false;
+                        LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
+                        return -1;
                     }
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x121);
-                    return false;
+                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x12);
+                    return -1;
                 }
             }
 
-            var patch = context.GetOrAddAsOverride(Global.State.PatchMod);
-            var setProperty = patch.GetType().GetProperty(rcd.PropertyName);
+            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            var setProperty = patchedRecord.GetType().GetProperty(rcd.PropertyName);
             if (setProperty == null)
             {
-                LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, 0x122);
-                return false;
+                LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x13);
+                return -1;
             }
 
-            setProperty.SetValue(patch, new TranslatedString(Language.English, newValue));
-            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Set to {newValue}.");
-            return true;
+            setProperty.SetValue(patchedRecord, new TranslatedString(Language.English, newValue));
+            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"changed.", ClassLogPrefix | 0x14);
+            return 1;
         }
 
-        // Log Codes: 0x110
         private static bool GetString ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out string? value )
         {
             value = null;
             var property = record.GetType().GetProperty(rcd.PropertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, 0x110);
+                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x21);
                 return false;
             }
 
@@ -85,7 +88,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (!translatedString && property.PropertyType != typeof(string))
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "string", property.PropertyType.Name, 0x111);
+                LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "string", property.PropertyType.Name, ClassLogPrefix | 0x22);
                 return false;
             }
 
@@ -96,7 +99,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     if (_value is not ITranslatedStringGetter __value)
                     {
-                        LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "ITranslatedStringGetter", _value.GetType().Name ?? "Unknown", 0x112);
+                        LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "ITranslatedStringGetter", _value.GetType().Name ?? "Unknown", ClassLogPrefix | 0x23);
                         return false;
                     }
 
@@ -106,7 +109,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     if (_value is not string __value)
                     {
-                        LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "string", _value.GetType().Name ?? "Unknown", 0x113);
+                        LogHelper.LogInvalidTypeFound(LogLevel.Error, context, rcd.PropertyName, "string", _value.GetType().Name ?? "Unknown", ClassLogPrefix | 0x24);
                         return false;
                     }
 

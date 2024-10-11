@@ -17,64 +17,122 @@ using Noggog;
 
 namespace GenericSynthesisPatcher
 {
-    // Log Codes: 0x0xx
     public partial class Program
     {
-        // Log Code: 0x01x
-        public static bool FillRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey )
+        private const int ClassLogPrefix = 0x000;
+
+        public static int FillRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey )
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Trace, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name, 0x011);
-                return false;
+                LogHelper.LogInvalidTypeFound(LogLevel.Trace, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name, ClassLogPrefix | 0x11);
+                return -1;
             }
 
             var rcd = FindRecordCallData(context, valueKey.Key);
 
-            if (rcd != null && rcd.CanFill())
-                return rcd.Fill(context, origin, rule, valueKey, rcd);
+            ISkyrimMajorRecord? patchedRecord = null;
 
-            LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for fill action: {valueKey.Key}", 0x012);
-            return false;
+            if (rcd != null && rcd.CanFill())
+                return rcd.Fill(context, origin, rule, valueKey, rcd, ref patchedRecord);
+
+            LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for fill action: {valueKey.Key}", ClassLogPrefix | 0x12);
+            return -1;
         }
 
-        // Log Code: 0x02x
-        public static uint ForwardRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey )
+        public static int ForwardRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey )
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Trace, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name, 0x021);
+                LogHelper.LogInvalidTypeFound(LogLevel.Trace, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name, ClassLogPrefix | 0x21);
                 return 0;
             }
 
-            var forwardRecord = Mod.GetModRecord(context, valueKey.Key);
-            if (forwardRecord == null)
+            Dictionary<string, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>?> modContexts = [];
+            List<string> fields = [];
+
+            if (rule.ForwardIndexedByField)
             {
-                //LogHelper.Log(LogLevel.Trace, context, "No forwarding record.", 0x022);
+                fields.Add(valueKey.Key);
+                foreach (string mod in rule.GetValueAs<List<string>>(valueKey) ?? [])
+                    modContexts.Add(mod, Mod.GetModRecord(context, mod));
+            }
+            else
+            {
+                var forwardRecord = Mod.GetModRecord(context, valueKey.Key);
+                if (forwardRecord != null)
+                    modContexts.Add(valueKey.Key, forwardRecord);
+
+                fields = rule.GetValueAs<List<string>>(valueKey) ?? fields;
+            }
+
+            if (!modContexts.Any(x => x.Value != null))
+            {
+                //LogHelper.Log(LogLevel.Trace, context, "No forwarding record.", ClassLogPrefix | 0x22);
                 return 0;
             }
 
-            var forwardFields = rule.GetValueAs<List<string>>(valueKey);
-            if (forwardFields == null || forwardFields.Count == 0)
+            if (fields.Count == 0)
             {
-                LogHelper.Log(LogLevel.Trace, context, "No fields in config to forward", 0x023);
+                LogHelper.Log(LogLevel.Trace, context, "No fields in config to forward", ClassLogPrefix | 0x23);
                 return 0;
             }
 
-            uint changed = 0;
-            foreach (string forwardField in forwardFields)
+            int changed = 0;
+            foreach (string field in fields)
             {
-                LogHelper.Log(LogLevel.Trace, context, $"Attempt forward field {forwardField} for {context.Record.FormKey}");
-                var rcd = FindRecordCallData(context, forwardField.ToLower());
-
-                if (rcd != null && rcd.CanForward())
+                var rcd = FindRecordCallData(context, field.ToLower());
+                if (rcd != null && rcd.CanForward() && (!rule.ForwardType.HasFlag(GSPRule.ForwardTypes.SelfMasterOnly) || rcd.CanForwardSelfOnly()))
                 {
-                    if (rcd.Forward(context, origin, rule, forwardRecord, rcd))
-                        changed++;
+                    bool firstMod = true;
+                    ISkyrimMajorRecord? patchedRecord = null;
+
+                    foreach (var modContext in modContexts)
+                    {
+                        LogHelper.Log(LogLevel.Trace, context, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {modContext.Key}", ClassLogPrefix | 0x24);
+                        if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.DefaultThenSelfMasterOnly))
+                        {
+                            if (firstMod)
+                            {   // First mod of DefaultThenSelfMasterOnly
+                                if (modContext.Value == null) // We don't continue if first mod can't be default forwarded
+                                    break;
+
+                                int changes = rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord);
+                                if (changes < 0)
+                                {   // If default forward fails we do not continue with the SelfMasterOnly forwards
+                                    LogHelper.Log(LogLevel.Trace, context, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.", ClassLogPrefix | 0x25);
+                                    break;
+                                }
+                                else
+                                {
+                                    changed += changes;
+                                    firstMod = false;
+                                }
+                            }
+                            else
+                            {   // All other mods in DefaultThenSelfMasterOnly
+                                int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                                if (changes > 0)
+                                    changed += changes;
+                            }
+                        }
+                        else if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.SelfMasterOnly))
+                        {   //  SelfMasterOnly
+                            int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                            if (changes > 0)
+                                changed += changes;
+                        }
+                        else
+                        {   // Default forward type
+                            int changes = (modContext.Value != null)?rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                            if (changes > 0)
+                                changed += changes;
+                        }
+                    }
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {forwardField}", 0x024);
+                    LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {field}", ClassLogPrefix | 0x26);
                 }
             }
 
@@ -87,7 +145,6 @@ namespace GenericSynthesisPatcher
                 .SetTypicalOpen(GameRelease.SkyrimSE, "GenericSynthesisPatcher.esp")
                 .Run(args);
 
-        // Log Codes: 0x00x
         public static void RunPatch ( IPatcherState<ISkyrimMod, ISkyrimModGetter> state )
         {
             Global.State = state;
@@ -95,14 +152,15 @@ namespace GenericSynthesisPatcher
             if (Global.Settings.Value.LogLevel != LogLevel.Trace)
                 Global.Settings.Value.TraceFormKey = null;
             else
-                LogHelper.Log(LogLevel.Trace, "Extra logging for FormKey: " + ((Global.Settings.Value.TraceFormKey == null) ? "null" : Global.Settings.Value.TraceFormKey));
+                LogHelper.Log(LogLevel.Trace, "Extra logging for FormKey: " + ((Global.Settings.Value.TraceFormKey == null) ? "null" : Global.Settings.Value.TraceFormKey), ClassLogPrefix | 0x31);
 
             var Rules = LoadRules();
             if (Rules.Count == 0)
                 return;
 
-            uint total = 0, updated = 0, changes = 0;
-            SortedDictionary<GSPRule.Type, (uint, uint, uint)> subTotals = [];
+            int total = 0, updated = 0, changed = 0;
+            // subTotals values = (Total, Matched, Updated)
+            SortedDictionary<GSPRule.Type, (int, int, int)> subTotals = [];
 
             foreach (var context in state.LoadOrder.PriorityOrder.SkyrimMajorRecord().WinningContextOverrides(state.LinkCache))
             {
@@ -124,24 +182,27 @@ namespace GenericSynthesisPatcher
                             switch (x.Key.ActionType)
                             {
                                 case GSPRule.ActionType.Fill:
-                                    if (FillRecord(context, origin, rule, x.Key))
+                                    int fillChanges = FillRecord(context, origin, rule, x.Key);
+                                    if (fillChanges > 0)
                                     {
-                                        changes++;
+                                        changed += fillChanges;
                                         recordUpdated = true;
                                     }
 
                                     break;
 
                                 case GSPRule.ActionType.Forward:
-                                    uint changed = ForwardRecord(context, origin, rule, x.Key);
-                                    changes += changed;
-                                    if (changed > 0)
+                                    int forwardChanges = ForwardRecord(context, origin, rule, x.Key);
+                                    if (forwardChanges > 0)
+                                    {
+                                        changed += forwardChanges;
                                         recordUpdated = true;
+                                    }
 
                                     break;
 
                                 default:
-                                    LogHelper.Log(LogLevel.Warning, context, "Unknown action type", 0x001);
+                                    LogHelper.Log(LogLevel.Warning, context, "Unknown action type", ClassLogPrefix | 0x32);
                                     break;
                             }
                         }
@@ -155,7 +216,7 @@ namespace GenericSynthesisPatcher
                 });
             }
 
-            LogHelper.Log(LogLevel.Information, $"Completed. Applied {changes:N0} changes over {updated:N0} updated records.");
+            LogHelper.Log(LogLevel.Information, $"Completed. Applied {changed:N0} changes over {updated:N0} updated records.", ClassLogPrefix | 0x33);
 
             Console.WriteLine($"Record Type Totals");
             Console.WriteLine($"{"Type",-10} {"Total",10} {"Matched",10} {"Updated",10}");
@@ -190,7 +251,7 @@ namespace GenericSynthesisPatcher
             }
 
             if (rcd == null)
-                LogHelper.Log(LogLevel.Trace, context, $"No RCD found - {valueKey}");
+                LogHelper.Log(LogLevel.Trace, context, $"No RCD found - {valueKey}", ClassLogPrefix | 0x41);
 
             return rcd;
         }
@@ -203,7 +264,7 @@ namespace GenericSynthesisPatcher
 
             if (!Directory.Exists(dataFolder))
             {
-                LogHelper.Log(LogLevel.Error, $"Missing data folder: {dataFolder}");
+                LogHelper.Log(LogLevel.Error, $"Missing data folder: {dataFolder}", ClassLogPrefix | 0x51);
                 return [];
             }
 
@@ -214,11 +275,11 @@ namespace GenericSynthesisPatcher
             {
                 if (Path.Combine(dataFolder, f).Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
                 {
-                    LogHelper.Log(LogLevel.Information, $"Skipping: {Path.Combine(dataFolder, f)}");
+                    LogHelper.Log(LogLevel.Information, $"Skipping: {Path.Combine(dataFolder, f)}", ClassLogPrefix | 0x52);
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Information, $"Loading config file: {Path.Combine(dataFolder, f)}");
+                    LogHelper.Log(LogLevel.Information, $"Loading config file: {Path.Combine(dataFolder, f)}", ClassLogPrefix | 0x53);
                     var a = JsonConvert.DeserializeObject<List<GSPRule>>(File.ReadAllText(Path.Combine(dataFolder, f)), Global.SerializerSettings);
                     rules = [.. rules, .. a];
                 }
@@ -226,7 +287,7 @@ namespace GenericSynthesisPatcher
 
             if (rules.Count == 0)
             {
-                LogHelper.Log(LogLevel.Error, $"No rules found in data location: {dataFolder}");
+                LogHelper.Log(LogLevel.Error, $"No rules found in data location: {dataFolder}", ClassLogPrefix | 0x54);
                 return [];
             }
 
@@ -247,7 +308,7 @@ namespace GenericSynthesisPatcher
                         : rule1.Priority.CompareTo(rule2.Priority);
             });
 
-            LogHelper.Log(LogLevel.Information, $"Loaded {rules.Count} rules");
+            LogHelper.Log(LogLevel.Information, $"Loaded {rules.Count} rules", ClassLogPrefix | 0x56);
 
             return rules;
         }

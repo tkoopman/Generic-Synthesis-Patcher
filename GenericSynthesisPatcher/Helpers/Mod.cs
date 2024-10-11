@@ -13,9 +13,9 @@ using Global = GenericSynthesisPatcher.Global;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    // Log Code: 0x7xx
     internal static class Mod
     {
+        private const int ClassLogPrefix = 0x100;
         private static readonly Dictionary<(FileName, string), IModListing<ISkyrimModGetter>?> ModCache = [];
 
         /// <summary>
@@ -36,13 +36,12 @@ namespace GenericSynthesisPatcher.Helpers
         /// <param name="context"></param>
         /// <param name="modFileName"></param>
         /// <returns>Record Getter with Context if found.</returns>
-        /// Log Code: 0x71x
         public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>? GetModRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, string modFileName )
         {
             var modGetter = TryGetOverridingMod(context, modFileName);
             if (modGetter == null)
             {
-                LogHelper.Log(LogLevel.Trace, context, $"Forward mod '{modFileName}' doesn't override '{context.Record.FormKey.ModKey.FileName}'.", 0x711);
+                LogHelper.Log(LogLevel.Trace, context, $"Forward mod '{modFileName}' doesn't override '{context.Record.FormKey.ModKey.FileName}'.", ClassLogPrefix | 0x11);
                 return null;
             }
 
@@ -50,15 +49,15 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 if (modFileName.Equals(forwardContext.ModKey.FileName.String, StringComparison.OrdinalIgnoreCase))
                 {
-                    LogHelper.Log(LogLevel.Trace, context, $"Found matching record in forwarding mod {modFileName}.", 0x712);
+                    LogHelper.Log(LogLevel.Trace, context, $"Found matching record in forwarding mod {modFileName}.", ClassLogPrefix | 0x12);
                     return forwardContext;
                 }
 
-                LogHelper.Log(LogLevel.Trace, context, $"Found incorrect matching record in forwarding mod {modFileName} != {forwardContext.ModKey.FileName.String}.", 0x714);
+                LogHelper.Log(LogLevel.Trace, context, $"Found incorrect matching record in forwarding mod {modFileName} != {forwardContext.ModKey.FileName.String}.", ClassLogPrefix | 0x13);
                 return null;
             }
 
-            LogHelper.Log(LogLevel.Trace, context, $"No matching record in forwarding mod {modFileName} of type {context.Record.Registration.GetterType.Name}.", 0x713);
+            LogHelper.Log(LogLevel.Trace, context, $"No matching record in forwarding mod {modFileName} of type {context.Record.Registration.GetterType.Name}.", ClassLogPrefix | 0x14);
             return null;
         }
 
@@ -78,20 +77,20 @@ namespace GenericSynthesisPatcher.Helpers
             if (ModCache.TryGetValue((context.Record.FormKey.ModKey.FileName, modFileName), out var getter))
             {
                 if (getter == null)
-                    LogHelper.Log(LogLevel.Trace, context, $"Returned null value for ('{context.Record.FormKey.ModKey.FileName}', '{modFileName}')");
+                    LogHelper.Log(LogLevel.Trace, context, $"Returned null value for ('{context.Record.FormKey.ModKey.FileName}', '{modFileName}')", ClassLogPrefix | 0x21);
                 else
-                    LogHelper.Log(LogLevel.Trace, context, $"Returned cached mod for ('{context.Record.FormKey.ModKey.FileName}', '{modFileName}')");
+                    LogHelper.Log(LogLevel.Trace, context, $"Returned cached mod for ('{context.Record.FormKey.ModKey.FileName}', '{modFileName}')", ClassLogPrefix | 0x22);
                 return getter;
             }
 
-            LogHelper.Log(LogLevel.Trace, context, $"Searching for forwarding record as not currently cached.");
-
-            if (context.Record.FormKey.ModKey.FileName.Equals(modFileName))
+            if (context.ModKey.FileName.Equals(context.Record.FormKey.ModKey))
             {
                 ModCache.Add((context.Record.FormKey.ModKey.FileName, modFileName), null);
-                LogHelper.Log(LogLevel.Information, context, $"Skipping. Can't forward to self.");
+                LogHelper.Log(LogLevel.Information, context, $"Skipping. Can't forward to self.", ClassLogPrefix | 0x23);
                 return null;
             }
+
+            LogHelper.Log(LogLevel.Trace, context, $"Searching for forwarding record as not currently cached.", ClassLogPrefix | 0x24);
 
             IModListing<ISkyrimModGetter>? modGetter = null;
             bool foundRecordMaster = false;
@@ -108,28 +107,31 @@ namespace GenericSynthesisPatcher.Helpers
                 }
             });
 
-            bool isMaster = false;
-            foreach (var m in modGetter?.Mod?.MasterReferences ?? [])
+            if (modGetter == null)
             {
-                if (m.Master.Equals(context.Record.FormKey.ModKey))
-                    isMaster = true;
-            }
-
-            if (!isMaster)
-            {
-                LogHelper.Log(LogLevel.Debug, $"Forwarding mod {modFileName} doesn't contain master record for {context.Record.FormKey.ModKey.FileName}.");
-                modGetter = null;
+                LogHelper.Log(LogLevel.Debug, $"Unable to find forwarding mod {modFileName} after master {context.Record.FormKey.ModKey.FileName}.", ClassLogPrefix | 0x25);
             }
             else
             {
-                ModCache.Add((context.Record.FormKey.ModKey.FileName, modFileName), modGetter);
+                bool isMaster = false;
+                foreach (var m in modGetter?.Mod?.MasterReferences ?? [])
+                {
+                    if (m.Master.Equals(context.Record.FormKey.ModKey))
+                        isMaster = true;
+                }
 
-                if (modGetter == null)
-                    LogHelper.Log(LogLevel.Debug, $"Unable to find forwarding mod {modFileName} after master {context.Record.FormKey.ModKey.FileName}.");
+                if (!isMaster)
+                {
+                    LogHelper.Log(LogLevel.Debug, $"Forwarding mod {modFileName} doesn't contain master record for {context.Record.FormKey.ModKey.FileName}.", ClassLogPrefix | 0x26);
+                    modGetter = null;
+                }
                 else
-                    LogHelper.Log(LogLevel.Debug, $"Found forwarding mod {modFileName} after master {context.Record.FormKey.ModKey.FileName}.");
+                {
+                    LogHelper.Log(LogLevel.Debug, $"Found forwarding mod {modFileName} after master {context.Record.FormKey.ModKey.FileName}.", ClassLogPrefix | 0x27);
+                }
             }
 
+            ModCache.Add((context.Record.FormKey.ModKey.FileName, modFileName), modGetter);
             return modGetter;
         }
     }

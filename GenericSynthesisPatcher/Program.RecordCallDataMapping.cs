@@ -3,7 +3,6 @@ using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins.Aspects;
-using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using String = GenericSynthesisPatcher.Helpers.Action.String;

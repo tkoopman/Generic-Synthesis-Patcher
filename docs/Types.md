@@ -19,3 +19,5 @@ You can use either the short type name or synonyms when listing types.
 | SCRL | Scroll         |
 | WEAP | Weapon         |
 | WRLD | Worldspace     |
+
+NOTE: I have not implemented Leveled Lists as I find https://github.com/OddDrifter/leveledlistresolver already does this well.

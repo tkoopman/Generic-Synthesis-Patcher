@@ -17,13 +17,15 @@ namespace GenericSynthesisPatcher.Json.Data
         [System.ComponentModel.DefaultValue(1)]
         public int Count = count;
 
+        private const int ClassLogPrefix = 0x900;
+
         [JsonProperty(PropertyName = "item", Required = Required.Always)]
         public FilterFormLinks FormKey { get; set; } = formKey;
 
-        public static bool Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref IMajorRecordGetter? patch, IFormLinkContainerGetter source )
+        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {
             if (context.Record is not IContainerGetter || source is not IContainerEntryGetter sourceRecord)
-                return false;
+                return -1;
 
             var containerEntry = new ContainerEntry();
             containerEntry.Item.Item.FormKey = sourceRecord.Item.Item.FormKey;
@@ -31,9 +33,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
             if (patch is IContainer p)
+            {
                 p.Items?.Add(containerEntry);
+                return 1;
+            }
 
-            return true;
+            return -1;
         }
 
         public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right ) => left is IContainerEntryGetter l && right is IContainerEntryGetter r && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey) && l.Item.Count == r.Item.Count;
@@ -44,10 +49,10 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static List<ContainerItemsAction>? GetValueAs ( GSPRule rule, GSPRule.ValueKey key ) => rule.GetValueAs<List<ContainerItemsAction>>(key);
 
-        public static bool Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref IMajorRecordGetter? patch, IFormLinkContainerGetter remove )
+        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
         {
             if (!((patch == null || (patch is IContainer)) && remove is IContainerEntryGetter entry))
-                return false;
+                return -1;
 
             var containerEntry = new ContainerEntry();
             containerEntry.Item.Item.FormKey = entry.Item.Item.FormKey;
@@ -55,29 +60,37 @@ namespace GenericSynthesisPatcher.Json.Data
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
             if (patch is not IContainer p || (!p.Items?.Remove(containerEntry) ?? false))
-                LogHelper.Log(Microsoft.Extensions.Logging.LogLevel.Error, context, $"Failed to remove item [{entry.Item.Item.FormKey}] from container.");
+            {
+                LogHelper.Log(Microsoft.Extensions.Logging.LogLevel.Error, context, $"Failed to remove item [{entry.Item.Item.FormKey}] from container.", ClassLogPrefix | 0x11);
+                return 0;
+            }
 
-            return true;
+            return 1;
         }
 
-        public static bool Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref IMajorRecordGetter? patch, IEnumerable<IFormLinkContainerGetter> newList )
+        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter> newList )
         {
             if (context.Record is not IContainerGetter record || newList is not IReadOnlyList<IContainerEntryGetter> list)
-                return false;
+                return -1;
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
             if (patch is IContainer p)
             {
-                _ = p.Items?.RemoveAll(_ => true);
+                int changes = p.Items?.RemoveAll(_ => true) ?? 0;
 
                 foreach (var add in list)
+                {
                     _ = Add(context, ref patch, add);
+                    changes++;
+                }
+
+                return changes;
             }
 
-            return true;
+            return -1;
         }
 
-        public bool Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref IMajorRecordGetter? patch )
+        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch )
         {
             var containerEntry = new ContainerEntry();
             containerEntry.Item.Item.FormKey = FormKey.FormKey;
@@ -85,9 +98,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
             if (patch is IContainer p)
+            {
                 p.Items?.Add(containerEntry);
+                return 1;
+            }
 
-            return true;
+            return -1;
         }
 
         public bool DataEquals ( IFormLinkContainerGetter other ) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.FormKey) && otherContainer.Item.Count == Count;
