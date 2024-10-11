@@ -10,7 +10,7 @@ Forward action will find matching parent record and forward only the selected fi
 Note: This is not meant to be a replacer for more specific Synthesis patchers. I wrote this to help when a Synthesis patcher for what I need didn't exist and it was just a simple fill or forward.
 Also to replace some SkyPatcher patches as personally I don't like to use them as when I am manually resolving conflicts, it's hard to remember / trust I'm getting what I want when I can't see the result in xEdit.
 
-I have only tested this with latest Skyrim SE however it should work on other versions. Fallout however I am not sure on. I am guessing I would probably need to make some modifications to properly work for Fallout.
+I have only tested this with latest Skyrim SE however it should work on other versions.
 
 ### Prerequisites
 

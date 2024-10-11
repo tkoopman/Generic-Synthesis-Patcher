@@ -21,14 +21,16 @@ All filters can be either single value or array of possible values.
 
 These can be single values or array of values.
 
->**<font color="red">-editorID</font>**: EditorID to exclude from matches. Can be a regular expression if starts and ends with /. Example "-editorID": "/.\*fur.\*/"
+>**<font color="red">-EditorID</font>**: EditorID to exclude from matches. Can be a regular expression if starts and ends with /. Example "-editorID": "/.\*fur.\*/"
 
->**<font color="red">-formID</font>**: FormID to exclude from matches in above format.
+>**<font color="red">-FormID</font>**: FormID to exclude from matches in above format.
 
 >**<font color="red">Masters</font>**: List of mod names ("Skyrim.esm"). Record must come from one of these master plugins to match. Good if you only using the **Type** basic filter to limit it to just type from the listed mod.
 
 >**<font color="red">OnlyIfDefault</font>**: False by default. If set to True will only apply action if the winning record's field value matches the original value set by the master record.
-Good for example if you want to forward one patches changes, but only if a later patch set the value back to the default, so protecting other winning patches.
+Good for example if you want to forward one patches changes, but only if a later patch set the value back to the default, so protecting other winning patches.  
+Checks are per field, meaning one action may fail to apply due to the field it updating not matching, but other action on the same record applies as it does match.  
+NOTE: Just because multiple fields are listed on a single fill/forward action, they are all still processed separately. No need to split into different rules.
 
 # Advanced Filters
 
@@ -77,6 +79,12 @@ In the below example Name just requires a single value, while Effects could have
 >**<font color="green">Forward</font>**: This will forward fields from a parent that this winning record overrode.  
 By default this is just a straight replace including if it is a list field like Items. It doesn't do any merging.
 
+>**<font color="green">ForwardIndexedByField</font>**: This changes how the contents of the Forward action is defined.  
+By default or with this set to false, it is "Mod.esp" : ["field1", ...].  
+Setting this to true changes it to "field":["Mod1.esp", "Mod2.esp", ....].  
+Depending on what you are doing one or the other may be more efficient for you to read. Inside the patcher both produce the same result.  
+Some settings may require this to be True. In those cases you can still just exclude this from the config as they will auto set it. However if you include it you must have it set correctly else you will get an error.
+
 >**<font color="green">ForwardType</font>**: ForwardType can change how Forwarding actions work. Following valid options:  
 - **<font color="green">Default</font>**: Will replace winning with value from forwarding mod as described above.  
 - **<font color="green">SelfMasterOnly</font>**: This is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.  
@@ -93,4 +101,14 @@ However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:
         "Forward": { "Cloaks - Dawnguard.esp": [ "Items" ] }
       }
 
-Now with using a low Priority Default Forward rule, followed by 1 or more SelfMasterOnly Forward rules with a higher Priority you could achieve some complex results if other patches do not exist to do it.
+- **<font color="green">DefaultThenSelfMasterOnly</font>**: This combines the two options above. This requires ForwardIndexedByField = true.  
+The first mod listed for a field will use the Default method. All others will follow using the SelfMasterOnly method.  
+NOTE: The first mod must successfully, by finding the record in that mod, and if OnlyIfDefault set, pass that check, else it will not apply any of the SelfMasterOnly forwards.
+All other mods do not check OnlyIfDefault, and can fail to find matching record without stopping the processing of other mods.
+
+      {
+        "types": [ "Outfit" ],
+        "Masters": "Dawnguard.esm",
+        "ForwardType": "DefaultThenSelfMasterOnly",
+        "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
+      }
