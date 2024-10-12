@@ -88,7 +88,7 @@ namespace GenericSynthesisPatcher.Json.Data
             get => forwardIndexedByField;
             set
             {
-                if (ForwardType == ForwardTypes.DefaultThenSelfMasterOnly && !value)
+                if (HasForwardType(ForwardTypeFlags.IndexedByField) && !value)
                     throw new ArgumentException("", "ForwardIndexedByField");
                 forwardIndexedByField = value;
             }
@@ -104,7 +104,7 @@ namespace GenericSynthesisPatcher.Json.Data
             set
             {
                 forwardType = value;
-                if (value == ForwardTypes.DefaultThenSelfMasterOnly)
+                if (HasForwardType(ForwardTypeFlags.IndexedByField))
                     forwardIndexedByField = true;
             }
         }
@@ -216,6 +216,8 @@ namespace GenericSynthesisPatcher.Json.Data
                   ? jsonValue.ToString()
                   : throw new InvalidOperationException($"Invalid value type returned for {key.Key}")
               : null;
+
+        public bool HasForwardType ( ForwardTypeFlags flag ) => ((ForwardTypeFlags)ForwardType).HasFlag(flag);
 
         /// <summary>
         /// Checks if rule filter(s) match current context's record.

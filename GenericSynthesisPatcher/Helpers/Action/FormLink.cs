@@ -24,11 +24,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!GetFormLink<IFormLinkGetter<T>>(context, patchedRecord ?? context.Record, rcd, out var curValue))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"Unable to get current value", ClassLogPrefix | 0x11);
+                if (!Mod.GetProperty<IFormLinkGetter<T>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue))
                     return -1;
-                }
 
                 var newValue = rule.GetValueAs<FormKey>(valueKey);
                 if (!Global.State.LinkCache.TryResolve(newValue, typeof(T), out var link))
@@ -48,13 +45,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!GetFormLink<IFormLinkGetter<T>>(context, patchedRecord ?? context.Record, rcd, out var curValue))
-                    return -1;
-
-                if (!GetFormLink<IFormLinkGetter<T>>(context, forwardContext.Record, rcd, out var newValue))
-                    return -1;
-
-                return Fill(context, origin, rule, rcd, curValue, newValue, ref patchedRecord);
+                return Mod.GetProperty<IFormLinkGetter<T>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue)
+                    && Mod.GetProperty<IFormLinkGetter<T>>(forwardContext.Record, rcd.PropertyName, out var newValue)
+                    ? Fill(context, origin, rule, rcd, curValue, newValue, ref patchedRecord)
+                    : -1;
             }
 
             LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name, ClassLogPrefix | 0x21);
@@ -71,9 +65,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return 0;
             }
 
-            if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
+            if (patchedRecord == null && rule.OnlyIfDefault && origin != null)
             {
-                if (GetFormLink<IFormLinkGetter<T>>(context, origin, rcd, out var originValue))
+                if (Mod.GetProperty<IFormLinkGetter<T>>(origin, rcd.PropertyName, out var originValue))
                 {
                     if (!(curValue != null && originValue != null)
                         && ((curValue == null && originValue != null)
@@ -84,50 +78,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         return -1;
                     }
                 }
-                else
-                {
-                    LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x33);
-                    return -1;
-                }
             }
 
             patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            var setProperty = patchedRecord.GetType().GetProperty(rcd.PropertyName);
-            if (setProperty == null)
-            {
-                LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x34);
+            if (!Mod.SetProperty(patchedRecord, rcd.PropertyName, newValue))
                 return -1;
-            }
 
-            setProperty.SetValue(patchedRecord, newValue);
             LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.", ClassLogPrefix | 0x35);
-
             return 1;
-        }
-
-        private static bool GetFormLink<LT> ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out LT? value ) where LT : class, IFormLinkGetter<IMajorRecordGetter>
-        {
-            value = null;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
-            if (property == null)
-            {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x41);
-                return false;
-            }
-
-            object? _value = property.GetValue(record);
-            if (_value == null)
-                return true;
-
-            if (_value is not LT __value)
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, typeof(LT).Name, _value.GetType().Name, ClassLogPrefix | 0x42);
-                return false;
-            }
-
-            value = __value;
-
-            return true;
         }
     }
 }

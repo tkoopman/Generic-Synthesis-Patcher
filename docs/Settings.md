@@ -83,7 +83,16 @@ By default this is just a straight replace including if it is a list field like 
 By default or with this set to false, it is "Mod.esp" : ["field1", ...].  
 Setting this to true changes it to "field":["Mod1.esp", "Mod2.esp", ....].  
 Depending on what you are doing one or the other may be more efficient for you to read. Inside the patcher both produce the same result.  
-Some settings may require this to be True. In those cases you can still just exclude this from the config as they will auto set it. However if you include it you must have it set correctly else you will get an error.
+If used with ForwardType of Default, as only a single mods value would be copied over it will pick a mod from the list to forward that contains this record.
+Some settings may require this to be True. In those cases you can still just exclude this from the config as they will auto set it. However if you include it you must have it set correctly else you will get an error.  
+Below example will forward record from PrvtI_HeavyArmory.esp unless it doesn't contain the record in which case Immersive Weapons.esp will be tried.
+
+        {
+            "types": [ "NPC" ],
+            "OnlyIfDefault": true,
+            "ForwardIndexedByField": true,
+            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+        }
 
 >**<font color="green">ForwardType</font>**: ForwardType can change how Forwarding actions work. Following valid options:  
 - **<font color="green">Default</font>**: Will replace winning with value from forwarding mod as described above.  
@@ -94,21 +103,32 @@ Other field types will just behave like they do in Default.
 Below example would make sure any cloaks that "Cloaks - Dawnguard.esp" added to outfits would be added to winning records if it was removed by another patch.
 However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:Dawnguard.esm] that the original Cloaks.esp removed would not be forwarded.
 
-      {
-        "types": [ "Outfit" ],
-        "Masters": "Dawnguard.esm",
-        "ForwardType": "SelfMasterOnly",
-        "Forward": { "Cloaks - Dawnguard.esp": [ "Items" ] }
-      }
+        {
+            "types": [ "Outfit" ],
+            "Masters": "Dawnguard.esm",
+            "ForwardType": "SelfMasterOnly",
+            "Forward": { "Cloaks - Dawnguard.esp": [ "Items" ] }
+        }
 
 - **<font color="green">DefaultThenSelfMasterOnly</font>**: This combines the two options above. This requires ForwardIndexedByField = true.  
 The first mod listed for a field will use the Default method. All others will follow using the SelfMasterOnly method.  
 NOTE: The first mod must successfully, by finding the record in that mod, and if OnlyIfDefault set, pass that check, else it will not apply any of the SelfMasterOnly forwards.
 All other mods do not check OnlyIfDefault, and can fail to find matching record without stopping the processing of other mods.
 
-      {
-        "types": [ "Outfit" ],
-        "Masters": "Dawnguard.esm",
-        "ForwardType": "DefaultThenSelfMasterOnly",
-        "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
-      }
+        {
+            "types": [ "Outfit" ],
+            "Masters": "Dawnguard.esm",
+            "ForwardType": "DefaultThenSelfMasterOnly",
+            "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
+        }
+
+- **<font color="green">DefaultRandom</font>**: This requires ForwardIndexedByField = true, however instead of picking the first valid mod to forward it will pick a random valid mod from the list.  
+The randomness is seeded for each rule, field & record combination so unless you change the rule you should get the same results each time.  
+Below example is the random version of the above example for ForwardIndexedByField. Changing the order of the listed mods, will change the seed used for randomness.
+
+        {
+            "types": [ "NPC" ],
+            "OnlyIfDefault": true,
+            "ForwardType": "DefaultRandom",
+            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+        }

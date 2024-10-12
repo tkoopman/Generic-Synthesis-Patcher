@@ -7,13 +7,23 @@ namespace GenericSynthesisPatcher.Json.Data
     public partial class GSPRule
     {
         [Flags]
+        public enum ForwardTypeFlags
+        {
+            Default = 1 << 1,
+            SelfMasterOnly = 1 << 2,
+            Random = 1 << 3,
+            IndexedByField = 1 << 4,
+            DefaultThenSelfMasterOnly = Default | SelfMasterOnly | IndexedByField,
+            DefaultRandom = Default | Random | IndexedByField,
+        }
+
         public enum ForwardTypes
         {
             /// <summary>
             /// Will replace winning with value from forwarding mod.
             /// If field is a list then all winning values will be removed and forwarding record entries added. (No merging)
             /// </summary>
-            Default,
+            Default = ForwardTypeFlags.Default,
 
             /// <summary>
             /// This  is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.
@@ -21,7 +31,7 @@ namespace GenericSynthesisPatcher.Json.Data
             /// It will not remove any current items from winning records.
             /// Other field types will just behave like they do in Default.
             /// </summary>
-            SelfMasterOnly,
+            SelfMasterOnly = ForwardTypeFlags.SelfMasterOnly,
 
             /// <summary>
             /// This only works with ForwardIndexedByField = true
@@ -31,7 +41,13 @@ namespace GenericSynthesisPatcher.Json.Data
             /// Main failure reasons would be if you have OnlyIfDefault set to true and it doesn't match the default or
             /// The record doesn't exist in the first mod listed. OnlyIfDefault is only checked for the first mod listed.
             /// </summary>
-            DefaultThenSelfMasterOnly
+            DefaultThenSelfMasterOnly = ForwardTypeFlags.DefaultThenSelfMasterOnly,
+
+            /// <summary>
+            /// This only works with ForwardIndexedByField = true
+            /// Instead of picking first mod from list containing record it will pick random mod from list containing record.
+            /// </summary>
+            DefaultRandom = ForwardTypeFlags.DefaultRandom,
         }
     }
 }

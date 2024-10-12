@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (baseRecord is IKeywordedGetter<IKeywordGetter> record)
             {
-                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
                     return -1;
@@ -68,6 +68,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     if (add != null && !record.HasKeyword(add))
                     {
                         patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                        if (((IKeyworded<IKeywordGetter>)patchedRecord).Keywords == null)
+                        {
+                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords = [];
+                            LogHelper.Log(LogLevel.Trace, context, "Created new keyword list.", 0x14);
+                        }
+
                         ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(add);
                         changes++;
                     }
@@ -96,13 +102,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
                     return -1;
                 }
 
                 patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                if (((IKeyworded<IKeywordGetter>)patchedRecord).Keywords == null)
+                {
+                    ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords = [];
+                    LogHelper.Log(LogLevel.Trace, context, "Created new keyword list.", 0x25);
+                }
+
                 int changes = ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.RemoveAll(_ => true) ?? 0;
 
                 if (forward.Keywords.SafeAny())
@@ -134,7 +146,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord != null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
                     return -1;
@@ -149,6 +161,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         if (record.Keywords == null || !record.Keywords.Contains(item))
                         {
                             patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                            if (((IKeyworded<IKeywordGetter>)patchedRecord).Keywords == null)
+                            {
+                                ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords = [];
+                                LogHelper.Log(LogLevel.Trace, context, "Created new keyword list.", 0x35);
+                            }
+
                             ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(item);
                             changes++;
                         }

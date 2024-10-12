@@ -8,6 +8,8 @@ using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     internal class Flags : IAction
@@ -29,12 +31,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return -1;
             }
 
-            if (!GetFlags(context, patchedRecord ?? context.Record, rcd, out var curValue) || curValue == null)
+            if (!Mod.GetProperty<Enum>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue) || curValue == null)
                 return -1;
 
-            if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
+            if (patchedRecord == null && rule.OnlyIfDefault && origin != null)
             {
-                if (GetFlags(context, origin, rcd, out var originValue))
+                if (Mod.GetProperty<Enum>(origin, rcd.PropertyName, out var originValue))
                 {
                     if (curValue != originValue)
                     {
@@ -76,47 +78,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 newFlags = (Enum)FlagEnums.CombineFlags(flagType, newFlags, setFlag);
             }
 
-            if (curValue != newFlags)
-            {
-                patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                var setFlagProp = patchedRecord.GetType().GetProperty(rcd.PropertyName);
-                if (setFlagProp == null)
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x14);
-                    return -1;
-                }
+            if (curValue == newFlags)
+                return 0;
 
-                setFlagProp.SetValue(patchedRecord, newFlags);
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.", ClassLogPrefix | 0x15);
-                return 1;
-            }
+            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.SetProperty(patchedRecord, rcd.PropertyName, newFlags))
+                return -1;
 
-            return 0;
+            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.", ClassLogPrefix | 0x15);
+            return 1;
         }
 
         public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
 
         public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
-
-        private static bool GetFlags ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out Enum? value )
-        {
-            value = null;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
-            if (property == null)
-            {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x21);
-                return false;
-            }
-
-            object? _value = property.GetValue(record);
-            if (_value == null || !FlagEnums.IsFlagEnum(_value.GetType()))
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "FlagEnums", _value?.GetType().Name ?? "?", ClassLogPrefix | 0x22);
-                return false;
-            }
-
-            value = (Enum)_value;
-            return true;
-        }
     }
 }

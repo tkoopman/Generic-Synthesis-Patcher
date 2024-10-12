@@ -50,12 +50,15 @@ namespace GenericSynthesisPatcher
 
             Dictionary<string, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>?> modContexts = [];
             List<string> fields = [];
-
+            int ruleHashCode = 0;
             if (rule.ForwardIndexedByField)
             {
                 fields.Add(valueKey.Key);
                 foreach (string mod in rule.GetValueAs<List<string>>(valueKey) ?? [])
+                {
                     modContexts.Add(mod, Mod.GetModRecord(context, mod));
+                    ruleHashCode = unchecked((ruleHashCode * 13) + mod.GetHashCode());
+                }
             }
             else
             {
@@ -87,52 +90,69 @@ namespace GenericSynthesisPatcher
                     bool firstMod = true;
                     ISkyrimMajorRecord? patchedRecord = null;
 
-                    foreach (var modContext in modContexts)
+                    if (rule.HasForwardType(GSPRule.ForwardTypeFlags.SelfMasterOnly))
                     {
-                        LogHelper.Log(LogLevel.Trace, context, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {modContext.Key}", ClassLogPrefix | 0x24);
-                        if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.DefaultThenSelfMasterOnly))
+                        foreach (var modContext in modContexts)
                         {
-                            if (firstMod)
-                            {   // First mod of DefaultThenSelfMasterOnly
-                                if (modContext.Value == null) // We don't continue if first mod can't be default forwarded
-                                    break;
+                            LogHelper.Log(LogLevel.Trace, context, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {modContext.Key}", ClassLogPrefix | 0x24);
+                            if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.DefaultThenSelfMasterOnly))
+                            {
+                                if (firstMod)
+                                {   // First mod of DefaultThenSelfMasterOnly
+                                    if (modContext.Value == null) // We don't continue if first mod can't be default forwarded
+                                        break;
 
-                                int changes = rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord);
-                                if (changes < 0)
-                                {   // If default forward fails we do not continue with the SelfMasterOnly forwards
-                                    LogHelper.Log(LogLevel.Trace, context, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.", ClassLogPrefix | 0x25);
-                                    break;
+                                    int changes = rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord);
+                                    if (changes < 0)
+                                    {   // If default forward fails we do not continue with the SelfMasterOnly forwards
+                                        LogHelper.Log(LogLevel.Trace, context, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.", ClassLogPrefix | 0x25);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        changed += changes;
+                                        firstMod = false;
+                                    }
                                 }
                                 else
-                                {
-                                    changed += changes;
-                                    firstMod = false;
+                                {   // All other mods in DefaultThenSelfMasterOnly
+                                    int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                                    if (changes > 0)
+                                        changed += changes;
                                 }
                             }
-                            else
-                            {   // All other mods in DefaultThenSelfMasterOnly
+                            else if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.SelfMasterOnly))
+                            {   //  SelfMasterOnly
                                 int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
                                 if (changes > 0)
                                     changed += changes;
                             }
+                            else
+                            {   // Should never reach here as Default already handled outside of foreach loop.
+                                throw new Exception("WTF. Code should never reach this point.");
+                            }
                         }
-                        else if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.SelfMasterOnly))
-                        {   //  SelfMasterOnly
-                            int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
-                            if (changes > 0)
-                                changed += changes;
-                        }
-                        else
-                        {   // Default forward type
-                            int changes = (modContext.Value != null)?rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord): 0;
-                            if (changes > 0)
-                                changed += changes;
-                        }
+                    }
+                    else
+                    {   // Default Forward Type
+                        var filtered = modContexts.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
+                        int index = filtered.Count != 1 && rule.HasForwardType(GSPRule.ForwardTypeFlags.Random) ? new Random(HashCode.Combine(context.Record.FormKey, field, ruleHashCode)).Next(filtered.Count) : 0;
+
+                        if (filtered.Count > 1)
+                            LogHelper.Log(LogLevel.Trace, context, field, $"Method: {Enum.GetName(rule.ForwardType)}. Selected #{index + 1} from {filtered.Count} available mods.", 0x28);
+
+                        var modContext = filtered.ElementAt(index);
+
+                        LogHelper.Log(LogLevel.Trace, context, field, $"Default forwarding from: {modContext.Key}", ClassLogPrefix | 0x27);
+
+                        int changes = (modContext.Value != null) ? rcd.Forward(context, origin, rule, modContext.Value, rcd, ref patchedRecord) : throw new Exception("WTF Should never hit this!");
+                        if (changes > 0)
+                            changed += changes;
                     }
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Trace, context, $"Unknown / Unimplemented field for forward action: {field}", ClassLogPrefix | 0x26);
+                    LogHelper.Log(LogLevel.Trace, context, field, $"Unknown / Unimplemented field for forward action type: {Enum.GetName(rule.ForwardType)}", ClassLogPrefix | 0x26);
                 }
             }
 

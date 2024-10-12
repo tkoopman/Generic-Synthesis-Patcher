@@ -25,24 +25,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!GetFormLinks(context, patchedRecord ?? context.Record, rcd, out var curList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curList))
                     return -1;
 
-                if (rule.OnlyIfDefault && origin != null)
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
                 {
-                    if (GetFormLinks(context, origin, rcd, out var originValue))
-                    {
-                        if (!curList.SequenceEqualNullable(originValue))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x12);
-                        return -1;
-                    }
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x12);
+                    return -1;
                 }
 
                 int changes = 0;
@@ -78,10 +67,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!GetFormLinks(context, context.Record, rcd, out var curList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curList))
                     return -1;
 
-                if (!GetFormLinks(context, forwardContext.Record, rcd, out var newList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, rcd.PropertyName, out var newList))
                     return -1;
 
                 if (curList.SequenceEqualNullable(newList))
@@ -90,24 +79,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
                 {
-                    if (GetFormLinks(context, origin, rcd, out var orgList))
-                    {
-                        if (!curList.SequenceEqualNullable(orgList))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x23);
-                        return -1;
-                    }
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
+                    return -1;
                 }
 
-                int changes = (newList != null) ? T.Replace(context, ref patchedRecord, newList) : 0;
+                int changes = T.Replace(context, ref patchedRecord, newList);
 
                 if (changes > 0)
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{changes} change(s).", ClassLogPrefix | 0x24);
@@ -124,10 +102,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!GetFormLinks(context, context.Record, rcd, out var curList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curList))
                     return -1;
 
-                if (!GetFormLinks(context, forwardContext.Record, rcd, out var newList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, rcd.PropertyName, out var newList))
                     return -1;
 
                 if (!newList.SafeAny())
@@ -139,21 +117,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord != null && rule.OnlyIfDefault && origin != null)
+                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
                 {
-                    if (GetFormLinks(context, origin, rcd, out var orgList))
-                    {
-                        if (!curList.SequenceEqualNullable(orgList))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x33);
-                        return -1;
-                    }
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
+                    return -1;
                 }
 
                 int changes = 0;
@@ -190,27 +157,20 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static bool GetFormLinks ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter record, RecordCallData rcd, out IReadOnlyList<IFormLinkContainerGetter>? value )
+        private static bool RecordsMatch ( IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right )
         {
-            value = null;
-            var property = record.GetType().GetProperty(rcd.PropertyName);
-            if (property == null)
-            {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x41);
-                return false;
-            }
-
-            object? _value = property.GetValue(record);
-            if (_value == null)
+            if (!left.SafeAny() && !right.SafeAny())
                 return true;
 
-            if (_value is not IReadOnlyList<IFormLinkContainerGetter> __value)
-            {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IReadOnlyList<IFormLinkContainerGetter>", _value.GetType().FullName ?? _value.GetType().Name, ClassLogPrefix | 0x42);
+            if (!left.SafeAny() || !right.SafeAny() || left.Count != right.Count)
                 return false;
+
+            for (int i = 0; i < left.Count; i++)
+            {
+                if (!T.DataEquals(left.ElementAt(i), right.ElementAt(i)))
+                    return false;
             }
 
-            value = __value;
             return true;
         }
     }

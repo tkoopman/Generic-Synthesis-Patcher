@@ -10,6 +10,8 @@ using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
+using Noggog;
+
 using static GenericSynthesisPatcher.Json.Data.GSPRule;
 using static Mutagen.Bethesda.Skyrim.Furniture;
 
@@ -106,20 +108,29 @@ namespace GenericSynthesisPatcher.Json.Data
             return 1;
         }
 
-        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter> newList )
+        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? newList )
         {
-            if (context.Record is not IContainerGetter record || newList is not IReadOnlyList<IContainerEntryGetter> list)
+            if (context.Record is not IIngestible)
                 return -1;
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+
             if (patch is IIngestible p)
             {
-                int changes = p.Effects?.RemoveAll(_ => true) ?? 0;
-
-                foreach (var add in list)
+                if (p.Effects != null)
                 {
-                    _ = Add(context, ref patch, add);
-                    changes++;
+                    int changes = p.Effects.RemoveAll(_ => true);
+
+                    if (newList is not IReadOnlyList<IContainerEntryGetter> list)
+                        return changes;
+
+                    foreach (var add in list)
+                    {
+                        _ = Add(context, ref patch, add);
+                        changes++;
+                    }
+
+                    return changes;
                 }
             }
 
