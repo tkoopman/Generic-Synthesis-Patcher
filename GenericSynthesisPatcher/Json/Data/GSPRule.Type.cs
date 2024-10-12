@@ -8,21 +8,21 @@ namespace GenericSynthesisPatcher.Json.Data
         public enum Type
         {
             UNKNOWN = -1,
-            ALCH,
-            AMMO,
-            ARMO,
-            BOOK,
-            CELL,
-            CONT,
-            FACT,
-            INGR,
-            KEYM,
-            MISC,
-            NPC,
-            OTFT,
-            SCRL,
-            WEAP,
-            WRLD,
+            ALCH = TypeFlags.ALCH,
+            AMMO = TypeFlags.AMMO,
+            ARMO = TypeFlags.ARMO,
+            BOOK = TypeFlags.BOOK,
+            CELL = TypeFlags.CELL,
+            CONT = TypeFlags.CONT,
+            FACT = TypeFlags.FACT,
+            INGR = TypeFlags.INGR,
+            KEYM = TypeFlags.KEYM,
+            MISC = TypeFlags.MISC,
+            NPC = TypeFlags.NPC,
+            OTFT = TypeFlags.OTFT,
+            SCRL = TypeFlags.SCRL,
+            WEAP = TypeFlags.WEAP,
+            WRLD = TypeFlags.WRLD,
             Ammunition = AMMO,
             Armor = ARMO,
             Container = CONT,
@@ -35,6 +35,28 @@ namespace GenericSynthesisPatcher.Json.Data
             Scroll = SCRL,
             Weapon = WEAP,
             Worldspace = WRLD
+        }
+
+        [Flags]
+        public enum TypeFlags
+        {
+            NONE = 0 << 0,
+            ALCH = 1 << 0,
+            AMMO = 1 << 1,
+            ARMO = 1 << 2,
+            BOOK = 1 << 3,
+            CELL = 1 << 4,
+            CONT = 1 << 5,
+            FACT = 1 << 6,
+            INGR = 1 << 7,
+            KEYM = 1 << 8,
+            MISC = 1 << 9,
+            NPC = 1 << 10,
+            OTFT = 1 << 11,
+            SCRL = 1 << 12,
+            WEAP = 1 << 13,
+            WRLD = 1 << 14,
+            All = ~(~0 << 15)
         }
 
         /// <summary>

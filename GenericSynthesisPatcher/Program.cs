@@ -1,5 +1,7 @@
 using System.Data;
 
+using EnumsNET;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Data;
 
@@ -15,11 +17,14 @@ using Newtonsoft.Json;
 
 using Noggog;
 
+using static GenericSynthesisPatcher.Json.Data.GSPRule;
+
 namespace GenericSynthesisPatcher
 {
     public partial class Program
     {
         private const int ClassLogPrefix = 0x000;
+        private static TypeFlags EnabledTypes = TypeFlags.All;
 
         public static int FillRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey )
         {
@@ -50,15 +55,12 @@ namespace GenericSynthesisPatcher
 
             Dictionary<string, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>?> modContexts = [];
             List<string> fields = [];
-            int ruleHashCode = 0;
+
             if (rule.ForwardIndexedByField)
             {
                 fields.Add(valueKey.Key);
                 foreach (string mod in rule.GetValueAs<List<string>>(valueKey) ?? [])
-                {
                     modContexts.Add(mod, Mod.GetModRecord(context, mod));
-                    ruleHashCode = unchecked((ruleHashCode * 13) + mod.GetHashCode());
-                }
             }
             else
             {
@@ -136,7 +138,7 @@ namespace GenericSynthesisPatcher
                     else
                     {   // Default Forward Type
                         var filtered = modContexts.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
-                        int index = filtered.Count != 1 && rule.HasForwardType(GSPRule.ForwardTypeFlags.Random) ? new Random(HashCode.Combine(context.Record.FormKey, field, ruleHashCode)).Next(filtered.Count) : 0;
+                        int index = filtered.Count != 1 && rule.HasForwardType(GSPRule.ForwardTypeFlags.Random) ? new Random(HashCode.Combine(context.Record.FormKey, field, rule)).Next(filtered.Count) : 0;
 
                         if (filtered.Count > 1)
                             LogHelper.Log(LogLevel.Trace, context, field, $"Method: {Enum.GetName(rule.ForwardType)}. Selected #{index + 1} from {filtered.Count} available mods.", 0x28);
@@ -182,58 +184,143 @@ namespace GenericSynthesisPatcher
             // subTotals values = (Total, Matched, Updated)
             SortedDictionary<GSPRule.Type, (int, int, int)> subTotals = [];
 
-            foreach (var context in state.LoadOrder.PriorityOrder.SkyrimMajorRecord().WinningContextOverrides(state.LinkCache))
+            while (EnabledTypes != TypeFlags.NONE)
             {
-                var recordType = GSPRule.GetGSPRuleType(context.Record);
-                if (!subTotals.ContainsKey(recordType))
-                    subTotals.Add(recordType, (0, 0, 0));
-                subTotals[recordType] = (subTotals[recordType].Item1 + 1, subTotals[recordType].Item2, subTotals[recordType].Item3);
-
-                total++;
-                Rules.ForEach(rule =>
+                IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> ProcessTypeRecords;
+                if (EnabledTypes.HasFlag(TypeFlags.ALCH))
                 {
-                    if (rule.Matches(context, out var origin))
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ingestible().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.ALCH);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.AMMO))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ammunition().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.AMMO);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.ARMO))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Armor().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.ARMO);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.BOOK))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Book().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.BOOK);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.CELL))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Cell().WinningContextOverrides(state.LinkCache);
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.CELL);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.CONT))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Container().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.CONT);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.FACT))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Faction().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.FACT);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.INGR))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ingredient().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.INGR);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.KEYM))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Key().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.KEYM);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.MISC))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.MiscItem().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.MISC);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.NPC))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Npc().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.NPC);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.OTFT))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Outfit().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.OTFT);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.SCRL))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Scroll().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.SCRL);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.WEAP))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Weapon().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.WEAP);
+                }
+                else if (EnabledTypes.HasFlag(TypeFlags.WRLD))
+                {
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Worldspace().WinningContextOverrides();
+                    EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.WRLD);
+                }
+                else
+                {
+                    LogHelper.Log(LogLevel.Critical, $"Found unsupported types. {(int)EnabledTypes:B18}", ClassLogPrefix | 0xFF);
+                    break;
+                }
+
+                foreach (var context in ProcessTypeRecords)
+                {
+                    var recordType = GSPRule.GetGSPRuleType(context.Record);
+                    if (!subTotals.ContainsKey(recordType))
+                        subTotals.Add(recordType, (0, 0, 0));
+                    subTotals[recordType] = (subTotals[recordType].Item1 + 1, subTotals[recordType].Item2, subTotals[recordType].Item3);
+
+                    total++;
+                    Rules.ForEach(rule =>
                     {
-                        subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2 + 1, subTotals[recordType].Item3);
-
-                        bool recordUpdated = false;
-                        foreach (var x in rule.jsonValues ?? [])
+                        if (rule.Matches(context, out var origin))
                         {
-                            switch (x.Key.ActionType)
+                            subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2 + 1, subTotals[recordType].Item3);
+
+                            bool recordUpdated = false;
+                            foreach (var x in rule.jsonValues ?? [])
                             {
-                                case GSPRule.ActionType.Fill:
-                                    int fillChanges = FillRecord(context, origin, rule, x.Key);
-                                    if (fillChanges > 0)
-                                    {
-                                        changed += fillChanges;
-                                        recordUpdated = true;
-                                    }
+                                switch (x.Key.ActionType)
+                                {
+                                    case GSPRule.ActionType.Fill:
+                                        int fillChanges = FillRecord(context, origin, rule, x.Key);
+                                        if (fillChanges > 0)
+                                        {
+                                            changed += fillChanges;
+                                            recordUpdated = true;
+                                        }
 
-                                    break;
+                                        break;
 
-                                case GSPRule.ActionType.Forward:
-                                    int forwardChanges = ForwardRecord(context, origin, rule, x.Key);
-                                    if (forwardChanges > 0)
-                                    {
-                                        changed += forwardChanges;
-                                        recordUpdated = true;
-                                    }
+                                    case GSPRule.ActionType.Forward:
+                                        int forwardChanges = ForwardRecord(context, origin, rule, x.Key);
+                                        if (forwardChanges > 0)
+                                        {
+                                            changed += forwardChanges;
+                                            recordUpdated = true;
+                                        }
 
-                                    break;
+                                        break;
 
-                                default:
-                                    LogHelper.Log(LogLevel.Warning, context, "Unknown action type", ClassLogPrefix | 0x32);
-                                    break;
+                                    default:
+                                        LogHelper.Log(LogLevel.Warning, context, "Unknown action type", ClassLogPrefix | 0x32);
+                                        break;
+                                }
+                            }
+
+                            if (recordUpdated)
+                            {
+                                subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2, subTotals[recordType].Item3 + 1);
+                                updated++;
                             }
                         }
-
-                        if (recordUpdated)
-                        {
-                            subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2, subTotals[recordType].Item3 + 1);
-                            updated++;
-                        }
-                    }
-                });
+                    });
+                }
             }
 
             LogHelper.Log(LogLevel.Information, $"Completed. Applied {changed:N0} changes over {updated:N0} updated records.", ClassLogPrefix | 0x33);
@@ -278,6 +365,7 @@ namespace GenericSynthesisPatcher
 
         private static List<GSPRule> LoadRules ()
         {
+            EnabledTypes = GSPRule.TypeFlags.NONE;
             string dataFolder = Global.Settings.Value.Folder;
             dataFolder = dataFolder.Replace("{SkyrimData}", Global.State.DataFolderPath);
             dataFolder = dataFolder.Replace("{SynthesisData}", Global.State.ExtraSettingsDataPath);
@@ -301,6 +389,30 @@ namespace GenericSynthesisPatcher
                 {
                     LogHelper.Log(LogLevel.Information, $"Loading config file: {Path.Combine(dataFolder, f)}", ClassLogPrefix | 0x53);
                     var a = JsonConvert.DeserializeObject<List<GSPRule>>(File.ReadAllText(Path.Combine(dataFolder, f)), Global.SerializerSettings);
+
+                    foreach (var b in a ?? [])
+                    {
+                        if (EnabledTypes == GSPRule.TypeFlags.All)
+                            break;
+
+                        if (b == null)
+                            continue;
+
+                        if (!b.Types.SafeAny())
+                        {
+                            if (EnabledTypes != GSPRule.TypeFlags.All)
+                            {
+                                LogHelper.Log(LogLevel.Information, "Found rule with no defined types. For best performance you should always define at least 1 type.", 0x57);
+                                EnabledTypes = GSPRule.TypeFlags.All;
+                            }
+                        }
+                        else
+                        {
+                            foreach (var t in b.Types)
+                                EnabledTypes |= (GSPRule.TypeFlags)t;
+                        }
+                    }
+
                     rules = [.. rules, .. a];
                 }
             });
@@ -311,22 +423,7 @@ namespace GenericSynthesisPatcher
                 return [];
             }
 
-            rules.Sort(delegate ( GSPRule rule1, GSPRule rule2 )
-            {
-                return rule1.Priority == rule2.Priority
-                        ? rule1.Types != null && rule2.Types == null
-                            ? 1 : rule1.Types == null && rule2.Types != null
-                            ? -1 : (rule1.Types == null && rule2.Types == null) || (rule1.Types?.Count == rule2.Types?.Count)
-                            ? rule1.FormID != null && rule2.FormID == null
-                                ? 1 : rule1.FormID == null && rule2.FormID != null
-                                ? -1 : (rule1.FormID == null && rule2.FormID == null) || (rule1.FormID?.Count == rule2.FormID?.Count)
-                                ? rule1.EditorID != null && rule2.EditorID == null
-                                    ? 1 : rule1.EditorID == null && rule2.EditorID != null
-                                    ? -1 : rule1.EditorID?.Count.CompareTo(rule2.EditorID?.Count) ?? 0
-                                : rule1.FormID?.Count.CompareTo(rule2.FormID?.Count) ?? 0
-                            : rule1.Types?.Count.CompareTo(rule2.Types?.Count) ?? 0
-                        : rule1.Priority.CompareTo(rule2.Priority);
-            });
+            rules.Sort();
 
             LogHelper.Log(LogLevel.Information, $"Loaded {rules.Count} rules", ClassLogPrefix | 0x56);
 

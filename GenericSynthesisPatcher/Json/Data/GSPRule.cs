@@ -21,13 +21,15 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public partial class GSPRule
+    public partial class GSPRule : IComparable<GSPRule>
     {
         internal Dictionary<ValueKey, JToken> jsonValues;
         private const int ClassLogPrefix = 0xA00;
         private Dictionary<ValueKey, object>? cache = null;
         private bool forwardIndexedByField;
         private ForwardTypes forwardType;
+
+        private int HashCode = 0;
 
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
@@ -175,6 +177,65 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             Fill,
             Forward
+        }
+
+        public int CompareTo ( GSPRule? other )
+        {
+            if (other == null)
+                return 1;
+            if (other == this)
+                return 0;
+
+            if (Priority != other.Priority)
+                return Priority.CompareTo(other.Priority);
+
+            int left
+                = ((Types?.Count ?? 0) << 8)
+                + ((FormID?.Count ?? 0) << 4)
+                + EditorID?.Count ?? 0;
+            int right
+                = ((other.Types?.Count ?? 0) << 8)
+                + ((other.FormID?.Count ?? 0) << 4)
+                + other.EditorID?.Count ?? 0;
+
+            return left.CompareTo(right);
+        }
+
+        public override int GetHashCode ()
+        {
+            if (HashCode == 0)
+            {
+                var hash = new HashCode();
+
+                hash.Add(FactionsOp);
+                hash.Add(ForwardIndexedByField);
+                hash.Add(ForwardType);
+                hash.Add(KeywordsOp);
+                hash.Add(OnlyIfDefault);
+                hash.Add(Priority);
+                if (EditorID != null)
+                    hash.AddEnumerable(EditorID);
+                if (Factions != null)
+                    hash.AddEnumerable(Factions);
+                if (FormID != null)
+                    hash.AddEnumerable(FormID);
+                if (Keywords != null)
+                    hash.AddEnumerable(Keywords);
+                if (Masters != null)
+                    hash.AddEnumerable(Masters);
+                if (NotEditorID != null)
+                    hash.AddEnumerable(NotEditorID);
+                if (NotFormID != null)
+                    hash.AddEnumerable(NotFormID);
+                if (Types != null)
+                    hash.AddEnumerable(Types);
+                if (jsonValues != null)
+                    hash.AddDictionary(jsonValues);
+
+                HashCode = hash.ToHashCode();
+            }
+
+            return HashCode;
         }
 
         /// <summary>
