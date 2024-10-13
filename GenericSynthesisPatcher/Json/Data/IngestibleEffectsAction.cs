@@ -17,7 +17,7 @@ using static Mutagen.Bethesda.Skyrim.Furniture;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public class IngestibleEffectsAction ( FilterFormLinks formKey, int area, int duration, float magnitude ) : IFormLinksWithData<IngestibleEffectsAction>
+    public class IngestibleEffectsAction ( OperationFormLink formKey, int area, int duration, float magnitude ) : IFormLinksWithData<IngestibleEffectsAction>
     {
         [JsonProperty(PropertyName = "area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
@@ -34,7 +34,7 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogPrefix = 0xB00;
 
         [JsonProperty(PropertyName = "effect", Required = Required.Always)]
-        public FilterFormLinks FormKey { get; set; } = formKey;
+        public OperationFormLink FormKey { get; set; } = formKey;
 
         public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {
@@ -77,9 +77,9 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
 
-        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
+        public static List<IngestibleEffectsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<IngestibleEffectsAction>>(key);
 
-        public static List<IngestibleEffectsAction>? GetValueAs ( GSPRule rule, GSPRule.ValueKey key ) => rule.GetValueAs<List<IngestibleEffectsAction>>(key);
+        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
         public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
         {

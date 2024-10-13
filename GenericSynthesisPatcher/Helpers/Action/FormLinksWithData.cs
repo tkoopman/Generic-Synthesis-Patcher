@@ -1,7 +1,10 @@
+using System.Data;
+
 using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -21,32 +24,26 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanForwardSelfOnly () => true;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
                 if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curList))
                     return -1;
 
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x12);
-                    return -1;
-                }
-
                 int changes = 0;
 
-                foreach (var action in T.GetValueAs(rule, valueKey) ?? [])
+                foreach (var action in T.GetFillValueAs(rule, valueKey) ?? [])
                 {
                     var e = action.Find(curList);
 
-                    if (e != null && (action.FormKey.Neg || !action.DataEquals(e)))
+                    if (e != null && (action.FormKey.Operation == Operation.Remove || !action.DataEquals(e)))
                     {
                         _ = T.Remove(context, ref patchedRecord, e);
                         changes++;
                     }
 
-                    if (!action.FormKey.Neg && (e == null || (e != null && !action.DataEquals(e))))
+                    if (action.FormKey.Operation != Operation.Remove && (e == null || (e != null && !action.DataEquals(e))))
                     {
                         _ = action.Add(context, ref patchedRecord);
                         changes++;
@@ -63,7 +60,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
@@ -79,12 +76,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
-                    return -1;
-                }
-
                 int changes = T.Replace(context, ref patchedRecord, newList);
 
                 if (changes > 0)
@@ -98,7 +89,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
@@ -117,12 +108,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && !Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList) && !RecordsMatch(curList, originList))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
-                    return -1;
-                }
-
                 int changes = 0;
                 foreach (var item in newList)
                 {
@@ -130,9 +115,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     if (key.ModKey == forwardContext.ModKey)
                     {
                         var i = T.Find(curList, key);
-                        bool eq = i != null && T.DataEquals(item, i);
 
-                        if (i != null && !eq)
+                        if (i != null && !T.DataEquals(item, i))
                         {
                             _ = T.Remove(context, ref patchedRecord, i);
                             _ = T.Add(context, ref patchedRecord, item);
@@ -157,6 +141,61 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
+        /// <summary>
+        /// Only checks the FormKeys not the Data
+        /// </summary>
+        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
+        {
+            if (check is not IFormLinkContainerGetter)
+                return false;
+
+            var links = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+
+            if (!links.SafeAny())
+                return true;
+
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(check, rcd.PropertyName, out var curLinks) || !curLinks.SafeAny())
+                return !links.Any(k => k.Operation != Operation.NOT);
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (var link in links)
+            {
+                if (link.Operation != Operation.NOT)
+                    includesChecked++;
+
+                if (T.Find(curLinks, link.FormKey) != null)
+                {
+                    // Doesn't matter what overall Operation is we always fail on a NOT match
+                    if (link.Operation == Operation.NOT)
+                        return false;
+
+                    if (valueKey.Operation == Operation.OR)
+                        return true;
+
+                    matchedCount++;
+                }
+                else if (link.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                {
+                    return false;
+                }
+            }
+
+            return valueKey.Operation switch
+            {
+                Operation.AND => true,
+                Operation.XOR => matchedCount == 1,
+                _ => includesChecked == 0 // OR
+            };
+        }
+
+        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
+                => origin != null
+                && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(check, rcd.PropertyName, out var curList)
+                && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, rcd.PropertyName, out var originList)
+                && RecordsMatch(curList, originList);
+
         private static bool RecordsMatch ( IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right )
         {
             if (!left.SafeAny() && !right.SafeAny())
@@ -165,9 +204,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!left.SafeAny() || !right.SafeAny() || left.Count != right.Count)
                 return false;
 
-            for (int i = 0; i < left.Count; i++)
+            foreach (var l in left)
             {
-                if (!T.DataEquals(left.ElementAt(i), right.ElementAt(i)))
+                if (!right.Any(r => T.DataEquals(l, r)))
                     return false;
             }
 

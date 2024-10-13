@@ -15,7 +15,7 @@ using static Mutagen.Bethesda.Skyrim.Furniture;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public class ContainerItemsAction ( FilterFormLinks formKey, int count ) : IFormLinksWithData<ContainerItemsAction>
+    public class ContainerItemsAction ( OperationFormLink formKey, int count ) : IFormLinksWithData<ContainerItemsAction>
     {
         [JsonProperty(PropertyName = "count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [System.ComponentModel.DefaultValue(1)]
@@ -24,7 +24,7 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogPrefix = 0x900;
 
         [JsonProperty(PropertyName = "item", Required = Required.Always)]
-        public FilterFormLinks FormKey { get; set; } = formKey;
+        public OperationFormLink FormKey { get; set; } = formKey;
 
         public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {
@@ -56,9 +56,9 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
 
-        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
+        public static List<ContainerItemsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<ContainerItemsAction>>(key);
 
-        public static List<ContainerItemsAction>? GetValueAs ( GSPRule rule, GSPRule.ValueKey key ) => rule.GetValueAs<List<ContainerItemsAction>>(key);
+        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
         public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
         {

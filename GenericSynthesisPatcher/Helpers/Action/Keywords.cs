@@ -1,3 +1,5 @@
+using System.Data;
+using System.Threading.Channels;
 using System.Xml.Linq;
 
 using DynamicData;
@@ -9,6 +11,7 @@ using GenericSynthesisPatcher.Json.Data;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -17,6 +20,7 @@ using Mutagen.Bethesda.Skyrim;
 using Noggog;
 
 using static GenericSynthesisPatcher.Json.Data.GSPRule;
+using static NexusMods.Paths.Delegates;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -31,50 +35,28 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanForwardSelfOnly () => true;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             var baseRecord = patchedRecord ?? context.Record;
 
             if (baseRecord is IKeywordedGetter<IKeywordGetter> record)
             {
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originKG && !record.Keywords.SequenceEqualNullable(originKG.Keywords))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
-                    return -1;
-                }
-
                 int changes = 0;
-                foreach (string c in rule.GetValueAs<List<string>>(valueKey) ?? [])
+                foreach (var keyword in rule.GetFillValueAs<List<OperationValue>>(valueKey) ?? [])
                 {
-                    string s = c;
-                    if (s.StartsWith('-'))
-                    {
-                        s = s[1..];
-                        var remove = GetKeyword(s);
-                        if (remove != null && record.HasKeyword(remove))
-                        {
-                            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Remove(remove);
-                            changes++;
-                        }
-
+                    var k = GetKeyword(keyword.Value);
+                    if (k == null)
                         continue;
-                    }
 
-                    if (s.StartsWith('+'))
-                        s = s[1..];
-
-                    var add = GetKeyword(s);
-                    if (add != null && !record.HasKeyword(add))
+                    bool found = record.HasKeyword(k);
+                    if ((found && keyword.Operation == Operation.Remove) || (!found && keyword.Operation != Operation.Remove))
                     {
                         patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                        if (((IKeyworded<IKeywordGetter>)patchedRecord).Keywords == null)
-                        {
-                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords = [];
-                            LogHelper.Log(LogLevel.Trace, context, "Created new keyword list.", 0x14);
-                        }
+                        if (keyword.Operation == Operation.Remove)
+                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Remove(k);
+                        else
+                            ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(k);
 
-                        ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(add);
                         changes++;
                     }
                 }
@@ -90,7 +72,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             var baseRecord = patchedRecord ?? context.Record;
 
@@ -100,12 +82,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x21);
                     return 0;
-                }
-
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
-                    return -1;
                 }
 
                 patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
@@ -131,7 +107,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             var baseRecord = patchedRecord ?? context.Record;
 
@@ -144,12 +120,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x31);
                     return 0;
-                }
-
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null && origin is IKeywordedGetter<IKeywordGetter> originGetter && !record.Keywords.SequenceEqualNullable(originGetter.Keywords))
-                {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
-                    return -1;
                 }
 
                 int changes = 0;
@@ -193,5 +163,56 @@ namespace GenericSynthesisPatcher.Helpers.Action
             _ = keywords.TryGetValue(name, out var value);
             return value;
         }
+
+        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
+        {
+            if (check is not IKeywordedGetter<IKeywordGetter> record)
+                return false;
+
+            var keywords = rule.GetMatchValueAs<List<OperationValue>>(valueKey);
+            if (!keywords.SafeAny())
+                return true;
+
+            if (!record.Keywords.SafeAny())
+                return !keywords.Any(k => k.Operation != Operation.NOT);
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (var key in keywords)
+            {
+                if (key.Operation != Operation.NOT)
+                    includesChecked++;
+
+                var keyword = GetKeyword(key.Value);
+                if (keyword != null && record.Keywords.Contains(keyword))
+                {
+                    // Doesn't matter what overall Operation is we always fail on a NOT match
+                    if (key.Operation == Operation.NOT)
+                        return false;
+
+                    if (valueKey.Operation == Operation.OR)
+                        return true;
+
+                    matchedCount++;
+                }
+                else if (key.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                {
+                    return false;
+                }
+            }
+
+            return valueKey.Operation switch
+            {
+                Operation.AND => true,
+                Operation.XOR => matchedCount == 1,
+                _ => includesChecked == 0 // OR
+            };
+        }
+
+        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
+                => check is IKeywordedGetter<IKeywordGetter> record
+                && origin is IKeywordedGetter<IKeywordGetter> originRecord
+                && record.Keywords.SequenceEqualNullable(originRecord.Keywords);
     }
 }

@@ -20,5 +20,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// </summary>
         /// <returns>False if null else result of .Any()</returns>
         public static bool SafeAny<TSource> ( [NotNullWhen(true)] this IEnumerable<TSource>? source ) => source != null && source.Any();
+
+        public static bool SafeAny<TSource> ( this IEnumerable<TSource>? source, Func<TSource, bool> predicate ) => source != null && source.Any(predicate);
     }
 }

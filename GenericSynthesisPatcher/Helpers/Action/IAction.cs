@@ -1,5 +1,3 @@
-using System;
-
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins.Cache;
@@ -31,9 +29,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     >=1 The number of changes made. If single field value should never be >1, but for lists could include count of number of items added/removed.
         /// </returns>
         public static abstract int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
-                                           IMajorRecordGetter? origin,
                                            GSPRule rule,
-                                           GSPRule.ValueKey valueKey,
+                                           ValueKey valueKey,
                                            RecordCallData rcd,
                                            ref ISkyrimMajorRecord? patchedRecord );
 
@@ -52,7 +49,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     >=1 The number of changes made. If single field value should never be >1, but for lists could include count of number of items added/removed.
         /// </returns>
         public static abstract int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
-                                              IMajorRecordGetter? origin,
                                               GSPRule rule,
                                               IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext,
                                               RecordCallData rcd,
@@ -73,10 +69,27 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     >=1 The number of changes made. If single field value should never be >1, but for lists could include count of number of items added/removed.
         /// </returns>
         public static abstract int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
-                                                      IMajorRecordGetter? origin,
                                                       GSPRule rule,
                                                       IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext,
                                                       RecordCallData rcd,
                                                       ref ISkyrimMajorRecord? patchedRecord );
+
+        /// <summary>
+        /// Check if current rule matches. Excludes checking Basic checks.
+        /// </summary>
+        /// <param name="check">Record to check if it matches rule.</param>
+        /// <param name="rule">Rule to check against</param>
+        /// <param name="rcd">Field currently checking</param>
+        /// <returns>True if this field matches</returns>
+        public static abstract bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd );
+
+        /// <summary>
+        /// Check if field matches in both current context and origin.
+        /// </summary>
+        /// <param name="check">Record to check if it matches origin.</param>
+        /// <param name="origin">Master record to check against.</param>
+        /// <param name="rcd">Field currently checking</param>
+        /// <returns>True if this field matches</returns>
+        public static abstract bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd );
     }
 }

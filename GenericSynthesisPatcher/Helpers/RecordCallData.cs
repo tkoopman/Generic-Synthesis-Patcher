@@ -1,13 +1,9 @@
-using System;
-
 using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
-
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher.Helpers
 {
@@ -19,11 +15,15 @@ namespace GenericSynthesisPatcher.Helpers
 
         public override bool CanForwardSelfOnly () => T.CanForwardSelfOnly();
 
-        public override int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.Fill(context, origin, rule, valueKey, rcd, ref patchedRecord);
+        public override int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.Fill(context, rule, valueKey, rcd, ref patchedRecord);
 
-        public override int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.Forward(context, origin, rule, forwardContext, rcd, ref patchedRecord);
+        public override int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.Forward(context, rule, forwardContext, rcd, ref patchedRecord);
 
-        public override int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.ForwardSelfOnly(context, origin, rule, forwardContext, rcd, ref patchedRecord);
+        public override int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => T.ForwardSelfOnly(context, rule, forwardContext, rcd, ref patchedRecord);
+
+        public override bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd ) => T.Matches(check, rule, valueKey, rcd);
+
+        public override bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd ) => T.Matches(check, origin, rcd);
     }
 
     public abstract class RecordCallData ( string propertyName )
@@ -36,10 +36,14 @@ namespace GenericSynthesisPatcher.Helpers
 
         public abstract bool CanForwardSelfOnly ();
 
-        public abstract int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
+        public abstract int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, Helpers.RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
 
-        public abstract int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
+        public abstract int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
 
-        public abstract int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
+        public abstract int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
+
+        public abstract bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd );
+
+        public abstract bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd );
     }
 }

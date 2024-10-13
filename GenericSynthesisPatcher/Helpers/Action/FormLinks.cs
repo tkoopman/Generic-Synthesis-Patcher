@@ -1,9 +1,12 @@
+using System.Data;
+
 using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -23,38 +26,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanForwardSelfOnly () => true;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, GSPRule.ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter record)
             {
                 if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue))
                     return -1;
 
-                if (rule.OnlyIfDefault && origin != null)
-                {
-                    if (Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue))
-                    {
-                        if (!curValue.SequenceEqualNullable(originValue))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x11);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x12);
-                        return -1;
-                    }
-                }
-
                 int changes = 0;
-                foreach (string c in rule.GetValueAs<List<string>>(valueKey) ?? [])
+                foreach (var actionKey in rule.GetFillValueAs<List<OperationFormLink>>(valueKey) ?? [])
                 {
-                    bool actionRemove = c.StartsWith('-');
-                    var actionKey = FormKey.Factory(actionRemove || c.StartsWith('+') ? c[1..] : c);
-                    var curKey = curValue?.SingleOrDefault(flg => flg?.FormKey.Equals(actionKey) ?? false, null);
+                    var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.FormKey) ?? false, null);
 
-                    if ((curKey != null && actionRemove) || (curKey == null && !actionRemove))
+                    if ((curKey != null && actionKey.Operation == Operation.Remove) || (curKey == null && actionKey.Operation != Operation.Remove))
                     {
                         patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
 
@@ -64,20 +48,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
                             return -1;
                         }
 
-                        if (!Global.State.LinkCache.TryResolve(actionKey, typeof(T), out var link))
+                        if (!Global.State.LinkCache.TryResolve(actionKey.FormKey, typeof(T), out var link))
                         {
                             LogHelper.Log(LogLevel.Warning, context, rcd.PropertyName, $"Unable to find {actionKey}", ClassLogPrefix | 0x16);
+                            continue;
                         }
-                        else if (actionRemove)
-                        {
+
+                        changes++;
+                        if (actionKey.Operation == Operation.Remove)
                             _ = setList.Remove(link.ToLinkGetter<T>());
-                            changes++;
-                        }
                         else
-                        {
                             setList.Add(link.ToLinkGetter<T>());
-                            changes++;
-                        }
                     }
                 }
 
@@ -91,7 +72,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter record)
             {
@@ -105,23 +86,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x21);
                     return 0;
-                }
-
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null)
-                {
-                    if (Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue))
-                    {
-                        if (!curValue.SequenceEqualNullable(originValue))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x22);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x23);
-                        return -1;
-                    }
                 }
 
                 patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
@@ -151,7 +115,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
@@ -166,25 +130,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 if (curValue.SequenceEqualNullable(newValue))
                 {
-                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x31);
+                    LogHelper.Log(LogLevel.Trace, context, rcd.PropertyName, LogHelper.PropertyIsEqual, ClassLogPrefix | 0x31);
                     return 0;
-                }
-
-                if (patchedRecord == null && rule.OnlyIfDefault && origin != null)
-                {
-                    if (Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue))
-                    {
-                        if (!curValue.SequenceEqualNullable(originValue))
-                        {
-                            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, LogHelper.OriginMismatch, ClassLogPrefix | 0x32);
-                            return -1;
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.Log(LogLevel.Error, context, rcd.PropertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x33);
-                        return -1;
-                    }
                 }
 
                 ISkyrimMajorRecord? patch = null;
@@ -221,6 +168,75 @@ namespace GenericSynthesisPatcher.Helpers.Action
             LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name, ClassLogPrefix | 0x35);
 
             return -1;
+        }
+
+        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
+        {
+            if (check is not IFormLinkContainerGetter)
+                return false;
+
+            var links = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+
+            if (!links.SafeAny())
+                return true;
+
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var curLinks) || !curLinks.SafeAny())
+                return !links.Any(k => k.Operation != Operation.NOT);
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (var link in links)
+            {
+                if (link.Operation != Operation.NOT)
+                    includesChecked++;
+
+                if (curLinks.Any(l => l.FormKey.Equals(link.FormKey)))
+                {
+                    // Doesn't matter what overall Operation is we always fail on a NOT match
+                    if (link.Operation == Operation.NOT)
+                        return false;
+
+                    if (valueKey.Operation == Operation.OR)
+                        return true;
+
+                    matchedCount++;
+                }
+                else if (link.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                {
+                    return false;
+                }
+            }
+
+            return valueKey.Operation switch
+            {
+                Operation.AND => true,
+                Operation.XOR => matchedCount == 1,
+                _ => includesChecked == 0 // OR
+            };
+        }
+
+        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
+                => origin != null
+                && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var checkValue)
+                && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue)
+                && RecordsMatch(checkValue, originValue);
+
+        private static bool RecordsMatch ( IReadOnlyList<IFormLinkGetter<T>>? left, IReadOnlyList<IFormLinkGetter<T>>? right )
+        {
+            if (!left.SafeAny() && !right.SafeAny())
+                return true;
+
+            if (!left.SafeAny() || !right.SafeAny() || left.Count != right.Count)
+                return false;
+
+            foreach (var l in left)
+            {
+                if (!right.Any(r => l.FormKey.Equals(r.FormKey)))
+                    return false;
+            }
+
+            return true;
         }
     }
 }
