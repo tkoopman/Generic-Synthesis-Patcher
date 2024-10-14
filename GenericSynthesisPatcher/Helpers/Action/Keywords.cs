@@ -7,6 +7,7 @@ using DynamicData;
 using EnumsNET;
 
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -42,17 +43,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (baseRecord is IKeywordedGetter<IKeywordGetter> record)
             {
                 int changes = 0;
-                foreach (var keyword in rule.GetFillValueAs<List<OperationValue>>(valueKey) ?? [])
+                foreach (var keyword in rule.GetFillValueAs<List<ListOperation>>(valueKey) ?? [])
                 {
                     var k = GetKeyword(keyword.Value);
                     if (k == null)
                         continue;
 
                     bool found = record.HasKeyword(k);
-                    if ((found && keyword.Operation == Operation.Remove) || (!found && keyword.Operation != Operation.Remove))
+                    if ((found && keyword.Operation == ListLogic.DEL) || (!found && keyword.Operation == ListLogic.ADD))
                     {
                         patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                        if (keyword.Operation == Operation.Remove)
+                        if (keyword.Operation == ListLogic.DEL)
                             ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Remove(k);
                         else
                             ((IKeyworded<IKeywordGetter>)patchedRecord).Keywords?.Add(k);
@@ -169,34 +170,34 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (check is not IKeywordedGetter<IKeywordGetter> record)
                 return false;
 
-            var keywords = rule.GetMatchValueAs<List<OperationValue>>(valueKey);
+            var keywords = rule.GetMatchValueAs<List<ListOperation>>(valueKey);
             if (!keywords.SafeAny())
                 return true;
 
             if (!record.Keywords.SafeAny())
-                return !keywords.Any(k => k.Operation != Operation.NOT);
+                return !keywords.Any(k => k.Operation != ListLogic.NOT);
 
             int matchedCount = 0;
             int includesChecked = 0; // Only count !Neg
 
             foreach (var key in keywords)
             {
-                if (key.Operation != Operation.NOT)
+                if (key.Operation != ListLogic.NOT)
                     includesChecked++;
 
                 var keyword = GetKeyword(key.Value);
                 if (keyword != null && record.Keywords.Contains(keyword))
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (key.Operation == Operation.NOT)
+                    if (key.Operation == ListLogic.NOT)
                         return false;
 
-                    if (valueKey.Operation == Operation.OR)
+                    if (valueKey.Operation == FilterLogic.OR)
                         return true;
 
                     matchedCount++;
                 }
-                else if (key.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                else if (key.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }
@@ -204,8 +205,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return valueKey.Operation switch
             {
-                Operation.AND => true,
-                Operation.XOR => matchedCount == 1,
+                FilterLogic.AND => true,
+                FilterLogic.XOR => matchedCount == 1,
                 _ => includesChecked == 0 // OR
             };
         }

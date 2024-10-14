@@ -1,6 +1,7 @@
 using EnumsNET;
 
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -39,11 +40,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             foreach (string f in flags)
             {
-                var checkFlag = new OperationValue(f);
+                var checkFlag = new ListOperation(f);
 
                 if (Enum.TryParse(flagType, checkFlag.Value, true, out object? setFlag))
                 {
-                    newFlags = checkFlag.Operation == Operation.Remove
+                    newFlags = checkFlag.Operation == ListLogic.DEL
                         ? (Enum)FlagEnums.RemoveFlags(flagType, newFlags, setFlag)
                         : (Enum)FlagEnums.CombineFlags(flagType, newFlags, setFlag);
                 }
@@ -73,12 +74,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
             int matchedCount = 0;
             int includesChecked = 0; // Only count !Neg
 
-            var flags = rule.GetMatchValueAs<List<OperationValue>>(valueKey);
+            var flags = rule.GetMatchValueAs<List<ListOperation>>(valueKey);
             if (!flags.SafeAny())
                 return true;
 
             if (checkFlags == null)
-                return !flags.Any(k => k.Operation == Operation.Default);
+                return !flags.Any(k => k.Operation == ListLogic.Default);
 
             var flagType = checkFlags.GetType();
 
@@ -87,21 +88,21 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 if (!Enum.TryParse(flagType, flag.Value, true, out object? checkFlag) || checkFlag == null)
                     continue;
 
-                if (flag.Operation != Operation.NOT)
+                if (flag.Operation != ListLogic.NOT)
                     includesChecked++;
 
                 if (checkFlags.HasFlag((Enum)checkFlag))
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (flag.Operation == Operation.NOT)
+                    if (flag.Operation == ListLogic.NOT)
                         return false;
 
-                    if (valueKey.Operation == Operation.OR)
+                    if (valueKey.Operation == FilterLogic.OR)
                         return true;
 
                     matchedCount++;
                 }
-                else if (flag.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                else if (flag.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }
@@ -109,8 +110,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return valueKey.Operation switch
             {
-                Operation.AND => true,
-                Operation.XOR => matchedCount == 1,
+                FilterLogic.AND => true,
+                FilterLogic.XOR => matchedCount == 1,
                 _ => includesChecked == 0 // OR
             };
         }

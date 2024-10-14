@@ -1,18 +1,16 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Converters;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
+using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
@@ -35,13 +33,6 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
         public List<string>? EditorID { get; set; }
-
-        [JsonProperty(PropertyName = "Factions", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<OperationFormLink>))]
-        public List<OperationFormLink>? Factions { get; set; }
-
-        [JsonProperty(PropertyName = "FactionsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation FactionsOp { get; set; }
 
         /// <summary>
         /// Add Fill action(s) to this rule.
@@ -111,13 +102,6 @@ namespace GenericSynthesisPatcher.Json.Data
                     forwardIndexedByField = true;
             }
         }
-
-        [JsonProperty(PropertyName = "Keywords", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? Keywords { get; set; }
-
-        [JsonProperty(PropertyName = "KeywordsOp", NullValueHandling = NullValueHandling.Ignore)]
-        public Operation KeywordsOp { get; set; }
 
         [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
@@ -205,14 +189,62 @@ namespace GenericSynthesisPatcher.Json.Data
         #region GetValues
 
         private Dictionary<ValueKey, object?> fillCache = [];
-        private Dictionary<ValueKey, object?> forwardCache = [];
+        private Dictionary<ValueKey, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
         private Dictionary<ValueKey, object?> matchCache = [];
 
         public T? GetFillValueAs<T> ( ValueKey key ) => GetValueAs<T>(fillValues, fillCache, key);
 
-        public T? GetForwardValueAs<T> ( ValueKey key ) => GetValueAs<T>(forwardValues, forwardCache, key);
-
         public T? GetMatchValueAs<T> ( ValueKey key ) => GetValueAs<T>(matchValues, matchCache, key);
+
+        public bool TryGetForward ( ValueKey key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields )
+        {
+            if (forwardCache.TryGetValue(key, out var value))
+            {
+                if (value == null || !value.HasValue)
+                {
+                    mods = null;
+                    fields = null;
+                    return false;
+                }
+
+                mods = value.Value.Item1;
+                fields = value.Value.Item2;
+
+                return true;
+            }
+
+            Dictionary<ModKey, IModListing<ISkyrimModGetter>> buildMods = [];
+            List<string> buildFields = [];
+
+            if (ForwardIndexedByField)
+            {
+                buildFields.Add(key.Key);
+                foreach (var mod in GetValueAs<List<ModKey>>(forwardValues, [], key) ?? [])
+                    buildMods.Add(mod, Global.State.LoadOrder[mod]);
+            }
+            else
+            {
+                if (ModKey.TryFromFileName(new FileName(key.Key), out var mod))
+                    buildMods.Add(mod, Global.State.LoadOrder[mod]);
+
+                buildFields = GetValueAs<List<string>>(forwardValues, [], key) ?? buildFields;
+            }
+
+            if (buildMods.Count != 0 && buildFields.Count != 0)
+            {
+                mods = new ReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>(buildMods);
+                fields = [.. buildFields];
+
+                forwardCache.Add(key, (mods, fields));
+
+                return true;
+            }
+
+            forwardCache.Add(key, null);
+            mods = null;
+            fields = null;
+            return false;
+        }
 
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.
@@ -255,20 +287,14 @@ namespace GenericSynthesisPatcher.Json.Data
             {
                 var hash = new HashCode();
 
-                hash.Add(FactionsOp);
                 hash.Add(ForwardIndexedByField);
                 hash.Add(ForwardType);
-                hash.Add(KeywordsOp);
                 hash.Add(OnlyIfDefault);
                 hash.Add(Priority);
                 if (EditorID != null)
                     hash.AddEnumerable(EditorID);
-                if (Factions != null)
-                    hash.AddEnumerable(Factions);
                 if (FormID != null)
                     hash.AddEnumerable(FormID);
-                if (Keywords != null)
-                    hash.AddEnumerable(Keywords);
                 if (Masters != null)
                     hash.AddEnumerable(Masters);
                 if (NotEditorID != null)
@@ -310,23 +336,6 @@ namespace GenericSynthesisPatcher.Json.Data
             }
 
             return matches;
-        }
-
-        private static bool MatchesFaction ( INpcGetter record, OperationFormLink check )
-        {
-            // If no factions on record return result based on if +/-
-            if (!record.Factions.SafeAny())
-                return false;
-
-            foreach (var f in record.Factions)
-            {
-                if (f.Faction.Equals(check.FormKey))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 using System.Data;
 
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +39,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 {
                     var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.FormKey) ?? false, null);
 
-                    if ((curKey != null && actionKey.Operation == Operation.Remove) || (curKey == null && actionKey.Operation != Operation.Remove))
+                    if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
                         patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
 
@@ -55,7 +56,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         }
 
                         changes++;
-                        if (actionKey.Operation == Operation.Remove)
+                        if (actionKey.Operation == ListLogic.DEL)
                             _ = setList.Remove(link.ToLinkGetter<T>());
                         else
                             setList.Add(link.ToLinkGetter<T>());
@@ -181,28 +182,28 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return true;
 
             if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var curLinks) || !curLinks.SafeAny())
-                return !links.Any(k => k.Operation != Operation.NOT);
+                return !links.Any(k => k.Operation != ListLogic.NOT);
 
             int matchedCount = 0;
             int includesChecked = 0; // Only count !Neg
 
             foreach (var link in links)
             {
-                if (link.Operation != Operation.NOT)
+                if (link.Operation != ListLogic.NOT)
                     includesChecked++;
 
                 if (curLinks.Any(l => l.FormKey.Equals(link.FormKey)))
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (link.Operation == Operation.NOT)
+                    if (link.Operation == ListLogic.NOT)
                         return false;
 
-                    if (valueKey.Operation == Operation.OR)
+                    if (valueKey.Operation == FilterLogic.OR)
                         return true;
 
                     matchedCount++;
                 }
-                else if (link.Operation != Operation.NOT && valueKey.Operation == Operation.AND)
+                else if (link.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }
@@ -210,8 +211,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return valueKey.Operation switch
             {
-                Operation.AND => true,
-                Operation.XOR => matchedCount == 1,
+                FilterLogic.AND => true,
+                FilterLogic.XOR => matchedCount == 1,
                 _ => includesChecked == 0 // OR
             };
         }

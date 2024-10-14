@@ -1,4 +1,5 @@
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -39,28 +40,28 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
         {
-            var values = rule.GetMatchValueAs<List<OperationValue<T>>>(valueKey);
+            var values = rule.GetMatchValueAs<List<ListOperation<T>>>(valueKey);
 
             if (!values.SafeAny())
                 return true;
 
             if (!Mod.GetProperty<T>(check, rcd.PropertyName, out var curValue) || curValue == null)
-                return !values.Any(k => k.Operation != Operation.NOT);
+                return !values.Any(k => k.Operation != ListLogic.NOT);
 
             foreach (var v in values)
             {
                 if (curValue.Equals(v.Value))
                 {
-                    if (v.Operation == Operation.NOT)
+                    if (v.Operation == ListLogic.NOT)
                         return false;
                 }
-                else if (v.Operation != Operation.NOT)
+                else if (v.Operation != ListLogic.NOT)
                 {   // Always OR as single value field
                     return true;
                 }
             }
 
-            return !values.Any(k => k.Operation != Operation.NOT);
+            return !values.Any(k => k.Operation != ListLogic.NOT);
         }
 
         public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )

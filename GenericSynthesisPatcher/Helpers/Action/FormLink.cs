@@ -1,4 +1,5 @@
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -70,22 +71,22 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return true;
 
             if (!Mod.GetProperty<IFormLinkGetter<T>>(check, rcd.PropertyName, out var curValue) || curValue == null)
-                return !values.Any(k => k.Operation != Operation.NOT);
+                return !values.Any(k => k.Operation != ListLogic.NOT);
 
             foreach (var v in values)
             {
                 if (curValue.FormKey.Equals(v.FormKey))
                 {
-                    if (v.Operation == Operation.NOT)
+                    if (v.Operation == ListLogic.NOT)
                         return false;
                 }
-                else if (v.Operation != Operation.NOT)
+                else if (v.Operation != ListLogic.NOT)
                 {   // Always OR as single value field
                     return true;
                 }
             }
 
-            return !values.Any(k => k.Operation != Operation.NOT);
+            return !values.Any(k => k.Operation != ListLogic.NOT);
         }
 
         public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )

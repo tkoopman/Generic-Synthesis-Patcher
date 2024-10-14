@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Data;
 
 using EnumsNET;
@@ -59,35 +60,17 @@ namespace GenericSynthesisPatcher
                 return 0;
             }
 
-            Dictionary<string, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>?> modContexts = [];
-            List<string> fields = [];
+            if (!rule.TryGetForward(valueKey, out var mods, out string[]? fields))
+                return -1;
 
-            if (rule.ForwardIndexedByField)
-            {
-                fields.Add(valueKey.Key);
-                foreach (string mod in rule.GetForwardValueAs<List<string>>(valueKey) ?? [])
-                    modContexts.Add(mod, Mod.GetModRecord(context, mod));
-            }
-            else
-            {
-                var forwardRecord = Mod.GetModRecord(context, valueKey.Key);
-                if (forwardRecord != null)
-                    modContexts.Add(valueKey.Key, forwardRecord);
+            var All = Global.State.LinkCache.ResolveAllContexts(context.Record.FormKey, context.Record.Registration.GetterType);
+            if (!All.SafeAny())
+                return -1;
 
-                fields = rule.GetForwardValueAs<List<string>>(valueKey) ?? fields;
-            }
+            var orderedMods = mods.Select((key,value) => new { key = key.Key, value = All.FirstOrDefault(m => m.ModKey.Equals(key.Key)) }).ToFrozenDictionary(x => x.key, x => x.value);
 
-            if (!modContexts.Any(x => x.Value != null))
-            {
-                //LogHelper.Log(LogLevel.Trace, context, "No forwarding record.", ClassLogPrefix | 0x22);
-                return 0;
-            }
-
-            if (fields.Count == 0)
-            {
-                LogHelper.Log(LogLevel.Trace, context, "No fields in config to forward", ClassLogPrefix | 0x23);
-                return 0;
-            }
+            if (!orderedMods.Any(k => k.Value != null))
+                return -1;
 
             int changed = 0;
             foreach (string field in fields)
@@ -104,14 +87,14 @@ namespace GenericSynthesisPatcher
 
                 if (rule.HasForwardType(GSPRule.ForwardTypeFlags.SelfMasterOnly))
                 {
-                    foreach (var modContext in modContexts)
+                    foreach (var mod in orderedMods)
                     {
-                        LogHelper.Log(LogLevel.Trace, context, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {modContext.Key}", ClassLogPrefix | 0x24);
+                        LogHelper.Log(LogLevel.Trace, context, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {mod.Key}", ClassLogPrefix | 0x24);
                         if (rule.ForwardType.HasFlag(GSPRule.ForwardTypes.DefaultThenSelfMasterOnly))
                         {
                             if (firstMod)
                             {   // First mod of DefaultThenSelfMasterOnly
-                                if (modContext.Value == null) // We don't continue if first mod can't be default forwarded
+                                if (mod.Value == null) // We don't continue if first mod can't be default forwarded
                                     break;
 
                                 if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
@@ -120,7 +103,7 @@ namespace GenericSynthesisPatcher
                                     break;
                                 }
 
-                                int changes = rcd.Forward(context, rule, modContext.Value, rcd, ref patchedRecord);
+                                int changes = rcd.Forward(context, rule, mod.Value, rcd, ref patchedRecord);
                                 if (changes < 0)
                                 {   // If default forward fails we do not continue with the SelfMasterOnly forwards
                                     LogHelper.Log(LogLevel.Trace, context, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.", ClassLogPrefix | 0x25);
@@ -134,7 +117,7 @@ namespace GenericSynthesisPatcher
                             }
                             else
                             {   // All other mods in DefaultThenSelfMasterOnly - No need to check origin
-                                int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                                int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchedRecord): 0;
                                 if (changes > 0)
                                     changed += changes;
                             }
@@ -148,7 +131,7 @@ namespace GenericSynthesisPatcher
                             }
 
                             // modContext == null fine here we just skip those ones
-                            int changes = (modContext.Value != null)?rcd.ForwardSelfOnly(context, rule, modContext.Value, rcd, ref patchedRecord): 0;
+                            int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchedRecord): 0;
                             if (changes > 0)
                                 changed += changes;
                         }
@@ -160,14 +143,14 @@ namespace GenericSynthesisPatcher
                 }
                 else
                 {   // Default Forward Type
-                    var filtered = modContexts.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
+                    var filtered = orderedMods.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
                     int index = filtered.Count != 1 && rule.HasForwardType(GSPRule.ForwardTypeFlags.Random) ? new Random(HashCode.Combine(context.Record.FormKey, field, rule)).Next(filtered.Count) : 0;
 
                     if (filtered.Count > 1)
                         LogHelper.Log(LogLevel.Trace, context, field, $"Method: {Enum.GetName(rule.ForwardType)}. Selected #{index + 1} from {filtered.Count} available mods.", 0x28);
 
                     var modContext = filtered.ElementAt(index);
-                    LogHelper.Log(LogLevel.Trace, context, field, $"Default forwarding from: {modContext.Key}", ClassLogPrefix | 0x27);
+                    LogHelper.Log(LogLevel.Trace, context, field, $"Default forwarding from: {modContext.Key.FileName}", ClassLogPrefix | 0x27);
 
                     if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                     {
@@ -213,77 +196,77 @@ namespace GenericSynthesisPatcher
                 IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> ProcessTypeRecords;
                 if (EnabledTypes.HasFlag(TypeFlags.ALCH))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ingestible().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Ingestible().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.ALCH);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.AMMO))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ammunition().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Ammunition().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.AMMO);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.ARMO))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Armor().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Armor().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.ARMO);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.BOOK))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Book().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Book().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.BOOK);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.CELL))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Cell().WinningContextOverrides(state.LinkCache);
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Cell().WinningContextOverrides(state.LinkCache);
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.CELL);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.CONT))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Container().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Container().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.CONT);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.FACT))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Faction().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Faction().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.FACT);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.INGR))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Ingredient().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Ingredient().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.INGR);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.KEYM))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Key().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Key().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.KEYM);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.MISC))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.MiscItem().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MiscItem().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.MISC);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.NPC))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Npc().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Npc().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.NPC);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.OTFT))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Outfit().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Outfit().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.OTFT);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.SCRL))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Scroll().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Scroll().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.SCRL);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.WEAP))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Weapon().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Weapon().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.WEAP);
                 }
                 else if (EnabledTypes.HasFlag(TypeFlags.WRLD))
                 {
-                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.Worldspace().WinningContextOverrides();
+                    ProcessTypeRecords = state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Worldspace().WinningContextOverrides();
                     EnabledTypes = EnabledTypes.RemoveFlags(TypeFlags.WRLD);
                 }
                 else

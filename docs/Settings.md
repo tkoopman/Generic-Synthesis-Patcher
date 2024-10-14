@@ -43,7 +43,7 @@ In general they follow the following rules:
 - +/-: You can add a prefix to these to say if they must be included or excluded from filter. Example below won't match any record with keyword Survival_ArmorCold.
 - Include (+) and OR (|) prefixes are default so no need to enter them however, can be used for unforeseen cases where the value you want to enter may start with a prefix value. Like trying to enter a negative number ("+-123" to allowed -123).
 - Exclude (-) values ignore Operation. A record with any excluded values will make it not match not matter the overall operation. ! can also be used instead of -.
-- Currently operation only available per field. If you list multiple fields to match it will always be AND (&).
+- Currently operation only available per field. If you list multiple fields to match it will always be AND (&) between all the fields.
 
 ## Example
 

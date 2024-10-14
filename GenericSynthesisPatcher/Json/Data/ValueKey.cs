@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
+using GenericSynthesisPatcher.Json.Operations;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
@@ -10,12 +10,12 @@ namespace GenericSynthesisPatcher.Json.Data
     public readonly struct ValueKey
     {
         public readonly string Key;
-        public readonly Operation Operation;
+        public readonly FilterLogic Operation;
 
         /// <param name="key"></param>
         public ValueKey ( string key )
         {
-            var operationValue = new OperationValue(key);
+            var operationValue = new FilterOperation(key);
             Key = operationValue.Value.ToLower();
             Operation = operationValue.Operation;
         }
