@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace GenericSynthesisPatcher
 {
     public class Counts ( int total = 0, int matched = 0, int updated = 0, int changes = 0 )

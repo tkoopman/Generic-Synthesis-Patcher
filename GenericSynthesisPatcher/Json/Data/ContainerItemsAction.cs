@@ -1,5 +1,3 @@
-using System.Data;
-
 using GenericSynthesisPatcher.Helpers;
 
 using Mutagen.Bethesda.Plugins;
@@ -10,8 +8,6 @@ using Mutagen.Bethesda.Skyrim;
 using Newtonsoft.Json;
 
 using Noggog;
-
-using static Mutagen.Bethesda.Skyrim.Furniture;
 
 namespace GenericSynthesisPatcher.Json.Data
 {

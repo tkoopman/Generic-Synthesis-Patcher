@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 
 using GenericSynthesisPatcher.Json.Converters;
-using GenericSynthesisPatcher.Json.Data;
 
 using Newtonsoft.Json;
 

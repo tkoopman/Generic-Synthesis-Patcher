@@ -1,5 +1,3 @@
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
-
 namespace GenericSynthesisPatcher.Json.Data
 {
     public enum ForwardTypes

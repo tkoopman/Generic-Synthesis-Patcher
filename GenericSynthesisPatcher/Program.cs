@@ -1,6 +1,5 @@
 using System.Collections.Frozen;
 using System.Data;
-using System.Text.RegularExpressions;
 
 using EnumsNET;
 
@@ -10,7 +9,6 @@ using GenericSynthesisPatcher.Json.Data;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
-using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -19,8 +17,6 @@ using Mutagen.Bethesda.Synthesis;
 using Newtonsoft.Json;
 
 using Noggog;
-
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher
 {

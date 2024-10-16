@@ -1,15 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using GenericSynthesisPatcher.Json.Data;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
-using Noggog;
 
 namespace GenericSynthesisPatcher.Json.Converters
 {
