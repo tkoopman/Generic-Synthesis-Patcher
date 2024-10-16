@@ -193,7 +193,7 @@
         }
       },
       {
-        "formID": [ "029DA9:Skyrim.esm" ],
+        "formID": "029DA9:Skyrim.esm",
         "fill": {
           "flags": [
             "-IgnoreAssault",
@@ -204,8 +204,8 @@
         }
       },
       {
-        "formID": [ "01DC62:Dragonborn.esm" ],
-        "fill": { "flags": [ "IgnoreWerewolf" ] }
+        "formID": "01DC62:Dragonborn.esm",
+        "fill": { "flags": "IgnoreWerewolf" }
       }
     ]
   }

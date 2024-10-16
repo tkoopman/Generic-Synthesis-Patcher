@@ -1,6 +1,6 @@
-# Rule Fields
+# Rule Properties
 
-These are case insensitive.
+These are case insensitive. If a property accepts multiple values as an array, you do not need to use the [ ] to denote an array if only entering a single value.
 
 > **<font color="green">Priority</font>**: All matching rules will be applied to a record in ascending priority. Default: 0  
 Matching priority will be applied in random order so be carful if multiple rules edit the same fields on a record.
@@ -32,13 +32,12 @@ Good for example if you want to forward one patches changes, but only if a later
 Checks are per field, meaning one action may fail to apply due to the field it updating not matching, but other action on the same record applies as it does match.  
 NOTE: Just because multiple fields are listed on a single fill/forward action, they are all still processed separately. No need to split into different rules.
 
-# Advanced Field Filters
+# Advanced Filters
 
 These filters can be applied in addition to the basic filters. Advanced filters should work for any [supported field](Fields.md).  
 In general they follow the following rules:
 
 - If you use one of these filters, any record that doesn't contain that field will never match the rule.
-- While for the other filters above you could include a single entry without surrounding it with [ ]. For Advanced Field Filters always use [ ] even for single values.
 - &/|/^ Operator: You can change the default operation using a prefix on the field name. Default is OR (|). Can set to And (&) or XOR (^).
 - +/-: You can add a prefix to these to say if they must be included or excluded from filter. Example below won't match any record with keyword Survival_ArmorCold.
 - Include (+) and OR (|) prefixes are default so no need to enter them however, can be used for unforeseen cases where the value you want to enter may start with a prefix value. Like trying to enter a negative number ("+-123" to allowed -123).
@@ -48,7 +47,7 @@ In general they follow the following rules:
 ## Example
 
     ... Single Value Match
-    "Matches": { "Keywords": [ "ArmorMaterialLeather" ] },
+    "Matches": { "Keywords": "ArmorMaterialLeather" },
     ... OR Match with exclude Example
     "Matches": { "Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide", "-WAF_ClothingCloak" ] },
     ... AND Match Example
@@ -56,9 +55,7 @@ In general they follow the following rules:
 
 # Actions
 
-At least 1 action must exist. If both provided then both will be applied to matching records.  
-**NOTE:** While for the most filters above you could either include a single entry without surrounding it with [ ]. For actions if multiple options possible you must always use [ ] even for single values in multi-valueable fields.  
-Single value fields should **not** include [ ].
+At least 1 action must exist. If both provided then both will be applied to matching records.
 
 >**<font color="green">Fill</font>**: This will just apply the changes to all listed fields. The most basic of action.  
 If field selected is a <font color="blue">list</font> then you must provide value as a list surrounded by [ ]. All other fields do not use [ ].  
@@ -102,10 +99,10 @@ Below example would make sure any cloaks that "Cloaks - Dawnguard.esp" added to 
 However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:Dawnguard.esm] that the original Cloaks.esp removed would not be forwarded.
 
         {
-            "types": [ "Outfit" ],
+            "types": "Outfit",
             "Masters": "Dawnguard.esm",
             "ForwardType": "SelfMasterOnly",
-            "Forward": { "Cloaks - Dawnguard.esp": [ "Items" ] }
+            "Forward": { "Cloaks - Dawnguard.esp": "Items" }
         }
 
 - **<font color="green">DefaultThenSelfMasterOnly</font>**: This combines the two options above. This requires ForwardIndexedByField = true.  
@@ -154,7 +151,7 @@ SingleMatch not necessary in this example, as only a single rule would match any
     [
       {
         "Types": "Faction",
-        "Masters": [ "Skyrim.esm" ],
+        "Masters": "Skyrim.esm",
 	    "SingleMatch": true,
         "Rules": [
           {

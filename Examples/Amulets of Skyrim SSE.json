@@ -6,7 +6,7 @@
     "Rules": [
       {
         "formID": "0146BD:Dawnguard.esm",
-        "Fill": { "items": [ "0CC848:Skyrim.esm" ] }
+        "Fill": { "items": "0CC848:Skyrim.esm" }
       },
       {
         "formID": [
@@ -21,46 +21,47 @@
           "0146BB:Dawnguard.esm",
           "0146BC:Dawnguard.esm"
         ],
-        "Fill": { "items": [ "002F9B:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "002F9B:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "0195AE:Dawnguard.esm",
           "03CA5B:Dawnguard.esm"
         ],
-        "Fill": { "items": [ "014FC5:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "014FC5:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "0292AF:Dawnguard.esm",
           "02BF43:Dawnguard.esm"
         ],
-        "Fill": { "items": [ "03DF3F:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "03DF3F:SL01AmuletsSkyrim.esp" }
       }
     ]
   },
   {
     "Types": "Outfit",
     "Masters": "Skyrim.esm",
+    "SingleMatch": true,
     "Rules": [
       {
         "formID": "0341FD:Skyrim.esm",
-        "Fill": { "items": [ "03FFCF:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "03FFCF:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "0FF282:Skyrim.esm",
-        "Fill": { "items": [ "0012DD:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012DD:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "0FCE7A:Skyrim.esm",
-        "Fill": { "items": [ "0012DE:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012DE:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "0853C5:Skyrim.esm",
           "0EF943:Skyrim.esm"
         ],
-        "Fill": { "items": [ "0012DB:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012DB:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
@@ -81,7 +82,7 @@
           "0F3E7D:Skyrim.esm",
           "0267EF:Skyrim.esm"
         ],
-        "Fill": { "items": [ "002313:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "002313:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
@@ -91,18 +92,18 @@
           "0ABF44:Skyrim.esm",
           "0ABF45:Skyrim.esm"
         ],
-        "Fill": { "items": [ "004367:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "004367:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "0874FA:Skyrim.esm",
-        "Fill": { "items": [ "000D64:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "000D64:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "063F3B:Skyrim.esm",
           "035F4E:Skyrim.esm"
         ],
-        "Fill": { "items": [ "0012D8:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012D8:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
@@ -110,7 +111,7 @@
           "047382:Skyrim.esm",
           "0F62F1:Skyrim.esm"
         ],
-        "Fill": { "items": [ "0012D7:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012D7:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
@@ -127,25 +128,25 @@
           "1040F9:Skyrim.esm",
           "10FE82:Skyrim.esm"
         ],
-        "Fill": { "items": [ "0038A0:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0038A0:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "0ABF57:Skyrim.esm",
           "0ABF58:Skyrim.esm"
         ],
-        "Fill": { "items": [ "005391:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "005391:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "07D97E:Skyrim.esm",
           "02B0FB:Skyrim.esm"
         ],
-        "Fill": { "items": [ "00DABE:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "00DABE:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "047380:Skyrim.esm",
-        "Fill": { "items": [ "0012DA:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012DA:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
@@ -155,29 +156,29 @@
           "104F3F:Skyrim.esm",
           "10B2EF:Skyrim.esm"
         ],
-        "Fill": { "items": [ "0012DC:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012DC:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "0D7885:Skyrim.esm",
-        "Fill": { "items": [ "0012D9:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "0012D9:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": "043BD9:Skyrim.esm",
-        "Fill": { "items": [ "03FA2F:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "03FA2F:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "0D5EB4:Skyrim.esm",
           "0D5EB5:Skyrim.esm"
         ],
-        "Fill": { "items": [ "01720A:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "01720A:SL01AmuletsSkyrim.esp" }
       },
       {
         "formID": [
           "039F22:Skyrim.esm",
           "06A158:Skyrim.esm"
         ],
-        "Fill": { "items": [ "00DABF:SL01AmuletsSkyrim.esp" ] }
+        "Fill": { "items": "00DABF:SL01AmuletsSkyrim.esp" }
       }
     ]
   }

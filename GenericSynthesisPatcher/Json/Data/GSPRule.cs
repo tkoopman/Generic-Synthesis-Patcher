@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -227,19 +228,11 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (values.TryGetValue(key, out var jsonValue))
             {
-                T? o = default;
-                if (jsonValue.Type != JTokenType.Null)
-                {
-                    if (typeof(T) == typeof(string))
-                    {
-                        o = (T)(object)(jsonValue.Type == JTokenType.String ? jsonValue.ToString()
-                        : throw new InvalidOperationException($"Invalid value type returned for {key.Key}"));
-                    }
-                    else if (JsonConvert.DeserializeObject<T>(jsonValue.ToString(), Global.SerializerSettings) is T value2)
-                    {
-                        o = value2;
-                    }
-                }
+                var o = jsonValue.Type == JTokenType.Null ? default
+                      : jsonValue.Type != JTokenType.String ? (T?)JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(jsonValue.CreateReader())
+                      : typeof(T) == typeof(string) ? (T?)(object)jsonValue.ToString()
+                      : typeof(T).IsAssignableTo(typeof(IEnumerable)) ? (T?)JsonConvert.DeserializeObject<T>($"[\"{jsonValue}\"]", Global.SerializerSettings)
+                      : throw new JsonSerializationException($"Failed to parse string into type {typeof(T).FullName}");
 
                 cache.Add(key, o);
                 return o;

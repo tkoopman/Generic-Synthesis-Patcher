@@ -1,6 +1,6 @@
 [
   {
-    "types": [ "WRLD" ],
+    "types": "WRLD",
     "Masters": [ "Skyrim.esm", "Dawnguard.esm", "Dragonborn.esm" ],
     "OnlyIfDefault": true,
     "Forward": { "Water for ENB (Shades of Skyrim).esp": [ "Water", "LodWater" ] }
