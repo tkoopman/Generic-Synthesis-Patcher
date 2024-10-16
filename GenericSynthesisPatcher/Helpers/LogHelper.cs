@@ -1,13 +1,13 @@
 using System.Data;
 using System.Text.RegularExpressions;
 
+using GenericSynthesisPatcher.Json.Data;
+
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
-
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
 
 namespace GenericSynthesisPatcher.Helpers
 {
@@ -29,7 +29,7 @@ namespace GenericSynthesisPatcher.Helpers
                 Log(logLevel, context.Record, $"{context.ModKey.FileName}: {log}", code);
         }
 
-        public static void Log ( LogLevel logLevel, IMajorRecordGetter record, string log, int code ) => Log(logLevel, $"{GetGSPRuleTypeAsString(record)} {record.FormKey}: {log}", code);
+        public static void Log ( LogLevel logLevel, IMajorRecordGetter record, string log, int code ) => Log(logLevel, $"{GSPBase.GetGSPRuleTypeAsString(record)} {record.FormKey}: {log}", code);
 
         public static void Log ( LogLevel logLevel, string log, int code )
         {

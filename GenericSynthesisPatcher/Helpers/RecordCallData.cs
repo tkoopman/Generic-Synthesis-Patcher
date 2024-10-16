@@ -1,6 +1,8 @@
 using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;

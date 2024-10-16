@@ -1,4 +1,5 @@
 using GenericSynthesisPatcher.Json.Converters;
+using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins;
 
