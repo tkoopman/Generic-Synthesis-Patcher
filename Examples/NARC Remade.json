@@ -8,6 +8,7 @@
       "BSHeartland.esm",
       "ForgottenCity.esp"
     ],
+    "SingleMatch": true,
     "Rules": [
       {
         "formID": [

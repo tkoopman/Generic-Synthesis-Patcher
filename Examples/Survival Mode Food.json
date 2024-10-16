@@ -1,6 +1,7 @@
 [
   {
     "Types": "Ingestible",
+    "SingleMatch": true,
     "Rules": [
       {
         "formID": [

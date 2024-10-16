@@ -27,6 +27,12 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonConverter(typeof(SingleOrArrayConverter<GSPRule>))]
         public List<GSPRule> Rules { get; set; } = [];
 
+        /// <summary>
+        /// If true processing will stop after finding a single matched rule for a record.
+        /// </summary>
+        [JsonProperty(PropertyName = "SingleMatch")]
+        public bool SingleMatch { get; set; } = false;
+
         public override bool Validate ()
         {
             var AllTypes = RecordTypes.NONE;

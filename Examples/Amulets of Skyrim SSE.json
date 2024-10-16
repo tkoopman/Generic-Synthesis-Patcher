@@ -2,6 +2,7 @@
   {
     "Types": "Outfit",
     "Masters": "Dawnguard.esm",
+    "SingleMatch": true,
     "Rules": [
       {
         "formID": "0146BD:Dawnguard.esm",

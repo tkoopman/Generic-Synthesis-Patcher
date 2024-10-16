@@ -189,9 +189,8 @@ namespace GenericSynthesisPatcher
             if (Rules.Count == 0)
                 return;
 
-            int total = 0, updated = 0, changed = 0;
-            // subTotals values = (Total, Matched, Updated)
-            SortedDictionary<RecordTypes, (int, int, int)> subTotals = [];
+            // subTotals values = (Total, Matched, Updated, Changes)
+            SortedDictionary<RecordTypes, Counts> subTotals = [];
 
             while (EnabledTypes != RecordTypes.NONE)
             {
@@ -280,40 +279,53 @@ namespace GenericSynthesisPatcher
                 foreach (var context in ProcessTypeRecords)
                 {
                     var recordType = GSPRule.GetGSPRuleType(context.Record);
-                    if (!subTotals.ContainsKey(recordType))
-                        subTotals.Add(recordType, (0, 0, 0));
-                    subTotals[recordType] = (subTotals[recordType].Item1 + 1, subTotals[recordType].Item2, subTotals[recordType].Item3);
+                    if (subTotals.TryGetValue(recordType, out var counts))
+                    {
+                        counts.Total++;
+                    }
+                    else
+                    {
+                        counts = new Counts(total: 1);
+                        subTotals.Add(recordType, counts);
+                    }
 
-                    total++;
                     foreach (var rule in Rules)
                     {
                         if (rule.Matches(context))
                         {
                             if (rule is GSPRule gspRule)
                             {
-                                subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2 + 1, subTotals[recordType].Item3);
-                                int changes = ProcessRule(context, gspRule);
-                                if (changes > 0)
+                                int changed = ProcessRule(context, gspRule);
+                                if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                 {
-                                    changed += changes;
-                                    subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2, subTotals[recordType].Item3 + 1);
-                                    updated++;
+                                    counts.Matched++;
+                                    if (changed > 0)
+                                        counts.Updated++;
+                                    counts.Changes += changed;
                                 }
                             }
                             else if (rule is GSPGroup group)
                             {
                                 LogHelper.Log(LogLevel.Trace, context, $"Matched group. Processing Rules.", 0x34);
+                                int count = 0;
                                 foreach (var groupRule in group.Rules)
                                 {
+                                    count++;
                                     if (groupRule.Matches(context))
                                     {
-                                        subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2 + 1, subTotals[recordType].Item3);
-                                        int changes = ProcessRule(context, groupRule);
-                                        if (changes > 0)
+                                        int changed = ProcessRule(context, groupRule);
+                                        if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                         {
-                                            changed += changes;
-                                            subTotals[recordType] = (subTotals[recordType].Item1, subTotals[recordType].Item2, subTotals[recordType].Item3 + 1);
-                                            updated++;
+                                            counts.Matched++;
+                                            if (changed > 0)
+                                                counts.Updated++;
+                                            counts.Changes += changed;
+
+                                            if (group.SingleMatch)
+                                            {
+                                                LogHelper.Log(LogLevel.Trace, context, $"Skipping remaining rules in group due to SingleMatch. Checked {count}/{group.Rules.Count}", 0x35);
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -323,20 +335,23 @@ namespace GenericSynthesisPatcher
                 }
             }
 
-            LogHelper.Log(LogLevel.Information, $"Completed. Applied {changed:N0} changes over {updated:N0} updated records.", ClassLogPrefix | 0x33);
+            LogHelper.Log(LogLevel.Information, $"Completed", ClassLogPrefix | 0x33);
 
             Console.WriteLine($"Record Type Totals");
-            Console.WriteLine($"{"Type",-10} {"Total",10} {"Matched",10} {"Updated",10}");
+            Console.WriteLine($"{"Type",-10} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");
 
-            foreach (var t in from t in subTotals
-                              where t.Key != RecordTypes.UNKNOWN
-                              select t)
+            var totals = new Counts();
+
+            foreach (var (key, subTotal) in subTotals)
             {
-                Console.WriteLine($"{Enum.GetName(t.Key),-10} {t.Value.Item1,10:N0} {t.Value.Item2,10:N0} {t.Value.Item3,10:N0}");
+                Console.WriteLine($"{Enum.GetName(key),-10} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
+                totals.Total += subTotal.Total;
+                totals.Matched += subTotal.Matched;
+                totals.Updated += subTotal.Updated;
+                totals.Changes += subTotal.Changes;
             }
 
-            if (subTotals.TryGetValue(RecordTypes.UNKNOWN, out var value))
-                Console.WriteLine($"{Enum.GetName(RecordTypes.UNKNOWN),-10} {value.Item1,10:N0} {value.Item2,10:N0} {value.Item3,10:N0}");
+            Console.WriteLine($"{"Totals",-10} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
         }
 
         private static List<GSPBase> LoadRules ()
@@ -420,15 +435,25 @@ namespace GenericSynthesisPatcher
 
         private static int ProcessRule ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule )
         {
-            int changes = 0;
+            int changes = -1;
 
             var origin = rule.OnlyIfDefault ? Mod.FindOrigin(context) : null;
 
             foreach (var x in rule.fillValues)
-                changes += FillRecord(context, origin, rule, x.Key);
+            {
+                int changed = FillRecord(context, origin, rule, x.Key);
+
+                if (changed >= 0)
+                    changes = (changes == -1) ? changed : changes + changed;
+            }
 
             foreach (var x in rule.forwardValues)
-                changes += ForwardRecord(context, origin, rule, x.Key);
+            {
+                int changed = ForwardRecord(context, origin, rule, x.Key);
+
+                if (changed >= 0)
+                    changes = (changes == -1) ? changed : changes + changed;
+            }
 
             return changes;
         }
