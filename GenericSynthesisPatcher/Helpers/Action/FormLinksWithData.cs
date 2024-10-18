@@ -15,6 +15,44 @@ namespace GenericSynthesisPatcher.Helpers.Action
         where T : class, IFormLinksWithData<T, TMajor>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
+        private const int ClassLogPrefix = 0x700;
+
+        public new static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        {
+            if (context.Record is IFormLinkContainerGetter)
+            {
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curList))
+                    return -1;
+
+                int changes = 0;
+
+                foreach (var action in T.GetFillValueAs(rule, valueKey) ?? [])
+                {
+                    var e = action.Find(curList);
+
+                    if (e != null && (action.FormKey.Operation == ListLogic.DEL || !action.DataEquals(e)))
+                    {
+                        _ = T.Remove(context, ref patchedRecord, e);
+                        changes++;
+                    }
+
+                    if (action.FormKey.Operation == ListLogic.ADD && (e == null || (e != null && !action.DataEquals(e))))
+                    {
+                        _ = action.Add(context, ref patchedRecord);
+                        changes++;
+                    }
+                }
+
+                if (changes > 0)
+                    LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{changes} change(s).", ClassLogPrefix | 0x13);
+
+                return changes;
+            }
+
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name, ClassLogPrefix | 0x14);
+            return -1;
+        }
+
         /// <summary>
         /// Only checks the FormKeys not the Data
         /// </summary>

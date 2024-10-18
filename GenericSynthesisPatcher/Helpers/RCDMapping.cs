@@ -31,6 +31,7 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly RecordCallData RcdBlockBashImpact = new RecordCallData<FormLink<IImpactDataSetGetter>>("BlockBashImpact");
         private static readonly RecordCallData RcdBookText = new RecordCallData<Generic<string>>("BookText");
         private static readonly RecordCallData RcdCastDuration = new RecordCallData<Generic<ushort>>("CastDuration");
+        private static readonly RecordCallData RcdCastType = new RecordCallData<Enums>("CastType");
         private static readonly RecordCallData RcdChargeTime = new RecordCallData<Generic<ushort>>("ChargeTime");
         private static readonly RecordCallData RcdClass = new RecordCallData<FormLink<IClassGetter>>("Class");
         private static readonly RecordCallData RcdClimate = new RecordCallData<FormLink<IClimateGetter>>("Climate");
@@ -38,7 +39,7 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly RecordCallData RcdCombatOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("CombatOverridePackageList");
         private static readonly RecordCallData RcdCombatStyle = new RecordCallData<FormLink<ICombatStyleGetter>>("CombatStyle");
         private static readonly RecordCallData RcdConsumeSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("ConsumeSound");
-        private static readonly RecordCallData RcdContainerItems = new RecordCallData<FormLinksWithData<ContainerItemsAction>>("Items");
+        private static readonly RecordCallData RcdContainerItems = new RecordCallData<FormLinksWithData<ContainerItemsAction, IItemGetter>>("Items");
         private static readonly RecordCallData RcdCrimeFaction = new RecordCallData<FormLink<IFactionGetter>>("CrimeFaction");
         private static readonly RecordCallData RcdDamage = new RecordCallData<Generic<float>>("Damage");
         private static readonly RecordCallData RcdDeathItem = new RecordCallData<FormLink<ILeveledItemGetter>>("DeathItem");
@@ -46,7 +47,7 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly RecordCallData RcdDefaultPackageList = new RecordCallData<FormLink<IFormListGetter>>("DefaultPackageList");
         private static readonly RecordCallData RcdDescription = new RecordCallData<Generic<string>>("Description");
         private static readonly RecordCallData RcdDistantLodMultiplier = new RecordCallData<Generic<float>>("DistantLodMultiplier");
-        private static readonly RecordCallData RcdEffects = new RecordCallData<FormLinksWithData<EffectsAction>>("Effects");
+        private static readonly RecordCallData RcdEffects = new RecordCallData<FormLinksWithData<EffectsAction, IMagicEffectGetter>>("Effects");
         private static readonly RecordCallData RcdEnchantmentAmount = new RecordCallData<Generic<ushort>>("EnchantmentAmount");
         private static readonly RecordCallData RcdEncounterZone = new RecordCallData<FormLink<IEncounterZoneGetter>>("EncounterZone");
         private static readonly RecordCallData RcdEquipmentType = new RecordCallData<FormLink<IEquipTypeGetter>>("EquipmentType");
@@ -98,10 +99,13 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly RecordCallData RcdShortName = new RecordCallData<Generic<string>>("ShortName");
         private static readonly RecordCallData RcdSkyAndWeatherFromRegion = new RecordCallData<FormLink<IRegionGetter>>("SkyAndWeatherFromRegion");
         private static readonly RecordCallData RcdSleepingOutfit = new RecordCallData<FormLink<IOutfitGetter>>("SleepingOutfit");
+        private static readonly RecordCallData RcdSoundLevel = new RecordCallData<Enums>("SoundLevel");
         private static readonly RecordCallData RcdSpectatorOverridePackageList = new RecordCallData<FormLink<IFormListGetter>>("SpectatorOverridePackageList");
         private static readonly RecordCallData RcdStolenGoodsContainer = new RecordCallData<FormLink<IPlacedObjectGetter>>("StolenGoodsContainer");
+        private static readonly RecordCallData RcdTargetType = new RecordCallData<Enums>("TargetType");
         private static readonly RecordCallData RcdTemplate = new RecordCallData<FormLink<INpcSpawnGetter>>("Template");
         private static readonly RecordCallData RcdTemplateArmor = new RecordCallData<FormLink<IArmorGetter>>("TemplateArmor");
+        private static readonly RecordCallData RcdType = new RecordCallData<Enums>("Type");
         private static readonly RecordCallData RcdUnequipSound = new RecordCallData<FormLink<ISoundDescriptorGetter>>("UnequipSound");
         private static readonly RecordCallData RcdValue = new RecordCallData<Generic<uint>>("Value");
         private static readonly RecordCallData RcdVendorBuySellList = new RecordCallData<FormLink<IFormListGetter>>("VendorBuySellList");
@@ -157,6 +161,7 @@ namespace GenericSynthesisPatcher.Helpers
                 { new RecordCallKey("BMCT"                               , typeof(IArmorGetter)         ) , RcdRagdollConstraintTemplate          },
                 { new RecordCallKey("BookText"                           , typeof(IBookGetter)          ) , RcdBookText                           },
                 { new RecordCallKey("CastDuration"                       , typeof(IScrollGetter)        ) , RcdCastDuration                       },
+                { new RecordCallKey("CastType"                           , typeof(IScrollGetter)        ) , RcdCastType                           },
                 { new RecordCallKey("ChargeTime"                         , typeof(IScrollGetter)        ) , RcdChargeTime                         },
                 { new RecordCallKey("Class"                              , typeof(INpcGetter)           ) , RcdClass                              },
                 { new RecordCallKey("Climate"                            , typeof(IWorldspaceGetter)    ) , RcdClimate                            },
@@ -251,6 +256,7 @@ namespace GenericSynthesisPatcher.Helpers
                 { new RecordCallKey("NAM6"                               , typeof(INpcGetter)           ) , RcdHeight                             },
                 { new RecordCallKey("NAM7"                               , typeof(INpcGetter)           ) , RcdWeight                             },
                 { new RecordCallKey("NAM7"                               , typeof(IWeaponGetter)        ) , RcdAttackLoopSound                    },
+                { new RecordCallKey("NAM8"                               , typeof(INpcGetter)           ) , RcdSoundLevel                         },
                 { new RecordCallKey("NAM8"                               , typeof(IWeaponGetter)        ) , RcdUnequipSound                       },
                 { new RecordCallKey("NAM9"                               , typeof(IWeaponGetter)        ) , RcdEquipSound                         },
                 { new RecordCallKey("NAMA"                               , typeof(IWorldspaceGetter)    ) , RcdDistantLodMultiplier               },
@@ -283,16 +289,20 @@ namespace GenericSynthesisPatcher.Helpers
                 { new RecordCallKey("SNAM"                               , typeof(IContainerGetter)     ) , RcdOpenSound                          },
                 { new RecordCallKey("SNAM"                               , typeof(IWeaponGetter)        ) , RcdAttackSound                        },
                 { new RecordCallKey("SOFT"                               , typeof(INpcGetter)           ) , RcdSleepingOutfit                     },
+                { new RecordCallKey("SoundLevel"                         , typeof(INpcGetter)           ) , RcdSoundLevel                         },
                 { new RecordCallKey("SpectatorOverridePackageList"       , typeof(INpcGetter)           ) , RcdSpectatorOverridePackageList       },
                 { new RecordCallKey("SPLO"                               , typeof(INpcGetter)           ) , RcdActorEffect                        },
                 { new RecordCallKey("SPOR"                               , typeof(INpcGetter)           ) , RcdSpectatorOverridePackageList       },
                 { new RecordCallKey("STOL"                               , typeof(IFactionGetter)       ) , RcdStolenGoodsContainer               },
                 { new RecordCallKey("StolenGoodsContainer"               , typeof(IFactionGetter)       ) , RcdStolenGoodsContainer               },
+                { new RecordCallKey("TargetType"                         , typeof(IScrollGetter)        ) , RcdTargetType                         },
                 { new RecordCallKey("Template"                           , typeof(INpcGetter)           ) , RcdTemplate                           },
                 { new RecordCallKey("TemplateArmor"                      , typeof(IArmorGetter)         ) , RcdTemplateArmor                      },
                 { new RecordCallKey("TNAM"                               , typeof(IArmorGetter)         ) , RcdTemplateArmor                      },
                 { new RecordCallKey("TNAM"                               , typeof(IWeaponGetter)        ) , RcdAttackFailSound                    },
                 { new RecordCallKey("TPLT"                               , typeof(INpcGetter)           ) , RcdTemplate                           },
+                { new RecordCallKey("Type"                               , typeof(IBookGetter)          ) , RcdType                               },
+                { new RecordCallKey("Type"                               , typeof(IScrollGetter)        ) , RcdType                               },
                 { new RecordCallKey("UNAM"                               , typeof(IWeaponGetter)        ) , RcdIdleSound                          },
                 { new RecordCallKey("UnequipSound"                       , typeof(IWeaponGetter)        ) , RcdUnequipSound                       },
                 { new RecordCallKey("Value"                              , typeof(IWeightValueGetter)   ) , RcdValue                              },

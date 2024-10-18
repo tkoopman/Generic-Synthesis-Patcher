@@ -12,7 +12,7 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public class ContainerItemsAction ( FormKeyListOperation formKey, int count ) : IFormLinksWithData<ContainerItemsAction>
+    public class ContainerItemsAction ( FormKeyListOperation<IItemGetter> formKey, int count ) : IFormLinksWithData<ContainerItemsAction, IItemGetter>
     {
         [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [System.ComponentModel.DefaultValue(1)]
@@ -21,7 +21,9 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogPrefix = 0x900;
 
         [JsonProperty(PropertyName = "Item", Required = Required.Always)]
-        public FormKeyListOperation FormKey { get; set; } = formKey;
+        public FormKeyListOperation<IItemGetter> FormKey { get; set; } = formKey;
+
+        FormKeyListOperation IFormLinksWithData<ContainerItemsAction>.FormKey => FormKey;
 
         public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {

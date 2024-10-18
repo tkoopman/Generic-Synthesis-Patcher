@@ -229,10 +229,10 @@ namespace GenericSynthesisPatcher.Json.Data
             if (values.TryGetValue(key, out var jsonValue))
             {
                 var o = jsonValue.Type == JTokenType.Null ? default
-                      : jsonValue.Type != JTokenType.String ? (T?)JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(jsonValue.CreateReader())
-                      : typeof(T) == typeof(string) ? (T?)(object)jsonValue.ToString()
-                      : typeof(T).IsAssignableTo(typeof(IEnumerable)) ? (T?)JsonConvert.DeserializeObject<T>($"[\"{jsonValue}\"]", Global.SerializerSettings)
-                      : throw new JsonSerializationException($"Failed to parse string into type {typeof(T).FullName}");
+                      : typeof(T) == typeof(string) && jsonValue.Type == JTokenType.String ? (T?)(object)jsonValue.ToString()
+                      : typeof(T).IsAssignableTo(typeof(IEnumerable)) && jsonValue.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(jsonValue).CreateReader())
+                      : jsonValue.Type != JTokenType.String ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(jsonValue.CreateReader())
+                      : throw new JsonSerializationException($"Failed to parse string into type {typeof(T).FullName} - {jsonValue.Type}");
 
                 cache.Add(key, o);
                 return o;

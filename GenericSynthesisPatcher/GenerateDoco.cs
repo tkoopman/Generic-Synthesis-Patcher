@@ -93,7 +93,7 @@ namespace GenericSynthesisPatcher
                 List<string[]> Properties = [];
                 foreach (var prop in rego.GetterType.GetProperties())
                 {
-                    if (IgnoreProperty.Contains(prop.Name, StringComparer.OrdinalIgnoreCase))
+                    if (IgnoreProperty.Contains(prop.Name))
                         continue;
 
                     // Check for matching RCD
@@ -195,6 +195,12 @@ namespace GenericSynthesisPatcher
                         desc = $"Flags ({string.Join(", ", flags)})";
                         exam = (flags.Length > 1) ? $"\"{names[0]}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{names[0]}\": \"{flags.First()}\"";
                     }
+                    else if (rcdType.IsAssignableTo(typeof(Enums)))
+                    {
+                        string[] values = Enum.GetNames(rego.GetterType.GetProperty(rcd.PropertyName)?.PropertyType ?? throw new Exception("Failed to get Enum values"));
+                        desc = $"Possible values ({string.Join(", ", values)})";
+                        exam = $"\"{names[0]}\": \"{values.First()}\"";
+                    }
 
                     Properties.Add([names[0], string.Join(';', names[1..]), desc, exam]);
                 }
@@ -236,6 +242,8 @@ namespace GenericSynthesisPatcher
                     string easy = "";
                     if (Implemented.TryGetValue((pt, pst), out string? s))
                         easy = s;
+                    else if (pt.IsEnum)
+                        easy = "Enum";
 
                     PrintTableRow([recordTypes[k].First(), p.Name, pt.Name, pst?.Name ?? "", easy], NICols);
                 }

@@ -75,6 +75,7 @@ You can use either the full field name or Alt name when available.
 | Name                           | FULL           | A string value                 | "Name": "Hello"                |
 | PickUpSound                    | YNAM           | Form Key or Editor ID          |                                |
 | PutDownSound                   | ZNAM           | Form Key or Editor ID          |                                |
+| Type                           |                | Possible values (BookOrTome, NoteOrScroll) | "Type": "BookOrTome"           |
 | Value                          |                | A numeric value                | "Value": 7                     |
 | Weight                         |                | A decimal value                | "Weight": 3.14                 |
 
@@ -195,6 +196,7 @@ You can use either the full field name or Alt name when available.
 | Race                           | RNAM           | Form Key or Editor ID          |                                |
 | ShortName                      | ONAM           | A string value                 | "ShortName": "Hello"           |
 | SleepingOutfit                 | SOFT           | Form Key or Editor ID          |                                |
+| SoundLevel                     | NAM8           | Possible values (Loud, Normal, Silent, VeryLoud) | "SoundLevel": "Loud"           |
 | SpectatorOverridePackageList   | SPOR           | Form Key or Editor ID          |                                |
 | Template                       | TPLT           | Form Key or Editor ID          |                                |
 | Voice                          | VTCK           | Form Key or Editor ID          |                                |
@@ -213,6 +215,7 @@ You can use either the full field name or Alt name when available.
 | ------------------------------ | -------------- | ------------------------------ | ------------------------------ |
 | BaseCost                       |                | A numeric value                | "BaseCost": 7                  |
 | CastDuration                   |                | A numeric value                | "CastDuration": 7              |
+| CastType                       |                | Possible values (ConstantEffect, FireAndForget, Concentration) | "CastType": "ConstantEffect"   |
 | ChargeTime                     |                | A numeric value                | "ChargeTime": 7                |
 | Description                    | DESC           | A string value                 | "Description": "Hello"         |
 | Effects                        |                | JSON objects containing effect Form Key/Editor ID and effect data | "Effects": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 } |
@@ -224,6 +227,8 @@ You can use either the full field name or Alt name when available.
 | PickUpSound                    | YNAM           | Form Key or Editor ID          |                                |
 | PutDownSound                   | ZNAM           | Form Key or Editor ID          |                                |
 | Range                          |                | A numeric value                | "Range": 7                     |
+| TargetType                     |                | Possible values (Self, Touch, Aimed, TargetActor, TargetLocation) | "TargetType": "Self"           |
+| Type                           |                | Possible values (Spell, Disease, Power, LesserPower, Ability, Poison, Addiction, Voice) | "Type": "Spell"                |
 | Value                          |                | A numeric value                | "Value": 7                     |
 | Weight                         |                | A decimal value                | "Weight": 3.14                 |
 
