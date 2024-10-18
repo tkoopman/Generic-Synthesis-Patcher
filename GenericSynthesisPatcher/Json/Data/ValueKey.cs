@@ -16,7 +16,7 @@ namespace GenericSynthesisPatcher.Json.Data
         public ValueKey ( string key )
         {
             var operationValue = new FilterOperation(key);
-            Key = operationValue.Value.ToLower();
+            Key = operationValue.Value;
             Operation = operationValue.Operation;
         }
 
@@ -27,8 +27,8 @@ namespace GenericSynthesisPatcher.Json.Data
         public override bool Equals ( [NotNullWhen(true)] object? obj )
                                     => obj is ValueKey key
                                     && Operation == key.Operation
-                                    && Key.Equals(key.Key);
+                                    && Key.Equals(key.Key, StringComparison.OrdinalIgnoreCase);
 
-        public override readonly int GetHashCode () => HashCode.Combine(Operation, Key);
+        public override readonly int GetHashCode () => HashCode.Combine(Operation, Key.GetHashCode(StringComparison.OrdinalIgnoreCase));
     }
 }

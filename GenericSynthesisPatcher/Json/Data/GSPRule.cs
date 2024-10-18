@@ -177,8 +177,7 @@ namespace GenericSynthesisPatcher.Json.Data
                     return false;
                 }
 
-                mods = value.Value.Item1;
-                fields = value.Value.Item2;
+                (mods, fields) = value.Value;
 
                 return true;
             }
@@ -223,6 +222,7 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             if (cache.TryGetValue(key, out object? value))
             {
+                LogHelper.Log(LogLevel.Trace, $"Got value for {key.Key} from cache.", ClassLogPrefix | 0x21);
                 return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
             }
 
@@ -319,7 +319,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
                 if (rcd != null && !rcd.Matches(context.Record, this, x.Key, rcd))
                 {
-                    LogHelper.Log(LogLevel.Trace, context, $"Failed on match. Field: {x.Key}", ClassLogPrefix | 0x32);
+                    LogHelper.Log(LogLevel.Trace, context, $"Failed on match. Field: {x.Key.Key} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}", ClassLogPrefix | 0x32);
                     return false;
                 }
             }

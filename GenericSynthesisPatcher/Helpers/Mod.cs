@@ -1,8 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Logging;
 
+using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -10,7 +13,7 @@ using Mutagen.Bethesda.Strings;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    internal static class Mod
+    internal static partial class Mod
     {
         private const int ClassLogPrefix = 0x100;
 
@@ -25,6 +28,8 @@ namespace GenericSynthesisPatcher.Helpers
                     ? null
                     : o
                 : null;
+
+        public static string FixFormKey ( string input ) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
         public static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value ) => GetProperty<T>(fromRecord, propertyName, out value, out _);
 
@@ -75,6 +80,23 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
+        public static bool TryFindFormKey<TMajor> ( string input, out FormKey formKey, out IFormLinkGetter<TMajor>? link ) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+        {
+            link = null;
+            if (FormKey.TryFactory(FixFormKey(input), out formKey))
+                return true;
+
+            if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
+            {
+                formKey = record.FormKey;
+                link = record.ToLinkGetter();
+                LogHelper.Log(LogLevel.Trace, $"Mapped EditorID \"{input}\" to FormKey {formKey}", ClassLogPrefix | 0x61);
+                return true;
+            }
+
+            return false;
+        }
+
         private static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property )
         {
             value = default;
@@ -105,5 +127,8 @@ namespace GenericSynthesisPatcher.Helpers
 
             return true;
         }
+
+        [GeneratedRegex(@"^[0-9A-Fa-f]{1,6}")]
+        private static partial Regex RegexFormKey ();
     }
 }

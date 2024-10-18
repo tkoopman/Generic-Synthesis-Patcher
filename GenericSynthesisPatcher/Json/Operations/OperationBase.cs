@@ -6,16 +6,16 @@ namespace GenericSynthesisPatcher.Json.Operations
     {
         protected static (P, string, S) Split ( string input, IReadOnlyDictionary<char, P> prefixes, IReadOnlyDictionary<char, S> suffixes, bool allowLongPrefixes )
         {
-            var split = Split(input, prefixes, allowLongPrefixes);
+            (var p, string v) = Split(input, prefixes, allowLongPrefixes);
 
-            return suffixes.TryGetValue(split.Item2.Last(), out var suffix) ? (split.Item1, split.Item2[..^1], suffix) : (split.Item1, split.Item2, default);
+            return suffixes.TryGetValue(v.Last(), out var suffix) ? (p, v[..^1], suffix) : (p, v, default);
         }
 
         protected static (P, string, S) Split ( string input, IReadOnlyDictionary<char, P> prefixes, IReadOnlyDictionary<char, S> suffixes )
         {
-            var split = Split(input, prefixes);
+            (var p, string v) = Split(input, prefixes);
 
-            return suffixes.TryGetValue(split.Item2.Last(), out var suffix) ? (split.Item1, split.Item2[..^1], suffix) : (split.Item1, split.Item2, default);
+            return suffixes.TryGetValue(v.Last(), out var suffix) ? (p, v[..^1], suffix) : (p, v, default);
         }
     }
 

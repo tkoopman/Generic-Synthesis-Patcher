@@ -3,7 +3,6 @@ using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -30,14 +29,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 if (!Mod.GetProperty<IFormLinkGetter<T>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue))
                     return -1;
 
-                var newValue = rule.GetFillValueAs<FormKey>(valueKey);
-                if (!Global.State.LinkCache.TryResolve(newValue, typeof(T), out var link))
+                var formKey = rule.GetFillValueAs<FormKeyListOperation<T>>(valueKey);
+                if (formKey?.ToLinkGetter() == null)
                 {
-                    LogHelper.Log(LogLevel.Warning, context, rcd.PropertyName, $"Unable to find {newValue}", ClassLogPrefix | 0x12);
+                    LogHelper.Log(LogLevel.Warning, context, rcd.PropertyName, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", ClassLogPrefix | 0x12);
                     return -1;
                 }
 
-                return Fill(context, rcd, curValue, link.ToLinkGetter<T>(), ref patchedRecord);
+                return Fill(context, rcd, curValue, formKey.ToLinkGetter(), ref patchedRecord);
             }
 
             LogHelper.LogInvalidTypeFound(LogLevel.Debug, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name, ClassLogPrefix | 0x13);
@@ -65,7 +64,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (check is not IFormLinkContainerGetter)
                 return false;
 
-            var values = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+            var values = rule.GetMatchValueAs<List<FormKeyListOperation<T>>>(valueKey);
 
             if (!values.SafeAny())
                 return true;
@@ -75,7 +74,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             foreach (var v in values)
             {
-                if (curValue.FormKey.Equals(v.FormKey))
+                if (curValue.FormKey.Equals(v.Value))
                 {
                     if (v.Operation == ListLogic.NOT)
                         return false;

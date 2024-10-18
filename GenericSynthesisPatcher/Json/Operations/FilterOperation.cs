@@ -22,10 +22,9 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public FilterOperation ( string value )
         {
-            var split = Split(value, ValidPrefixes);
+            (Operation, string? v) = Split(value, ValidPrefixes);
 
-            Operation = split.Item1;
-            Value = (T)((IConvertible)split.Item2).ToType(typeof(T), null);
+            Value = (T)((IConvertible)v).ToType(typeof(T), null);
         }
 
         public override bool Equals ( object? obj )

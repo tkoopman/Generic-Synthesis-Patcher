@@ -11,6 +11,60 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
+    public class FormLinksWithData<T, TMajor> : FormLinksWithData<T>, IAction
+        where T : class, IFormLinksWithData<T, TMajor>
+        where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+    {
+        /// <summary>
+        /// Only checks the FormKeys not the Data
+        /// </summary>
+        public new static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
+        {
+            if (check is not IFormLinkContainerGetter)
+                return false;
+
+            var links = rule.GetMatchValueAs<List<FormKeyListOperation<TMajor>>>(valueKey);
+
+            if (!links.SafeAny())
+                return true;
+
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(check, rcd.PropertyName, out var curLinks) || !curLinks.SafeAny())
+                return !links.Any(k => k.Operation != ListLogic.NOT);
+
+            int matchedCount = 0;
+            int includesChecked = 0; // Only count !Neg
+
+            foreach (var link in links)
+            {
+                if (link.Operation != ListLogic.NOT)
+                    includesChecked++;
+
+                if (T.Find(curLinks, link.Value) != null)
+                {
+                    // Doesn't matter what overall Operation is we always fail on a NOT match
+                    if (link.Operation == ListLogic.NOT)
+                        return false;
+
+                    if (valueKey.Operation == FilterLogic.OR)
+                        return true;
+
+                    matchedCount++;
+                }
+                else if (link.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
+                {
+                    return false;
+                }
+            }
+
+            return valueKey.Operation switch
+            {
+                FilterLogic.AND => true,
+                FilterLogic.XOR => matchedCount == 1,
+                _ => includesChecked == 0 // OR
+            };
+        }
+    }
+
     public class FormLinksWithData<T> : IAction
         where T : class, IFormLinksWithData<T>
     {
@@ -147,7 +201,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (check is not IFormLinkContainerGetter)
                 return false;
 
-            var links = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+            var links = rule.GetMatchValueAs<List<FormKeyListOperation>>(valueKey);
 
             if (!links.SafeAny())
                 return true;
@@ -163,7 +217,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 if (link.Operation != ListLogic.NOT)
                     includesChecked++;
 
-                if (T.Find(curLinks, link.FormKey) != null)
+                if (T.Find(curLinks, link.Value) != null)
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
                     if (link.Operation == ListLogic.NOT)

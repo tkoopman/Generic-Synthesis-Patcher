@@ -32,9 +32,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return -1;
 
                 int changes = 0;
-                foreach (var actionKey in rule.GetFillValueAs<List<OperationFormLink>>(valueKey) ?? [])
+                foreach (var actionKey in rule.GetFillValueAs<List<FormKeyListOperation<T>>>(valueKey) ?? [])
                 {
-                    var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.FormKey) ?? false, null);
+                    var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.Value) ?? false, null);
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
@@ -46,7 +46,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                             return -1;
                         }
 
-                        if (!Global.State.LinkCache.TryResolve(actionKey.FormKey, typeof(T), out var link))
+                        if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(T), out var link))
                         {
                             LogHelper.Log(LogLevel.Warning, context, rcd.PropertyName, $"Unable to find {actionKey}", ClassLogPrefix | 0x16);
                             continue;
@@ -173,7 +173,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (check is not IFormLinkContainerGetter)
                 return false;
 
-            var links = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+            var links = rule.GetMatchValueAs<List<FormKeyListOperation<T>>>(valueKey);
 
             if (!links.SafeAny())
                 return true;
@@ -189,7 +189,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 if (link.Operation != ListLogic.NOT)
                     includesChecked++;
 
-                if (curLinks.Any(l => l.FormKey.Equals(link.FormKey)))
+                if (curLinks.Any(l => l.FormKey.Equals(link.Value)))
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
                     if (link.Operation == ListLogic.NOT)
