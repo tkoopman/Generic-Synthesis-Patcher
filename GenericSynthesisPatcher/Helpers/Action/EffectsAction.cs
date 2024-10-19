@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using System.Data;
 
-using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -10,31 +10,28 @@ using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
-using Noggog;
-
-using static GenericSynthesisPatcher.Json.Data.GSPRule;
-using static Mutagen.Bethesda.Skyrim.Furniture;
-
-namespace GenericSynthesisPatcher.Json.Data
+namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class IngestibleEffectsAction ( OperationFormLink formKey, int area, int duration, float magnitude ) : IFormLinksWithData<IngestibleEffectsAction>
+    public class EffectsAction ( FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude ) : IFormLinksWithData<EffectsAction, IMagicEffectGetter>
     {
-        [JsonProperty(PropertyName = "area", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
         public int Area = area;
 
-        [JsonProperty(PropertyName = "duration", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(PropertyName = "Duration", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
         public int Duration = duration;
 
-        [JsonProperty(PropertyName = "magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
         public float Magnitude = magnitude;
 
         private const int ClassLogPrefix = 0xB00;
 
-        [JsonProperty(PropertyName = "effect", Required = Required.Always)]
-        public OperationFormLink FormKey { get; set; } = formKey;
+        [JsonProperty(PropertyName = "Effect", Required = Required.Always)]
+        public FormKeyListOperation<IMagicEffectGetter> FormKey { get; private set; } = formKey;
+
+        FormKeyListOperation IFormLinksWithData<EffectsAction>.FormKey => FormKey;
 
         public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {
@@ -75,15 +72,15 @@ namespace GenericSynthesisPatcher.Json.Data
             && l.Data.Magnitude == r.Data.Magnitude)
             || (l.Data == null && r.Data == null));
 
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
 
-        public static List<IngestibleEffectsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<IngestibleEffectsAction>>(key);
+        public static List<EffectsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<EffectsAction>>(key);
 
         public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
         public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
         {
-            if (!((patch == null || (patch is IIngestible)) && remove is IEffectGetter entry))
+            if (!((patch == null || patch is IIngestible) && remove is IEffectGetter entry))
                 return -1;
 
             var effect = new Effect();
@@ -140,7 +137,7 @@ namespace GenericSynthesisPatcher.Json.Data
         public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch )
         {
             var effect = new Effect();
-            effect.BaseEffect.FormKey = FormKey.FormKey;
+            effect.BaseEffect.FormKey = FormKey.Value;
             effect.Data = new EffectData
             {
                 Area = Area,
@@ -160,12 +157,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public bool DataEquals ( IFormLinkContainerGetter other )
             => other is IEffectGetter effect
-            && effect.BaseEffect.FormKey.Equals(FormKey.FormKey)
+            && effect.BaseEffect.FormKey.Equals(FormKey.Value)
             && effect.Data != null
             && effect.Data.Area == Area
             && effect.Data.Duration == Duration
             && effect.Data.Magnitude == Magnitude;
 
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.FormKey);
+        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.Value);
     }
 }

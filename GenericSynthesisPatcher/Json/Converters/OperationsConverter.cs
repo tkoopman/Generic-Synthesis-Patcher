@@ -1,5 +1,4 @@
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,7 @@ namespace GenericSynthesisPatcher.Json.Converters
     {
         public override bool CanWrite => false;
 
-        public override bool CanConvert ( Type objectType ) => objectType == typeof(OperationFormLink) || objectType.GetType().IsAssignableTo(typeof(OperationBase<>));
+        public override bool CanConvert ( Type objectType ) => objectType.GetType().IsAssignableTo(typeof(OperationBase<>));
 
         public override object? ReadJson ( JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer )
         {

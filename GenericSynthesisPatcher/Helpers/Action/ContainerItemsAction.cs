@@ -1,6 +1,5 @@
-using System.Data;
-
-using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -11,20 +10,20 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-using static Mutagen.Bethesda.Skyrim.Furniture;
-
-namespace GenericSynthesisPatcher.Json.Data
+namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class ContainerItemsAction ( OperationFormLink formKey, int count ) : IFormLinksWithData<ContainerItemsAction>
+    public class ContainerItemsAction ( FormKeyListOperation<IItemGetter> formKey, int count ) : IFormLinksWithData<ContainerItemsAction, IItemGetter>
     {
-        [JsonProperty(PropertyName = "count", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [System.ComponentModel.DefaultValue(1)]
         public int Count = count;
 
         private const int ClassLogPrefix = 0x900;
 
-        [JsonProperty(PropertyName = "item", Required = Required.Always)]
-        public OperationFormLink FormKey { get; set; } = formKey;
+        [JsonProperty(PropertyName = "Item", Required = Required.Always)]
+        public FormKeyListOperation<IItemGetter> FormKey { get; set; } = formKey;
+
+        FormKeyListOperation IFormLinksWithData<ContainerItemsAction>.FormKey => FormKey;
 
         public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
         {
@@ -54,7 +53,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right ) => left is IContainerEntryGetter l && right is IContainerEntryGetter r && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey) && l.Item.Count == r.Item.Count;
 
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
 
         public static List<ContainerItemsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<ContainerItemsAction>>(key);
 
@@ -102,7 +101,7 @@ namespace GenericSynthesisPatcher.Json.Data
         public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch )
         {
             var containerEntry = new ContainerEntry();
-            containerEntry.Item.Item.FormKey = FormKey.FormKey;
+            containerEntry.Item.Item.FormKey = FormKey.Value;
             containerEntry.Item.Count = Count;
 
             patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
@@ -121,13 +120,13 @@ namespace GenericSynthesisPatcher.Json.Data
             return 1;
         }
 
-        public bool DataEquals ( IFormLinkContainerGetter other ) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.FormKey) && otherContainer.Item.Count == Count;
+        public bool DataEquals ( IFormLinkContainerGetter other ) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.Value) && otherContainer.Item.Count == Count;
 
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.FormKey);
+        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.Value);
 
         private static IReadOnlyList<IContainerEntryGetter>? GetItems ( ISkyrimMajorRecordGetter? record )
-            => (record is IContainerGetter cont) ? cont.Items :
-               (record is INpcGetter npc) ? npc.Items : null;
+            => record is IContainerGetter cont ? cont.Items :
+               record is INpcGetter npc ? npc.Items : null;
 
         private static void SetItems ( ISkyrimMajorRecordGetter? record, ExtendedList<ContainerEntry> list )
         {

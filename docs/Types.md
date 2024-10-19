@@ -7,14 +7,14 @@ You can use either the short type name or synonyms when listing types.
 | ALCH | Ingestible     |
 | AMMO | Ammunition     |
 | ARMO | Armor          |
-| BOOK |
-| CELL |
+| BOOK |                |
+| CELL |                |
 | CONT | Container      |
 | FACT | Faction        |
 | INGR | Ingredient     |
 | KEYM | Key            |
 | MISC | MiscItem       |
-| NPC  |
+| NPC  |                |
 | OTFT | Outfit         |
 | SCRL | Scroll         |
 | WEAP | Weapon         |

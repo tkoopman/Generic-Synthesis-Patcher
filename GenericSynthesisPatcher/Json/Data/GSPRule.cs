@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -20,7 +20,7 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Json.Data
 {
-    public partial class GSPRule : IComparable<GSPRule>
+    public class GSPRule : GSPBase
     {
         internal Dictionary<ValueKey, JToken> fillValues = [];
         internal Dictionary<ValueKey, JToken> forwardValues = [];
@@ -103,9 +103,8 @@ namespace GenericSynthesisPatcher.Json.Data
             }
         }
 
-        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
-        public List<ModKey>? Masters { get; set; }
+        [JsonIgnore]
+        public GSPGroup? Group { get; private set; } = null;
 
         /// <summary>
         /// Add Forward action(s) to this rule.
@@ -135,62 +134,33 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
         public bool OnlyIfDefault { get; set; }
 
-        [DefaultValue(0)]
-        [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Priority { get; set; }
-
-        [JsonProperty(PropertyName = "Types", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<GSPRule.Type>))]
-        public List<GSPRule.Type>? Types { get; set; }
-
-        /// <summary>
-        /// Create new rule, and validates it meets basic needs.
-        /// </summary>
-        public GSPRule ( int priority, List<GSPRule.Type>? types, List<FormKey>? formID, List<string>? editorID, List<FormKey>? notFormID, List<string>? notEditorID, JObject? match, JObject? fill, JObject? forward, List<ModKey>? masters, ForwardTypes forwardType )
+        public bool ClaimAndValidate ( GSPGroup group )
         {
-            Priority = priority;
-            Types = ValidateList(types);
-            FormID = ValidateList(formID);
-            EditorID = ValidateList(editorID);
-            NotFormID = ValidateList(notFormID);
-            NotEditorID = ValidateList(notEditorID);
-            Masters = ValidateList(masters);
-            Match = match;
-            Fill = fill;
-            Forward = forward;
-            ForwardType = forwardType;
+            if (Group != null)
+                throw new Exception("Rule already claimed.");
 
-            if (types == null && formID == null && editorID == null)
-                throw new JsonSerializationException("Each Json record must contain at least one basic filter (types, editorID or formID)");
-        }
+            Group = group;
 
-        public int CompareTo ( GSPRule? other )
-        {
-            if (other == null)
-                return 1;
-            if (other == this)
-                return 0;
+            if (Types == RecordTypes.NONE)
+                Types = Group.Types;  // This may also be NONE but we do extra check for that after validation.
+            else if (Group.Types != RecordTypes.NONE && (Types & ~Group.Types) != RecordTypes.NONE)
+                throw new Exception($"Record under group tries to filter for Type(s) [{Types & ~Group.Types}] that are excluded at by group.");
 
-            if (Priority != other.Priority)
-                return Priority.CompareTo(other.Priority);
+            if (Priority != 0)
+                LogHelper.Log(LogLevel.Information, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", 0x00);
 
-            int left
-                = ((Types?.Count ?? 0) << 8)
-                + ((FormID?.Count ?? 0) << 4)
-                + EditorID?.Count ?? 0;
-            int right
-                = ((other.Types?.Count ?? 0) << 8)
-                + ((other.FormID?.Count ?? 0) << 4)
-                + other.EditorID?.Count ?? 0;
+            bool valid = Validate();
+            if (Types == RecordTypes.NONE)
+                Types = RecordTypes.All;
 
-            return left.CompareTo(right);
+            return valid;
         }
 
         #region GetValues
 
-        private Dictionary<ValueKey, object?> fillCache = [];
-        private Dictionary<ValueKey, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
-        private Dictionary<ValueKey, object?> matchCache = [];
+        private readonly Dictionary<ValueKey, object?> fillCache = [];
+        private readonly Dictionary<ValueKey, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
+        private readonly Dictionary<ValueKey, object?> matchCache = [];
 
         public T? GetFillValueAs<T> ( ValueKey key ) => GetValueAs<T>(fillValues, fillCache, key);
 
@@ -207,8 +177,7 @@ namespace GenericSynthesisPatcher.Json.Data
                     return false;
                 }
 
-                mods = value.Value.Item1;
-                fields = value.Value.Item2;
+                (mods, fields) = value.Value;
 
                 return true;
             }
@@ -253,24 +222,17 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             if (cache.TryGetValue(key, out object? value))
             {
+                //LogHelper.Log(LogLevel.Trace, $"Got value for {key.Key} from cache.", ClassLogPrefix | 0x21);
                 return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
             }
 
             if (values.TryGetValue(key, out var jsonValue))
             {
-                T? o = default;
-                if (jsonValue.Type != JTokenType.Null)
-                {
-                    if (typeof(T) == typeof(string))
-                    {
-                        o = (T)(object)(jsonValue.Type == JTokenType.String ? jsonValue.ToString()
-                        : throw new InvalidOperationException($"Invalid value type returned for {key.Key}"));
-                    }
-                    else if (JsonConvert.DeserializeObject<T>(jsonValue.ToString(), Global.SerializerSettings) is T value2)
-                    {
-                        o = value2;
-                    }
-                }
+                var o = jsonValue.Type == JTokenType.Null ? default
+                      : typeof(T) == typeof(string) && jsonValue.Type == JTokenType.String ? (T?)(object)jsonValue.ToString()
+                      : typeof(T).IsAssignableTo(typeof(IEnumerable)) && jsonValue.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(jsonValue).CreateReader())
+                      : jsonValue.Type != JTokenType.String ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(jsonValue.CreateReader())
+                      : throw new JsonSerializationException($"Failed to parse string into type {typeof(T).FullName} - {jsonValue.Type}");
 
                 cache.Add(key, o);
                 return o;
@@ -286,23 +248,19 @@ namespace GenericSynthesisPatcher.Json.Data
             if (HashCode == 0)
             {
                 var hash = new HashCode();
+                hash.Add(base.GetHashCode());
 
                 hash.Add(ForwardIndexedByField);
                 hash.Add(ForwardType);
                 hash.Add(OnlyIfDefault);
-                hash.Add(Priority);
                 if (EditorID != null)
                     hash.AddEnumerable(EditorID);
                 if (FormID != null)
                     hash.AddEnumerable(FormID);
-                if (Masters != null)
-                    hash.AddEnumerable(Masters);
                 if (NotEditorID != null)
                     hash.AddEnumerable(NotEditorID);
                 if (NotFormID != null)
                     hash.AddEnumerable(NotFormID);
-                if (Types != null)
-                    hash.AddEnumerable(Types);
                 if (matchValues != null)
                     hash.AddDictionary(matchValues);
                 if (fillValues != null)
@@ -324,27 +282,61 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <param name="context"></param>
         /// <param name="Origin"></param>
         /// <returns></returns>
-        public bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        public override bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
         {
-            bool matches = MatchesBasicFilters(context)
-                        && MatchesExtraFilters(context);
+            if (!base.Matches(context))
+                return false;
 
-            if (Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey))
+            bool trace = Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey);
+
+            if (trace && FormID != null)
+                LogHelper.Log(LogLevel.Trace, context, $"Check FormID: {FormID != null && !FormID.Contains(context.Record.FormKey)}", ClassLogPrefix | 0x10);
+
+            if (FormID != null && !FormID.Contains(context.Record.FormKey))
+                return false;
+
+            if (trace && NotFormID != null)
+                LogHelper.Log(LogLevel.Trace, context, $"Check FormID: {NotFormID != null && !NotFormID.Contains(context.Record.FormKey)}", ClassLogPrefix | 0x10);
+
+            if (NotFormID != null && NotFormID.Contains(context.Record.FormKey))
+                return false;
+
+            if (trace && EditorID != null)
+                LogHelper.Log(LogLevel.Trace, context, $"Check EditorID: {MatchesEditorID(context, EditorID)}", ClassLogPrefix | 0x10);
+
+            if (!MatchesEditorID(context, EditorID))
+                return false;
+
+            if (trace && NotEditorID != null)
+                LogHelper.Log(LogLevel.Trace, context, $"Check NotEditorID: {!MatchesEditorID(context, NotEditorID)}", ClassLogPrefix | 0x10);
+
+            if (NotEditorID != null && MatchesEditorID(context, NotEditorID))
+                return false;
+
+            foreach (var x in matchValues)
             {
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesBasicFilters: {MatchesBasicFilters(context)} HasTypes: {Types != null} HasEditorID: {EditorID != null} HasFormID: {FormID != null}", ClassLogPrefix | 0x11);
-                LogHelper.Log(LogLevel.Trace, context, $"MatchesExtraFilters: {MatchesExtraFilters(context)} HasNotEditorID: {NotEditorID != null} HasNotFormID: {NotFormID != null} HasMasters: {Masters != null}", ClassLogPrefix | 0x12);
+                var rcd = RCDMapping.FindRecordCallData(context, x.Key.Key);
+
+                if (rcd != null && !rcd.Matches(context.Record, this, x.Key, rcd))
+                {
+                    LogHelper.Log(LogLevel.Trace, context, $"Failed on match. Field: {x.Key.Key} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}", ClassLogPrefix | 0x32);
+                    return false;
+                }
             }
 
-            return matches;
+            return true;
         }
 
-        /// <summary>
-        /// Validates Lists to make sure it is null if list contains 0 entries and no duplicates.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns>Cleaned List.</returns>
-        private static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list.Distinct().ToList() : null;
+        public override bool Validate ()
+        {
+            if (FormID == null && EditorID == null && Types == RecordTypes.NONE)
+            {
+                LogHelper.Log(LogLevel.Critical, "Each rule in config must contain at least one basic filter (types, editorID or formID)", 0xFE);
+                return false;
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Checks basic filters.
@@ -352,28 +344,18 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <param name="context"></param>
         /// <param name="Origin"></param>
         /// <returns>Returns true if context matches basic filters.</returns>
-        private bool MatchesBasicFilters ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        private static bool MatchesEditorID ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IReadOnlyList<string>? ids )
         {
-            var recordType = GetGSPRuleType(context.Record);
-            if (recordType == GSPRule.Type.UNKNOWN)
-                return false;
-
-            if (Types != null && !Types.Contains(recordType))
-                return false;
-
-            if (FormID != null && !FormID.Contains(context.Record.FormKey))
-                return false;
-
             // Can assume true if no EditorID filter as GSPRule MUST contain 1 filter
             // Which means one of the above checks must of have contained a matching value
-            if (EditorID == null)
+            if (ids == null)
                 return true;
 
-            foreach (string editorID in EditorID)
+            foreach (string editorID in ids)
             {
                 if (editorID.StartsWith('/') && editorID.EndsWith('/'))
                 {
-                    var matchedRegex = new Regex(editorID.Trim('/'));
+                    var matchedRegex = new Regex(editorID.Trim('/'), RegexOptions.IgnoreCase);
                     if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
                         return true;
                 }
@@ -384,45 +366,6 @@ namespace GenericSynthesisPatcher.Json.Data
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Checks Extra filters.
-        /// Excludes OnlyIfDefault as that must be checked by the appropriate Actions if all other filters match.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns>Return true if context matches any defined extra filters.</returns>
-        private bool MatchesExtraFilters ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
-        {
-            if (Masters != null && !Masters.Contains(context.Record.FormKey.ModKey))
-                return false;
-
-            if (NotFormID != null && NotFormID.Contains(context.Record.FormKey))
-                return false;
-
-            if (NotEditorID != null)
-            {
-                foreach (string editorID in NotEditorID)
-                {
-                    if (editorID.StartsWith('/') && editorID.EndsWith('/'))
-                    {
-                        var matchedRegex = new Regex(editorID.Trim('/'));
-                        if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if (editorID.Equals(context.Record.EditorID))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            return true;
         }
     }
 }

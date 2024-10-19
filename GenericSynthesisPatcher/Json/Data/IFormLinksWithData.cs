@@ -1,3 +1,5 @@
+using GenericSynthesisPatcher.Json.Operations;
+
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -8,7 +10,7 @@ namespace GenericSynthesisPatcher.Json.Data
     public interface IFormLinksWithData<T>
         where T : class, IFormLinksWithData<T>
     {
-        public OperationFormLink FormKey { get; }
+        public FormKeyListOperation FormKey { get; }
 
         public abstract static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source );
 
@@ -29,5 +31,12 @@ namespace GenericSynthesisPatcher.Json.Data
         public bool DataEquals ( IFormLinkContainerGetter other );
 
         public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list );
+    }
+
+    public interface IFormLinksWithData<T, TMajor> : IFormLinksWithData<T>
+        where T : class, IFormLinksWithData<T, TMajor>
+        where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+    {
+        public new FormKeyListOperation<TMajor> FormKey { get; }
     }
 }

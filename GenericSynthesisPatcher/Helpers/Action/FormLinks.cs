@@ -1,5 +1,3 @@
-using System.Data;
-
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -7,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -35,9 +32,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return -1;
 
                 int changes = 0;
-                foreach (var actionKey in rule.GetFillValueAs<List<OperationFormLink>>(valueKey) ?? [])
+                foreach (var actionKey in rule.GetFillValueAs<List<FormKeyListOperation<T>>>(valueKey) ?? [])
                 {
-                    var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.FormKey) ?? false, null);
+                    var curKey = curValue?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.Value) ?? false, null);
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
@@ -49,7 +46,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                             return -1;
                         }
 
-                        if (!Global.State.LinkCache.TryResolve(actionKey.FormKey, typeof(T), out var link))
+                        if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(T), out var link))
                         {
                             LogHelper.Log(LogLevel.Warning, context, rcd.PropertyName, $"Unable to find {actionKey}", ClassLogPrefix | 0x16);
                             continue;
@@ -176,26 +173,41 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (check is not IFormLinkContainerGetter)
                 return false;
 
-            var links = rule.GetMatchValueAs<List<OperationFormLink>>(valueKey);
+            var values = rule.GetMatchValueAs<List<FormKeyListOperationAdvanced<T>>>(valueKey);
 
-            if (!links.SafeAny())
+            if (!values.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var curLinks) || !curLinks.SafeAny())
-                return !links.Any(k => k.Operation != ListLogic.NOT);
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var curValue) || !curValue.SafeAny())
+                return !values.Any(k => k.Operation != ListLogic.NOT);
+
+            List<string> EditorIDs = [];
+            if (values.Any(v => v.Regex != null))
+            {
+                foreach (var v in curValue)
+                {
+                    var link = v.TryResolve(Global.State.LinkCache);
+                    if (link != null && link.EditorID != null)
+                        EditorIDs.Add(link.EditorID);
+                }
+            }
 
             int matchedCount = 0;
             int includesChecked = 0; // Only count !Neg
 
-            foreach (var link in links)
+            foreach (var v in values)
             {
-                if (link.Operation != ListLogic.NOT)
+                if (v.Operation != ListLogic.NOT)
                     includesChecked++;
 
-                if (curLinks.Any(l => l.FormKey.Equals(link.FormKey)))
+                bool match = (v.Regex != null)
+                    ? EditorIDs.Any(v.Regex.IsMatch)
+                    : curValue.Any(l => l.FormKey.Equals(v.Value));
+
+                if (match)
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (link.Operation == ListLogic.NOT)
+                    if (v.Operation == ListLogic.NOT)
                         return false;
 
                     if (valueKey.Operation == FilterLogic.OR)
@@ -203,7 +215,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     matchedCount++;
                 }
-                else if (link.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
+                else if (v.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }

@@ -1,6 +1,6 @@
-# Rule Fields
+# Rule Properties
 
-These are case insensitive.
+These are case insensitive. If a property accepts multiple values as an array, you do not need to use the [ ] to denote an array if only entering a single value.
 
 > **<font color="green">Priority</font>**: All matching rules will be applied to a record in ascending priority. Default: 0  
 Matching priority will be applied in random order so be carful if multiple rules edit the same fields on a record.
@@ -32,33 +32,33 @@ Good for example if you want to forward one patches changes, but only if a later
 Checks are per field, meaning one action may fail to apply due to the field it updating not matching, but other action on the same record applies as it does match.  
 NOTE: Just because multiple fields are listed on a single fill/forward action, they are all still processed separately. No need to split into different rules.
 
-# Advanced Field Filters
+# Advanced Filters
 
 These filters can be applied in addition to the basic filters. Advanced filters should work for any [supported field](Fields.md).  
 In general they follow the following rules:
 
 - If you use one of these filters, any record that doesn't contain that field will never match the rule.
-- While for the other filters above you could include a single entry without surrounding it with [ ]. For Advanced Field Filters always use [ ] even for single values.
 - &/|/^ Operator: You can change the default operation using a prefix on the field name. Default is OR (|). Can set to And (&) or XOR (^).
 - +/-: You can add a prefix to these to say if they must be included or excluded from filter. Example below won't match any record with keyword Survival_ArmorCold.
 - Include (+) and OR (|) prefixes are default so no need to enter them however, can be used for unforeseen cases where the value you want to enter may start with a prefix value. Like trying to enter a negative number ("+-123" to allowed -123).
 - Exclude (-) values ignore Operation. A record with any excluded values will make it not match not matter the overall operation. ! can also be used instead of -.
+- If matching against a field that accepts a string or Editor ID you can use regular expression to match, like EditorID basic filter. If used with exclude operator the - goes before the first /. 
 - Currently operation only available per field. If you list multiple fields to match it will always be AND (&) between all the fields.
 
-## Example
+## Examples
 
     ... Single Value Match
-    "Matches": { "Keywords": [ "ArmorMaterialLeather" ] },
+    "Matches": { "Keywords": "ArmorMaterialLeather" },
     ... OR Match with exclude Example
     "Matches": { "Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide", "-WAF_ClothingCloak" ] },
     ... AND Match Example
     "Matches": { "&Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide" ] },
+    ... Exclude Regex Example
+    "Matches": { "InventoryArt": "-/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" }
 
 # Actions
 
-At least 1 action must exist. If both provided then both will be applied to matching records.  
-**NOTE:** While for the most filters above you could either include a single entry without surrounding it with [ ]. For actions if multiple options possible you must always use [ ] even for single values in multi-valueable fields.  
-Single value fields should **not** include [ ].
+At least 1 action must exist. If both provided then both will be applied to matching records.
 
 >**<font color="green">Fill</font>**: This will just apply the changes to all listed fields. The most basic of action.  
 If field selected is a <font color="blue">list</font> then you must provide value as a list surrounded by [ ]. All other fields do not use [ ].  
@@ -102,10 +102,10 @@ Below example would make sure any cloaks that "Cloaks - Dawnguard.esp" added to 
 However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:Dawnguard.esm] that the original Cloaks.esp removed would not be forwarded.
 
         {
-            "types": [ "Outfit" ],
+            "types": "Outfit",
             "Masters": "Dawnguard.esm",
             "ForwardType": "SelfMasterOnly",
-            "Forward": { "Cloaks - Dawnguard.esp": [ "Items" ] }
+            "Forward": { "Cloaks - Dawnguard.esp": "Items" }
         }
 
 - **<font color="green">DefaultThenSelfMasterOnly</font>**: This combines the two options above. This requires ForwardIndexedByField = true.  
@@ -130,3 +130,68 @@ Below example is the random version of the above example for ForwardIndexedByFie
             "ForwardType": "DefaultRandom",
             "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
         }
+
+# Groups
+
+Groups allow you to group multiple rules together. This can assist in making the JSON files easier to maintain, but also opens up performance improvements, and some special processing.  
+You **can not** have groups within groups. Rules in groups are processed in order the are in the JSON file. This means the Priority field for Rules in a group is ignored.
+
+## Group Properties
+
+> **<font color="green">Priority</font>**: This is the same priority as rules above. Groups are sorted with ungrouped rules based on priority.
+
+>**<font color="green">Types</font>**: List valid types for this group. You can still specify types per rule to further limit a rule, but rules in a group cannot match types not defined here (Unless none defined at group level which is the same as All types).
+
+>**<font color="red">Masters</font>**: List of mod names ("Skyrim.esm"). Same as types, you can still further limit it per group rule.
+
+>**<font color="red">SingleMatch</font>**: True or False (Default). If true a record will stop trying to match rules once it finds it's first match.
+
+>**<font color="red">Rules</font>**: This is the list of all the rules in this group.
+
+Example - Both rules in this group must be Factions in Skyrim.esm, it will also stop search for rules once it find a match for a record.  
+SingleMatch not necessary in this example, as only a single rule would match anyway, but if lots of rules in group it could still save processing time by having it.
+
+    [
+      {
+        "Types": "Faction",
+        "Masters": "Skyrim.esm",
+	    "SingleMatch": true,
+        "Rules": [
+          {
+            "FormID": [
+              "000013:Skyrim.esm",
+              "01C4ED:Skyrim.esm",
+              ...
+            ],
+            "Fill": {
+              "flags": [
+                "IgnoreMurder",
+                "IgnoreAssault",
+                "IgnoreStealing",
+                "IgnoreTrespass",
+                "DoNotReportCrimesAgainstMembers",
+                "IgnorePickpocket",
+                "IgnoreWerewolf"
+              ]
+            }
+          },
+          {
+            "FormID": [
+              "01BCC0:Skyrim.esm",
+              "025F95:Skyrim.esm",
+              ...
+            ],
+            "Fill": {
+              "flags": [
+                "IgnoreMurder",
+                "IgnoreAssault",
+                "IgnoreStealing",
+                "IgnoreTrespass",
+                "IgnorePickpocket",
+                "-IgnoreWerewolf"
+              ]
+            }
+          }
+        ]
+      }
+    ]
