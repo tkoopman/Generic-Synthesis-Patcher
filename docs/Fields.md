@@ -190,8 +190,7 @@ You can use either the full field name or Alt name when available.
 | Keywords                       | KWDA           | Form Keys or Editor IDs        |                                |
 | MajorFlags                     | RecordFlags    | Flags (BleedoutOverride)       | "MajorFlags": "BleedoutOverride" |
 | Name                           | FULL           | A string value                 | "Name": "Hello"                |
-| ObserveDeadBodyOverridePackageList | OCOR           | Form Key or Editor ID          |
-|
+| ObserveDeadBodyOverridePackageList | OCOR           | Form Key or Editor ID          |                                |
 | Packages                       | PKID           | Form Keys or Editor IDs        |                                |
 | Race                           | RNAM           | Form Key or Editor ID          |                                |
 | ShortName                      | ONAM           | A string value                 | "ShortName": "Hello"           |
