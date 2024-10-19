@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -49,14 +51,15 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             foreach (var v in values)
             {
-                if (curValue.Equals(v.Value))
+                if (v is string str && str.StartsWith('/') && str.EndsWith('/') && curValue is string curStr)
+                {
+                    if (new Regex(str.Trim('/'), RegexOptions.IgnoreCase).IsMatch(curStr))
+                        return v.Operation != ListLogic.NOT;
+                }
+                else if (curValue.Equals(v.Value))
                 {
                     if (v.Operation == ListLogic.NOT)
-                        return false;
-                }
-                else if (v.Operation != ListLogic.NOT)
-                {   // Always OR as single value field
-                    return true;
+                        return v.Operation != ListLogic.NOT;
                 }
             }
 

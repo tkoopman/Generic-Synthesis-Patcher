@@ -42,9 +42,10 @@ In general they follow the following rules:
 - +/-: You can add a prefix to these to say if they must be included or excluded from filter. Example below won't match any record with keyword Survival_ArmorCold.
 - Include (+) and OR (|) prefixes are default so no need to enter them however, can be used for unforeseen cases where the value you want to enter may start with a prefix value. Like trying to enter a negative number ("+-123" to allowed -123).
 - Exclude (-) values ignore Operation. A record with any excluded values will make it not match not matter the overall operation. ! can also be used instead of -.
+- If matching against a field that accepts a string or Editor ID you can use regular expression to match, like EditorID basic filter. If used with exclude operator the - goes before the first /. 
 - Currently operation only available per field. If you list multiple fields to match it will always be AND (&) between all the fields.
 
-## Example
+## Examples
 
     ... Single Value Match
     "Matches": { "Keywords": "ArmorMaterialLeather" },
@@ -52,6 +53,8 @@ In general they follow the following rules:
     "Matches": { "Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide", "-WAF_ClothingCloak" ] },
     ... AND Match Example
     "Matches": { "&Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide" ] },
+    ... Exclude Regex Example
+    "Matches": { "InventoryArt": "-/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" }
 
 # Actions
 

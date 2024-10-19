@@ -1,5 +1,3 @@
-using EnumsNET;
-
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 

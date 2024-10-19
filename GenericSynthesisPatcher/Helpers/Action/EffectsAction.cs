@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
@@ -10,7 +10,7 @@ using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Json.Data
+namespace GenericSynthesisPatcher.Helpers.Action
 {
     public class EffectsAction ( FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude ) : IFormLinksWithData<EffectsAction, IMagicEffectGetter>
     {
@@ -72,7 +72,7 @@ namespace GenericSynthesisPatcher.Json.Data
             && l.Data.Magnitude == r.Data.Magnitude)
             || (l.Data == null && r.Data == null));
 
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
 
         public static List<EffectsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<EffectsAction>>(key);
 
@@ -80,7 +80,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
         {
-            if (!((patch == null || (patch is IIngestible)) && remove is IEffectGetter entry))
+            if (!((patch == null || patch is IIngestible) && remove is IEffectGetter entry))
                 return -1;
 
             var effect = new Effect();

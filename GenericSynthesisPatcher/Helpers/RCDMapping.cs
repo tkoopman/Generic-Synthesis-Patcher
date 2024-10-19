@@ -1,5 +1,4 @@
 using GenericSynthesisPatcher.Helpers.Action;
-using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 

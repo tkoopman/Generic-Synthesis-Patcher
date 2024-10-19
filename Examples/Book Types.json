@@ -1,0 +1,16 @@
+[
+  {
+    "Types": "Book",
+    "SingleMatch": true,
+    "Rules": [
+      {
+        "Matches": { "InventoryArt": "+/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" },
+        "Fill": { "Type": "NoteOrScroll" }
+      },
+      {
+        "Matches": { "InventoryArt": "-/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" },
+        "Fill": { "Type": "BookOrTome" }
+      }
+    ]
+  }
+]

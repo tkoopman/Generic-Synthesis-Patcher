@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Json.Data
+namespace GenericSynthesisPatcher.Helpers.Action
 {
     public class ContainerItemsAction ( FormKeyListOperation<IItemGetter> formKey, int count ) : IFormLinksWithData<ContainerItemsAction, IItemGetter>
     {
@@ -53,7 +53,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right ) => left is IContainerEntryGetter l && right is IContainerEntryGetter r && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey) && l.Item.Count == r.Item.Count;
 
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => (s != null) && GetFormKey(s).Equals(key), null);
+        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
 
         public static List<ContainerItemsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<ContainerItemsAction>>(key);
 
@@ -125,8 +125,8 @@ namespace GenericSynthesisPatcher.Json.Data
         public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.Value);
 
         private static IReadOnlyList<IContainerEntryGetter>? GetItems ( ISkyrimMajorRecordGetter? record )
-            => (record is IContainerGetter cont) ? cont.Items :
-               (record is INpcGetter npc) ? npc.Items : null;
+            => record is IContainerGetter cont ? cont.Items :
+               record is INpcGetter npc ? npc.Items : null;
 
         private static void SetItems ( ISkyrimMajorRecordGetter? record, ExtendedList<ContainerEntry> list )
         {

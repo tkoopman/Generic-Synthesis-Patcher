@@ -12,7 +12,7 @@ You can use either the full field name or Alt name when available.
 | AddictionChance                |                | A decimal value                | "AddictionChance": 3.14        |
 | ConsumeSound                   |                | Form Key or Editor ID          |                                |
 | Description                    | DESC           | A string value                 | "Description": "Hello"         |
-| Effects                        |                | JSON objects containing effect Form Key/Editor ID and effect data | "Effects": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 } |
+| Effects                        |                | !!!                            | !!!                            |
 | EquipmentType                  | ETYP           | Form Key or Editor ID          |                                |
 | Flags                          | DataFlags      | Flags (NoAutoCalc, FoodItem, Medicine, Poison) | "Flags": [ "NoAutoCalc", "-Poison" ] |
 | Keywords                       | KWDA           | Form Keys or Editor IDs        |                                |
@@ -106,7 +106,7 @@ You can use either the full field name or Alt name when available.
 | ------------------------------ | -------------- | ------------------------------ | ------------------------------ |
 | CloseSound                     | QNAM           | Form Key or Editor ID          |                                |
 | Flags                          | DataFlags      | Flags (AllowSoundsWhenAnimation, Respawns, ShowOwner) | "Flags": [ "AllowSoundsWhenAnimation", "-ShowOwner" ] |
-| Items                          | Item           | JSON objects containing item Form Key/Editor ID and Count (QTY) | "Items": { "Item": "021FED:Skyrim.esm", "Count": 3 } |
+| Items                          | Item           | !!!                            | !!!                            |
 | MajorFlags                     | RecordFlags    | Flags (HasDistantLOD, RandomAnimStart, Obstacle, NavMeshGenerationFilter, NavMeshGenerationBoundingBox, NavMeshGenerationGround) | "MajorFlags": [ "HasDistantLOD", "-NavMeshGenerationGround" ] |
 | Name                           | FULL           | A string value                 | "Name": "Hello"                |
 | OpenSound                      | SNAM           | Form Key or Editor ID          |                                |
@@ -131,7 +131,7 @@ You can use either the full field name or Alt name when available.
 
 | Field                          | Alt            | Value Type                     | Example                        |
 | ------------------------------ | -------------- | ------------------------------ | ------------------------------ |
-| Effects                        |                | JSON objects containing effect Form Key/Editor ID and effect data | "Effects": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 } |
+| Effects                        |                | !!!                            | !!!                            |
 | EquipType                      | ETYP           | Form Key or Editor ID          |                                |
 | Flags                          | DataFlags      | Flags (NoAutoCalculation, FoodItem, ReferencesPersist) | "Flags": [ "NoAutoCalculation", "-ReferencesPersist" ] |
 | IngredientValue                |                | A numeric value                | "IngredientValue": 7           |
@@ -186,7 +186,7 @@ You can use either the full field name or Alt name when available.
 | HeadParts                      | PNAM           | Form Keys or Editor IDs        |                                |
 | HeadTexture                    | FTST           | Form Key or Editor ID          |                                |
 | Height                         | NAM6           | A decimal value                | "Height": 3.14                 |
-| Items                          | Item           | JSON objects containing item Form Key/Editor ID and Count (QTY) | "Items": { "Item": "021FED:Skyrim.esm", "Count": 3 } |
+| Items                          | Item           | !!!                            | !!!                            |
 | Keywords                       | KWDA           | Form Keys or Editor IDs        |                                |
 | MajorFlags                     | RecordFlags    | Flags (BleedoutOverride)       | "MajorFlags": "BleedoutOverride" |
 | Name                           | FULL           | A string value                 | "Name": "Hello"                |
@@ -218,7 +218,7 @@ You can use either the full field name or Alt name when available.
 | CastType                       |                | Possible values (ConstantEffect, FireAndForget, Concentration) | "CastType": "ConstantEffect"   |
 | ChargeTime                     |                | A numeric value                | "ChargeTime": 7                |
 | Description                    | DESC           | A string value                 | "Description": "Hello"         |
-| Effects                        |                | JSON objects containing effect Form Key/Editor ID and effect data | "Effects": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 } |
+| Effects                        |                | !!!                            | !!!                            |
 | EquipmentType                  | ETYP           | Form Key or Editor ID          |                                |
 | Flags                          | DataFlags      | Flags (ManualCostCalc, PCStartSpell, AreaEffectIgnoresLOS, IgnoreResistance, NoAbsorbOrReflect, NoDualCastModification) | "Flags": [ "ManualCostCalc", "-NoDualCastModification" ] |
 | Keywords                       | KWDA           | Form Keys or Editor IDs        |                                |

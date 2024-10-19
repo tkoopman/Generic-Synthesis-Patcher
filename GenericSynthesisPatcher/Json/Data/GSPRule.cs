@@ -222,7 +222,7 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             if (cache.TryGetValue(key, out object? value))
             {
-                LogHelper.Log(LogLevel.Trace, $"Got value for {key.Key} from cache.", ClassLogPrefix | 0x21);
+                //LogHelper.Log(LogLevel.Trace, $"Got value for {key.Key} from cache.", ClassLogPrefix | 0x21);
                 return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
             }
 
@@ -355,7 +355,7 @@ namespace GenericSynthesisPatcher.Json.Data
             {
                 if (editorID.StartsWith('/') && editorID.EndsWith('/'))
                 {
-                    var matchedRegex = new Regex(editorID.Trim('/'));
+                    var matchedRegex = new Regex(editorID.Trim('/'), RegexOptions.IgnoreCase);
                     if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
                         return true;
                 }
