@@ -1,4 +1,4 @@
-# Implemented Fields - WIP
+# Implemented Fields
 
 Fields that are invalid for a record that was matched by your filter will just be ignored.  
 You can use either the full field name or Alt name when available.  
