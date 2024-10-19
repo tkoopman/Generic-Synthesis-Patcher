@@ -138,8 +138,8 @@ namespace GenericSynthesisPatcher
 
                     // Get the RCD IAction type
                     var rcdType = rcd.GetType().GenericTypeArguments[0];
-                    string desc = "!!!";
-                    string exam = "!!!";
+                    string? desc = null;
+                    string exam = "";
 
                     if (rcdType.IsGenericType)
                     {
@@ -175,7 +175,7 @@ namespace GenericSynthesisPatcher
                             desc = "Form Keys or Editor IDs";
                             exam = "";
                         }
-                        else if (rcdGeneric == typeof(FormLinksWithData<>))
+                        else if (rcdGeneric == typeof(FormLinksWithData<>) || rcdGeneric == typeof(FormLinksWithData<,>))
                         {
                             if (rcdSubType == typeof(ContainerItemsAction))
                             {
@@ -201,6 +201,9 @@ namespace GenericSynthesisPatcher
                         desc = $"Possible values ({string.Join(", ", values)})";
                         exam = $"\"{names[0]}\": \"{values.First()}\"";
                     }
+
+                    if (desc == null)
+                        throw new Exception("Fix Missing Doco");
 
                     Properties.Add([names[0], string.Join(';', names[1..]), desc, exam]);
                 }
