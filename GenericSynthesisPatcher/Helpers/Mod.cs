@@ -41,20 +41,15 @@ namespace GenericSynthesisPatcher.Helpers
             if (value != null)
                 return true;
 
-            var constructor = property.PropertyType.GetConstructor([]);
-            if (constructor == null)
+            object? _value = System.Activator.CreateInstance(property.PropertyType);
+
+            if (_value == null || _value is not T outValue)
             {
-                LogHelper.Log(LogLevel.Error, patchRecord, propertyName, "Failed to construct new value for editing.", ClassLogPrefix | 0x31);
+                LogHelper.Log(LogLevel.Error, patchRecord, propertyName, $"Failed to construct new {property.PropertyType} value for editing.", ClassLogPrefix | 0x32);
                 return false;
             }
 
-            object _value = constructor.Invoke([]);
-            if (value == null)
-            {
-                LogHelper.Log(LogLevel.Error, patchRecord, propertyName, "Failed to construct new value for editing.", ClassLogPrefix | 0x32);
-                return false;
-            }
-
+            value = outValue;
             property.SetValue(patchRecord, _value);
 
             LogHelper.Log(LogLevel.Trace, patchRecord, propertyName, "Created new value for editing.", ClassLogPrefix | 0x33);
