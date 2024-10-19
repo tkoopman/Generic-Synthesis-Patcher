@@ -2,14 +2,14 @@
 ## About
 
 Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types.
-It has a number of ways to filter for records to match, including matching against most implemented fields, and even using RegEx against stings or Editor IDs and also 2 main actions.  
+It has a number of ways to filter for records to apply actions to, including matching against most implemented fields, and even using RegEx against stings or Editor IDs and also 2 main actions.
 Rules can even be grouped to share some common filters.
 
-Fill action will apply static changes to the winning record. Could be used to rename items, or add / remove keywords for example.
-
-Forward action will find matching parent record and forward only the selected fields to the winning record.  
-This is useful when you have multiple patches for the one record all for different fields.
-It has a few extra modes for when forwarding lists, like Container/Outfit Items.
+Once a record has matched a rule following actions could be applied:
+- Fill action will apply static changes to the winning record. Could be used to rename items, or add / remove keywords for example.
+- Forward action will find matching parent record and forward only the selected fields to the winning record.  
+  This is useful when you have multiple patches for the one record all for different fields.
+  It has a few extra modes for when forwarding lists, like Container/Outfit Items.
 
 While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order. 
 A number of current patchers would however fit into this generic category.  
