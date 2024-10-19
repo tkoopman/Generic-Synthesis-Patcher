@@ -1,3 +1,7 @@
+/*
+  Sets the Book Type field correctly to Book/Tomb or Note/Scroll based on inventory art assigned.
+*/
+
 [
   {
     "Types": "Book",

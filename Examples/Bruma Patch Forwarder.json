@@ -1,3 +1,7 @@
+/*
+  Forward a couple of fields that can get overwritten.
+*/
+
 [
   {
     "types": [ "CELL" ],

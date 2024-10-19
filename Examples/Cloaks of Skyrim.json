@@ -1,3 +1,8 @@
+/*
+  Forwards Outfit changes made by Cloaks of Skyrim to make sure not overwritten.
+  Also sets survival warmth on some cloaks.
+*/
+
 [
   {
     "types": "Outfit",

@@ -1,3 +1,9 @@
+/*
+  Synthesis version of jss2a98aj's remake of Pharros's NARC mod, NARC Remade - No Animals Report Crimes for Skyrim SE
+  https://www.nexusmods.com/skyrimspecialedition/mods/17946
+  I have not done all optional mods yet. Currently done Vanilla, Bruma & Forgotten City
+*/
+
 [
   {
     "Types": "Faction",

@@ -1,3 +1,7 @@
+/*
+  Forwards Water for ENB Shades of Skyrim water & LOD fields to make sure they not overwritten.
+*/
+
 [
   {
     "types": "WRLD",
