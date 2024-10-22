@@ -175,7 +175,7 @@ namespace GenericSynthesisPatcher
                             }
                             else if (rule is GSPGroup group)
                             {
-                                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Matched group. Processing Rules.");
+                                Global.TraceLogger?.Log(ClassLogCode, $"Matched group. Processing Rules.");
                                 int count = 0;
                                 foreach (var groupRule in group.Rules)
                                 {

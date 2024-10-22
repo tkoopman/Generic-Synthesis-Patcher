@@ -24,8 +24,21 @@ namespace GenericSynthesisPatcher
 
         public static LogWriter? TraceLogger { get; private set; } = null;
 
+        public static void ForceTrace ( int classLogCode, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
+        {
+            if (TraceLogger == null)
+            {
+                TraceLogger = new LogWriter(LogLevel.Trace, classLogCode, context, line: line);
+            }
+            else
+            {
+                TraceLogger.ClassLogCode = classLogCode;
+                TraceLogger.Line = line;
+            }
+        }
+
         public static void Processing ( int classLogCode, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
-            => TraceLogger = Settings.Value.TraceFormKey != null && Settings.Value.TraceFormKey == context.Record.FormKey
+            => TraceLogger = Settings.Value.TraceFormKey != null && Settings.Value.LogLevel == LogLevel.Trace && Settings.Value.TraceFormKey == context.Record.FormKey
              ? new LogWriter(LogLevel.Trace, classLogCode, context, line: line)
              : null;
 

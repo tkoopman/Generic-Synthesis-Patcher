@@ -1,5 +1,7 @@
 using System.ComponentModel;
 
+using DynamicData;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
@@ -32,11 +34,11 @@ namespace GenericSynthesisPatcher.Json.Data
             get => masters;
             set
             {
+                if (!value.SafeAny())
+                    return;
+
                 masters ??= [];
-                foreach (var v in value ?? [])
-                {
-                    masters.Add(v);
-                }
+                masters.Add(value);
             }
         }
 
@@ -46,11 +48,12 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             set
             {
+                if (!value.SafeAny())
+                    return;
+
                 masters ??= [];
                 foreach (var v in value ?? [])
-                {
                     masters.Add(v.Inverse());
-                }
             }
         }
 
@@ -145,18 +148,24 @@ namespace GenericSynthesisPatcher.Json.Data
         public virtual bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
         {
             var recordType = GetGSPRuleType(context.Record);
+            Global.TraceLogger?.Log(ClassLogCode, $"Check Types: {Types.HasFlag(recordType)} RecordType: {recordType}");
 
-            bool hasMaster = Masters?.Any(m => m.Value == context.Record.FormKey.ModKey) ?? false;
-            bool isNegMaster = Masters != null && Masters.First().Operation == ListLogic.NOT;
-            bool masterResult = isNegMaster ? !hasMaster : (Masters == null || hasMaster);
+            if (recordType == RecordTypes.UNKNOWN || !Types.HasFlag(recordType))
+                return false;
 
-            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"RecordType: {recordType}");
-            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check Types: {Types.HasFlag(recordType)}");
-            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check Masters: {masterResult} Has Masters: {Masters != null} Record Found: {hasMaster} Not: {isNegMaster}");
+            if (Masters != null)
+            {
+                bool hasEntry = Masters?.Any(m => m.Value == context.Record.FormKey.ModKey) ?? false;
+                bool isNeg = Masters != null && Masters.First().Operation == ListLogic.NOT;
+                bool result = isNeg ? !hasEntry : (Masters == null || hasEntry);
 
-            return recordType != RecordTypes.UNKNOWN
-                && Types.HasFlag(recordType)
-                && masterResult;
+                Global.TraceLogger?.Log(ClassLogCode, $"Check Masters: {result} Has Masters: {Masters != null} Record Found: {hasEntry} Not: {isNeg}");
+
+                if (!result)
+                    return false;
+            }
+
+            return true;
         }
 
         public virtual bool Validate ()

@@ -2,6 +2,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
+using DynamicData;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
@@ -23,13 +25,45 @@ namespace GenericSynthesisPatcher.Json.Data
     public class GSPRule : GSPBase
     {
         private const int ClassLogCode = 0x04;
+        private List<ListOperation>? editorIDs;
+        private List<FormKeyListOperation>? formIDs;
         private bool forwardIndexedByField;
         private ForwardTypes forwardType;
         private int HashCode = 0;
 
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? EditorID { get; set; }
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? EditorID
+        {
+            get => editorIDs;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                editorIDs ??= [];
+                editorIDs.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? EditorIDDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                editorIDs ??= [];
+                foreach (var v in value)
+                    editorIDs.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!EditorID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? EditorIDNot { set => EditorIDDel = value; }
 
         /// <summary>
         /// Add Fill action(s) to this rule.
@@ -40,8 +74,38 @@ namespace GenericSynthesisPatcher.Json.Data
         public Dictionary<FilterOperation, JToken> Fill { get; set; } = [];
 
         [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? FormID { get; set; }
+        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
+        public List<FormKeyListOperation>? FormID
+        {
+            get => formIDs;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                formIDs ??= [];
+                formIDs.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
+        public List<FormKeyListOperation>? FormIDDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                formIDs ??= [];
+                foreach (var v in value)
+                    formIDs.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!FormID", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
+        public List<FormKeyListOperation>? FormIDNot { set => FormIDDel = value; }
 
         /// <summary>
         /// Add Forward action(s) to this rule.
@@ -99,14 +163,6 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonProperty(PropertyName = "Merge", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, List<ModKeyListOperation>>))]
         public Dictionary<FilterOperation, List<ModKeyListOperation>?> Merge { get; set; } = [];
-
-        [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
-        public List<string>? NotEditorID { get; set; }
-
-        [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
-        public List<FormKey>? NotFormID { get; set; }
 
         [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
         public bool OnlyIfDefault { get; set; }
@@ -199,7 +255,7 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             if (cache.TryGetValue(key, out object? value))
             {
-                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Got value for {key.Value} from cache.");
+                Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
                 return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Value}");
             }
 
@@ -230,10 +286,6 @@ namespace GenericSynthesisPatcher.Json.Data
                     hash.AddEnumerable(EditorID);
                 if (FormID != null)
                     hash.AddEnumerable(FormID);
-                if (NotEditorID != null)
-                    hash.AddEnumerable(NotEditorID);
-                if (NotFormID != null)
-                    hash.AddEnumerable(NotFormID);
                 if (Match != null)
                     hash.AddDictionary(Match);
                 if (Fill != null)
@@ -261,28 +313,27 @@ namespace GenericSynthesisPatcher.Json.Data
                 return false;
 
             if (FormID != null)
-                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check FormID: {FormID != null && !FormID.Contains(context.Record.FormKey)}");
+            {
+                bool hasEntry = FormID?.Any(id => id.Value.Equals(context.Record.FormKey)) ?? false;
+                bool isNeg = FormID != null && FormID.First().Operation == ListLogic.NOT;
+                bool result = isNeg ? !hasEntry : (FormID == null || hasEntry);
+                Global.TraceLogger?.Log(ClassLogCode, $"Check FormID: {result} Has FormID: {FormID != null} Found: {hasEntry} Not: {isNeg}");
 
-            if (FormID != null && !FormID.Contains(context.Record.FormKey))
-                return false;
-
-            if (NotFormID != null)
-                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check FormID: {NotFormID != null && !NotFormID.Contains(context.Record.FormKey)}");
-
-            if (NotFormID != null && NotFormID.Contains(context.Record.FormKey))
-                return false;
+                if (!result)
+                    return false;
+            }
 
             if (EditorID != null)
-                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check EditorID: {MatchesEditorID(context, EditorID)}");
+            {
+                bool hasEntry = !context.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.MatchesValue(context.Record.EditorID));
+                bool isNeg = EditorID != null && EditorID.First().Operation == ListLogic.NOT;
+                bool result = isNeg ? !hasEntry : (EditorID == null || hasEntry);
 
-            if (!MatchesEditorID(context, EditorID))
-                return false;
+                Global.TraceLogger?.Log(ClassLogCode, $"Check EditorID: {result} Has EditorID: {EditorID != null} Record Found: {hasEntry} Not: {isNeg}");
 
-            if (NotEditorID != null)
-                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check NotEditorID: {!MatchesEditorID(context, NotEditorID)}");
-
-            if (NotEditorID != null && MatchesEditorID(context, NotEditorID))
-                return false;
+                if (!result)
+                    return false;
+            }
 
             foreach (var x in Match)
             {
@@ -290,7 +341,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
                 if (rcd != null && !rcd.Matches(context.Record, this, x.Key, rcd))
                 {
-                    LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}", context: context);
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}");
                     return false;
                 }
             }
@@ -310,36 +361,6 @@ namespace GenericSynthesisPatcher.Json.Data
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Checks basic filters.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="Origin"></param>
-        /// <returns>Returns true if context matches basic filters.</returns>
-        private static bool MatchesEditorID ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IReadOnlyList<string>? ids )
-        {
-            // Can assume true if no EditorID filter as GSPRule MUST contain 1 filter
-            // Which means one of the above checks must of have contained a matching value
-            if (ids == null)
-                return true;
-
-            foreach (string editorID in ids)
-            {
-                if (editorID.StartsWith('/') && editorID.EndsWith('/'))
-                {
-                    var matchedRegex = new Regex(editorID.Trim('/'), RegexOptions.IgnoreCase);
-                    if (matchedRegex.IsMatch(context.Record.EditorID ?? ""))
-                        return true;
-                }
-                else if (editorID.Equals(context.Record.EditorID))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }

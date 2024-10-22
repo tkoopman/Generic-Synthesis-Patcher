@@ -41,8 +41,8 @@ namespace GenericSynthesisPatcher.Helpers
                 LogHelper.Log(LogLevel, ClassLogCode, log, context: Context, line: Line);
         }
 
-        public void Log ( LogLevel logLevel, int classCode, string log, string? propertyName = null, [CallerLineNumber] int line = 0 )
-                    => LogHelper.Log(logLevel, classCode, log, context: Context, propertyName: propertyName, line: line);
+        public void Log ( int classCode, string log, string? propertyName = null, [CallerLineNumber] int line = 0 )
+                    => LogHelper.Log(LogLevel.Trace, classCode, log, context: Context, propertyName: propertyName, line: line);
 
         public override void Write ( char value )
         {

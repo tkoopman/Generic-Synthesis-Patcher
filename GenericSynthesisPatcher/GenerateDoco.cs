@@ -26,7 +26,7 @@ namespace GenericSynthesisPatcher
             ];
 
         private static readonly int[] NICols = [14, 30, 30, 30, 40];
-        private static readonly int[] PropCols = [30, 14, 30, 30];
+        private static readonly int[] PropCols = [30, 14, 5, 30, 30];
         private static readonly int[] TypesCols = [4, 14];
 
         internal static void Generate ()
@@ -140,6 +140,14 @@ namespace GenericSynthesisPatcher
                     var rcdType = rcd.GetType().GenericTypeArguments[0];
                     string? desc = null;
                     string exam = "";
+                    string MFFSM = string.Join<char>(string.Empty,
+                        [
+                            'M',
+                            rcd.CanFill() ? 'F' : '-',
+                            rcd.CanForward() ? 'F': '-',
+                            rcd.CanForwardSelfOnly() ? 'S': '-',
+                            rcd.CanMerge() ? 'M': '-',
+                        ]);
 
                     if (rcdType.IsGenericType)
                     {
@@ -205,7 +213,7 @@ namespace GenericSynthesisPatcher
                     if (desc == null)
                         throw new Exception("Fix Missing Doco");
 
-                    Properties.Add([names[0], string.Join(';', names[1..]), desc, exam]);
+                    Properties.Add([names[0], string.Join(';', names[1..]), MFFSM, desc, exam]);
                 }
 
                 // Output heading per record type
@@ -214,8 +222,8 @@ namespace GenericSynthesisPatcher
                 h += (recordTypes[k].Count > 1) ? $" - {recordTypes[k].Last()}" : "";
                 Console.WriteLine($"## {h}");
                 Console.WriteLine();
-                PrintTableRow(["Field", "Alt", "Value Type", "Example"], PropCols);
-                PrintTableRow(["", "", "", ""], PropCols, '-');
+                PrintTableRow(["Field", "Alt", "MFFSM", "Value Type", "Example"], PropCols);
+                PrintTableRow(["", "", "", "", ""], PropCols, '-');
 
                 // Output properties
                 Properties.Sort(( l, r ) => string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase));
