@@ -10,6 +10,8 @@ namespace GenericSynthesisPatcher.Json.Data
     [JsonConverter(typeof(GSPBaseConverter))]
     public class GSPGroup : GSPBase
     {
+        private const int ClassLogCode = 0x05;
+
         /// <summary>
         /// Rules contained in this group.
         /// NOTE: Rule Priority is ignored when in a group.
@@ -27,6 +29,9 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public override bool Validate ()
         {
+            if (!base.Validate())
+                return false;
+
             var AllTypes = RecordTypes.NONE;
 
             foreach (var rule in Rules)
@@ -34,11 +39,16 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!rule.ClaimAndValidate(this))
                     return false;
 
+                // Claiming rule will also Rule type if current None to either match Group Types or All if group types is None
+                // So AllTypes will be All if a single rule and group were None
+                // So can overwrite Group Types once all rules claimed safely.
                 AllTypes |= rule.Types;
             }
 
+            // Output message if groups types defined and all rule types defined but combined to less than current group types.
             if (Types != RecordTypes.NONE && Types != AllTypes)
-                LogHelper.Log(LogLevel.Information, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.", 0xFFD);
+                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.");
+
             Types = AllTypes;
 
             return true;

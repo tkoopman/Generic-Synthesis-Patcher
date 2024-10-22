@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 {
     internal class Enums : IAction
     {
-        private const int ClassLogPrefix = 0x900;
+        private const int ClassLogCode = 0x11;
 
         public static bool CanFill () => true;
 
@@ -21,12 +21,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanForwardSelfOnly () => false;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ValueKey valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static bool CanMerge () => false;
+
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
             string? setValueStr = rule.GetFillValueAs<string>(valueKey);
             if (context.Record == null || setValueStr == null)
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"No {rcd.PropertyName} to set.", ClassLogPrefix | 0x11);
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, $"No {rcd.PropertyName} to set.", context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -36,7 +38,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             var enumType = curValue.GetType();
             if (!Enum.TryParse(enumType, setValueStr, true, out object? setValue))
             {
-                LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", ClassLogPrefix | 0x12);
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -47,7 +49,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.SetProperty(patchedRecord, rcd.PropertyName, setValue))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, context, rcd.PropertyName, "Updated.", ClassLogPrefix | 0x13);
+            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", context: context, propertyName: rcd.PropertyName);
             return 1;
         }
 
@@ -55,10 +57,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd )
+        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
         {
             if (valueKey.Operation != FilterLogic.OR)
-                LogHelper.Log(LogLevel.Warning, check, rcd.PropertyName, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", 0x21);
+                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", record: check, propertyName: rcd.PropertyName);
 
             if (!Mod.GetProperty<Enum>(check, rcd.PropertyName, out var curValue))
                 return false;
@@ -94,5 +96,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 && Mod.GetProperty<Enum>(check, rcd.PropertyName, out var curValue)
                 && Mod.GetProperty<Enum>(origin, rcd.PropertyName, out var originValue)
                 && curValue == originValue;
+
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
     }
 }

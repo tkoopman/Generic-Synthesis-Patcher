@@ -8,7 +8,7 @@ namespace GenericSynthesisPatcher.Json.Operations
     public class ListOperation ( string value ) : ListOperation<string>(value);
 
     [JsonConverter(typeof(OperationsConverter))]
-    public class ListOperation<T> : ListOperationBase<T> where T : IConvertible
+    public class ListOperation<T> : ListOperationBase<ListOperation<T>, T> where T : IConvertible
     {
         public override ListLogic Operation { get; protected set; }
         public override T Value { get; protected set; }
@@ -18,5 +18,13 @@ namespace GenericSynthesisPatcher.Json.Operations
             (Operation, string? v) = Split(value, ValidPrefixes);
             Value = (T)((IConvertible)v).ToType(typeof(T), null);
         }
+
+        public ListOperation ( ListLogic operation, T value )
+        {
+            Operation = operation;
+            Value = value;
+        }
+
+        public override ListOperation<T> Inverse () => new(InverseOperation(), Value);
     }
 }

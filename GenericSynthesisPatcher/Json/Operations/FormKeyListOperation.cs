@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public class FormKeyListOperation : ListOperationBase<FormKey>
+    public class FormKeyListOperation : ListOperationBase<FormKeyListOperation, FormKey>
     {
         public override ListLogic Operation { get; protected set; }
 
@@ -24,8 +24,16 @@ namespace GenericSynthesisPatcher.Json.Operations
                   : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey");
         }
 
+        public FormKeyListOperation ( ListLogic operation, FormKey value )
+        {
+            Operation = operation;
+            Value = value;
+        }
+
         protected FormKeyListOperation ()
         { }
+
+        public override FormKeyListOperation Inverse () => new(InverseOperation(), Value);
     }
 
     public class FormKeyListOperation<TMajor> : FormKeyListOperation where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
@@ -44,12 +52,18 @@ namespace GenericSynthesisPatcher.Json.Operations
                   : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey or EditorID");
         }
 
+        public FormKeyListOperation ( ListLogic operation, FormKey value ) : base(operation, value)
+        {
+        }
+
+        public override FormKeyListOperation<TMajor> Inverse () => new(InverseOperation(), Value);
+
         public IFormLinkGetter<TMajor>? ToLinkGetter ()
         {
             if (formLinkGetter == null && !linked)
             {
                 if (!Global.State.LinkCache.TryResolve<TMajor>(Value, out var link))
-                    LogHelper.Log(LogLevel.Warning, $"Unable to find {Value} to link to.", 0xF12);
+                    LogHelper.Log(LogLevel.Warning, 0xFF, $"Unable to find {Value} to link to.");
 
                 formLinkGetter = link?.ToLinkGetter();
                 linked = true;

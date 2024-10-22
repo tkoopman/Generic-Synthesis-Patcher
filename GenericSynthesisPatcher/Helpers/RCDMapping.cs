@@ -10,6 +10,8 @@ namespace GenericSynthesisPatcher.Helpers
 {
     public class RCDMapping
     {
+        private const int ClassLogCode = 0x06;
+
         // This just to make sorting mappings easier by placing null after typeof alphabetically
         private const Type? zzNull = null;
 
@@ -123,7 +125,7 @@ namespace GenericSynthesisPatcher.Helpers
                                                             && (r.Key.RecordType == null || r.Key.RecordType.IsAssignableFrom(context.Record.GetType()))).Value;
 
             if (rcd == null)
-                LogHelper.Log(LogLevel.Trace, context, $"No RCD found - {valueKey}", 0xF41);
+                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"No RCD found - {valueKey}", context: context);
 
             return rcd;
         }

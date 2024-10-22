@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Json.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
-    public abstract class ListOperationBase<T> : OperationBase<ListLogic>
+    public abstract class ListOperationBase<TOperation, TValue> : OperationBase<TOperation, ListLogic>
+        where TOperation : ListOperationBase<TOperation, TValue>
     {
         protected static readonly IReadOnlyDictionary<char, ListLogic> ValidPrefixes = new ReadOnlyDictionary<char, ListLogic>(new Dictionary<char, ListLogic>() {
             { '-', ListLogic.DEL },
@@ -15,10 +16,10 @@ namespace GenericSynthesisPatcher.Json.Operations
             { '+', ListLogic.ADD } });
 
         public abstract ListLogic Operation { get; protected set; }
-        public abstract T Value { get; protected set; }
+        public abstract TValue Value { get; protected set; }
 
         public override bool Equals ( object? obj )
-            => obj is ListOperationBase<T> other
+            => obj is ListOperationBase<TOperation, TValue> other
             && Operation == other.Operation
             && (Value?.Equals(other.Value ?? default) ?? false);
 
@@ -34,5 +35,7 @@ namespace GenericSynthesisPatcher.Json.Operations
 
             return prefix != null ? prefix + Value?.ToString() : Value?.ToString();
         }
+
+        protected ListLogic InverseOperation () => Operation == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
     }
 }

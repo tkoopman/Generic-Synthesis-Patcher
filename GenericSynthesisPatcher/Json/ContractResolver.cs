@@ -1,4 +1,5 @@
 using GenericSynthesisPatcher.Json.Converters;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 
@@ -18,6 +19,8 @@ namespace GenericSynthesisPatcher.Json
                 contract.Converter = new FormKeyConverter();
             if (objectType == typeof(ModKey))
                 contract.Converter = new ModKeyConverter();
+            if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
+                contract.Converter = new OperationsConverter();
 
             return contract;
         }

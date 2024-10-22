@@ -12,12 +12,12 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public class FormKeyListOperationAdvanced : ListOperationBase<FormKey>
+    public class FormKeyListOperationAdvanced : ListOperationBase<FormKeyListOperationAdvanced, FormKey>
     {
         public override ListLogic Operation { get; protected set; }
 
         public Regex? Regex { get; protected set; }
-        public override FormKey Value { get; protected set; }
+        public override FormKey Value { get; protected set; } = FormKey.Null;
 
         public FormKeyListOperationAdvanced ( string value )
         {
@@ -33,17 +33,23 @@ namespace GenericSynthesisPatcher.Json.Operations
                   : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey");
         }
 
+        public FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex )
+        {
+            Operation = operation;
+            Value = value;
+            Regex = regex;
+        }
+
         protected FormKeyListOperationAdvanced ()
         { }
+
+        public override FormKeyListOperationAdvanced Inverse () => new(InverseOperation(), Value, Regex);
     }
 
     public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperationAdvanced where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
         private IFormLinkGetter<TMajor>? formLinkGetter;
         private bool linked = false;
-        public override ListLogic Operation { get; protected set; }
-
-        public override FormKey Value { get; protected set; }
 
         public FormKeyListOperationAdvanced ( string value ) : base()
         {
@@ -55,16 +61,25 @@ namespace GenericSynthesisPatcher.Json.Operations
                 return;
             }
 
-            Value = Mod.TryFindFormKey<TMajor>(v, out var formKey, out formLinkGetter) ? formKey
+            Value = Mod.TryFindFormKey(v, out var formKey, out formLinkGetter) ? formKey
                   : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey or EditorID");
         }
+
+        private FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex )
+        {
+            Operation = operation;
+            Value = value;
+            Regex = regex;
+        }
+
+        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(InverseOperation(), Value, Regex);
 
         public IFormLinkGetter<TMajor>? ToLinkGetter ()
         {
             if (formLinkGetter == null && !linked)
             {
                 if (!Global.State.LinkCache.TryResolve<TMajor>(Value, out var link))
-                    LogHelper.Log(LogLevel.Warning, $"Unable to find {Value} to link to.", 0xF12);
+                    LogHelper.Log(LogLevel.Warning, 0xFF, $"Unable to find {Value} to link to.");
 
                 formLinkGetter = link?.ToLinkGetter();
                 linked = true;

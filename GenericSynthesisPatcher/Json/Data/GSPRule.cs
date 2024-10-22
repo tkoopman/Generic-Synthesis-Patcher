@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -22,10 +22,7 @@ namespace GenericSynthesisPatcher.Json.Data
 {
     public class GSPRule : GSPBase
     {
-        internal Dictionary<ValueKey, JToken> fillValues = [];
-        internal Dictionary<ValueKey, JToken> forwardValues = [];
-        internal Dictionary<ValueKey, JToken> matchValues = [];
-        private const int ClassLogPrefix = 0xA00;
+        private const int ClassLogCode = 0x04;
         private bool forwardIndexedByField;
         private ForwardTypes forwardType;
         private int HashCode = 0;
@@ -39,17 +36,8 @@ namespace GenericSynthesisPatcher.Json.Data
         /// This is only used for adding to joint Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Fill", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Fill
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        fillValues.Add(new ValueKey(x.Key), x.Value);
-                }
-            }
-        }
+        [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
+        public Dictionary<FilterOperation, JToken> Fill { get; set; } = [];
 
         [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKey>))]
@@ -60,17 +48,8 @@ namespace GenericSynthesisPatcher.Json.Data
         /// This is only used for adding to joint Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Forward", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Forward
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        forwardValues.Add(new ValueKey(x.Key), x.Value);
-                }
-            }
-        }
+        [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
+        public Dictionary<FilterOperation, JToken> Forward { get; set; } = [];
 
         /// <summary>
         /// Changes JSON format for Forward from being the default "mod.esp" : [ "field1", "field2" ]
@@ -111,17 +90,15 @@ namespace GenericSynthesisPatcher.Json.Data
         /// This is only used for adding to joint Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Matches", NullValueHandling = NullValueHandling.Ignore)]
-        public JObject? Match
-        {
-            set
-            {
-                foreach (var x in value ?? [])
-                {
-                    if (x.Value != null)
-                        matchValues.Add(new ValueKey(x.Key), x.Value);
-                }
-            }
-        }
+        [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
+        public Dictionary<FilterOperation, JToken> Match { get; set; } = [];
+
+        /// <summary>
+        /// List of merge actions to perform.
+        /// </summary>
+        [JsonProperty(PropertyName = "Merge", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(DictionaryConverter<FilterOperation, List<ModKeyListOperation>>))]
+        public Dictionary<FilterOperation, List<ModKeyListOperation>?> Merge { get; set; } = [];
 
         [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<string>))]
@@ -147,7 +124,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 throw new Exception($"Record under group tries to filter for Type(s) [{Types & ~Group.Types}] that are excluded at by group.");
 
             if (Priority != 0)
-                LogHelper.Log(LogLevel.Information, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", 0x00);
+                LogHelper.Log(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.");
 
             bool valid = Validate();
             if (Types == RecordTypes.NONE)
@@ -158,15 +135,15 @@ namespace GenericSynthesisPatcher.Json.Data
 
         #region GetValues
 
-        private readonly Dictionary<ValueKey, object?> fillCache = [];
-        private readonly Dictionary<ValueKey, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
-        private readonly Dictionary<ValueKey, object?> matchCache = [];
+        private readonly Dictionary<FilterOperation, object?> fillCache = [];
+        private readonly Dictionary<FilterOperation, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
+        private readonly Dictionary<FilterOperation, object?> matchCache = [];
 
-        public T? GetFillValueAs<T> ( ValueKey key ) => GetValueAs<T>(fillValues, fillCache, key);
+        public T? GetFillValueAs<T> ( FilterOperation key ) => GetValueAs<T>(Fill, fillCache, key);
 
-        public T? GetMatchValueAs<T> ( ValueKey key ) => GetValueAs<T>(matchValues, matchCache, key);
+        public T? GetMatchValueAs<T> ( FilterOperation key ) => GetValueAs<T>(Match, matchCache, key);
 
-        public bool TryGetForward ( ValueKey key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields )
+        public bool TryGetForward ( FilterOperation key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields )
         {
             if (forwardCache.TryGetValue(key, out var value))
             {
@@ -187,16 +164,16 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (ForwardIndexedByField)
             {
-                buildFields.Add(key.Key);
-                foreach (var mod in GetValueAs<List<ModKey>>(forwardValues, [], key) ?? [])
+                buildFields.Add(key.Value);
+                foreach (var mod in GetValueAs<List<ModKey>>(Forward, [], key) ?? [])
                     buildMods.Add(mod, Global.State.LoadOrder[mod]);
             }
             else
             {
-                if (ModKey.TryFromFileName(new FileName(key.Key), out var mod))
+                if (ModKey.TryFromFileName(new FileName(key.Value), out var mod))
                     buildMods.Add(mod, Global.State.LoadOrder[mod]);
 
-                buildFields = GetValueAs<List<string>>(forwardValues, [], key) ?? buildFields;
+                buildFields = GetValueAs<List<string>>(Forward, [], key) ?? buildFields;
             }
 
             if (buildMods.Count != 0 && buildFields.Count != 0)
@@ -218,21 +195,17 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.
         /// </summary>
-        private static T? GetValueAs<T> ( Dictionary<ValueKey, JToken> values, Dictionary<ValueKey, object?> cache, ValueKey key )
+        private static T? GetValueAs<T> ( Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key )
         {
             if (cache.TryGetValue(key, out object? value))
             {
-                //LogHelper.Log(LogLevel.Trace, $"Got value for {key.Key} from cache.", ClassLogPrefix | 0x21);
-                return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Key}");
+                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Got value for {key.Value} from cache.");
+                return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Value}");
             }
 
             if (values.TryGetValue(key, out var jsonValue))
             {
-                var o = jsonValue.Type == JTokenType.Null ? default
-                      : typeof(T) == typeof(string) && jsonValue.Type == JTokenType.String ? (T?)(object)jsonValue.ToString()
-                      : typeof(T).IsAssignableTo(typeof(IEnumerable)) && jsonValue.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(jsonValue).CreateReader())
-                      : jsonValue.Type != JTokenType.String ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(jsonValue.CreateReader())
-                      : throw new JsonSerializationException($"Failed to parse string into type {typeof(T).FullName} - {jsonValue.Type}");
+                var o = jsonValue.Deserialize<T>();
 
                 cache.Add(key, o);
                 return o;
@@ -261,12 +234,12 @@ namespace GenericSynthesisPatcher.Json.Data
                     hash.AddEnumerable(NotEditorID);
                 if (NotFormID != null)
                     hash.AddEnumerable(NotFormID);
-                if (matchValues != null)
-                    hash.AddDictionary(matchValues);
-                if (fillValues != null)
-                    hash.AddDictionary(fillValues);
-                if (forwardValues != null)
-                    hash.AddDictionary(forwardValues);
+                if (Match != null)
+                    hash.AddDictionary(Match);
+                if (Fill != null)
+                    hash.AddDictionary(Fill);
+                if (Forward != null)
+                    hash.AddDictionary(Forward);
 
                 HashCode = hash.ToHashCode();
             }
@@ -287,39 +260,37 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Matches(context))
                 return false;
 
-            bool trace = Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey);
-
-            if (trace && FormID != null)
-                LogHelper.Log(LogLevel.Trace, context, $"Check FormID: {FormID != null && !FormID.Contains(context.Record.FormKey)}", ClassLogPrefix | 0x10);
+            if (FormID != null)
+                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check FormID: {FormID != null && !FormID.Contains(context.Record.FormKey)}");
 
             if (FormID != null && !FormID.Contains(context.Record.FormKey))
                 return false;
 
-            if (trace && NotFormID != null)
-                LogHelper.Log(LogLevel.Trace, context, $"Check FormID: {NotFormID != null && !NotFormID.Contains(context.Record.FormKey)}", ClassLogPrefix | 0x10);
+            if (NotFormID != null)
+                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check FormID: {NotFormID != null && !NotFormID.Contains(context.Record.FormKey)}");
 
             if (NotFormID != null && NotFormID.Contains(context.Record.FormKey))
                 return false;
 
-            if (trace && EditorID != null)
-                LogHelper.Log(LogLevel.Trace, context, $"Check EditorID: {MatchesEditorID(context, EditorID)}", ClassLogPrefix | 0x10);
+            if (EditorID != null)
+                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check EditorID: {MatchesEditorID(context, EditorID)}");
 
             if (!MatchesEditorID(context, EditorID))
                 return false;
 
-            if (trace && NotEditorID != null)
-                LogHelper.Log(LogLevel.Trace, context, $"Check NotEditorID: {!MatchesEditorID(context, NotEditorID)}", ClassLogPrefix | 0x10);
+            if (NotEditorID != null)
+                Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check NotEditorID: {!MatchesEditorID(context, NotEditorID)}");
 
             if (NotEditorID != null && MatchesEditorID(context, NotEditorID))
                 return false;
 
-            foreach (var x in matchValues)
+            foreach (var x in Match)
             {
-                var rcd = RCDMapping.FindRecordCallData(context, x.Key.Key);
+                var rcd = RCDMapping.FindRecordCallData(context, x.Key.Value);
 
                 if (rcd != null && !rcd.Matches(context.Record, this, x.Key, rcd))
                 {
-                    LogHelper.Log(LogLevel.Trace, context, $"Failed on match. Field: {x.Key.Key} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}", ClassLogPrefix | 0x32);
+                    LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}", context: context);
                     return false;
                 }
             }
@@ -329,9 +300,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public override bool Validate ()
         {
+            if (!base.Validate())
+                return false;
+
             if (FormID == null && EditorID == null && Types == RecordTypes.NONE)
             {
-                LogHelper.Log(LogLevel.Critical, "Each rule in config must contain at least one basic filter (types, editorID or formID)", 0xFE);
+                LogHelper.Log(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)");
                 return false;
             }
 

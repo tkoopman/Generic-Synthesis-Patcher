@@ -1,5 +1,8 @@
+using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Operations;
 
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -13,6 +16,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public static abstract bool CanForward ();
 
         public static abstract bool CanForwardSelfOnly ();
+
+        public static abstract bool CanMerge ();
 
         /// <summary>
         /// Static fill of value from JSON rule
@@ -30,7 +35,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// </returns>
         public static abstract int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context,
                                            GSPRule rule,
-                                           ValueKey valueKey,
+                                           FilterOperation valueKey,
                                            RecordCallData rcd,
                                            ref ISkyrimMajorRecord? patchedRecord );
 
@@ -81,7 +86,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="rule">Rule to check against</param>
         /// <param name="rcd">Field currently checking</param>
         /// <returns>True if this field matches</returns>
-        public static abstract bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, ValueKey valueKey, RecordCallData rcd );
+        public static abstract bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd );
 
         /// <summary>
         /// Check if field matches in both current context and origin.
@@ -91,5 +96,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="rcd">Field currently checking</param>
         /// <returns>True if this field matches</returns>
         public static abstract bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd );
+
+        public static abstract int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
     }
 }

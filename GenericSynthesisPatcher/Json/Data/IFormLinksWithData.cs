@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
@@ -12,21 +13,25 @@ namespace GenericSynthesisPatcher.Json.Data
     {
         public FormKeyListOperation FormKey { get; }
 
-        public abstract static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source );
+        public abstract static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source );
+
+        public static abstract bool CanMerge ();
 
         public abstract static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right );
 
         public abstract static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key );
 
-        public abstract static List<T>? GetFillValueAs ( GSPRule rule, ValueKey key );
+        public abstract static List<T>? GetFillValueAs ( GSPRule rule, FilterOperation key );
 
         public abstract static FormKey GetFormKey ( IFormLinkContainerGetter from );
 
-        public abstract static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove );
+        public static abstract int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
 
-        public abstract static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? newList );
+        public abstract static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove );
 
-        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch );
+        public abstract static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? newList );
+
+        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch );
 
         public bool DataEquals ( IFormLinkContainerGetter other );
 

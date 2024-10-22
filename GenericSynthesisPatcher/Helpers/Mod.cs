@@ -15,7 +15,7 @@ namespace GenericSynthesisPatcher.Helpers
 {
     internal static partial class Mod
     {
-        private const int ClassLogPrefix = 0x100;
+        private const int ClassLogCode = 0x02;
 
         /// <summary>
         /// Finds the master record of the current context record.
@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static string FixFormKey ( string input ) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
-        public static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value ) => GetProperty<T>(fromRecord, propertyName, out value, out _);
+        public static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value ) => GetProperty(fromRecord, propertyName, out value, out _);
 
         public static bool GetPropertyForEditing<T> ( IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value )
         {
@@ -45,32 +45,32 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (_value == null || _value is not T outValue)
             {
-                LogHelper.Log(LogLevel.Error, patchRecord, propertyName, $"Failed to construct new {property.PropertyType} value for editing.", ClassLogPrefix | 0x32);
+                LogHelper.Log(LogLevel.Error, ClassLogCode, $"Failed to construct new {property.PropertyType} value for editing.", record: patchRecord, propertyName: propertyName);
                 return false;
             }
 
             value = outValue;
             property.SetValue(patchRecord, _value);
 
-            LogHelper.Log(LogLevel.Trace, patchRecord, propertyName, "Created new value for editing.", ClassLogPrefix | 0x33);
+            LogHelper.Log(LogLevel.Trace, ClassLogCode, "Created new value for editing.", record: patchRecord, propertyName: propertyName);
             return true;
         }
 
-        public static bool SetProperty<T> ( IMajorRecord patch, string propertyName, T? value )
+        public static bool SetProperty<T> ( IMajorRecord patchRecord, string propertyName, T? value )
         {
-            var property = patch.GetType().GetProperty(propertyName);
+            var property = patchRecord.GetType().GetProperty(propertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, patch, propertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x51);
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.MissingProperty, record: patchRecord, propertyName: propertyName);
                 return false;
             }
 
             if (value == null)
-                property.SetValue(patch, null);
+                property.SetValue(patchRecord, null);
             else if (value is string strValue && property.PropertyType == typeof(TranslatedString))
-                property.SetValue(patch, new TranslatedString(Language.English, strValue));
+                property.SetValue(patchRecord, new TranslatedString(Language.English, strValue));
             else
-                property.SetValue(patch, value);
+                property.SetValue(patchRecord, value);
 
             return true;
         }
@@ -85,7 +85,7 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 formKey = record.FormKey;
                 link = record.ToLinkGetter();
-                LogHelper.Log(LogLevel.Trace, $"Mapped EditorID \"{input}\" to FormKey {formKey}", ClassLogPrefix | 0x61);
+                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
                 return true;
             }
 
@@ -98,7 +98,7 @@ namespace GenericSynthesisPatcher.Helpers
             property = fromRecord.GetType().GetProperty(propertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, fromRecord, propertyName, LogHelper.MissingProperty, ClassLogPrefix | 0x41);
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.MissingProperty, record: fromRecord, propertyName: propertyName);
                 return false;
             }
 
@@ -114,7 +114,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (_value is not T __value)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, fromRecord, propertyName, typeof(T).Name, _value.GetType().Name, ClassLogPrefix | 0x42);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, fromRecord, propertyName, typeof(T).Name, _value.GetType().Name);
                 return false;
             }
 

@@ -2,6 +2,7 @@ using System.ComponentModel;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -19,11 +20,43 @@ namespace GenericSynthesisPatcher.Json.Data
     [JsonConverter(typeof(GSPBaseConverter))]
     public abstract class GSPBase : IComparable<GSPBase>
     {
-        private const int ClassLogPrefix = 0xB00;
+        private const int ClassLogCode = 0x03;
+
+        // Only works due to knowing only will be set by deserialization as will always just add to list
+        private List<ModKeyListOperation>? masters = null;
 
         [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
-        public List<ModKey>? Masters { get; private set; }
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? Masters
+        {
+            get => masters;
+            set
+            {
+                masters ??= [];
+                foreach (var v in value ?? [])
+                {
+                    masters.Add(v);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "-Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? MastersDel
+        {
+            set
+            {
+                masters ??= [];
+                foreach (var v in value ?? [])
+                {
+                    masters.Add(v.Inverse());
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "!Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
 
         [DefaultValue(0)]
         [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -113,19 +146,29 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             var recordType = GetGSPRuleType(context.Record);
 
-            if (Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey))
-            {
-                LogHelper.Log(LogLevel.Trace, context, $"RecordType: {recordType}", ClassLogPrefix | 0x10);
-                LogHelper.Log(LogLevel.Trace, context, $"Check Types: {Types.HasFlag(recordType)}", ClassLogPrefix | 0x10);
-                LogHelper.Log(LogLevel.Trace, context, $"Check Masters: {Masters == null || Masters.Contains(context.Record.FormKey.ModKey)}", ClassLogPrefix | 0x10);
-            }
+            bool hasMaster = Masters?.Any(m => m.Value == context.Record.FormKey.ModKey) ?? false;
+            bool isNegMaster = Masters != null && Masters.First().Operation == ListLogic.NOT;
+            bool masterResult = isNegMaster ? !hasMaster : (Masters == null || hasMaster);
+
+            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"RecordType: {recordType}");
+            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check Types: {Types.HasFlag(recordType)}");
+            Global.TraceLogger?.Log(LogLevel.Trace, ClassLogCode, $"Check Masters: {masterResult} Has Masters: {Masters != null} Record Found: {hasMaster} Not: {isNegMaster}");
 
             return recordType != RecordTypes.UNKNOWN
                 && Types.HasFlag(recordType)
-                && (Masters == null || Masters.Contains(context.Record.FormKey.ModKey));
+                && masterResult;
         }
 
-        public abstract bool Validate ();
+        public virtual bool Validate ()
+        {
+            if (Masters.SafeAny() && Masters.Any(m => m.Operation == ListLogic.NOT) && Masters.Any(m => m.Operation != ListLogic.NOT))
+            {
+                LogHelper.Log(LogLevel.Error, ClassLogCode, "Rule includes both include and exclude masters, which does not compute.");
+                return false;
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Validates Lists to make sure it is null if list contains 0 entries.
