@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
+using Mutagen.Bethesda.Plugins.Exceptions;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
@@ -24,7 +26,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanForwardSelfOnly () => true;
 
-        public static bool CanMerge () => false;
+        public static bool CanMerge () => true;
 
         public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
         {
@@ -237,7 +239,60 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue)
                 && RecordsMatch(checkValue, originValue);
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        {
+            _ = Global.UpdateTrace(ClassLogCode);
+
+            var root = RecordGraph<IFormLinkGetter<T>>.Create(
+                context.Record.FormKey,
+                context.Record.Registration.GetterType,
+                rule.Merge[valueKey],
+                list => Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(list.Record, rcd.PropertyName, out var value) ? value : null,
+                item => $"{item.FormKey}");
+
+            if (root == null)
+            {
+                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", context: context, propertyName: rcd.PropertyName);
+                return -1;
+            }
+
+            return root.Merge(out var newList) ? Replace(context, rcd, ref patchedRecord, newList) : 0;
+        }
+
+        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkGetter<T>>? _newList )
+        {
+            if (_newList is not IReadOnlyList<IFormLinkGetter<T>> newList || !Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(context.Record, rcd.PropertyName, out var curList))
+            {
+                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to replace entries", context: context, propertyName: rcd.PropertyName);
+                return -1;
+            }
+
+            var add = newList.WhereNotIn(curList);
+            var del = curList.WhereNotIn(newList);
+
+            if (!add.Any() && !del.Any())
+                return 0;
+
+            try
+            {
+                patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(patch, rcd.PropertyName, out var list))
+                    return -1;
+
+                foreach (var d in del)
+                    _ = list.Remove(d);
+
+                foreach (var a in add)
+                    list.Add(a);
+            }
+            catch (RecordException ex)
+            {
+                LogHelper.Log(LogLevel.Critical, ClassLogCode, ex.Message, context: context, propertyName: rcd.PropertyName);
+                return -1;
+            }
+
+            return add.Count() + del.Count();
+        }
 
         private static bool RecordsMatch ( IReadOnlyList<IFormLinkGetter<T>>? left, IReadOnlyList<IFormLinkGetter<T>>? right )
         {

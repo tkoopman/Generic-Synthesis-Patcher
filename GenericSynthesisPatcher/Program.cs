@@ -205,6 +205,8 @@ namespace GenericSynthesisPatcher
             }
 
             LogHelper.Log(LogLevel.Information, ClassLogCode, $"Completed");
+            LogHelper.PrintCounts();
+            Console.WriteLine();
 
             Console.WriteLine($"Record Type Totals");
             Console.WriteLine($"{"Type",-10} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");

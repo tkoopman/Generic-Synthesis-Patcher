@@ -15,7 +15,7 @@ using Noggog.StructuredStrings;
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class RecordNode<TItem> : IRecordNode
-        where TItem : class, IPrintable
+        where TItem : class
     {
         protected readonly List<TItem> workingList;
         private readonly List<RecordNode<TItem>> overwrites = [];

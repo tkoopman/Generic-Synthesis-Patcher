@@ -13,7 +13,7 @@ using Noggog.StructuredStrings;
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class RecordGraph<TItem> : RecordNode<TItem>, IRecordNode
-        where TItem : class, IPrintable
+        where TItem : class
     {
         protected RecordGraph ( IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate ) : base(context, modKeys, predicate, debugPredicate)
         {
