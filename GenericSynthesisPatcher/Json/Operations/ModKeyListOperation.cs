@@ -1,13 +1,4 @@
-using GenericSynthesisPatcher.Helpers;
-
-using Microsoft.Extensions.Logging;
-
-using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
-
-using Newtonsoft.Json;
 
 using Noggog;
 

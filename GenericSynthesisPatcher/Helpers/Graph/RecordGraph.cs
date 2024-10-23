@@ -8,7 +8,6 @@ using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
-using Noggog.StructuredStrings;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {

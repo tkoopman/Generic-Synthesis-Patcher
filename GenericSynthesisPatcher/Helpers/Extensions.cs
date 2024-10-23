@@ -6,8 +6,6 @@ using DynamicData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-using ValveKeyValue;
-
 namespace GenericSynthesisPatcher.Helpers
 {
     public static class Extensions

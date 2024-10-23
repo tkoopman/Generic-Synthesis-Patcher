@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Text.Json.Nodes;
-
 using GenericSynthesisPatcher.Helpers;
 
 using Newtonsoft.Json;

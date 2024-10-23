@@ -2,8 +2,6 @@ using System.Text.RegularExpressions;
 
 using GenericSynthesisPatcher.Json.Converters;
 
-using Microsoft.Extensions.Logging;
-
 using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Operations

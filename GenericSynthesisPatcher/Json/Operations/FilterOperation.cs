@@ -1,9 +1,6 @@
 using System.Collections.ObjectModel;
 
 using GenericSynthesisPatcher.Json.Converters;
-using GenericSynthesisPatcher.Json.Data;
-
-using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
