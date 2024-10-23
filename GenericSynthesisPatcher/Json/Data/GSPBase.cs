@@ -8,7 +8,6 @@ using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -27,7 +26,13 @@ namespace GenericSynthesisPatcher.Json.Data
         // Only works due to knowing only will be set by deserialization as will always just add to list
         private List<ModKeyListOperation>? masters = null;
 
-        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonIgnore]
+        public int ConfigFile { get; internal set; }
+
+        [JsonIgnore]
+        public int ConfigRule { get; internal set; }
+
+        [JsonProperty(PropertyName = "Masters")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? Masters
         {
@@ -42,7 +47,7 @@ namespace GenericSynthesisPatcher.Json.Data
             }
         }
 
-        [JsonProperty(PropertyName = "-Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "-Masters")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? MastersDel
         {
@@ -57,15 +62,19 @@ namespace GenericSynthesisPatcher.Json.Data
             }
         }
 
-        [JsonProperty(PropertyName = "!Masters", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "!Masters")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
 
         [DefaultValue(0)]
-        [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "Priority")]
         public int Priority { get; private set; }
 
-        [JsonProperty(PropertyName = "Types", NullValueHandling = NullValueHandling.Ignore)]
+        [DefaultValue(false)]
+        [JsonProperty(PropertyName = "Trace")]
+        public bool Trace { get; set; }
+
+        [JsonProperty(PropertyName = "Types")]
         [JsonConverter(typeof(FlagConverter))]
         public RecordTypes Types { get; protected set; }
 
@@ -170,6 +179,9 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public virtual bool Validate ()
         {
+            if (Trace)
+                LogHelper.Log(LogLevel.Trace, ClassLogCode, "Trace logging enabled for this rule.", rule: this);
+
             if (Masters.SafeAny() && Masters.Any(m => m.Operation == ListLogic.NOT) && Masters.Any(m => m.Operation != ListLogic.NOT))
             {
                 LogHelper.Log(LogLevel.Error, ClassLogCode, "Rule includes both include and exclude masters, which does not compute.");

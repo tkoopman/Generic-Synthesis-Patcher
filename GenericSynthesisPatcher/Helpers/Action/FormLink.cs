@@ -24,47 +24,47 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanMerge () => false;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IFormLinkGetter<T>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue))
+                if (!Mod.GetProperty<IFormLinkGetter<T>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue))
                     return -1;
 
                 var formKey = rule.GetFillValueAs<FormKeyListOperation<T>>(valueKey);
                 if (formKey?.ToLinkGetter() == null)
                 {
-                    LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", context: context, propertyName: rcd.PropertyName);
+                    LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", rule: rule, context: context, propertyName: rcd.PropertyName);
                     return -1;
                 }
 
-                return Fill(context, rcd, curValue, formKey.ToLinkGetter(), ref patchedRecord);
+                return Fill(context, rcd, curValue, formKey.ToLinkGetter(), ref patchRecord);
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                return Mod.GetProperty<IFormLinkGetter<T>>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue)
+                return Mod.GetProperty<IFormLinkGetter<T>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue)
                     && Mod.GetProperty<IFormLinkGetter<T>>(forwardContext.Record, rcd.PropertyName, out var newValue)
-                    ? Fill(context, rcd, curValue, newValue, ref patchedRecord)
+                    ? Fill(context, rcd, curValue, newValue, ref patchRecord)
                     : -1;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
 
         public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
         {
             if (valueKey.Operation != FilterLogic.OR)
-                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", record: check, propertyName: rcd.PropertyName);
+                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", rule: rule, record: check, propertyName: rcd.PropertyName);
 
             if (check is not IFormLinkContainerGetter)
                 return false;
@@ -103,18 +103,18 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 && ((curValue == null && originValue == null)
                    || (curValue != null && originValue != null && curValue.FormKey.Equals(originValue.FormKey)));
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
 
-        private static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, IFormLinkGetter<T>? curValue, IFormLinkGetter<T>? newValue, ref ISkyrimMajorRecord? patchedRecord )
+        private static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, IFormLinkGetter<T>? curValue, IFormLinkGetter<T>? newValue, ref ISkyrimMajorRecord? patchRecord )
         {
             if (curValue != null && newValue != null && curValue.FormKey.Equals(newValue.FormKey))
             {
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, LogHelper.PropertyIsEqual, context: context, propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: rcd.PropertyName);
                 return 0;
             }
 
-            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.SetProperty(patchedRecord, rcd.PropertyName, newValue))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newValue))
                 return -1;
 
             LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", context: context, propertyName: rcd.PropertyName);

@@ -34,8 +34,12 @@ namespace GenericSynthesisPatcher.Json.Data
 
             var AllTypes = RecordTypes.NONE;
 
+            int ruleCount = 1;
             foreach (var rule in Rules)
             {
+                rule.ConfigFile = ConfigFile;
+                rule.ConfigRule = ruleCount++;
+
                 if (!rule.ClaimAndValidate(this))
                     return false;
 
@@ -47,7 +51,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             // Output message if groups types defined and all rule types defined but combined to less than current group types.
             if (Types != RecordTypes.NONE && Types != AllTypes)
-                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.");
+                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.", rule: this);
 
             Types = AllTypes;
 

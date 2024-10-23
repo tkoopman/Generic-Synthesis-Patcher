@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
 
 using DynamicData;
 
@@ -180,7 +179,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 throw new Exception($"Record under group tries to filter for Type(s) [{Types & ~Group.Types}] that are excluded at by group.");
 
             if (Priority != 0)
-                LogHelper.Log(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.");
+                LogHelper.Log(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
 
             bool valid = Validate();
             if (Types == RecordTypes.NONE)
@@ -356,7 +355,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (FormID == null && EditorID == null && Types == RecordTypes.NONE)
             {
-                LogHelper.Log(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)");
+                LogHelper.Log(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)", rule: this);
                 return false;
             }
 

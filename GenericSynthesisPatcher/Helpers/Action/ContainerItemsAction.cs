@@ -1,7 +1,5 @@
 using System.ComponentModel;
 
-using DynamicData;
-
 using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
@@ -32,7 +30,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         FormKeyListOperation IFormLinksWithData<ContainerItemsAction>.FormKey => FormKey;
 
-        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
+        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter source )
         {
             if (source is not IContainerEntryGetter sourceRecord)
             {
@@ -44,8 +42,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
             containerEntry.Item.Item.FormKey = sourceRecord.Item.Item.FormKey;
             containerEntry.Item.Count = sourceRecord.Item.Count;
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patch, rcd.PropertyName, out var items))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patchRecord, rcd.PropertyName, out var items))
                 return -1;
 
             items.Add(containerEntry);
@@ -69,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             _ = Global.UpdateTrace(ClassLogCode);
 
@@ -82,14 +80,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (root == null)
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", context: context, propertyName: rcd.PropertyName);
+                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", rule: rule, context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
-            return root.Merge(out var newList) ? Replace(context, rcd, ref patchedRecord, newList) : 0;
+            return root.Merge(out var newList) ? Replace(context, rcd, ref patchRecord, newList) : 0;
         }
 
-        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
+        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter remove )
         {
             if (remove is not IContainerEntryGetter sourceRecord)
                 return -1;
@@ -98,8 +96,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
             containerEntry.Item.Item.FormKey = sourceRecord.Item.Item.FormKey;
             containerEntry.Item.Count = sourceRecord.Item.Count;
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patch, rcd.PropertyName, out var items))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patchRecord, rcd.PropertyName, out var items))
                 return -1;
 
             if (items.Remove(containerEntry))
@@ -112,9 +110,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 0;
         }
 
-        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? _newList )
+        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IEnumerable<IFormLinkContainerGetter>? _newList )
         {
-            if (_newList is not IReadOnlyList<IContainerEntryGetter> newList || !Mod.GetProperty<IReadOnlyList<IContainerEntryGetter>>(context.Record, rcd.PropertyName, out var curList))
+            if (_newList is not IReadOnlyList<IContainerEntryGetter> newList || !Mod.GetProperty<IReadOnlyList<IContainerEntryGetter>>(patchRecord ?? context.Record, rcd.PropertyName, out var curList))
             {
                 LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to replace items", context: context, propertyName: rcd.PropertyName);
                 return -1;
@@ -126,27 +124,27 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!add.Any() && !del.Any())
                 return 0;
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patch, rcd.PropertyName, out _))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patchRecord, rcd.PropertyName, out _))
                 return -1;
 
             foreach (var d in del)
-                _ = Remove(context, rcd, ref patch, d);
+                _ = Remove(context, rcd, ref patchRecord, d);
 
             foreach (var a in add)
-                _ = Add(context, rcd, ref patch, a);
+                _ = Add(context, rcd, ref patchRecord, a);
 
             return add.Count() + del.Count();
         }
 
-        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch )
+        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             var containerEntry = new ContainerEntry();
             containerEntry.Item.Item.FormKey = FormKey.Value;
             containerEntry.Item.Count = Count;
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patch, rcd.PropertyName, out var items))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(patchRecord, rcd.PropertyName, out var items))
                 return -1;
 
             items.Add(containerEntry);

@@ -10,6 +10,7 @@ using GenericSynthesisPatcher.Json.Operations;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -24,6 +25,7 @@ namespace GenericSynthesisPatcher
     public partial class Program
     {
         private const int ClassLogCode = 0x01;
+        private static readonly List<(RecordTypes Type, FormKey FormKey, GSPRule Rule, RecordCallData Rcd, int Changes)> RecordUpdates = [];
         private static RecordTypes EnabledTypes;
 
         public static async Task<int> Main ( string[] args )
@@ -50,7 +52,7 @@ namespace GenericSynthesisPatcher
             if (Global.Settings.Value.LogLevel != LogLevel.Trace)
                 Global.Settings.Value.TraceFormKey = null;
             else
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, "Extra logging for FormKey: " + (Global.Settings.Value.TraceFormKey.ToString() ?? "null"));
+                LogHelper.Log(LogLevel.Trace, ClassLogCode, "Extra logging for FormKey: " + (Global.Settings.Value.TraceFormKey?.ToString() ?? "None"));
 
             var Rules = LoadRules();
             if (Rules.Count == 0)
@@ -145,9 +147,7 @@ namespace GenericSynthesisPatcher
 
                 foreach (var context in ProcessTypeRecords)
                 {
-                    Global.Processing(ClassLogCode, context);
-
-                    var recordType = GSPRule.GetGSPRuleType(context.Record);
+                    var recordType = GSPBase.GetGSPRuleType(context.Record);
                     if (subTotals.TryGetValue(recordType, out var counts))
                     {
                         counts.Total++;
@@ -158,13 +158,17 @@ namespace GenericSynthesisPatcher
                         subTotals.Add(recordType, counts);
                     }
 
+                    ISkyrimMajorRecord? patchRecord = null;
+
                     foreach (var rule in Rules)
                     {
+                        Global.Processing(ClassLogCode, rule, context);
+
                         if (rule.Matches(context))
                         {
                             if (rule is GSPRule gspRule)
                             {
-                                int changed = ProcessRule(context, gspRule);
+                                int changed = ProcessRule(context, gspRule, ref patchRecord);
                                 if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                 {
                                     counts.Matched++;
@@ -179,10 +183,12 @@ namespace GenericSynthesisPatcher
                                 int count = 0;
                                 foreach (var groupRule in group.Rules)
                                 {
+                                    Global.Processing(ClassLogCode, groupRule, context);
+
                                     count++;
                                     if (groupRule.Matches(context))
                                     {
-                                        int changed = ProcessRule(context, groupRule);
+                                        int changed = ProcessRule(context, groupRule, ref patchRecord);
                                         if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                         {
                                             counts.Matched++;
@@ -192,7 +198,8 @@ namespace GenericSynthesisPatcher
 
                                             if (group.SingleMatch)
                                             {
-                                                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Skipping remaining rules in group due to SingleMatch. Checked {count}/{group.Rules.Count}", context: context);
+                                                if (count != group.Rules.Count)
+                                                    Global.TraceLogger?.Log(ClassLogCode, $"Skipping remaining rules in group due to SingleMatch. Checked {count}/{group.Rules.Count}");
                                                 break;
                                             }
                                         }
@@ -206,6 +213,15 @@ namespace GenericSynthesisPatcher
 
             LogHelper.Log(LogLevel.Information, ClassLogCode, $"Completed");
             LogHelper.PrintCounts();
+            Console.WriteLine();
+
+            var updates = RecordUpdates.GroupBy(g => (g.Type, g.FormKey, g.Rcd.PropertyName),
+                                                g => (g.Rule, g.Changes), (k, data) => new { Key = k, Rules = data.Select(d => d.Rule).Count(), Changes = data.Select(d => d.Changes).Sum() })
+                                       .Where(g => g.Rules > 1);
+
+            foreach (var update in updates)
+                Console.WriteLine($"Warning: Record {update.Key.FormKey} had {update.Key.PropertyName} updated by {update.Rules} different rules, with total of {update.Changes} changes.");
+
             Console.WriteLine();
 
             Console.WriteLine($"Record Type Totals");
@@ -242,19 +258,29 @@ namespace GenericSynthesisPatcher
             int count = 0;
 
             var files = Directory.GetFiles(dataFolder).Where(x => x.EndsWith(".json"));
+            int countFile = 1;
             files.ForEach(f =>
             {
-                if (Path.Combine(dataFolder, f).Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
+                if (f.Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
                 {
-                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Skipping: {Path.Combine(dataFolder, f)}");
+                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Skipping: {f}");
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Loading config file: {Path.Combine(dataFolder, f)}");
-                    var rules = JsonConvert.DeserializeObject<List<GSPBase>>(File.ReadAllText(Path.Combine(dataFolder, f)), Global.SerializerSettings);
+                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Loading config file #{countFile}: {f}");
+                    List<GSPBase>? rules = null;
+                    using (var jsonFile = File.OpenText(f))
+                    {
+                        using var jsonReader = new JsonTextReader(jsonFile);
+                        rules = JsonSerializer.Create(Global.SerializerSettings).Deserialize<List<GSPBase>>(jsonReader);
+                    }
 
+                    int countRule = 1;
                     foreach (var rule in rules ?? [])
                     {
+                        rule.ConfigFile = countFile++;
+                        rule.ConfigRule = countRule++;
+
                         if (!rule.Validate())
                         {
                             LogHelper.Log(LogLevel.Critical, ClassLogCode, "Error validating rules.");
@@ -282,9 +308,11 @@ namespace GenericSynthesisPatcher
                         {
                             EnabledTypes |= rule.Types;
                         }
+
+                        LoadedRules.Add(rule);
                     }
 
-                    LoadedRules = [.. LoadedRules, .. rules];
+                    //LoadedRules = [.. LoadedRules, .. rules];
                 }
             });
 
@@ -304,18 +332,18 @@ namespace GenericSynthesisPatcher
             return LoadedRules;
         }
 
-        private static int ProcessFillRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey )
+        private static int ProcessFillRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey, ref ISkyrimMajorRecord? patchRecord )
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Trace, ClassLogCode, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
                 return -1;
             }
 
             var rcd = RCDMapping.FindRecordCallData(context, valueKey.Value);
             if (rcd == null || !rcd.CanFill())
             {
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Unknown / Unimplemented field for fill action: {valueKey.Value}", context: context);
+                Global.TraceLogger?.Log(ClassLogCode, $"Unknown / Unimplemented field for fill action: {valueKey.Value}");
                 return -1;
             }
 
@@ -325,15 +353,19 @@ namespace GenericSynthesisPatcher
                 return -1;
             }
 
-            ISkyrimMajorRecord? patchedRecord = null;
-            return rcd.Fill(context, rule, valueKey, rcd, ref patchedRecord);
+            int changed = rcd.Fill(context, rule, valueKey, rcd, ref patchRecord);
+
+            if (changed > 0)
+                RecordUpdates.Add((GSPBase.GetGSPRuleType(context.Record), context.Record.FormKey, rule, rcd, changed));
+
+            return changed;
         }
 
-        private static int ProcessForwardRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey )
+        private static int ProcessForwardRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey, ref ISkyrimMajorRecord? patchRecord )
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Trace, ClassLogCode, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
                 return 0;
             }
 
@@ -355,18 +387,17 @@ namespace GenericSynthesisPatcher
                 var rcd = RCDMapping.FindRecordCallData(context, field);
                 if (rcd == null || !rcd.CanForward() || (rule.ForwardType.HasFlag(ForwardTypes.SelfMasterOnly) && !rcd.CanForwardSelfOnly()))
                 {
-                    LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Unknown / Unimplemented field for forward action type: {Enum.GetName(rule.ForwardType)}", context: context, propertyName: field);
+                    Global.TraceLogger?.Log(ClassLogCode, $"Unknown / Unimplemented field for forward action type: {Enum.GetName(rule.ForwardType)}", propertyName: field);
                     continue;
                 }
 
                 bool firstMod = true;
-                ISkyrimMajorRecord? patchedRecord = null;
 
                 if (rule.HasForwardType(ForwardTypeFlags.SelfMasterOnly))
                 {
                     foreach (var mod in orderedMods)
                     {
-                        LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {mod.Key}", context: context);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Attempt {Enum.GetName(rule.ForwardType)} forward field {field} from {mod.Key}");
                         if (rule.ForwardType.HasFlag(ForwardTypes.DefaultThenSelfMasterOnly))
                         {
                             if (firstMod)
@@ -380,10 +411,10 @@ namespace GenericSynthesisPatcher
                                     break;
                                 }
 
-                                int changes = rcd.Forward(context, rule, mod.Value, rcd, ref patchedRecord);
+                                int changes = rcd.Forward(context, rule, mod.Value, rcd, ref patchRecord);
                                 if (changes < 0)
                                 {   // If default forward fails we do not continue with the SelfMasterOnly forwards
-                                    LogHelper.Log(LogLevel.Trace, ClassLogCode, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.", context: context);
+                                    Global.TraceLogger?.Log(ClassLogCode, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.");
                                     break;
                                 }
                                 else
@@ -394,21 +425,21 @@ namespace GenericSynthesisPatcher
                             }
                             else
                             {   // All other mods in DefaultThenSelfMasterOnly - No need to check origin
-                                int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchedRecord): 0;
+                                int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchRecord): 0;
                                 if (changes > 0)
                                     changed += changes;
                             }
                         }
                         else if (rule.ForwardType.HasFlag(ForwardTypes.SelfMasterOnly))
                         {   //  SelfMasterOnly
-                            if (patchedRecord != null && rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
+                            if (patchRecord != null && rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                             {
                                 LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
                                 break;
                             }
 
                             // modContext == null fine here we just skip those ones
-                            int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchedRecord): 0;
+                            int changes = (mod.Value != null)?rcd.ForwardSelfOnly(context, rule, mod.Value, rcd, ref patchRecord): 0;
                             if (changes > 0)
                                 changed += changes;
                         }
@@ -424,10 +455,10 @@ namespace GenericSynthesisPatcher
                     int index = filtered.Count != 1 && rule.HasForwardType(ForwardTypeFlags.Random) ? new Random(HashCode.Combine(context.Record.FormKey, rcd.PropertyName, rule)).Next(filtered.Count) : 0;
 
                     if (filtered.Count > 1)
-                        LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Method: {Enum.GetName(rule.ForwardType)}. Selected #{index + 1} from {filtered.Count} available mods.", context: context, propertyName: field);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Method: {Enum.GetName(rule.ForwardType)}. Selected #{index + 1} from {filtered.Count} available mods.", propertyName: rcd.PropertyName);
 
                     var modContext = filtered.ElementAt(index);
-                    LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Default forwarding from: {modContext.Key.FileName}", context: context, propertyName: rcd.PropertyName);
+                    Global.TraceLogger?.Log(ClassLogCode, $"Default forwarding from: {modContext.Key.FileName}", propertyName: rcd.PropertyName);
 
                     if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                     {
@@ -435,22 +466,25 @@ namespace GenericSynthesisPatcher
                     }
                     else
                     {
-                        int changes = (modContext.Value != null) ? rcd.Forward(context, rule, modContext.Value, rcd, ref patchedRecord) : throw new Exception("WTF Should never hit this!");
+                        int changes = (modContext.Value != null) ? rcd.Forward(context, rule, modContext.Value, rcd, ref patchRecord) : throw new Exception("WTF Should never hit this!");
                         if (changes > 0)
                             changed += changes;
                     }
                 }
+
+                if (changed > 0)
+                    RecordUpdates.Add((GSPBase.GetGSPRuleType(context.Record), context.Record.FormKey, rule, rcd, changed));
             }
 
             return changed;
         }
 
-        private static int ProcessMergeRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey )
+        private static int ProcessMergeRecord ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, IMajorRecordGetter? origin, GSPRule rule, FilterOperation valueKey, ref ISkyrimMajorRecord? patchRecord )
         {
             var rcd = RCDMapping.FindRecordCallData(context, valueKey.Value);
             if (rcd == null || !rcd.CanMerge())
             {
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Unknown / Unimplemented field for merge action: {valueKey.Value}", context: context);
+                Global.TraceLogger?.Log(ClassLogCode, $"Unknown / Unimplemented field for merge action: {valueKey.Value}");
                 return -1;
             }
 
@@ -460,20 +494,31 @@ namespace GenericSynthesisPatcher
                 return -1;
             }
 
-            LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Merging field.", context: context, propertyName: rcd.PropertyName);
-            ISkyrimMajorRecord? patchedRecord = null;
-            return rcd.Merge(context, rule, valueKey, rcd, ref patchedRecord);
+            Global.TraceLogger?.Log(ClassLogCode, $"Merging field.", propertyName: rcd.PropertyName);
+            int changed = rcd.Merge(context, rule, valueKey, rcd, ref patchRecord);
+
+            if (changed > 0)
+                RecordUpdates.Add((GSPBase.GetGSPRuleType(context.Record), context.Record.FormKey, rule, rcd, changed));
+
+            return changed;
         }
 
-        private static int ProcessRule ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule )
+        private static int ProcessRule ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, ref ISkyrimMajorRecord? patchRecord )
         {
+            // We want result to be 0 if no actions so it works with SingleMatch
+            if (!rule.Fill.SafeAny() && !rule.Forward.SafeAny() && !rule.Merge.SafeAny())
+            {
+                Global.TraceLogger?.Log(ClassLogCode, "Rule contains no actions.");
+                return 0;
+            }
+
             int changes = -1;
 
             var origin = rule.OnlyIfDefault ? Mod.FindOrigin(context) : null;
 
             foreach (var x in rule.Forward)
             {
-                int changed = ProcessForwardRecord(context, origin, rule, x.Key);
+                int changed = ProcessForwardRecord(context, origin, rule, x.Key, ref patchRecord);
 
                 if (changed >= 0)
                     changes = (changes == -1) ? changed : changes + changed;
@@ -485,17 +530,13 @@ namespace GenericSynthesisPatcher
                 switch (versions)
                 {
                     case < 2:
-                        LogHelper.Log(LogLevel.Trace, ClassLogCode, "Doesn't have any overwrites to merge with.", context: context);
-                        break;
-
-                    case 2:
-                        LogHelper.Log(LogLevel.Trace, ClassLogCode, "Only 1 overwrite so nothing to merge.", context: context);
+                        Global.TraceLogger?.Log(ClassLogCode, "Doesn't have any overwrites to merge with.");
                         break;
 
                     default:
                         foreach (var x in rule.Merge)
                         {
-                            int changed = ProcessMergeRecord(context, origin, rule, x.Key);
+                            int changed = ProcessMergeRecord(context, origin, rule, x.Key, ref patchRecord);
 
                             if (changed >= 0)
                                 changes = (changes == -1) ? changed : changes + changed;
@@ -507,7 +548,7 @@ namespace GenericSynthesisPatcher
 
             foreach (var x in rule.Fill)
             {
-                int changed = ProcessFillRecord(context, origin, rule, x.Key);
+                int changed = ProcessFillRecord(context, origin, rule, x.Key, ref patchRecord);
 
                 if (changed >= 0)
                     changes = (changes == -1) ? changed : changes + changed;

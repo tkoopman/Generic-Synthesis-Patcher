@@ -15,8 +15,6 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-using static Mutagen.Bethesda.Skyrim.Furniture;
-
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     public class EffectsAction ( FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude ) : IFormLinksWithData<EffectsAction, IMagicEffectGetter>
@@ -40,7 +38,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         FormKeyListOperation IFormLinksWithData<EffectsAction>.FormKey => FormKey;
 
-        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
+        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter source )
         {
             if (source is not IEffectGetter sourceRecord)
             {
@@ -60,8 +58,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 };
             }
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patch, rcd.PropertyName, out var items))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patchRecord, rcd.PropertyName, out var items))
                 return -1;
 
             items.Add(effect);
@@ -88,7 +86,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             _ = Global.UpdateTrace(ClassLogCode);
 
@@ -101,14 +99,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (root == null)
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", context: context, propertyName: rcd.PropertyName);
+                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", rule: rule, context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
-            return root.Merge(out var newList) ? Replace(context, rcd, ref patchedRecord, newList) : 0;
+            return root.Merge(out var newList) ? Replace(context, rcd, ref patchRecord, newList) : 0;
         }
 
-        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
+        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter remove )
         {
             if (remove is not IEffectGetter sourceRecord)
                 return -1;
@@ -125,8 +123,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 };
             }
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patch, rcd.PropertyName, out var items))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patchRecord, rcd.PropertyName, out var items))
                 return -1;
 
             if (items.Remove(effect))
@@ -139,9 +137,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 0;
         }
 
-        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? _newList )
+        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IEnumerable<IFormLinkContainerGetter>? _newList )
         {
-            if (_newList is not IReadOnlyList<IEffectGetter> newList || !Mod.GetProperty<IReadOnlyList<IEffectGetter>>(context.Record, rcd.PropertyName, out var curList))
+            if (_newList is not IReadOnlyList<IEffectGetter> newList || !Mod.GetProperty<IReadOnlyList<IEffectGetter>>(patchRecord ?? context.Record, rcd.PropertyName, out var curList))
             {
                 LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to replace effects", context: context, propertyName: rcd.PropertyName);
                 return -1;
@@ -153,20 +151,20 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!add.Any() && !del.Any())
                 return 0;
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patch, rcd.PropertyName, out _))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patchRecord, rcd.PropertyName, out _))
                 return -1;
 
             foreach (var d in del)
-                _ = Remove(context, rcd, ref patch, d);
+                _ = Remove(context, rcd, ref patchRecord, d);
 
             foreach (var a in add)
-                _ = Add(context, rcd, ref patch, a);
+                _ = Add(context, rcd, ref patchRecord, a);
 
             return add.Count() + del.Count();
         }
 
-        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patch )
+        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             var effect = new Effect();
             effect.BaseEffect.FormKey = FormKey.Value;
@@ -177,8 +175,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 Magnitude = Magnitude
             };
 
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patch, rcd.PropertyName, out var effects))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(patchRecord, rcd.PropertyName, out var effects))
                 return -1;
 
             effects.Add(effect);

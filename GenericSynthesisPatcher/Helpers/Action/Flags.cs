@@ -25,16 +25,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static bool CanMerge () => false;
 
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord )
+        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
             var flags = rule.GetFillValueAs<List<string>>(valueKey);
             if (context.Record == null || flags == null)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, "No flags to set.", context: context, propertyName: rcd.PropertyName);
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, "No flags to set.", rule: rule, context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
-            if (!Mod.GetProperty<Enum>(patchedRecord ?? context.Record, rcd.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.GetProperty<Enum>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue) || curValue == null)
                 return -1;
 
             var flagType = curValue.GetType();
@@ -55,17 +55,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (curValue == newFlags)
                 return 0;
 
-            patchedRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.SetProperty(patchedRecord, rcd.PropertyName, newFlags))
+            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+            if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newFlags))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", context: context, propertyName: rcd.PropertyName);
+            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", rule: rule, context: context, propertyName: rcd.PropertyName);
             return 1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2248:Provide correct 'enum' argument to 'Enum.HasFlag'", Justification = "They do match just errors due to generic nature.")]
         public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
@@ -124,6 +124,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 && Mod.GetProperty<Enum>(origin, rcd.PropertyName, out var originValue)
                 && curValue == originValue;
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord ) => throw new NotImplementedException();
+        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
     }
 }

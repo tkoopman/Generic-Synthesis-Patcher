@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json;
+using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
@@ -18,17 +19,24 @@ namespace GenericSynthesisPatcher
         internal static Lazy<GSPSettings> settings = null!;
         private static IPatcherState<ISkyrimMod, ISkyrimModGetter>? state;
 
-        public static JsonSerializerSettings SerializerSettings { get; } = new() { MissingMemberHandling = MissingMemberHandling.Ignore, ContractResolver = ContractResolver.Instance };
+        public static JsonSerializerSettings SerializerSettings { get; } = new()
+        {
+            ContractResolver = ContractResolver.Instance,
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            NullValueHandling = NullValueHandling.Ignore,
+        };
+
         public static Lazy<GSPSettings> Settings { get => settings; private set => settings = value; }
         public static IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get => state ?? throw new Exception("Oh boy this shouldn't happen!"); set => state = value; }
 
         public static LogWriter? TraceLogger { get; private set; } = null;
 
-        public static void ForceTrace ( int classLogCode, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
+        public static void ForceTrace ( int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
         {
             if (TraceLogger == null)
             {
-                TraceLogger = new LogWriter(LogLevel.Trace, classLogCode, context, line: line);
+                TraceLogger = new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line);
             }
             else
             {
@@ -37,9 +45,11 @@ namespace GenericSynthesisPatcher
             }
         }
 
-        public static void Processing ( int classLogCode, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
-            => TraceLogger = Settings.Value.TraceFormKey != null && Settings.Value.LogLevel == LogLevel.Trace && Settings.Value.TraceFormKey == context.Record.FormKey
-             ? new LogWriter(LogLevel.Trace, classLogCode, context, line: line)
+        public static void Processing ( int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
+            => TraceLogger = Settings.Value.LogLevel == LogLevel.Trace
+                          && ((rule != null && rule.Trace)
+                          || (Settings.Value.TraceFormKey != null && Settings.Value.TraceFormKey == context.Record.FormKey))
+             ? new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line)
              : null;
 
         public static bool UpdateTrace ( int classLogCode, [CallerLineNumber] int line = 0 )

@@ -1,8 +1,6 @@
-using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
-using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -27,7 +25,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="rule">Current rule being processed.</param>
         /// <param name="valueKey">Key to current action being taken. Used to get value data from JSON.</param>
         /// <param name="rcd">RCD used to process this action.</param>
-        /// <param name="patchedRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
+        /// <param name="patchRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
         /// <returns>
         ///     -1 if couldn't update due to error. This would include not updating due to OnlyIfDefault = true and current record doesn't match origin.
         ///     0 if could update just nothing to update. Like value already equals what you were going to set.
@@ -37,7 +35,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                                            GSPRule rule,
                                            FilterOperation valueKey,
                                            RecordCallData rcd,
-                                           ref ISkyrimMajorRecord? patchedRecord );
+                                           ref ISkyrimMajorRecord? patchRecord );
 
         /// <summary>
         /// Static fill of value from JSON rule
@@ -47,7 +45,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="rule">Current rule being processed.</param>
         /// <param name="valueKey">Key to current action being taken. Used to get value data from JSON.</param>
         /// <param name="rcd">RCD used to process this action.</param>
-        /// <param name="patchedRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
+        /// <param name="patchRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
         /// <returns>
         ///     -1 if couldn't update due to error. This would include not updating due to OnlyIfDefault = true and current record doesn't match origin.
         ///     0 if could update just nothing to update. Like value already equals what you were going to set.
@@ -57,7 +55,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                                               GSPRule rule,
                                               IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext,
                                               RecordCallData rcd,
-                                              ref ISkyrimMajorRecord? patchedRecord );
+                                              ref ISkyrimMajorRecord? patchRecord );
 
         /// <summary>
         /// Static fill of value from JSON rule
@@ -67,7 +65,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="rule">Current rule being processed.</param>
         /// <param name="valueKey">Key to current action being taken. Used to get value data from JSON.</param>
         /// <param name="rcd">RCD used to process this action.</param>
-        /// <param name="patchedRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
+        /// <param name="patchRecord">If patch record created for current field it will be provided here. If provided should also ignore origin checks as this field has already been changed.</param>
         /// <returns>
         ///     -1 if couldn't update due to error. This would include not updating due to OnlyIfDefault = true and current record doesn't match origin.
         ///     0 if could update just nothing to update. Like value already equals what you were going to set.
@@ -77,7 +75,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                                                       GSPRule rule,
                                                       IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext,
                                                       RecordCallData rcd,
-                                                      ref ISkyrimMajorRecord? patchedRecord );
+                                                      ref ISkyrimMajorRecord? patchRecord );
 
         /// <summary>
         /// Check if current rule matches. Excludes checking Basic checks.
@@ -97,6 +95,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <returns>True if this field matches</returns>
         public static abstract bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd );
 
-        public static abstract int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchedRecord );
+        public static abstract int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord );
     }
 }

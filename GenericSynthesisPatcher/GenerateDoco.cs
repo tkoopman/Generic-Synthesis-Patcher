@@ -111,6 +111,7 @@ namespace GenericSynthesisPatcher
                         pst = pt.GenericTypeArguments[0];
                         pt = pt.GetGenericTypeDefinition();
                     }
+
                     _ = Implemented.TryAdd((pt, pst), $"{rego.GetterType.Name}.{prop.Name}");
 
                     //rcds.Sort(( l, r ) => l.Key.JsonKey.Length.CompareTo(r.Key.JsonKey.Length) * -1);
@@ -123,6 +124,7 @@ namespace GenericSynthesisPatcher
                         rcd ??= r.Value;
                         names.Add(r.Key.JsonKey);
                     }
+
                     names = names.Distinct().ToList();
                     names.Sort(( l, r ) =>
                     {
@@ -250,6 +252,7 @@ namespace GenericSynthesisPatcher
                         pst = pt.GenericTypeArguments[0];
                         pt = pt.GetGenericTypeDefinition();
                     }
+
                     string easy = "";
                     if (Implemented.TryGetValue((pt, pst), out string? s))
                         easy = s;

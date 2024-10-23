@@ -52,7 +52,7 @@ namespace GenericSynthesisPatcher.Helpers
             value = outValue;
             property.SetValue(patchRecord, _value);
 
-            LogHelper.Log(LogLevel.Trace, ClassLogCode, "Created new value for editing.", record: patchRecord, propertyName: propertyName);
+            Global.TraceLogger?.Log(ClassLogCode, "Created new value for editing.", propertyName: propertyName);
             return true;
         }
 
@@ -85,7 +85,7 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 formKey = record.FormKey;
                 link = record.ToLinkGetter();
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
+                Global.TraceLogger?.Log(ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
                 return true;
             }
 
@@ -114,7 +114,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (_value is not T __value)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, fromRecord, propertyName, typeof(T).Name, _value.GetType().Name);
+                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, null, fromRecord, propertyName, typeof(T).Name, _value.GetType().Name);
                 return false;
             }
 

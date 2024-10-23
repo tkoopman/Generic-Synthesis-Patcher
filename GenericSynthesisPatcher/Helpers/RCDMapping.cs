@@ -1,7 +1,5 @@
 using GenericSynthesisPatcher.Helpers.Action;
 
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Skyrim;
@@ -125,7 +123,7 @@ namespace GenericSynthesisPatcher.Helpers
                                                             && (r.Key.RecordType == null || r.Key.RecordType.IsAssignableFrom(context.Record.GetType()))).Value;
 
             if (rcd == null)
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, $"No RCD found - {valueKey}", context: context);
+                Global.TraceLogger?.Log(ClassLogCode, $"No RCD found - {valueKey}");
 
             return rcd;
         }
