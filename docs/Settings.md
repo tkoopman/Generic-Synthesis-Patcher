@@ -141,7 +141,7 @@ Below example is the random version of the above example for ForwardIndexedByFie
 ### Merge
 
 This is like Bashing but with a lot more control, as you can not only merge just the fields you want, but use filters to only merge the records you want.
-You also can tell the merge to exclude a plugin or force the values of a plugin to not be removed. Please see [Merge Example.json](../Examples/Merge Example.json)
+You also can tell the merge to exclude a plugin or force the values of a plugin to not be removed. Please see [Merge Example.json](/tkoopman/Generic-Synthesis-Patcher/blob/master/Examples/Merge Example.json)
 
 # Groups
 
