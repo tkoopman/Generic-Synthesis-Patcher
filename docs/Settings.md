@@ -7,7 +7,7 @@
         - [Fill](#fill)
         - [Forward](#forward)
         - [Merge](#merge)
-    - [Debug / Trace Logging](#debug-trace-logging)
+    - [Debug / Trace Logging](#debug--trace-logging)
 
 # Rule Properties
 
