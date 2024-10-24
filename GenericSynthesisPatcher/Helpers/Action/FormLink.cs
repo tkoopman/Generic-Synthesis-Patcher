@@ -41,7 +41,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return Fill(context, rcd, curValue, formKey.ToLinkGetter(), ref patchRecord);
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
@@ -55,7 +55,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     : -1;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
@@ -117,7 +117,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newValue))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", context: context, propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: rcd.PropertyName);
             return 1;
         }
     }

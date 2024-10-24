@@ -32,6 +32,10 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonIgnore]
         public int ConfigRule { get; internal set; }
 
+        [DefaultValue(false)]
+        [JsonProperty(PropertyName = "Debug")]
+        public bool Debug { get; set; }
+
         [JsonProperty(PropertyName = "Masters")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? Masters
@@ -69,10 +73,6 @@ namespace GenericSynthesisPatcher.Json.Data
         [DefaultValue(0)]
         [JsonProperty(PropertyName = "Priority")]
         public int Priority { get; private set; }
-
-        [DefaultValue(false)]
-        [JsonProperty(PropertyName = "Trace")]
-        public bool Trace { get; set; }
 
         [JsonProperty(PropertyName = "Types")]
         [JsonConverter(typeof(FlagConverter))]
@@ -179,7 +179,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
         public virtual bool Validate ()
         {
-            if (Trace)
+            if (Debug)
                 LogHelper.Log(LogLevel.Trace, ClassLogCode, "Trace logging enabled for this rule.", rule: this);
 
             if (Masters.SafeAny() && Masters.Any(m => m.Operation == ListLogic.NOT) && Masters.Any(m => m.Operation != ListLogic.NOT))

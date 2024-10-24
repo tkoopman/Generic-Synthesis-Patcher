@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             string? setValueStr = rule.GetFillValueAs<string>(valueKey);
             if (context.Record == null || setValueStr == null)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, $"No {rcd.PropertyName} to set.", rule: rule, context: context, propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, $"No {rcd.PropertyName} to set.", propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -38,7 +38,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             var enumType = curValue.GetType();
             if (!Enum.TryParse(enumType, setValueStr, true, out object? setValue))
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", rule: rule, context: context, propertyName: rcd.PropertyName);
+                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", rule: rule, context: context, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -49,7 +49,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.SetProperty(patchRecord, rcd.PropertyName, setValue))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", rule: rule, context: context, propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: rcd.PropertyName);
             return 1;
         }
 

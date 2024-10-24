@@ -338,9 +338,9 @@ namespace GenericSynthesisPatcher.Json.Data
             {
                 var rcd = RCDMapping.FindRecordCallData(context, x.Key.Value);
 
-                if (rcd != null && !rcd.Matches(context.Record, this, x.Key, rcd))
+                if (rcd == null || !rcd.Matches(context.Record, this, x.Key, rcd))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd.GetType().GenericTypeArguments[0].Name}");
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd?.GetType().GenericTypeArguments[0].Name ?? "None found."}");
                     return false;
                 }
             }

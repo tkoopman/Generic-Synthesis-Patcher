@@ -19,6 +19,8 @@ namespace GenericSynthesisPatcher
         internal static Lazy<GSPSettings> settings = null!;
         private static IPatcherState<ISkyrimMod, ISkyrimModGetter>? state;
 
+        public static LogWriter? DebugLogger { get; private set; } = null;
+
         public static JsonSerializerSettings SerializerSettings { get; } = new()
         {
             ContractResolver = ContractResolver.Instance,
@@ -46,11 +48,21 @@ namespace GenericSynthesisPatcher
         }
 
         public static void Processing ( int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
-            => TraceLogger = Settings.Value.LogLevel == LogLevel.Trace
-                          && ((rule != null && rule.Trace)
-                          || (Settings.Value.TraceFormKey != null && Settings.Value.TraceFormKey == context.Record.FormKey))
-             ? new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line)
-             : null;
+        {
+            TraceLogger = Settings.Value.Logging.LogLevel == LogLevel.Trace
+                                  && ((rule != null && rule.Debug)
+                                  || Settings.Value.Logging.FormKey == context.Record.FormKey
+                                  || Settings.Value.Logging.All)
+                     ? new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line)
+                     : null;
+
+            DebugLogger = Settings.Value.Logging.LogLevel <= LogLevel.Debug
+                                  && ((rule != null && rule.Debug)
+                                  || Settings.Value.Logging.FormKey == context.Record.FormKey
+                                  || Settings.Value.Logging.All)
+                     ? new LogWriter(LogLevel.Debug, classLogCode, rule, context, line: line)
+                     : null;
+        }
 
         public static bool UpdateTrace ( int classLogCode, [CallerLineNumber] int line = 0 )
         {

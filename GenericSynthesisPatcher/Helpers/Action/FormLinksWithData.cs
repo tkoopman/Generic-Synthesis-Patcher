@@ -1,8 +1,6 @@
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -44,12 +42,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{changes} change(s).", rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
 
                 return changes;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
@@ -143,12 +141,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{changes} change(s).", rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
 
                 return changes;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 
@@ -164,19 +162,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 if (curList.SequenceEqualNullable(newList))
                 {
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.PropertyIsEqual, rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: rcd.PropertyName);
                     return 0;
                 }
 
                 int changes = T.Replace(context, rcd, ref patchRecord, newList);
 
                 if (changes > 0)
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{changes} change(s).", rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
 
                 return changes;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
 
             return -1;
         }
@@ -196,7 +194,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 if (curList.SequenceEqualNullable(newList))
                 {
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.PropertyIsEqual, rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: rcd.PropertyName);
                     return 0;
                 }
 
@@ -224,12 +222,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    LogHelper.Log(LogLevel.Debug, ClassLogCode, $"{changes} change(s).", rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
 
                 return changes;
             }
 
-            LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
             return -1;
         }
 

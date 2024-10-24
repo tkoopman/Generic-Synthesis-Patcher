@@ -49,10 +49,15 @@ namespace GenericSynthesisPatcher
         {
             Global.State = state;
 
-            if (Global.Settings.Value.LogLevel != LogLevel.Trace)
-                Global.Settings.Value.TraceFormKey = null;
-            else
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, "Extra logging for FormKey: " + (Global.Settings.Value.TraceFormKey?.ToString() ?? "None"));
+            if (Global.Settings.Value.Logging.LogLevel <= LogLevel.Debug)
+            {
+                LogHelper.Log(LogLevel.Debug, ClassLogCode, "Extra logging for FormKey: " +
+                    (
+                        Global.Settings.Value.Logging.All ? "ALL" :
+                        Global.Settings.Value.Logging.FormKey == FormKey.Null ? "None" :
+                        Global.Settings.Value.Logging.FormKey.ToString()
+                    ));
+            }
 
             var Rules = LoadRules();
             if (Rules.Count == 0)
@@ -336,7 +341,7 @@ namespace GenericSynthesisPatcher
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
+                Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
                 return -1;
             }
 
@@ -349,7 +354,7 @@ namespace GenericSynthesisPatcher
 
             if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -365,7 +370,7 @@ namespace GenericSynthesisPatcher
         {
             if (context.Record is not IMajorRecordGetter)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, rule, context, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
+                Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, "", typeof(IMajorRecordGetter).Name, context.Record.GetType().Name);
                 return 0;
             }
 
@@ -407,7 +412,7 @@ namespace GenericSynthesisPatcher
 
                                 if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                                 {
-                                    LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
+                                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: rcd.PropertyName);
                                     break;
                                 }
 
@@ -434,7 +439,7 @@ namespace GenericSynthesisPatcher
                         {   //  SelfMasterOnly
                             if (patchRecord != null && rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                             {
-                                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
+                                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: rcd.PropertyName);
                                 break;
                             }
 
@@ -462,7 +467,7 @@ namespace GenericSynthesisPatcher
 
                     if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
                     {
-                        LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
+                        Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: rcd.PropertyName);
                     }
                     else
                     {
@@ -490,7 +495,7 @@ namespace GenericSynthesisPatcher
 
             if (rule.OnlyIfDefault && !rcd.Matches(context.Record, origin, rcd))
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.OriginMismatch, context: context, propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -516,14 +521,6 @@ namespace GenericSynthesisPatcher
 
             var origin = rule.OnlyIfDefault ? Mod.FindOrigin(context) : null;
 
-            foreach (var x in rule.Forward)
-            {
-                int changed = ProcessForwardRecord(context, origin, rule, x.Key, ref patchRecord);
-
-                if (changed >= 0)
-                    changes = (changes == -1) ? changed : changes + changed;
-            }
-
             if (rule.Merge.Count > 0)
             {
                 int versions = Global.State.LinkCache.ResolveAllContexts(context.Record.FormKey, context.Record.Registration.GetterType).Count();
@@ -544,6 +541,14 @@ namespace GenericSynthesisPatcher
 
                         break;
                 }
+            }
+
+            foreach (var x in rule.Forward)
+            {
+                int changed = ProcessForwardRecord(context, origin, rule, x.Key, ref patchRecord);
+
+                if (changed >= 0)
+                    changes = (changes == -1) ? changed : changes + changed;
             }
 
             foreach (var x in rule.Fill)

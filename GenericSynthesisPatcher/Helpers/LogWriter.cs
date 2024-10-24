@@ -43,6 +43,8 @@ namespace GenericSynthesisPatcher.Helpers
         public void Log ( int classCode, string log, string? propertyName = null, [CallerLineNumber] int line = 0 )
                     => LogHelper.Log(LogLevel, classCode, log, rule: Rule, context: Context, propertyName: propertyName, line: line);
 
+        public void LogInvalidTypeFound ( int classCode, string propertyName, string expected, string found, [CallerLineNumber] int line = 0 ) => Log(classCode, $"Invalid type returned. Expected: {expected}. Found: {found}.", propertyName: propertyName, line: line);
+
         public override void Write ( char value )
         {
             switch (value)

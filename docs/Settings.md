@@ -1,11 +1,11 @@
 # Rule Properties
 
-These are case insensitive. If a property accepts multiple values as an array, you do not need to use the [ ] to denote an array if only entering a single value.
+These are case insensitive. If a property accepts multiple values as an array, you do not need to use the \[ ] to denote an array if only entering a single value.
 
 > **<font color="green">Priority</font>**: All matching rules will be applied to a record in ascending priority. Default: 0  
 Matching priority will be applied in random order so be carful if multiple rules edit the same fields on a record.
 
-# Basic Filters
+## Filters
 
 At least 1 basic filter must be applied to a rule. If multiple filters provided then the logic is **Type AND (EditorID OR FormID)**  
 All filters can be either single value or array of possible values.
@@ -17,7 +17,7 @@ All filters can be either single value or array of possible values.
 
 > **<font color="green">FormID</font>**: FormID to match in the format "0123AB:Skyrim.esm". Can exclude leading 0s.
 
-## Extra Filters
+### Extra Filters
 
 These can be single values or array of values.
 
@@ -32,20 +32,20 @@ Good for example if you want to forward one patches changes, but only if a later
 Checks are per field, meaning one action may fail to apply due to the field it updating not matching, but other action on the same record applies as it does match.  
 NOTE: Just because multiple fields are listed on a single fill/forward action, they are all still processed separately. No need to split into different rules.
 
-# Advanced Filters
+### Advanced Filters (Matches)
 
-These filters can be applied in addition to the basic filters. Advanced filters should work for any [supported field](Fields.md).  
+Using Matches you can filter on any [supported field](Fields.md).  
 In general they follow the following rules:
 
 - If you use one of these filters, any record that doesn't contain that field will never match the rule.
 - &/|/^ Operator: You can change the default operation using a prefix on the field name. Default is OR (|). Can set to And (&) or XOR (^).
-- +/-: You can add a prefix to these to say if they must be included or excluded from filter. Example below won't match any record with keyword Survival_ArmorCold.
+- +/-: You can add a prefix to these to say if they must be included or excluded from filter. 2nd example below won't match any record with keyword WAF_ClothingCloak.
 - Include (+) and OR (|) prefixes are default so no need to enter them however, can be used for unforeseen cases where the value you want to enter may start with a prefix value. Like trying to enter a negative number ("+-123" to allowed -123).
 - Exclude (-) values ignore Operation. A record with any excluded values will make it not match not matter the overall operation. ! can also be used instead of -.
-- If matching against a field that accepts a string or Editor ID you can use regular expression to match, like EditorID basic filter. If used with exclude operator the - goes before the first /. 
+- If matching against a field that accepts a string or Editor ID you can use regular expression to match, like EditorID basic filter. If used with exclude operator the - goes before the first /, like in the 4th example below.
 - Currently operation only available per field. If you list multiple fields to match it will always be AND (&) between all the fields.
 
-## Examples
+#### Examples
 
     ... Single Value Match
     "Matches": { "Keywords": "ArmorMaterialLeather" },
@@ -56,13 +56,20 @@ In general they follow the following rules:
     ... Exclude Regex Example
     "Matches": { "InventoryArt": "-/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" }
 
-# Actions
+## Actions
 
-At least 1 action must exist. If both provided then both will be applied to matching records.
+At least 1 action should exist, under most circumstances (see SingleMatch Groups below), else what's the point of the rule. If both provided then multiple actions the processing order will be:
+
+- Merge
+- Forward - Should be self only, else will overwrite merge.
+- Fill - Could be used to add / remove extra stuff post Merge/Forward.
 
 >**<font color="green">Fill</font>**: This will just apply the changes to all listed fields. The most basic of action.  
-If field selected is a <font color="blue">list</font> then you must provide value as a list surrounded by [ ]. All other fields do not use [ ].  
-In the below example Name just requires a single value, while Effects could have multiple so uses [ ]
+If single value field, then will just overwrite field with what you put in fill action.
+If field selected is a <font color="blue">list</font> then:
+
+- Fill will add / remove items from the list, based on prefix of the item.
+- Surrounded multiple entries with \[ ]
 
     {
         "Types": "Ingestible",
@@ -131,6 +138,11 @@ Below example is the random version of the above example for ForwardIndexedByFie
             "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
         }
 
+### Merge
+
+This is like Bashing but with a lot more control, as you can not only merge just the fields you want, but use filters to only merge the records you want.
+You also can tell the merge to exclude a plugin or force the values of a plugin to not be removed. Please see [Merge Example.json](../Examples/Merge Example.json)
+
 # Groups
 
 Groups allow you to group multiple rules together. This can assist in making the JSON files easier to maintain, but also opens up performance improvements, and some special processing.  
@@ -145,6 +157,7 @@ You **can not** have groups within groups. Rules in groups are processed in orde
 >**<font color="red">Masters</font>**: List of mod names ("Skyrim.esm"). Same as types, you can still further limit it per group rule.
 
 >**<font color="red">SingleMatch</font>**: True or False (Default). If true a record will stop trying to match rules once it finds it's first match.
+When this is true, it is the one time having a rule with no actions does something. That something is stop any records that match the rule from progressing to further rules in the group.
 
 >**<font color="red">Rules</font>**: This is the list of all the rules in this group.
 
@@ -195,3 +208,24 @@ SingleMatch not necessary in this example, as only a single rule would match any
         ]
       }
     ]
+
+## Debug / Trace Logging
+
+If you have set your logging level to Debug or Trace in the settings page of GSP in Synthesis, you can use the following to enable logs to be generated for select rules.  
+If used on a group it will only enable the Debug/Trace logging for the filters defined on the group. So you can add to both the group and/or rules in that group to get the logs you want.
+
+> **<font color="green">Debug</font>**: True or False (Default).
+
+        {
+            "types": [ "NPC" ],
+            "OnlyIfDefault": true,
+            "ForwardType": "DefaultRandom",
+            "Debug": true,
+            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+        }
+
+Remember logging must be set to either Debug or Trace in Synthesis GSP plugin settings for this to have any effect.  
+Debug in general will output extra logs about what the patcher has done.  
+Trace will include all debug logs but also a lot extra like why the patcher may not of done something (Failed to match rule, Value already matched what you tried to set).
+
+You should always include Trace logs if reporting bugs, but as they are big, either attach as text file to GitHub issue, or if you using Nexus you <ins>must</ins> use spoiler tags.

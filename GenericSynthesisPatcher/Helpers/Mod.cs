@@ -61,7 +61,7 @@ namespace GenericSynthesisPatcher.Helpers
             var property = patchRecord.GetType().GetProperty(propertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.MissingProperty, record: patchRecord, propertyName: propertyName);
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;
             }
 
@@ -98,7 +98,7 @@ namespace GenericSynthesisPatcher.Helpers
             property = fromRecord.GetType().GetProperty(propertyName);
             if (property == null)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, LogHelper.MissingProperty, record: fromRecord, propertyName: propertyName);
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;
             }
 
@@ -114,7 +114,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (_value is not T __value)
             {
-                LogHelper.LogInvalidTypeFound(LogLevel.Debug, ClassLogCode, null, fromRecord, propertyName, typeof(T).Name, _value.GetType().Name);
+                Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, propertyName, typeof(T).Name, _value.GetType().Name);
                 return false;
             }
 

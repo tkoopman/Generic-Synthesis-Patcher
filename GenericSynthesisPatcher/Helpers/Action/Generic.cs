@@ -3,8 +3,6 @@ using System.Text.RegularExpressions;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -91,7 +89,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newValue))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Changed.", context: context, propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: rcd.PropertyName);
             return 1;
         }
     }

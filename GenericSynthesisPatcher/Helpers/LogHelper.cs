@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static void Log ( LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0 )
         {
-            if (logLevel < Global.Settings.Value.LogLevel)
+            if (logLevel < Global.Settings.Value.Logging.LogLevel)
                 return;
 
             Count[(int)logLevel]++;
@@ -64,10 +64,6 @@ namespace GenericSynthesisPatcher.Helpers
 
             Console.WriteLine(sb.ToString());
         }
-
-        public static void LogInvalidTypeFound ( LogLevel logLevel, int classCode, GSPBase rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, string propertyName, string expected, string found, [CallerLineNumber] int line = 0 ) => Log(logLevel, classCode, $"Invalid type returned. Expected: {expected}. Found: {found}.", rule: rule, context: context, propertyName: propertyName, line: line);
-
-        public static void LogInvalidTypeFound ( LogLevel logLevel, int classCode, GSPBase? rule, IMajorRecordGetter record, string propertyName, string expected, string found, [CallerLineNumber] int line = 0 ) => Log(logLevel, classCode, $"Invalid type returned. Expected: {expected}. Found: {found}.", rule: rule, record: record, propertyName: propertyName, line: line);
 
         public static void PrintCounts ()
         {

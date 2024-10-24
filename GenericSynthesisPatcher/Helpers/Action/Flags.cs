@@ -3,8 +3,6 @@ using EnumsNET;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -30,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             var flags = rule.GetFillValueAs<List<string>>(valueKey);
             if (context.Record == null || flags == null)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, "No flags to set.", rule: rule, context: context, propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, "No flags to set.", propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -59,7 +57,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newFlags))
                 return -1;
 
-            LogHelper.Log(LogLevel.Debug, ClassLogCode, "Updated.", rule: rule, context: context, propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: rcd.PropertyName);
             return 1;
         }
 

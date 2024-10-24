@@ -27,6 +27,7 @@ namespace GenericSynthesisPatcher
 
         private static readonly int[] NICols = [14, 30, 30, 30, 40];
         private static readonly int[] PropCols = [30, 14, 5, 30, 30];
+        private static readonly StringWriter sw = new();
         private static readonly int[] TypesCols = [4, 14];
 
         internal static void Generate ()
@@ -219,11 +220,11 @@ namespace GenericSynthesisPatcher
                 }
 
                 // Output heading per record type
-                Console.WriteLine();
+                sw.WriteLine();
                 string h = recordTypes[k].First();
                 h += (recordTypes[k].Count > 1) ? $" - {recordTypes[k].Last()}" : "";
-                Console.WriteLine($"## {h}");
-                Console.WriteLine();
+                sw.WriteLine($"## {h}");
+                sw.WriteLine();
                 PrintTableRow(["Field", "Alt", "MFFSM", "Value Type", "Example"], PropCols);
                 PrintTableRow(["", "", "", "", ""], PropCols, '-');
 
@@ -234,10 +235,10 @@ namespace GenericSynthesisPatcher
             }
 
             // Output not implemented properties
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("### Not Implemented Properties");
-            Console.WriteLine();
+            sw.WriteLine();
+            sw.WriteLine();
+            sw.WriteLine("### Not Implemented Properties");
+            sw.WriteLine();
 
             PrintTableRow(["Record", "Property", "Type", "Sub Type", "Easy?"], NICols);
             PrintTableRow(["", "", "", "", ""], NICols, '-');
@@ -262,6 +263,12 @@ namespace GenericSynthesisPatcher
                     PrintTableRow([recordTypes[k].First(), p.Name, pt.Name, pst?.Name ?? "", easy], NICols);
                 }
             }
+
+            using var fw = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSPDoco.txt"), false);
+            fw.WriteLine(sw.ToString());
+            fw.Close();
+
+            _ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSPDoco.txt")}\"");
         }
 
         private static void PrintTableRow ( string[] values, int[] widths, char padding = ' ' )
@@ -269,10 +276,10 @@ namespace GenericSynthesisPatcher
             if (values.Length != widths.Length)
                 throw new Exception("Get it together!");
 
-            Console.Write('|');
+            sw.Write('|');
             for (int i = 0; i < widths.Length; i++)
-                Console.Write($" {values[i].PadRight(widths[i], padding)} |");
-            Console.WriteLine();
+                sw.Write($" {values[i].PadRight(widths[i], padding)} |");
+            sw.WriteLine();
         }
     }
 }
