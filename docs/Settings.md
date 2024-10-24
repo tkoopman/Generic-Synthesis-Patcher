@@ -1,11 +1,24 @@
+- (Rule Properties)[#rule-properties]
+    - (Filters)[#filters]
+        - (Basic)[#basic-filters]
+        - (Extra Filters)[#extra-filters]
+        - (Advanced Filters)[#advanced-filters-matches]
+    - (Actions)[#actions]
+        - (Fill)[#fill]
+        - (Forward)[#forward]
+        - (Merge)[#merge]
+    - (Debug / Trace Logging)[#debug-trace-logging]
+
 # Rule Properties
 
-These are case insensitive. If a property accepts multiple values as an array, you do not need to use the \[ ] to denote an array if only entering a single value.
+Property names are case insensitive. If a property accepts multiple values as an array, you do not need to use the \[ ] to denote an array if only entering a single value.
 
 > **<font color="green">Priority</font>**: All matching rules will be applied to a record in ascending priority. Default: 0  
 Matching priority will be applied in random order so be carful if multiple rules edit the same fields on a record.
 
 ## Filters
+
+### Basic Filters
 
 At least 1 basic filter must be applied to a rule. If multiple filters provided then the logic is **Type AND (EditorID OR FormID)**  
 All filters can be either single value or array of possible values.
@@ -64,8 +77,9 @@ At least 1 action should exist, under most circumstances (see SingleMatch Groups
 - Forward - Should be self only, else will overwrite merge.
 - Fill - Could be used to add / remove extra stuff post Merge/Forward.
 
->**<font color="green">Fill</font>**: This will just apply the changes to all listed fields. The most basic of action.  
-If single value field, then will just overwrite field with what you put in fill action.
+### Fill
+This will just apply the changes to all listed fields. The most basic of action.  
+If single value field, then will just overwrite field with what you put in fill action.  
 If field selected is a <font color="blue">list</font> then:
 
 - Fill will add / remove items from the list, based on prefix of the item.
@@ -81,7 +95,9 @@ If field selected is a <font color="blue">list</font> then:
             }
     }
 
->**<font color="green">Forward</font>**: This will forward fields from a parent that this winning record overrode.  
+### Forward
+
+This will forward fields from a parent that this winning record overrode.  
 By default this is just a straight replace including if it is a list field like Items. It doesn't do any merging.
 
 >**<font color="green">ForwardIndexedByField</font>**: This changes how the contents of the Forward action is defined.  
