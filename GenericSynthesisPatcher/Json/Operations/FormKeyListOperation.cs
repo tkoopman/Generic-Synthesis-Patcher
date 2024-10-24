@@ -10,60 +10,25 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public class FormKeyListOperation : ListOperationBase<FormKeyListOperation, FormKey>
-    {
-        public override ListLogic Operation { get; protected set; }
-
-        public override FormKey Value { get; protected set; }
-
-        public FormKeyListOperation ( string value )
-        {
-            (Operation, string? v) = Split(value, ValidPrefixes);
-
-            Value = FormKey.TryFactory(Mod.FixFormKey(v), out var formKey) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey");
-        }
-
-        public FormKeyListOperation ( ListLogic operation, FormKey value )
-        {
-            Operation = operation;
-            Value = value;
-        }
-
-        protected FormKeyListOperation ()
-        { }
-
-        public override FormKeyListOperation Inverse () => new(InverseOperation(), Value);
-    }
-
-    public class FormKeyListOperation<TMajor> : FormKeyListOperation where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+    public sealed class FormKeyListOperation<TMajor> : ListOperationBase<FormKeyListOperation<TMajor>, FormKey> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
         private IFormLinkGetter<TMajor>? formLinkGetter;
         private bool linked = false;
-        public override ListLogic Operation { get; protected set; }
 
-        public override FormKey Value { get; protected set; }
-
-        public FormKeyListOperation ( string value ) : base()
+        public FormKeyListOperation ( string? value ) : base(value)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
-
-            Value = Mod.TryFindFormKey<TMajor>(v, out var formKey, out formLinkGetter) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey or EditorID");
         }
 
         public FormKeyListOperation ( ListLogic operation, FormKey value ) : base(operation, value)
         {
         }
 
-        public override FormKeyListOperation<TMajor> Inverse () => new(InverseOperation(), Value);
-
         public IFormLinkGetter<TMajor>? ToLinkGetter ()
         {
             if (formLinkGetter == null && !linked)
             {
                 if (!Global.State.LinkCache.TryResolve<TMajor>(Value, out var link))
-                    LogHelper.Log(LogLevel.Warning, 0xFF, $"Unable to find {Value} to link to.");
+                    Global.Logger.Log(0xFF, $"Unable to find {Value} to link to.", logLevel: LogLevel.Warning);
 
                 formLinkGetter = link?.ToLinkGetter();
                 linked = true;
@@ -71,5 +36,32 @@ namespace GenericSynthesisPatcher.Json.Operations
 
             return formLinkGetter;
         }
+
+        protected override FormKey ConvertValue ( string? value )
+        {
+            if (value == null)
+                return FormKey.Null;
+
+            var _value = Mod.TryFindFormKey(value, out var formKey, out formLinkGetter) ? formKey
+                  : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey or EditorID");
+
+            return _value;
+        }
+    }
+
+    public class FormKeyListOperation : ListOperationBase<FormKeyListOperation, FormKey>
+    {
+        public FormKeyListOperation ( string? value ) : base(value)
+        {
+        }
+
+        public FormKeyListOperation ( ListLogic operation, FormKey value ) : base(operation, value)
+        {
+        }
+
+        protected override FormKey ConvertValue ( string? value )
+            => value == null ? FormKey.Null
+             : FormKey.TryFactory(Mod.FixFormKey(value), out var formKey) ? formKey
+             : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");
     }
 }

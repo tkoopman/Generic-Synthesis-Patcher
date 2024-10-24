@@ -34,7 +34,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 var formKey = rule.GetFillValueAs<FormKeyListOperation<T>>(valueKey);
                 if (formKey?.ToLinkGetter() == null)
                 {
-                    LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", rule: rule, context: context, propertyName: rcd.PropertyName);
+                    Global.Logger.Log(ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
                     return -1;
                 }
 
@@ -64,7 +64,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
         {
             if (valueKey.Operation != FilterLogic.OR)
-                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", rule: rule, record: check, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
 
             if (check is not IFormLinkContainerGetter)
                 return false;

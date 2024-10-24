@@ -51,7 +51,7 @@ namespace GenericSynthesisPatcher
 
             if (Global.Settings.Value.Logging.LogLevel <= LogLevel.Debug)
             {
-                LogHelper.Log(LogLevel.Debug, ClassLogCode, "Extra logging for FormKey: " +
+                LogHelper.WriteLog(LogLevel.Debug, ClassLogCode, "Extra logging for FormKey: " +
                     (
                         Global.Settings.Value.Logging.All ? "ALL" :
                         Global.Settings.Value.Logging.FormKey == FormKey.Null ? "None" :
@@ -146,7 +146,7 @@ namespace GenericSynthesisPatcher
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Critical, ClassLogCode, $"Found unsupported types. {(int)EnabledTypes:B18}");
+                    LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, $"Found unsupported types. {(int)EnabledTypes:B18}");
                     break;
                 }
 
@@ -216,7 +216,9 @@ namespace GenericSynthesisPatcher
                 }
             }
 
-            LogHelper.Log(LogLevel.Information, ClassLogCode, $"Completed");
+            Global.Processing(ClassLogCode, null, null);
+            LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Completed");
+            Console.WriteLine();
             LogHelper.PrintCounts();
             Console.WriteLine();
 
@@ -255,7 +257,7 @@ namespace GenericSynthesisPatcher
 
             if (!Directory.Exists(dataFolder))
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, $"Missing data folder: {dataFolder}");
+                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"Missing data folder: {dataFolder}");
                 return [];
             }
 
@@ -268,11 +270,11 @@ namespace GenericSynthesisPatcher
             {
                 if (f.Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
                 {
-                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Skipping: {f}");
+                    LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Skipping: {f}");
                 }
                 else
                 {
-                    LogHelper.Log(LogLevel.Information, ClassLogCode, $"Loading config file #{countFile}: {f}");
+                    LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Loading config file #{countFile}: {f}");
                     List<GSPBase>? rules = null;
                     using (var jsonFile = File.OpenText(f))
                     {
@@ -288,7 +290,7 @@ namespace GenericSynthesisPatcher
 
                         if (!rule.Validate())
                         {
-                            LogHelper.Log(LogLevel.Critical, ClassLogCode, "Error validating rules.");
+                            LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Error validating rules.", rule: rule);
                             LoadedRules = [];
                             return;
                         }
@@ -306,7 +308,7 @@ namespace GenericSynthesisPatcher
 
                         if (rule.Types == RecordTypes.All)
                         {
-                            LogHelper.Log(LogLevel.Information, ClassLogCode, "Found rule with no or all defined types. For best performance you should always define at least 1 type, and only required types for the rule.");
+                            LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "Found rule with no or all defined types. For best performance you should always define at least 1 type, and only required types for the rule.");
                             EnabledTypes = RecordTypes.All;
                         }
                         else
@@ -316,23 +318,21 @@ namespace GenericSynthesisPatcher
 
                         LoadedRules.Add(rule);
                     }
-
-                    //LoadedRules = [.. LoadedRules, .. rules];
                 }
             });
 
             if (LoadedRules.Count == 0)
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, $"No rules found in data location: {dataFolder}");
+                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"No rules found in data location: {dataFolder}");
                 return [];
             }
 
             LoadedRules.Sort();
 
             if (LoadedRules.Count != count)
-                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Loaded {LoadedRules.Count} primary rules and {count} total rules.");
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Loaded {LoadedRules.Count} primary rules and {count} total rules.");
             else
-                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Loaded {count} total rules.");
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Loaded {count} total rules.");
 
             return LoadedRules;
         }

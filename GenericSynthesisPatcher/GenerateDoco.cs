@@ -186,7 +186,7 @@ namespace GenericSynthesisPatcher
                             desc = "Form Keys or Editor IDs";
                             exam = "";
                         }
-                        else if (rcdGeneric == typeof(FormLinksWithData<>) || rcdGeneric == typeof(FormLinksWithData<,>))
+                        else if (rcdGeneric == typeof(FormLinksWithData<,>))
                         {
                             if (rcdSubType == typeof(ContainerItemsAction))
                             {

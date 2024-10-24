@@ -25,39 +25,43 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
-            var flags = rule.GetFillValueAs<List<string>>(valueKey);
+            var flags = rule.GetFillValueAs<List<ListOperation>>(valueKey);
             if (context.Record == null || flags == null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, "No flags to set.", propertyName: rcd.PropertyName);
                 return -1;
             }
 
-            if (!Mod.GetProperty<Enum>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.GetProperty<Enum>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue, out var propertyInfo))
                 return -1;
 
-            var flagType = curValue.GetType();
+            var flagType = propertyInfo.PropertyType;
+            curValue ??= (Enum)Enum.ToObject(flagType, 0);
             var newFlags = curValue;
 
-            foreach (string f in flags)
+            foreach (var flag in flags)
             {
-                var checkFlag = new ListOperation(f);
-
-                if (Enum.TryParse(flagType, checkFlag.Value, true, out object? setFlag))
+                if (flag.Value == null)
                 {
-                    newFlags = checkFlag.Operation == ListLogic.DEL
+                    newFlags = (Enum)Enum.ToObject(flagType, 0);
+                }
+                else if (Enum.TryParse(flagType, flag.Value, true, out object? setFlag))
+                {
+                    newFlags = flag.Operation == ListLogic.DEL
                         ? (Enum)FlagEnums.RemoveFlags(flagType, newFlags, setFlag)
                         : (Enum)FlagEnums.CombineFlags(flagType, newFlags, setFlag);
                 }
             }
 
-            if (curValue == newFlags)
+            if (curValue.Equals(newFlags))
                 return 0;
 
             patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
             if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newFlags))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, $"Flags set to {newFlags}", propertyName: rcd.PropertyName);
+
             return 1;
         }
 

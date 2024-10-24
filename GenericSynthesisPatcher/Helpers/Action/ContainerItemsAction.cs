@@ -26,15 +26,23 @@ namespace GenericSynthesisPatcher.Helpers.Action
         private const int ClassLogCode = 0x16;
 
         [JsonProperty(PropertyName = "Item", Required = Required.Always)]
-        public FormKeyListOperation<IItemGetter> FormKey { get; set; } = formKey;
+        public FormKeyListOperation<IItemGetter> FormKey { get; set; } = formKey ?? new(null);
 
-        FormKeyListOperation IFormLinksWithData<ContainerItemsAction>.FormKey => FormKey;
+        public static bool CanMerge () => true;
 
-        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter source )
+        public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right )
+            => left is IContainerEntryGetter l
+            && right is IContainerEntryGetter r
+            && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
+            && l.Item.Count == r.Item.Count;
+
+        public static IFormLinkContainerGetter? FindRecord ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
+
+        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IFormLinkContainerGetter source )
         {
             if (source is not IContainerEntryGetter sourceRecord)
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, $"Failed to add item. No Items?", context: context, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, $"Failed to add item. No Items?", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -53,23 +61,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 1;
         }
 
-        public static bool CanMerge () => true;
-
-        public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right )
-            => left is IContainerEntryGetter l
-            && right is IContainerEntryGetter r
-            && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
-            && l.Item.Count == r.Item.Count;
-
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.FirstOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
-
         public static List<ContainerItemsAction>? GetFillValueAs ( GSPRule rule, FilterOperation key ) => rule.GetFillValueAs<List<ContainerItemsAction>>(key);
 
-        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
+        public static FormKey GetFormKeyFromRecord ( IFormLinkContainerGetter from ) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
         public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
         {
-            _ = Global.UpdateTrace(ClassLogCode);
+            Global.UpdateLoggers(ClassLogCode);
 
             var root = RecordGraph<IContainerEntryGetter>.Create(
                 context.Record.FormKey,
@@ -80,7 +78,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (root == null)
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to generate graph for merge", rule: rule, context: context, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, "Failed to generate graph for merge", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -106,7 +104,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return 1;
             }
 
-            LogHelper.Log(LogLevel.Error, ClassLogCode, $"Failed to remove item [{sourceRecord.Item.Item.FormKey}].", context: context, propertyName: rcd.PropertyName);
+            Global.Logger.Log(ClassLogCode, $"Failed to remove item [{sourceRecord.Item.Item.FormKey}].", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
             return 0;
         }
 
@@ -114,7 +112,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (_newList is not IReadOnlyList<IContainerEntryGetter> newList || !Mod.GetProperty<IReadOnlyList<IContainerEntryGetter>>(patchRecord ?? context.Record, rcd.PropertyName, out var curList))
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, "Failed to replace items", context: context, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, "Failed to replace items", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -132,7 +130,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 _ = Remove(context, rcd, ref patchRecord, d);
 
             foreach (var a in add)
-                _ = Add(context, rcd, ref patchRecord, a);
+                _ = Forward(context, rcd, ref patchRecord, a);
 
             return add.Count() + del.Count();
         }
@@ -153,6 +151,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public bool DataEquals ( IFormLinkContainerGetter other ) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.Value) && otherContainer.Item.Count == Count;
 
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.Value);
+        public IFormLinkContainerGetter? FindFormKey ( IEnumerable<IFormLinkContainerGetter>? list ) => FindRecord(list, FormKey.Value);
     }
 }

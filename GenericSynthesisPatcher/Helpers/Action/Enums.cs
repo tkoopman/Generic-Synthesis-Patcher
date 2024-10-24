@@ -38,7 +38,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             var enumType = curValue.GetType();
             if (!Enum.TryParse(enumType, setValueStr, true, out object? setValue))
             {
-                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", rule: rule, context: context, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, $"{setValueStr} is not a valid value for {rcd.PropertyName}.", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
                 return -1;
             }
 
@@ -60,7 +60,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
         {
             if (valueKey.Operation != FilterLogic.OR)
-                LogHelper.Log(LogLevel.Warning, ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", rule: rule, record: check, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
 
             if (!Mod.GetProperty<Enum>(check, rcd.PropertyName, out var curValue))
                 return false;

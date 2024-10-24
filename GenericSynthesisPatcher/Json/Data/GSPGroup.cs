@@ -51,7 +51,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             // Output message if groups types defined and all rule types defined but combined to less than current group types.
             if (Types != RecordTypes.NONE && Types != AllTypes)
-                LogHelper.Log(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.", rule: this);
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.", rule: this);
 
             Types = AllTypes;
 

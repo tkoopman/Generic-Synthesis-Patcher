@@ -50,10 +50,9 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         public static T? Deserialize<T> ( this JToken token )
-                            => token.Type == JTokenType.Null ? default
-                     : typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
-                     : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
-                     : JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(token.CreateReader());
+            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
+             : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
+             : JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(token.CreateReader());
 
         /// <summary>
         /// Same as IEnumerable<>.Any() but will return false instead of throwing ArgumentNullException if null.

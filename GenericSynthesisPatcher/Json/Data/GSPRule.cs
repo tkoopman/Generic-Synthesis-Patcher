@@ -179,7 +179,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 throw new Exception($"Record under group tries to filter for Type(s) [{Types & ~Group.Types}] that are excluded at by group.");
 
             if (Priority != 0)
-                LogHelper.Log(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
 
             bool valid = Validate();
             if (Types == RecordTypes.NONE)
@@ -255,7 +255,9 @@ namespace GenericSynthesisPatcher.Json.Data
             if (cache.TryGetValue(key, out object? value))
             {
                 Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
-                return value is T v ? v : throw new InvalidOperationException($"Invalid value type returned for {key.Value}");
+                return value == null ? default
+                     : value is T v ? v
+                     : throw new InvalidOperationException($"Invalid value type returned for {key.Value} - {value?.GetType().FullName ?? "null"}");
             }
 
             if (values.TryGetValue(key, out var jsonValue))
@@ -355,7 +357,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (FormID == null && EditorID == null && Types == RecordTypes.NONE)
             {
-                LogHelper.Log(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)", rule: this);
+                LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)", rule: this);
                 return false;
             }
 

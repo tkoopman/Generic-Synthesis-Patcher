@@ -2,8 +2,8 @@ using System.Text.RegularExpressions;
 
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public abstract class OperationBase<TOperation, TPrefix, TSuffix> : OperationBase<TOperation, TPrefix>
-        where TOperation : OperationBase<TOperation, TPrefix, TSuffix>
+    public abstract class OperationBase<TClass, TPrefix, TSuffix> : OperationBase<TClass, TPrefix>
+        where TClass : OperationBase<TClass, TPrefix, TSuffix>
         where TPrefix : struct, Enum
         where TSuffix : struct, Enum
     {
@@ -22,11 +22,11 @@ namespace GenericSynthesisPatcher.Json.Operations
         }
     }
 
-    public abstract partial class OperationBase<TOperation, TPrefix>
-        where TOperation : OperationBase<TOperation, TPrefix>
+    public abstract partial class OperationBase<TClass, TPrefix>
+        where TClass : OperationBase<TClass, TPrefix>
         where TPrefix : struct, Enum
     {
-        public abstract TOperation Inverse ();
+        public abstract TClass Inverse ();
 
         [GeneratedRegex(@"^\(([A-Za-z0-9]+)\)(.+)$")]
         protected static partial Regex LongPrefix ();

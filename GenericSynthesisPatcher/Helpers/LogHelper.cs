@@ -19,7 +19,16 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly uint[] Count = new uint[7];
         private static readonly char[] Divider = [':', ' '];
 
-        public static void Log ( LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0 )
+        public static void PrintCounts ()
+        {
+            for (int i = (int)LogLevel.Warning; i <= (int)LogLevel.Critical; i++)
+            {
+                if (Count[i] > 0)
+                    Console.WriteLine($"{(LogLevel)i}: {Count[i]:N0}");
+            }
+        }
+
+        public static void WriteLog ( LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0 )
         {
             if (logLevel < Global.Settings.Value.Logging.LogLevel)
                 return;
@@ -63,15 +72,6 @@ namespace GenericSynthesisPatcher.Helpers
             _ = sb.Append(log);
 
             Console.WriteLine(sb.ToString());
-        }
-
-        public static void PrintCounts ()
-        {
-            for (int i = (int)LogLevel.Warning; i <= (int)LogLevel.Critical; i++)
-            {
-                if (Count[i] > 0)
-                    Console.WriteLine($"{(LogLevel)i}: {Count[i]:N0}");
-            }
         }
     }
 }

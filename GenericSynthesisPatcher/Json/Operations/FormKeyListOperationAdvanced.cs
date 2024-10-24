@@ -14,78 +14,73 @@ namespace GenericSynthesisPatcher.Json.Operations
 {
     public class FormKeyListOperationAdvanced : ListOperationBase<FormKeyListOperationAdvanced, FormKey>
     {
-        public override ListLogic Operation { get; protected set; }
-
         public Regex? Regex { get; protected set; }
-        public override FormKey Value { get; protected set; } = FormKey.Null;
 
-        public FormKeyListOperationAdvanced ( string value )
+        public FormKeyListOperationAdvanced ( string value ) : base(value)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
+        }
 
-            if (v.StartsWith('/') && v.EndsWith('/'))
+        public FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex = null ) : base(operation, value) => Regex = regex;
+
+        public override FormKeyListOperationAdvanced Inverse () => new(Inverse(Operation), Value, Regex);
+
+        protected override FormKey ConvertValue ( string? value )
+        {
+            if (value == null)
+                return FormKey.Null;
+
+            if (value.StartsWith('/') && value.EndsWith('/'))
             {
-                Regex = new Regex(v.Trim('/'), RegexOptions.IgnoreCase);
-                return;
+                Regex = new Regex(value.Trim('/'), RegexOptions.IgnoreCase);
+                return FormKey.Null;
             }
 
-            Value = FormKey.TryFactory(Mod.FixFormKey(v), out var formKey) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey");
+            return FormKey.TryFactory(Mod.FixFormKey(value), out var formKey) ? formKey
+                   : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");
         }
-
-        public FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex )
-        {
-            Operation = operation;
-            Value = value;
-            Regex = regex;
-        }
-
-        protected FormKeyListOperationAdvanced ()
-        { }
-
-        public override FormKeyListOperationAdvanced Inverse () => new(InverseOperation(), Value, Regex);
     }
 
-    public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperationAdvanced where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+    public class FormKeyListOperationAdvanced<TMajor> : ListOperationBase<FormKeyListOperationAdvanced<TMajor>, FormKey> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
         private IFormLinkGetter<TMajor>? formLinkGetter;
         private bool linked = false;
+        public Regex? Regex { get; protected set; }
 
-        public FormKeyListOperationAdvanced ( string value ) : base()
+        public FormKeyListOperationAdvanced ( string value ) : base(value)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
-
-            if (v.StartsWith('/') && v.EndsWith('/'))
-            {
-                Regex = new Regex(v.Trim('/'), RegexOptions.IgnoreCase);
-                return;
-            }
-
-            Value = Mod.TryFindFormKey(v, out var formKey, out formLinkGetter) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey or EditorID");
         }
 
-        private FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex )
-        {
-            Operation = operation;
-            Value = value;
-            Regex = regex;
-        }
+        private FormKeyListOperationAdvanced ( ListLogic operation, FormKey value, Regex? regex = null ) : base(operation, value) => Regex = regex;
 
-        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(InverseOperation(), Value, Regex);
+        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(Inverse(Operation), Value, Regex);
 
         public IFormLinkGetter<TMajor>? ToLinkGetter ()
         {
             if (formLinkGetter == null && !linked)
             {
                 if (!Global.State.LinkCache.TryResolve<TMajor>(Value, out var link))
-                    LogHelper.Log(LogLevel.Warning, 0xFF, $"Unable to find {Value} to link to.");
+                    Global.Logger.Log(0xFF, $"Unable to find {Value} to link to.", logLevel: LogLevel.Warning);
 
                 formLinkGetter = link?.ToLinkGetter();
                 linked = true;
             }
 
             return formLinkGetter;
+        }
+
+        protected override FormKey ConvertValue ( string? value )
+        {
+            if (value == null)
+                return FormKey.Null;
+
+            if (value.StartsWith('/') && value.EndsWith('/'))
+            {
+                Regex = new Regex(value.Trim('/'), RegexOptions.IgnoreCase);
+                return FormKey.Null;
+            }
+
+            return Mod.TryFindFormKey(value, out var formKey, out formLinkGetter) ? formKey
+                 : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey or EditorID");
         }
     }
 }

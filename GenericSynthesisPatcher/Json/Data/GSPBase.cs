@@ -157,10 +157,16 @@ namespace GenericSynthesisPatcher.Json.Data
         public virtual bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
         {
             var recordType = GetGSPRuleType(context.Record);
-            Global.TraceLogger?.Log(ClassLogCode, $"Check Types: {Types.HasFlag(recordType)} RecordType: {recordType}");
 
             if (recordType == RecordTypes.UNKNOWN || !Types.HasFlag(recordType))
+            {
+                if (!Global.Settings.Value.Logging.DisabledLogs.FailedTypeMatch)
+                    Global.TraceLogger?.Log(ClassLogCode, "Match Types: No");
                 return false;
+            }
+
+            if (!Global.Settings.Value.Logging.DisabledLogs.SuccessfulTypeMatch)
+                Global.TraceLogger?.Log(ClassLogCode, "Matched Types: Yes");
 
             if (Masters != null)
             {
@@ -168,7 +174,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 bool isNeg = Masters != null && Masters.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (Masters == null || hasEntry);
 
-                Global.TraceLogger?.Log(ClassLogCode, $"Check Masters: {result} Has Masters: {Masters != null} Record Found: {hasEntry} Not: {isNeg}");
+                Global.TraceLogger?.Log(ClassLogCode, $"Matched Masters: {result} Has Masters: {Masters != null} Record Found: {hasEntry} Not: {isNeg}");
 
                 if (!result)
                     return false;
@@ -180,11 +186,11 @@ namespace GenericSynthesisPatcher.Json.Data
         public virtual bool Validate ()
         {
             if (Debug)
-                LogHelper.Log(LogLevel.Trace, ClassLogCode, "Trace logging enabled for this rule.", rule: this);
+                LogHelper.WriteLog(LogLevel.Debug, ClassLogCode, "Debug / Trace logging enabled for this rule.", rule: this);
 
             if (Masters.SafeAny() && Masters.Any(m => m.Operation == ListLogic.NOT) && Masters.Any(m => m.Operation != ListLogic.NOT))
             {
-                LogHelper.Log(LogLevel.Error, ClassLogCode, "Rule includes both include and exclude masters, which does not compute.");
+                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Rule includes both include and exclude masters, which does not compute.", rule: this);
                 return false;
             }
 
