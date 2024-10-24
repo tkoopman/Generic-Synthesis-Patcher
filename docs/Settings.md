@@ -1,13 +1,13 @@
-- (Rule Properties)[#rule-properties]
-    - (Filters)[#filters]
-        - (Basic)[#basic-filters]
-        - (Extra Filters)[#extra-filters]
-        - (Advanced Filters)[#advanced-filters-matches]
-    - (Actions)[#actions]
-        - (Fill)[#fill]
-        - (Forward)[#forward]
-        - (Merge)[#merge]
-    - (Debug / Trace Logging)[#debug-trace-logging]
+- [Rule Properties](#rule-properties)
+    - [Filters](#filters)
+        - [Basic](#basic-filters)
+        - [Extra Filters](#extra-filters)
+        - [Advanced Filters](#advanced-filters-matches)
+    - [Actions](#actions)
+        - [Fill](#fill)
+        - [Forward](#forward)
+        - [Merge](#merge)
+    - [Debug / Trace Logging](#debug-trace-logging)
 
 # Rule Properties
 
