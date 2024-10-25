@@ -54,6 +54,8 @@ namespace GenericSynthesisPatcher.Helpers
              : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
              : JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(token.CreateReader());
 
+        public static Type GetPrimaryType ( this Type type ) => type.IsGenericType ? type.GetGenericTypeDefinition() : type;
+
         /// <summary>
         /// Same as IEnumerable<>.Any() but will return false instead of throwing ArgumentNullException if null.
         /// </summary>

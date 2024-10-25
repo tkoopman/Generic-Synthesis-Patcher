@@ -28,11 +28,36 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (context.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IFormLinkGetter<T>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue))
+                if (!Mod.GetProperty<IFormLinkGetter<T>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue, out var propertyInfo))
                     return -1;
 
                 var formKey = rule.GetFillValueAs<FormKeyListOperation<T>>(valueKey);
-                if (formKey?.ToLinkGetter() == null)
+
+                if (formKey == null || formKey.Value == FormKey.Null)
+                {
+                    if (curValue != null && !curValue.IsNull)
+                    {
+                        if (propertyInfo.PropertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<T>)))
+                        {
+                            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
+                            if (!Mod.GetProperty<IFormLinkNullable<T>>(patchRecord, rcd.PropertyName, out var setValue) || setValue == null)
+                                return -1;
+
+                            setValue.SetToNull();
+                            Global.DebugLogger?.Log(ClassLogCode, "Set to null.", propertyName: rcd.PropertyName);
+                            return 1;
+                        }
+                        else
+                        {
+                            Global.Logger.Log(ClassLogCode, "Not nullable.", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                            return -1;
+                        }
+                    }
+
+                    return 0;
+                }
+
+                if (formKey.ToLinkGetter() == null)
                 {
                     Global.Logger.Log(ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
                     return -1;
