@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 
-using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
@@ -9,44 +8,61 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    internal class Generic<T> : IAction where T : IConvertible
+    public class Generic<T> : IRecordAction where T : IConvertible
     {
+        public static readonly Generic<T> Instance = new();
         private const int ClassLogCode = 0x10;
 
-        public static bool CanFill () => true;
-
-        public static bool CanForward () => true;
-
-        public static bool CanForwardSelfOnly () => false;
-
-        public static bool CanMerge () => false;
-
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        private Generic ()
         {
-            if (!Mod.GetProperty<T>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue))
-                return -1;
-
-            var newValue = rule.GetFillValueAs<T>(valueKey);
-
-            return Fill(context, rcd, curValue, newValue, ref patchRecord);
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
-                    => (Mod.GetProperty<T>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue)
-                     && Mod.GetProperty<T>(forwardContext.Record, rcd.PropertyName, out var newValue)) ?
-                        Fill(context, rcd, curValue, newValue, ref patchRecord)
+        public bool CanFill () => true;
+
+        public bool CanForward () => true;
+
+        public bool CanForwardSelfOnly () => false;
+
+        public bool CanMerge () => false;
+
+        public int Fill (ProcessingKeys proKeys)
+        {
+            if (!Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+                return -1;
+
+            var newValue = proKeys.GetFillValueAs<T>();
+
+            return Generic<T>.Fill(proKeys, curValue, newValue);
+        }
+
+        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
+                    => (Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                     && Mod.GetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)) ?
+                        Generic<T>.Fill(proKeys, curValue, newValue)
                         : -1;
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
+        public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
+        public bool MatchesOrigin (ProcessingKeys proKeys)
         {
-            var values = rule.GetMatchValueAs<List<ListOperation<T>>>(valueKey);
+            var origin = proKeys.GetOriginRecord();
+            return origin != null
+                        && Mod.GetProperty<T>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
+                        && Mod.GetProperty<T>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && !(curValue == null ^ originValue == null)
+                        && !(curValue != null ^ originValue != null)
+                        && ((curValue == null && originValue == null)
+                           || (curValue != null && originValue != null && curValue.Equals(originValue)));
+        }
+
+        public bool MatchesRule (ProcessingKeys proKeys)
+        {
+            var values = proKeys.GetMatchValueAs<List<ListOperation<T>>>();
 
             if (!values.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<T>(check, rcd.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
                 return !values.Any(k => k.Operation != ListLogic.NOT);
 
             foreach (var v in values)
@@ -66,30 +82,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return !values.Any(k => k.Operation != ListLogic.NOT);
         }
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
-                => origin != null
-                && Mod.GetProperty<T>(check, rcd.PropertyName, out var curValue)
-                && Mod.GetProperty<T>(origin, rcd.PropertyName, out var originValue)
-                && !(curValue == null ^ originValue == null)
-                && !(curValue != null ^ originValue != null)
-                && ((curValue == null && originValue == null)
-                   || (curValue != null && originValue != null && curValue.Equals(originValue)));
+        public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
-
-        private static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, T? curValue, T? newValue, ref ISkyrimMajorRecord? patchRecord )
+        private static int Fill (ProcessingKeys proKeys, T? curValue, T? newValue)
         {
             if (curValue == null && newValue == null)
                 return 0;
             if (curValue != null && newValue != null && curValue.Equals(newValue))
                 return 0;
 
-            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-
-            if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newValue))
+            if (!Mod.SetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: proKeys.Property.PropertyName);
             return 1;
         }
     }

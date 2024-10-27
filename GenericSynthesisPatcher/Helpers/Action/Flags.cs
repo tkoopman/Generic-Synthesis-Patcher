@@ -11,28 +11,33 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    internal class Flags : IAction
+    internal class Flags : IRecordAction
     {
+        public static readonly Flags Instance = new();
         private const int ClassLogCode = 0x12;
 
-        public static bool CanFill () => true;
-
-        public static bool CanForward () => false;
-
-        public static bool CanForwardSelfOnly () => false;
-
-        public static bool CanMerge () => false;
-
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        private Flags ()
         {
-            var flags = rule.GetFillValueAs<List<ListOperation>>(valueKey);
-            if (context.Record == null || flags == null)
+        }
+
+        public bool CanFill () => true;
+
+        public bool CanForward () => false;
+
+        public bool CanForwardSelfOnly () => false;
+
+        public bool CanMerge () => false;
+
+        public int Fill (ProcessingKeys proKeys)
+        {
+            var flags = proKeys.GetFillValueAs<List<ListOperation>>();
+            if (flags == null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, "No flags to set.", propertyName: rcd.PropertyName);
+                Global.TraceLogger?.Log(ClassLogCode, "No flags to set.", propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
-            if (!Mod.GetProperty<Enum>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue, out var propertyInfo))
+            if (!Mod.GetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyInfo))
                 return -1;
 
             var flagType = propertyInfo.PropertyType;
@@ -56,29 +61,37 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (curValue.Equals(newFlags))
                 return 0;
 
-            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (!Mod.SetProperty(patchRecord, rcd.PropertyName, newFlags))
+            if (!Mod.SetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newFlags))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, $"Flags set to {newFlags}", propertyName: rcd.PropertyName);
+            Global.DebugLogger?.Log(ClassLogCode, $"Flags set to {newFlags}", propertyName: proKeys.Property.PropertyName);
 
             return 1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
+        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
+        public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
+
+        public bool MatchesOrigin (ProcessingKeys proKeys)
+        {
+            var origin = proKeys.GetOriginRecord();
+            return origin != null
+                        && Mod.GetProperty<Enum>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
+                        && Mod.GetProperty<Enum>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && curValue == originValue;
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2248:Provide correct 'enum' argument to 'Enum.HasFlag'", Justification = "They do match just errors due to generic nature.")]
-        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
+        public bool MatchesRule (ProcessingKeys proKeys)
         {
-            if (!Mod.GetProperty<Enum>(check, rcd.PropertyName, out var checkFlags))
+            if (!Mod.GetProperty<Enum>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkFlags))
                 return false;
 
             int matchedCount = 0;
             int includesChecked = 0; // Only count !Neg
 
-            var flags = rule.GetMatchValueAs<List<ListOperation>>(valueKey);
+            var flags = proKeys.GetMatchValueAs<List<ListOperation>>();
             if (!flags.SafeAny())
                 return true;
 
@@ -101,18 +114,18 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     if (flag.Operation == ListLogic.NOT)
                         return false;
 
-                    if (valueKey.Operation == FilterLogic.OR)
+                    if (proKeys.RuleKey.Operation == FilterLogic.OR)
                         return true;
 
                     matchedCount++;
                 }
-                else if (flag.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
+                else if (flag.Operation != ListLogic.NOT && proKeys.RuleKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }
             }
 
-            return valueKey.Operation switch
+            return proKeys.RuleKey.Operation switch
             {
                 FilterLogic.AND => true,
                 FilterLogic.XOR => matchedCount == 1,
@@ -120,12 +133,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
             };
         }
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
-                => origin != null
-                && Mod.GetProperty<Enum>(check, rcd.PropertyName, out var curValue)
-                && Mod.GetProperty<Enum>(origin, rcd.PropertyName, out var originValue)
-                && curValue == originValue;
-
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord ) => throw new NotImplementedException();
+        public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
     }
 }

@@ -8,10 +8,6 @@ using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
-
 using Newtonsoft.Json;
 
 using Noggog;
@@ -75,63 +71,13 @@ namespace GenericSynthesisPatcher.Json.Data
         public int Priority { get; private set; }
 
         [JsonProperty(PropertyName = "Types")]
-        [JsonConverter(typeof(FlagConverter))]
-        public RecordTypes Types { get; protected set; }
-
-        /// <summary>
-        /// Return GSP rule type for a record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static RecordTypes GetGSPRuleType ( IMajorRecordGetter record ) => record switch
-        {
-            IIngestibleGetter => RecordTypes.ALCH,
-            IAmmunitionGetter => RecordTypes.AMMO,
-            IArmorGetter => RecordTypes.ARMO,
-            IBookGetter => RecordTypes.BOOK,
-            ICellGetter => RecordTypes.CELL,
-            IContainerGetter => RecordTypes.CONT,
-            IFactionGetter => RecordTypes.FACT,
-            IIngredientGetter => RecordTypes.INGR,
-            IKeyGetter => RecordTypes.KEYM,
-            IMiscItemGetter => RecordTypes.MISC,
-            INpcGetter => RecordTypes.NPC,
-            IOutfitGetter => RecordTypes.OTFT,
-            IScrollGetter => RecordTypes.SCRL,
-            IWeaponGetter => RecordTypes.WEAP,
-            IWorldspaceGetter => RecordTypes.WRLD,
-            _ => RecordTypes.UNKNOWN
-        };
-
-        /// <summary>
-        /// Return GSP rule type as string for a record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static string GetGSPRuleTypeAsString ( IMajorRecordGetter record ) => record switch
-        {
-            IIngestibleGetter => "ALCH",
-            IAmmunitionGetter => "AMMO",
-            IArmorGetter => "ARMO",
-            IBookGetter => "BOOK",
-            ICellGetter => "CELL",
-            IContainerGetter => "CONT",
-            IFactionGetter => "FACT",
-            IIngredientGetter => "INGR",
-            IKeyGetter => "KEYM",
-            IMiscItemGetter => "MISC",
-            INpcGetter => "NPC",
-            IOutfitGetter => "OTFT",
-            IScrollGetter => "SCRL",
-            IWeaponGetter => "WEAP",
-            IWorldspaceGetter => "WRLD",
-            _ => "UNKNOWN"
-        };
+        [JsonConverter(typeof(SingleOrArrayConverter<RecordTypeMapping>))]
+        public IReadOnlyList<RecordTypeMapping> Types { get; protected set; } = [];
 
         /// <summary>
         /// Should only be used for sorting by Priority
         /// </summary>
-        public int CompareTo ( GSPBase? other )
+        public int CompareTo (GSPBase? other)
             => other == null ? 1
              : other == this ? 0
              : Priority.CompareTo(other.Priority);
@@ -154,11 +100,9 @@ namespace GenericSynthesisPatcher.Json.Data
         /// </summary>
         /// <param name="context"></param>
         /// <returns>Returns true if context matches filters.</returns>
-        public virtual bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        public virtual bool Matches (ProcessingKeys proKeys)
         {
-            var recordType = GetGSPRuleType(context.Record);
-
-            if (recordType == RecordTypes.UNKNOWN || !Types.HasFlag(recordType))
+            if (!Types.Contains(proKeys.Type))
             {
                 if (!Global.Settings.Value.Logging.DisabledLogs.FailedTypeMatch)
                     Global.TraceLogger?.Log(ClassLogCode, "Match Types: No");
@@ -170,7 +114,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (Masters != null)
             {
-                bool hasEntry = Masters?.Any(m => m.Value == context.Record.FormKey.ModKey) ?? false;
+                bool hasEntry = Masters?.Any(m => m.Value == proKeys.Record.FormKey.ModKey) ?? false;
                 bool isNeg = Masters != null && Masters.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (Masters == null || hasEntry);
 
@@ -203,6 +147,6 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns>Cleaned List.</returns>
-        protected static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list : null;
+        protected static List<T>? ValidateList<T> (List<T>? list) => list.SafeAny() ? list : null;
     }
 }

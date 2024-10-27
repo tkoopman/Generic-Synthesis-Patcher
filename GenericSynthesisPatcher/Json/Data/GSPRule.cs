@@ -10,7 +10,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Skyrim;
 
@@ -166,24 +165,24 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
         public bool OnlyIfDefault { get; set; }
 
-        public bool ClaimAndValidate ( GSPGroup group )
+        public bool ClaimAndValidate (GSPGroup group)
         {
             if (Group != null)
                 throw new Exception("Rule already claimed.");
 
             Group = group;
 
-            if (Types == RecordTypes.NONE)
+            if (Types.Count == 0)
                 Types = Group.Types;  // This may also be NONE but we do extra check for that after validation.
-            else if (Group.Types != RecordTypes.NONE && (Types & ~Group.Types) != RecordTypes.NONE)
-                throw new Exception($"Record under group tries to filter for Type(s) [{Types & ~Group.Types}] that are excluded at by group.");
+            else if (Group.Types.Count > 0 && Types.Any(t => !Group.Types.Contains(t)))
+                throw new Exception($"Record under group tries to filter for Type(s) that are excluded at by group.");
 
             if (Priority != 0)
                 LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
 
             bool valid = Validate();
-            if (Types == RecordTypes.NONE)
-                Types = RecordTypes.All;
+            if (Types.Count == 0)
+                Types = RecordTypeMappings.All;
 
             return valid;
         }
@@ -194,11 +193,11 @@ namespace GenericSynthesisPatcher.Json.Data
         private readonly Dictionary<FilterOperation, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
         private readonly Dictionary<FilterOperation, object?> matchCache = [];
 
-        public T? GetFillValueAs<T> ( FilterOperation key ) => GetValueAs<T>(Fill, fillCache, key);
+        public T? GetFillValueAs<T> (FilterOperation key) => GetValueAs<T>(Fill, fillCache, key);
 
-        public T? GetMatchValueAs<T> ( FilterOperation key ) => GetValueAs<T>(Match, matchCache, key);
+        public T? GetMatchValueAs<T> (FilterOperation key) => GetValueAs<T>(Match, matchCache, key);
 
-        public bool TryGetForward ( FilterOperation key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields )
+        public bool TryGetForward (FilterOperation key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields)
         {
             if (forwardCache.TryGetValue(key, out var value))
             {
@@ -250,7 +249,7 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.
         /// </summary>
-        private static T? GetValueAs<T> ( Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key )
+        private static T? GetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key)
         {
             if (cache.TryGetValue(key, out object? value))
             {
@@ -300,7 +299,7 @@ namespace GenericSynthesisPatcher.Json.Data
             return HashCode;
         }
 
-        public bool HasForwardType ( ForwardTypeFlags flag ) => ((ForwardTypeFlags)ForwardType).HasFlag(flag);
+        public bool HasForwardType (ForwardTypeFlags flag) => ((ForwardTypeFlags)ForwardType).HasFlag(flag);
 
         /// <summary>
         /// Checks if rule filter(s) match current context's record.
@@ -308,14 +307,14 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <param name="context"></param>
         /// <param name="Origin"></param>
         /// <returns></returns>
-        public override bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        public override bool Matches (ProcessingKeys proKeys)
         {
-            if (!base.Matches(context))
+            if (!base.Matches(proKeys))
                 return false;
 
             if (FormID != null)
             {
-                bool hasEntry = FormID?.Any(id => id.Value.Equals(context.Record.FormKey)) ?? false;
+                bool hasEntry = FormID?.Any(id => id.Value.Equals(proKeys.Record.FormKey)) ?? false;
                 bool isNeg = FormID != null && FormID.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (FormID == null || hasEntry);
                 Global.TraceLogger?.Log(ClassLogCode, $"Check FormID: {result} Has FormID: {FormID != null} Found: {hasEntry} Not: {isNeg}");
@@ -326,7 +325,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (EditorID != null)
             {
-                bool hasEntry = !context.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.MatchesValue(context.Record.EditorID));
+                bool hasEntry = !proKeys.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.MatchesValue(proKeys.Record.EditorID));
                 bool isNeg = EditorID != null && EditorID.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (EditorID == null || hasEntry);
 
@@ -338,11 +337,16 @@ namespace GenericSynthesisPatcher.Json.Data
 
             foreach (var x in Match)
             {
-                var rcd = RCDMapping.FindRecordCallData(context, x.Key.Value);
-
-                if (rcd == null || !rcd.Matches(context.Record, this, x.Key, rcd))
+                if (!proKeys.SetProperty(x.Key, x.Key.Value))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {rcd?.GetType().GenericTypeArguments[0].Name ?? "None found."}");
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. No RPM for Field: {x.Key.Value}");
+                    return false;
+                }
+
+                Global.TraceLogger?.Log(ClassLogCode, $"Action: {proKeys.Property.Action.GetType().GetClassName()}.MatchesRule", propertyName: proKeys.Property.PropertyName);
+                if (!proKeys.Property.Action.MatchesRule(proKeys))
+                {
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {proKeys.Property.Action.GetType().Name}");
                     return false;
                 }
             }
@@ -355,7 +359,7 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Validate())
                 return false;
 
-            if (FormID == null && EditorID == null && Types == RecordTypes.NONE)
+            if (FormID == null && EditorID == null && Types.Count == 0)
             {
                 LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)", rule: this);
                 return false;

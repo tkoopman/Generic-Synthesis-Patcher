@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -19,6 +20,8 @@ namespace GenericSynthesisPatcher.Json
                 contract.Converter = new FormKeyConverter();
             if (objectType == typeof(ModKey))
                 contract.Converter = new ModKeyConverter();
+            if (objectType == typeof(RecordTypeMapping))
+                contract.Converter = new RecordTypeConverter();
             if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
                 contract.Converter = new OperationsConverter();
 

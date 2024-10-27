@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Json.Data
 {
     [JsonConverter(typeof(GSPBaseConverter))]
@@ -32,7 +34,7 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Validate())
                 return false;
 
-            var AllTypes = RecordTypes.NONE;
+            HashSet<RecordTypeMapping> AllTypes = [];
 
             int ruleCount = 1;
             foreach (var rule in Rules)
@@ -46,14 +48,14 @@ namespace GenericSynthesisPatcher.Json.Data
                 // Claiming rule will also Rule type if current None to either match Group Types or All if group types is None
                 // So AllTypes will be All if a single rule and group were None
                 // So can overwrite Group Types once all rules claimed safely.
-                AllTypes |= rule.Types;
+                AllTypes.Add(rule.Types);
             }
 
             // Output message if groups types defined and all rule types defined but combined to less than current group types.
-            if (Types != RecordTypes.NONE && Types != AllTypes)
-                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes} from {Types} as extra types not used.", rule: this);
+            if (Types.Count != 0 && AllTypes.Count < Types.Count)
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes.Count} from {Types.Count} as extra types not used.", rule: this);
 
-            Types = AllTypes;
+            Types = AllTypes.ToList().AsReadOnly();
 
             return true;
         }

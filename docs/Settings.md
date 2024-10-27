@@ -83,6 +83,7 @@ If single value field, then will just overwrite field with what you put in fill 
 If field selected is a <font color="blue">list</font> then:
 
 - Fill will add / remove items from the list, based on prefix of the item.
+- To clear all current values use null as first element in list.
 - Surrounded multiple entries with \[ ]
 
     {
@@ -91,7 +92,7 @@ If field selected is a <font color="blue">list</font> then:
         "Fill":
             {
                 "Name" : "My Name for This",
-                "Effects": [ { "effect": "002EE1:Update.esm" } ]
+                "Effects": [ null, { "effect": "002EE1:Update.esm" } ]
             }
     }
 

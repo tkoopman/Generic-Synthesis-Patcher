@@ -1,5 +1,4 @@
 using GenericSynthesisPatcher.Helpers.Graph;
-using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -15,38 +14,41 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLinks<T> : IAction
+    public class FormLinks<T> : IRecordAction
         where T : class, IMajorRecordGetter
     {
+        public static readonly FormLinks<T> Instance = new();
         private const int ClassLogCode = 0x14;
 
-        public static bool CanFill () => true;
-
-        public static bool CanForward () => true;
-
-        public static bool CanForwardSelfOnly () => true;
-
-        public static bool CanMerge () => true;
-
-        public static int Fill ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        private FormLinks ()
         {
-            if (context.Record is IFormLinkContainerGetter record)
+        }
+
+        public bool CanFill () => true;
+
+        public bool CanForward () => true;
+
+        public bool CanForwardSelfOnly () => true;
+
+        public bool CanMerge () => true;
+
+        public int Fill (ProcessingKeys proKeys)
+        {
+            if (proKeys.Record is IFormLinkContainerGetter record)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(patchRecord ?? context.Record, rcd.PropertyName, out var curList))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
                     return -1;
 
                 int changes = 0;
-                foreach (var actionKey in rule.GetFillValueAs<List<FormKeyListOperation<T>>>(valueKey) ?? [])
+                foreach (var actionKey in proKeys.GetFillValueAs<List<FormKeyListOperation<T>>>() ?? [])
                 {
                     if (actionKey.Value == FormKey.Null)
                     {
                         if (curList != null && curList.Count > 0)
                         {
-                            patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-
-                            if (!Mod.ClearProperty(patchRecord, rcd.PropertyName))
+                            if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName))
                             {
-                                Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                                Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                                 return -1;
                             }
 
@@ -61,17 +63,15 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
-                        patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-
-                        if (!Mod.GetPropertyForEditing<List<IFormLinkGetter<T>>>(patchRecord, rcd.PropertyName, out var setList))
+                        if (!Mod.GetPropertyForEditing<List<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
                         {
-                            Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                            Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                             return -1;
                         }
 
                         if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(T), out var link))
                         {
-                            Global.Logger.Log(ClassLogCode, $"Unable to find {actionKey}", logLevel: LogLevel.Warning, propertyName: rcd.PropertyName);
+                            Global.Logger.Log(ClassLogCode, $"Unable to find {actionKey}", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
                             continue;
                         }
 
@@ -84,36 +84,34 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
             return -1;
         }
 
-        public static int Forward ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
         {
-            if (context.Record is IFormLinkContainerGetter record)
+            if (proKeys.Record is IFormLinkContainerGetter record)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, rcd.PropertyName, out var newValue))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
                     return -1;
 
                 if (curValue.SequenceEqualNullable(newValue))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: rcd.PropertyName);
+                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: proKeys.Property.PropertyName);
                     return 0;
                 }
 
-                patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-
-                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(patchRecord, rcd.PropertyName, out var patchValue))
+                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                 {
-                    Global.Logger.Log(ClassLogCode, "Patch has null value.", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                    Global.Logger.Log(ClassLogCode, "Patch has null value.", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                     return -1;
                 }
 
@@ -126,24 +124,24 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
 
             return -1;
         }
 
-        public static int ForwardSelfOnly ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
         {
-            if (context.Record is IFormLinkContainerGetter)
+            if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(patchRecord ?? context.Record, rcd.PropertyName, out var curValue))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, rcd.PropertyName, out var newValue))
+                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
                     return -1;
 
                 if (!newValue.SafeAny())
@@ -151,7 +149,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 if (curValue.SequenceEqualNullable(newValue))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: rcd.PropertyName);
+                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: proKeys.Property.PropertyName);
                     return 0;
                 }
 
@@ -166,8 +164,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         {
                             if (patchValueLinks == null)
                             {
-                                patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(patchRecord, rcd.PropertyName, out var patchValue))
+                                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                                     return -1;
 
                                 patchValueLinks = patchValue;
@@ -180,27 +177,36 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 }
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: rcd.PropertyName);
+                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, rcd.PropertyName, "IFormLinkContainerGetter", context.Record.GetType().Name);
+            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
 
             return -1;
         }
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, GSPRule rule, FilterOperation valueKey, RecordCallData rcd )
+        public bool MatchesOrigin (ProcessingKeys proKeys)
         {
-            if (check is not IFormLinkContainerGetter)
+            var origin = proKeys.GetOriginRecord();
+            return origin != null
+                        && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkValue)
+                        && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && FormLinks<T>.RecordsMatch(checkValue, originValue);
+        }
+
+        public bool MatchesRule (ProcessingKeys proKeys)
+        {
+            if (proKeys.Record is not IFormLinkContainerGetter)
                 return false;
 
-            var values = rule.GetMatchValueAs<List<FormKeyListOperationAdvanced<T>>>(valueKey);
+            var values = proKeys.GetMatchValueAs<List<FormKeyListOperationAdvanced<T>>>();
 
             if (!values.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var curValue) || !curValue.SafeAny())
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || !curValue.SafeAny())
                 return !values.Any(k => k.Operation != ListLogic.NOT);
 
             List<string> EditorIDs = [];
@@ -232,18 +238,18 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     if (v.Operation == ListLogic.NOT)
                         return false;
 
-                    if (valueKey.Operation == FilterLogic.OR)
+                    if (proKeys.RuleKey.Operation == FilterLogic.OR)
                         return true;
 
                     matchedCount++;
                 }
-                else if (v.Operation != ListLogic.NOT && valueKey.Operation == FilterLogic.AND)
+                else if (v.Operation != ListLogic.NOT && proKeys.RuleKey.Operation == FilterLogic.AND)
                 {
                     return false;
                 }
             }
 
-            return valueKey.Operation switch
+            return proKeys.RuleKey.Operation switch
             {
                 FilterLogic.AND => true,
                 FilterLogic.XOR => matchedCount == 1,
@@ -251,37 +257,31 @@ namespace GenericSynthesisPatcher.Helpers.Action
             };
         }
 
-        public static bool Matches ( ISkyrimMajorRecordGetter check, IMajorRecordGetter? origin, RecordCallData rcd )
-                => origin != null
-                && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(check, rcd.PropertyName, out var checkValue)
-                && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, rcd.PropertyName, out var originValue)
-                && RecordsMatch(checkValue, originValue);
-
-        public static int Merge ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, GSPRule rule, FilterOperation valueKey, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord )
+        public int Merge (ProcessingKeys proKeys)
         {
             Global.UpdateLoggers(ClassLogCode);
 
             var root = RecordGraph<IFormLinkGetter<T>>.Create(
-                context.Record.FormKey,
-                context.Record.Registration.GetterType,
-                rule.Merge[valueKey],
-                list => Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(list.Record, rcd.PropertyName, out var value) ? value : null,
+                proKeys.Record.FormKey,
+                proKeys.Type.StaticRegistration.GetterType,
+                proKeys.Rule.Merge[proKeys.RuleKey],
+                list => Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => $"{item.FormKey}");
 
             if (root == null)
             {
-                Global.Logger.Log(ClassLogCode, "Failed to generate graph for merge", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, "Failed to generate graph for merge", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
-            return root.Merge(out var newList) ? Replace(context, rcd, ref patchRecord, newList) : 0;
+            return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
-        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, RecordCallData rcd, ref ISkyrimMajorRecord? patchRecord, IEnumerable<IFormLinkGetter<T>>? _newList )
+        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<T>>? _newList)
         {
-            if (_newList is not IReadOnlyList<IFormLinkGetter<T>> newList || !Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(patchRecord ?? context.Record, rcd.PropertyName, out var curList))
+            if (_newList is not IReadOnlyList<IFormLinkGetter<T>> newList || !Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
-                Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
@@ -293,8 +293,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             try
             {
-                patchRecord ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(patchRecord, rcd.PropertyName, out var list))
+                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
                     return -1;
 
                 foreach (var d in del)
@@ -305,14 +304,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
             catch (RecordException ex)
             {
-                Global.Logger.Log(ClassLogCode, ex.Message, logLevel: LogLevel.Critical, propertyName: rcd.PropertyName);
+                Global.Logger.Log(ClassLogCode, ex.Message, logLevel: LogLevel.Critical, propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
             return add.Count() + del.Count();
         }
 
-        private static bool RecordsMatch ( IReadOnlyList<IFormLinkGetter<T>>? left, IReadOnlyList<IFormLinkGetter<T>>? right )
+        private static bool RecordsMatch (IReadOnlyList<IFormLinkGetter<T>>? left, IReadOnlyList<IFormLinkGetter<T>>? right)
         {
             if (!left.SafeAny() && !right.SafeAny())
                 return true;
