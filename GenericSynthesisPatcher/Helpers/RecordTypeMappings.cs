@@ -2,7 +2,6 @@ using Loqui;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
@@ -10,49 +9,6 @@ using static GenericSynthesisPatcher.Helpers.RecordTypeMapping;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    public readonly struct RecordTypeMapping : IEquatable<RecordTypeMapping>, IEquatable<RecordType>, IEquatable<ILoquiRegistration>, IEquatable<string>
-    {
-        public readonly WinningContextOverridesDelegate WinningContextOverrides;
-        public string FullName => StaticRegistration.Name;
-        public string Name => Type.CheckedType;
-        public ILoquiRegistration StaticRegistration { get; }
-        public RecordType Type { get; }
-
-        public RecordTypeMapping (ILoquiRegistration staticRegistration, WinningContextOverridesDelegate winningContextOverrides)
-        {
-            if (staticRegistration.GetType().GetField("TriggeringRecordType")?.GetValue(StaticRegistration) is not RecordType recordType)
-                throw new ArgumentException("Doesn't map to RecordType", nameof(staticRegistration));
-            Type = recordType;
-            StaticRegistration = staticRegistration;
-            WinningContextOverrides = winningContextOverrides;
-        }
-
-        public delegate IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverridesDelegate ();
-
-        public static bool operator != (RecordTypeMapping r1, RecordTypeMapping r2) => !r1.Equals(r2);
-
-        public static bool operator == (RecordTypeMapping r1, RecordTypeMapping r2) => r1.Equals(r2);
-
-        public bool Equals (RecordTypeMapping other) => Type.Equals(other.Type);
-
-        public bool Equals (RecordType other) => Type.Equals(other);
-
-        public bool Equals (ILoquiRegistration? other) => StaticRegistration == other;
-
-        public bool Equals (string? other) => Type.Equals(other);
-
-        public override bool Equals (object? obj) => obj switch
-        {
-            RecordTypeMapping => Equals((RecordTypeMapping)obj),
-            RecordType => Equals((RecordType)obj),
-            ILoquiRegistration => Equals((ILoquiRegistration)obj),
-            string => Equals((string)obj),
-            _ => false
-        };
-
-        public override int GetHashCode () => Type.TypeInt;
-    }
-
     public static class RecordTypeMappings
     {
         public static readonly IReadOnlyList<RecordTypeMapping> All;

@@ -1,8 +1,5 @@
-using System.ComponentModel;
-
 using GenericSynthesisPatcher.Helpers.Graph;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
 
@@ -10,34 +7,27 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-using Newtonsoft.Json;
-
 using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class EffectsAction (FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude) : IFormLinksWithData<EffectsAction, IMagicEffectGetter>
+    public class EffectsAction : FormLinksWithData<EffectsData, IMagicEffectGetter, Effect>
     {
-        [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public int Area = area;
-
-        [JsonProperty(PropertyName = "Duration", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public int Duration = duration;
-
-        [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public float Magnitude = magnitude;
-
+        public static readonly EffectsAction Instance = new();
         private const int ClassLogCode = 0x17;
 
-        [JsonProperty(PropertyName = "Effect", Required = Required.Always)]
-        public FormKeyListOperation<IMagicEffectGetter> FormKey { get; private set; } = formKey ?? new(null);
+        public override int Add (ProcessingKeys proKeys, EffectsData data)
+        {
+            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var effects))
+                return -1;
 
-        public static bool CanMerge () => true;
+            effects.Add(data.ToActionData());
+            return 1;
+        }
 
-        public static bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
+        public override bool CanMerge () => true;
+
+        public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
             => left is IEffectGetter l
             && right is IEffectGetter r
             && l.BaseEffect.FormKey.Equals(r.BaseEffect.FormKey)
@@ -47,9 +37,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             && l.Data.Magnitude == r.Data.Magnitude)
             || (l.Data == null && r.Data == null));
 
-        public static IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
+        public override IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
 
-        public static int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
+        public override int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
         {
             if (source is not IEffectGetter sourceRecord)
             {
@@ -78,11 +68,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 1;
         }
 
-        public static List<EffectsAction>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.GetFillValueAs<List<EffectsAction>>();
+        public override List<EffectsData>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.GetFillValueAs<List<EffectsData>>();
 
-        public static FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
+        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
-        public static int Merge (ProcessingKeys proKeys)
+        public override int Merge (ProcessingKeys proKeys)
         {
             Global.UpdateLoggers(ClassLogCode);
 
@@ -102,7 +92,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
-        public static int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove)
+        public override int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove)
         {
             if (remove is not IEffectGetter sourceRecord)
                 return -1;
@@ -132,7 +122,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 0;
         }
 
-        public static int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? _newList)
+        public override int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? _newList)
         {
             if (_newList is not IReadOnlyList<IEffectGetter> newList || !Mod.GetProperty<IReadOnlyList<IEffectGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
@@ -157,33 +147,5 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return add.Count() + del.Count();
         }
-
-        public int Add (ProcessingKeys proKeys)
-        {
-            var effect = new Effect();
-            effect.BaseEffect.FormKey = FormKey.Value;
-            effect.Data = new EffectData
-            {
-                Area = Area,
-                Duration = Duration,
-                Magnitude = Magnitude
-            };
-
-            if (!Mod.GetPropertyForEditing<ExtendedList<Effect>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var effects))
-                return -1;
-
-            effects.Add(effect);
-            return 1;
-        }
-
-        public bool DataEquals (IFormLinkContainerGetter other)
-            => other is IEffectGetter effect
-            && effect.BaseEffect.FormKey.Equals(FormKey.Value)
-            && effect.Data != null
-            && effect.Data.Area == Area
-            && effect.Data.Duration == Duration
-            && effect.Data.Magnitude == Magnitude;
-
-        public IFormLinkContainerGetter? FindFormKey (IEnumerable<IFormLinkContainerGetter>? list) => FindRecord(list, FormKey.Value);
     }
 }

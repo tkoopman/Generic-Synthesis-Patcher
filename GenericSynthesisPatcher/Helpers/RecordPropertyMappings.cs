@@ -7,39 +7,6 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    internal interface IRecordProperty
-    {
-        public string PropertyName { get; }
-
-        public Type? Type { get; }
-    }
-
-    public readonly struct PropertyAliasMapping (Type? type, string propertyName, string realPropertyName) : IRecordProperty
-    {
-        public string PropertyName { get; } = propertyName;
-        public string RealPropertyName { get; } = realPropertyName;
-        public Type? Type { get; } = type;
-    }
-
-    public readonly struct RecordPropertyMapping (Type? type, string propertyName, IRecordAction action) : IRecordProperty
-    {
-        public IRecordAction Action { get; } = action;
-
-        public string PropertyName { get; } = propertyName;
-        public Type? Type { get; } = type;
-    }
-
-    internal readonly struct RecordProperty (Type? type, string propertyName) : IRecordProperty
-    {
-        public string PropertyName { get; } = propertyName;
-
-        public Type? Type { get; } = type;
-
-        public RecordProperty (string propertyName) : this(null, propertyName)
-        {
-        }
-    }
-
     public static class RecordPropertyMappings
     {
         private static readonly HashSet<IRecordProperty> propertyAliases = new(comparer: new RecordPropertyComparer());
@@ -360,7 +327,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IEffectShaderGetter)          ,  "EdgeWidth"                                 ,  Generic<float>.Instance);
             Add(typeof(IVisualEffectGetter)          ,  "EffectArt"                                 ,  FormLink<IArtObjectGetter>.Instance);
             Add(typeof(IDualCastDataGetter)          ,  "EffectShader"                              ,  FormLink<IEffectShaderGetter>.Instance);
-            Add(null                                 ,  "Effects"                                   ,  FormLinksWithData<EffectsAction, IMagicEffectGetter>.Instance);
+            Add(null                                 ,  "Effects"                                   ,  EffectsAction.Instance);
             Add(typeof(IMagicEffectGetter)           ,  "EnchantArt"                                ,  FormLink<IArtObjectGetter>.Instance);
             Add(typeof(IMagicEffectGetter)           ,  "EnchantShader"                             ,  FormLink<IEffectShaderGetter>.Instance);
             Add(typeof(IObjectEffectGetter)          ,  "EnchantType"                               ,  Enums.Instance);
@@ -513,7 +480,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IBookGetter)                  ,  "InventoryArt"                              ,  FormLink<IStaticGetter>.Instance);
             Add(typeof(IOutfitGetter)                ,  "Items"                                     ,  FormLinks<IOutfitTargetGetter>.Instance);
             Add(typeof(IFormListGetter)              ,  "Items"                                     ,  FormLinks<ISkyrimMajorRecordGetter>.Instance);
-            Add(null                                 ,  "Items"                                     ,  FormLinksWithData<ContainerItemsAction, IItemGetter>.Instance);
+            Add(null                                 ,  "Items"                                     ,  ContainerItemsAction.Instance);
             Add(typeof(IFactionGetter)               ,  "JailOutfit"                                ,  FormLink<IOutfitGetter>.Instance);
             Add(null                                 ,  "Keywords"                                  ,  FormLinks<IKeywordGetter>.Instance);
             Add(typeof(ISceneGetter)                 ,  "LastActionIndex"                           ,  Generic<uint>.Instance);
@@ -860,6 +827,19 @@ namespace GenericSynthesisPatcher.Helpers
         }
     }
 
+    #region Support Classes
+
+    internal readonly struct RecordProperty (Type? type, string propertyName) : IRecordProperty
+    {
+        public string PropertyName { get; } = propertyName;
+
+        public Type? Type { get; } = type;
+
+        public RecordProperty (string propertyName) : this(null, propertyName)
+        {
+        }
+    }
+
     internal class RecordPropertyComparer : IEqualityComparer<IRecordProperty>
     {
         public static bool Equals (IRecordProperty? x, IRecordProperty? y)
@@ -872,10 +852,12 @@ namespace GenericSynthesisPatcher.Helpers
             return x.Type == y.Type && x.PropertyName.Equals(y.PropertyName, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static int GetHashCode ([DisallowNull] IRecordProperty obj) => obj.Type?.GetHashCode() ?? 0 ^ obj.PropertyName.GetHashCode(StringComparison.OrdinalIgnoreCase);
+        public static int GetHashCode ([DisallowNull] IRecordProperty obj) => (obj.Type?.GetHashCode() ?? 0) ^ obj.PropertyName.GetHashCode(StringComparison.OrdinalIgnoreCase);
 
         bool IEqualityComparer<IRecordProperty>.Equals (IRecordProperty? x, IRecordProperty? y) => Equals(x, y);
 
         int IEqualityComparer<IRecordProperty>.GetHashCode ([DisallowNull] IRecordProperty obj) => GetHashCode(obj);
     }
+
+    #endregion Support Classes
 }

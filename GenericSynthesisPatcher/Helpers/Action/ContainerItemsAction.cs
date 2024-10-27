@@ -1,8 +1,5 @@
-using System.ComponentModel;
-
 using GenericSynthesisPatcher.Helpers.Graph;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
 
@@ -10,34 +7,35 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-using Newtonsoft.Json;
-
 using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class ContainerItemsAction (FormKeyListOperation<IItemGetter> formKey, int count) : IFormLinksWithData<ContainerItemsAction, IItemGetter>
+    public class ContainerItemsAction : FormLinksWithData<ContainerItemsData, IItemGetter, ContainerEntry>
     {
-        [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(1)]
-        public int Count = count;
-
+        public static readonly ContainerItemsAction Instance = new();
         private const int ClassLogCode = 0x16;
 
-        [JsonProperty(PropertyName = "Item", Required = Required.Always)]
-        public FormKeyListOperation<IItemGetter> FormKey { get; set; } = formKey ?? new(null);
+        public override int Add (ProcessingKeys proKeys, ContainerItemsData data)
+        {
+            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+                return -1;
 
-        public static bool CanMerge () => true;
+            items.Add(data.ToActionData());
+            return 1;
+        }
 
-        public static bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
+        public override bool CanMerge () => true;
+
+        public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
             => left is IContainerEntryGetter l
             && right is IContainerEntryGetter r
             && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
             && l.Item.Count == r.Item.Count;
 
-        public static IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
+        public override IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
 
-        public static int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
+        public override int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
         {
             if (source is not IContainerEntryGetter sourceRecord)
             {
@@ -59,11 +57,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 1;
         }
 
-        public static List<ContainerItemsAction>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.Rule.GetFillValueAs<List<ContainerItemsAction>>(proKeys.RuleKey);
+        public override List<ContainerItemsData>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.Rule.GetFillValueAs<List<ContainerItemsData>>(proKeys.RuleKey);
 
-        public static FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
+        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
-        public static int Merge (ProcessingKeys proKeys)
+        public override int Merge (ProcessingKeys proKeys)
         {
             Global.UpdateLoggers(ClassLogCode);
 
@@ -83,7 +81,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
-        public static int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove)
+        public override int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove)
         {
             if (remove is not IContainerEntryGetter sourceRecord)
                 return -1;
@@ -105,7 +103,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 0;
         }
 
-        public static int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? _newList)
+        public override int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? _newList)
         {
             if (_newList is not IReadOnlyList<IContainerEntryGetter> newList || !Mod.GetProperty<IReadOnlyList<IContainerEntryGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
@@ -130,22 +128,5 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return add.Count() + del.Count();
         }
-
-        public int Add (ProcessingKeys proKeys)
-        {
-            var containerEntry = new ContainerEntry();
-            containerEntry.Item.Item.FormKey = FormKey.Value;
-            containerEntry.Item.Count = Count;
-
-            if (!Mod.GetPropertyForEditing<ExtendedList<ContainerEntry>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
-                return -1;
-
-            items.Add(containerEntry);
-            return 1;
-        }
-
-        public bool DataEquals (IFormLinkContainerGetter other) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.Value) && otherContainer.Item.Count == Count;
-
-        public IFormLinkContainerGetter? FindFormKey (IEnumerable<IFormLinkContainerGetter>? list) => FindRecord(list, FormKey.Value);
     }
 }

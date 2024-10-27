@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Json.Data.Action;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -12,16 +12,12 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLinksWithData<T, TMajor> : IRecordAction
-        where T : class, IFormLinksWithData<T, TMajor>
+    public abstract class FormLinksWithData<TActionData, TMajor, TData> : IRecordAction
+        where TActionData : ActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+        where TData : class, IFormLinkContainer
     {
-        public static readonly FormLinksWithData<T, TMajor> Instance = new();
         private const int ClassLogCode = 0x15;
-
-        private FormLinksWithData ()
-        {
-        }
 
         public bool CanFill () => true;
 
@@ -29,7 +25,88 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public bool CanForwardSelfOnly () => true;
 
-        public bool CanMerge () => T.CanMerge();
+        #region Abstract
+
+        /// <summary>
+        /// Add entry as detailed by this IFormLinksWithData object.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="rcd"></param>
+        /// <param name="patchRecord"></param>
+        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public abstract int Add (ProcessingKeys proKeys, TActionData data);
+
+        /// <summary>
+        /// Can this be used in merge actions
+        /// </summary>
+        /// <returns>True if Merge implemented</returns>
+        public abstract bool CanMerge ();
+
+        /// <summary>
+        /// Check if 2 links and data are equal
+        /// </summary>
+        /// <returns>True only if both FormKey and any data match across both entries.</returns>
+        public abstract bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right);
+
+        /// <summary>
+        /// Find record from list of records.
+        /// </summary>
+        /// <param name="list">List to search</param>
+        /// <param name="key">FormKey to find</param>
+        /// <returns>Getter of found entry or null if not found.</returns>
+        public abstract IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key);
+
+        /// <summary>
+        /// Add source entry to patch record.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="patchRecord"></param>
+        /// <param name="source">Entry to add to list in patch record.</param>
+        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public abstract int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source);
+
+        /// <summary>
+        /// Get data from JSON value in rule.
+        /// </summary>
+        /// <param name="rule">Rule to get data from</param>
+        /// <param name="key">Key to current action in rule</param>
+        /// <returns>List of all data values for action.</returns>
+        public abstract List<TActionData>? GetFillValueAs (ProcessingKeys proKeys);
+
+        /// <summary>
+        /// Get FormKey of entry.
+        /// </summary>
+        /// <param name="from">Form Link to get FormKey from</param>
+        /// <returns>FormKey</returns>
+        public abstract FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from);
+
+        /// <summary>
+        /// Preform merge of current field in current record.
+        /// </summary>
+        /// <returns>Number of changes to complete merge. Each entry removed / added counts as 1 change.</returns>
+        public abstract int Merge (ProcessingKeys proKeys);
+
+        /// <summary>
+        /// Remove link entry from current record.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="rcd"></param>
+        /// <param name="patchRecord"></param>
+        /// <param name="remove"></param>
+        /// <returns>Number of changes made to remove entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public abstract int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove);
+
+        /// <summary>
+        /// Replace list of links in current record with new list.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="rcd"></param>
+        /// <param name="patchRecord"></param>
+        /// <param name="newList">Patch record list should match this list after replace.</param>
+        /// <returns>Number of changes to complete replace. Each entry removed / added counts as 1 change.</returns>
+        public abstract int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList);
+
+        #endregion Abstract
 
         public int Fill (ProcessingKeys proKeys)
         {
@@ -40,9 +117,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 int changes = 0;
 
-                foreach (var action in T.GetFillValueAs(proKeys) ?? [])
+                foreach (var actionData in GetFillValueAs(proKeys) ?? [])
                 {
-                    if (action?.FormKey == null || action.FormKey.Value == FormKey.Null)
+                    if (actionData?.FormKey == null || actionData.FormKey.Value == FormKey.Null)
                     {
                         if (curList != null && curList.Count > 0)
                         {
@@ -59,17 +136,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         continue;
                     }
 
-                    var e = action.FindFormKey(curList);
+                    var e = FindRecord(curList, actionData.FormKey.Value);
 
-                    if (e != null && (action.FormKey.Operation == ListLogic.DEL || !action.DataEquals(e)))
+                    if (e != null && (actionData.FormKey.Operation == ListLogic.DEL || !actionData.Equals(e)))
                     {
-                        _ = T.Remove(proKeys, e);
+                        _ = Remove(proKeys, e);
                         changes++;
                     }
 
-                    if (action.FormKey.Operation == ListLogic.ADD && (e == null || (e != null && !action.DataEquals(e))))
+                    if (actionData.FormKey.Operation == ListLogic.ADD && (e == null || (e != null && !actionData.Equals(e))))
                     {
-                        _ = action.Add(proKeys);
+                        _ = Add(proKeys, actionData);
                         changes++;
                     }
                 }
@@ -100,7 +177,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                int changes = T.Replace(proKeys, newList);
+                int changes = Replace(proKeys, newList);
 
                 if (changes > 0)
                     Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
@@ -135,21 +212,21 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 int changes = 0;
                 foreach (var item in newList)
                 {
-                    var key = T.GetFormKeyFromRecord(item);
+                    var key = GetFormKeyFromRecord(item);
                     if (key.ModKey == forwardContext.ModKey)
                     {
-                        var i = T.FindRecord(curList, key);
+                        var i = FindRecord(curList, key);
 
-                        if (i != null && !T.DataEquals(item, i))
+                        if (i != null && !DataEquals(item, i))
                         {
-                            _ = T.Remove(proKeys, i);
-                            _ = T.Forward(proKeys, item);
+                            _ = Remove(proKeys, i);
+                            _ = Forward(proKeys, item);
                             changes++;
                         }
 
                         if (i == null)
                         {
-                            _ = T.Forward(proKeys, item);
+                            _ = Forward(proKeys, item);
                             changes++;
                         }
                     }
@@ -175,7 +252,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return origin != null
                         && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curList)
                         && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, proKeys.Property.PropertyName, out var originList)
-                        && FormLinksWithData<T, TMajor>.RecordsMatch(curList, originList);
+                        && RecordsMatch(curList, originList);
         }
 
         /// <summary>
@@ -202,7 +279,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 if (link.Operation != ListLogic.NOT)
                     includesChecked++;
 
-                if (T.FindRecord(curLinks, link.Value) != null)
+                if (FindRecord(curLinks, link.Value) != null)
                 {
                     // Doesn't matter what overall Operation is we always fail on a NOT match
                     if (link.Operation == ListLogic.NOT)
@@ -227,9 +304,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             };
         }
 
-        public int Merge (ProcessingKeys proKeys) => T.Merge(proKeys);
-
-        private static bool RecordsMatch (IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right)
+        private bool RecordsMatch (IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right)
         {
             if (!left.SafeAny() && !right.SafeAny())
                 return true;
@@ -239,7 +314,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             foreach (var l in left)
             {
-                if (!right.Any(r => T.DataEquals(l, r)))
+                if (!right.Any(r => DataEquals(l, r)))
                     return false;
             }
 

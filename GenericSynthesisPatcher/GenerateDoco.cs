@@ -196,19 +196,6 @@ namespace GenericSynthesisPatcher
                             desc = "Form Keys or Editor IDs";
                             exam = "";
                         }
-                        else if (rcdGeneric == typeof(FormLinksWithData<,>))
-                        {
-                            if (rcdSubType == typeof(ContainerItemsAction))
-                            {
-                                desc = "JSON objects containing item Form Key/Editor ID and Count (QTY)";
-                                exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }}";
-                            }
-                            else if (rcdSubType == typeof(EffectsAction))
-                            {
-                                desc = "JSON objects containing effect Form Key/Editor ID and effect data";
-                                exam = $"\"{rpm.PropertyName}\": {{ \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }}";
-                            }
-                        }
                     }
                     else if (actionType.IsAssignableTo(typeof(Flags)))
                     {
@@ -226,6 +213,16 @@ namespace GenericSynthesisPatcher
                         string[] values = Enum.GetNames(type);
                         desc = $"Possible values ({string.Join(", ", values)})";
                         exam = $"\"{rpm.PropertyName}\": \"{values.First()}\"";
+                    }
+                    else if (actionType == typeof(ContainerItemsAction))
+                    {
+                        desc = "JSON objects containing item Form Key/Editor ID and Count (QTY)";
+                        exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }}";
+                    }
+                    else if (actionType == typeof(EffectsAction))
+                    {
+                        desc = "JSON objects containing effect Form Key/Editor ID and effect data";
+                        exam = $"\"{rpm.PropertyName}\": {{ \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }}";
                     }
 
                     if (desc == null)
