@@ -40,5 +40,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 
             return containerEntry;
         }
+
+        public override string? ToString () => $"{Count}x{FormKey.Value}";
     }
 }

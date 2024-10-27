@@ -53,5 +53,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 
             return effect;
         }
+
+        public override string? ToString () => $"{FormKey.Value} (Area: {Area}, Duration: {Duration}, Magnitude: {Magnitude})";
     }
 }

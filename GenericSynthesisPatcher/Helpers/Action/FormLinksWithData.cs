@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data.Action;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -19,28 +20,35 @@ namespace GenericSynthesisPatcher.Helpers.Action
     {
         private const int ClassLogCode = 0x15;
 
+        /// <summary>
+        /// Add entry as detailed by this data object.
+        /// </summary>
+        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public int Add (ProcessingKeys proKeys, TActionData data)
+        {
+            if (!Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+                return -1;
+
+            items.Add(data.ToActionData());
+            return 1;
+        }
+
         public bool CanFill () => true;
 
         public bool CanForward () => true;
 
         public bool CanForwardSelfOnly () => true;
 
+        public bool CanMerge () => true;
+
         #region Abstract
 
         /// <summary>
-        /// Add entry as detailed by this IFormLinksWithData object.
+        /// Create new TData coping values from existing Getter.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="rcd"></param>
-        /// <param name="patchRecord"></param>
-        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
-        public abstract int Add (ProcessingKeys proKeys, TActionData data);
-
-        /// <summary>
-        /// Can this be used in merge actions
-        /// </summary>
-        /// <returns>True if Merge implemented</returns>
-        public abstract bool CanMerge ();
+        /// <param name="source">Source to copy values from.</param>
+        /// <returns>New TData with Source values</returns>
+        public abstract TData? CreateFrom (IFormLinkContainerGetter source);
 
         /// <summary>
         /// Check if 2 links and data are equal
@@ -49,62 +57,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public abstract bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right);
 
         /// <summary>
-        /// Find record from list of records.
-        /// </summary>
-        /// <param name="list">List to search</param>
-        /// <param name="key">FormKey to find</param>
-        /// <returns>Getter of found entry or null if not found.</returns>
-        public abstract IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key);
-
-        /// <summary>
-        /// Add source entry to patch record.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="patchRecord"></param>
-        /// <param name="source">Entry to add to list in patch record.</param>
-        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
-        public abstract int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source);
-
-        /// <summary>
-        /// Get data from JSON value in rule.
-        /// </summary>
-        /// <param name="rule">Rule to get data from</param>
-        /// <param name="key">Key to current action in rule</param>
-        /// <returns>List of all data values for action.</returns>
-        public abstract List<TActionData>? GetFillValueAs (ProcessingKeys proKeys);
-
-        /// <summary>
         /// Get FormKey of entry.
         /// </summary>
         /// <param name="from">Form Link to get FormKey from</param>
         /// <returns>FormKey</returns>
         public abstract FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from);
 
-        /// <summary>
-        /// Preform merge of current field in current record.
-        /// </summary>
-        /// <returns>Number of changes to complete merge. Each entry removed / added counts as 1 change.</returns>
-        public abstract int Merge (ProcessingKeys proKeys);
-
-        /// <summary>
-        /// Remove link entry from current record.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="rcd"></param>
-        /// <param name="patchRecord"></param>
-        /// <param name="remove"></param>
-        /// <returns>Number of changes made to remove entry. Should be 1 if successful else 0. -1 if major failure.</returns>
-        public abstract int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove);
-
-        /// <summary>
-        /// Replace list of links in current record with new list.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="rcd"></param>
-        /// <param name="patchRecord"></param>
-        /// <param name="newList">Patch record list should match this list after replace.</param>
-        /// <returns>Number of changes to complete replace. Each entry removed / added counts as 1 change.</returns>
-        public abstract int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList);
+        public abstract string ToString (IFormLinkContainerGetter source);
 
         #endregion Abstract
 
@@ -159,6 +118,33 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
             return -1;
+        }
+
+        /// <summary>
+        /// Find record from list of records.
+        /// </summary>
+        /// <param name="list">List to search</param>
+        /// <param name="key">FormKey to find</param>
+        /// <returns>Getter of found entry or null if not found.</returns>
+        public IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
+
+        /// <summary>
+        /// Add source entry to patch record.
+        /// </summary>
+        /// <param name="source">Entry to add to list in patch record.</param>
+        /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
+        {
+            var newEntry = CreateFrom(source);
+
+            if (newEntry == null || !Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+                return -1;
+
+            items.Add(newEntry);
+
+            Global.TraceLogger?.Log(ClassLogCode, $"Added {newEntry}");
+
+            return 1;
         }
 
         public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
@@ -243,6 +229,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         /// <summary>
+        /// Get data from JSON value in rule.
+        /// </summary>
+        /// <param name="rule">Rule to get data from</param>
+        /// <param name="key">Key to current action in rule</param>
+        /// <returns>List of all data values for action.</returns>
+        public List<TActionData>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.GetFillValueAs<List<TActionData>>();
+
+        /// <summary>
         /// Called when GSPRule.OnlyIfDefault is true
         /// </summary>
         /// <returns>True if all form keys and data matches</returns>
@@ -302,6 +296,83 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 FilterLogic.XOR => matchedCount == 1,
                 _ => includesChecked == 0 // OR
             };
+        }
+
+        /// <summary>
+        /// Preform merge of current field in current record.
+        /// </summary>
+        /// <returns>Number of changes to complete merge. Each entry removed / added counts as 1 change.</returns>
+        public int Merge (ProcessingKeys proKeys)
+        {
+            Global.UpdateLoggers(ClassLogCode);
+
+            var root = RecordGraph<IFormLinkContainerGetter>.Create(
+                proKeys.Record.FormKey,
+                proKeys.Type.StaticRegistration.GetterType,
+                proKeys.Rule.Merge[proKeys.RuleKey],
+                list => Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
+                item => ToString(item));
+
+            if (root == null)
+            {
+                Global.Logger.Log(ClassLogCode, "Failed to generate graph for merge", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+                return -1;
+            }
+
+            return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
+        }
+
+        /// <summary>
+        /// Remove link entry from current record.
+        /// </summary>
+        /// <param name="remove"></param>
+        /// <returns>Number of changes made to remove entry. Should be 1 if successful else 0. -1 if major failure.</returns>
+        public int Remove (ProcessingKeys proKeys, IFormLinkContainerGetter remove)
+        {
+            var entry = CreateFrom(remove);
+
+            if (entry == null || !Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+                return -1;
+
+            if (items.Remove(entry))
+            {
+                Global.TraceLogger?.Log(ClassLogCode, $"Removed {entry}");
+                return 1;
+            }
+
+            Global.Logger.Log(ClassLogCode, $"Failed to remove {ToString(remove)}", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+            return 0;
+        }
+
+        /// <summary>
+        /// Replace list of links in current record with new list.
+        /// </summary>
+        /// <param name="newList">Patch record list should match this list after replace.</param>
+        /// <returns>Number of changes to complete replace. Each entry removed / added counts as 1 change.</returns>
+        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList)
+        {
+            if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+            {
+                Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+                return -1;
+            }
+
+            var add = newList.WhereNotIn(curList);
+            var del = curList.WhereNotIn(newList);
+
+            if (!add.Any() && !del.Any())
+                return 0;
+
+            if (!Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
+                return -1;
+
+            foreach (var d in del)
+                _ = Remove(proKeys, d);
+
+            foreach (var a in add)
+                _ = Forward(proKeys, a);
+
+            return add.Count() + del.Count();
         }
 
         private bool RecordsMatch (IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right)
