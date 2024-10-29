@@ -2,6 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
+using Loqui;
+
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
@@ -17,7 +19,7 @@ namespace GenericSynthesisPatcher.Helpers
     {
         private const int ClassLogCode = 0x02;
 
-        public static bool ClearProperty ( IMajorRecord patchRecord, string propertyName )
+        public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
             if (property == null)
@@ -45,18 +47,18 @@ namespace GenericSynthesisPatcher.Helpers
         /// </summary>
         /// <param name="context"></param>
         /// <returns>Overwritten master record. Null if current record is the master.</returns>
-        public static IMajorRecordGetter? FindOrigin ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        public static IMajorRecordGetter? FindOrigin (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
             => Global.State.LinkCache.TryResolve(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
                 ? context.Record.Equals(o)
                     ? null
                     : o
                 : null;
 
-        public static string FixFormKey ( string input ) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
+        public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
-        public static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value ) => GetProperty(fromRecord, propertyName, out value, out _);
+        public static bool GetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value) => GetProperty(fromRecord, propertyName, out value, out _);
 
-        public static bool GetProperty<T> ( IMajorRecordGetter fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property )
+        public static bool GetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property)
         {
             value = default;
             property = fromRecord.GetType().GetProperty(propertyName);
@@ -87,7 +89,7 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        public static bool GetPropertyForEditing<T> ( IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value )
+        public static bool GetPropertyForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
         {
             if (!GetProperty(patchRecord, propertyName, out value, out var property))
                 return false;
@@ -110,7 +112,7 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        public static bool SetProperty<T> ( IMajorRecord patchRecord, string propertyName, T? value )
+        public static bool SetProperty<T> (IMajorRecord patchRecord, string propertyName, T? value)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
             if (property == null)
@@ -129,7 +131,7 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        public static bool TryFindFormKey<TMajor> ( string input, out FormKey formKey, out IFormLinkGetter<TMajor>? link ) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+        public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out IFormLinkGetter<TMajor>? link) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         {
             link = null;
             if (FormKey.TryFactory(FixFormKey(input), out formKey))

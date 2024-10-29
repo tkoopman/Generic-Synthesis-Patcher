@@ -8,7 +8,7 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class EffectsAction : FormLinksWithData<EffectsData, IMagicEffectGetter, Effect>
+    public class EffectsAction : FormLinksWithDataAction<EffectsData, IMagicEffectGetter, Effect>
     {
         public static readonly EffectsAction Instance = new();
         private const int ClassLogCode = 0x17;

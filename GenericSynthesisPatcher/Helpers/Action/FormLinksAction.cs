@@ -14,13 +14,13 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLinks<T> : IRecordAction
+    public class FormLinksAction<T> : IRecordAction
         where T : class, IMajorRecordGetter
     {
-        public static readonly FormLinks<T> Instance = new();
+        public static readonly FormLinksAction<T> Instance = new();
         private const int ClassLogCode = 0x14;
 
-        private FormLinks ()
+        private FormLinksAction ()
         {
         }
 
@@ -29,6 +29,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool CanForward () => true;
 
         public bool CanForwardSelfOnly () => true;
+
+        public bool CanMatch () => true;
 
         public bool CanMerge () => true;
 
@@ -193,7 +195,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return origin != null
                         && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkValue)
                         && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, proKeys.Property.PropertyName, out var originValue)
-                        && FormLinks<T>.RecordsMatch(checkValue, originValue);
+                        && FormLinksAction<T>.RecordsMatch(checkValue, originValue);
         }
 
         public bool MatchesRule (ProcessingKeys proKeys)

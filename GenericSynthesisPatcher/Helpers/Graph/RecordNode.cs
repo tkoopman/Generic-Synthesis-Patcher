@@ -26,7 +26,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Func<TItem, string> DebugPredicate { get; }
         protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; }
 
-        protected RecordNode ( IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate )
+        protected RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate)
         {
             Context = context;
             workingList = predicate(context)?.ToList() ?? [];
@@ -34,7 +34,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             ModKeys = modKeys;
         }
 
-        public bool TryFind ( ModKey modKey, [NotNullWhen(true)] out IRecordNode? result )
+        public bool TryFind (ModKey modKey, [NotNullWhen(true)] out IRecordNode? result)
         {
             bool b = TryFindRecord(modKey, out var r);
             result = r;
@@ -42,7 +42,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return b;
         }
 
-        protected static void Populate ( RecordGraph<TItem> root, IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> all, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate )
+        protected static void Populate (RecordGraph<TItem> root, IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> all, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate)
         {
             int count = all.Count() - 2;
 
@@ -58,12 +58,19 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 var node = new RecordNode<TItem>(all.ElementAt(i), root.ModKeys, predicate, root.DebugPredicate);
                 int index = Global.State.LinkCache.ListedOrder.IndexOf(node.Context.ModKey, static (i, k) => i.ModKey == k);
 
+                Global.TraceLogger?.WriteLine($"Creating graph node {node.Context.ModKey} under {root.Context.ModKey}");
+
                 foreach (var nodeMaster in Global.State.LinkCache.ListedOrder[index].MasterReferences)
                 {
                     if (root.TryFindRecord(nodeMaster.Master, out var nodeOverwrites))
                     {
+                        Global.TraceLogger?.WriteLine($"{nodeOverwrites.Context.ModKey} overwritten by {node.Context.ModKey}");
                         nodeOverwrites.overwrittenBy.Add(node);
                         node.overwrites.Add(nodeOverwrites);
+                    }
+                    else
+                    {
+                        Global.TraceLogger?.WriteLine($"{nodeMaster.Master} not found on graph.");
                     }
                 }
             }
@@ -79,11 +86,11 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 }
             }
 
-            foreach (var c in overwrittenBy)
+            foreach (var c in overwrittenBy.ToArray())
                 c.CleanUp();
         }
 
-        protected bool Merge ( IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove )
+        protected bool Merge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
         {
             // Done with List instead of Hashtable as in rare cases may have same entry multiple times.
             List<TItem> myAdds = [];
@@ -152,7 +159,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return add.Any() || remove.Any() || forceAdd.Any();
         }
 
-        protected void Print ( string line )
+        protected void Print (string line)
         {
             if (!string.IsNullOrEmpty(line))
                 line += " > ";
@@ -168,7 +175,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 node.Print(line);
         }
 
-        protected bool TryFindRecord ( ModKey modKey, [NotNullWhen(true)] out RecordNode<TItem>? result )
+        protected bool TryFindRecord (ModKey modKey, [NotNullWhen(true)] out RecordNode<TItem>? result)
         {
             result = null;
             if (Context.ModKey == modKey)
@@ -177,7 +184,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 return true;
             }
 
-            foreach (var node in overwrites)
+            foreach (var node in overwrittenBy)
             {
                 if (node.TryFindRecord(modKey, out result))
                     return true;
@@ -186,7 +193,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return false;
         }
 
-        private void RemoveOverwrittenBy ( RecordNode<TItem> recordGraph )
+        private void RemoveOverwrittenBy (RecordNode<TItem> recordGraph)
         {
             if (overwrittenBy.Remove(recordGraph) && overwrittenBy.Count == 0)
                 throw new Exception("Houston, I think we have a problem!");

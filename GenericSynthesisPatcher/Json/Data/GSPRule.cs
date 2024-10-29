@@ -337,9 +337,9 @@ namespace GenericSynthesisPatcher.Json.Data
 
             foreach (var x in Match)
             {
-                if (!proKeys.SetProperty(x.Key, x.Key.Value))
+                if (!proKeys.SetProperty(x.Key, x.Key.Value) || !proKeys.Property.Action.CanMatch())
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. No RPM for Field: {x.Key.Value}");
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. No match enabled RPM for Field: {x.Key.Value}");
                     return false;
                 }
 

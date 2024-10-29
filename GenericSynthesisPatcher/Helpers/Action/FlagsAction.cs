@@ -1,6 +1,5 @@
 using EnumsNET;
 
-using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
@@ -11,12 +10,12 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    internal class Flags : IRecordAction
+    internal class FlagsAction : IRecordAction
     {
-        public static readonly Flags Instance = new();
+        public static readonly FlagsAction Instance = new();
         private const int ClassLogCode = 0x12;
 
-        private Flags ()
+        private FlagsAction ()
         {
         }
 
@@ -25,6 +24,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool CanForward () => false;
 
         public bool CanForwardSelfOnly () => false;
+
+        public bool CanMatch () => true;
 
         public bool CanMerge () => false;
 

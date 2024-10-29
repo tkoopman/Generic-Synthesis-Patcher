@@ -8,7 +8,7 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class ContainerItemsAction : FormLinksWithData<ContainerItemsData, IItemGetter, ContainerEntry>
+    public class ContainerItemsAction : FormLinksWithDataAction<ContainerItemsData, IItemGetter, ContainerEntry>
     {
         public static readonly ContainerItemsAction Instance = new();
         private const int ClassLogCode = 0x16;

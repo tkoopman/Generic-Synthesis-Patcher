@@ -13,7 +13,7 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public abstract class FormLinksWithData<TActionData, TMajor, TData> : IRecordAction
+    public abstract class FormLinksWithDataAction<TActionData, TMajor, TData> : IRecordAction
         where TActionData : ActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
@@ -38,6 +38,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool CanForward () => true;
 
         public bool CanForwardSelfOnly () => true;
+
+        public bool CanMatch () => true;
 
         public bool CanMerge () => true;
 
@@ -199,7 +201,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 foreach (var item in newList)
                 {
                     var key = GetFormKeyFromRecord(item);
-                    if (key.ModKey == forwardContext.ModKey)
+                    if (key != null && key.ModKey == forwardContext.ModKey)
                     {
                         var i = FindRecord(curList, key);
 

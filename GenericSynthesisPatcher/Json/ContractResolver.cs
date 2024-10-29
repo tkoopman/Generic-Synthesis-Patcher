@@ -6,13 +6,15 @@ using Mutagen.Bethesda.Plugins;
 
 using Newtonsoft.Json.Serialization;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Json
 {
     public class ContractResolver : DefaultContractResolver
     {
         public static readonly ContractResolver Instance = new();
 
-        protected override JsonContract CreateContract ( Type objectType )
+        protected override JsonContract CreateContract (Type objectType)
         {
             var contract = base.CreateContract(objectType);
 
@@ -24,6 +26,8 @@ namespace GenericSynthesisPatcher.Json
                 contract.Converter = new RecordTypeConverter();
             if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
                 contract.Converter = new OperationsConverter();
+            if (objectType == typeof(Percent))
+                contract.Converter = new PercentConverter();
 
             return contract;
         }

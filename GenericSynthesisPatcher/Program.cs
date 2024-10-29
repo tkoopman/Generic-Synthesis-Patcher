@@ -178,7 +178,7 @@ namespace GenericSynthesisPatcher
 
             var files = Directory.GetFiles(dataFolder).Where(x => x.EndsWith(".json"));
             int countFile = 0;
-            files.ForEach(f =>
+            foreach (string? f in files)
             {
                 if (f.Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
                 {
@@ -203,8 +203,8 @@ namespace GenericSynthesisPatcher
                         if (!rule.Validate())
                         {
                             LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Error validating rules.", rule: rule);
-                            LoadedRules = [];
-                            return;
+                            enabledTypes.Clear();
+                            return [];
                         }
 
                         if (rule is GSPGroup group)
@@ -228,7 +228,7 @@ namespace GenericSynthesisPatcher
                         }
                     }
                 }
-            });
+            }
 
             EnabledTypes = enabledTypes.ToList().AsReadOnly();
 

@@ -8,6 +8,8 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher
 {
     internal static class GenerateDoco
@@ -71,10 +73,10 @@ namespace GenericSynthesisPatcher
 
             if (type.IsEnum)
             {
-                actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? "Enums" : "Flags";
+                actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? nameof(EnumsAction) : nameof(FlagsAction);
             }
             else if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
-                actionClass = $"Generic<string>";
+                actionClass = $"{nameof(GenericAction<string>)}<string>";
             else if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
             {
                 string? n = type.Name switch
@@ -92,20 +94,28 @@ namespace GenericSynthesisPatcher
                     _ => type.Name
                 };
                 if (n != null)
-                    actionClass = $"Generic<{n}>";
+                    actionClass = $"{nameof(GenericAction<byte>)}<{n}>";
             }
+            else if (type == typeof(Percent))
+                actionClass = typeof(StructAction<Percent>).GetClassName();
             else if (subType != null)
             {
                 if (mainType.IsAssignableTo(typeof(IFormLinkGetter<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullableGetter<>)))
-                    actionClass = $"FormLink<{subType.Name}>";
+                    actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
                 else if (mainType.IsAssignableTo(typeof(IReadOnlyList<>)))
                 {
                     if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
-                        actionClass = $"FormLinks<{subSubType.Name}>";
+                        actionClass = $"{nameof(FormLinksAction<IActionRecordGetter>)}<{subSubType.Name}>";
                     else if (subType == typeof(IContainerEntryGetter))
-                        actionClass = "FormLinksWithData<ContainerItemsAction, IItemGetter>";
+                        actionClass = nameof(ContainerItemsAction);
                     else if (subType == typeof(IEffectGetter))
-                        actionClass = "FormLinksWithData<EffectsAction, IMagicEffectGetter>";
+                        actionClass = nameof(EffectsAction);
+                    else if (subType == typeof(ILeveledItemEntryGetter))
+                        actionClass = nameof(LeveledItemAction);
+                    else if (subType == typeof(ILeveledNpcEntryGetter))
+                        actionClass = nameof(LeveledNpcAction);
+                    else if (subType == typeof(ILeveledSpellEntryGetter))
+                        actionClass = nameof(LeveledSpellAction);
                 }
             }
 
@@ -132,9 +142,13 @@ namespace GenericSynthesisPatcher
 
                     buildRPMs.Add(CalcRPM(rtm, prop));
 
-                    // Check for matching RCD
+                    // Check for matching RPM
                     if (!RecordPropertyMappings.TryFindMapping(rtm.StaticRegistration.GetterType, prop.Name, out var rpm))
+                    {
+                        // Include Unimplemented
+                        //Properties.Add([$"*{prop.Name}", "", "-----", prop.PropertyType.GetClassName(), ""]);
                         continue;
+                    }
 
                     var pt = prop.PropertyType;
                     Type? pst = null;
@@ -155,7 +169,7 @@ namespace GenericSynthesisPatcher
                     string exam = "";
                     string MFFSM = string.Join<char>(string.Empty,
                         [
-                            'M',
+                            rpm.Action.CanMatch() ? 'M' : '-',
                             rpm.Action.CanFill() ? 'F' : '-',
                             rpm.Action.CanForward() ? 'F': '-',
                             rpm.Action.CanForwardSelfOnly() ? 'S': '-',
@@ -168,14 +182,14 @@ namespace GenericSynthesisPatcher
                         var rcdGeneric = actionType.GetGenericTypeDefinition();
                         var rcdSubType = actionType.GenericTypeArguments[0];
 
-                        if (rcdGeneric == typeof(Generic<>))
+                        if (rcdGeneric == typeof(GenericAction<>))
                         {
                             if (rcdSubType == typeof(float))
                             {
                                 desc = "A decimal value";
                                 exam = $"\"{rpm.PropertyName}\": 3.14";
                             }
-                            else if (actionType.IsAssignableTo(typeof(Generic<string>)))
+                            else if (actionType.IsAssignableTo(typeof(GenericAction<string>)))
                             {
                                 desc = "A string value";
                                 exam = $"\"{rpm.PropertyName}\": \"Hello\"";
@@ -186,18 +200,26 @@ namespace GenericSynthesisPatcher
                                 exam = $"\"{rpm.PropertyName}\": 7";
                             }
                         }
-                        else if (rcdGeneric == typeof(Helpers.Action.FormLink<>))
+                        else if (rcdGeneric == typeof(Helpers.Action.FormLinkAction<>))
                         {
                             desc = "Form Key or Editor ID";
                             exam = "";
                         }
-                        else if (rcdGeneric == typeof(FormLinks<>))
+                        else if (rcdGeneric == typeof(FormLinksAction<>))
                         {
                             desc = "Form Keys or Editor IDs";
                             exam = "";
                         }
+                        else if (rcdGeneric == typeof(StructAction<>))
+                        {
+                            if (rcdSubType == typeof(Percent))
+                            {
+                                desc = "A decimal value between 0.00 - 1.00, or string ending in %";
+                                exam = $"\"{rpm.PropertyName}\": \"30.5%\"";
+                            }
+                        }
                     }
-                    else if (actionType.IsAssignableTo(typeof(Flags)))
+                    else if (actionType.IsAssignableTo(typeof(FlagsAction)))
                     {
                         var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
                         var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
@@ -206,7 +228,7 @@ namespace GenericSynthesisPatcher
                         desc = $"Flags ({string.Join(", ", flags)})";
                         exam = (flags.Length > 1) ? $"\"{rpm.PropertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{rpm.PropertyName}\": \"{flags.First()}\"";
                     }
-                    else if (actionType.IsAssignableTo(typeof(Enums)))
+                    else if (actionType.IsAssignableTo(typeof(Helpers.Action.EnumsAction)))
                     {
                         var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
                         var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
@@ -223,6 +245,21 @@ namespace GenericSynthesisPatcher
                     {
                         desc = "JSON objects containing effect Form Key/Editor ID and effect data";
                         exam = $"\"{rpm.PropertyName}\": {{ \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }}";
+                    }
+                    else if (actionType == typeof(LeveledItemAction))
+                    {
+                        desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
+                        exam = $"\"{rpm.PropertyName}\": [{{ \"Item\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
+                    }
+                    else if (actionType == typeof(LeveledNpcAction))
+                    {
+                        desc = "Array of JSON objects containing NPC Form Key/Editor ID and level/count data";
+                        exam = $"\"{rpm.PropertyName}\": [{{ \"NPC\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
+                    }
+                    else if (actionType == typeof(LeveledSpellAction))
+                    {
+                        desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
+                        exam = $"\"{rpm.PropertyName}\": [{{ \"Spell\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
                     }
 
                     if (desc == null)
@@ -298,11 +335,23 @@ namespace GenericSynthesisPatcher
             implemented.Sort((l, r) => string.CompareOrdinal(l.PropertyName, r.PropertyName));
 
             var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
-            notImplemented.Sort((l, r) => l.Types.Count().CompareTo(r.Types.Count()));
+            // Sort by uses then name
+            notImplemented.Sort((l, r) =>
+            {
+                int i = l.Types.Count().CompareTo(r.Types.Count());
+                if (i == 0)
+                    i = l.PropertyName.CompareTo(r.PropertyName);
+
+                return i;
+            });
 
             // Print Unimplemented Entries to Screen
             foreach (var rpm in notImplemented)
                 Console.WriteLine($"{rpm.PropertyName}, {rpm.Types.Count()}, {string.Join('|', rpm.PropertyTypes.Select(p => p.GetClassName()))}");
+
+            /*
+             * Output implemented to file as RPM code to paste into RecordPropertyMappings.cs
+             */
 
             lines = [];
             foreach (var rpm in implemented)

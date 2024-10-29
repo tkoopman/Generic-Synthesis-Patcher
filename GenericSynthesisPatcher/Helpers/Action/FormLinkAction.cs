@@ -11,12 +11,12 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLink<T> : IRecordAction where T : class, IMajorRecordGetter
+    public class FormLinkAction<T> : IRecordAction where T : class, IMajorRecordGetter
     {
-        public static readonly FormLink<T> Instance = new();
+        public static readonly FormLinkAction<T> Instance = new();
         private const int ClassLogCode = 0x13;
 
-        private FormLink ()
+        private FormLinkAction ()
         {
         }
 
@@ -25,6 +25,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool CanForward () => true;
 
         public bool CanForwardSelfOnly () => false;
+
+        public bool CanMatch () => true;
 
         public bool CanMerge () => false;
 

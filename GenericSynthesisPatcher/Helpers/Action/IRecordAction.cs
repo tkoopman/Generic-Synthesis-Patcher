@@ -12,6 +12,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public bool CanForwardSelfOnly ();
 
+        public bool CanMatch ();
+
         public bool CanMerge ();
 
         /// <summary>

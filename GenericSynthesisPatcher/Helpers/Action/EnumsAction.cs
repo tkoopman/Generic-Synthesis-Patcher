@@ -10,12 +10,12 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    internal class Enums : IRecordAction
+    internal class EnumsAction : IRecordAction
     {
-        public static readonly Enums Instance = new();
+        public static readonly EnumsAction Instance = new();
         private const int ClassLogCode = 0x11;
 
-        private Enums ()
+        private EnumsAction ()
         {
         }
 
@@ -24,6 +24,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool CanForward () => false;
 
         public bool CanForwardSelfOnly () => false;
+
+        public bool CanMatch () => true;
 
         public bool CanMerge () => false;
 
