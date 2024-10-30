@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Drawing;
 using System.Reflection;
 
 using GenericSynthesisPatcher.Helpers;
@@ -61,69 +62,11 @@ namespace GenericSynthesisPatcher
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
         private static StringWriter sw = new();
 
-        internal static (Type type, string name, string? iAction, Type propertyType) CalcRPM (RecordTypeMapping rtm, PropertyInfo propertyInfo)
-        {
-            string name = propertyInfo.Name;
-            string? actionClass = null;
-            var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
-
-            var mainType = type.GetIfGenericTypeDefinition();
-            var subType = type.GetIfUnderlyingType()?.GetIfGenericTypeDefinition();
-            var subSubType = type.GetIfUnderlyingType()?.GetIfUnderlyingType();
-
-            if (type.IsEnum)
-            {
-                actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? nameof(EnumsAction) : nameof(FlagsAction);
-            }
-            else if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
-                actionClass = $"{nameof(GenericAction<string>)}<string>";
-            else if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
-            {
-                string? n = type.Name switch
-                {
-                    nameof(Boolean) => null,
-                    nameof(Byte) => "byte",
-                    nameof(Char) => "char",
-                    nameof(Int16) => "short",
-                    nameof(Int32) => "int",
-                    nameof(SByte) => "sbyte",
-                    nameof(Single) => "float",
-                    nameof(String) => "string",
-                    nameof(UInt16) => "ushort",
-                    nameof(UInt32) => "uint",
-                    _ => type.Name
-                };
-                if (n != null)
-                    actionClass = $"{nameof(GenericAction<byte>)}<{n}>";
-            }
-            else if (type == typeof(Percent))
-                actionClass = typeof(StructAction<Percent>).GetClassName();
-            else if (subType != null)
-            {
-                if (mainType.IsAssignableTo(typeof(IFormLinkGetter<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullableGetter<>)))
-                    actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
-                else if (mainType.IsAssignableTo(typeof(IReadOnlyList<>)))
-                {
-                    if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
-                        actionClass = $"{nameof(FormLinksAction<IActionRecordGetter>)}<{subSubType.Name}>";
-                    else if (subType == typeof(IContainerEntryGetter))
-                        actionClass = nameof(ContainerItemsAction);
-                    else if (subType == typeof(IEffectGetter))
-                        actionClass = nameof(EffectsAction);
-                    else if (subType == typeof(ILeveledItemEntryGetter))
-                        actionClass = nameof(LeveledItemAction);
-                    else if (subType == typeof(ILeveledNpcEntryGetter))
-                        actionClass = nameof(LeveledNpcAction);
-                    else if (subType == typeof(ILeveledSpellEntryGetter))
-                        actionClass = nameof(LeveledSpellAction);
-                }
-            }
-
-            return (rtm.StaticRegistration.GetterType, name, actionClass, type);
-        }
-
         internal static void Generate ()
         {
+            CheckAliases();
+            Console.WriteLine();
+
             List<string[]> lines = [];
 
             List<RecordTypeMapping> ImplementedRTMs = [];
@@ -176,50 +119,55 @@ namespace GenericSynthesisPatcher
                             rpm.Action.CanMerge() ? 'M': '-',
                         ]);
 
-                    if (actionType.IsGenericType)
-                    {
-                        // If IAction generic get it's implemented type
-                        var rcdGeneric = actionType.GetGenericTypeDefinition();
-                        var rcdSubType = actionType.GenericTypeArguments[0];
+                    var baseType = actionType.GetIfGenericTypeDefinition();
+                    var subType = actionType.GetIfUnderlyingType();
 
-                        if (rcdGeneric == typeof(GenericAction<>))
-                        {
-                            if (rcdSubType == typeof(float))
-                            {
-                                desc = "A decimal value";
-                                exam = $"\"{rpm.PropertyName}\": 3.14";
-                            }
-                            else if (actionType.IsAssignableTo(typeof(GenericAction<string>)))
-                            {
-                                desc = "A string value";
-                                exam = $"\"{rpm.PropertyName}\": \"Hello\"";
-                            }
-                            else
-                            {
-                                desc = "A numeric value";
-                                exam = $"\"{rpm.PropertyName}\": 7";
-                            }
-                        }
-                        else if (rcdGeneric == typeof(Helpers.Action.FormLinkAction<>))
-                        {
-                            desc = "Form Key or Editor ID";
-                            exam = "";
-                        }
-                        else if (rcdGeneric == typeof(FormLinksAction<>))
-                        {
-                            desc = "Form Keys or Editor IDs";
-                            exam = "";
-                        }
-                        else if (rcdGeneric == typeof(StructAction<>))
-                        {
-                            if (rcdSubType == typeof(Percent))
-                            {
-                                desc = "A decimal value between 0.00 - 1.00, or string ending in %";
-                                exam = $"\"{rpm.PropertyName}\": \"30.5%\"";
-                            }
-                        }
+                    if (actionType == typeof(ConvertibleAction<string>))
+                    {
+                        desc = "String value";
+                        exam = $"\"{rpm.PropertyName}\": \"Hello\"";
                     }
-                    else if (actionType.IsAssignableTo(typeof(FlagsAction)))
+                    else if (actionType == typeof(ConvertibleAction<bool>))
+                    {
+                        desc = "True / False";
+                        exam = $"\"{rpm.PropertyName}\": true";
+                    }
+                    else if (actionType == typeof(ConvertibleAction<float>))
+                    {
+                        desc = "Decimal value";
+                        exam = $"\"{rpm.PropertyName}\": 3.14";
+                    }
+                    else if (baseType == typeof(ConvertibleAction<>))
+                    {
+                        desc = "Numeric value";
+                        exam = $"\"{rpm.PropertyName}\": 7";
+                    }
+                    else if (baseType == typeof(Helpers.Action.FormLinkAction<>))
+                    {
+                        desc = "Form Key or Editor ID";
+                        exam = "";
+                    }
+                    else if (baseType == typeof(FormLinksAction<>))
+                    {
+                        desc = "Form Keys or Editor IDs";
+                        exam = "";
+                    }
+                    else if (actionType == typeof(BasicAction<Percent>))
+                    {
+                        desc = "Decimal value between 0.00 - 1.00, or string ending in %";
+                        exam = $"\"{rpm.PropertyName}\": \"30.5%\"";
+                    }
+                    else if (actionType == typeof(BasicAction<Color>))
+                    {
+                        desc = "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.";
+                        exam = $"\"{rpm.PropertyName}\": [40,50,60]";
+                    }
+                    else if (actionType == typeof(DeepCopyAction<IObjectBoundsGetter>))
+                    {
+                        desc = "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]";
+                        exam = $"\"{rpm.PropertyName}\": [6,6,6,9,9,9]";
+                    }
+                    else if (actionType == typeof(FlagsAction))
                     {
                         var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
                         var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
@@ -228,7 +176,7 @@ namespace GenericSynthesisPatcher
                         desc = $"Flags ({string.Join(", ", flags)})";
                         exam = (flags.Length > 1) ? $"\"{rpm.PropertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{rpm.PropertyName}\": \"{flags.First()}\"";
                     }
-                    else if (actionType.IsAssignableTo(typeof(Helpers.Action.EnumsAction)))
+                    else if (actionType == typeof(EnumsAction))
                     {
                         var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
                         var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
@@ -264,6 +212,7 @@ namespace GenericSynthesisPatcher
 
                     if (desc == null)
                         throw new Exception("Fix Missing Doco");
+                    //desc ??= "????";
 
                     Properties.Add([rpm.PropertyName, string.Join(';', names), MFFSM, desc, exam]);
                 }
@@ -334,20 +283,21 @@ namespace GenericSynthesisPatcher
             var implemented = groupRPMs.Where(g => g.RPM != null).ToList();
             implemented.Sort((l, r) => string.CompareOrdinal(l.PropertyName, r.PropertyName));
 
-            var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
+            //var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
+            var notImplemented = buildRPMs.Where(r => r.Item3 == null).GroupBy(g => g.Item4).Select(g => new { PropertyType = g.Key, RecordTypes = g.Select(r => $"{r.Item1.GetClassName()}.{r.Item2}") }).ToList();
             // Sort by uses then name
             notImplemented.Sort((l, r) =>
             {
-                int i = l.Types.Count().CompareTo(r.Types.Count());
+                int i = l.RecordTypes.Count().CompareTo(r.RecordTypes.Count());
                 if (i == 0)
-                    i = l.PropertyName.CompareTo(r.PropertyName);
+                    i = l.PropertyType.GetClassName().CompareTo(r.PropertyType.GetClassName());
 
                 return i;
             });
 
             // Print Unimplemented Entries to Screen
             foreach (var rpm in notImplemented)
-                Console.WriteLine($"{rpm.PropertyName}, {rpm.Types.Count()}, {string.Join('|', rpm.PropertyTypes.Select(p => p.GetClassName()))}");
+                Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes.Count()}");
 
             /*
              * Output implemented to file as RPM code to paste into RecordPropertyMappings.cs
@@ -369,13 +319,121 @@ namespace GenericSynthesisPatcher
 
             sw = new();
 
-            PrintTableRow(lines, sep: ", ", prefix: "            ", suffix: "", padLast: false);
+            PrintTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
             using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_RPM.txt"), false);
             rpmFW.Write(sw.ToString());
             rpmFW.Close();
 
-            _ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSPDoco.txt")}\"");
-            _ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSP_RPM.txt")}\"");
+            //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSPDoco.txt")}\"");
+            //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSP_RPM.txt")}\"");
+        }
+
+        private static (Type type, string name, string? iAction, Type propertyType) CalcRPM (RecordTypeMapping rtm, PropertyInfo propertyInfo)
+        {
+            string name = propertyInfo.Name;
+            string? actionClass = null;
+            var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
+
+            var mainType = type.GetIfGenericTypeDefinition();
+            var subType = type.GetIfUnderlyingType()?.GetIfGenericTypeDefinition();
+            var subSubType = type.GetIfUnderlyingType()?.GetIfUnderlyingType();
+
+            if (type.IsEnum)
+            {
+                actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? nameof(EnumsAction) : nameof(FlagsAction);
+            }
+            else if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
+                actionClass = $"{nameof(ConvertibleAction<string>)}<string>";
+            else if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
+            {
+                string? n = type.Name switch
+                {
+                    nameof(Boolean) => "bool",
+                    nameof(Byte) => "byte",
+                    nameof(Char) => "char",
+                    nameof(Int16) => "short",
+                    nameof(Int32) => "int",
+                    nameof(SByte) => "sbyte",
+                    nameof(Single) => "float",
+                    nameof(String) => "string",
+                    nameof(UInt16) => "ushort",
+                    nameof(UInt32) => "uint",
+                    _ => type.Name
+                };
+                if (n != null)
+                    actionClass = $"{nameof(ConvertibleAction<byte>)}<{n}>";
+            }
+            else if (type == typeof(ObjectBounds))
+                actionClass = typeof(BasicAction<ObjectBounds>).GetClassName();
+            else if (type == typeof(Percent))
+                actionClass = typeof(BasicAction<Percent>).GetClassName();
+            else if (type == typeof(Color))
+                actionClass = typeof(BasicAction<Color>).GetClassName();
+            else if (type == typeof(IObjectBoundsGetter))
+                actionClass = typeof(DeepCopyAction<IObjectBoundsGetter>).GetClassName();
+            else if (subType != null)
+            {
+                if (mainType.IsAssignableTo(typeof(IFormLinkGetter<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullableGetter<>)))
+                    actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
+                else if (mainType.IsAssignableTo(typeof(IReadOnlyList<>)))
+                {
+                    if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
+                        actionClass = $"{nameof(FormLinksAction<IActionRecordGetter>)}<{subSubType.Name}>";
+                    else if (subType == typeof(IContainerEntryGetter))
+                        actionClass = nameof(ContainerItemsAction);
+                    else if (subType == typeof(IEffectGetter))
+                        actionClass = nameof(EffectsAction);
+                    else if (subType == typeof(ILeveledItemEntryGetter))
+                        actionClass = nameof(LeveledItemAction);
+                    else if (subType == typeof(ILeveledNpcEntryGetter))
+                        actionClass = nameof(LeveledNpcAction);
+                    else if (subType == typeof(ILeveledSpellEntryGetter))
+                        actionClass = nameof(LeveledSpellAction);
+                }
+            }
+
+            return (rtm.StaticRegistration.GetterType, name, actionClass, type);
+        }
+
+        private static void CheckAliases ()
+        {
+            var AllAliases = RecordPropertyMappings.AllAliases;
+            var grouped = AllAliases.GroupBy(x => x.PropertyName).Where(g => g.Count() > 1).ToList();
+
+            // Check for typed RPMs that match existing null typed
+            // Also remove any groups that contain null typed after checking as no longer required
+            foreach (var g in grouped.ToArray().Where(g => g.Any(x => x.Type == null)))
+            {
+                string nullRPM = g.First(x => x.Type == null).RealPropertyName;
+                foreach (var gg in g.Where(x => x.Type != null && x.RealPropertyName == nullRPM))
+                    Console.WriteLine($"{gg.Type?.GetClassName()}.{g.Key} = {nullRPM} is same as existing null type entry.");
+
+                _ = grouped.Remove(g);
+            }
+
+            // Check for where all typed instances match so could be made a single nulled typed
+            // Remove these groups after checking as no longer required
+            foreach (var g in grouped.ToArray().Where(g => g.Select(x => x.RealPropertyName).Distinct().Count() == 1))
+            {
+                Console.WriteLine($"{g.Key} = {g.First().RealPropertyName} on all {g.Count()} aliases");
+                _ = grouped.Remove(g);
+            }
+
+            // Check for if one alias mapping is dominant over others so could maybe create null typed for that subset
+            foreach (var g in grouped)
+            {
+                var gg = g.GroupBy(x => x.RealPropertyName).Select(x => new { RealPropertyName = x.Key, Count = x.Count(), Types = x.Select(y => y.Type?.GetClassName()) });
+                int max = gg.Select(x => x.Count).Max();
+                if (max > 1)
+                {
+                    var ggMax = gg.Where(x => x.Count == max);
+                    if (ggMax.Count() == 1)
+                    {
+                        var gMax = ggMax.First();
+                        Console.WriteLine($"{g.Key} = {gMax.RealPropertyName} on {gMax.Types.Count()} alias types ({string.Join(", ", gMax.Types)}).");
+                    }
+                }
+            }
         }
 
         private static void PrintTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)

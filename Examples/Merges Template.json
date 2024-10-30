@@ -1,0 +1,92 @@
+/*
+  Perform merges of some stuff, ready to add excludes if required
+*/
+
+[
+  {
+    "types": "Container",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Items": [] } }
+    ]
+  },
+  {
+    "types": [ "Ammunition", "Armor", "Container", "Ingestible", "Ingredient" ],
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      {
+        "Merge": { "Keywords": [ "-Immersive Sounds - Compendium.esp" ] }
+      }
+    ]
+  },
+  {
+    "types": "FormList",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Items": [] } }
+    ]
+  },
+  {
+    "types": [ "Ingestible", "Ingredient" ],
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Effects": [] } }
+    ]
+  },
+  {
+    "types": "LeveledItem",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Entries": [] } }
+    ]
+  },
+  {
+    "types": "LeveledNpc",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Entries": [] } }
+    ]
+  },
+  {
+    "types": "LeveledSpell",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Entries": [] } }
+    ]
+  }
+]

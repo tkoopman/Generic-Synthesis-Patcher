@@ -1,12 +1,17 @@
+using System.Drawing;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json.Serialization;
 
 using Noggog;
+
+using ColorConverter = GenericSynthesisPatcher.Json.Converters.ColorConverter;
 
 namespace GenericSynthesisPatcher.Json
 {
@@ -20,14 +25,18 @@ namespace GenericSynthesisPatcher.Json
 
             if (objectType == typeof(FormKey))
                 contract.Converter = new FormKeyConverter();
-            if (objectType == typeof(ModKey))
+            else if (objectType == typeof(ModKey))
                 contract.Converter = new ModKeyConverter();
-            if (objectType == typeof(RecordTypeMapping))
+            else if (objectType == typeof(RecordTypeMapping))
                 contract.Converter = new RecordTypeConverter();
-            if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
+            else if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
                 contract.Converter = new OperationsConverter();
-            if (objectType == typeof(Percent))
+            else if (objectType == typeof(Percent))
                 contract.Converter = new PercentConverter();
+            else if (objectType.IsAssignableTo(typeof(IObjectBoundsGetter)))
+                contract.Converter = new ObjectBoundsConverter();
+            else if (objectType == typeof(Color))
+                contract.Converter = new ColorConverter();
 
             return contract;
         }

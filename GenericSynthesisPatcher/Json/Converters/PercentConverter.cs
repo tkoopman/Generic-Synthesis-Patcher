@@ -16,7 +16,6 @@ namespace GenericSynthesisPatcher.Json.Converters
             {
                 case JsonToken.Integer:
                 case JsonToken.Float:
-                case JsonToken.Bytes:
                     double p = reader.ReadAsDouble() ?? throw new JsonSerializationException("Unable to read percent");
                     return new Percent(p);
 
