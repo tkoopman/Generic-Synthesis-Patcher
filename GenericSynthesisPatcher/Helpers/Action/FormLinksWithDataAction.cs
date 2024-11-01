@@ -80,6 +80,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                 foreach (var actionData in links ?? [])
                 {
+                    // Check if action wanting to clear all
                     if (actionData?.FormKey == null || actionData.FormKey.Value == FormKey.Null)
                     {
                         if (curList != null && curList.Count > 0)

@@ -108,7 +108,10 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryGetPropertyForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
         {
             if (!TryGetProperty(patchRecord, propertyName, out value, out var property))
+            {
+                Global.TraceLogger?.Log(ClassLogCode, $"Failed to find property.", propertyName: propertyName);
                 return false;
+            }
 
             if (value != null)
                 return true;

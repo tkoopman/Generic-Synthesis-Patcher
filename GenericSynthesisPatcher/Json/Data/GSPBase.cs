@@ -19,9 +19,6 @@ namespace GenericSynthesisPatcher.Json.Data
     {
         private const int ClassLogCode = 0x03;
 
-        // Only works due to knowing only will be set by deserialization as will always just add to list
-        private List<ListOperation>? patched = null;
-
         [JsonIgnore]
         public int ConfigFile { get; internal set; }
 
@@ -34,6 +31,13 @@ namespace GenericSynthesisPatcher.Json.Data
         [DefaultValue(false)]
         [JsonProperty(PropertyName = "Debug")]
         public bool Debug { get; set; }
+
+        /// <summary>
+        /// If set will check if record has already been patched by another GSP rule or not.
+        /// If you don't care exclude or set to null
+        /// </summary>
+        [JsonProperty(PropertyName = "Patched")]
+        public bool? Patched { get; set; }
 
         /// <summary>
         /// Sets order of processing rules. Rules with matching priority can be executed in any order.
@@ -53,8 +57,6 @@ namespace GenericSynthesisPatcher.Json.Data
 
         #region Masters
 
-        // Only works due to knowing only one will be set by deserialization as will always just add to list
-        // If some puts in multiple it will probably generate errors.
         private List<ModKeyListOperation>? masters = null;
 
         /// <summary>
@@ -70,8 +72,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                masters ??= [];
-                masters.Add(value);
+                masters = value;
             }
         }
 
@@ -84,7 +85,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                masters ??= [];
+                masters = [];
                 foreach (var v in value ?? [])
                     masters.Add(v.Inverse());
             }
@@ -98,7 +99,6 @@ namespace GenericSynthesisPatcher.Json.Data
 
         #region PatchedBy
 
-        // Only works due to knowing only will be set by deserialization as will always just add to list
         private List<ModKeyListOperation>? patchedBy = null;
 
         private FilterLogic patchedByLogic = FilterLogic.Default;
@@ -118,6 +118,10 @@ namespace GenericSynthesisPatcher.Json.Data
             }
         }
 
+        /// <summary>
+        /// List of mods that if this record was patched by will either include or exclude it from matching.
+        /// Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
+        /// </summary>
         [JsonProperty(PropertyName = "PatchedBy")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? PatchedBy
@@ -129,8 +133,7 @@ namespace GenericSynthesisPatcher.Json.Data
                     return;
 
                 patchedByLogic = FilterLogic.Default;
-                patchedBy ??= [];
-                patchedBy.Add(value);
+                patchedBy = value;
             }
         }
 
@@ -144,7 +147,7 @@ namespace GenericSynthesisPatcher.Json.Data
                     return;
 
                 patchedByLogic = FilterLogic.Default;
-                patchedBy ??= [];
+                patchedBy = [];
                 foreach (var v in value ?? [])
                     patchedBy.Add(v.Inverse());
             }
@@ -164,54 +167,11 @@ namespace GenericSynthesisPatcher.Json.Data
                     return;
 
                 patchedByLogic = FilterLogic.XOR;
-                patchedBy ??= [];
-                patchedBy.Add(value);
+                patchedBy = value;
             }
         }
 
         #endregion PatchedBy
-
-        #region Patched
-
-        /// <summary>
-        /// List of mods that if this record was patched by will either include or exclude it from matching.
-        /// Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
-        /// </summary>
-        [JsonProperty(PropertyName = "Patched")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? Patched
-        {
-            get => patched;
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patched ??= [];
-                patched.Add(value);
-            }
-        }
-
-        [JsonProperty(PropertyName = "-Patched")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? PatchedDel
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patched ??= [];
-                foreach (var v in value ?? [])
-                    patched.Add(v.Inverse());
-            }
-        }
-
-        [JsonProperty(PropertyName = "!Patched")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? PatchedNot { set => PatchedDel = value; }
-
-        #endregion Patched
 
         /// <summary>
         /// Should only be used for sorting by Priority
@@ -244,23 +204,28 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!Types.Contains(proKeys.Type))
             {
                 if (!Global.Settings.Value.Logging.DisabledLogs.FailedTypeMatch)
-                    Global.TraceLogger?.Log(ClassLogCode, "Match Types: No");
+                    Global.TraceLogger?.Log(ClassLogCode, "Matched Types: No");
                 return false;
             }
 
             if (!Global.Settings.Value.Logging.DisabledLogs.SuccessfulTypeMatch)
                 Global.TraceLogger?.Log(ClassLogCode, "Matched Types: Yes");
 
-            // Due to SafeAny checks in property setters should be null or a list with at least 1 entry, never just an empty list. So process with this assumption
-            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, "Masters: "))
+            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, "Matched Masters: "))
                 return false;
 
-            // Due to SafeAny checks in property setters should be null or a list with at least 1 entry, never just an empty list. So process with this assumption
             if (PatchedBy != null)
             {
                 var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
-                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, debugPrefix: "PatchedBy: "))
+                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, debugPrefix: "Matched PatchedBy: "))
                     return false;
+            }
+
+            if (Patched.HasValue)
+            {
+                bool result = Patched.Value ? proKeys.HasPatchRecord : !proKeys.HasPatchRecord;
+                Global.TraceLogger?.Log(ClassLogCode, $"Matched Patched: {result} Has patch record: {proKeys.HasPatchRecord}");
+                return result;
             }
 
             return true;

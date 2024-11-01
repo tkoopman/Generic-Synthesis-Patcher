@@ -1,8 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
-using DynamicData;
-
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
@@ -39,8 +37,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                editorIDs ??= [];
-                editorIDs.Add(value);
+                editorIDs = value;
             }
         }
 
@@ -53,7 +50,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                editorIDs ??= [];
+                editorIDs = [];
                 foreach (var v in value)
                     editorIDs.Add(v.Inverse());
             }
@@ -81,8 +78,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                formIDs ??= [];
-                formIDs.Add(value);
+                formIDs = value;
             }
         }
 
@@ -95,7 +91,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!value.SafeAny())
                     return;
 
-                formIDs ??= [];
+                formIDs = [];
                 foreach (var v in value)
                     formIDs.Add(v.Inverse());
             }
@@ -325,43 +321,23 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Matches(proKeys))
                 return false;
 
-            if (FormID != null)
-            {
-                bool hasEntry = FormID?.Any(id => id.Value.Equals(proKeys.Record.FormKey)) ?? false;
-                bool isNeg = FormID != null && FormID.First().Operation == ListLogic.NOT;
-                bool result = isNeg ? !hasEntry : (FormID == null || hasEntry);
-                Global.TraceLogger?.Log(ClassLogCode, $"Check FormID: {result} Found: {hasEntry} Not: {isNeg}");
+            if (FormID != null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: "))
+                return false;
 
-                if (!result)
-                    return false;
-            }
-
-            if (EditorID != null)
-            {
-                bool hasEntry = !proKeys.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.ValueEquals(proKeys.Record.EditorID));
-                bool isNeg = EditorID != null && EditorID.First().Operation == ListLogic.NOT;
-                bool result = isNeg ? !hasEntry : (EditorID == null || hasEntry);
-
-                Global.TraceLogger?.Log(ClassLogCode, $"Check EditorID: {result} Record Found: {hasEntry} Not: {isNeg}");
-
-                if (!result)
-                    return false;
-            }
+            if (EditorID != null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched FormID: "))
+                return false;
 
             foreach (var x in Match)
             {
                 if (!proKeys.SetProperty(x.Key, x.Key.Value) || !proKeys.Property.Action.CanMatch())
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. No match enabled RPM for Field: {x.Key.Value}");
+                    Global.TraceLogger?.Log(ClassLogCode, $"Matched {x.Key}: No match enabled RPM for field.");
                     return false;
                 }
 
                 Global.TraceLogger?.Log(ClassLogCode, $"Action: {proKeys.Property.Action.GetType().GetClassName()}.MatchesRule", propertyName: proKeys.Property.PropertyName);
                 if (!proKeys.Property.Action.MatchesRule(proKeys))
-                {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {proKeys.Property.Action.GetType().GetClassName()}");
                     return false;
-                }
             }
 
             return true;

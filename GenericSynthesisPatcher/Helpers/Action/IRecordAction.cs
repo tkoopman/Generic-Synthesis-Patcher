@@ -53,7 +53,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool MatchesOrigin (ProcessingKeys proKeys);
 
         /// <summary>
-        /// Check if current rule matches. Excludes checking Basic checks.
+        /// Check Property matches current RuleKey both set in proKeys.
         /// </summary>
         /// <returns>True if this field matches</returns>
         public bool MatchesRule (ProcessingKeys proKeys);

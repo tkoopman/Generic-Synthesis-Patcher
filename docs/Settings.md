@@ -28,10 +28,10 @@ These filters can be used when creating a rule or group.
 >**<font color="green">Types</font>**: List valid record types for this rule. Types are case insensitive.  
 [List of implemented types](Types.md).
 
->**<font color="red">Masters</font>**: List of mod names ("Skyrim.esm"). Original record must come from one of these master mods to match.  
+>**<font color="green">Masters</font>**: List of mod names ("Skyrim.esm"). Original record must come from one of these master mods to match.  
 To change to a list of masters to exclude, use "!Masters" instead.
 
->**<font color="red">PatchedBy</font>**: List of mod names ("unofficial skyrim special edition patch.esp"). By default this is an OR check, so record must of been patched by just one of these mods to match.  
+>**<font color="green">PatchedBy</font>**: List of mod names ("unofficial skyrim special edition patch.esp"). By default this is an OR check, so record must of been patched by just one of these mods to match.  
 Replace "PatchedBy" with
 - "!PatchedBy": Exclude if matched by any listed mod.
 - "^PatchedBy": XOR. Be patched by exactly one of the listed mods.
@@ -41,6 +41,11 @@ Replace "PatchedBy" with
 NOTE: PatchedBy will not match records that originate from a mod, only if patched by. Use Masters for that.  
 So if listing in the same rule, the same single mod in both Masters and PatchedBy no records will ever match.
 
+>**<font color="green">Patched</font>**: null (default), true or false. Checked if a previous rule has already applied a patch to this record.  
+Using "Patched": false will mean this rule will only match if the record hasn't already been patched by another rule.  
+Omit this or set to null to ignore patched state.  
+Note: This doesn't care what field has been patched, just that a patch record has been created.
+
 ### Rule Only Filters
 
 > **<font color="green">EditorID</font>**: EditorID(s) to match. Can be a regular expression if starts and ends with /. Example "EditorID": "/.\*fur.\*/"  
@@ -49,7 +54,7 @@ To change to a list of EditorID(s) to exclude, use "!EditorID" instead.
 > **<font color="green">FormID</font>**: FormID(s) to match in the format "0123AB:Skyrim.esm". Can exclude leading 0s.  
 To change to a list of FormID(s) to exclude, use "!FormID" instead.
 
->**<font color="red">OnlyIfDefault</font>**: False by default. If set to True will only apply action if the winning record's field value matches the original value set by the master record.
+>**<font color="green">OnlyIfDefault</font>**: False by default. If set to True will only apply action if the winning record's field value matches the original value set by the master record.
 Good for example if you want to forward one patches changes, but only if a later patch set the value back to the default, so protecting other winning patches.  
 Checks are per field, meaning one action may fail to apply due to the field it updating not matching, but other action on the same record applies as it does match.  
 NOTE: Just because multiple fields are listed on a single fill/forward action, they are all still processed separately. No need to split into different rules.

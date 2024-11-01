@@ -74,12 +74,13 @@ namespace GenericSynthesisPatcher
                 foreach (var context in ProcessTypeRecords)
                 {
                     counts.Total++;
+                    var proKeys = new ProcessingKeys(rtm, context);
 
                     foreach (var rule in Rules)
                     {
                         Global.Processing(ClassLogCode, rule, context);
 
-                        var proKeys = new ProcessingKeys(rtm, rule, context);
+                        _ = proKeys.SetRule(rule);
 
                         if (rule.Matches(proKeys))
                         {
@@ -97,11 +98,12 @@ namespace GenericSynthesisPatcher
                             else if (proKeys.IsGroup)
                             {
                                 Global.TraceLogger?.Log(ClassLogCode, $"Matched group. Processing Rules.");
+                                var gProKeys = new ProcessingKeys(rtm, context, proKeys);
                                 int count = 0;
                                 foreach (var groupRule in proKeys.Group.Rules)
                                 {
+                                    gProKeys.SetRule(groupRule);
                                     Global.Processing(ClassLogCode, groupRule, context);
-                                    var gProKeys = new ProcessingKeys(rtm, groupRule, context);
 
                                     count++;
                                     if (groupRule.Matches(gProKeys))
@@ -154,7 +156,7 @@ namespace GenericSynthesisPatcher
             foreach (var (key, subTotal) in subTotals)
             {
                 if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
-                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0} {subTotal.Stopwatch.Elapsed:c}");
+                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}   {subTotal.Stopwatch.Elapsed:c}");
                 else
                     Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
 
@@ -167,7 +169,7 @@ namespace GenericSynthesisPatcher
 
             if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
             {
-                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0} {ts:c}");
+                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
                 Console.WriteLine();
                 Console.WriteLine($"All matches took: {MatchesHelper.Stopwatch.Elapsed:c}");
             }
