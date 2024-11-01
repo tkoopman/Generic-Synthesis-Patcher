@@ -1,6 +1,8 @@
 <!--- cSpell:enable --->
 ## About
 
+**Version 1.0 now include merge ability and a lot more implemented record types and fields!**
+
 Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types.
 It has a number of ways to filter for records to apply actions to, including matching against most implemented fields, and even using RegEx against strings or Editor IDs and also 3 main actions, fill, forward and merge.
 Rules can even be grouped to share some common filters, or stop processing rules after one has matched.
