@@ -31,14 +31,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public int Fill (ProcessingKeys proKeys)
         {
-            string? setValueStr = proKeys.GetFillValueAs<string>();
-            if (setValueStr == null)
+            if (!proKeys.TryGetFillValueAs(out string? setValueStr) || setValueStr == null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, $"No {proKeys.Property.PropertyName} to set.", propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
-            if (!Mod.GetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
                 return -1;
 
             var enumType = curValue.GetType();
@@ -51,7 +50,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (curValue.Equals(setValue))
                 return 0;
 
-            if (!Mod.SetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, setValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, setValue))
                 return -1;
 
             Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: proKeys.Property.PropertyName);
@@ -66,8 +65,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var origin = proKeys.GetOriginRecord();
             return origin != null
-                        && Mod.GetProperty<Enum>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
-                        && Mod.GetProperty<Enum>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && Mod.TryGetProperty<Enum>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
+                        && Mod.TryGetProperty<Enum>(origin, proKeys.Property.PropertyName, out var originValue)
                         && curValue == originValue;
         }
 
@@ -76,12 +75,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (proKeys.RuleKey.Operation != FilterLogic.OR)
                 Global.Logger.Log(ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
 
-            if (!Mod.GetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                 return false;
 
             int includesChecked = 0; // Only count !Neg
 
-            var checkValues = proKeys.GetMatchValueAs<List<ListOperation>>();
+            if (!proKeys.TryGetMatchValueAs(out _, out List<ListOperation>? checkValues))
+                return false;
+
             if (!checkValues.SafeAny())
                 return true;
 

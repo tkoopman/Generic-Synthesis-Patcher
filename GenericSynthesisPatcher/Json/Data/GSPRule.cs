@@ -193,9 +193,7 @@ namespace GenericSynthesisPatcher.Json.Data
         private readonly Dictionary<FilterOperation, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
         private readonly Dictionary<FilterOperation, object?> matchCache = [];
 
-        public T? GetFillValueAs<T> (FilterOperation key) => GetValueAs<T>(Fill, fillCache, key);
-
-        public T? GetMatchValueAs<T> (FilterOperation key) => GetValueAs<T>(Match, matchCache, key);
+        public bool TryGetFillValueAs<T> (FilterOperation key, out T? valueAs) => TryGetValueAs(Fill, fillCache, key, out _, out valueAs);
 
         public bool TryGetForward (FilterOperation key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields)
         {
@@ -219,15 +217,19 @@ namespace GenericSynthesisPatcher.Json.Data
             if (ForwardIndexedByField)
             {
                 buildFields.Add(key.Value);
-                foreach (var mod in GetValueAs<List<ModKey>>(Forward, [], key) ?? [])
-                    buildMods.Add(mod, Global.State.LoadOrder[mod]);
+                if (TryGetValueAs(Forward, [], key, out _, out List<ModKey>? values))
+                {
+                    foreach (var mod in values ?? [])
+                        buildMods.Add(mod, Global.State.LoadOrder[mod]);
+                }
             }
             else
             {
                 if (ModKey.TryFromFileName(new FileName(key.Value), out var mod))
                     buildMods.Add(mod, Global.State.LoadOrder[mod]);
 
-                buildFields = GetValueAs<List<string>>(Forward, [], key) ?? buildFields;
+                if (TryGetValueAs(Forward, [], key, out _, out List<string>? values))
+                    buildFields = values ?? buildFields;
             }
 
             if (buildMods.Count != 0 && buildFields.Count != 0)
@@ -246,28 +248,39 @@ namespace GenericSynthesisPatcher.Json.Data
             return false;
         }
 
+        public bool TryGetMatchValueAs<T> (FilterOperation key, out bool fromCache, out T? valueAs) => TryGetValueAs(Match, matchCache, key, out fromCache, out valueAs);
+
         /// <summary>
         /// Get the value data for a selected rule's action value key parsed to selected class type.
         /// </summary>
-        private static T? GetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key)
+        private static bool TryGetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key, out bool fromCache, out T? valueAs)
         {
-            if (cache.TryGetValue(key, out object? value))
+            if (cache.TryGetValue(key, out object? cachedValue))
             {
+                fromCache = true;
                 Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
-                return value == null ? default
-                     : value is T v ? v
-                     : throw new InvalidOperationException($"Invalid value type returned for {key.Value} - {value?.GetType().FullName ?? "null"}");
+                if (cachedValue is T v)
+                {
+                    valueAs = v;
+                    return true;
+                }
+                else
+                {
+                    valueAs = default;
+                    // If value != null then failed to cast to correct type
+                    return cachedValue == null;
+                }
             }
 
-            if (values.TryGetValue(key, out var jsonValue))
-            {
-                var o = jsonValue.Deserialize<T>();
+            fromCache = false;
+            valueAs = default;
+            bool valid = values.TryGetValue(key, out var jsonValue);
 
-                cache.Add(key, o);
-                return o;
-            }
+            if (valid && jsonValue != null)
+                valueAs = jsonValue.Deserialize<T>();
 
-            return default;
+            cache.Add(key, valueAs);
+            return valid;
         }
 
         #endregion GetValues
@@ -317,7 +330,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 bool hasEntry = FormID?.Any(id => id.Value.Equals(proKeys.Record.FormKey)) ?? false;
                 bool isNeg = FormID != null && FormID.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (FormID == null || hasEntry);
-                Global.TraceLogger?.Log(ClassLogCode, $"Check FormID: {result} Has FormID: {FormID != null} Found: {hasEntry} Not: {isNeg}");
+                Global.TraceLogger?.Log(ClassLogCode, $"Check FormID: {result} Found: {hasEntry} Not: {isNeg}");
 
                 if (!result)
                     return false;
@@ -325,11 +338,11 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (EditorID != null)
             {
-                bool hasEntry = !proKeys.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.MatchesValue(proKeys.Record.EditorID));
+                bool hasEntry = !proKeys.Record.EditorID.IsNullOrEmpty() && EditorID.Any(id => id.ValueEquals(proKeys.Record.EditorID));
                 bool isNeg = EditorID != null && EditorID.First().Operation == ListLogic.NOT;
                 bool result = isNeg ? !hasEntry : (EditorID == null || hasEntry);
 
-                Global.TraceLogger?.Log(ClassLogCode, $"Check EditorID: {result} Has EditorID: {EditorID != null} Record Found: {hasEntry} Not: {isNeg}");
+                Global.TraceLogger?.Log(ClassLogCode, $"Check EditorID: {result} Record Found: {hasEntry} Not: {isNeg}");
 
                 if (!result)
                     return false;
@@ -346,7 +359,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 Global.TraceLogger?.Log(ClassLogCode, $"Action: {proKeys.Property.Action.GetType().GetClassName()}.MatchesRule", propertyName: proKeys.Property.PropertyName);
                 if (!proKeys.Property.Action.MatchesRule(proKeys))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {proKeys.Property.Action.GetType().Name}");
+                    Global.TraceLogger?.Log(ClassLogCode, $"Failed on match. Field: {x.Key.Value} RCD Class: {proKeys.Property.Action.GetType().GetClassName()}");
                     return false;
                 }
             }
@@ -359,9 +372,9 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Validate())
                 return false;
 
-            if (FormID == null && EditorID == null && Types.Count == 0)
+            if (Types.Count == 0)
             {
-                LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Each rule in config must contain at least one basic filter (types, editorID or formID)", rule: this);
+                LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Rules must specify record type(s) either directly in the rule or via type(s) added at a group level.", rule: this);
                 return false;
             }
 

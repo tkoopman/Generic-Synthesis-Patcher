@@ -11,9 +11,9 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLinkAction<T> : IRecordAction where T : class, IMajorRecordGetter
+    public class FormLinkAction<TMajor> : IRecordAction where TMajor : class, IMajorRecordGetter
     {
-        public static readonly FormLinkAction<T> Instance = new();
+        public static readonly FormLinkAction<TMajor> Instance = new();
         private const int ClassLogCode = 0x13;
 
         private FormLinkAction ()
@@ -34,18 +34,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IFormLinkGetter<T>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyInfo))
+                if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyInfo) || !proKeys.TryGetFillValueAs(out FormKeyListOperation<TMajor>? formKey))
                     return -1;
-
-                var formKey = proKeys.GetFillValueAs<FormKeyListOperation<T>>();
 
                 if (formKey == null || formKey.Value == FormKey.Null)
                 {
                     if (curValue != null && !curValue.IsNull)
                     {
-                        if (propertyInfo.PropertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<T>)))
+                        if (propertyInfo.PropertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<TMajor>)))
                         {
-                            if (!Mod.GetProperty<IFormLinkNullable<T>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue == null)
+                            if (!Mod.TryGetProperty<IFormLinkNullable<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue == null)
                                 return -1;
 
                             setValue.SetToNull();
@@ -79,8 +77,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                return Mod.GetProperty<IFormLinkGetter<T>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-                    && Mod.GetProperty<IFormLinkGetter<T>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+                return Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                    && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
                     ? Fill(proKeys, curValue, newValue)
                     : -1;
             }
@@ -95,8 +93,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var origin = proKeys.GetOriginRecord();
             return origin != null
-                        && Mod.GetProperty<IFormLinkGetter<T>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
-                        && Mod.GetProperty<IFormLinkGetter<T>>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
+                        && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(origin, proKeys.Property.PropertyName, out var originValue)
                         && !(curValue == null ^ originValue == null)
                         && !(curValue != null ^ originValue != null)
                         && ((curValue == null && originValue == null)
@@ -111,34 +109,24 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (proKeys.Record is not IFormLinkContainerGetter)
                 return false;
 
-            var values = proKeys.GetMatchValueAs<List<FormKeyListOperationAdvanced<T>>>();
+            if (!proKeys.TryGetMatchValueAs(out bool fromCache, out List<FormKeyListOperationAdvanced<TMajor>>? matches))
+                return false;
 
-            if (!values.SafeAny())
+            if (!matches.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<IFormLinkGetter<T>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
-                return !values.Any(k => k.Operation != ListLogic.NOT);
+            if (!fromCache && !MatchesHelper.Validate(matches))
+                throw new InvalidDataException("Json data for matches invalid");
 
-            foreach (var v in values)
-            {
-                if (v.Regex != null)
-                {
-                    var link = curValue.TryResolve(Global.State.LinkCache);
-                    if (link != null && link.EditorID != null && v.Regex.IsMatch(link.EditorID))
-                        return v.Operation != ListLogic.NOT;
-                }
-                else if (curValue.FormKey.Equals(v.Value))
-                {
-                    return v.Operation != ListLogic.NOT;
-                }
-            }
+            if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
+                return !matches.Any(k => k.Operation != ListLogic.NOT);
 
-            return !values.Any(k => k.Operation != ListLogic.NOT);
+            return MatchesHelper.Matches(curValue.FormKey, matches);
         }
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
-        private static int Fill (ProcessingKeys proKeys, IFormLinkGetter<T>? curValue, IFormLinkGetter<T>? newValue)
+        private static int Fill (ProcessingKeys proKeys, IFormLinkGetter<TMajor>? curValue, IFormLinkGetter<TMajor>? newValue)
         {
             if (curValue != null && newValue != null && curValue.FormKey.Equals(newValue.FormKey))
             {
@@ -146,7 +134,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return 0;
             }
 
-            if (!Mod.SetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
                 return -1;
 
             Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: proKeys.Property.PropertyName);

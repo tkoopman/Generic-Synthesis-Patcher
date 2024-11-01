@@ -26,7 +26,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <returns>Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.</returns>
         public int Add (ProcessingKeys proKeys, TActionData data)
         {
-            if (!Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (!Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             items.Add(data.ToActionData());
@@ -73,12 +73,12 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList) || !TryGetFillValueAs(proKeys, out var links))
                     return -1;
 
                 int changes = 0;
 
-                foreach (var actionData in GetFillValueAs(proKeys) ?? [])
+                foreach (var actionData in links ?? [])
                 {
                     if (actionData?.FormKey == null || actionData.FormKey.Value == FormKey.Null)
                     {
@@ -139,7 +139,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var newEntry = CreateFrom(source);
 
-            if (newEntry == null || !Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (newEntry == null || !Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             items.Add(newEntry);
@@ -153,10 +153,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
                     return -1;
 
                 if (curList.SequenceEqualNullable(newList))
@@ -182,10 +182,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
                     return -1;
 
                 if (!newList.SafeAny())
@@ -231,14 +231,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         /// <summary>
-        /// Get data from JSON value in rule.
-        /// </summary>
-        /// <param name="rule">Rule to get data from</param>
-        /// <param name="key">Key to current action in rule</param>
-        /// <returns>List of all data values for action.</returns>
-        public List<TActionData>? GetFillValueAs (ProcessingKeys proKeys) => proKeys.GetFillValueAs<List<TActionData>>();
-
-        /// <summary>
         /// Called when GSPRule.OnlyIfDefault is true
         /// </summary>
         /// <returns>True if all form keys and data matches</returns>
@@ -246,8 +238,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var origin = proKeys.GetOriginRecord();
             return origin != null
-                        && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curList)
-                        && Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, proKeys.Property.PropertyName, out var originList)
+                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curList)
+                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(origin, proKeys.Property.PropertyName, out var originList)
                         && RecordsMatch(curList, originList);
         }
 
@@ -256,48 +248,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// </summary>
         public bool MatchesRule (ProcessingKeys proKeys)
         {
-            if (proKeys is not IFormLinkContainerGetter)
+            if (!proKeys.TryGetMatchValueAs(out bool fromCache, out List<FormKeyListOperation<TMajor>>? matches))
                 return false;
 
-            var links = proKeys.GetMatchValueAs<List<FormKeyListOperation<TMajor>>>();
-
-            if (!links.SafeAny())
+            if (!matches.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks) || !curLinks.SafeAny())
-                return !links.Any(k => k.Operation != ListLogic.NOT);
+            if (!fromCache && !MatchesHelper.Validate(proKeys.RuleKey.Operation, matches))
+                throw new InvalidDataException("Json data for matches invalid");
 
-            int matchedCount = 0;
-            int includesChecked = 0; // Only count !Neg
+            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks))
+                return false; // Property must not exist for this record.
 
-            foreach (var link in links)
-            {
-                if (link.Operation != ListLogic.NOT)
-                    includesChecked++;
-
-                if (FindRecord(curLinks, link.Value) != null)
-                {
-                    // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (link.Operation == ListLogic.NOT)
-                        return false;
-
-                    if (proKeys.RuleKey.Operation == FilterLogic.OR)
-                        return true;
-
-                    matchedCount++;
-                }
-                else if (link.Operation != ListLogic.NOT && proKeys.RuleKey.Operation == FilterLogic.AND)
-                {
-                    return false;
-                }
-            }
-
-            return proKeys.RuleKey.Operation switch
-            {
-                FilterLogic.AND => true,
-                FilterLogic.XOR => matchedCount == 1,
-                _ => includesChecked == 0 // OR
-            };
+            return MatchesHelper.Matches(curLinks?.Select(GetFormKeyFromRecord), proKeys.RuleKey.Operation, matches);
         }
 
         /// <summary>
@@ -312,7 +275,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 proKeys.Record.FormKey,
                 proKeys.Type.StaticRegistration.GetterType,
                 proKeys.Rule.Merge[proKeys.RuleKey],
-                list => Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
+                list => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => ToString(item));
 
             if (root == null)
@@ -333,7 +296,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var entry = CreateFrom(remove);
 
-            if (entry == null || !Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (entry == null || !Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             if (items.Remove(entry))
@@ -353,7 +316,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <returns>Number of changes to complete replace. Each entry removed / added counts as 1 change.</returns>
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList)
         {
-            if (!Mod.GetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
                 Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                 return -1;
@@ -365,7 +328,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!add.Any() && !del.Any())
                 return 0;
 
-            if (!Mod.GetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
+            if (!Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
                 return -1;
 
             foreach (var d in del)
@@ -376,6 +339,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return add.Count() + del.Count();
         }
+
+        /// <summary>
+        /// Get data from JSON value in rule.
+        /// </summary>
+        /// <param name="rule">Rule to get data from</param>
+        /// <param name="key">Key to current action in rule</param>
+        /// <returns>List of all data values for action.</returns>
+        public bool TryGetFillValueAs (ProcessingKeys proKeys, out List<TActionData>? data) => proKeys.TryGetFillValueAs(out data);
 
         private bool RecordsMatch (IReadOnlyList<IFormLinkContainerGetter>? left, IReadOnlyList<IFormLinkContainerGetter>? right)
         {

@@ -25,17 +25,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public virtual int Fill (ProcessingKeys proKeys)
         {
-            if (!Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+            if (!Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+             || !proKeys.TryGetFillValueAs(out T? newValue))
                 return -1;
-
-            var newValue = proKeys.GetFillValueAs<T>();
 
             return Fill(proKeys, curValue, newValue);
         }
 
         public virtual int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
-                    => (Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-                     && Mod.GetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)) ?
+                    => (Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                     && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)) ?
                         Fill(proKeys, curValue, newValue)
                         : -1;
 
@@ -45,8 +44,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var origin = proKeys.GetOriginRecord();
             return origin != null
-                        && Mod.GetProperty<T>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
-                        && Mod.GetProperty<T>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && Mod.TryGetProperty<T>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
+                        && Mod.TryGetProperty<T>(origin, proKeys.Property.PropertyName, out var originValue)
                         && Equals(curValue, originValue);
         }
 
@@ -59,7 +58,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (Equals(curValue, newValue))
                 return 0;
 
-            if (!Mod.SetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
                 return -1;
 
             Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: proKeys.Property.PropertyName);

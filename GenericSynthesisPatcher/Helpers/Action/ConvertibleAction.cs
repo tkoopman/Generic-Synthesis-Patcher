@@ -1,10 +1,4 @@
-using System.Text.RegularExpressions;
-
 using GenericSynthesisPatcher.Json.Operations;
-
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -21,29 +15,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public override bool MatchesRule (ProcessingKeys proKeys)
         {
-            var values = proKeys.GetMatchValueAs<List<ListOperation<T>>>();
+            if (!proKeys.TryGetMatchValueAs(out bool fromCache, out List<ListOperation<T>>? matches))
+                return false;
 
-            if (!values.SafeAny())
+            if (!matches.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
-                return !values.Any(k => k.Operation != ListLogic.NOT);
+            if (!fromCache && !MatchesHelper.Validate(matches))
+                throw new InvalidDataException("Json data for matches invalid");
 
-            foreach (var v in values)
-            {
-                if (v is string str && str.StartsWith('/') && str.EndsWith('/') && curValue is string curStr)
-                {
-                    if (new Regex(str.Trim('/'), RegexOptions.IgnoreCase).IsMatch(curStr))
-                        return v.Operation != ListLogic.NOT;
-                }
-                else if (curValue.Equals(v.Value))
-                {
-                    if (v.Operation == ListLogic.NOT)
-                        return v.Operation != ListLogic.NOT;
-                }
-            }
+            if (!Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+                return false; // Property must not exist for this record.
 
-            return !values.Any(k => k.Operation != ListLogic.NOT);
+            return MatchesHelper.Matches(curValue, matches);
         }
     }
 }

@@ -70,6 +70,7 @@ namespace GenericSynthesisPatcher
                 var counts = new Counts();
                 subTotals.Add(rtm.Name, counts);
 
+                counts.Stopwatch.Start();
                 foreach (var context in ProcessTypeRecords)
                 {
                     counts.Total++;
@@ -126,6 +127,7 @@ namespace GenericSynthesisPatcher
                         }
                     }
                 }
+                counts.Stopwatch.Stop();
             }
 
             Global.Processing(ClassLogCode, null, null);
@@ -147,17 +149,30 @@ namespace GenericSynthesisPatcher
             Console.WriteLine($"{"Type",-6} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");
 
             var totals = new Counts();
+            TimeSpan ts = new();
 
             foreach (var (key, subTotal) in subTotals)
             {
-                Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
+                if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
+                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0} {subTotal.Stopwatch.Elapsed:c}");
+                else
+                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
+
                 totals.Total += subTotal.Total;
                 totals.Matched += subTotal.Matched;
                 totals.Updated += subTotal.Updated;
                 totals.Changes += subTotal.Changes;
+                ts = ts.Add(subTotal.Stopwatch.Elapsed);
             }
 
-            Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+            if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
+            {
+                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0} {ts:c}");
+                Console.WriteLine();
+                Console.WriteLine($"All matches took: {MatchesHelper.Stopwatch.Elapsed:c}");
+            }
+            else
+                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
         }
 
         private static List<GSPBase> LoadRules ()

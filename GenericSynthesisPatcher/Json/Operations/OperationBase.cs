@@ -2,19 +2,18 @@ using System.Text.RegularExpressions;
 
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public abstract class OperationBase<TClass, TPrefix, TSuffix> : OperationBase<TClass, TPrefix>
-        where TClass : OperationBase<TClass, TPrefix, TSuffix>
+    public abstract class OperationBase<TPrefix, TSuffix> : OperationBase<TPrefix>
         where TPrefix : struct, Enum
         where TSuffix : struct, Enum
     {
-        protected static (TPrefix, string, TSuffix) Split ( string input, IReadOnlyDictionary<char, TPrefix> prefixes, IReadOnlyDictionary<char, TSuffix> suffixes, bool allowLongPrefixes )
+        protected static (TPrefix, string, TSuffix) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes, IReadOnlyDictionary<char, TSuffix> suffixes, bool allowLongPrefixes)
         {
             (var p, string v) = Split(input, prefixes, allowLongPrefixes);
 
             return suffixes.TryGetValue(v.Last(), out var suffix) ? (p, v[..^1], suffix) : (p, v, default);
         }
 
-        protected static (TPrefix, string, TSuffix) Split ( string input, IReadOnlyDictionary<char, TPrefix> prefixes, IReadOnlyDictionary<char, TSuffix> suffixes )
+        protected static (TPrefix, string, TSuffix) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes, IReadOnlyDictionary<char, TSuffix> suffixes)
         {
             (var p, string v) = Split(input, prefixes);
 
@@ -22,16 +21,15 @@ namespace GenericSynthesisPatcher.Json.Operations
         }
     }
 
-    public abstract partial class OperationBase<TClass, TPrefix>
-        where TClass : OperationBase<TClass, TPrefix>
+    public abstract partial class OperationBase<TPrefix>
         where TPrefix : struct, Enum
     {
-        public abstract TClass Inverse ();
+        public abstract OperationBase<TPrefix> Inverse ();
 
         [GeneratedRegex(@"^\(([A-Za-z0-9]+)\)(.+)$")]
         protected static partial Regex LongPrefix ();
 
-        protected static (TPrefix, string) Split ( string input, IReadOnlyDictionary<char, TPrefix> prefixes, bool allowLongPrefixes )
+        protected static (TPrefix, string) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes, bool allowLongPrefixes)
         {
             if (allowLongPrefixes)
             {
@@ -43,6 +41,6 @@ namespace GenericSynthesisPatcher.Json.Operations
             return Split(input, prefixes);
         }
 
-        protected static (TPrefix, string) Split ( string input, IReadOnlyDictionary<char, TPrefix> prefixes ) => prefixes.TryGetValue(input.First(), out var prefix) ? (prefix, input[1..]) : (default, input);
+        protected static (TPrefix, string) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes) => prefixes.TryGetValue(input.First(), out var prefix) ? (prefix, input[1..]) : (default, input);
     }
 }

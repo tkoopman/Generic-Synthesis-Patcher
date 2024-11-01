@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return -1;
             }
 
-            if (!Mod.GetPropertyForEditing<T>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var editValue))
+            if (!Mod.TryGetPropertyForEditing<T>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var editValue))
                 return -1;
 
             _ = deepCopyIn.Invoke(null, [editValue, newValue]);

@@ -39,10 +39,6 @@ namespace GenericSynthesisPatcher
 
         public RecordTypeMapping Type { get; } = rtm;
 
-        public T? GetFillValueAs<T> () => RuleKey is not null ? Rule.GetFillValueAs<T>(RuleKey) : throw new InvalidOperationException("Property not set");
-
-        public T? GetMatchValueAs<T> () => RuleKey is not null ? Rule.GetMatchValueAs<T>(RuleKey) : throw new InvalidOperationException("Property not set");
-
         public IMajorRecordGetter? GetOriginRecord ()
         {
             if (!Rule.OnlyIfDefault || originSaved)
@@ -76,5 +72,9 @@ namespace GenericSynthesisPatcher
             this.ruleKey = null;
             return false;
         }
+
+        public bool TryGetFillValueAs<T> (out T? valueAs) => RuleKey is not null ? Rule.TryGetFillValueAs(RuleKey, out valueAs) : throw new InvalidOperationException("Property not set");
+
+        public bool TryGetMatchValueAs<T> (out bool fromCache, out T? valueAs) => RuleKey is not null ? Rule.TryGetMatchValueAs(RuleKey, out fromCache, out valueAs) : throw new InvalidOperationException("Property not set");
     }
 }

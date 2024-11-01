@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogCode = 0x03;
 
         // Only works due to knowing only will be set by deserialization as will always just add to list
-        private List<ModKeyListOperation>? masters = null;
+        private List<ListOperation>? patched = null;
 
         [JsonIgnore]
         public int ConfigFile { get; internal set; }
@@ -28,10 +28,38 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonIgnore]
         public int ConfigRule { get; internal set; }
 
+        /// <summary>
+        /// Set to true to enable Debug/Trace logging for this rule
+        /// </summary>
         [DefaultValue(false)]
         [JsonProperty(PropertyName = "Debug")]
         public bool Debug { get; set; }
 
+        /// <summary>
+        /// Sets order of processing rules. Rules with matching priority can be executed in any order.
+        /// Processed lowest to highest, so if rules with priority of 1 & 100 both touch the same field,
+        /// while both still run the 100 priority will run last so may overwrite changes the other made.
+        /// </summary>
+        [DefaultValue(0)]
+        [JsonProperty(PropertyName = "Priority")]
+        public int Priority { get; private set; }
+
+        /// <summary>
+        /// List of record types this rule should match
+        /// </summary>
+        [JsonProperty(PropertyName = "Types")]
+        [JsonConverter(typeof(SingleOrArrayConverter<RecordTypeMapping>))]
+        public IReadOnlyList<RecordTypeMapping> Types { get; protected set; } = [];
+
+        #region Masters
+
+        // Only works due to knowing only one will be set by deserialization as will always just add to list
+        // If some puts in multiple it will probably generate errors.
+        private List<ModKeyListOperation>? masters = null;
+
+        /// <summary>
+        /// List of masters that should be either included or excluded from matching
+        /// </summary>
         [JsonProperty(PropertyName = "Masters")]
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? Masters
@@ -66,13 +94,124 @@ namespace GenericSynthesisPatcher.Json.Data
         [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
         public List<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
 
-        [DefaultValue(0)]
-        [JsonProperty(PropertyName = "Priority")]
-        public int Priority { get; private set; }
+        #endregion Masters
 
-        [JsonProperty(PropertyName = "Types")]
-        [JsonConverter(typeof(SingleOrArrayConverter<RecordTypeMapping>))]
-        public IReadOnlyList<RecordTypeMapping> Types { get; protected set; } = [];
+        #region PatchedBy
+
+        // Only works due to knowing only will be set by deserialization as will always just add to list
+        private List<ModKeyListOperation>? patchedBy = null;
+
+        private FilterLogic patchedByLogic = FilterLogic.Default;
+
+        [JsonProperty(PropertyName = "&PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedAnd
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.AND;
+                patchedBy ??= [];
+                patchedBy.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedBy
+        {
+            get => patchedBy;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy ??= [];
+                patchedBy.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "-PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedByDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy ??= [];
+                foreach (var v in value ?? [])
+                    patchedBy.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedByNot { set => PatchedByDel = value; }
+
+        [JsonProperty(PropertyName = "^PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedXOR
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.XOR;
+                patchedBy ??= [];
+                patchedBy.Add(value);
+            }
+        }
+
+        #endregion PatchedBy
+
+        #region Patched
+
+        /// <summary>
+        /// List of mods that if this record was patched by will either include or exclude it from matching.
+        /// Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
+        /// </summary>
+        [JsonProperty(PropertyName = "Patched")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? Patched
+        {
+            get => patched;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patched ??= [];
+                patched.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "-Patched")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? PatchedDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patched ??= [];
+                foreach (var v in value ?? [])
+                    patched.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!Patched")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
+        public List<ListOperation>? PatchedNot { set => PatchedDel = value; }
+
+        #endregion Patched
 
         /// <summary>
         /// Should only be used for sorting by Priority
@@ -112,31 +251,37 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!Global.Settings.Value.Logging.DisabledLogs.SuccessfulTypeMatch)
                 Global.TraceLogger?.Log(ClassLogCode, "Matched Types: Yes");
 
-            if (Masters != null)
+            // Due to SafeAny checks in property setters should be null or a list with at least 1 entry, never just an empty list. So process with this assumption
+            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, "Masters: "))
+                return false;
+
+            // Due to SafeAny checks in property setters should be null or a list with at least 1 entry, never just an empty list. So process with this assumption
+            if (PatchedBy != null)
             {
-                bool hasEntry = Masters?.Any(m => m.Value == proKeys.Record.FormKey.ModKey) ?? false;
-                bool isNeg = Masters != null && Masters.First().Operation == ListLogic.NOT;
-                bool result = isNeg ? !hasEntry : (Masters == null || hasEntry);
-
-                Global.TraceLogger?.Log(ClassLogCode, $"Matched Masters: {result} Has Masters: {Masters != null} Record Found: {hasEntry} Not: {isNeg}");
-
-                if (!result)
+                var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
+                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, debugPrefix: "PatchedBy: "))
                     return false;
             }
 
             return true;
         }
 
+        /// <summary>
+        /// Checks for anything that may make this rule invalid and possibly cause issues.
+        /// Any rule failing validation will mean the patcher will never start any patching,
+        /// and just end with an error.
+        /// </summary>
+        /// <returns>True if rule passes validation</returns>
         public virtual bool Validate ()
         {
             if (Debug)
                 LogHelper.WriteLog(LogLevel.Debug, ClassLogCode, "Debug / Trace logging enabled for this rule.", rule: this);
 
-            if (Masters.SafeAny() && Masters.Any(m => m.Operation == ListLogic.NOT) && Masters.Any(m => m.Operation != ListLogic.NOT))
-            {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Rule includes both include and exclude masters, which does not compute.", rule: this);
+            if (Masters.SafeAny() && !MatchesHelper.Validate(Masters, $"Masters: "))
                 return false;
-            }
+
+            if (patchedByLogic != FilterLogic.AND && PatchedBy.SafeAny() && !MatchesHelper.Validate(patchedByLogic, PatchedBy, "PatchedBy: "))
+                return false;
 
             return true;
         }

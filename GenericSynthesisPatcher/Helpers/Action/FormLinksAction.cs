@@ -14,10 +14,10 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class FormLinksAction<T> : IRecordAction
-        where T : class, IMajorRecordGetter
+    public class FormLinksAction<TMajor> : IRecordAction
+        where TMajor : class, IMajorRecordGetter
     {
-        public static readonly FormLinksAction<T> Instance = new();
+        public static readonly FormLinksAction<TMajor> Instance = new();
         private const int ClassLogCode = 0x14;
 
         private FormLinksAction ()
@@ -38,11 +38,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter record)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList) || !proKeys.TryGetFillValueAs(out List<FormKeyListOperation<TMajor>>? links))
                     return -1;
 
                 int changes = 0;
-                foreach (var actionKey in proKeys.GetFillValueAs<List<FormKeyListOperation<T>>>() ?? [])
+                foreach (var actionKey in links ?? [])
                 {
                     if (actionKey.Value == FormKey.Null)
                     {
@@ -65,13 +65,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
-                        if (!Mod.GetPropertyForEditing<List<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
+                        if (!Mod.TryGetPropertyForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
                         {
                             Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                             return -1;
                         }
 
-                        if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(T), out var link))
+                        if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(TMajor), out var link))
                         {
                             Global.Logger.Log(ClassLogCode, $"Unable to find {actionKey}", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
                             continue;
@@ -79,9 +79,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                         changes++;
                         if (actionKey.Operation == ListLogic.DEL)
-                            _ = setList.Remove(link.ToLinkGetter<T>());
+                            _ = setList.Remove(link.ToLinkGetter<TMajor>());
                         else
-                            setList.Add(link.ToLinkGetter<T>());
+                            setList.Add(link.ToLinkGetter<TMajor>());
                     }
                 }
 
@@ -99,10 +99,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter record)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
                     return -1;
 
                 if (curValue.SequenceEqualNullable(newValue))
@@ -111,7 +111,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                 {
                     Global.Logger.Log(ClassLogCode, "Patch has null value.", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                     return -1;
@@ -140,10 +140,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                     return -1;
 
-                if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
                     return -1;
 
                 if (!newValue.SafeAny())
@@ -155,7 +155,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                ExtendedList<IFormLinkGetter<T>>? patchValueLinks = null;
+                ExtendedList<IFormLinkGetter<TMajor>>? patchValueLinks = null;
                 int changes = 0;
 
                 foreach (var item in newValue)
@@ -166,7 +166,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         {
                             if (patchValueLinks == null)
                             {
-                                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                                     return -1;
 
                                 patchValueLinks = patchValue;
@@ -193,81 +193,37 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var origin = proKeys.GetOriginRecord();
             return origin != null
-                        && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkValue)
-                        && Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(origin, proKeys.Property.PropertyName, out var originValue)
-                        && FormLinksAction<T>.RecordsMatch(checkValue, originValue);
+                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkValue)
+                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(origin, proKeys.Property.PropertyName, out var originValue)
+                        && FormLinksAction<TMajor>.RecordsMatch(checkValue, originValue);
         }
 
         public bool MatchesRule (ProcessingKeys proKeys)
         {
-            if (proKeys.Record is not IFormLinkContainerGetter)
+            if (!proKeys.TryGetMatchValueAs(out bool fromCache, out List<FormKeyListOperation<TMajor>>? matches))
                 return false;
 
-            var values = proKeys.GetMatchValueAs<List<FormKeyListOperationAdvanced<T>>>();
-
-            if (!values.SafeAny())
+            if (!matches.SafeAny())
                 return true;
 
-            if (!Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || !curValue.SafeAny())
-                return !values.Any(k => k.Operation != ListLogic.NOT);
+            if (!fromCache && !MatchesHelper.Validate(proKeys.RuleKey.Operation, matches))
+                throw new InvalidDataException("Json data for matches invalid");
 
-            List<string> EditorIDs = [];
-            if (values.Any(v => v.Regex != null))
-            {
-                foreach (var v in curValue)
-                {
-                    var link = v.TryResolve(Global.State.LinkCache);
-                    if (link != null && link.EditorID != null)
-                        EditorIDs.Add(link.EditorID);
-                }
-            }
+            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks))
+                return false; // Property must not exist for this record.
 
-            int matchedCount = 0;
-            int includesChecked = 0; // Only count !Neg
-
-            foreach (var v in values)
-            {
-                if (v.Operation != ListLogic.NOT)
-                    includesChecked++;
-
-                bool match = (v.Regex != null)
-                    ? EditorIDs.Any(v.Regex.IsMatch)
-                    : curValue.Any(l => l.FormKey.Equals(v.Value));
-
-                if (match)
-                {
-                    // Doesn't matter what overall Operation is we always fail on a NOT match
-                    if (v.Operation == ListLogic.NOT)
-                        return false;
-
-                    if (proKeys.RuleKey.Operation == FilterLogic.OR)
-                        return true;
-
-                    matchedCount++;
-                }
-                else if (v.Operation != ListLogic.NOT && proKeys.RuleKey.Operation == FilterLogic.AND)
-                {
-                    return false;
-                }
-            }
-
-            return proKeys.RuleKey.Operation switch
-            {
-                FilterLogic.AND => true,
-                FilterLogic.XOR => matchedCount == 1,
-                _ => includesChecked == 0 // OR
-            };
+            return MatchesHelper.Matches(curLinks?.Select(l => l.FormKey), proKeys.RuleKey.Operation, matches);
         }
 
         public int Merge (ProcessingKeys proKeys)
         {
             Global.UpdateLoggers(ClassLogCode);
 
-            var root = RecordGraph<IFormLinkGetter<T>>.Create(
+            var root = RecordGraph<IFormLinkGetter<TMajor>>.Create(
                 proKeys.Record.FormKey,
                 proKeys.Type.StaticRegistration.GetterType,
                 proKeys.Rule.Merge[proKeys.RuleKey],
-                list => Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
+                list => Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => $"{item.FormKey}");
 
             if (root == null)
@@ -279,9 +235,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
-        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<T>>? _newList)
+        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? _newList)
         {
-            if (_newList is not IReadOnlyList<IFormLinkGetter<T>> newList || !Mod.GetProperty<IReadOnlyList<IFormLinkGetter<T>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+            if (_newList is not IReadOnlyList<IFormLinkGetter<TMajor>> newList || !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
                 Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                 return -1;
@@ -295,7 +251,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             try
             {
-                if (!Mod.GetPropertyForEditing<ExtendedList<IFormLinkGetter<T>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
+                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
                     return -1;
 
                 foreach (var d in del)
@@ -313,7 +269,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return add.Count() + del.Count();
         }
 
-        private static bool RecordsMatch (IReadOnlyList<IFormLinkGetter<T>>? left, IReadOnlyList<IFormLinkGetter<T>>? right)
+        private static bool RecordsMatch (IReadOnlyList<IFormLinkGetter<TMajor>>? left, IReadOnlyList<IFormLinkGetter<TMajor>>? right)
         {
             if (!left.SafeAny() && !right.SafeAny())
                 return true;

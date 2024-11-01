@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Json.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
-    public class FilterOperation ( string value ) : FilterOperation<string>(value);
+    public class FilterOperation (string value) : FilterOperation<string>(value);
 
     [JsonConverter(typeof(OperationsConverter))]
-    public class FilterOperation<T> : OperationBase<FilterOperation<T>, FilterLogic> where T : IConvertible
+    public class FilterOperation<T> : OperationBase<FilterLogic> where T : IConvertible
     {
         public readonly FilterLogic Operation;
         public readonly T Value;
@@ -20,18 +20,18 @@ namespace GenericSynthesisPatcher.Json.Operations
             { '^', FilterLogic.XOR },
             { '|', FilterLogic.OR } });
 
-        public FilterOperation ( string value )
+        public FilterOperation (string value)
         {
             (Operation, string? v) = Split(value, ValidPrefixes);
 
             Value = (T)((IConvertible)v).ToType(typeof(T), null);
         }
 
-        public static bool operator != ( FilterOperation<T> left, FilterOperation<T> right ) => !(left == right);
+        public static bool operator != (FilterOperation<T> left, FilterOperation<T> right) => !(left == right);
 
-        public static bool operator == ( FilterOperation<T> left, FilterOperation<T> right ) => left.Equals(right);
+        public static bool operator == (FilterOperation<T> left, FilterOperation<T> right) => left.Equals(right);
 
-        public override bool Equals ( object? obj )
+        public override bool Equals (object? obj)
                     => obj is FilterOperation<T> other
                     && Operation == other.Operation
                     && ((Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase))

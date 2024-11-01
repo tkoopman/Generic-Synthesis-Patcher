@@ -6,7 +6,6 @@ using Loqui;
 
 using Microsoft.Extensions.Logging;
 
-using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -56,9 +55,24 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
-        public static bool GetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value) => GetProperty(fromRecord, propertyName, out value, out _);
+        public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+        {
+            wasEditorID = false;
+            if (FormKey.TryFactory(FixFormKey(input), out formKey))
+                return true;
 
-        public static bool GetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property)
+            if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
+            {
+                wasEditorID = true;
+                formKey = record.FormKey;
+                Global.TraceLogger?.Log(ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property)
         {
             value = default;
             property = fromRecord.GetType().GetProperty(propertyName);
@@ -89,9 +103,11 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        public static bool GetPropertyForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
+        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
+
+        public static bool TryGetPropertyForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
         {
-            if (!GetProperty(patchRecord, propertyName, out value, out var property))
+            if (!TryGetProperty(patchRecord, propertyName, out value, out var property))
                 return false;
 
             if (value != null)
@@ -112,7 +128,7 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        public static bool SetProperty<T> (IMajorRecord patchRecord, string propertyName, T? value)
+        public static bool TrySetProperty<T> (IMajorRecord patchRecord, string propertyName, T? value)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
             if (property == null)
@@ -129,23 +145,6 @@ namespace GenericSynthesisPatcher.Helpers
                 property.SetValue(patchRecord, value);
 
             return true;
-        }
-
-        public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out IFormLinkGetter<TMajor>? link) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
-        {
-            link = null;
-            if (FormKey.TryFactory(FixFormKey(input), out formKey))
-                return true;
-
-            if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
-            {
-                formKey = record.FormKey;
-                link = record.ToLinkGetter();
-                Global.TraceLogger?.Log(ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
-                return true;
-            }
-
-            return false;
         }
 
         [GeneratedRegex(@"^[0-9A-Fa-f]{1,6}")]

@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 using GenericSynthesisPatcher.Json.Converters;
@@ -12,18 +11,24 @@ namespace GenericSynthesisPatcher.Json.Operations
     {
         public Regex? Regex { get; private set; }
 
-        public ListOperation ( string? value ) : base(value)
+        public ListOperation (string? value) : base(value)
         {
         }
 
-        public ListOperation ( ListLogic operation, string? value ) : base(operation, value)
+        public ListOperation (ListLogic operation, string? value) : base(operation, value)
         {
         }
 
         public override ListOperation Inverse () => new(Operation, Value);
 
-        public bool MatchesValue ( string check )
+        public override bool ValueEquals (string? check)
         {
+            if (Value == null && check == null)
+                return true;
+
+            if (Value == null || check == null)
+                return false;
+
             if (Regex == null)
                 Global.TraceLogger?.WriteLine($"String inspecting: {Value} Check: {check} IsMatch: {string.Equals(Value, check, StringComparison.OrdinalIgnoreCase)}");
             else
@@ -40,16 +45,16 @@ namespace GenericSynthesisPatcher.Json.Operations
     }
 
     [JsonConverter(typeof(OperationsConverter))]
-    public class ListOperation<T> : ListOperationBase<ListOperation<T>, T> where T : IConvertible
+    public class ListOperation<T> : ListOperationBase<T> where T : IConvertible
     {
-        public ListOperation ( string? value ) : base(value)
+        public ListOperation (string? value) : base(value)
         {
         }
 
-        public ListOperation ( ListLogic operation, T? value ) : base(operation, value)
+        public ListOperation (ListLogic operation, T? value) : base(operation, value)
         {
         }
 
-        protected override T? ConvertValue ( string? value ) => value != null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
+        protected override T? ConvertValue (string? value) => value != null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
     }
 }

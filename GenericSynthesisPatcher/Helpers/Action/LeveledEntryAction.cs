@@ -18,7 +18,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         protected ExtraData? CreateExtraData (ILoquiObject source)
         {
-            if (!Mod.GetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData == null)
+            if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData == null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, $"No extra data to copy", logLevel: LogLevel.Error);
                 return null;

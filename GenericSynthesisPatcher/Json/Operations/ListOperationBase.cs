@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 
 using Newtonsoft.Json;
@@ -8,8 +9,7 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Json.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
-    public abstract class ListOperationBase<TClass, TValue> : OperationBase<TClass, ListLogic>
-        where TClass : ListOperationBase<TClass, TValue>
+    public abstract class ListOperationBase<TValue> : OperationBase<ListLogic>, IEquatable<ListOperationBase<TValue>>
     {
         protected static readonly IReadOnlyDictionary<char, ListLogic> ValidPrefixes = new ReadOnlyDictionary<char, ListLogic>(new Dictionary<char, ListLogic>() {
             { '-', ListLogic.DEL },
@@ -30,7 +30,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             }
         }
 
-        public ListOperationBase ( string? value )
+        public ListOperationBase (string? value)
         {
             if (value == null)
             {
@@ -44,41 +44,49 @@ namespace GenericSynthesisPatcher.Json.Operations
             }
         }
 
-        public ListOperationBase ( ListLogic operation, TValue? value )
+        public ListOperationBase (ListLogic operation, TValue? value)
         {
             Operation = operation;
             Value = value;
         }
 
-        public override bool Equals ( object? obj ) => obj is ListOperationBase<TClass, TValue> other && Equals(other);
+        public override bool Equals (object? obj) => obj switch
+        {
+            ListOperationBase<TValue> other => Equals(other),
+            TValue other => Equals(other),
+            _ => false
+        };
 
-        public bool Equals ( ListOperationBase<TClass, TValue> other ) => Operation == other.Operation && ValueEquals(other.Value);
+        public virtual bool Equals (ListOperationBase<TValue>? other) => other != null && Operation == other.Operation && ValueEquals(other.Value);
 
-        public override int GetHashCode () => HashCode.Combine(Operation, Value);
+        public override int GetHashCode () => HashCode.Combine(Value);
 
-        public override TClass Inverse () => System.Activator.CreateInstance(GetType(), [Inverse(Operation), Value]) is TClass result ? result : throw new Exception("Failed to invert operation");
+        public int GetHashCode ([DisallowNull] TValue obj) => throw new NotImplementedException();
 
-        public override string? ToString ()
+        public override ListOperationBase<TValue> Inverse () => System.Activator.CreateInstance(GetType(), [Inverse(Operation), Value]) is ListOperationBase<TValue> result ? result : throw new Exception("Failed to invert operation");
+
+        public override string? ToString () => ToString('-');
+
+        public string? ToString (char delPrefix)
         {
             if (Value == null)
                 return "null";
 
             char? prefix = Operation switch
             {
-                ListLogic.DEL => '-',
+                ListLogic.DEL => delPrefix,
                 _ => null,
             };
 
             return prefix != null ? prefix + Value.ToString() : Value.ToString();
         }
 
-        public bool ValueEquals ( TValue? other )
-            => (Value == null && other == null)
-            || (Value != null && other != null && Value.Equals(other));
+        public virtual bool ValueEquals (TValue? other)
+            => MyEqualityComparer.Equals(Value, other);
 
-        protected static ListLogic Inverse ( ListLogic logic ) => logic == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
+        protected static ListLogic Inverse (ListLogic logic) => logic == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
 
-        protected abstract TValue? ConvertValue ( string? value );
+        protected abstract TValue? ConvertValue (string? value);
 
         protected virtual void ValueUpdated ()
         { }
