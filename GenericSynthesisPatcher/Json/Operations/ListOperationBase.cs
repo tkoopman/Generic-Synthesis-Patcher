@@ -65,9 +65,9 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public override ListOperationBase<TValue> Inverse () => System.Activator.CreateInstance(GetType(), [Inverse(Operation), Value]) is ListOperationBase<TValue> result ? result : throw new Exception("Failed to invert operation");
 
-        public override string? ToString () => ToString('-');
+        public override string ToString () => ToString('-');
 
-        public string? ToString (char delPrefix)
+        public string ToString (char delPrefix)
         {
             if (Value == null)
                 return "null";
@@ -78,7 +78,7 @@ namespace GenericSynthesisPatcher.Json.Operations
                 _ => null,
             };
 
-            return prefix != null ? prefix + Value.ToString() : Value.ToString();
+            return prefix != null ? prefix + (Value.ToString() ?? "?") : (Value.ToString() ?? "?");
         }
 
         public virtual bool ValueEquals (TValue? other)

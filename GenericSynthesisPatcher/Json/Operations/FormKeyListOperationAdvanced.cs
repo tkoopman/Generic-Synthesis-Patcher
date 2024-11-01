@@ -22,9 +22,20 @@ namespace GenericSynthesisPatcher.Json.Operations
         public override IFormLinkGetter<TMajor>? ToLinkGetter () => Regex == null ? base.ToLinkGetter() : throw new InvalidOperationException("Unable to link to RegEx values.");
 
         public override bool ValueEquals (FormKey other)
-            => Regex == null
-             ? Value.Equals(other)
-             : other.ToLinkGetter<TMajor>().TryResolve(Global.State.LinkCache, out var link) && link.EditorID != null && Regex.IsMatch(link.EditorID);
+        {
+            if (Regex == null)
+                return Value.Equals(other);
+
+            if (!other.ToLinkGetter<TMajor>().TryResolve(Global.State.LinkCache, out var link) || link.EditorID == null)
+                return false;
+
+            bool result = Regex.IsMatch(link.EditorID);
+
+            if ((Global.Settings.Value.Logging.NoisyLogs.RegexMatchFailed && !result) || (Global.Settings.Value.Logging.NoisyLogs.RegexMatchSuccessful && result))
+                Global.TraceLogger?.WriteLine($"Regex: {Regex} Value: {link.EditorID} IsMatch: {result}");
+
+            return result;
+        }
 
         protected override FormKey ConvertValue (string? value)
         {

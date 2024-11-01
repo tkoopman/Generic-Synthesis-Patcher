@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -254,7 +255,9 @@ namespace GenericSynthesisPatcher.Json.Data
             if (cache.TryGetValue(key, out object? cachedValue))
             {
                 fromCache = true;
-                Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
+                if (Global.Settings.Value.Logging.NoisyLogs.Cache)
+                    Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
+
                 if (cachedValue is T v)
                 {
                     valueAs = v;
@@ -321,10 +324,10 @@ namespace GenericSynthesisPatcher.Json.Data
             if (!base.Matches(proKeys))
                 return false;
 
-            if (FormID != null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: "))
+            if (FormID != null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: ", Global.Settings.Value.Logging.NoisyLogs.FormIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.FormIDMatchFailed))
                 return false;
 
-            if (EditorID != null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched FormID: "))
+            if (EditorID != null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched EditorID: ", Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchFailed))
                 return false;
 
             foreach (var x in Match)
@@ -335,7 +338,7 @@ namespace GenericSynthesisPatcher.Json.Data
                     return false;
                 }
 
-                Global.TraceLogger?.Log(ClassLogCode, $"Action: {proKeys.Property.Action.GetType().GetClassName()}.MatchesRule", propertyName: proKeys.Property.PropertyName);
+                Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesRule)}", propertyName: proKeys.Property.PropertyName);
                 if (!proKeys.Property.Action.MatchesRule(proKeys))
                     return false;
             }

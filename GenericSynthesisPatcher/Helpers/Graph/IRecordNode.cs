@@ -1,15 +1,11 @@
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
+using Mutagen.Bethesda.Plugins;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public interface IRecordNode
     {
-        public IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> Context { get; }
-
+        public ModKey ModKey { get; }
         public IReadOnlyList<IRecordNode> Overwrites { get; }
-
         public IReadOnlyList<IRecordNode> OverwrittenBy { get; }
     }
 }

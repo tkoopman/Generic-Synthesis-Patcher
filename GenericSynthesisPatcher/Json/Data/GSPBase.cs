@@ -203,28 +203,28 @@ namespace GenericSynthesisPatcher.Json.Data
         {
             if (!Types.Contains(proKeys.Type))
             {
-                if (!Global.Settings.Value.Logging.DisabledLogs.FailedTypeMatch)
-                    Global.TraceLogger?.Log(ClassLogCode, "Matched Types: No");
+                if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchFailed)
+                    Global.TraceLogger?.Log(ClassLogCode, "Matched: False", propertyName: "Record Type");
                 return false;
             }
 
-            if (!Global.Settings.Value.Logging.DisabledLogs.SuccessfulTypeMatch)
-                Global.TraceLogger?.Log(ClassLogCode, "Matched Types: Yes");
+            if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchSuccessful)
+                Global.TraceLogger?.Log(ClassLogCode, "Matched: True", propertyName: "Record Type");
 
-            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, "Matched Masters: "))
+            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, nameof(Masters), Global.Settings.Value.Logging.NoisyLogs.MastersMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.MastersMatchFailed))
                 return false;
 
             if (PatchedBy != null)
             {
                 var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
-                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, debugPrefix: "Matched PatchedBy: "))
+                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))
                     return false;
             }
 
             if (Patched.HasValue)
             {
                 bool result = Patched.Value ? proKeys.HasPatchRecord : !proKeys.HasPatchRecord;
-                Global.TraceLogger?.Log(ClassLogCode, $"Matched Patched: {result} Has patch record: {proKeys.HasPatchRecord}");
+                Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Has patch record: {proKeys.HasPatchRecord}", propertyName: nameof(Patched));
                 return result;
             }
 

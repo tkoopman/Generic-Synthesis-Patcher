@@ -121,7 +121,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
                 return !matches.Any(k => k.Operation != ListLogic.NOT);
 
-            return MatchesHelper.Matches(curValue.FormKey, matches);
+            return MatchesHelper.Matches(curValue.FormKey, matches, propertyName: proKeys.Property.PropertyName);
         }
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();

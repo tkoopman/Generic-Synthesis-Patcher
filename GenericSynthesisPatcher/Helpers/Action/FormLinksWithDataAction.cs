@@ -261,7 +261,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks))
                 return false; // Property must not exist for this record.
 
-            return MatchesHelper.Matches(curLinks?.Select(GetFormKeyFromRecord), proKeys.RuleKey.Operation, matches);
+            return MatchesHelper.Matches(curLinks?.Select(GetFormKeyFromRecord), proKeys.RuleKey.Operation, matches, propertyName: proKeys.Property.PropertyName);
         }
 
         /// <summary>
@@ -273,11 +273,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
             Global.UpdateLoggers(ClassLogCode);
 
             var root = RecordGraph<IFormLinkContainerGetter>.Create(
-                proKeys.Record.FormKey,
-                proKeys.Type.StaticRegistration.GetterType,
-                proKeys.Rule.Merge[proKeys.RuleKey],
-                list => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
-                item => ToString(item));
+                proKeys,
+                record => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
+                ToString);
 
             if (root == null)
             {

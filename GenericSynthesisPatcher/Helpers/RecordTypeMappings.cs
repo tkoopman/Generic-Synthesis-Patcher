@@ -158,7 +158,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static bool TryFindByType (IMajorRecordGetter record, out RecordTypeMapping mapping)
         {
-            if (!TryFindByType(record.GetType(), out mapping) && !Global.Settings.Value.Logging.DisabledLogs.FailedTypeMatch)
+            if (!TryFindByType(record.GetType(), out mapping))
             {
                 Global.TraceLogger?.Log(ClassLogCode, "Find Types: Type Unknown");
                 return false;

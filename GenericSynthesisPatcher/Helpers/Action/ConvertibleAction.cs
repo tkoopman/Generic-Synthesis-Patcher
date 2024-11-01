@@ -5,7 +5,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
     public class ConvertibleAction<T> : BasicAction<T> where T : IConvertible
     {
         public new static readonly ConvertibleAction<T> Instance = new();
-        private const int ClassLogCode = 0x10;
 
         private ConvertibleAction () : base()
         {
@@ -27,7 +26,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
                 return false; // Property must not exist for this record.
 
-            return MatchesHelper.Matches(curValue, matches);
+            return MatchesHelper.Matches(curValue, matches, propertyName: proKeys.Property.PropertyName);
         }
     }
 }

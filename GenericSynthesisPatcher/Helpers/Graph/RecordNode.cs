@@ -13,25 +13,25 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
-    public class RecordNode<TItem> : IRecordNode
+    public class RecordNode<TItem> (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : IRecordNode
         where TItem : class
     {
-        protected readonly List<TItem> workingList;
+        protected readonly List<TItem> workingList = predicate(record)?.ToList() ?? [];
         private readonly List<RecordNode<TItem>> overwrites = [];
         private readonly List<RecordNode<TItem>> overwrittenBy = [];
-        public IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> Context { get; }
+
+        public ModKey ModKey { get; } = modKey;
+
         public IReadOnlyList<IRecordNode> Overwrites => overwrites.AsReadOnly();
+
         public IReadOnlyList<IRecordNode> OverwrittenBy => overwrittenBy.AsReadOnly();
 
-        protected Func<TItem, string> DebugPredicate { get; }
-        protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; }
+        protected Func<TItem, string> DebugPredicate { get; } = debugPredicate;
 
-        protected RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate)
+        protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; } = modKeys;
+
+        public RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : this(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
         {
-            Context = context;
-            workingList = predicate(context)?.ToList() ?? [];
-            DebugPredicate = debugPredicate;
-            ModKeys = modKeys;
         }
 
         public bool TryFind (ModKey modKey, [NotNullWhen(true)] out IRecordNode? result)
@@ -42,7 +42,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return b;
         }
 
-        protected static void Populate (RecordGraph<TItem> root, IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> all, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate)
+        protected static void Populate (RecordGraph<TItem> root, IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> all, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate)
         {
             int count = all.Count() - 2;
 
@@ -51,26 +51,33 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 var m = root.ModKeys?.FirstOrDefault(m => m.Value.Equals(all.ElementAt(i).ModKey));
                 if (m != null && m.Operation == ListLogic.NOT)
                 {
-                    Global.TraceLogger?.WriteLine($"Merge {root.Context.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
+                    Global.TraceLogger?.WriteLine($"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
                     continue;
                 }
 
                 var node = new RecordNode<TItem>(all.ElementAt(i), root.ModKeys, predicate, root.DebugPredicate);
-                int index = Global.State.LinkCache.ListedOrder.IndexOf(node.Context.ModKey, static (i, k) => i.ModKey == k);
+                int index = Global.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
 
-                Global.TraceLogger?.WriteLine($"Creating graph node {node.Context.ModKey} under {root.Context.ModKey}");
+                Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
 
-                foreach (var nodeMaster in Global.State.LinkCache.ListedOrder[index].MasterReferences)
+                var masters = Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
+
+                // If last entry in load order but has no masters it must be an existing GSP patch record,
+                // so link it to previous winner.
+                if (i == 0 && !masters.Any())
+                    masters = [all.ElementAt(1).ModKey];
+
+                foreach (var nodeMaster in masters)
                 {
-                    if (root.TryFindRecord(nodeMaster.Master, out var nodeOverwrites))
+                    if (root.TryFindRecord(nodeMaster, out var nodeOverwrites))
                     {
-                        Global.TraceLogger?.WriteLine($"{nodeOverwrites.Context.ModKey} overwritten by {node.Context.ModKey}");
+                        Global.TraceLogger?.WriteLine($"{nodeOverwrites.ModKey} overwritten by {node.ModKey}");
                         nodeOverwrites.overwrittenBy.Add(node);
                         node.overwrites.Add(nodeOverwrites);
                     }
                     else
                     {
-                        Global.TraceLogger?.WriteLine($"{nodeMaster.Master} not found on graph.");
+                        Global.TraceLogger?.WriteLine($"{nodeMaster} not found on graph.");
                     }
                 }
             }
@@ -97,25 +104,25 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             List<TItem> myRemoves = [];
 
             List<TItem> forceAdds = [];
-            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(Context.ModKey)) != null; // Must be + as - wouldn't have a node
+            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
 
             foreach (var node in overwrittenBy)
             {
                 if (node.Merge(workingList.AsReadOnly(), out var _add, out var _forceAdds, out var _remove))
                 {
                     foreach (var ai in _add)
-                        Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << {node.Context.ModKey.FileName}. Add: {DebugPredicate(ai)}");
+                        Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Add: {DebugPredicate(ai)}");
                     int a = myAdds.AddMissing(_add);
 
                     foreach (var fi in _forceAdds)
-                        Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << {node.Context.ModKey.FileName}. Force Add: {DebugPredicate(fi)}");
+                        Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Force Add: {DebugPredicate(fi)}");
                     int f = forceAdds.AddMissing(_forceAdds);
 
                     foreach (var ri in _remove)
-                        Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << {node.Context.ModKey.FileName}. Del: {DebugPredicate(ri)}");
+                        Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Del: {DebugPredicate(ri)}");
                     int r = myRemoves.AddMissing(_remove);
 
-                    Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << {node.Context.ModKey.FileName}. Add: {a}/{_add.Count()} Force Add: {f}/{_forceAdds.Count()} Del: {r}/{_remove.Count()}");
+                    Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Add: {a}/{_add.Count()} Force Add: {f}/{_forceAdds.Count()} Del: {r}/{_remove.Count()}");
                 }
             }
 
@@ -127,13 +134,13 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             foreach (var myRemove in myRemoves)
             {
-                Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << All. Del: {DebugPredicate(myRemove)}");
+                Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Del: {DebugPredicate(myRemove)}");
                 _ = workingList.Remove(myRemove);
             }
 
             foreach (var myAdd in myAdds)
             {
-                Global.TraceLogger?.WriteLine($"Merge {Context.ModKey.FileName} << All. Add: {DebugPredicate(myAdd)}");
+                Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Add: {DebugPredicate(myAdd)}");
                 workingList.Add(myAdd);
             }
 
@@ -162,8 +169,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected void Print (string line)
         {
             if (!string.IsNullOrEmpty(line))
-                line += " > ";
-            line += Context.ModKey.FileName;
+                line += " < ";
+            line += ModKey.FileName;
 
             if (overwrittenBy.Count == 0)
             {
@@ -178,7 +185,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected bool TryFindRecord (ModKey modKey, [NotNullWhen(true)] out RecordNode<TItem>? result)
         {
             result = null;
-            if (Context.ModKey == modKey)
+            if (ModKey == modKey)
             {
                 result = this;
                 return true;

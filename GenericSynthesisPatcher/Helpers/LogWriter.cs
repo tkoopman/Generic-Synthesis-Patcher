@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers
         public LogLevel LogLevel { get; set; }
         public GSPBase? Rule { get; set; }
 
-        public LogWriter ( LogLevel logLevel, int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0 )
+        public LogWriter (LogLevel logLevel, int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             NewLine = "\n";
             LogLevel = logLevel;
@@ -40,12 +40,18 @@ namespace GenericSynthesisPatcher.Helpers
                 LogHelper.WriteLog(LogLevel, ClassLogCode, log, rule: Rule, context: Context, line: Line);
         }
 
-        public void Log ( int classCode, string log, LogLevel logLevel = LogLevel.None, string? propertyName = null, [CallerLineNumber] int line = 0 )
+        public void Log (int classCode, string log, LogLevel logLevel = LogLevel.None, string? propertyName = null, [CallerLineNumber] int line = 0)
                     => LogHelper.WriteLog((logLevel == LogLevel.None) ? LogLevel : logLevel, classCode, log, rule: Rule, context: Context, propertyName: propertyName, line: line);
 
-        public void LogInvalidTypeFound ( int classCode, string propertyName, string expected, string found, [CallerLineNumber] int line = 0 ) => Log(classCode, $"Invalid type returned. Expected: {expected}. Found: {found}.", propertyName: propertyName, line: line);
+        public void LogAction (int classCode, string action, LogLevel logLevel = LogLevel.None, string? propertyName = null, [CallerLineNumber] int line = 0)
+        {
+            if (Global.Settings.Value.Logging.NoisyLogs.CallingAction)
+                LogHelper.WriteLog((logLevel == LogLevel.None) ? LogLevel : logLevel, classCode, log: $"Calling {action}", rule: Rule, context: Context, propertyName: propertyName, line: line);
+        }
 
-        public override void Write ( char value )
+        public void LogInvalidTypeFound (int classCode, string propertyName, string expected, string found, [CallerLineNumber] int line = 0) => Log(classCode, $"Invalid type returned. Expected: {expected}. Found: {found}.", propertyName: propertyName, line: line);
+
+        public override void Write (char value)
         {
             switch (value)
             {

@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 using GenericSynthesisPatcher.Json.Operations;
 
-using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -14,13 +13,16 @@ namespace GenericSynthesisPatcher.Helpers.Graph
     public class RecordGraph<TItem> : RecordNode<TItem>, IRecordNode
         where TItem : class
     {
-        protected RecordGraph ( IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate ) : base(context, modKeys, predicate, debugPredicate)
+        protected RecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context, modKeys, predicate, debugPredicate)
         {
         }
 
-        public static RecordGraph<TItem>? Create ( FormKey formKey, Type getter, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate )
+        public static RecordGraph<TItem>? Create (ProcessingKeys proKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate)
         {
-            var all = Global.State.LinkCache.ResolveAllContexts(formKey, getter);
+            var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Type.StaticRegistration.GetterType);
+
+            var modKeys = proKeys.Rule.Merge[proKeys.RuleKey];
+
             if (!all.SafeAny())
             {
                 Global.TraceLogger?.WriteLine("Failed to find master references");
@@ -47,7 +49,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return root;
         }
 
-        public bool Merge ( [NotNullWhen(true)] out IReadOnlyList<TItem>? newList )
+        public bool Merge ([NotNullWhen(true)] out IReadOnlyList<TItem>? newList)
         {
             if (!Merge(null, out _, out _, out _))
             {

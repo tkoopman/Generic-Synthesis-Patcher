@@ -30,11 +30,14 @@ namespace GenericSynthesisPatcher.Json.Operations
                 return false;
 
             if (Regex == null)
-                Global.TraceLogger?.WriteLine($"String inspecting: {Value} Check: {check} IsMatch: {string.Equals(Value, check, StringComparison.OrdinalIgnoreCase)}");
-            else
-                Global.TraceLogger?.WriteLine($"Regex: {Regex?.ToString()} Check: {check} IsMatch: {Regex?.IsMatch(check)}");
+                return string.Equals(Value, check, StringComparison.OrdinalIgnoreCase);
 
-            return Regex == null ? string.Equals(Value, check, StringComparison.OrdinalIgnoreCase) : Regex.IsMatch(check);
+            bool result = Regex.IsMatch(check);
+
+            if ((Global.Settings.Value.Logging.NoisyLogs.RegexMatchFailed && !result) || (Global.Settings.Value.Logging.NoisyLogs.RegexMatchSuccessful && result))
+                Global.TraceLogger?.WriteLine($"Regex: {Regex} Value: {check} IsMatch: {result}");
+
+            return result;
         }
 
         protected override void ValueUpdated ()

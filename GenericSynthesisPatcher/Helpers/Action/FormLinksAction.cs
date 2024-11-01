@@ -212,7 +212,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks))
                 return false; // Property must not exist for this record.
 
-            return MatchesHelper.Matches(curLinks?.Select(l => l.FormKey), proKeys.RuleKey.Operation, matches);
+            return MatchesHelper.Matches(curLinks?.Select(l => l.FormKey), proKeys.RuleKey.Operation, matches, propertyName: proKeys.Property.PropertyName);
         }
 
         public int Merge (ProcessingKeys proKeys)
@@ -220,10 +220,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
             Global.UpdateLoggers(ClassLogCode);
 
             var root = RecordGraph<IFormLinkGetter<TMajor>>.Create(
-                proKeys.Record.FormKey,
-                proKeys.Type.StaticRegistration.GetterType,
-                proKeys.Rule.Merge[proKeys.RuleKey],
-                list => Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(list.Record, proKeys.Property.PropertyName, out var value) ? value : null,
+                proKeys,
+                record => Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => $"{item.FormKey}");
 
             if (root == null)

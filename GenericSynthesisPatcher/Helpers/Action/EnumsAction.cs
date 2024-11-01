@@ -91,19 +91,38 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             var valueType = curValue.GetType();
 
+            bool result = false;
+            bool loopFinished = true;
+            object? matchedOn = null;
+
             foreach (var checkValueOp in checkValues)
             {
+                loopFinished = false;
                 if (!Enum.TryParse(valueType, checkValueOp.Value, true, out object? checkValue) || checkValue == null)
+                {
+                    Global.Logger.Log(ClassLogCode, $"{checkValueOp.Value} is not a valid value for enum type {valueType.Name}. Ignoring this entry.", logLevel: LogLevel.Warning);
+                    loopFinished = true;
                     continue;
+                }
 
                 if (checkValueOp.Operation != ListLogic.NOT)
                     includesChecked++;
 
                 if (curValue.Equals(checkValue))
-                    return checkValueOp.Operation != ListLogic.NOT;
+                {
+                    matchedOn = checkValue;
+                    result = checkValueOp.Operation != ListLogic.NOT;
+                    break;
+                }
+
+                loopFinished = true;
             }
 
-            return includesChecked == 0;
+            if (loopFinished)
+                result = includesChecked == 0;
+
+            Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Trigger: {matchedOn}", propertyName: proKeys.Property.PropertyName);
+            return result;
         }
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();

@@ -104,12 +104,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             int matchedCount = 0;
             int countIncludes = 0;
+            bool result = false;
+            bool loopFinished = true;
+            ListOperation? matchedOn = null;
 
             foreach (var m in matches)
             {
+                loopFinished = false;
                 if (!Enum.TryParse(flagType, m.Value, true, out object? mFlag) || mFlag == null)
                 {
                     Global.Logger.Log(ClassLogCode, $"{m.Value} is not a valid flag for flag type {flagType.Name}. Ignoring this entry.", logLevel: LogLevel.Warning);
+                    loopFinished = true;
                     continue;
                 }
 
@@ -121,13 +126,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     if (proKeys.RuleKey.Operation == FilterLogic.OR)
                     {
                         Global.TraceLogger?.Log(ClassLogCode, $"Matched: {m.Operation != ListLogic.NOT}. Matched: {m.ToString('!')}");
-                        return m.Operation != ListLogic.NOT;
+                        result = m.Operation != ListLogic.NOT;
+                        matchedOn = m;
+                        break;
                     }
 
                     if (proKeys.RuleKey.Operation == FilterLogic.AND && m.Operation == ListLogic.NOT)
                     {
                         Global.TraceLogger?.Log(ClassLogCode, $"Matched: False. Matched {m.ToString('!')}");
-                        return false;
+                        matchedOn = m;
+                        break;
                     }
 
                     matchedCount++;
@@ -135,19 +143,24 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 else if (proKeys.RuleKey.Operation == FilterLogic.AND && m.Operation != ListLogic.NOT)
                 {
                     Global.TraceLogger?.Log(ClassLogCode, $"Matched: False. Matched {m.Value}");
-                    return false;
+                    matchedOn = m;
+                    break;
                 }
+
+                loopFinished = true;
             }
 
-            bool result = proKeys.RuleKey.Operation switch
+            if (loopFinished)
             {
-                FilterLogic.AND => matchedCount == countIncludes, // Any failed matches returned above already so as long as all included matches matched we good.
-                FilterLogic.XOR => matchedCount == 1,
-                _ => countIncludes == 0 // OR - Any matches would of returned results above, so now only fail if any check was that it had to match a entry.
-            };
+                result = proKeys.RuleKey.Operation switch
+                {
+                    FilterLogic.AND => matchedCount == countIncludes, // Any failed matches returned above already so as long as all included matches matched we good.
+                    FilterLogic.XOR => matchedCount == 1,
+                    _ => countIncludes == 0 // OR - Any matches would of returned results above, so now only fail if any check was that it had to match a entry.
+                };
+            }
 
-            Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Operation: {proKeys.RuleKey.Operation} Matched: {matchedCount}/{matches?.Count} All Excludes: {countIncludes == 0}");
-
+            Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Operation: {proKeys.RuleKey.Operation} Trigger: {matchedOn}", propertyName: proKeys.Property.PropertyName);
             return result;
         }
 
