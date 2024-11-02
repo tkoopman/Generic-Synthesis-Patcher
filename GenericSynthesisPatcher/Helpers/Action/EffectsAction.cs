@@ -1,69 +1,43 @@
-using System.ComponentModel;
+using GenericSynthesisPatcher.Json.Data.Action;
 
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
+using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-using Newtonsoft.Json;
-
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    public class EffectsAction ( FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude ) : IFormLinksWithData<EffectsAction, IMagicEffectGetter>
+    public class EffectsAction : FormLinksWithDataAction<EffectsData, IMagicEffectGetter, Effect>
     {
-        [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public int Area = area;
+        public static readonly EffectsAction Instance = new();
+        private const int ClassLogCode = 0x17;
 
-        [JsonProperty(PropertyName = "Duration", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public int Duration = duration;
-
-        [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public float Magnitude = magnitude;
-
-        private const int ClassLogPrefix = 0xB00;
-
-        [JsonProperty(PropertyName = "Effect", Required = Required.Always)]
-        public FormKeyListOperation<IMagicEffectGetter> FormKey { get; private set; } = formKey;
-
-        FormKeyListOperation IFormLinksWithData<EffectsAction>.FormKey => FormKey;
-
-        public static int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter source )
+        public override Effect? CreateFrom (IFormLinkContainerGetter source)
         {
-            if (context.Record is not IIngestibleGetter || source is not IEffectGetter entry)
-                return -1;
+            if (source is not IEffectGetter sourceRecord)
+            {
+                Global.Logger.Log(ClassLogCode, $"Failed to add effect. No Effects?", logLevel: LogLevel.Error);
+                return null;
+            }
 
             var effect = new Effect();
-            effect.BaseEffect.FormKey = entry.BaseEffect.FormKey;
-            if (entry.Data != null)
+            effect.BaseEffect.FormKey = sourceRecord.BaseEffect.FormKey;
+            if (sourceRecord.Data != null)
             {
                 effect.Data = new EffectData
                 {
-                    Area = entry.Data.Area,
-                    Duration = entry.Data.Duration,
-                    Magnitude = entry.Data.Magnitude
+                    Area = sourceRecord.Data.Area,
+                    Duration = sourceRecord.Data.Duration,
+                    Magnitude = sourceRecord.Data.Magnitude
                 };
             }
 
-            patch ??= (IIngestible)context.GetOrAddAsOverride(Global.State.PatchMod);
-
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (patch is IIngestible p)
-            {
-                p.Effects?.Add(effect);
-                return 1;
-            }
-
-            return -1;
+            return effect;
         }
 
-        public static bool DataEquals ( IFormLinkContainerGetter left, IFormLinkContainerGetter right )
-            => left is IEffectGetter l
+        public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
+                    => left is IEffectGetter l
             && right is IEffectGetter r
             && l.BaseEffect.FormKey.Equals(r.BaseEffect.FormKey)
             && ((l.Data != null && r.Data != null
@@ -72,97 +46,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
             && l.Data.Magnitude == r.Data.Magnitude)
             || (l.Data == null && r.Data == null));
 
-        public static IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list, FormKey key ) => list?.SingleOrDefault(s => s != null && GetFormKey(s).Equals(key), null);
+        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
 
-        public static List<EffectsAction>? GetFillValueAs ( GSPRule rule, ValueKey key ) => rule.GetFillValueAs<List<EffectsAction>>(key);
-
-        public static FormKey GetFormKey ( IFormLinkContainerGetter from ) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
-
-        public static int Remove ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IFormLinkContainerGetter remove )
-        {
-            if (!((patch == null || patch is IIngestible) && remove is IEffectGetter entry))
-                return -1;
-
-            var effect = new Effect();
-            effect.BaseEffect.FormKey = entry.BaseEffect.FormKey;
-            if (entry.Data != null)
-            {
-                effect.Data = new EffectData
-                {
-                    Area = entry.Data.Area,
-                    Duration = entry.Data.Duration,
-                    Magnitude = entry.Data.Magnitude
-                };
-            }
-
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (patch is not IIngestible p || (!p.Effects?.Remove(effect) ?? false))
-            {
-                LogHelper.Log(Microsoft.Extensions.Logging.LogLevel.Error, context, $"Failed to remove effect [{entry.BaseEffect.FormKey}] from container.", ClassLogPrefix | 0X11);
-                return -1;
-            }
-
-            return 1;
-        }
-
-        public static int Replace ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch, IEnumerable<IFormLinkContainerGetter>? newList )
-        {
-            if (context.Record is not IIngestible)
-                return -1;
-
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-
-            if (patch is IIngestible p)
-            {
-                if (p.Effects != null)
-                {
-                    int changes = p.Effects.RemoveAll(_ => true);
-
-                    if (newList is not IReadOnlyList<IContainerEntryGetter> list)
-                        return changes;
-
-                    foreach (var add in list)
-                    {
-                        _ = Add(context, ref patch, add);
-                        changes++;
-                    }
-
-                    return changes;
-                }
-            }
-
-            return -1;
-        }
-
-        public int Add ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ref ISkyrimMajorRecord? patch )
-        {
-            var effect = new Effect();
-            effect.BaseEffect.FormKey = FormKey.Value;
-            effect.Data = new EffectData
-            {
-                Area = Area,
-                Duration = Duration,
-                Magnitude = Magnitude
-            };
-
-            patch ??= context.GetOrAddAsOverride(Global.State.PatchMod);
-            if (patch is IIngestible p)
-            {
-                p.Effects?.Add(effect);
-                return 1;
-            }
-
-            return -1;
-        }
-
-        public bool DataEquals ( IFormLinkContainerGetter other )
-            => other is IEffectGetter effect
-            && effect.BaseEffect.FormKey.Equals(FormKey.Value)
-            && effect.Data != null
-            && effect.Data.Area == Area
-            && effect.Data.Duration == Duration
-            && effect.Data.Magnitude == Magnitude;
-
-        public IFormLinkContainerGetter? Find ( IEnumerable<IFormLinkContainerGetter>? list ) => Find(list, FormKey.Value);
+        public override string ToString (IFormLinkContainerGetter source) => source is IEffectGetter item ? $"{item.BaseEffect.FormKey} (Area: {item.Data?.Area}, Duration: {item.Data?.Duration}, Magnitude: {item.Data?.Magnitude})" : throw new InvalidCastException();
     }
 }

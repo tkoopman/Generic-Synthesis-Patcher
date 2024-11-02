@@ -1,14 +1,12 @@
 using System.ComponentModel;
 
+using DynamicData;
+
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
+using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
-
-using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
@@ -19,74 +17,166 @@ namespace GenericSynthesisPatcher.Json.Data
     [JsonConverter(typeof(GSPBaseConverter))]
     public abstract class GSPBase : IComparable<GSPBase>
     {
-        private const int ClassLogPrefix = 0xB00;
+        private const int ClassLogCode = 0x03;
 
-        [JsonProperty(PropertyName = "Masters", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
-        public List<ModKey>? Masters { get; private set; }
+        [JsonIgnore]
+        public int ConfigFile { get; internal set; }
 
+        [JsonIgnore]
+        public int ConfigRule { get; internal set; }
+
+        /// <summary>
+        /// Set to true to enable Debug/Trace logging for this rule
+        /// </summary>
+        [DefaultValue(false)]
+        [JsonProperty(PropertyName = "Debug")]
+        public bool Debug { get; set; }
+
+        /// <summary>
+        /// If set will check if record has already been patched by another GSP rule or not.
+        /// If you don't care exclude or set to null
+        /// </summary>
+        [JsonProperty(PropertyName = "Patched")]
+        public bool? Patched { get; set; }
+
+        /// <summary>
+        /// Sets order of processing rules. Rules with matching priority can be executed in any order.
+        /// Processed lowest to highest, so if rules with priority of 1 & 100 both touch the same field,
+        /// while both still run the 100 priority will run last so may overwrite changes the other made.
+        /// </summary>
         [DefaultValue(0)]
-        [JsonProperty(PropertyName = "Priority", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "Priority")]
         public int Priority { get; private set; }
 
-        [JsonProperty(PropertyName = "Types", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(FlagConverter))]
-        public RecordTypes Types { get; protected set; }
+        /// <summary>
+        /// List of record types this rule should match
+        /// </summary>
+        [JsonProperty(PropertyName = "Types")]
+        [JsonConverter(typeof(SingleOrArrayConverter<RecordTypeMapping>))]
+        public IReadOnlyList<RecordTypeMapping> Types { get; protected set; } = [];
+
+        #region Masters
+
+        private List<ModKeyListOperation>? masters = null;
 
         /// <summary>
-        /// Return GSP rule type for a record.
+        /// List of masters that should be either included or excluded from matching
         /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static RecordTypes GetGSPRuleType ( IMajorRecordGetter record ) => record switch
+        [JsonProperty(PropertyName = "Masters")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? Masters
         {
-            IIngestibleGetter => RecordTypes.ALCH,
-            IAmmunitionGetter => RecordTypes.AMMO,
-            IArmorGetter => RecordTypes.ARMO,
-            IBookGetter => RecordTypes.BOOK,
-            ICellGetter => RecordTypes.CELL,
-            IContainerGetter => RecordTypes.CONT,
-            IFactionGetter => RecordTypes.FACT,
-            IIngredientGetter => RecordTypes.INGR,
-            IKeyGetter => RecordTypes.KEYM,
-            IMiscItemGetter => RecordTypes.MISC,
-            INpcGetter => RecordTypes.NPC,
-            IOutfitGetter => RecordTypes.OTFT,
-            IScrollGetter => RecordTypes.SCRL,
-            IWeaponGetter => RecordTypes.WEAP,
-            IWorldspaceGetter => RecordTypes.WRLD,
-            _ => RecordTypes.UNKNOWN
-        };
+            get => masters;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                masters = value;
+            }
+        }
+
+        [JsonProperty(PropertyName = "-Masters")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? MastersDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                masters = [];
+                foreach (var v in value ?? [])
+                    masters.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!Masters")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
+
+        #endregion Masters
+
+        #region PatchedBy
+
+        private List<ModKeyListOperation>? patchedBy = null;
+
+        private FilterLogic patchedByLogic = FilterLogic.Default;
+
+        [JsonProperty(PropertyName = "&PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedAnd
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.AND;
+                patchedBy ??= [];
+                patchedBy.Add(value);
+            }
+        }
 
         /// <summary>
-        /// Return GSP rule type as string for a record.
+        /// List of mods that if this record was patched by will either include or exclude it from matching.
+        /// Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
         /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public static string GetGSPRuleTypeAsString ( IMajorRecordGetter record ) => record switch
+        [JsonProperty(PropertyName = "PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedBy
         {
-            IIngestibleGetter => "ALCH",
-            IAmmunitionGetter => "AMMO",
-            IArmorGetter => "ARMO",
-            IBookGetter => "BOOK",
-            ICellGetter => "CELL",
-            IContainerGetter => "CONT",
-            IFactionGetter => "FACT",
-            IIngredientGetter => "INGR",
-            IKeyGetter => "KEYM",
-            IMiscItemGetter => "MISC",
-            INpcGetter => "NPC",
-            IOutfitGetter => "OTFT",
-            IScrollGetter => "SCRL",
-            IWeaponGetter => "WEAP",
-            IWorldspaceGetter => "WRLD",
-            _ => "UNKNOWN"
-        };
+            get => patchedBy;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy = value;
+            }
+        }
+
+        [JsonProperty(PropertyName = "-PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedByDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy = [];
+                foreach (var v in value ?? [])
+                    patchedBy.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedByNot { set => PatchedByDel = value; }
+
+        [JsonProperty(PropertyName = "^PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedXOR
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.XOR;
+                patchedBy = value;
+            }
+        }
+
+        #endregion PatchedBy
 
         /// <summary>
         /// Should only be used for sorting by Priority
         /// </summary>
-        public int CompareTo ( GSPBase? other )
+        public int CompareTo (GSPBase? other)
             => other == null ? 1
              : other == this ? 0
              : Priority.CompareTo(other.Priority);
@@ -109,23 +199,57 @@ namespace GenericSynthesisPatcher.Json.Data
         /// </summary>
         /// <param name="context"></param>
         /// <returns>Returns true if context matches filters.</returns>
-        public virtual bool Matches ( IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context )
+        public virtual bool Matches (ProcessingKeys proKeys)
         {
-            var recordType = GetGSPRuleType(context.Record);
-
-            if (Global.Settings.Value.TraceFormKey != null && context.Record.FormKey.Equals(Global.Settings.Value.TraceFormKey))
+            if (!Types.Contains(proKeys.Type))
             {
-                LogHelper.Log(LogLevel.Trace, context, $"RecordType: {recordType}", ClassLogPrefix | 0x10);
-                LogHelper.Log(LogLevel.Trace, context, $"Check Types: {Types.HasFlag(recordType)}", ClassLogPrefix | 0x10);
-                LogHelper.Log(LogLevel.Trace, context, $"Check Masters: {Masters == null || Masters.Contains(context.Record.FormKey.ModKey)}", ClassLogPrefix | 0x10);
+                if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchFailed)
+                    Global.TraceLogger?.Log(ClassLogCode, "Matched: False", propertyName: "Record Type");
+                return false;
             }
 
-            return recordType != RecordTypes.UNKNOWN
-                && Types.HasFlag(recordType)
-                && (Masters == null || Masters.Contains(context.Record.FormKey.ModKey));
+            if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchSuccessful)
+                Global.TraceLogger?.Log(ClassLogCode, "Matched: True", propertyName: "Record Type");
+
+            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, nameof(Masters), Global.Settings.Value.Logging.NoisyLogs.MastersMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.MastersMatchFailed))
+                return false;
+
+            if (PatchedBy != null)
+            {
+                var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
+                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))
+                    return false;
+            }
+
+            if (Patched.HasValue)
+            {
+                bool result = Patched.Value ? proKeys.HasPatchRecord : !proKeys.HasPatchRecord;
+                Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Has patch record: {proKeys.HasPatchRecord}", propertyName: nameof(Patched));
+                return result;
+            }
+
+            return true;
         }
 
-        public abstract bool Validate ();
+        /// <summary>
+        /// Checks for anything that may make this rule invalid and possibly cause issues.
+        /// Any rule failing validation will mean the patcher will never start any patching,
+        /// and just end with an error.
+        /// </summary>
+        /// <returns>True if rule passes validation</returns>
+        public virtual bool Validate ()
+        {
+            if (Debug)
+                LogHelper.WriteLog(LogLevel.Debug, ClassLogCode, "Debug / Trace logging enabled for this rule.", rule: this);
+
+            if (Masters.SafeAny() && !MatchesHelper.Validate(Masters, $"Masters: "))
+                return false;
+
+            if (patchedByLogic != FilterLogic.AND && PatchedBy.SafeAny() && !MatchesHelper.Validate(patchedByLogic, PatchedBy, "PatchedBy: "))
+                return false;
+
+            return true;
+        }
 
         /// <summary>
         /// Validates Lists to make sure it is null if list contains 0 entries.
@@ -133,6 +257,6 @@ namespace GenericSynthesisPatcher.Json.Data
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns>Cleaned List.</returns>
-        protected static List<T>? ValidateList<T> ( List<T>? list ) => list.SafeAny() ? list : null;
+        protected static List<T>? ValidateList<T> (List<T>? list) => list.SafeAny() ? list : null;
     }
 }

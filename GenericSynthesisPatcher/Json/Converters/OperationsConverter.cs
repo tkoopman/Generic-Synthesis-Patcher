@@ -1,4 +1,3 @@
-using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -11,18 +10,16 @@ namespace GenericSynthesisPatcher.Json.Converters
     {
         public override bool CanWrite => false;
 
-        public override bool CanConvert ( Type objectType ) => objectType.GetType().IsAssignableTo(typeof(OperationBase<>));
+        public override bool CanConvert ( Type objectType ) => objectType.GetType().IsAssignableTo(typeof(OperationBase<,>));
 
         public override object? ReadJson ( JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer )
         {
             string? key = reader.Value?.ToString();
-            if (key == null)
-                return null;
 
             var constructor = objectType.GetConstructor([typeof(string)]);
             if (constructor == null)
             {
-                LogHelper.Log(LogLevel.Error, "Failed to construct new value form JSON.", 0xF00);
+                Global.Logger.Log(0xFF, "Failed to construct new value form JSON.", logLevel: LogLevel.Error);
                 return false;
             }
 

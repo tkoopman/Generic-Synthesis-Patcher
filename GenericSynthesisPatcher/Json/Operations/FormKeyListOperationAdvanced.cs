@@ -1,76 +1,54 @@
 using System.Text.RegularExpressions;
 
-using GenericSynthesisPatcher.Helpers;
-
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 
-using Newtonsoft.Json;
-
 namespace GenericSynthesisPatcher.Json.Operations
 {
-    public class FormKeyListOperationAdvanced : ListOperationBase<FormKey>
+    public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperation<TMajor> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
-        public override ListLogic Operation { get; protected set; }
-
         public Regex? Regex { get; protected set; }
-        public override FormKey Value { get; protected set; }
 
-        public FormKeyListOperationAdvanced ( string value )
+        public FormKeyListOperationAdvanced (string value) : base(value)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
-
-            if (v.StartsWith('/') && v.EndsWith('/'))
-            {
-                Regex = new Regex(v.Trim('/'), RegexOptions.IgnoreCase);
-                return;
-            }
-
-            Value = FormKey.TryFactory(Mod.FixFormKey(v), out var formKey) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey");
         }
 
-        protected FormKeyListOperationAdvanced ()
-        { }
-    }
+        private FormKeyListOperationAdvanced (ListLogic operation, FormKey value, Regex? regex = null) : base(operation, value) => Regex = regex;
 
-    public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperationAdvanced where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
-    {
-        private IFormLinkGetter<TMajor>? formLinkGetter;
-        private bool linked = false;
-        public override ListLogic Operation { get; protected set; }
+        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(Inverse(Operation), Value, Regex);
 
-        public override FormKey Value { get; protected set; }
+        // Not just creating link, but confirming record exists
+        public override IFormLinkGetter<TMajor>? ToLinkGetter () => Regex == null ? base.ToLinkGetter() : throw new InvalidOperationException("Unable to link to RegEx values.");
 
-        public FormKeyListOperationAdvanced ( string value ) : base()
+        public override bool ValueEquals (FormKey other)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
+            if (Regex == null)
+                return Value.Equals(other);
 
-            if (v.StartsWith('/') && v.EndsWith('/'))
-            {
-                Regex = new Regex(v.Trim('/'), RegexOptions.IgnoreCase);
-                return;
-            }
+            if (!other.ToLinkGetter<TMajor>().TryResolve(Global.State.LinkCache, out var link) || link.EditorID == null)
+                return false;
 
-            Value = Mod.TryFindFormKey<TMajor>(v, out var formKey, out formLinkGetter) ? formKey
-                  : throw new JsonSerializationException($"Unable to parse \"{v}\" into valid FormKey or EditorID");
+            bool result = Regex.IsMatch(link.EditorID);
+
+            if ((Global.Settings.Value.Logging.NoisyLogs.RegexMatchFailed && !result) || (Global.Settings.Value.Logging.NoisyLogs.RegexMatchSuccessful && result))
+                Global.TraceLogger?.WriteLine($"Regex: {Regex} Value: {link.EditorID} IsMatch: {result}");
+
+            return result;
         }
 
-        public IFormLinkGetter<TMajor>? ToLinkGetter ()
+        protected override FormKey ConvertValue (string? value)
         {
-            if (formLinkGetter == null && !linked)
-            {
-                if (!Global.State.LinkCache.TryResolve<TMajor>(Value, out var link))
-                    LogHelper.Log(LogLevel.Warning, $"Unable to find {Value} to link to.", 0xF12);
+            if (value == null)
+                return FormKey.Null;
 
-                formLinkGetter = link?.ToLinkGetter();
-                linked = true;
+            if (value.StartsWith('/') && value.EndsWith('/'))
+            {
+                Regex = new Regex(value.Trim('/'), RegexOptions.IgnoreCase);
+                return FormKey.Null;
             }
 
-            return formLinkGetter;
+            return base.ConvertValue(value);
         }
     }
 }

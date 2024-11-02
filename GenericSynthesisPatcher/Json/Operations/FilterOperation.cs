@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Json.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
-    public class FilterOperation ( string value ) : FilterOperation<string>(value);
+    public class FilterOperation (string value) : FilterOperation<string>(value);
 
     [JsonConverter(typeof(OperationsConverter))]
     public class FilterOperation<T> : OperationBase<FilterLogic> where T : IConvertible
@@ -20,19 +20,36 @@ namespace GenericSynthesisPatcher.Json.Operations
             { '^', FilterLogic.XOR },
             { '|', FilterLogic.OR } });
 
-        public FilterOperation ( string value )
+        public FilterOperation (string value)
         {
             (Operation, string? v) = Split(value, ValidPrefixes);
 
             Value = (T)((IConvertible)v).ToType(typeof(T), null);
         }
 
-        public override bool Equals ( object? obj )
-            => obj is FilterOperation<T> other
-            && Operation == other.Operation
-            && Value.Equals(other.Value);
+        public static bool operator != (FilterOperation<T> left, FilterOperation<T> right) => !(left == right);
 
-        public override int GetHashCode () => HashCode.Combine(Operation, Value);
+        public static bool operator == (FilterOperation<T> left, FilterOperation<T> right) => left.Equals(right);
+
+        public override bool Equals (object? obj)
+                    => obj is FilterOperation<T> other
+                    && Operation == other.Operation
+                    && ((Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase))
+                    || Value.Equals(other.Value));
+
+        public override int GetHashCode ()
+        {
+            var hash = new HashCode ();
+            hash.Add(Operation);
+            if (Value is string v)
+                hash.Add(v, StringComparer.OrdinalIgnoreCase);
+            else
+                hash.Add(Value);
+
+            return hash.ToHashCode();
+        }
+
+        public override FilterOperation<T> Inverse () => throw new NotImplementedException();
 
         public override string? ToString ()
         {
