@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Json.Operations
 {
     public abstract class OperationBase<TPrefix, TSuffix> : OperationBase<TPrefix>
@@ -41,6 +43,8 @@ namespace GenericSynthesisPatcher.Json.Operations
             return Split(input, prefixes);
         }
 
-        protected static (TPrefix, string) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes) => prefixes.TryGetValue(input.First(), out var prefix) ? (prefix, input[1..]) : (default, input);
+        protected static (TPrefix, string) Split (string input, IReadOnlyDictionary<char, TPrefix> prefixes)
+            => input.IsNullOrEmpty() ? (default, input)
+             : prefixes.TryGetValue(input.First(), out var prefix) ? (prefix, input[1..]) : (default, input);
     }
 }
