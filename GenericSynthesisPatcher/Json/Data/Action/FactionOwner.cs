@@ -15,6 +15,20 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "RequiredRank")]
         public int RequiredRank { get; set; }
 
+        public static bool Equals (FactionOwner? l, FactionOwner? r)
+        {
+            if (ReferenceEquals(l, r))
+                return true;
+
+            if (l == null && r == null)
+                return true;
+
+            if (l == null || r == null)
+                return false;
+
+            return l.RequiredRank == r.RequiredRank && FormKeyListOperationAdvanced<IFactionGetter>.Equals(l.Faction, r.Faction);
+        }
+
         public override OwnerTarget ToActionData ()
         {
             if (Faction == null || Faction.Value == FormKey.Null)

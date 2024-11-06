@@ -389,6 +389,8 @@ namespace GenericSynthesisPatcher
                         actionClass = nameof(LeveledNpcAction);
                     else if (subType == typeof(ILeveledSpellEntryGetter))
                         actionClass = nameof(LeveledSpellAction);
+                    else if (subType == typeof(IRankPlacementGetter))
+                        actionClass = nameof(RankPlacementAction);
                 }
             }
 

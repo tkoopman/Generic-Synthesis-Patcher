@@ -9,6 +9,22 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     [JsonConverter(typeof(OwnerBaseConverter))]
     public abstract class OwnerBase
     {
+        public static bool Equals (OwnerBase? l, OwnerBase? r)
+        {
+            if (ReferenceEquals(l, r))
+                return true;
+            if (l == null || r == null)
+                return false;
+
+            if (l is FactionOwner lf && r is FactionOwner rf)
+                return FactionOwner.Equals(lf, rf);
+
+            if (l is NpcOwner ln && r is NpcOwner rn)
+                return NpcOwner.Equals(ln, rn);
+
+            return false;
+        }
+
         public abstract OwnerTarget ToActionData ();
     }
 }

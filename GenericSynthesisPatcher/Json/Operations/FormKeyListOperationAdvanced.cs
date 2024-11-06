@@ -16,6 +16,20 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         private FormKeyListOperationAdvanced (ListLogic operation, FormKey value, Regex? regex = null) : base(operation, value) => Regex = regex;
 
+        public static bool Equals (FormKeyListOperationAdvanced<TMajor>? l, FormKeyListOperationAdvanced<TMajor>? r)
+        {
+            if (ReferenceEquals(l, r))
+                return true;
+
+            if (l == null && r == null)
+                return true;
+
+            if (l == null || r == null)
+                return false;
+
+            return l.Regex == r.Regex && l.Value == r.Value && l.Operation == r.Operation;
+        }
+
         public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(Inverse(Operation), Value, Regex);
 
         // Not just creating link, but confirming record exists

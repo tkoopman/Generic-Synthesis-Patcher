@@ -15,6 +15,17 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "NPC")]
         public FormKeyListOperationAdvanced<INpcGetter>? NPC { get; set; }
 
+        public static bool Equals (NpcOwner? l, NpcOwner? r)
+        {
+            if (ReferenceEquals(l, r))
+                return true;
+
+            if (l == null || r == null)
+                return false;
+
+            return FormKeyListOperationAdvanced<IGlobalGetter>.Equals(l.Global, r.Global) && FormKeyListOperationAdvanced<INpcGetter>.Equals(r.NPC, l.NPC);
+        }
+
         public override OwnerTarget ToActionData ()
         {
             if ((NPC == null || NPC.Value == FormKey.Null) && (Global == null || Global.Value == FormKey.Null))

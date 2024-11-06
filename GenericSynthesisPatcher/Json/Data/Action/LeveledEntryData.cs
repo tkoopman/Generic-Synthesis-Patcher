@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
-    public abstract class LeveledEntryData<TMajor, TData> (short count, short level) : ActionDataBase<TMajor, TData>, IEquatable<ContainerItemsData>
+    public abstract class LeveledEntryData<TMajor, TData> (short count, short level) : ActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
@@ -24,17 +24,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "Owner")]
         public OwnerBase? Owner { get; set; }
 
-        public static bool Equals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-            => left is IContainerEntryGetter l
-            && right is IContainerEntryGetter r
-            && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
-            && l.Item.Count == r.Item.Count;
-
-        public bool Equals (ContainerItemsData? other) => Equals(this, other);
-
-        public override bool Equals (object? obj) => Equals(obj as ContainerItemsData);
-
-        public override bool Equals (IFormLinkContainerGetter? other) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.Value) && otherContainer.Item.Count == Count;
+        public abstract override bool Equals (IFormLinkContainerGetter? other);
 
         public override int GetHashCode () => FormKey.GetHashCode() ^ Count;
 

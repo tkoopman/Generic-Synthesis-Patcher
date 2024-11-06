@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 
         public override bool Equals (IFormLinkContainerGetter? other)
             => other is IEffectGetter effect
-            && effect.BaseEffect.FormKey.Equals(FormKey.Value)
+            && FormKey.ValueEquals(effect.BaseEffect.FormKey)
             && effect.Data != null
             && effect.Data.Area == Area
             && effect.Data.Duration == Duration

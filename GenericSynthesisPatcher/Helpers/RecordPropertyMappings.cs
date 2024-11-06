@@ -467,6 +467,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRaceGetter)                  , "FacegenFaceClamp"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "FacegenMainClamp"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ICellGetter)                  , "FactionRank"                               , ConvertibleAction<int>.Instance);
+            Add(typeof(INpcGetter)                   , "Factions"                                  , RankPlacementAction.Instance);
             Add(typeof(IMusicTypeGetter)             , "FadeDuration"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IProjectileGetter)            , "FadeDuration"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IMusicTrackGetter)            , "FadeOut"                                   , ConvertibleAction<float>.Instance);

@@ -24,11 +24,14 @@ namespace GenericSynthesisPatcher.Json.Data.Action
             && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
             && l.Item.Count == r.Item.Count;
 
-        public bool Equals (ContainerItemsData? other) => Equals(this, other);
+        public bool Equals (ContainerItemsData? other) => FormKey.Equals(other?.FormKey) && Count.Equals(other?.Count);
 
         public override bool Equals (object? obj) => Equals(obj as ContainerItemsData);
 
-        public override bool Equals (IFormLinkContainerGetter? other) => other is IContainerEntryGetter otherContainer && otherContainer.Item.Item.FormKey.Equals(FormKey.Value) && otherContainer.Item.Count == Count;
+        public override bool Equals (IFormLinkContainerGetter? other)
+            => other is IContainerEntryGetter otherContainer
+            && FormKey.ValueEquals(otherContainer.Item.Item.FormKey)
+            && otherContainer.Item.Count == Count;
 
         public override int GetHashCode () => FormKey.GetHashCode() ^ Count;
 

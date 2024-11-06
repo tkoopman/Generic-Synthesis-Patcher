@@ -1,5 +1,6 @@
 using GenericSynthesisPatcher.Json.Operations;
 
+using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
@@ -10,6 +11,16 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     {
         [JsonProperty(PropertyName = "Item", Required = Required.Always)]
         public override FormKeyListOperation<IItemGetter> FormKey { get; } = formKey ?? new(null);
+
+        public override bool Equals (IFormLinkContainerGetter? other)
+            => other is ILeveledItemEntryGetter entry
+            && entry.Data != null
+            && FormKey.ValueEquals(entry.Data.Reference.FormKey)
+            && Count == entry.Data?.Count
+            && Level == entry.Data?.Level
+            && ItemCondition == entry.ExtraData?.ItemCondition
+            && ((Owner == null && entry.ExtraData?.Owner == null)
+             || (Owner != null && Owner.ToActionData().Equals(entry.ExtraData?.Owner)));
 
         public override LeveledItemEntry ToActionData ()
         {
