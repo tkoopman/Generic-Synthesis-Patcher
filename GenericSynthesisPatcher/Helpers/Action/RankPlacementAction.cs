@@ -10,7 +10,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 {
     public class RankPlacementAction : FormLinksWithDataAction<RankPlacementData, IFactionGetter, RankPlacement>
     {
-        public static readonly ContainerItemsAction Instance = new();
+        public static readonly RankPlacementAction Instance = new();
         private const int ClassLogCode = 0x16;
 
         public override RankPlacement? CreateFrom (IFormLinkContainerGetter source)

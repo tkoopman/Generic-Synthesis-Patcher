@@ -209,6 +209,11 @@ namespace GenericSynthesisPatcher
                         desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
                         exam = $"\"{rpm.PropertyName}\": [{{ \"Spell\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
                     }
+                    else if (actionType == typeof(RankPlacementAction))
+                    {
+                        desc = "JSON objects containing item Form Key/Editor ID and Rank";
+                        exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
+                    }
 
                     if (desc == null)
                         throw new Exception("Fix Missing Doco");
