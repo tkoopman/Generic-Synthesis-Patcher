@@ -8,13 +8,13 @@ namespace GenericSynthesisPatcher.Json.Operations
 {
     public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperation<TMajor> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
-        public Regex? Regex { get; protected set; }
-
         public FormKeyListOperationAdvanced (string value) : base(value)
         {
         }
 
         private FormKeyListOperationAdvanced (ListLogic operation, FormKey value, Regex? regex = null) : base(operation, value) => Regex = regex;
+
+        public Regex? Regex { get; protected set; }
 
         public static bool Equals (FormKeyListOperationAdvanced<TMajor>? l, FormKeyListOperationAdvanced<TMajor>? r)
         {

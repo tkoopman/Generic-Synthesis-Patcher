@@ -38,7 +38,7 @@ namespace GenericSynthesisPatcher
 
         #endregion Log Writers
 
-        public static void ForceTrace ( int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0 )
+        public static void ForceTrace (int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0)
         {
             if (TraceLogger == null)
             {
@@ -51,7 +51,7 @@ namespace GenericSynthesisPatcher
             }
         }
 
-        public static void Processing ( int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0 )
+        public static void Processing (int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             TraceLogger = Settings.Value.Logging.LogLevel == LogLevel.Trace
                                   && ((rule != null && rule.Debug)
@@ -73,7 +73,7 @@ namespace GenericSynthesisPatcher
             Logger.Line = line;
         }
 
-        public static void UpdateLoggers ( int classLogCode, [CallerLineNumber] int line = 0 )
+        public static void UpdateLoggers (int classLogCode, [CallerLineNumber] int line = 0)
         {
             if (TraceLogger != null)
             {

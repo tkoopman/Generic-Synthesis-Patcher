@@ -4,9 +4,9 @@ namespace GenericSynthesisPatcher.Json.Converters
 {
     public class FlagConverter : JsonConverter
     {
-        public override bool CanConvert ( Type objectType ) => objectType.IsEnum;
+        public override bool CanConvert (Type objectType) => objectType.IsEnum;
 
-        public override object? ReadJson ( JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer )
+        public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
                 return null;
@@ -25,6 +25,6 @@ namespace GenericSynthesisPatcher.Json.Converters
             throw new JsonReaderException("Invalid type found for Flag");
         }
 
-        public override void WriteJson ( JsonWriter writer, object? value, JsonSerializer serializer ) => throw new NotImplementedException();
+        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
     }
 }

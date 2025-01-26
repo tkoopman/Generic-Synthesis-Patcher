@@ -20,6 +20,10 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         private readonly List<RecordNode<TItem>> overwrites = [];
         private readonly List<RecordNode<TItem>> overwrittenBy = [];
 
+        public RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : this(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
+        {
+        }
+
         public ModKey ModKey { get; } = modKey;
 
         public IReadOnlyList<IRecordNode> Overwrites => overwrites.AsReadOnly();
@@ -29,10 +33,6 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Func<TItem, string> DebugPredicate { get; } = debugPredicate;
 
         protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; } = modKeys;
-
-        public RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : this(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
-        {
-        }
 
         public bool TryFind (ModKey modKey, [NotNullWhen(true)] out IRecordNode? result)
         {

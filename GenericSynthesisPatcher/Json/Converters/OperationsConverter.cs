@@ -10,9 +10,9 @@ namespace GenericSynthesisPatcher.Json.Converters
     {
         public override bool CanWrite => false;
 
-        public override bool CanConvert ( Type objectType ) => objectType.GetType().IsAssignableTo(typeof(OperationBase<,>));
+        public override bool CanConvert (Type objectType) => objectType.GetType().IsAssignableTo(typeof(OperationBase<,>));
 
-        public override object? ReadJson ( JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer )
+        public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
 
@@ -26,6 +26,6 @@ namespace GenericSynthesisPatcher.Json.Converters
             return constructor.Invoke([key]);
         }
 
-        public override void WriteJson ( JsonWriter writer, object? value, JsonSerializer serializer ) => throw new NotImplementedException();
+        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
     }
 }

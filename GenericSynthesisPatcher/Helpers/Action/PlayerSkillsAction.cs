@@ -16,16 +16,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
         protected PlayerSkillsAction ()
         {
         }
-        public static bool SkillsEqual (IReadOnlyDictionary<Skill, byte> l, IReadOnlyDictionary<Skill, byte> r)
-        {
-            foreach (Skill skill in Enum.GetValues(typeof(Skill)))
-            {
-                if (l[skill] != r[skill])
-                    return false;
-            }
-
-            return true;
-        }
 
         public static int ForwardSkills (IReadOnlyDictionary<Skill, byte> from, IDictionary<Skill, byte> to)
         {
@@ -64,6 +54,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
 
             return count;
+        }
+
+        public static bool SkillsEqual (IReadOnlyDictionary<Skill, byte> l, IReadOnlyDictionary<Skill, byte> r)
+        {
+            foreach (Skill skill in Enum.GetValues(typeof(Skill)))
+            {
+                if (l[skill] != r[skill])
+                    return false;
+            }
+
+            return true;
         }
 
         public virtual bool CanFill () => true;

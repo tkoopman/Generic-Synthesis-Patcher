@@ -9,10 +9,6 @@ namespace GenericSynthesisPatcher.Helpers
     public readonly struct RecordTypeMapping : IEquatable<RecordTypeMapping>, IEquatable<RecordType>, IEquatable<ILoquiRegistration>, IEquatable<string>
     {
         public readonly WinningContextOverridesDelegate WinningContextOverrides;
-        public string FullName => StaticRegistration.Name;
-        public string Name => Type.CheckedType;
-        public ILoquiRegistration StaticRegistration { get; }
-        public RecordType Type { get; }
 
         public RecordTypeMapping (ILoquiRegistration staticRegistration, WinningContextOverridesDelegate winningContextOverrides)
         {
@@ -24,6 +20,11 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         public delegate IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverridesDelegate ();
+
+        public string FullName => StaticRegistration.Name;
+        public string Name => Type.CheckedType;
+        public ILoquiRegistration StaticRegistration { get; }
+        public RecordType Type { get; }
 
         public static bool operator != (RecordTypeMapping r1, RecordTypeMapping r2) => !r1.Equals(r2);
 

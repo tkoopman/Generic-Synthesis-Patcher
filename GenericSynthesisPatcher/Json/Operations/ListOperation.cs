@@ -9,8 +9,6 @@ namespace GenericSynthesisPatcher.Json.Operations
     [JsonConverter(typeof(OperationsConverter))]
     public sealed class ListOperation : ListOperation<string>
     {
-        public Regex? Regex { get; private set; }
-
         public ListOperation (string? value) : base(value)
         {
         }
@@ -18,6 +16,8 @@ namespace GenericSynthesisPatcher.Json.Operations
         public ListOperation (ListLogic operation, string? value) : base(operation, value)
         {
         }
+
+        public Regex? Regex { get; private set; }
 
         public override ListOperation Inverse () => new(Operation, Value);
 

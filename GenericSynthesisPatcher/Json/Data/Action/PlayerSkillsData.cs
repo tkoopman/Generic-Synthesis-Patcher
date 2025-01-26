@@ -1,14 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using GenericSynthesisPatcher.Json.Operations;
-
-using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
@@ -66,7 +55,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
                 (SkillValues == null || SkillValues.Equals(other.SkillValues));
         }
 
-        public int Update(IPlayerSkills update)
+        public int Update (IPlayerSkills update)
         {
             int count = 0;
 
