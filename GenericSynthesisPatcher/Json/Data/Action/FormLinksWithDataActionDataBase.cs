@@ -4,7 +4,7 @@ using Mutagen.Bethesda.Plugins.Records;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
-    public abstract class ActionDataBase<TMajor, TData> : IEquatable<IFormLinkContainerGetter>
+    public abstract class FormLinksWithDataActionDataBase<TMajor, TData> : IEquatable<IFormLinkContainerGetter>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
-    public class RankPlacementData (FormKeyListOperation<IFactionGetter> formKey, sbyte rank) : ActionDataBase<IFactionGetter, RankPlacement>, IEquatable<RankPlacementData>
+    public class RankPlacementData (FormKeyListOperation<IFactionGetter> formKey, sbyte rank) : FormLinksWithDataActionDataBase<IFactionGetter, RankPlacement>, IEquatable<RankPlacementData>
     {
         [JsonProperty(PropertyName = "Rank", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(1)]

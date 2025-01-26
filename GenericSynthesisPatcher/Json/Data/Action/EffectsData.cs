@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
-    public class EffectsData (FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude) : ActionDataBase<IMagicEffectGetter, Effect>, IEquatable<EffectsData>
+    public class EffectsData (FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude) : FormLinksWithDataActionDataBase<IMagicEffectGetter, Effect>, IEquatable<EffectsData>
     {
         [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]

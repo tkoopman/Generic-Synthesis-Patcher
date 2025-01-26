@@ -14,13 +14,6 @@ namespace GenericSynthesisPatcher.Helpers
     {
         private readonly StringBuilder _log = new();
 
-        public int ClassLogCode { get; set; }
-        public IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? Context { get; set; }
-        public override Encoding Encoding => Encoding.Default;
-        public int Line { get; set; }
-        public LogLevel LogLevel { get; set; }
-        public GSPBase? Rule { get; set; }
-
         public LogWriter (LogLevel logLevel, int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             NewLine = "\n";
@@ -30,6 +23,13 @@ namespace GenericSynthesisPatcher.Helpers
             Rule = rule;
             Line = line;
         }
+
+        public int ClassLogCode { get; set; }
+        public IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? Context { get; set; }
+        public override Encoding Encoding => Encoding.Default;
+        public int Line { get; set; }
+        public LogLevel LogLevel { get; set; }
+        public GSPBase? Rule { get; set; }
 
         public override void Flush ()
         {

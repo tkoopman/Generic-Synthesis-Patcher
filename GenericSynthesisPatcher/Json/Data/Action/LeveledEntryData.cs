@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
-    public abstract class LeveledEntryData<TMajor, TData> (short count, short level) : ActionDataBase<TMajor, TData>
+    public abstract class LeveledEntryData<TMajor, TData> (short count, short level) : FormLinksWithDataActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {

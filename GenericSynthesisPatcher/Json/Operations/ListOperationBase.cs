@@ -18,18 +18,6 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         private TValue? value;
 
-        public ListLogic Operation { get; private set; }
-
-        public TValue? Value
-        {
-            get => value;
-            protected set
-            {
-                this.@value = value;
-                ValueUpdated();
-            }
-        }
-
         public ListOperationBase (string? value)
         {
             if (value == null)
@@ -48,6 +36,18 @@ namespace GenericSynthesisPatcher.Json.Operations
         {
             Operation = operation;
             Value = value;
+        }
+
+        public ListLogic Operation { get; private set; }
+
+        public TValue? Value
+        {
+            get => value;
+            protected set
+            {
+                this.@value = value;
+                ValueUpdated();
+            }
         }
 
         public override bool Equals (object? obj) => obj switch

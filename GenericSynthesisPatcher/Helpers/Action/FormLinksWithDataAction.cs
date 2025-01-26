@@ -14,7 +14,7 @@ using Noggog;
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     public abstract class FormLinksWithDataAction<TActionData, TMajor, TData> : IRecordAction
-        where TActionData : ActionDataBase<TMajor, TData>
+        where TActionData : FormLinksWithDataActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
