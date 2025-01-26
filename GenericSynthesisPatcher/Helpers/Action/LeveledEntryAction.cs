@@ -10,7 +10,7 @@ using Mutagen.Bethesda.Skyrim;
 namespace GenericSynthesisPatcher.Helpers.Action
 {
     public abstract class LeveledEntryAction<TActionData, TMajor, TData> : FormLinksWithDataAction<TActionData, TMajor, TData>
-        where TActionData : ActionDataBase<TMajor, TData>
+        where TActionData : FormLinksWithDataActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {

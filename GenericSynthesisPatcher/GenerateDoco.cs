@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.Intrinsics.Arm;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
@@ -214,6 +215,11 @@ namespace GenericSynthesisPatcher
                         desc = "JSON objects containing item Form Key/Editor ID and Rank";
                         exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
                     }
+                    else if (actionType == typeof(PlayerSkillsAction))
+                    {
+                        desc = "JSON object containing the values under PlayerSkills you want to set";
+                        exam = $"See ../Examples/NPC Player Skills.json";
+                    }
 
                     if (desc == null)
                         throw new Exception("Fix Missing Doco");
@@ -285,8 +291,7 @@ namespace GenericSynthesisPatcher
             var groupRPMs = buildRPMs.GroupBy(g => (g.Item2, g.Item3),
                                               g => (g.Item1, g.Item4), (k, data) => new { PropertyName = k.Item1, RPM = k.Item2, Types = data.Select(d => d.Item1), PropertyTypes = data.Select(d => d.Item2).Distinct()});
 
-            var implemented = groupRPMs.Where(g => g.RPM != null).ToList();
-            implemented.Sort((l, r) => string.CompareOrdinal(l.PropertyName, r.PropertyName));
+            var implemented = groupRPMs.Where(g => g.RPM != null);
 
             //var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
             var notImplemented = buildRPMs.Where(r => r.Item3 == null).GroupBy(g => g.Item4).Select(g => new { PropertyType = g.Key, RecordTypes = g.Select(r => $"{r.Item1.GetClassName()}.{r.Item2}") }).ToList();
@@ -313,14 +318,31 @@ namespace GenericSynthesisPatcher
             {
                 if (rpm.Types.Count() < 3)
                 {
-                    foreach (var type in rpm.Types)
+                    var types = rpm.Types.ToList();
+                    types.Sort(static (l, r) => l.Name.CompareTo(r.Name));
+                    foreach (var type in types)
                         lines.Add([$"Add(typeof({type.Name})", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
                 }
                 else
                 {
-                    lines.Add([$"Add(null", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
+                    lines.Add(["Add(null", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
                 }
             }
+
+            lines.Sort(static (l, r) =>
+            {
+                int comp = string.Compare(l[1], r[1], true);
+                if (comp != 0)
+                    return comp;
+
+                if (l[0] == "Add(null")
+                    return 1;
+
+                if (r[0] == "Add(null")
+                    return -1;
+
+                return string.Compare(l[0], r[0], true);
+            });
 
             sw = new();
 
@@ -376,6 +398,8 @@ namespace GenericSynthesisPatcher
                 actionClass = typeof(BasicAction<Color>).GetClassName();
             else if (type == typeof(IObjectBoundsGetter))
                 actionClass = typeof(DeepCopyAction<IObjectBoundsGetter>).GetClassName();
+            else if (type == typeof(IPlayerSkillsGetter))
+                actionClass = typeof(PlayerSkillsAction).GetClassName();
             else if (subType != null)
             {
                 if (mainType.IsAssignableTo(typeof(IFormLinkGetter<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullableGetter<>)))
