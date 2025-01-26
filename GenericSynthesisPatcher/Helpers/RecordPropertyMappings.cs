@@ -203,6 +203,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(INpcGetter)                   , "ATKR"       , nameof(INpcGetter.AttackRace));
             Add(typeof(INpcGetter)                   , "CNAM"       , nameof(INpcGetter.Class));
             Add(typeof(INpcGetter)                   , "CRIF"       , nameof(INpcGetter.CrimeFaction));
+            Add(typeof(INpcGetter)                   , "DNAM"       , nameof(INpcGetter.PlayerSkills));
             Add(typeof(INpcGetter)                   , "DOFT"       , nameof(INpcGetter.DefaultOutfit));
             Add(typeof(INpcGetter)                   , "DPLT"       , nameof(INpcGetter.DefaultPackageList));
             Add(typeof(INpcGetter)                   , "ECOR"       , nameof(INpcGetter.CombatOverridePackageList));
