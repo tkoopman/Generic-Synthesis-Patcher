@@ -75,10 +75,14 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out PropertyInfo? property)
         {
             value = default;
-
-            if (!TryGetPropertyFromHierarchy(fromRecord, propertyName, out object? _value, out property))
+            property = fromRecord.GetType().GetProperty(propertyName);
+            if (property == null)
+            {
+                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;
+            }
 
+            object? _value = property.GetValue(fromRecord);
             if (_value == null)
                 return true;
 
@@ -112,7 +116,6 @@ namespace GenericSynthesisPatcher.Helpers
             if (value != null)
                 return true;
 
-            // TODO - Update following code to support Hierarchy
             object? _value = System.Activator.CreateInstance(property.PropertyType);
 
             if (_value == null || _value is not T outValue)
@@ -149,67 +152,5 @@ namespace GenericSynthesisPatcher.Helpers
 
         [GeneratedRegex(@"^[0-9A-Fa-f]{1,6}")]
         private static partial Regex RegexFormKey ();
-
-        /// <summary>
-        /// Attempt to get a property from input object. Supports property name hierarchy.
-        /// </summary>
-        /// <param name="from">         Object to get property value from </param>
-        /// <param name="propertyName"> Name of property, using period (.) to seperate </param>
-        /// <param name="value">
-        /// Property value. Can be null, even if true returned, if property name was valid but
-        /// returned null. When using property hierarchy, this will also be the case if any parent
-        /// in the hierarchy return null.
-        /// </param>
-        /// <param name="property">     Property Info of resulting value </param>
-        /// <returns> True if property name existed, even if result of valid property was null </returns>
-        private static bool TryGetPropertyFromHierarchy (object from, string propertyName, out object? value, [NotNullWhen(true)] out PropertyInfo? property) => TryGetPropertyFromHierarchy(from, from.GetType(), propertyName, out value, out property);
-
-        /// <summary>
-        /// Attempt to get a property from input object. Supports property name hierarchy.
-        /// Include type of from for property name validation when from is null.
-        /// </summary>
-        /// <param name="from">         Object to get property value from </param>
-        /// <param name="fromType">     Type of from</param>
-        /// <param name="propertyName"> Name of property, using period (.) to seperate </param>
-        /// <param name="value">
-        /// Property value. Can be null, even if true returned, if property name was valid but
-        /// returned null value. When using property hierarchy, this will also be the case if any parent
-        /// in the hierarchy return null, however children still checked to make sure valid property name.
-        /// </param>
-        /// <param name="property">     Property Info of resulting value </param>
-        /// <returns> True if property name existed, even if result of valid property was null </returns>
-        private static bool TryGetPropertyFromHierarchy (object? from, Type fromType, string propertyName, out object? value, [NotNullWhen(true)] out PropertyInfo? property)
-        {
-            value = default;
-            property = null;
-            string[] propertyNames = propertyName.Split('.');
-
-            for (int i = 0; i < propertyNames.Length; i++)
-            {
-                string name = propertyNames[i];
-                property = fromType.GetProperty(name);
-                if (property == null)
-                {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
-                    return false;
-                }
-
-                value = from is not null ? property.GetValue(from) : null;
-                if (i < propertyNames.Length - 1)
-                {
-                    value = default;
-                    fromType = property.PropertyType;
-                }
-            }
-
-            // Check property is not null one last time just for off chance propertyNames had no entries
-            if (property == null)
-            {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
-                return false;
-            }
-
-            return true;
-        }
     }
 }
