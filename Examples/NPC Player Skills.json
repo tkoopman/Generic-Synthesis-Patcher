@@ -1,12 +1,20 @@
 /*
-  Set all possible values under PlayerSkills for the player NPC.
-  You can exclude and values under the PlayerSkills that you don't want to change.
+  First example of forwarding changes from listed mods.
+  Then example of setting all possible values under PlayerSkills for the player NPC.
+  You can exclude any values under the PlayerSkills that you don't want to change.
   Only the values you do include will be set by Fill command. 
   This includes only including the Skills under SkillOffsets & SkillValues you want to set.
 */
 
 [
-
+  {
+    "types": [ "NPC" ],
+    "forwardIndexedByField": true,
+    "OnlyIfDefault": true,
+    "forward": {
+      "PlayerSkills": [ "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim creation club content patch.esl", "unofficial skyrim special edition patch.esp" ]
+    }
+  },
   {
     "types": [ "NPC" ],
     "FormID": "7:Skyrim.esm",
