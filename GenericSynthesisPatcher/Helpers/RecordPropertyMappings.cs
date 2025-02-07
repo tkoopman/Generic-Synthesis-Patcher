@@ -175,6 +175,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IFactionGetter)               , "VENC"       , nameof(IFactionGetter.MerchantContainer));
             Add(typeof(IFactionGetter)               , "VEND"       , nameof(IFactionGetter.VendorBuySellList));
             Add(typeof(IFactionGetter)               , "WAIT"       , nameof(IFactionGetter.FollowerWaitMarker));
+            Add(typeof(IFactionGetter)               , "XNAM"       , nameof(IFactionGetter.Relations));
             Add(typeof(IFloraGetter)                 , "PFIG"       , nameof(IFloraGetter.Ingredient));
             Add(typeof(IFloraGetter)                 , "RNAM"       , nameof(IFloraGetter.ActivateTextOverride));
             Add(typeof(IFloraGetter)                 , "SNAM"       , nameof(IFloraGetter.HarvestSound));
@@ -787,6 +788,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICellGetter)                  , "Regions"                                   , FormLinksAction<IRegionGetter>.Instance);
             Add(typeof(IIdleAnimationGetter)         , "RelatedIdles"                              , FormLinksAction<IIdleRelationGetter>.Instance);
             Add(typeof(ICameraPathGetter)            , "RelatedPaths"                              , FormLinksAction<ICameraPathGetter>.Instance);
+            Add(typeof(IFactionGetter)               , "Relations"                                 , RelationsAction.Instance);
             Add(typeof(IProjectileGetter)            , "RelaunchInterval"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IIdleAnimationGetter)         , "ReplayDelay"                               , ConvertibleAction<ushort>.Instance);
             Add(typeof(IMagicEffectGetter)           , "ResistValue"                               , EnumsAction.Instance);
@@ -949,7 +951,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IObjectEffectGetter)          , "WornRestrictions"                          , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(ICameraPathGetter)            , "Zoom"                                      , FlagsAction.Instance);
             Add(typeof(ICameraPathGetter)            , "ZoomMustHaveCameraShots"                   , ConvertibleAction<bool>.Instance);
-           #pragma warning restore format
+            #pragma warning restore format
         }
 
         private static bool TryFindAlias (Type? type, string key, out PropertyAliasMapping pam)
