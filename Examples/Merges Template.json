@@ -88,5 +88,17 @@
       // For everything else just do basic merge
       { "Merge": { "Entries": [] } }
     ]
+  },
+  {
+    "types": "Faction",
+    "SingleMatch": true,
+    "Rules": [
+      // Add sections here with no actions to exclude from merge
+      // { "FormID": [] },
+      // { "Masters": [] },
+
+      // For everything else just do basic merge
+      { "Merge": { "Relations": [] } }
+    ]
   }
 ]

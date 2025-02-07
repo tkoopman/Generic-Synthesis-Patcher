@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
 using System.Drawing;
 using System.Reflection;
-using System.Runtime.Intrinsics.Arm;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
@@ -207,13 +206,18 @@ namespace GenericSynthesisPatcher
                     }
                     else if (actionType == typeof(LeveledSpellAction))
                     {
-                        desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
+                        desc = "Array of JSON objects containing Spell Form Key/Editor ID and level/count data";
                         exam = $"\"{rpm.PropertyName}\": [{{ \"Spell\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
                     }
                     else if (actionType == typeof(RankPlacementAction))
                     {
-                        desc = "JSON objects containing item Form Key/Editor ID and Rank";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
+                        desc = "JSON objects containing faction Form Key/Editor ID and Rank";
+                        exam = $"\"{rpm.PropertyName}\": {{ \"Faction\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
+                    }
+                    else if (actionType == typeof(RelationsAction))
+                    {
+                        desc = "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)";
+                        exam = $"\"{rpm.PropertyName}\": {{ \"Target\": \"021FED:Skyrim.esm\", \"Reaction\": \"Friend\" }}";
                     }
                     else if (actionType == typeof(PlayerSkillsAction))
                     {
@@ -420,6 +424,8 @@ namespace GenericSynthesisPatcher
                         actionClass = nameof(LeveledSpellAction);
                     else if (subType == typeof(IRankPlacementGetter))
                         actionClass = nameof(RankPlacementAction);
+                    else if (subType == typeof(IRelationGetter))
+                        actionClass = nameof(RelationsAction);
                 }
             }
 

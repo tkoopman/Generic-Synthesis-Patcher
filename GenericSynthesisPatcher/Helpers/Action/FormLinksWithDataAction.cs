@@ -13,6 +13,12 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
+    /// <summary>
+    /// Abstract class used to implement actions that modify fields that contain list of FormLinks with extra data
+    /// </summary>
+    /// <typeparam name="TActionData">The JSON Data class</typeparam>
+    /// <typeparam name="TMajor">The major class that FormKey on an entry in the list points to</typeparam>
+    /// <typeparam name="TData">The class of the items contained in the list. This would include the FormKey pointing to TMajor and the extra data.</typeparam>
     public abstract class FormLinksWithDataAction<TActionData, TMajor, TData> : IRecordAction
         where TActionData : FormLinksWithDataActionDataBase<TMajor, TData>
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter

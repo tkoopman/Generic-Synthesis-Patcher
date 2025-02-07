@@ -9,6 +9,11 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
+    /// <summary>
+    /// JSON Data class used by ContainerItemsAction class
+    /// </summary>
+    /// <param name="formKey">FormKey of item</param>
+    /// <param name="count">QTY</param>
     public class ContainerItemsData (FormKeyListOperation<IItemGetter> formKey, int count) : FormLinksWithDataActionDataBase<IItemGetter, ContainerEntry>, IEquatable<ContainerItemsData>
     {
         [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
