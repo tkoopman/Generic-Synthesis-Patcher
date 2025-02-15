@@ -1,0 +1,64 @@
+/*
+  Shows how you can forward patches that maybe overridden.
+  You may not want to forward everything that is here, or you may need more.
+  I just selected a bunch of fields I saw overridden in my load order to show what can be done.
+*/
+
+[
+	{
+		"Priority": -100,
+		"PatchedBy": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+		"Rules": [
+			{
+				"types": "CELL",
+				"OnlyIfDefault": true,
+				"ForwardIndexedByField": true,
+				"Forward": {
+					"AcousticSpace": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"EncounterZone": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"LightingTemplate": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Location": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Music": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Name": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Owner": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"SkyAndWeatherFromRegion": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Water": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"WaterHeight": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]
+				}
+			},
+			{
+				"types": "Location",
+				"OnlyIfDefault": true,
+				"ForwardIndexedByField": true,
+				"Forward": {
+					"Name": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"ParentLocation": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"WorldLocationMarkerRef": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]
+				}
+			},
+			{
+				"types": "NPC",
+				"OnlyIfDefault": true,
+				"ForwardIndexedByField": true,
+				"Forward": {
+					"Class": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"CombatStyle": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"CrimeFaction": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"DeathItem": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"ObjectBounds": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"SleepingOutfit": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]
+				}
+			},
+			{
+				"types": "Worldspace",
+				"OnlyIfDefault": true,
+				"ForwardIndexedByField": true,
+				"Forward": {
+					"Climate": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"EncounterZone": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+					"Location": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]
+				}
+			}
+		]
+	}
+]
