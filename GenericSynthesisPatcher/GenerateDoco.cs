@@ -17,6 +17,10 @@ namespace GenericSynthesisPatcher
     {
         private static readonly string[] IgnoreProperty = [
             "DATADataTypeState",
+            "FormKey",
+            "IsCompressed",
+            "IsDeleted",
+            "MajorRecordFlagsRaw",
             "PersistentTimestamp",
             "PersistentUnknownGroupData",
             "StaticRegistration",
@@ -56,6 +60,8 @@ namespace GenericSynthesisPatcher
             "UnknownGroupData",
             "Unused",
             "Unused2",
+            "Version2",
+            "VersionControl",
             "VirtualMachineAdapter",
             ];
 
@@ -78,7 +84,9 @@ namespace GenericSynthesisPatcher
             {
                 // Loop all properties of setter looking for implemented properties
                 List<string[]> Properties = [];
-                foreach (var prop in rtm.StaticRegistration.GetterType.GetProperties())
+
+                var props = rtm.StaticRegistration.SetterType.GetPublicProperties().Where(p => ((p.CanRead && p.CanWrite) || p.PropertyType.GetIfGenericTypeDefinition() == typeof(ExtendedList<>)) && !IgnoreProperty.Contains(p.Name)).DistinctBy(p => p.Name);
+                foreach (var prop in props)
                 {
                     if (IgnoreProperty.Contains(prop.Name))
                         continue;
@@ -162,15 +170,14 @@ namespace GenericSynthesisPatcher
                         desc = "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.";
                         exam = $"\"{rpm.PropertyName}\": [40,50,60]";
                     }
-                    else if (actionType == typeof(DeepCopyAction<IObjectBoundsGetter>))
+                    else if (actionType == typeof(ObjectBoundsAction))
                     {
                         desc = "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]";
                         exam = $"\"{rpm.PropertyName}\": [6,6,6,9,9,9]";
                     }
                     else if (actionType == typeof(FlagsAction))
                     {
-                        var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
-                        var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
+                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
 
                         string[] flags = Enum.GetNames(type ?? throw new Exception($"Failed to get flags - {rtm.Name} - {rpm.PropertyName}"));
                         desc = $"Flags ({string.Join(", ", flags)})";
@@ -178,8 +185,7 @@ namespace GenericSynthesisPatcher
                     }
                     else if (actionType == typeof(EnumsAction))
                     {
-                        var propertyInfo = rtm.StaticRegistration.GetterType.GetProperty(rpm.PropertyName) ?? throw new Exception("Weird");
-                        var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
+                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
                         string[] values = Enum.GetNames(type);
                         desc = $"Possible values ({string.Join(", ", values)})";
                         exam = $"\"{rpm.PropertyName}\": \"{values.First()}\"";
@@ -223,6 +229,11 @@ namespace GenericSynthesisPatcher
                     {
                         desc = "JSON object containing the values under PlayerSkills you want to set";
                         exam = $"See ../Examples/NPC Player Skills.json";
+                    }
+                    else if (actionType == typeof(MemorySliceByteAction))
+                    {
+                        desc = "Memory slice in form of array of bytes";
+                        exam = $"[0x1A,0x00,0x3F]";
                     }
 
                     if (desc == null)
@@ -394,37 +405,37 @@ namespace GenericSynthesisPatcher
                 if (n != null)
                     actionClass = $"{nameof(ConvertibleAction<byte>)}<{n}>";
             }
-            else if (type == typeof(ObjectBounds))
-                actionClass = typeof(BasicAction<ObjectBounds>).GetClassName();
             else if (type == typeof(Percent))
                 actionClass = typeof(BasicAction<Percent>).GetClassName();
             else if (type == typeof(Color))
                 actionClass = typeof(BasicAction<Color>).GetClassName();
-            else if (type == typeof(IObjectBoundsGetter))
-                actionClass = typeof(DeepCopyAction<IObjectBoundsGetter>).GetClassName();
-            else if (type == typeof(IPlayerSkillsGetter))
+            else if (type.IsAssignableTo(typeof(IObjectBoundsGetter)))
+                actionClass = typeof(ObjectBoundsAction).GetClassName();
+            else if (type.IsAssignableTo(typeof(IPlayerSkillsGetter)))
                 actionClass = typeof(PlayerSkillsAction).GetClassName();
+            else if (type == typeof(MemorySlice<byte>))
+                actionClass = typeof(MemorySliceByteAction).GetClassName();
             else if (subType != null)
             {
-                if (mainType.IsAssignableTo(typeof(IFormLinkGetter<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullableGetter<>)))
+                if (mainType.IsAssignableTo(typeof(IFormLink<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullable<>)))
                     actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
-                else if (mainType.IsAssignableTo(typeof(IReadOnlyList<>)))
+                else if (mainType.IsAssignableTo(typeof(ExtendedList<>)))
                 {
                     if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
                         actionClass = $"{nameof(FormLinksAction<IActionRecordGetter>)}<{subSubType.Name}>";
-                    else if (subType == typeof(IContainerEntryGetter))
+                    else if (subType.IsAssignableTo(typeof(IContainerEntryGetter)))
                         actionClass = nameof(ContainerItemsAction);
-                    else if (subType == typeof(IEffectGetter))
+                    else if (subType.IsAssignableTo(typeof(IEffectGetter)))
                         actionClass = nameof(EffectsAction);
-                    else if (subType == typeof(ILeveledItemEntryGetter))
+                    else if (subType.IsAssignableTo(typeof(ILeveledItemEntryGetter)))
                         actionClass = nameof(LeveledItemAction);
-                    else if (subType == typeof(ILeveledNpcEntryGetter))
+                    else if (subType.IsAssignableTo(typeof(ILeveledNpcEntryGetter)))
                         actionClass = nameof(LeveledNpcAction);
-                    else if (subType == typeof(ILeveledSpellEntryGetter))
+                    else if (subType.IsAssignableTo(typeof(ILeveledSpellEntryGetter)))
                         actionClass = nameof(LeveledSpellAction);
-                    else if (subType == typeof(IRankPlacementGetter))
+                    else if (subType.IsAssignableTo(typeof(IRankPlacementGetter)))
                         actionClass = nameof(RankPlacementAction);
-                    else if (subType == typeof(IRelationGetter))
+                    else if (subType.IsAssignableTo(typeof(IRelationGetter)))
                         actionClass = nameof(RelationsAction);
                 }
             }
