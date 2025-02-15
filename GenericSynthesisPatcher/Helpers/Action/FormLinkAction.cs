@@ -134,8 +134,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return 0;
             }
 
-            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
+            if (!Mod.TryGetPropertyForEditing<IFormLink<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var formLink))
                 return -1;
+
+            if (newValue == null || newValue.IsNull)
+                formLink.SetToNull();
+            else
+                formLink.SetTo(newValue.FormKey);
 
             Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: proKeys.Property.PropertyName);
             return 1;

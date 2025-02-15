@@ -242,7 +242,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
 
             var add = newList.WhereNotIn(curList);
-            var del = curList.WhereNotIn(newList);
+            var del = curList.WhereNotIn(newList).ToList();
 
             if (!add.Any() && !del.Any())
                 return 0;

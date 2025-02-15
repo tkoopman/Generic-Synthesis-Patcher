@@ -5,6 +5,7 @@ You can use either the short type name or synonyms when listing types.
 | Type                                            | Synonyms               |
 | ----------------------------------------------- | ---------------------- |
 | [ASPC](Fields.md#aspc---acousticspace)          | AcousticSpace          |
+| [AACT](Fields.md#aact---actionrecord)           | ActionRecord           |
 | [ACTI](Fields.md#acti---activator)              | Activator              |
 | [AVIF](Fields.md#avif---actorvalueinformation)  | ActorValueInformation  |
 | [ADDN](Fields.md#addn---addonnode)              | AddonNode              |
@@ -14,6 +15,8 @@ You can use either the short type name or synonyms when listing types.
 | [ARMA](Fields.md#arma---armoraddon)             | ArmorAddon             |
 | [ARMO](Fields.md#armo---armor)                  | Armor                  |
 | [ARTO](Fields.md#arto---artobject)              | ArtObject              |
+| [ASTP](Fields.md#astp---associationtype)        | AssociationType        |
+| [BPTD](Fields.md#bptd---bodypartdata)           | BodyPartData           |
 | [BOOK](Fields.md#book)                          |                        |
 | [CPTH](Fields.md#cpth---camerapath)             | CameraPath             |
 | [CAMS](Fields.md#cams---camerashot)             | CameraShot             |
@@ -25,6 +28,8 @@ You can use either the short type name or synonyms when listing types.
 | [CSTY](Fields.md#csty---combatstyle)            | CombatStyle            |
 | [COBJ](Fields.md#cobj---constructibleobject)    | ConstructibleObject    |
 | [CONT](Fields.md#cont---container)              | Container              |
+| [DEBR](Fields.md#debr---debris)                 | Debris                 |
+| [DOBJ](Fields.md#dobj---defaultobjectmanager)   | DefaultObjectManager   |
 | [DLBR](Fields.md#dlbr---dialogbranch)           | DialogBranch           |
 | [DIAL](Fields.md#dial---dialogtopic)            | DialogTopic            |
 | [DLVW](Fields.md#dlvw---dialogview)             | DialogView             |
@@ -41,6 +46,7 @@ You can use either the short type name or synonyms when listing types.
 | [FSTS](Fields.md#fsts---footstepset)            | FootstepSet            |
 | [FLST](Fields.md#flst---formlist)               | FormList               |
 | [FURN](Fields.md#furn---furniture)              | Furniture              |
+| [GMST](Fields.md#gmst---gamesetting)            | GameSetting            |
 | [GLOB](Fields.md#glob---global)                 | Global                 |
 | [GRAS](Fields.md#gras---grass)                  | Grass                  |
 | [HAZD](Fields.md#hazd---hazard)                 | Hazard                 |
@@ -48,10 +54,13 @@ You can use either the short type name or synonyms when listing types.
 | [IDLE](Fields.md#idle---idleanimation)          | IdleAnimation          |
 | [IDLM](Fields.md#idlm---idlemarker)             | IdleMarker             |
 | [IMAD](Fields.md#imad---imagespaceadapter)      | ImageSpaceAdapter      |
+| [IMGS](Fields.md#imgs---imagespace)             | ImageSpace             |
+| [IPDS](Fields.md#ipds---impactdataset)          | ImpactDataSet          |
 | [IPCT](Fields.md#ipct---impact)                 | Impact                 |
 | [ALCH](Fields.md#alch---ingestible)             | Ingestible             |
 | [INGR](Fields.md#ingr---ingredient)             | Ingredient             |
 | [KEYM](Fields.md#keym---key)                    | Key                    |
+| [KYWD](Fields.md#kywd---keyword)                | Keyword                |
 | [LTEX](Fields.md#ltex---landscapetexture)       | LandscapeTexture       |
 | [LVLI](Fields.md#lvli---leveleditem)            | LeveledItem            |
 | [LVLN](Fields.md#lvln---levelednpc)             | LeveledNpc             |
@@ -60,6 +69,7 @@ You can use either the short type name or synonyms when listing types.
 | [LGTM](Fields.md#lgtm---lightingtemplate)       | LightingTemplate       |
 | [LSCR](Fields.md#lscr---loadscreen)             | LoadScreen             |
 | [LCTN](Fields.md#lctn---location)               | Location               |
+| [LCRT](Fields.md#lcrt---locationreferencetype)  | LocationReferenceType  |
 | [MGEF](Fields.md#mgef---magiceffect)            | MagicEffect            |
 | [MATO](Fields.md#mato---materialobject)         | MaterialObject         |
 | [MATT](Fields.md#matt---materialtype)           | MaterialType           |

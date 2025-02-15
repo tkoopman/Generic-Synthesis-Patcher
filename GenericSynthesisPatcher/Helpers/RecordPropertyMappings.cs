@@ -15,14 +15,14 @@ namespace GenericSynthesisPatcher.Helpers
         private static readonly HashSet<IRecordProperty> propertyAliases = new(comparer: new RecordPropertyComparer());
         private static readonly HashSet<IRecordProperty> propertyMappings = new(comparer: new RecordPropertyComparer());
 
-        public static IReadOnlyList<PropertyAliasMapping> AllAliases => propertyAliases.Select(a => (PropertyAliasMapping)a).ToList().AsReadOnly();
-        public static IReadOnlyList<RecordPropertyMapping> AllRPMs => propertyMappings.Select(a => (RecordPropertyMapping)a).ToList().AsReadOnly();
-
         static RecordPropertyMappings ()
         {
             PopulateMappings();
             PopulateAliases();
         }
+
+        public static IReadOnlyList<PropertyAliasMapping> AllAliases => propertyAliases.Select(a => (PropertyAliasMapping)a).ToList().AsReadOnly();
+        public static IReadOnlyList<RecordPropertyMapping> AllRPMs => propertyMappings.Select(a => (RecordPropertyMapping)a).ToList().AsReadOnly();
 
         public static IReadOnlyList<string> GetAllAliases (Type type, string propertyName)
         {
@@ -73,12 +73,15 @@ namespace GenericSynthesisPatcher.Helpers
             Add(null                                 , "DataFlags"  , nameof(IAmmunitionGetter.Flags));
             Add(null                                 , "DESC"       , nameof(IAmmunitionGetter.Description));
             Add(null                                 , "EAMT"       , nameof(IArmorGetter.EnchantmentAmount));
+            Add(null                                 , "EDID"       , nameof(IArmorGetter.EditorID));
             Add(null                                 , "EITM"       , nameof(IArmorGetter.ObjectEffect));
             Add(null                                 , "ETYP"       , nameof(IWeaponGetter.EquipmentType));
             Add(null                                 , "FNAM"       , nameof(IAmmunitionGetter.Flags));
             Add(null                                 , "FULL"       , nameof(INamedGetter.Name));
             Add(null                                 , "Item"       , nameof(IContainerGetter.Items));
             Add(null                                 , "KWDA"       , nameof(IKeywordedGetter.Keywords));
+            Add(null                                 , "LVLD"       , nameof(ILeveledItemGetter.ChanceNone));
+            Add(null                                 , "LVLG"       , nameof(ILeveledItemGetter.Global));
             Add(null                                 , "OBND"       , nameof(IArmorGetter.ObjectBounds));
             Add(null                                 , "ONAM"       , nameof(INpcGetter.ShortName));
             Add(null                                 , "RecordFlags", nameof(IAmmunitionGetter.MajorFlags));
@@ -118,6 +121,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IBookGetter)                  , "CNAM"       , nameof(IBookGetter.Description));
             Add(typeof(IBookGetter)                  , "DESC"       , nameof(IBookGetter.BookText));
             Add(typeof(IBookGetter)                  , "INAM"       , nameof(IBookGetter.InventoryArt));
+            Add(typeof(ICameraPathGetter)            , "ANAM"       , nameof(ICameraPathGetter.RelatedPaths));
+            Add(typeof(ICameraPathGetter)            , "SNAM"       , nameof(ICameraPathGetter.Shots));
             Add(typeof(ICameraShotGetter)            , "MNAM"       , nameof(ICameraShotGetter.ImageSpaceModifier));
             Add(typeof(ICellGetter)                  , "LTMP"       , nameof(ICellGetter.LightingTemplate));
             Add(typeof(ICellGetter)                  , "TVDT"       , nameof(ICellGetter.OcclusionData));
@@ -128,8 +133,10 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICellGetter)                  , "XCLW"       , nameof(ICellGetter.WaterHeight));
             Add(typeof(ICellGetter)                  , "XCLX"       , nameof(ICellGetter.Grid));
             Add(typeof(ICellGetter)                  , "XCMO"       , nameof(ICellGetter.Music));
+            Add(typeof(ICellGetter)                  , "XRNK"       , nameof(ICellGetter.FactionRank));
             Add(typeof(ICellGetter)                  , "XILL"       , nameof(ICellGetter.LockList));
             Add(typeof(ICellGetter)                  , "XNAM"       , nameof(ICellGetter.WaterNoiseTexture));
+            Add(typeof(ICellGetter)                  , "XOWN"       , nameof(ICellGetter.Owner));
             Add(typeof(ICellGetter)                  , "XWEM"       , nameof(ICellGetter.WaterEnvironmentMap));
             Add(typeof(IClimateGetter)               , "FNAM"       , nameof(IClimateGetter.SunTexture));
             Add(typeof(IClimateGetter)               , "GNAM"       , nameof(IClimateGetter.SunGlareTexture));
@@ -138,6 +145,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICollisionLayerGetter)        , "FNAM"       , nameof(ICollisionLayerGetter.DebugColor));
             Add(typeof(ICollisionLayerGetter)        , "GNAM"       , nameof(ICollisionLayerGetter.Flags));
             Add(typeof(ICollisionLayerGetter)        , "MNAM"       , nameof(ICollisionLayerGetter.Name));
+            Add(typeof(IColorRecordGetter)           , "CNAM"       , nameof(IColorRecordGetter.Color));
             Add(typeof(IColorRecordGetter)           , "FNAM"       , nameof(IColorRecordGetter.Playable));
             Add(typeof(ICombatStyleGetter)           , "CSLR"       , nameof(ICombatStyleGetter.LongRangeStrafeMult));
             Add(typeof(IConstructibleObjectGetter)   , "BNAM"       , nameof(IConstructibleObjectGetter.WorkbenchKeyword));
@@ -189,17 +197,58 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IFurnitureGetter)             , "XMRK"       , nameof(IFurnitureGetter.ModelFilename));
             Add(typeof(IHazardGetter)                , "MNAM"       , nameof(IHazardGetter.ImageSpaceModifier));
             Add(typeof(IHeadPartGetter)              , "CNAM"       , nameof(IHeadPartGetter.Color));
+            Add(typeof(IHeadPartGetter)              , "HNAM"       , nameof(IHeadPartGetter.ExtraParts));
             Add(typeof(IHeadPartGetter)              , "PNAM"       , nameof(IHeadPartGetter.Type));
             Add(typeof(IHeadPartGetter)              , "Race"       , nameof(IHeadPartGetter.ValidRaces));
             Add(typeof(IHeadPartGetter)              , "Races"      , nameof(IHeadPartGetter.ValidRaces));
             Add(typeof(IHeadPartGetter)              , "RNAM"       , nameof(IHeadPartGetter.ValidRaces));
             Add(typeof(IHeadPartGetter)              , "TNAM"       , nameof(IHeadPartGetter.TextureSet));
+            Add(typeof(IIdleAnimationGetter)         , "ANAM"       , nameof(IIdleAnimationGetter.RelatedIdles));
             Add(typeof(IIdleAnimationGetter)         , "DNAM"       , nameof(IIdleAnimationGetter.Filename));
             Add(typeof(IIdleAnimationGetter)         , "ENAM"       , nameof(IIdleAnimationGetter.AnimationEvent));
             Add(typeof(IIdleMarkerGetter)            , "IDLA"       , nameof(IIdleMarkerGetter.Animations));
             Add(typeof(IIdleMarkerGetter)            , "IDLF"       , nameof(IIdleMarkerGetter.Flags));
             Add(typeof(IIdleMarkerGetter)            , "IDLT"       , nameof(IIdleMarkerGetter.IdleTimer));
+            Add(typeof(IImpactGetter)                , "DNAM"       , nameof(IImpactGetter.TextureSet));
+            Add(typeof(IImpactGetter)                , "ENAM"       , nameof(IImpactGetter.SecondaryTextureSet));
+            Add(typeof(IImpactGetter)                , "NAM1"       , nameof(IImpactGetter.Sound2));
+            Add(typeof(IImpactGetter)                , "NAM2"       , nameof(IImpactGetter.Hazard));
+            Add(typeof(IImpactGetter)                , "SNAM"       , nameof(IImpactGetter.Sound1));
+            Add(typeof(IIngestibleGetter)            , "DATA"       , nameof(IIngredientGetter.Weight));
             Add(typeof(IIngredientGetter)            , "ETYP"       , nameof(IIngredientGetter.EquipType));
+            Add(typeof(IKeywordGetter)               , "CNAM"       , nameof(IKeywordGetter.Color));
+            Add(typeof(ILightGetter)                 , "FNAM"       , nameof(ILightGetter.FadeValue));
+            Add(typeof(ILightGetter)                 , "LNAM"       , nameof(ILightGetter.Lens));
+            Add(typeof(ILightGetter)                 , "SNAM"       , nameof(ILightGetter.Sound));
+            Add(typeof(ILandscapeTextureGetter)      , "GNAM"       , nameof(ILandscapeTextureGetter.Grasses));
+            Add(typeof(ILandscapeTextureGetter)      , "MNAM"       , nameof(ILandscapeTextureGetter.MaterialType));
+            Add(typeof(ILandscapeTextureGetter)      , "SNAM"       , nameof(ILandscapeTextureGetter.TextureSpecularExponent));
+            Add(typeof(ILandscapeTextureGetter)      , "TNAM"       , nameof(ILandscapeTextureGetter.TextureSet));
+            Add(typeof(ILoadScreenGetter)            , "NNAM"       , nameof(ILoadScreenGetter.LoadingScreenNif));
+            Add(typeof(ILoadScreenGetter)            , "SNAM"       , nameof(ILoadScreenGetter.InitialScale));
+            Add(typeof(ILocationGetter)              , "CNAM"       , nameof(ILocationGetter.Color));
+            Add(typeof(ILocationGetter)              , "FNAM"       , nameof(ILocationGetter.UnreportedCrimeFaction));
+            Add(typeof(ILocationGetter)              , "MNAM"       , nameof(ILocationGetter.WorldLocationMarkerRef));
+            Add(typeof(ILocationGetter)              , "NAM0"       , nameof(ILocationGetter.HorseMarkerRef));
+            Add(typeof(ILocationGetter)              , "NAM1"       , nameof(ILocationGetter.Music));
+            Add(typeof(ILocationGetter)              , "PNAM"       , nameof(ILocationGetter.ParentLocation));
+            Add(typeof(ILocationGetter)              , "RNAM"       , nameof(ILocationGetter.WorldLocationRadius));
+            Add(typeof(ILocationReferenceTypeGetter) , "CNAM"       , nameof(ILocationReferenceTypeGetter.Color));
+            Add(typeof(IMagicEffectGetter)           , "DNAM"       , nameof(IMagicEffectGetter.Description));
+            Add(typeof(IMagicEffectGetter)           , "MDOB"       , nameof(IMagicEffectGetter.MenuDisplayObject));
+            Add(typeof(IMaterialTypeGetter)          , "BNAM"       , nameof(IMaterialTypeGetter.Buoyancy));
+            Add(typeof(IMaterialTypeGetter)          , "CNAM"       , nameof(IMaterialTypeGetter.HavokDisplayColor));
+            Add(typeof(IMaterialTypeGetter)          , "HNAM"       , nameof(IMaterialTypeGetter.HavokImpactDataSet));
+            Add(typeof(IMaterialTypeGetter)          , "PNAM"       , nameof(IMaterialTypeGetter.Parent));
+            Add(typeof(IMessageGetter)               , "QNAM"       , nameof(IMessageGetter.Quest));
+            Add(typeof(IMessageGetter)               , "TNAM"       , nameof(IMessageGetter.DisplayTime));
+            Add(typeof(IMoveableStaticGetter)        , "SNAM"       , nameof(IMoveableStaticGetter.LoopingSound));
+            Add(typeof(IMusicTrackGetter)            , "CNAM"       , nameof(IMusicTrackGetter.Type));
+            Add(typeof(IMusicTrackGetter)            , "DNAM"       , nameof(IMusicTrackGetter.FadeOut));
+            Add(typeof(IMusicTrackGetter)            , "FLTV"       , nameof(IMusicTrackGetter.Duration));
+            Add(typeof(IMusicTrackGetter)            , "SNAM"       , nameof(IMusicTrackGetter.Tracks));
+            Add(typeof(IMusicTypeGetter)             , "TNAM"       , nameof(IMusicTypeGetter.Tracks));
+            Add(typeof(IMusicTypeGetter)             , "WNAM"       , nameof(IMusicTypeGetter.FadeDuration));
             Add(typeof(INpcGetter)                   , "ANAM"       , nameof(INpcGetter.FarAwayModel));
             Add(typeof(INpcGetter)                   , "ATKR"       , nameof(INpcGetter.AttackRace));
             Add(typeof(INpcGetter)                   , "CNAM"       , nameof(INpcGetter.Class));
@@ -219,6 +268,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(INpcGetter)                   , "OCOR"       , nameof(INpcGetter.ObserveDeadBodyOverridePackageList));
             Add(typeof(INpcGetter)                   , "PKID"       , nameof(INpcGetter.Packages));
             Add(typeof(INpcGetter)                   , "PNAM"       , nameof(INpcGetter.HeadParts));
+            Add(typeof(INpcGetter)                   , "QNAM"       , nameof(INpcGetter.TextureLighting));
+            Add(typeof(INpcGetter)                   , "SNAM"       , nameof(INpcGetter.Factions));
             Add(typeof(INpcGetter)                   , "SOFT"       , nameof(INpcGetter.SleepingOutfit));
             Add(typeof(INpcGetter)                   , "SPLO"       , nameof(INpcGetter.ActorEffect));
             Add(typeof(INpcGetter)                   , "SPOR"       , nameof(INpcGetter.SpectatorOverridePackageList));
@@ -226,8 +277,68 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(INpcGetter)                   , "VTCK"       , nameof(INpcGetter.Voice));
             Add(typeof(INpcGetter)                   , "WNAM"       , nameof(INpcGetter.WornArmor));
             Add(typeof(INpcGetter)                   , "ZNAM"       , nameof(INpcGetter.CombatStyle));
+            Add(typeof(IPackageGetter)               , "CNAM"       , nameof(IPackageGetter.CombatStyle));
+            Add(typeof(IPackageGetter)               , "QNAM"       , nameof(IPackageGetter.OwnerQuest));
+            Add(typeof(IPackageGetter)               , "XNAM"       , nameof(IPackageGetter.XnamMarker));
+            Add(typeof(IPerkGetter)                  , "NNAM"       , nameof(IPerkGetter.NextPerk));
+            Add(typeof(IProjectileGetter)            , "VNAM"       , nameof(IProjectileGetter.SoundLevel));
+            Add(typeof(IQuestGetter)                 , "ANAM"       , nameof(IQuestGetter.NextAliasID));
+            Add(typeof(IQuestGetter)                 , "FLTR"       , nameof(IQuestGetter.Filter));
+            Add(typeof(IQuestGetter)                 , "QTGL"       , nameof(IQuestGetter.TextDisplayGlobals));
+            Add(typeof(IRaceGetter)                  , "ATKR"       , nameof(IRaceGetter.AttackRace));
+            Add(typeof(IRaceGetter)                  , "ENAM"       , nameof(IRaceGetter.Eyes));
+            Add(typeof(IRaceGetter)                  , "FLMV"       , nameof(IRaceGetter.BaseMovementDefaultFly));
+            Add(typeof(IRaceGetter)                  , "GNAM"       , nameof(IRaceGetter.BodyPartData));
+            Add(typeof(IRaceGetter)                  , "HNAM"       , nameof(IRaceGetter.Hairs));
+            Add(typeof(IRaceGetter)                  , "LNAM"       , nameof(IRaceGetter.CloseLootSound));
+            Add(typeof(IRaceGetter)                  , "NAM4"       , nameof(IRaceGetter.MaterialType));
+            Add(typeof(IRaceGetter)                  , "NAM5"       , nameof(IRaceGetter.ImpactDataSet));
+            Add(typeof(IRaceGetter)                  , "NAM7"       , nameof(IRaceGetter.DecapitationFX));
+            Add(typeof(IRaceGetter)                  , "NAM8"       , nameof(IRaceGetter.MorphRace));
+            Add(typeof(IRaceGetter)                  , "ONAM"       , nameof(IRaceGetter.OpenLootSound));
+            Add(typeof(IRaceGetter)                  , "PNAM"       , nameof(IRaceGetter.FacegenMainClamp));
+            Add(typeof(IRaceGetter)                  , "QNAM"       , nameof(IRaceGetter.EquipmentSlots));
+            Add(typeof(IRaceGetter)                  , "RNAM"       , nameof(IRaceGetter.ArmorRace));
+            Add(typeof(IRaceGetter)                  , "RNMV"       , nameof(IRaceGetter.BaseMovementDefaultRun));
+            Add(typeof(IRaceGetter)                  , "SNMV"       , nameof(IRaceGetter.BaseMovementDefaultSneak));
+            Add(typeof(IRaceGetter)                  , "SPMV"       , nameof(IRaceGetter.BaseMovementDefaultSprint));
+            Add(typeof(IRaceGetter)                  , "SWMV"       , nameof(IRaceGetter.BaseMovementDefaultSwim));
+            Add(typeof(IRaceGetter)                  , "UNAM"       , nameof(IRaceGetter.FacegenFaceClamp));
+            Add(typeof(IRaceGetter)                  , "UNES"       , nameof(IRaceGetter.UnarmedEquipSlot));
+            Add(typeof(IRaceGetter)                  , "VNAM"       , nameof(IRaceGetter.EquipmentFlags));
+            Add(typeof(IRaceGetter)                  , "WKMV"       , nameof(IRaceGetter.BaseMovementDefaultWalk));
+            Add(typeof(IRaceGetter)                  , "WNAM"       , nameof(IRaceGetter.Skin));
+            Add(typeof(IRegionGetter)                , "RCLR"       , nameof(IRegionGetter.MapColor));
+            Add(typeof(IRegionGetter)                , "WNAM"       , nameof(IRegionGetter.Worldspace));
+            Add(typeof(ISceneGetter)                 , "INAM"       , nameof(ISceneGetter.LastActionIndex));
+            Add(typeof(ISceneGetter)                 , "PNAM"       , nameof(ISceneGetter.Quest));
             Add(typeof(IScrollGetter)                , "MDOB"       , nameof(IScrollGetter.MenuDisplayObject));
+            Add(typeof(IShoutGetter)                 , "MDOB"       , nameof(IShoutGetter.MenuDisplayObject));
+            Add(typeof(ISoulGemGetter)               , "NAM0"       , nameof(ISoulGemGetter.LinkedTo));
+            Add(typeof(ISoulGemGetter)               , "SLCP"       , nameof(ISoulGemGetter.MaximumCapacity));
+            Add(typeof(ISoulGemGetter)               , "SOUL"       , nameof(ISoulGemGetter.ContainedSoul));
+            Add(typeof(ISoundCategoryGetter)         , "PNAM"       , nameof(ISoundCategoryGetter.Parent));
+            Add(typeof(ISoundCategoryGetter)         , "UNAM"       , nameof(ISoundCategoryGetter.DefaultMenuVolume));
+            Add(typeof(ISoundCategoryGetter)         , "VNAM"       , nameof(ISoundCategoryGetter.StaticVolumeMultiplier));
+            Add(typeof(ISoundDescriptorGetter)       , "CNAM"       , nameof(ISoundDescriptorGetter.Type));
+            Add(typeof(ISoundDescriptorGetter)       , "FNAM"       , nameof(ISoundDescriptorGetter.String));
+            Add(typeof(ISoundDescriptorGetter)       , "GNAM"       , nameof(ISoundDescriptorGetter.Category));
+            Add(typeof(ISoundDescriptorGetter)       , "ONAM"       , nameof(ISoundDescriptorGetter.OutputModel));
+            Add(typeof(ISoundDescriptorGetter)       , "SNAM"       , nameof(ISoundDescriptorGetter.AlternateSoundFor));
+            Add(typeof(ISoundMarkerGetter)           , "SDSC"       , nameof(ISoundMarkerGetter.SoundDescriptor));
+            Add(typeof(ISoundOutputModelGetter)      , "MNAM"       , nameof(ISoundOutputModelGetter.Type));
+            Add(typeof(ISpellGetter)                 , "MDOB"       , nameof(ISpellGetter.MenuDisplayObject));
+            Add(typeof(ITalkingActivatorGetter)      , "SNAM"       , nameof(ITalkingActivatorGetter.LoopingSound));
+            Add(typeof(ITalkingActivatorGetter)      , "VNAM"       , nameof(ITalkingActivatorGetter.VoiceType));
+            Add(typeof(ITreeGetter)                  , "PFIG"       , nameof(ITreeGetter.Ingredient));
+            Add(typeof(ITreeGetter)                  , "SNAM"       , nameof(ITreeGetter.HarvestSound));
+            Add(typeof(IWaterGetter)                 , "ANAM"       , nameof(IWaterGetter.Opacity));
+            Add(typeof(IWaterGetter)                 , "INAM"       , nameof(IWaterGetter.ImageSpace));
+            Add(typeof(IWaterGetter)                 , "SNAM"       , nameof(IWaterGetter.OpenSound));
+            Add(typeof(IWaterGetter)                 , "TNAM"       , nameof(IWaterGetter.Material));
+            Add(typeof(IWaterGetter)                 , "XNAM"       , nameof(IWaterGetter.Spell));
             Add(typeof(IWeaponGetter)                , "BIDS"       , nameof(IWeaponGetter.BlockBashImpact));
+            Add(typeof(IWeaponGetter)                , "CNAM"       , nameof(IWeaponGetter.Template));
             Add(typeof(IWeaponGetter)                , "INAM"       , nameof(IWeaponGetter.ImpactDataSet));
             Add(typeof(IWeaponGetter)                , "NAM7"       , nameof(IWeaponGetter.AttackLoopSound));
             Add(typeof(IWeaponGetter)                , "NAM8"       , nameof(IWeaponGetter.UnequipSound));
@@ -235,12 +346,19 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWeaponGetter)                , "SNAM"       , nameof(IWeaponGetter.AttackSound));
             Add(typeof(IWeaponGetter)                , "TNAM"       , nameof(IWeaponGetter.AttackFailSound));
             Add(typeof(IWeaponGetter)                , "UNAM"       , nameof(IWeaponGetter.IdleSound));
+            Add(typeof(IWeaponGetter)                , "VNAM"       , nameof(IWeaponGetter.DetectionSoundLevel));
+            Add(typeof(IWeaponGetter)                , "WNAM"       , nameof(IWeaponGetter.FirstPersonModel));
             Add(typeof(IWeaponGetter)                , "XNAM"       , nameof(IWeaponGetter.AttackSound2D));
+            Add(typeof(IWeatherGetter)               , "GNAM"       , nameof(IWeatherGetter.SunGlareLensFlare));
+            Add(typeof(IWeatherGetter)               , "MNAM"       , nameof(IWeatherGetter.Precipitation));
+            Add(typeof(IWeatherGetter)               , "NNAM"       , nameof(IWeatherGetter.VisualEffect));
+            Add(typeof(IWordOfPowerGetter)           , "TNAM"       , nameof(IWordOfPowerGetter.Translation));
             Add(typeof(IWorldspaceGetter)            , "CNAM"       , nameof(IWorldspaceGetter.Climate));
             Add(typeof(IWorldspaceGetter)            , "LTMP"       , nameof(IWorldspaceGetter.InteriorLighting));
             Add(typeof(IWorldspaceGetter)            , "NAM3"       , nameof(IWorldspaceGetter.LodWater));
             Add(typeof(IWorldspaceGetter)            , "NAM4"       , nameof(IWorldspaceGetter.LodWaterHeight));
             Add(typeof(IWorldspaceGetter)            , "NAMA"       , nameof(IWorldspaceGetter.DistantLodMultiplier));
+            Add(typeof(IWorldspaceGetter)            , "OFST"       , nameof(IWorldspaceGetter.OffsetData));
             Add(typeof(IWorldspaceGetter)            , "ZNAM"       , nameof(IWorldspaceGetter.Music));
 #pragma warning restore format
         }
@@ -276,6 +394,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ILightingTemplateGetter)      , "AmbientColor"                              , BasicAction<Color>.Instance);
             Add(typeof(IAcousticSpaceGetter)         , "AmbientSound"                              , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IEffectShaderGetter)          , "AmbientSound"                              , FormLinkAction<ISoundGetter>.Instance);
+            Add(typeof(IWeatherGetter)               , "ANAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IImpactGetter)                , "AngleThreshold"                            , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "AngularAccelerationRate"                   , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "AngularTolerance"                          , ConvertibleAction<float>.Instance);
@@ -315,6 +434,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IEffectShaderGetter)          , "BirthPositionOffsetRangePlusMinus"         , ConvertibleAction<float>.Instance);
             Add(typeof(IClassGetter)                 , "BleedoutDefault"                           , ConvertibleAction<float>.Instance);
             Add(typeof(IWeaponGetter)                , "BlockBashImpact"                           , FormLinkAction<IImpactDataSetGetter>.Instance);
+            Add(typeof(IWeatherGetter)               , "BNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IRaceGetter)                  , "BodyBipedObject"                           , EnumsAction.Instance);
             Add(typeof(IRaceGetter)                  , "BodyPartData"                              , FormLinkAction<IBodyPartDataGetter>.Instance);
             Add(typeof(IBookGetter)                  , "BookText"                                  , ConvertibleAction<string>.Instance);
@@ -342,6 +462,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRaceGetter)                  , "CloseLootSound"                            , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IContainerGetter)             , "CloseSound"                                , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IDoorGetter)                  , "CloseSound"                                , FormLinkAction<ISoundDescriptorGetter>.Instance);
+            Add(null                                 , "CNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ICollisionLayerGetter)        , "CollidesWith"                              , FormLinksAction<ICollisionLayerGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "CollisionLayer"                            , FormLinkAction<ICollisionLayerGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "CollisionRadius"                           , ConvertibleAction<float>.Instance);
@@ -370,6 +491,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IConstructibleObjectGetter)   , "CreatedObjectCount"                        , ConvertibleAction<ushort>.Instance);
             Add(typeof(INpcGetter)                   , "CrimeFaction"                              , FormLinkAction<IFactionGetter>.Instance);
             Add(typeof(ICombatStyleGetter)           , "CSGDDataTypeState"                         , FlagsAction.Instance);
+            Add(typeof(ICombatStyleGetter)           , "CSMD"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IAmmunitionGetter)            , "Damage"                                    , ConvertibleAction<float>.Instance);
             Add(typeof(IExplosionGetter)             , "Damage"                                    , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "DamagePerSecond"                           , ConvertibleAction<ushort>.Instance);
@@ -410,6 +532,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWaterGetter)                 , "DisplacementVelocity"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IMessageGetter)               , "DisplayTime"                               , ConvertibleAction<uint>.Instance);
             Add(typeof(IWorldspaceGetter)            , "DistantLodMultiplier"                      , ConvertibleAction<float>.Instance);
+            Add(typeof(IDialogViewGetter)            , "DNAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IWeatherGetter)               , "DNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IStaticGetter)                , "DNAMDataTypeState"                         , FlagsAction.Instance);
             Add(typeof(IWaterGetter)                 , "DNAMDataTypeState"                         , FlagsAction.Instance);
             Add(typeof(IMagicEffectGetter)           , "DualCastArt"                               , FormLinkAction<IDualCastDataGetter>.Instance);
@@ -426,9 +550,12 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IEffectShaderGetter)          , "EdgeEffectFullAlphaTime"                   , ConvertibleAction<float>.Instance);
             Add(typeof(IEffectShaderGetter)          , "EdgeEffectPersistentAlphaRatio"            , ConvertibleAction<float>.Instance);
             Add(typeof(IEffectShaderGetter)          , "EdgeWidth"                                 , ConvertibleAction<float>.Instance);
+            Add(null                                 , "EditorID"                                  , ConvertibleAction<string>.Instance);
             Add(typeof(IVisualEffectGetter)          , "EffectArt"                                 , FormLinkAction<IArtObjectGetter>.Instance);
             Add(null                                 , "Effects"                                   , EffectsAction.Instance);
             Add(typeof(IDualCastDataGetter)          , "EffectShader"                              , FormLinkAction<IEffectShaderGetter>.Instance);
+            Add(typeof(IDialogViewGetter)            , "ENAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IImageSpaceGetter)            , "ENAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IMagicEffectGetter)           , "EnchantArt"                                , FormLinkAction<IArtObjectGetter>.Instance);
             Add(typeof(IArmorGetter)                 , "EnchantmentAmount"                         , ConvertibleAction<ushort>.Instance);
             Add(typeof(IObjectEffectGetter)          , "EnchantmentAmount"                         , ConvertibleAction<int>.Instance);
@@ -504,6 +631,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ILightGetter)                 , "FlickerPeriod"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "FlightRadius"                              , ConvertibleAction<float>.Instance);
             Add(typeof(ITalkingActivatorGetter)      , "FNAM"                                      , ConvertibleAction<short>.Instance);
+            Add(null                                 , "FNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IWaterGetter)                 , "FogAboveWaterAmount"                       , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "FogAboveWaterDistanceFarPlane"             , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "FogAboveWaterDistanceNearPlane"            , ConvertibleAction<float>.Instance);
@@ -528,12 +656,14 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IFactionGetter)               , "FollowerWaitMarker"                        , FormLinkAction<IPlacedObjectGetter>.Instance);
             Add(typeof(IArmorAddonGetter)            , "FootstepSound"                             , FormLinkAction<IFootstepSetGetter>.Instance);
             Add(typeof(IExplosionGetter)             , "Force"                                     , ConvertibleAction<float>.Instance);
+            Add(null                                 , "FormVersion"                               , ConvertibleAction<ushort>.Instance);
             Add(typeof(IMovementTypeGetter)          , "ForwardRun"                                , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "ForwardWalk"                               , ConvertibleAction<float>.Instance);
             Add(typeof(ILightGetter)                 , "FOV"                                       , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "GiftFilter"                                , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(ILeveledItemGetter)           , "Global"                                    , FormLinkAction<IGlobalGetter>.Instance);
             Add(typeof(ILeveledNpcGetter)            , "Global"                                    , FormLinkAction<IGlobalGetter>.Instance);
+            Add(typeof(IWaterGetter)                 , "GNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ILandscapeTextureGetter)      , "Grasses"                                   , FormLinksAction<IGrassGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "Gravity"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "GravityVelocity"                           , ConvertibleAction<float>.Instance);
@@ -578,6 +708,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IMagicEffectGetter)           , "ImpactData"                                , FormLinkAction<IImpactDataSetGetter>.Instance);
             Add(null                                 , "ImpactDataSet"                             , FormLinkAction<IImpactDataSetGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "ImpactForce"                               , ConvertibleAction<float>.Instance);
+            Add(typeof(IMessageGetter)               , "INAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ICollisionLayerGetter)        , "Index"                                     , ConvertibleAction<uint>.Instance);
             Add(typeof(IFloraGetter)                 , "Ingredient"                                , FormLinkAction<IHarvestTargetGetter>.Instance);
             Add(typeof(ITreeGetter)                  , "Ingredient"                                , FormLinkAction<IHarvestTargetGetter>.Instance);
@@ -615,6 +746,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWeatherGetter)               , "LightningColor"                            , BasicAction<Color>.Instance);
             Add(typeof(IHazardGetter)                , "Limit"                                     , ConvertibleAction<uint>.Instance);
             Add(typeof(ISoulGemGetter)               , "LinkedTo"                                  , FormLinkAction<ISoulGemGetter>.Instance);
+            Add(typeof(ICellGetter)                  , "LNAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IWeatherGetter)               , "LNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ILoadScreenGetter)            , "LoadingScreenNif"                          , FormLinkAction<IStaticGetter>.Instance);
             Add(typeof(ICameraShotGetter)            , "Location"                                  , EnumsAction.Instance);
             Add(null                                 , "Location"                                  , FormLinkAction<ILocationGetter>.Instance);
@@ -655,12 +788,15 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IEncounterZoneGetter)         , "MinLevel"                                  , ConvertibleAction<sbyte>.Instance);
             Add(typeof(IGrassGetter)                 , "MinSlope"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ICameraShotGetter)            , "MinTime"                                   , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "MNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IClimateGetter)               , "Moons"                                     , FlagsAction.Instance);
             Add(typeof(IRaceGetter)                  , "MorphRace"                                 , FormLinkAction<IRaceGetter>.Instance);
             Add(null                                 , "Music"                                     , FormLinkAction<IMusicTypeGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "MuzzleFlash"                               , FormLinkAction<ILightGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "MuzzleFlashDuration"                       , ConvertibleAction<float>.Instance);
             Add(typeof(IWeatherGetter)               , "NAM0DataTypeState"                         , FlagsAction.Instance);
+            Add(typeof(IWeatherGetter)               , "NAM2"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IWeatherGetter)               , "NAM3"                                      , MemorySliceByteAction.Instance);
             Add(typeof(INpcGetter)                   , "NAM5"                                      , ConvertibleAction<ushort>.Instance);
             Add(null                                 , "Name"                                      , ConvertibleAction<string>.Instance);
             Add(typeof(ILightGetter)                 , "NearClip"                                  , ConvertibleAction<float>.Instance);
@@ -689,10 +825,13 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IPerkGetter)                  , "NumRanks"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "NumSubtexturesX"                           , ConvertibleAction<uint>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "NumSubtexturesY"                           , ConvertibleAction<uint>.Instance);
-            Add(null                                 , "ObjectBounds"                              , DeepCopyAction<IObjectBoundsGetter>.Instance);
+            Add(null                                 , "ObjectBounds"                              , ObjectBoundsAction.Instance);
             Add(null                                 , "ObjectEffect"                              , FormLinkAction<IEffectRecordGetter>.Instance);
             Add(typeof(INpcGetter)                   , "ObserveDeadBodyOverridePackageList"        , FormLinkAction<IFormListGetter>.Instance);
+            Add(typeof(ICellGetter)                  , "OcclusionData"                             , MemorySliceByteAction.Instance);
             Add(typeof(ICombatStyleGetter)           , "OffensiveMult"                             , ConvertibleAction<float>.Instance);
+            Add(typeof(IWorldspaceGetter)            , "OffsetData"                                , MemorySliceByteAction.Instance);
+            Add(typeof(IWeatherGetter)               , "ONAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IWaterGetter)                 , "Opacity"                                   , ConvertibleAction<byte>.Instance);
             Add(typeof(IRaceGetter)                  , "OpenLootSound"                             , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(null                                 , "OpenSound"                                 , FormLinkAction<ISoundDescriptorGetter>.Instance);
@@ -756,6 +895,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IPerkGetter)                  , "Playable"                                  , ConvertibleAction<bool>.Instance);
             Add(typeof(IFactionGetter)               , "PlayerInventoryContainer"                  , FormLinkAction<IPlacedObjectGetter>.Instance);
             Add(typeof(INpcGetter)                   , "PlayerSkills"                              , PlayerSkillsAction.Instance);
+            Add(typeof(IFloraGetter)                 , "PNAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IFurnitureGetter)             , "PNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ITalkingActivatorGetter)      , "PNAM"                                      , ConvertibleAction<int>.Instance);
             Add(typeof(IGrassGetter)                 , "PositionRange"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IWeatherGetter)               , "Precipitation"                             , FormLinkAction<IShaderParticleGeometryGetter>.Instance);
@@ -829,9 +970,12 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IMagicEffectGetter)           , "SkillUsageMultiplier"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "Skin"                                      , FormLinkAction<IArmorGetter>.Instance);
             Add(typeof(ICellGetter)                  , "SkyAndWeatherFromRegion"                   , FormLinkAction<IRegionGetter>.Instance);
+            Add(null                                 , "SkyrimMajorRecordFlags"                    , FlagsAction.Instance);
             Add(typeof(IWeatherGetter)               , "SkyStatics"                                , FormLinksAction<IStaticGetter>.Instance);
             Add(typeof(INpcGetter)                   , "SleepingOutfit"                            , FormLinkAction<IOutfitGetter>.Instance);
             Add(typeof(IEquipTypeGetter)             , "SlotParents"                               , FormLinksAction<IEquipTypeGetter>.Instance);
+            Add(typeof(ISoundOutputModelGetter)      , "SNAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(ISoundMarkerGetter)           , "SNDD"                                      , MemorySliceByteAction.Instance);
             Add(null                                 , "Sound"                                     , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IExplosionGetter)             , "Sound1"                                    , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IImpactGetter)                , "Sound1"                                    , FormLinkAction<ISoundGetter>.Instance);
@@ -879,6 +1023,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IQuestGetter)                 , "TextDisplayGlobals"                        , FormLinksAction<IGlobalGetter>.Instance);
             Add(typeof(IEffectShaderGetter)          , "TextureCountU"                             , ConvertibleAction<uint>.Instance);
             Add(typeof(IEffectShaderGetter)          , "TextureCountV"                             , ConvertibleAction<uint>.Instance);
+            Add(typeof(IProjectileGetter)            , "TextureFilesHashes"                        , MemorySliceByteAction.Instance);
             Add(typeof(INpcGetter)                   , "TextureLighting"                           , BasicAction<Color>.Instance);
             Add(null                                 , "TextureSet"                                , FormLinkAction<ITextureSetGetter>.Instance);
             Add(typeof(ILandscapeTextureGetter)      , "TextureSpecularExponent"                   , ConvertibleAction<byte>.Instance);
@@ -899,7 +1044,6 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ITreeGetter)                  , "TrunkFlexibility"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IArtObjectGetter)             , "Type"                                      , FlagsAction.Instance);
             Add(null                                 , "Type"                                      , EnumsAction.Instance);
-            Add(typeof(IGlobalGetter)                , "TypeChar"                                  , ConvertibleAction<char>.Instance);
             Add(typeof(IRaceGetter)                  , "UnarmedDamage"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "UnarmedEquipSlot"                          , FormLinkAction<IEquipTypeGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "UnarmedReach"                              , ConvertibleAction<float>.Instance);
@@ -919,6 +1063,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWeatherGetter)               , "VisualEffect"                              , FormLinkAction<IVisualEffectGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffectBegin"                         , BasicAction<Percent>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffectEnd"                           , BasicAction<Percent>.Instance);
+            Add(typeof(ISceneGetter)                 , "VNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(INpcGetter)                   , "Voice"                                     , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(IClassGetter)                 , "VoicePoints"                               , ConvertibleAction<uint>.Instance);
             Add(typeof(ITalkingActivatorGetter)      , "VoiceType"                                 , FormLinkAction<IVoiceTypeGetter>.Instance);
@@ -949,6 +1094,9 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRegionGetter)                , "Worldspace"                                , FormLinkAction<IWorldspaceGetter>.Instance);
             Add(typeof(INpcGetter)                   , "WornArmor"                                 , FormLinkAction<IArmorGetter>.Instance);
             Add(typeof(IObjectEffectGetter)          , "WornRestrictions"                          , FormLinkAction<IFormListGetter>.Instance);
+            Add(typeof(IPackageGetter)               , "XnamMarker"                                , MemorySliceByteAction.Instance);
+            Add(typeof(ICellGetter)                  , "XWCN"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(ICellGetter)                  , "XWCS"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ICameraPathGetter)            , "Zoom"                                      , FlagsAction.Instance);
             Add(typeof(ICameraPathGetter)            , "ZoomMustHaveCameraShots"                   , ConvertibleAction<bool>.Instance);
             #pragma warning restore format
@@ -976,13 +1124,13 @@ namespace GenericSynthesisPatcher.Helpers
 
     internal readonly struct RecordProperty (Type? type, string propertyName) : IRecordProperty
     {
-        public string PropertyName { get; } = propertyName;
-
-        public Type? Type { get; } = type;
-
         public RecordProperty (string propertyName) : this(null, propertyName)
         {
         }
+
+        public string PropertyName { get; } = propertyName;
+
+        public Type? Type { get; } = type;
     }
 
     internal class RecordPropertyComparer : IEqualityComparer<IRecordProperty>
