@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
@@ -8,14 +6,13 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
-    public class RecordGraph<TItem> : RecordNode<TItem>, IRecordNode
-        where TItem : class
+    public class FlagsRecordGraph : FlagsRecordNode, IRecordNode
     {
-        protected RecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context, modKeys, predicate, debugPredicate)
+        protected FlagsRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
         {
         }
 
-        public static RecordGraph<TItem>? Create (ProcessingKeys proKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate)
+        public static FlagsRecordGraph? Create (ProcessingKeys proKeys)
         {
             var modKeys = proKeys.Rule.Merge[proKeys.RuleKey];
 
@@ -27,7 +24,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 return null;
             }
 
-            var root = new RecordGraph<TItem>(master, modKeys, predicate, debugPredicate);
+            var root = new FlagsRecordGraph(master, modKeys, proKeys.Property.PropertyName);
             Populate(root);
 
             if (Global.TraceLogger != null)
@@ -47,15 +44,15 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             return root;
         }
 
-        public bool Merge ([NotNullWhen(true)] out IReadOnlyList<TItem>? newList)
+        public bool Merge (out Enum newValue)
         {
-            if (!Merge(null, out _, out _, out _))
+            if (!Merge(-1, out _, out _, out _))
             {
-                newList = null;
+                newValue = (Enum)Enum.ToObject(Type, 0);
                 return false;
             }
 
-            newList = workingList.AsReadOnly();
+            newValue = (Enum)Enum.ToObject(Type, workingList);
             return true;
         }
     }

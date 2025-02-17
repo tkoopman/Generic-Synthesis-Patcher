@@ -224,13 +224,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 record => Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => $"{item.FormKey}");
 
-            if (root == null)
-            {
-                Global.Logger.Log(ClassLogCode, "Failed to generate graph for merge", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
-                return -1;
-            }
-
-            return root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
+            return root != null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? _newList)

@@ -18,6 +18,14 @@ namespace GenericSynthesisPatcher.Helpers
     {
         private const int ClassLogCode = 0x02;
 
+        /// <summary>
+        /// Used to clear a property back to default instance of it's type.
+        /// Good for clearing list field's by setting it back to an empty list.
+        /// Does not check if current value already set to default instance.
+        /// </summary>
+        /// <param name="patchRecord">Editable version of the record to claer property on</param>
+        /// <param name="propertyName">Name of property to clear</param>
+        /// <returns>True if successfully cleared.</returns>
         public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
@@ -42,17 +50,28 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         /// <summary>
-        /// Finds the master record of the current context record.
+        /// Finds the master record of the current record context.
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>Overwritten master record. Null if current record is the master.</returns>
+        /// <returns>Overwritten master record. Null if current record context is the master.</returns>
         public static IMajorRecordGetter? FindOrigin (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
-            => Global.State.LinkCache.TryResolve(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
-                ? context.Record.Equals(o)
-                    ? null
-                    : o
-                : null;
+            => FindOriginContext(context)?.Record;
 
+        /// <summary>
+        /// Finds the master record context of the current record context.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Overwritten master record's context. Null if current record context is the master.</returns>
+        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>? FindOriginContext (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
+            => !context.ModKey.Equals(context.Record.FormKey.ModKey)
+            && Global.State.LinkCache.TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
+            ? o : null;
+
+        /// <summary>
+        /// Adds 0 padding to String representation of a form key
+        /// </summary>
+        /// <param name="input">String representation of a form key that may not be padded</param>
+        /// <returns>String representation of the form key with 0 padding added if required</returns>
         public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
         public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
@@ -90,6 +109,11 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 if (str.String is T tValue)
                     _value = tValue;
+            }
+            else if (typeof(T) == typeof(int) && property.PropertyType.IsEnum)
+            {
+                Global.DebugLogger?.Log(ClassLogCode, $"{property.PropertyType}", propertyName: propertyName);
+                _value = (int)_value;
             }
 
             if (_value is not T __value)

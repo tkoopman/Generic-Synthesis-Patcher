@@ -1,5 +1,6 @@
 using EnumsNET;
 
+using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -23,13 +24,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public bool CanFill () => true;
 
-        public bool CanForward () => false;
+        public bool CanForward () => true;
 
         public bool CanForwardSelfOnly () => false;
 
         public bool CanMatch () => true;
 
-        public bool CanMerge () => false;
+        public bool CanMerge () => true;
 
         public int Fill (ProcessingKeys proKeys)
         {
@@ -71,7 +72,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 1;
         }
 
-        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
+        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
+                    => Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                    && Mod.TryGetProperty<Enum>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+                    && curValue != newValue
+                    && Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue) ? 1 : -1;
 
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
@@ -164,6 +169,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return result;
         }
 
-        public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+        public int Merge (ProcessingKeys proKeys)
+        {
+            Global.UpdateLoggers(ClassLogCode);
+
+            var root = FlagsRecordGraph.Create(proKeys);
+
+            return root != null && root.Merge(out var newValue) && Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue) ? 1 : 0;
+        }
     }
 }
