@@ -299,6 +299,10 @@ namespace GenericSynthesisPatcher
 
         private static int ProcessForwardRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
         {
+            // Don't waste time if record is master with no overwrites
+            if (proKeys.Context.ModKey.Equals(proKeys.Record.FormKey.ModKey))
+                return -1;
+
             if (!proKeys.Rule.TryGetForward(ruleKey, out var mods, out string[]? fields))
                 return -1;
 
@@ -395,6 +399,18 @@ namespace GenericSynthesisPatcher
                 }
                 else
                 {   // Default Forward Type
+                    // Find modContext of forwarding record
+                    var filtered = orderedMods.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
+                    int index = filtered.Count != 1 && proKeys.Rule.HasForwardType(ForwardTypeFlags.Random) ? proKeys.GetRandom().Next(filtered.Count) : 0;
+                    var modContext = filtered.ElementAt(index).Value ?? throw new Exception("WTF Should never hit this!");
+
+                    // If forwarding context mod is same as current lets not waste time continuing
+                    if (modContext.ModKey.Equals(proKeys.Context.ModKey))
+                    {
+                        Global.TraceLogger?.Log(ClassLogCode, "Skipping forward as cannot forward to self", propertyName: proKeys.Property.PropertyName);
+                        continue;
+                    }
+
                     if (proKeys.Rule.OnlyIfDefault)
                         Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
 
@@ -404,17 +420,13 @@ namespace GenericSynthesisPatcher
                         continue;
                     }
 
-                    var filtered = orderedMods.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
-                    int index = filtered.Count != 1 && proKeys.Rule.HasForwardType(ForwardTypeFlags.Random) ? proKeys.GetRandom().Next(filtered.Count) : 0;
-
-                    var modContext = filtered.ElementAt(index);
                     if (filtered.Count > 1)
-                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.Key.FileName}. Selected #{index + 1} from {filtered.Count} available mods.", propertyName: proKeys.Property.PropertyName);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.ModKey.FileName}. Selected #{index + 1} from {filtered.Count} available mods.", propertyName: proKeys.Property.PropertyName);
                     else
-                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.Key.FileName}.", propertyName: proKeys.Property.PropertyName);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
 
                     Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", propertyName: proKeys.Property.PropertyName);
-                    int changes = (modContext.Value != null) ? proKeys.Property.Action.Forward(proKeys, modContext.Value) : throw new Exception("WTF Should never hit this!");
+                    int changes = proKeys.Property.Action.Forward(proKeys, modContext);
                     if (changes > 0)
                         changed += changes;
                 }

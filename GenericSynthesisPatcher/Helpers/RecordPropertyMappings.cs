@@ -76,7 +76,6 @@ namespace GenericSynthesisPatcher.Helpers
             Add(null                                 , "EDID"       , nameof(IArmorGetter.EditorID));
             Add(null                                 , "EITM"       , nameof(IArmorGetter.ObjectEffect));
             Add(null                                 , "ETYP"       , nameof(IWeaponGetter.EquipmentType));
-            Add(null                                 , "FNAM"       , nameof(IAmmunitionGetter.Flags));
             Add(null                                 , "FULL"       , nameof(INamedGetter.Name));
             Add(null                                 , "Item"       , nameof(IContainerGetter.Items));
             Add(null                                 , "KWDA"       , nameof(IKeywordedGetter.Keywords));

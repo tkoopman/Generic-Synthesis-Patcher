@@ -1,7 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
-using DynamicData;
-
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
@@ -13,89 +9,19 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
-    public class RecordNode<TItem> (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : IRecordNode
+    public class RecordNode<TItem> (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : RecordNodeBase(modKey, record, modKeys)
         where TItem : class
     {
         protected readonly List<TItem> workingList = predicate(record)?.ToList() ?? [];
-        private readonly List<RecordNode<TItem>> overwrites = [];
-        private readonly List<RecordNode<TItem>> overwrittenBy = [];
 
         public RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : this(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
         {
         }
 
-        public ModKey ModKey { get; } = modKey;
-
-        public IReadOnlyList<IRecordNode> Overwrites => overwrites.AsReadOnly();
-
-        public IReadOnlyList<IRecordNode> OverwrittenBy => overwrittenBy.AsReadOnly();
-
         protected Func<TItem, string> DebugPredicate { get; } = debugPredicate;
+        protected Func<IMajorRecordGetter, IReadOnlyList<TItem>?> Predicate { get; } = predicate;
 
-        protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; } = modKeys;
-
-        public bool TryFind (ModKey modKey, [NotNullWhen(true)] out IRecordNode? result)
-        {
-            bool b = TryFindRecord(modKey, out var r);
-            result = r;
-
-            return b;
-        }
-
-        protected static void Populate (RecordGraph<TItem> root, IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> all, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate)
-        {
-            int count = all.Count() - 2;
-
-            for (int i = count; i >= 0; i--)
-            {
-                var m = root.ModKeys?.FirstOrDefault(m => m.Value.Equals(all.ElementAt(i).ModKey));
-                if (m != null && m.Operation == ListLogic.NOT)
-                {
-                    Global.TraceLogger?.WriteLine($"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
-                    continue;
-                }
-
-                var node = new RecordNode<TItem>(all.ElementAt(i), root.ModKeys, predicate, root.DebugPredicate);
-                int index = Global.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
-
-                Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
-
-                var masters = Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
-
-                // If last entry in load order but has no masters it must be an existing GSP patch record,
-                // so link it to previous winner.
-                if (i == 0 && !masters.Any())
-                    masters = [all.ElementAt(1).ModKey];
-
-                foreach (var nodeMaster in masters)
-                {
-                    if (root.TryFindRecord(nodeMaster, out var nodeOverwrites))
-                    {
-                        Global.TraceLogger?.WriteLine($"{nodeOverwrites.ModKey} overwritten by {node.ModKey}");
-                        nodeOverwrites.overwrittenBy.Add(node);
-                        node.overwrites.Add(nodeOverwrites);
-                    }
-                    else
-                    {
-                        Global.TraceLogger?.WriteLine($"{nodeMaster} not found on graph.");
-                    }
-                }
-            }
-        }
-
-        protected void CleanUp ()
-        {
-            foreach (var a in overwrites)
-            {
-                foreach (var b in a.overwrites)
-                {
-                    b.RemoveOverwrittenBy(this);
-                }
-            }
-
-            foreach (var c in overwrittenBy.ToArray())
-                c.CleanUp();
-        }
+        protected override RecordNodeBase CreateChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context, modKeys, Predicate, DebugPredicate);
 
         protected bool Merge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
         {
@@ -106,9 +32,9 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             List<TItem> forceAdds = [];
             bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
 
-            foreach (var node in overwrittenBy)
+            foreach (var node in OverwrittenBy)
             {
-                if (node.Merge(workingList.AsReadOnly(), out var _add, out var _forceAdds, out var _remove))
+                if (node is RecordNode<TItem> myNode && myNode.Merge(workingList.AsReadOnly(), out var _add, out var _forceAdds, out var _remove))
                 {
                     foreach (var ai in _add)
                         Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Add: {DebugPredicate(ai)}");
@@ -164,49 +90,6 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             }
 
             return add.Any() || remove.Any() || forceAdd.Any();
-        }
-
-        protected void Print (string line)
-        {
-            if (!string.IsNullOrEmpty(line))
-                line += " < ";
-            line += ModKey.FileName;
-
-            if (overwrittenBy.Count == 0)
-            {
-                Global.TraceLogger?.WriteLine(line);
-                return;
-            }
-
-            foreach (var node in overwrittenBy)
-                node.Print(line);
-        }
-
-        protected bool TryFindRecord (ModKey modKey, [NotNullWhen(true)] out RecordNode<TItem>? result)
-        {
-            result = null;
-            if (ModKey == modKey)
-            {
-                result = this;
-                return true;
-            }
-
-            foreach (var node in overwrittenBy)
-            {
-                if (node.TryFindRecord(modKey, out result))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private void RemoveOverwrittenBy (RecordNode<TItem> recordGraph)
-        {
-            if (overwrittenBy.Remove(recordGraph) && overwrittenBy.Count == 0)
-                throw new Exception("Houston, I think we have a problem!");
-
-            foreach (var o in overwrites)
-                o.RemoveOverwrittenBy(recordGraph);
         }
     }
 }
