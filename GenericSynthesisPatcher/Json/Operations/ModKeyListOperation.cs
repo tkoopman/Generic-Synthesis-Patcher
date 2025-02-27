@@ -18,6 +18,6 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public override bool ValueEquals (ModKey other) => Value.Equals(other);
 
-        protected override ModKey ConvertValue (string? value) => value == null ? ModKey.Null : ModKey.FromFileName(new FileName(value));
+        protected override ModKey convertValue (string? value) => value == null ? ModKey.Null : ModKey.FromFileName(new FileName(value));
     }
 }

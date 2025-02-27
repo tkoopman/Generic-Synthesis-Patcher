@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Json.Data.Action
 {
     /// <summary>
-    /// JSON Data class used by ContainerItemsAction class
+    ///     JSON Data class used by ContainerItemsAction class
     /// </summary>
     /// <param name="formKey">FormKey of item</param>
     /// <param name="count">QTY</param>
@@ -18,7 +18,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     {
         [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(1)]
-        public int Count = count;
+        public int Count { get; set; } = count;
 
         [JsonProperty(PropertyName = "Item", Required = Required.Always)]
         public override FormKeyListOperation<IItemGetter> FormKey { get; } = formKey ?? new(null);

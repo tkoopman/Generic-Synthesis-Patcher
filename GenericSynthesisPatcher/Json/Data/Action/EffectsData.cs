@@ -13,18 +13,18 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     {
         [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
-        public int Area = area;
+        public int Area { get; set; } = area;
 
         [JsonProperty(PropertyName = "Duration", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
-        public int Duration = duration;
-
-        [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public float Magnitude = magnitude;
+        public int Duration { get; set; } = duration;
 
         [JsonProperty(PropertyName = "Effect", Required = Required.Always)]
         public override FormKeyListOperation<IMagicEffectGetter> FormKey { get; } = formKey ?? new(null);
+
+        [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(0)]
+        public float Magnitude { get; set; } = magnitude;
 
         public override bool Equals (IFormLinkContainerGetter? other)
             => other is IEffectGetter effect

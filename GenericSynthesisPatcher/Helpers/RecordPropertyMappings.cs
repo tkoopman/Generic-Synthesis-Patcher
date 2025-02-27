@@ -17,8 +17,8 @@ namespace GenericSynthesisPatcher.Helpers
 
         static RecordPropertyMappings ()
         {
-            PopulateMappings();
-            PopulateAliases();
+            populateMappings();
+            populateAliases();
         }
 
         public static IReadOnlyList<PropertyAliasMapping> AllAliases => propertyAliases.Select(a => (PropertyAliasMapping)a).ToList().AsReadOnly();
@@ -26,7 +26,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static IReadOnlyList<string> GetAllAliases (Type type, string propertyName)
         {
-            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && pam.RealPropertyName.Equals(propertyName) && (pam.Type == null || pam.Type == type)).Select(p => (PropertyAliasMapping)p).ToList();
+            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && pam.RealPropertyName.Equals(propertyName, StringComparison.Ordinal) && (pam.Type == null || pam.Type == type)).Select(p => (PropertyAliasMapping)p).ToList();
 
             foreach (var item in list.ToArray().Where(l => l.Type == null && list.Count(i => i.PropertyName == l.PropertyName) > 1))
                 _ = list.Remove(item);
@@ -34,18 +34,19 @@ namespace GenericSynthesisPatcher.Helpers
             return list.Select(l => l.PropertyName).ToList().AsReadOnly();
         }
 
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool TryFind (Type? type, string propertyName, out RecordPropertyMapping rpm)
         {
-            if (TryFindMapping(type, propertyName, out rpm))
+            if (tryFindMapping(type, propertyName, out rpm))
                 return true;
 
-            if (TryFindAlias(type, propertyName, out var pam))
-                return TryFindMapping(type, pam.RealPropertyName, out rpm);
+            if (tryFindAlias(type, propertyName, out var pam))
+                return tryFindMapping(type, pam.RealPropertyName, out rpm);
 
             return false;
         }
 
-        internal static bool TryFindMapping (Type? type, string key, out RecordPropertyMapping rpm)
+        internal static bool tryFindMapping (Type? type, string key, out RecordPropertyMapping rpm)
         {
             if (type != null && propertyMappings.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is RecordPropertyMapping _RPM)
             {
@@ -62,13 +63,15 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static void Add (Type? type, string propertyName, IRecordAction action) => _ = propertyMappings.Add(new RecordPropertyMapping(type, propertyName, action));
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static void Add (Type? type, string propertyName, string realPropertyName) => _ = propertyAliases.Add(new PropertyAliasMapping(type, propertyName, realPropertyName));
 
-        private static void PopulateAliases ()
+        private static void populateAliases ()
         {
-            #pragma warning disable format
+#pragma warning disable format
             Add(null                                 , "BAMT"       , nameof(IArmorGetter.AlternateBlockMaterial));
             Add(null                                 , "DataFlags"  , nameof(IAmmunitionGetter.Flags));
             Add(null                                 , "DESC"       , nameof(IAmmunitionGetter.Description));
@@ -124,6 +127,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICameraPathGetter)            , "SNAM"       , nameof(ICameraPathGetter.Shots));
             Add(typeof(ICameraShotGetter)            , "MNAM"       , nameof(ICameraShotGetter.ImageSpaceModifier));
             Add(typeof(ICellGetter)                  , "LTMP"       , nameof(ICellGetter.LightingTemplate));
+            Add(typeof(ICellGetter)                  , "MHDT"       , nameof(ICellGetter.MaxHeightData));
             Add(typeof(ICellGetter)                  , "TVDT"       , nameof(ICellGetter.OcclusionData));
             Add(typeof(ICellGetter)                  , "XCAS"       , nameof(ICellGetter.AcousticSpace));
             Add(typeof(ICellGetter)                  , "XCCM"       , nameof(ICellGetter.SkyAndWeatherFromRegion));
@@ -354,6 +358,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWordOfPowerGetter)           , "TNAM"       , nameof(IWordOfPowerGetter.Translation));
             Add(typeof(IWorldspaceGetter)            , "CNAM"       , nameof(IWorldspaceGetter.Climate));
             Add(typeof(IWorldspaceGetter)            , "LTMP"       , nameof(IWorldspaceGetter.InteriorLighting));
+            Add(typeof(IWorldspaceGetter)            , "MHDT"       , nameof(IWorldspaceGetter.MaxHeight));
             Add(typeof(IWorldspaceGetter)            , "NAM3"       , nameof(IWorldspaceGetter.LodWater));
             Add(typeof(IWorldspaceGetter)            , "NAM4"       , nameof(IWorldspaceGetter.LodWaterHeight));
             Add(typeof(IWorldspaceGetter)            , "NAMA"       , nameof(IWorldspaceGetter.DistantLodMultiplier));
@@ -362,9 +367,9 @@ namespace GenericSynthesisPatcher.Helpers
 #pragma warning restore format
         }
 
-        private static void PopulateMappings ()
+        private static void populateMappings ()
         {
-            #pragma warning disable format
+#pragma warning disable format
             Add(typeof(IActorValueInformationGetter) , "Abbreviation"                              , ConvertibleAction<string>.Instance);
             Add(typeof(IRaceGetter)                  , "AccelerationRate"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ICellGetter)                  , "AcousticSpace"                             , FormLinkAction<IAcousticSpaceGetter>.Instance);
@@ -772,6 +777,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRaceGetter)                  , "MaterialType"                              , FormLinkAction<IMaterialTypeGetter>.Instance);
             Add(typeof(IMaterialObjectGetter)        , "MaterialUvScale"                           , ConvertibleAction<float>.Instance);
             Add(typeof(IStaticGetter)                , "MaxAngle"                                  , ConvertibleAction<float>.Instance);
+            Add(typeof(IWorldspaceGetter)            , "MaxHeight"                                 , WorldspaceMaxHeightAction.Instance);
+            Add(typeof(ICellGetter)                  , "MaxHeightData"                             , CellMaxHeightDataAction.Instance);
             Add(typeof(ISoulGemGetter)               , "MaximumCapacity"                           , EnumsAction.Instance);
             Add(typeof(IEncounterZoneGetter)         , "MaxLevel"                                  , ConvertibleAction<sbyte>.Instance);
             Add(typeof(IGrassGetter)                 , "MaxSlope"                                  , ConvertibleAction<byte>.Instance);
@@ -1098,10 +1105,10 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICellGetter)                  , "XWCS"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ICameraPathGetter)            , "Zoom"                                      , FlagsAction.Instance);
             Add(typeof(ICameraPathGetter)            , "ZoomMustHaveCameraShots"                   , ConvertibleAction<bool>.Instance);
-            #pragma warning restore format
+#pragma warning restore format
         }
 
-        private static bool TryFindAlias (Type? type, string key, out PropertyAliasMapping pam)
+        private static bool tryFindAlias (Type? type, string key, out PropertyAliasMapping pam)
         {
             if (type != null && propertyAliases.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is PropertyAliasMapping _PAM)
             {
@@ -1132,12 +1139,14 @@ namespace GenericSynthesisPatcher.Helpers
         public Type? Type { get; } = type;
     }
 
-    internal class RecordPropertyComparer : IEqualityComparer<IRecordProperty>
+    internal sealed class RecordPropertyComparer : IEqualityComparer<IRecordProperty>
     {
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (IRecordProperty? x, IRecordProperty? y)
         {
             if (x == null && y == null)
                 return true;
+
             if (x == null || y == null)
                 return false;
 

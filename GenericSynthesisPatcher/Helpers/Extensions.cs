@@ -3,6 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 
 using DynamicData;
 
+using Mutagen.Bethesda.Plugins.Cache;
+using Mutagen.Bethesda.Plugins.Records;
+using Mutagen.Bethesda.Skyrim;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,9 +14,9 @@ namespace GenericSynthesisPatcher.Helpers
 {
     public static class Extensions
     {
-        public static void AddDictionary<TKey> (this HashCode hashCode, IDictionary<TKey, JToken> dic)
+        public static void AddDictionary<TKey> (this HashCode hashCode, IDictionary<TKey, JToken> dictionary)
         {
-            foreach (var pair in dic)
+            foreach (var pair in dictionary)
             {
                 hashCode.Add(pair.Key);
                 hashCode.Add(pair.Value.ToString());
@@ -67,14 +71,25 @@ namespace GenericSynthesisPatcher.Helpers
             return result;
         }
 
+        /// <summary>
+        ///     If type is generic, returns generic type definition, else returns input type
+        /// </summary>
         public static Type GetIfGenericTypeDefinition (this Type type) => type.IsGenericType && !type.IsGenericTypeDefinition ? type.GetGenericTypeDefinition() : type;
 
-        public static Type? GetIfUnderlyingType (this Type type, int index = 0) => type.IsGenericType && !type.IsGenericTypeDefinition && type.GetGenericArguments().Length > index ? type.GetGenericArguments()[index] : type;
+        /// <summary>
+        ///     If type is generic and underlying type exists at index, returns that underlying
+        ///     type, else returns null
+        /// </summary>
+        /// <param name="index">Underlying Type Index</param>
+        public static Type? GetIfUnderlyingType (this Type type, int index = 0) => type.IsGenericType && !type.IsGenericTypeDefinition && type.GetGenericArguments().Length > index ? type.GetGenericArguments()[index] : null;
 
         /// <summary>
-        /// Same as IEnumerable<>.Any() but will return false instead of throwing ArgumentNullException if null.
+        ///     Is this record context the master
         /// </summary>
-        /// <returns>False if null else result of .Any()</returns>
+        public static bool IsMaster (this IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) => context.ModKey.Equals(context.Record.FormKey.ModKey);
+
+        /// <summary> Same as IEnumerable<>.Any() but will return false instead of throwing
+        /// ArgumentNullException if null. </summary> <returns>False if null else result of .Any()</returns>
         public static bool SafeAny<TSource> ([NotNullWhen(true)] this IEnumerable<TSource>? source) => source != null && source.Any();
 
         public static bool SafeAny<TSource> (this IEnumerable<TSource>? source, Func<TSource, bool> predicate) => source != null && source.Any(predicate);
@@ -86,7 +101,7 @@ namespace GenericSynthesisPatcher.Helpers
                 return [];
 
             if (!notInList.SafeAny())
-                return source;
+                return [.. source]; // Create new array to prevent errors if source modified
 
             var list = new List<T>(source);
 

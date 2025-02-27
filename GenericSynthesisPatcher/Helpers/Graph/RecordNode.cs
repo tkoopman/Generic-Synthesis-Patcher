@@ -12,20 +12,16 @@ namespace GenericSynthesisPatcher.Helpers.Graph
     public class RecordNode<TItem> (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : RecordNodeBase(modKey, record, modKeys)
         where TItem : class
     {
-        protected readonly List<TItem> workingList = predicate(record)?.ToList() ?? [];
-
-        public RecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : this(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
-        {
-        }
-
         protected Func<TItem, string> DebugPredicate { get; } = debugPredicate;
         protected Func<IMajorRecordGetter, IReadOnlyList<TItem>?> Predicate { get; } = predicate;
+        protected List<TItem> WorkingList { get; } = predicate(record)?.ToList() ?? [];
 
-        protected override RecordNodeBase CreateChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context, modKeys, Predicate, DebugPredicate);
+        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context.ModKey, context.Record, modKeys, Predicate, DebugPredicate);
 
-        protected bool Merge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
+        protected bool performMerge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
         {
-            // Done with List instead of Hashtable as in rare cases may have same entry multiple times.
+            // Done with List instead of Hashtable as in rare cases may have same entry multiple
+            // times.
             List<TItem> myAdds = [];
             List<TItem> myRemoves = [];
 
@@ -34,7 +30,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             foreach (var node in OverwrittenBy)
             {
-                if (node is RecordNode<TItem> myNode && myNode.Merge(workingList.AsReadOnly(), out var _add, out var _forceAdds, out var _remove))
+                if (node is RecordNode<TItem> myNode && myNode.performMerge(WorkingList.AsReadOnly(), out var _add, out var _forceAdds, out var _remove))
                 {
                     foreach (var ai in _add)
                         Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << {node.ModKey.FileName}. Add: {DebugPredicate(ai)}");
@@ -54,30 +50,31 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             // Combine this records items with any other force adds
             if (_forceAdd)
-                _ = forceAdds.AddMissing(workingList);
+                _ = forceAdds.AddMissing(WorkingList);
 
             forceAdd = forceAdds;
 
             foreach (var myRemove in myRemoves)
             {
                 Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Del: {DebugPredicate(myRemove)}");
-                _ = workingList.Remove(myRemove);
+                _ = WorkingList.Remove(myRemove);
             }
 
             foreach (var myAdd in myAdds)
             {
                 Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Add: {DebugPredicate(myAdd)}");
-                workingList.Add(myAdd);
+                WorkingList.Add(myAdd);
             }
 
             if (parent == null)
             {
-                // Just return current results as will be ignored by RecordGraph which is only one to call this with no parent
+                // Just return current results as will be ignored by RecordGraph which is only one
+                // to call this with no parent
                 add = myAdds.AsEnumerable<TItem>();
                 remove = myRemoves.AsEnumerable<TItem>();
 
                 // Time to actually force add now
-                int f = workingList.AddMissing(forceAdds);
+                int f = WorkingList.AddMissing(forceAdds);
                 Global.TraceLogger?.WriteLine($"Merge All. Force Added: {f}/{forceAdds.Count}");
 
                 return add.Any() || remove.Any() || f > 0;
@@ -85,8 +82,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             else
             {
                 // Work out changes in workingList compared to parent
-                add = _forceAdd ? [] : workingList.WhereNotIn(parent);
-                remove = parent.WhereNotIn(workingList);
+                add = _forceAdd ? [] : WorkingList.WhereNotIn(parent);
+                remove = parent.WhereNotIn(WorkingList);
             }
 
             return add.Any() || remove.Any() || forceAdd.Any();

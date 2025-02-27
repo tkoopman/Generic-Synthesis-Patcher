@@ -11,15 +11,15 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 {
     public class RelationsData (FormKeyListOperation<IRelatableGetter> formKey, int modifier, CombatReaction reaction) : FormLinksWithDataActionDataBase<IRelatableGetter, Relation>, IEquatable<RelationsData>
     {
-        [JsonProperty(PropertyName = "Modifier", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(0)]
-        public int Modifier = modifier;
-
-        [JsonProperty(PropertyName = "Reaction", Required = Required.Always)]
-        public CombatReaction Reaction  = reaction;
-
         [JsonProperty(PropertyName = "Target", Required = Required.Always)]
         public override FormKeyListOperation<IRelatableGetter> FormKey { get; } = formKey ?? new(null);
+
+        [JsonProperty(PropertyName = "Modifier", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(0)]
+        public int Modifier { get; set; } = modifier;
+
+        [JsonProperty(PropertyName = "Reaction", Required = Required.Always)]
+        public CombatReaction Reaction { get; set; } = reaction;
 
         public static bool Equals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
             => left is IRelationGetter l

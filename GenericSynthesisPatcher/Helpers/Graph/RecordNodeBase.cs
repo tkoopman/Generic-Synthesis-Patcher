@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 using DynamicData;
@@ -15,7 +14,7 @@ using Noggog;
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     /// <summary>
-    /// Base node class for creating a graph of mod record relationships.
+    ///     Base node class for creating a graph of mod record relationships.
     /// </summary>
     /// <param name="modKey">Mod this record is in (Not the mod that created the record)</param>
     /// <param name="record">This record found in this mod</param>
@@ -27,43 +26,32 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         private readonly List<RecordNodeBase> overwrittenBy = [];
 
         /// <summary>
-        /// Create base node class from record context
-        /// </summary>
-        /// <param name="context">Record context</param>
-        /// <param name="modKeys">Mod Key Operations for forcing a mod's changes or ignoring them</param>
-        public RecordNodeBase (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) : this(context.ModKey, context.Record, modKeys)
-        {
-        }
-
-        /// <summary>
-        /// Key to mod that this record came from
+        ///     Key to mod that this record came from
         /// </summary>
         public ModKey ModKey { get; } = modKey;
 
         /// <summary>
-        /// List of nodes this record overwrites (Parents)
-        /// Based on mod's Masters
+        ///     List of nodes this record overwrites (Parents) Based on mod's Masters
         /// </summary>
         public IReadOnlyList<IRecordNode> Overwrites => overwrites.AsReadOnly();
 
         /// <summary>
-        /// List of nodes this record is overwritten by (Children)
-        /// Base on other mod's Masters
+        ///     List of nodes this record is overwritten by (Children) Base on other mod's Masters
         /// </summary>
         public IReadOnlyList<IRecordNode> OverwrittenBy => overwrittenBy.AsReadOnly();
 
         public IMajorRecordGetter Record { get; } = record;
 
         /// <summary>
-        /// Mod Key Operations for forcing a mod's changes or ignoring them
+        ///     Mod Key Operations for forcing a mod's changes or ignoring them
         /// </summary>
         protected IReadOnlyList<ModKeyListOperation>? ModKeys { get; } = modKeys;
 
         /// <summary>
-        /// Create the graph
+        ///     Create the graph
         /// </summary>
         /// <param name="root">Graph node pointing to parent record</param>
-        protected static void Populate (RecordNodeBase root)
+        protected static void populate (RecordNodeBase root)
         {
             var all = Global.State.LinkCache.ResolveAllContexts(root.Record.FormKey, root.Record.Registration.GetterType);
             int count = all.Count() - 2;
@@ -77,21 +65,21 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                     continue;
                 }
 
-                var node = root.CreateChild(all.ElementAt(i), root.ModKeys);
+                var node = root.createChild(all.ElementAt(i), root.ModKeys);
                 int index = Global.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
 
                 Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
 
                 var masters = Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
 
-                // If last entry in load order but has no masters it must be an existing GSP patch record,
-                // so link it to previous winner.
+                // If last entry in load order but has no masters it must be an existing GSP patch
+                // record, so link it to previous winner.
                 if (i == 0 && !masters.Any())
                     masters = [all.ElementAt(1).ModKey];
 
                 foreach (var nodeMaster in masters)
                 {
-                    if (root.TryFindRecord(nodeMaster, out var nodeOverwrites))
+                    if (root.tryFindRecord(nodeMaster, out var nodeOverwrites))
                     {
                         Global.TraceLogger?.WriteLine($"{nodeOverwrites.ModKey} overwritten by {node.ModKey}");
                         nodeOverwrites.overwrittenBy.Add(node);
@@ -105,23 +93,23 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             }
         }
 
-        protected void CleanUp ()
+        protected void cleanUp ()
         {
             foreach (var a in overwrites)
             {
                 foreach (var b in a.overwrites)
                 {
-                    b.RemoveOverwrittenBy(this);
+                    b.removeOverwrittenBy(this);
                 }
             }
 
             foreach (var c in overwrittenBy.ToArray())
-                c.CleanUp();
+                c.cleanUp();
         }
 
-        protected abstract RecordNodeBase CreateChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
+        protected abstract RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
 
-        protected void Print (string line)
+        protected void print (string line)
         {
             if (!string.IsNullOrEmpty(line))
                 line += " < ";
@@ -134,10 +122,19 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             }
 
             foreach (var node in overwrittenBy)
-                node.Print(line);
+                node.print(line);
         }
 
-        protected bool TryFindRecord (ModKey modKey, [NotNullWhen(true)] out RecordNodeBase? result)
+        private void removeOverwrittenBy (RecordNodeBase recordGraph)
+        {
+            if (overwrittenBy.Remove(recordGraph) && overwrittenBy.Count == 0)
+                throw new Exception("Houston, I think we have a problem!");
+
+            foreach (var o in overwrites)
+                o.removeOverwrittenBy(recordGraph);
+        }
+
+        private bool tryFindRecord (ModKey modKey, [NotNullWhen(true)] out RecordNodeBase? result)
         {
             result = null;
             if (ModKey == modKey)
@@ -148,20 +145,11 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             foreach (var node in overwrittenBy)
             {
-                if (node.TryFindRecord(modKey, out result))
+                if (node.tryFindRecord(modKey, out result))
                     return true;
             }
 
             return false;
-        }
-
-        private void RemoveOverwrittenBy (RecordNodeBase recordGraph)
-        {
-            if (overwrittenBy.Remove(recordGraph) && overwrittenBy.Count == 0)
-                throw new Exception("Houston, I think we have a problem!");
-
-            foreach (var o in overwrites)
-                o.RemoveOverwrittenBy(recordGraph);
         }
     }
 }

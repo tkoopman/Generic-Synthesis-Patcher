@@ -11,8 +11,8 @@ namespace GenericSynthesisPatcher.Json.Operations
 {
     public class FormKeyListOperation<TMajor> : FormKeyListOperation where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
-        private bool exists = false;
-        private bool existsChecked = false;
+        private bool exists;
+        private bool existsChecked;
 
         public FormKeyListOperation (string? value) : base(value)
         {
@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Json.Operations
         public override FormKeyListOperation<TMajor> Inverse () => (FormKeyListOperation<TMajor>)base.Inverse();
 
         /// <summary>
-        /// Returns link getter but only if to a valid record.
+        ///     Returns link getter but only if to a valid record.
         /// </summary>
         /// <returns>Null if FormKey doesn't resolve to a record of type TMajor</returns>
         public virtual IFormLinkGetter<TMajor>? ToLinkGetter ()
@@ -43,7 +43,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             return exists ? Value.ToLinkGetter<TMajor>() : null;
         }
 
-        protected override FormKey ConvertValue (string? value)
+        protected override FormKey convertValue (string? value)
         {
             if (value == null)
                 return FormKey.Null;
@@ -69,7 +69,7 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public override FormKeyListOperation Inverse () => (FormKeyListOperation)base.Inverse();
 
-        protected override FormKey ConvertValue (string? value)
+        protected override FormKey convertValue (string? value)
             => value == null ? FormKey.Null
              : FormKey.TryFactory(Mod.FixFormKey(value), out var formKey) ? formKey
              : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");

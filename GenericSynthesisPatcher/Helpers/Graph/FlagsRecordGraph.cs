@@ -8,7 +8,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class FlagsRecordGraph : FlagsRecordNode, IRecordNode
     {
-        protected FlagsRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
+        private FlagsRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
         {
         }
 
@@ -16,29 +16,29 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         {
             var modKeys = proKeys.Rule.Merge[proKeys.RuleKey];
 
-            var master = Mod.FindOriginContext(proKeys.Context);
-
-            if (master == null)
+            if (proKeys.Context.IsMaster())
             {
                 Global.TraceLogger?.WriteLine("No record overwrites found");
                 return null;
             }
 
+            var master = Mod.FindOriginContext(proKeys.Context);
+
             var root = new FlagsRecordGraph(master, modKeys, proKeys.Property.PropertyName);
-            Populate(root);
+            populate(root);
 
             if (Global.TraceLogger != null)
             {
                 Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
-                root.Print(string.Empty);
+                root.print(string.Empty);
             }
 
-            root.CleanUp();
+            root.cleanUp();
 
             if (Global.TraceLogger != null)
             {
                 Global.TraceLogger?.WriteLine("Graph Post Cleanup");
-                root.Print(string.Empty);
+                root.print(string.Empty);
             }
 
             return root;
@@ -46,13 +46,13 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
         public bool Merge (out Enum newValue)
         {
-            if (!Merge(-1, out _, out _, out _))
+            if (!performMerge(-1, out _, out _, out _))
             {
                 newValue = (Enum)Enum.ToObject(Type, 0);
                 return false;
             }
 
-            newValue = (Enum)Enum.ToObject(Type, workingList);
+            newValue = (Enum)Enum.ToObject(Type, WorkingFlags);
             return true;
         }
     }

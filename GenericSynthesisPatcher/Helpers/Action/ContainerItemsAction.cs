@@ -29,7 +29,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-                    => left is IContainerEntryGetter l
+            => left is IContainerEntryGetter l
             && right is IContainerEntryGetter r
             && l.Item.Item.FormKey.Equals(r.Item.Item.FormKey)
             && l.Item.Count == r.Item.Count;

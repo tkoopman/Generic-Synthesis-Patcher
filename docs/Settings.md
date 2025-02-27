@@ -31,7 +31,7 @@ These filters can be used when creating a rule or group.
 >**<font color="green">Masters</font>**: List of mod names ("Skyrim.esm"). Original record must come from one of these master mods to match.  
 To change to a list of masters to exclude, use "!Masters" instead.
 
->**<font color="green">PatchedBy</font>**: List of mod names ("unofficial skyrim special edition patch.esp"). By default this is an OR check, so record must of been patched by just one of these mods to match.  
+>**<font color="green">PatchedBy</font>**: List of mod names ("unofficial skyrim special edition patch.esp"). By default this is an OR check, so record must of been patched by one or more of these mods to match.  
 Replace "PatchedBy" with
 - "!PatchedBy": Exclude if matched by any listed mod.
 - "^PatchedBy": XOR. Be patched by exactly one of the listed mods.
@@ -121,59 +121,84 @@ If field selected is a <font color="blue">list</font> then:
 This will forward fields from a parent that the current winning record.  
 By default this is just a straight replace including if it is a list field like Items. It doesn't do any merging.
 
->**<font color="green">ForwardIndexedByField</font>**: This changes how the contents of the Forward action is defined.  
-By default or with this set to false, it is "Mod.esp" : ["field1", ...].  
-Setting this to true changes it to "field":["Mod1.esp", "Mod2.esp", ....].  
-Depending on what you are doing one or the other may be more efficient for you to read. Inside the patcher both produce the same result.  
-If used with ForwardType of Default, as only a single mods value would be copied over it will pick a mod from the list to forward that contains this record.
-Some settings may require this to be True. In those cases you can still just exclude this from the config as they will auto set it. However if you include it you must have it set correctly else you will get an error.  
-Below example will forward record from PrvtI_HeavyArmory.esp unless it doesn't contain the record in which case Immersive Weapons.esp will be tried.
-
-        {
-            "types": [ "NPC" ],
-            "OnlyIfDefault": true,
-            "ForwardIndexedByField": true,
-            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
-        }
-
->**<font color="green">ForwardType</font>**: ForwardType can change how Forwarding actions work. Following valid options:  
+>**<font color="green">ForwardOptions</font>**: ForwardOptions can change how Forward actions work. Multiple options can be combined. Following are the valid options:  
 - **<font color="green">Default</font>**: Will replace winning with value from forwarding mod as described above.  
+
 - **<font color="green">SelfMasterOnly</font>**: This is only relevant when forwarding changes from lists of FormIDs. This includes Keywords.  
-It will only add new FormIDs to lists if FormID is from the same Forwarding Mod.  
-It will not remove any current items from winning records.  
-Other field types will just behave like they do in Default.  
+It will only add new FormIDs to lists if FormID is from the same mod that you are forwarding from.  
+It will not remove any current items from winning records. If however it is combined with the Default option, then the first mod in the list will perform the Default forward, while all other listed mods will perform SelfMasterOnly.  
 Below example would make sure any cloaks that "Cloaks - Dawnguard.esp" added to outfits would be added to winning records if it was removed by another patch.
 However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:Dawnguard.esm] that the original Cloaks.esp removed would not be forwarded.
 
         {
             "types": "Outfit",
             "Masters": "Dawnguard.esm",
-            "ForwardType": "SelfMasterOnly",
+            "ForwardOptions": ["SelfMasterOnly"],
             "Forward": { "Cloaks - Dawnguard.esp": "Items" }
         }
 
-- **<font color="green">DefaultThenSelfMasterOnly</font>**: This combines the two options above. This requires ForwardIndexedByField = true.  
+- **<font color="green">IndexedByField</font>**: This changes how the contents of the Forward action is defined.  
+By default, it is "Mod.esp" : ["field1", ...].  
+Setting this to true changes it to "field":["Mod1.esp", "Mod2.esp", ....].  
+Depending on what you are doing one or the other may be more efficient for you to read. Inside the patcher both produce the same result.  
+If used with ForwardOption of Default, as only a single mods value would be copied over it will pick the first mod from the list that contains this record.
+Below example will forward record from PrvtI_HeavyArmory.esp unless it doesn't contain the record in which case Immersive Weapons.esp will be tried.
+
+        {
+            "types": [ "NPC" ],
+            "OnlyIfDefault": true,
+            "ForwardOptions": ["IndexedByField"],
+            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+        }
+
+- **<font color="green">NonDefault</font>**: When performing a Default forward with multiple mods listed, will exclude picking a mod that would set the value back to it's original value defined in the master.  
+Automatically adds Default and IndexedByField options.  
+Ignored if used with SelfMasterOnly.
+
+- **<font color="green">NonNull</font>**: When performing a Default forward with multiple mods listed, will exclude picking a mod that would set the value to null or equivalent (Empty string, 0).  
+Automatically adds Default and IndexedByField options.  
+Ignored if used with SelfMasterOnly.
+
+- **<font color="green">Sort</font>**: Sorts mods listed by load order priority, with higher priority at the start. Useful when leaving mods empty, which would add every mod in load order to the list.  
+Automatically adds IndexedByField option.
+
+- **<font color="green">HPU</font>**: This one complex for me to explain in full. Firstly had troubles coming up with name so for now it is Highest Priority Unique (HPU).  
+This could be seen as the "Merge" for non list fields, and on that HPU is invalid on list fields that implement the Merge action.  
+Basically HPU will look at all values a record's field has had across all mods, and find the highest priority unique value. However it does respect defined Masters of mods.
+So if a patch mod has defined Master(s) then patch record's value will still be used for those defined master(s) even if setting it back to previous value.  
+This is mainly for record types that are often validly included in mods but not changed like Worldspace and Cell records.  
+Automatically adds Default and IndexedByField options.
+
+- **<font color="green">Random</font>**: For selecting a random mod to forward. If used with Sort, then mod order is sorted into a random order once and that order applied to all records for this field (Normal picking of which mod to use from the random order still applies).  
+Without Sort then a random mod will be picked per record. If you have multiple forward fields with same list of mods, each field does random independently. 
+Automatically adds Default and IndexedByField options.  
+Crazy if used with SelfMasterOnly and Sort (Which mod is first and as such does the Default forward would be random), ignored if just used with SelfMasterOnly.
+Below example is the random version of the above example for IndexedByField.
+
+        {
+            "types": [ "NPC" ],
+            "OnlyIfDefault": true,
+            "ForwardOptions": "DefaultRandom",
+            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+        }
+
+- **<font color="green">DefaultThenSelfMasterOnly</font>**: Combination alias for selecting the Default, SelfMasterOnly and IndexedByField.
 The first mod listed for a field will use the Default method. All others will follow using the SelfMasterOnly method.  
-NOTE: The first mod must successfully, by finding the record in that mod, and if OnlyIfDefault set, pass that check, else it will not apply any of the SelfMasterOnly forwards.
+NOTE: The first mod must contain the record and if OnlyIfDefault set, pass that check, else it will not apply any of the SelfMasterOnly forwards.
 All other mods do not check OnlyIfDefault, and can fail to find matching record without stopping the processing of other mods.
 
         {
             "types": [ "Outfit" ],
             "Masters": "Dawnguard.esm",
-            "ForwardType": "DefaultThenSelfMasterOnly",
+            "ForwardOptions": "DefaultThenSelfMasterOnly",
             "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
         }
 
-- **<font color="green">DefaultRandom</font>**: This requires ForwardIndexedByField = true, however instead of picking the first valid mod to forward it will pick a random valid mod from the list.  
-The randomness is seeded for each rule, field & record combination so unless you change the rule you should get the same results each time.  
-Below example is the random version of the above example for ForwardIndexedByField. Changing the order of the listed mods, will change the seed used for randomness.
 
-        {
-            "types": [ "NPC" ],
-            "OnlyIfDefault": true,
-            "ForwardType": "DefaultRandom",
-            "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
-        }
+
+>**<font color="red">ForwardIndexedByField</font>**: This has been deprecated in v2.0, and will be removed in a future version. You should use ForwardOptions instead.
+
+>**<font color="red">ForwardType</font>**: This has been deprecated in v2.0, and will be removed in a future version. You should use ForwardOptions instead.
 
 ### Merge
 
@@ -250,7 +275,7 @@ If used on a group it will only enable the Debug/Trace logging for the filters d
         {
             "types": [ "NPC" ],
             "OnlyIfDefault": true,
-            "ForwardType": "DefaultRandom",
+            "ForwardOptions": "DefaultRandom",
             "Debug": true,
             "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
         }

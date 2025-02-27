@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
@@ -45,11 +46,12 @@ namespace GenericSynthesisPatcher.Json.Converters
                     if (argb.Success)
                     {
                         return Color.FromArgb(
-                            argb.Groups.ContainsKey("a") ? byte.Parse(argb.Groups["a"].Value, System.Globalization.NumberStyles.HexNumber) : byte.MaxValue,
-                            byte.Parse(argb.Groups["r"].Value, System.Globalization.NumberStyles.HexNumber),
-                            byte.Parse(argb.Groups["g"].Value, System.Globalization.NumberStyles.HexNumber),
-                            byte.Parse(argb.Groups["b"].Value, System.Globalization.NumberStyles.HexNumber));
+                            argb.Groups.ContainsKey("a") ? byte.Parse(argb.Groups["a"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture) : byte.MaxValue,
+                            byte.Parse(argb.Groups["r"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture),
+                            byte.Parse(argb.Groups["g"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture),
+                            byte.Parse(argb.Groups["b"].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture));
                     }
+
                     var color = Color.FromName(str);
 
                     if (color.IsKnownColor)

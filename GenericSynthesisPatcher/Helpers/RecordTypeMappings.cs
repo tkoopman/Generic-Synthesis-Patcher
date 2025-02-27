@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Loqui;
 
 using Mutagen.Bethesda;
@@ -19,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers
         static RecordTypeMappings ()
         {
             List<RecordTypeMapping> all = [];
-            #pragma warning disable format
+#pragma warning disable format
             all.Add(Add(IAcousticSpaceGetter.StaticRegistration,          () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AcousticSpace().WinningContextOverrides()));
             all.Add(Add(IActionRecordGetter.StaticRegistration,           () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ActionRecord().WinningContextOverrides()));
             all.Add(Add(IActivatorGetter.StaticRegistration,              () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Activator().WinningContextOverrides()));
@@ -117,6 +119,7 @@ namespace GenericSynthesisPatcher.Helpers
             all.Add(Add(ISoundOutputModelGetter.StaticRegistration,       () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SoundOutputModel().WinningContextOverrides()));
             all.Add(Add(ISpellGetter.StaticRegistration,                  () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Spell().WinningContextOverrides()));
             all.Add(Add(IStaticGetter.StaticRegistration,                 () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Static().WinningContextOverrides()));
+
             //all.Add(Add(IStoryManagerBranchNodeGetter.StaticRegistration, () => []));
             //all.Add(Add(IStoryManagerEventNodeGetter.StaticRegistration,  () => []));
             //all.Add(Add(IStoryManagerQuestNodeGetter.StaticRegistration,  () => []));
@@ -130,7 +133,7 @@ namespace GenericSynthesisPatcher.Helpers
             all.Add(Add(IWeatherGetter.StaticRegistration,                () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Weather().WinningContextOverrides()));
             all.Add(Add(IWordOfPowerGetter.StaticRegistration,            () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().WordOfPower().WinningContextOverrides()));
             all.Add(Add(IWorldspaceGetter.StaticRegistration,             () => Global.State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Worldspace().WinningContextOverrides()));
-            #pragma warning restore format
+#pragma warning restore format
 
             All = all.AsReadOnly();
         }
@@ -170,6 +173,7 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryFindByType (Type type, out RecordTypeMapping mapping)
             => ByType.TryGetValue(type, out mapping);
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static RecordTypeMapping Add (ILoquiRegistration staticRegistration, WinningContextOverridesDelegate getWinningContexts)
         {
             var map = new RecordTypeMapping(staticRegistration, getWinningContexts);

@@ -1,7 +1,9 @@
+using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -10,7 +12,7 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
-    internal class EnumsAction : IRecordAction
+    public class EnumsAction : IRecordAction
     {
         public static readonly EnumsAction Instance = new();
         private const int ClassLogCode = 0x11;
@@ -57,18 +59,63 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return 1;
         }
 
+        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
+        {
+            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
+            List<Enum?> history = [];
+            int hpu = -1;
+            int hpuHistory = -1;
+
+            foreach (int i in indexes.Reverse())
+            {
+                var mc = AllRecordMods[mods.ElementAt(i)];
+
+                if (Mod.TryGetProperty<Enum>(mc.Record, proKeys.Property.PropertyName, out var curValue)
+                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
+                {
+                    int historyIndex = history.IndexOf(curValue);
+                    if (historyIndex == -1)
+                    {
+                        historyIndex = history.Count;
+                        history.Add(curValue);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
+                    }
+
+                    if (validMods is null || validMods.Contains(mc.ModKey))
+                    {
+                        // If this a valid mod to be selected then check when it's value was added
+                        // to history and if higher or equal we found new HPU.
+                        if (hpuHistory <= historyIndex)
+                        {
+                            hpu = i;
+                            hpuHistory = historyIndex;
+                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
+                        }
+                    }
+                }
+            }
+
+            return hpu;
+        }
+
         public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        public bool MatchesOrigin (ProcessingKeys proKeys)
-        {
-            var origin = proKeys.GetOriginRecord();
-            return origin != null
-                        && Mod.TryGetProperty<Enum>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
-                        && Mod.TryGetProperty<Enum>(origin, proKeys.Property.PropertyName, out var originValue)
-                        && curValue == originValue;
-        }
+        public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+            => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
+
+        /// <summary>
+        ///     Called when GSPRule.OnlyIfDefault is true
+        /// </summary>
+        /// <returns>True if Enum value matches</returns>
+        public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+            => recordContext.IsMaster()
+            || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            && curValue == originValue);
+
+        public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
         public bool MatchesRule (ProcessingKeys proKeys)
         {

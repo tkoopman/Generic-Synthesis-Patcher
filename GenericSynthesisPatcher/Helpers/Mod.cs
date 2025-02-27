@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -12,6 +13,8 @@ using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Helpers
 {
     internal static partial class Mod
@@ -19,11 +22,11 @@ namespace GenericSynthesisPatcher.Helpers
         private const int ClassLogCode = 0x02;
 
         /// <summary>
-        /// Used to clear a property back to default instance of it's type.
-        /// Good for clearing list field's by setting it back to an empty list.
-        /// Does not check if current value already set to default instance.
+        ///     Used to clear a property back to default instance of it's type. Good for clearing
+        ///     list field's by setting it back to an empty list. Does not check if current value
+        ///     already set to default instance.
         /// </summary>
-        /// <param name="patchRecord">Editable version of the record to claer property on</param>
+        /// <param name="patchRecord">Editable version of the record to clear property on</param>
         /// <param name="propertyName">Name of property to clear</param>
         /// <returns>True if successfully cleared.</returns>
         public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
@@ -50,29 +53,35 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         /// <summary>
-        /// Finds the master record of the current record context.
+        ///     Finds the master record context of the current record context.
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>Overwritten master record. Null if current record context is the master.</returns>
-        public static IMajorRecordGetter? FindOrigin (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
-            => FindOriginContext(context)?.Record;
-
-        /// <summary>
-        /// Finds the master record context of the current record context.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns>Overwritten master record's context. Null if current record context is the master.</returns>
-        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>? FindOriginContext (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
-            => !context.ModKey.Equals(context.Record.FormKey.ModKey)
+        /// <returns>
+        ///     Overwritten master record's context. Null if current record context is the master.
+        /// </returns>
+        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> FindOriginContext (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
+            => !context.IsMaster()
             && Global.State.LinkCache.TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
-            ? o : null;
+            ? o : context;
 
         /// <summary>
-        /// Adds 0 padding to String representation of a form key
+        ///     Adds 0 padding to String representation of a form key
         /// </summary>
-        /// <param name="input">String representation of a form key that may not be padded</param>
-        /// <returns>String representation of the form key with 0 padding added if required</returns>
+        /// <param name="input">
+        ///     String representation of a form key that may not be padded
+        /// </param>
+        /// <returns>
+        ///     String representation of the form key with 0 padding added if required
+        /// </returns>
         public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
+
+        /// <summary>
+        ///     Checks if random object equals null or default value.
+        /// </summary>
+        public static bool IsNullOrEmpty<T> (T value)
+            => value is string valueString ? string.IsNullOrEmpty(valueString)
+            : value is IEnumerable valueList ? !valueList.Any()
+            : value is null || value.Equals(default(T));
 
         public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         {

@@ -40,7 +40,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             return result;
         }
 
-        protected override void ValueUpdated ()
+        protected override void valueUpdated ()
         {
             if (Value != null && Value.StartsWith('/') && Value.EndsWith('/'))
                 Regex = new Regex(Value.Trim('/'), RegexOptions.IgnoreCase);
@@ -58,6 +58,6 @@ namespace GenericSynthesisPatcher.Json.Operations
         {
         }
 
-        protected override T? ConvertValue (string? value) => value != null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
+        protected override T? convertValue (string? value) => value != null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
     }
 }

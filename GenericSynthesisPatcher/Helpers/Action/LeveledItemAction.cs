@@ -37,14 +37,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (sourceRecord.ExtraData != null)
             {
-                entry.ExtraData = CreateExtraData(sourceRecord);
+                entry.ExtraData = createExtraData(sourceRecord);
             }
 
             return entry;
         }
 
         public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-                    => left is ILeveledItemEntryGetter l
+            => left is ILeveledItemEntryGetter l
             && right is ILeveledItemEntryGetter r
             && l.Data?.Count == r.Data?.Count
             && l.Data?.Level == r.Data?.Level
@@ -54,6 +54,6 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is ILeveledItemEntryGetter record ? (record.Data?.Reference.FormKey ?? default) : throw new ArgumentNullException(nameof(from));
 
-        public override string ToString (IFormLinkContainerGetter source) => source is ILeveledItemEntryGetter entry ? $"[Lvl{entry.Data?.Level}] {entry.Data?.Count}x{entry.Data?.Reference.FormKey}" : throw new InvalidCastException();
+        public override string ToString (IFormLinkContainerGetter source) => source is ILeveledItemEntryGetter entry ? $"[LVL{entry.Data?.Level}] {entry.Data?.Count}x{entry.Data?.Reference.FormKey}" : throw new InvalidCastException();
     }
 }

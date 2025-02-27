@@ -16,7 +16,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
     {
         private const int ClassLogCode = 0x18;
 
-        protected ExtraData? CreateExtraData (ILoquiObject source)
+        protected ExtraData? createExtraData (ILoquiObject source)
         {
             if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData == null)
             {

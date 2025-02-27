@@ -6,7 +6,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
     {
         public static readonly ObjectBoundsAction Instance = new();
 
-        protected override bool CompareValues (IObjectBoundsGetter? lhs, ObjectBounds? rhs)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
+        protected override bool compareValues (IObjectBoundsGetter? lhs, ObjectBounds? rhs)
         {
             if (lhs == null && rhs == null)
                 return true;
@@ -19,16 +20,13 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 lhs.Second.Equals(rhs.Second);
         }
 
-        protected override ObjectBounds? GetSetter (IObjectBoundsGetter? getter)
-        {
-            if (getter == null)
-                return null;
-
-            return new ObjectBounds
+        protected override ObjectBounds? getSetter (IObjectBoundsGetter? getter)
+            => getter == null
+            ? null
+            : new ObjectBounds
             {
                 First = getter.First,
                 Second = getter.Second
             };
-        }
     }
 }

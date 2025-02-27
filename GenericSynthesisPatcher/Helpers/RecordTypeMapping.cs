@@ -8,8 +8,6 @@ namespace GenericSynthesisPatcher.Helpers
 {
     public readonly struct RecordTypeMapping : IEquatable<RecordTypeMapping>, IEquatable<RecordType>, IEquatable<ILoquiRegistration>, IEquatable<string>
     {
-        public readonly WinningContextOverridesDelegate WinningContextOverrides;
-
         public RecordTypeMapping (ILoquiRegistration staticRegistration, WinningContextOverridesDelegate winningContextOverrides)
         {
             if (staticRegistration.GetType().GetField("TriggeringRecordType")?.GetValue(StaticRegistration) is not RecordType recordType)
@@ -19,12 +17,14 @@ namespace GenericSynthesisPatcher.Helpers
             WinningContextOverrides = winningContextOverrides;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>")]
         public delegate IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverridesDelegate ();
 
         public string FullName => StaticRegistration.Name;
         public string Name => Type.CheckedType;
         public ILoquiRegistration StaticRegistration { get; }
         public RecordType Type { get; }
+        public readonly WinningContextOverridesDelegate WinningContextOverrides { get; }
 
         public static bool operator != (RecordTypeMapping r1, RecordTypeMapping r2) => !r1.Equals(r2);
 

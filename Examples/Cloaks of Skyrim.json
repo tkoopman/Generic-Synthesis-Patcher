@@ -7,13 +7,13 @@
   {
     "types": "Outfit",
     "Masters": "Skyrim.esm",
-    "ForwardType": "SelfMasterOnly",
+    "ForwardOptions": "SelfMasterOnly",
     "Forward": { "Cloaks.esp": "Items" }
   },
   {
     "types": "Outfit",
     "Masters": "Dawnguard.esm",
-    "ForwardType": "SelfMasterOnly",
+    "ForwardOptions": "SelfMasterOnly",
     "Forward": { "Cloaks - Dawnguard.esp": "Items" }
   },
   {

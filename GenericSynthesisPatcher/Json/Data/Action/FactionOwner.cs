@@ -15,6 +15,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "RequiredRank")]
         public int RequiredRank { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (FactionOwner? l, FactionOwner? r)
         {
             if (ReferenceEquals(l, r))

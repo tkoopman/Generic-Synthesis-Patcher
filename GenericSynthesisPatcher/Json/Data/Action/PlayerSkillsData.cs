@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
@@ -29,12 +31,14 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 
         public PlayerSkillsStatsData Stats { get; set; } = new PlayerSkillsStatsData();
 
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public bool Equals (PlayerSkillsData? other)
         {
-            if (ReferenceEquals(this, other))
-                return true;
             if (other is null)
                 return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
 
             return
                 FarAwayModelDistance == other.FarAwayModelDistance &&
@@ -45,17 +49,31 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         }
 
         public bool Equals (IPlayerSkillsGetter? other)
+            => other != null
+            && (FarAwayModelDistance == null || FarAwayModelDistance == other.FarAwayModelDistance)
+            && (GearedUpWeapons == null || GearedUpWeapons == other.GearedUpWeapons)
+            && Stats.Equals(other)
+            && (SkillOffsets == null || SkillOffsets.Equals(other.SkillOffsets))
+            && (SkillValues == null || SkillValues.Equals(other.SkillValues));
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
+        public override bool Equals (object? obj)
         {
-            return
-                other != null &&
-                (FarAwayModelDistance == null || FarAwayModelDistance == other.FarAwayModelDistance) &&
-                (GearedUpWeapons == null || GearedUpWeapons == other.GearedUpWeapons) &&
-                Stats.Equals(other) &&
-                (SkillOffsets == null || SkillOffsets.Equals(other.SkillOffsets)) &&
-                (SkillValues == null || SkillValues.Equals(other.SkillValues));
+            if (obj == null)
+                return false;
+
+            if (obj is PlayerSkillsData psdObj)
+                return Equals(psdObj);
+
+            if (obj is IPlayerSkillsGetter psgObj)
+                return Equals(psgObj);
+
+            return false;
         }
 
-        public int Update (IPlayerSkills update)
+        public override int GetHashCode () => HashCode.Combine(FarAwayModelDistance, GearedUpWeapons, Stats.GetHashCode());
+
+        public int UpdateRecord (IPlayerSkills update)
         {
             int count = 0;
 
@@ -64,6 +82,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
                 count++;
                 update.FarAwayModelDistance = (float)FarAwayModelDistance;
             }
+
             if (GearedUpWeapons != null && GearedUpWeapons != update.GearedUpWeapons)
             {
                 count++;

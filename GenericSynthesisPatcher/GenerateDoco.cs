@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 
 using GenericSynthesisPatcher.Helpers;
@@ -68,9 +69,9 @@ namespace GenericSynthesisPatcher
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
         private static StringWriter sw = new();
 
-        internal static void Generate ()
+        internal static void generate ()
         {
-            CheckAliases();
+            checkAliases();
             Console.WriteLine();
 
             List<string[]> lines = [];
@@ -91,10 +92,10 @@ namespace GenericSynthesisPatcher
                     if (IgnoreProperty.Contains(prop.Name))
                         continue;
 
-                    buildRPMs.Add(CalcRPM(rtm, prop));
+                    buildRPMs.Add(calcRPM(rtm, prop));
 
                     // Check for matching RPM
-                    if (!RecordPropertyMappings.TryFindMapping(rtm.StaticRegistration.GetterType, prop.Name, out var rpm))
+                    if (!RecordPropertyMappings.tryFindMapping(rtm.StaticRegistration.GetterType, prop.Name, out var rpm))
                     {
                         // Include Unimplemented
                         //Properties.Add([$"*{prop.Name}", "", "-----", prop.PropertyType.GetClassName(), ""]);
@@ -128,7 +129,6 @@ namespace GenericSynthesisPatcher
                         ]);
 
                     var baseType = actionType.GetIfGenericTypeDefinition();
-                    var subType = actionType.GetIfUnderlyingType();
 
                     if (actionType == typeof(ConvertibleAction<string>))
                     {
@@ -177,15 +177,15 @@ namespace GenericSynthesisPatcher
                     }
                     else if (actionType == typeof(FlagsAction))
                     {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
+                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : prop.PropertyType;
 
-                        string[] flags = Enum.GetNames(type ?? throw new Exception($"Failed to get flags - {rtm.Name} - {rpm.PropertyName}"));
+                        string[] flags = Enum.GetNames(type);
                         desc = $"Flags ({string.Join(", ", flags)})";
                         exam = (flags.Length > 1) ? $"\"{rpm.PropertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{rpm.PropertyName}\": \"{flags.First()}\"";
                     }
                     else if (actionType == typeof(EnumsAction))
                     {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
+                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : prop.PropertyType;
                         string[] values = Enum.GetNames(type);
                         desc = $"Possible values ({string.Join(", ", values)})";
                         exam = $"\"{rpm.PropertyName}\": \"{values.First()}\"";
@@ -228,16 +228,27 @@ namespace GenericSynthesisPatcher
                     else if (actionType == typeof(PlayerSkillsAction))
                     {
                         desc = "JSON object containing the values under PlayerSkills you want to set";
-                        exam = $"See ../Examples/NPC Player Skills.json";
+                        exam = "See ../Examples/NPC Player Skills.json";
                     }
                     else if (actionType == typeof(MemorySliceByteAction))
                     {
                         desc = "Memory slice in form of array of bytes";
-                        exam = $"[0x1A,0x00,0x3F]";
+                        exam = $"\"{rpm.PropertyName}\": [0x1A,0x00,0x3F]";
+                    }
+                    else if (actionType == typeof(WorldspaceMaxHeightAction))
+                    {
+                        desc = "Forward Worldspace Max Height data.";
+                        exam = """[{ "types": ["Worldspace"], "ForwardOptions": ["HPU", "NonNull"], "Forward": { "MHDT": [] }}]""";
+                    }
+                    else if (actionType == typeof(CellMaxHeightDataAction))
+                    {
+                        desc = "Forward Cell Max Height data.";
+                        exam = """[{ "types": ["Cell"], "ForwardOptions": ["HPU", "NonNull"], "Forward": { "MHDT": [] }}]""";
                     }
 
                     if (desc == null)
-                        throw new Exception("Fix Missing Doco");
+                        throw new Exception("Fix missing description");
+
                     //desc ??= "????";
 
                     Properties.Add([rpm.PropertyName, string.Join(';', names), MFFSM, desc, exam]);
@@ -250,7 +261,7 @@ namespace GenericSynthesisPatcher
 
                     sw.WriteLine();
                     string h = rtm.Name;
-                    h += rtm.Name.Equals(rtm.FullName) ? "" : $" - {rtm.FullName}";
+                    h += rtm.Name.Equals(rtm.FullName, StringComparison.Ordinal) ? "" : $" - {rtm.FullName}";
                     sw.WriteLine($"## {h}");
                     sw.WriteLine();
 
@@ -262,7 +273,7 @@ namespace GenericSynthesisPatcher
                     foreach (string[] row in Properties)
                         lines.Add(row);
 
-                    PrintTableRow(lines);
+                    printTableRow(lines);
                     lines = [];
 
                     // Footer
@@ -280,18 +291,18 @@ namespace GenericSynthesisPatcher
             lines.Add(["-", "-"]);
             foreach (var rtm in ImplementedRTMs)
             {
-                string anchor = rtm.Name.ToLower();
+                string anchor = rtm.Name.ToLower(CultureInfo.InvariantCulture);
                 string fullName = "";
                 if (!rtm.Name.Equals(rtm.FullName, StringComparison.OrdinalIgnoreCase))
                 {
                     fullName = rtm.FullName;
-                    anchor += "---" + fullName.ToLower();
+                    anchor += "---" + fullName.ToLower(CultureInfo.InvariantCulture);
                 }
 
                 lines.Add([$"[{rtm.Name}](Fields.md#{anchor})", fullName]);
             }
 
-            PrintTableRow(lines);
+            printTableRow(lines);
             lines = [];
 
             // Write Types and Implemented Properties to Temp File
@@ -310,12 +321,13 @@ namespace GenericSynthesisPatcher
 
             //var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
             var notImplemented = buildRPMs.Where(r => r.Item3 == null).GroupBy(g => g.Item4).Select(g => new { PropertyType = g.Key, RecordTypes = g.Select(r => $"{r.Item1.GetClassName()}.{r.Item2}") }).ToList();
+
             // Sort by uses then name
             notImplemented.Sort((l, r) =>
             {
                 int i = l.RecordTypes.Count().CompareTo(r.RecordTypes.Count());
                 if (i == 0)
-                    i = l.PropertyType.GetClassName().CompareTo(r.PropertyType.GetClassName());
+                    i = string.Compare(l.PropertyType.GetClassName(), r.PropertyType.GetClassName(), StringComparison.Ordinal);
 
                 return i;
             });
@@ -334,7 +346,7 @@ namespace GenericSynthesisPatcher
                 if (rpm.Types.Count() < 3)
                 {
                     var types = rpm.Types.ToList();
-                    types.Sort(static (l, r) => l.Name.CompareTo(r.Name));
+                    types.Sort(static (l, r) => string.Compare(l.Name, r.Name, StringComparison.Ordinal));
                     foreach (var type in types)
                         lines.Add([$"Add(typeof({type.Name})", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
                 }
@@ -346,22 +358,24 @@ namespace GenericSynthesisPatcher
 
             lines.Sort(static (l, r) =>
             {
-                int comp = string.Compare(l[1], r[1], true);
+                int comp = string.Compare(l[1], r[1], StringComparison.OrdinalIgnoreCase);
                 if (comp != 0)
                     return comp;
 
                 if (l[0] == "Add(null")
                     return 1;
 
+#pragma warning disable IDE0046 // Convert to conditional expression
                 if (r[0] == "Add(null")
                     return -1;
+#pragma warning restore IDE0046 // Convert to conditional expression
 
-                return string.Compare(l[0], r[0], true);
+                return string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase);
             });
 
             sw = new();
 
-            PrintTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
+            printTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
             using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_RPM.txt"), false);
             rpmFW.Write(sw.ToString());
             rpmFW.Close();
@@ -370,11 +384,11 @@ namespace GenericSynthesisPatcher
             //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSP_RPM.txt")}\"");
         }
 
-        private static (Type type, string name, string? iAction, Type propertyType) CalcRPM (RecordTypeMapping rtm, PropertyInfo propertyInfo)
+        private static (Type type, string name, string? iAction, Type propertyType) calcRPM (RecordTypeMapping rtm, PropertyInfo propertyInfo)
         {
             string name = propertyInfo.Name;
             string? actionClass = null;
-            var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
+            var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ??  throw new Exception("WTF - This not meant to happen") : propertyInfo.PropertyType;
 
             var mainType = type.GetIfGenericTypeDefinition();
             var subType = type.GetIfUnderlyingType()?.GetIfGenericTypeDefinition();
@@ -385,7 +399,9 @@ namespace GenericSynthesisPatcher
                 actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? nameof(EnumsAction) : nameof(FlagsAction);
             }
             else if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
+            {
                 actionClass = $"{nameof(ConvertibleAction<string>)}<string>";
+            }
             else if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
             {
                 string? n = type.Name switch
@@ -406,19 +422,39 @@ namespace GenericSynthesisPatcher
                     actionClass = $"{nameof(ConvertibleAction<byte>)}<{n}>";
             }
             else if (type == typeof(Percent))
+            {
                 actionClass = typeof(BasicAction<Percent>).GetClassName();
+            }
             else if (type == typeof(Color))
+            {
                 actionClass = typeof(BasicAction<Color>).GetClassName();
+            }
             else if (type.IsAssignableTo(typeof(IObjectBoundsGetter)))
+            {
                 actionClass = typeof(ObjectBoundsAction).GetClassName();
+            }
             else if (type.IsAssignableTo(typeof(IPlayerSkillsGetter)))
+            {
                 actionClass = typeof(PlayerSkillsAction).GetClassName();
+            }
+            else if (type == typeof(WorldspaceMaxHeight))
+            {
+                actionClass = typeof(WorldspaceMaxHeightAction).GetClassName();
+            }
+            else if (type == typeof(CellMaxHeightData))
+            {
+                actionClass = typeof(CellMaxHeightDataAction).GetClassName();
+            }
             else if (type == typeof(MemorySlice<byte>))
+            {
                 actionClass = typeof(MemorySliceByteAction).GetClassName();
+            }
             else if (subType != null)
             {
                 if (mainType.IsAssignableTo(typeof(IFormLink<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullable<>)))
+                {
                     actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
+                }
                 else if (mainType.IsAssignableTo(typeof(ExtendedList<>)))
                 {
                     if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
@@ -443,13 +479,13 @@ namespace GenericSynthesisPatcher
             return (rtm.StaticRegistration.GetterType, name, actionClass, type);
         }
 
-        private static void CheckAliases ()
+        private static void checkAliases ()
         {
             var AllAliases = RecordPropertyMappings.AllAliases;
             var grouped = AllAliases.GroupBy(x => x.PropertyName).Where(g => g.Count() > 1).ToList();
 
-            // Check for typed RPMs that match existing null typed
-            // Also remove any groups that contain null typed after checking as no longer required
+            // Check for typed RPMs that match existing null typed Also remove any groups that
+            // contain null typed after checking as no longer required
             foreach (var g in grouped.ToArray().Where(g => g.Any(x => x.Type == null)))
             {
                 string nullRPM = g.First(x => x.Type == null).RealPropertyName;
@@ -467,7 +503,8 @@ namespace GenericSynthesisPatcher
                 _ = grouped.Remove(g);
             }
 
-            // Check for if one alias mapping is dominant over others so could maybe create null typed for that subset
+            // Check for if one alias mapping is dominant over others so could maybe create null
+            // typed for that subset
             foreach (var g in grouped)
             {
                 var gg = g.GroupBy(x => x.RealPropertyName).Select(x => new { RealPropertyName = x.Key, Count = x.Count(), Types = x.Select(y => y.Type?.GetClassName()) });
@@ -484,7 +521,7 @@ namespace GenericSynthesisPatcher
             }
         }
 
-        private static void PrintTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)
+        private static void printTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)
         {
             if (lines.Count == 0 || lines.Any(v => v.Length != lines[0].Length))
                 throw new Exception("Nope! Try again");

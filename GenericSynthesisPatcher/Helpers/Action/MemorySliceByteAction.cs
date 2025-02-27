@@ -6,8 +6,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
     {
         public static readonly MemorySliceByteAction Instance = new();
 
-        protected override bool CompareValues (ReadOnlyMemorySlice<byte> lhs, MemorySlice<byte> rhs) => lhs.SequenceEqual(rhs);
+        protected override bool compareValues (ReadOnlyMemorySlice<byte> lhs, MemorySlice<byte> rhs) => lhs.SequenceEqual(rhs);
 
-        protected override MemorySlice<byte> GetSetter (ReadOnlyMemorySlice<byte> getter) => new MemorySlice<byte>([.. getter]);
+        protected override MemorySlice<byte> getSetter (ReadOnlyMemorySlice<byte> getter) => new([.. getter]);
     }
 }

@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
@@ -66,11 +67,50 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return -1;
                 }
 
-                return Fill(proKeys, curValue, formKey.ToLinkGetter());
+                return performFill(proKeys, curValue, formKey.ToLinkGetter());
             }
 
             Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
             return -1;
+        }
+
+        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
+        {
+            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
+            List<FormKey?> history = [];
+            int hpu = -1;
+            int hpuHistory = -1;
+
+            foreach (int i in indexes.Reverse())
+            {
+                var mc = AllRecordMods[mods.ElementAt(i)];
+
+                if (Mod.TryGetProperty<IFormLinkGetter<TMajor>>(mc.Record, proKeys.Property.PropertyName, out var curValue)
+                    && (!nonNull || (curValue is not null && !curValue.IsNull)))
+                {
+                    int historyIndex = history.IndexOf(curValue?.FormKey);
+                    if (historyIndex == -1)
+                    {
+                        historyIndex = history.Count;
+                        history.Add(curValue?.FormKey);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
+                    }
+
+                    if (validMods is null || validMods.Contains(mc.ModKey))
+                    {
+                        // If this a valid mod to be selected then check when it's value was added
+                        // to history and if higher or equal we found new HPU.
+                        if (hpuHistory <= historyIndex)
+                        {
+                            hpu = i;
+                            hpuHistory = historyIndex;
+                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
+                        }
+                    }
+                }
+            }
+
+            return hpu;
         }
 
         public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
@@ -79,7 +119,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             {
                 return Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
                     && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
-                    ? Fill(proKeys, curValue, newValue)
+                    ? performFill(proKeys, curValue, newValue)
                     : -1;
             }
 
@@ -89,18 +129,25 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        public bool MatchesOrigin (ProcessingKeys proKeys)
-        {
-            var origin = proKeys.GetOriginRecord();
-            return origin != null
-                        && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var curValue)
-                        && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(origin, proKeys.Property.PropertyName, out var originValue)
-                        && !(curValue == null ^ originValue == null)
-                        && !(curValue != null ^ originValue != null)
-                        && ((curValue == null && originValue == null)
-                           || (curValue != null && originValue != null && curValue.FormKey.Equals(originValue.FormKey)));
-        }
+        public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+            => !Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || curValue.IsNull;
 
+        /// <summary>
+        ///     Called when GSPRule.OnlyIfDefault is true
+        /// </summary>
+        /// <returns>True if form link matches</returns>
+        public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+            => recordContext.IsMaster()
+            || (Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+                && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+                && !(curValue == null ^ originValue == null)
+                && !(curValue != null ^ originValue != null)
+                && ((curValue == null && originValue == null)
+                    || (curValue != null && originValue != null && curValue.FormKey.Equals(originValue.FormKey))));
+
+        public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public bool MatchesRule (ProcessingKeys proKeys)
         {
             if (proKeys.RuleKey.Operation != FilterLogic.OR)
@@ -126,7 +173,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
-        private static int Fill (ProcessingKeys proKeys, IFormLinkGetter<TMajor>? curValue, IFormLinkGetter<TMajor>? newValue)
+        private static int performFill (ProcessingKeys proKeys, IFormLinkGetter<TMajor>? curValue, IFormLinkGetter<TMajor>? newValue)
         {
             if (curValue != null && newValue != null && curValue.FormKey.Equals(newValue.FormKey))
             {

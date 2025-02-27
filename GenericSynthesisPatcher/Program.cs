@@ -1,10 +1,10 @@
-using System.Collections.Frozen;
 using System.Data;
 
 using DynamicData;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
+using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Cache;
+using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 
@@ -24,14 +26,18 @@ namespace GenericSynthesisPatcher
     public partial class Program
     {
         private const int ClassLogCode = 0x01;
+
+        /// <summary>
+        ///     Record of all record properties that have been updated. Used to detect when a
+        ///     property is updated by 2 different processes.
+        /// </summary>
         private static readonly List<(RecordTypeMapping Type, FormKey FormKey, GSPRule Rule, RecordPropertyMapping Rpm, int Changes)> RecordUpdates = [];
-        private static IReadOnlyList<RecordTypeMapping> EnabledTypes = [];
 
         public static async Task<int> Main (string[] args)
         {
             if (args.Length == 0)
             {
-                GenerateDoco.Generate();
+                GenerateDoco.generate();
                 return 0;
             }
             else
@@ -58,7 +64,7 @@ namespace GenericSynthesisPatcher
                     ));
             }
 
-            var Rules = LoadRules();
+            var (Rules, EnabledTypes) = loadRules();
             if (Rules.Count == 0)
                 return;
 
@@ -87,7 +93,7 @@ namespace GenericSynthesisPatcher
                         {
                             if (proKeys.IsRule)
                             {
-                                int changed = ProcessRule(proKeys);
+                                int changed = processRule(proKeys);
                                 if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                 {
                                     counts.Matched++;
@@ -111,7 +117,7 @@ namespace GenericSynthesisPatcher
                                     count++;
                                     if (groupRule.Matches(gProKeys))
                                     {
-                                        int changed = ProcessRule(gProKeys);
+                                        int changed = processRule(gProKeys);
                                         if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                                         {
                                             counts.Matched++;
@@ -172,20 +178,76 @@ namespace GenericSynthesisPatcher
             }
 
             if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
-            {
                 Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
-                Console.WriteLine();
-                Console.WriteLine($"All matches took: {MatchesHelper.Stopwatch.Elapsed:c}");
+            else
+                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+        }
+
+        /// <summary>
+        ///     Returns index to be forwarded. As mods already either sorted or randomized, will
+        ///     just return the first mod index that meets the NonDefault and NonNull filters
+        /// </summary>
+        /// <returns>-1 if no valid mod found, else index to use</returns>
+        private static int getIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods)
+        {
+            bool nonDefault = proKeys.Rule.HasForwardType(ForwardOptions._nonDefaultMod);
+            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
+            bool randomize = proKeys.Rule.HasForwardType(ForwardOptions._randomMod) && !proKeys.Rule.HasForwardType(ForwardOptions._sortMods);
+            int count = mods.Count();
+
+            // If nothing special to be done to filter valid mods can just return here
+            if (!nonDefault && !nonNull)
+                return randomize && count > 1 ? proKeys.GetRandom().Next(count) : 0;
+
+            var indexes = Enumerable.Range(0, count);
+
+            if (randomize)
+            {  // Randomize the order that we evaluate indexes so can still just accept first valid one
+                var r = proKeys.GetRandom();
+                indexes = indexes.OrderBy(_ => r.Next());
+            }
+
+            if (proKeys.Rule.HasForwardType(ForwardOptions._hpu))
+            {
+                var graph = ForwardRecordGraph.Create(proKeys);
+                var endNodes = graph?.GetEndNodes(mods);
+                if (endNodes is null)
+                    return -1;
+
+                Global.TraceLogger?.Log(ClassLogCode, $"End nodes: {string.Join(',', endNodes)}", propertyName: proKeys.Property.PropertyName);
+                return proKeys.Property.Action.FindHPUIndex(proKeys, mods, indexes, AllRecordMods, endNodes);
             }
             else
             {
-                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+                foreach (int i in indexes)
+                {
+                    var mc = AllRecordMods[mods.ElementAt(i)];
+
+                    if (nonNull && proKeys.Property.Action.IsNullOrEmpty(proKeys, mc))
+                        continue;
+
+                    if (nonDefault && proKeys.Property.Action.MatchesOrigin(proKeys, mc))
+                        continue;
+
+                    return i;
+                }
+
+                // If we haven't found a valid mod index then none exist and we return -1
+                return -1;
             }
         }
 
-        private static List<GSPBase> LoadRules ()
+        /// <summary>
+        ///     Loads all JSON configuration files from GSP data folder
+        /// </summary>
+        /// <returns>List of rules</returns>
+        private static (List<GSPBase>, IReadOnlyList<RecordTypeMapping>) loadRules ()
         {
+            var LoadedRules = new List<GSPBase>();
             HashSet <RecordTypeMapping> enabledTypes = [];
+
+            bool warned = false;
+
             string dataFolder = Global.Settings.Value.Folder;
             dataFolder = dataFolder.Replace("{SkyrimData}", Global.State.DataFolderPath);
             dataFolder = dataFolder.Replace("{SynthesisData}", Global.State.ExtraSettingsDataPath);
@@ -193,17 +255,16 @@ namespace GenericSynthesisPatcher
             if (!Directory.Exists(dataFolder))
             {
                 LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"Missing data folder: {dataFolder}");
-                return [];
+                return ([], []);
             }
 
-            var LoadedRules = new List<GSPBase>();
             int count = 0;
 
-            var files = Directory.GetFiles(dataFolder).Where(x => x.EndsWith(".json"));
+            var files = Directory.GetFiles(dataFolder).Where(x => x.EndsWith(".json", StringComparison.OrdinalIgnoreCase));
             int countFile = 0;
             foreach (string? f in files)
             {
-                if (f.Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json")))
+                if (f.Equals(Path.Combine(Global.State.ExtraSettingsDataPath ?? "", "settings.json"), StringComparison.OrdinalIgnoreCase))
                 {
                     LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Skipping: {f}");
                 }
@@ -227,7 +288,7 @@ namespace GenericSynthesisPatcher
                         {
                             LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Error validating rules.", rule: rule);
                             enabledTypes.Clear();
-                            return [];
+                            return ([], []);
                         }
 
                         if (rule is GSPGroup group)
@@ -237,28 +298,23 @@ namespace GenericSynthesisPatcher
 
                         LoadedRules.Add(rule);
 
-                        if (EnabledTypes != RecordTypeMappings.All)
+                        if (!warned && rule.Types.Count == RecordTypeMappings.All.Count)
                         {
-                            if (rule.Types.Count == RecordTypeMappings.All.Count)
-                            {
-                                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "Found rule with no or all defined types. For best performance you should always define at least 1 type, and only required types for the rule.");
-                                EnabledTypes = RecordTypeMappings.All;
-                            }
-                            else
-                            {
-                                enabledTypes.Add(rule.Types);
-                            }
+                            LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "Found rule with no or all defined types. For best performance you should always define at least 1 type, and only required types for the rule.");
+                            warned = true;
+                        }
+                        else
+                        {
+                            enabledTypes.Add(rule.Types);
                         }
                     }
                 }
             }
 
-            EnabledTypes = enabledTypes.ToList().AsReadOnly();
-
             if (LoadedRules.Count == 0)
             {
                 LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"No rules found in data location: {dataFolder}");
-                return [];
+                return ([], []);
             }
 
             LoadedRules.Sort();
@@ -268,10 +324,19 @@ namespace GenericSynthesisPatcher
             else
                 LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Loaded {count} total rules.");
 
-            return LoadedRules;
+            return (LoadedRules, enabledTypes.ToList().AsReadOnly());
         }
 
-        private static int ProcessFillRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
+        /// <summary>
+        ///     Process a fill rule against current record
+        /// </summary>
+        /// <param name="proKeys">Current processing keys</param>
+        /// <param name="ruleKey">Current key of current rule</param>
+        /// <returns>
+        ///     Number of updates made to current record. -1 if record didn't meet requirements for
+        ///     this rule
+        /// </returns>
+        private static int processFillRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
         {
             if (!proKeys.SetProperty(ruleKey, ruleKey.Value) || !proKeys.Property.Action.CanFill())
             {
@@ -279,14 +344,8 @@ namespace GenericSynthesisPatcher
                 return -1;
             }
 
-            if (proKeys.Rule.OnlyIfDefault)
-                Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
-
-            if (proKeys.Rule.OnlyIfDefault && !proKeys.Property.Action.MatchesOrigin(proKeys))
-            {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: proKeys.Property.PropertyName);
+            if (proKeys.CheckOnlyIfDefault())
                 return -1;
-            }
 
             Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Fill)}", propertyName: proKeys.Property.PropertyName);
             int changed = proKeys.Property.Action.Fill(proKeys);
@@ -297,133 +356,73 @@ namespace GenericSynthesisPatcher
             return changed;
         }
 
-        private static int ProcessForwardRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
+        /// <summary>
+        ///     Process a Forward rule against current record
+        /// </summary>
+        /// <param name="proKeys">Current processing keys</param>
+        /// <param name="ruleKey">Current key of current rule</param>
+        /// <returns>
+        ///     Number of updates made to current record. -1 if record didn't meet requirements for
+        ///     this rule
+        /// </returns>
+        private static int processForwardRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
         {
             // Don't waste time if record is master with no overwrites
-            if (proKeys.Context.ModKey.Equals(proKeys.Record.FormKey.ModKey))
+            if (proKeys.Context.IsMaster())
                 return -1;
 
-            if (!proKeys.Rule.TryGetForward(ruleKey, out var mods, out string[]? fields))
+            if (!proKeys.Rule.TryGetForward(proKeys, ruleKey, out var mods, out string[]? fields))
                 return -1;
 
-            var All = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType);
-            if (!All.SafeAny())
-                return -1;
+            var AllRecordMods = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => new { key = m.ModKey, value = m }).ToDictionary(x => x.key, x => x.value);
 
-            // Dictionary with key of ModKey from JSON and value of the record context or null if record not found in that mod.
-            var orderedMods = mods.Select((key,value) => new { key = key.Key, value = All.FirstOrDefault(m => m.ModKey.Equals(key.Key)) }).ToFrozenDictionary(x => x.key, x => x.value);
-
-            if (!orderedMods.Any(k => k.Value != null))
-                return -1;
+            // Make sure at list one listed mod contains record we currently processing Can't be
+            // done under TryGetForward has different for each record
+            if (proKeys.Rule.HasForwardType(ForwardOptions.SelfMasterOnly))
+            {
+                if (!mods.Any(AllRecordMods.ContainsKey))
+                    return -1;
+            }
+            else
+            {
+                // Can filter out any mods that record doesn't exist in NonDefault then we can
+                // exclude master as well
+                mods = proKeys.Rule.HasForwardType(ForwardOptions._nonDefaultMod) ? mods.Where(m => AllRecordMods.ContainsKey(m) && !proKeys.Record.FormKey.ModKey.Equals(m)) : mods.Where(AllRecordMods.ContainsKey);
+                if (!mods.Any())
+                    return -1;
+            }
 
             int changed = 0;
             foreach (string field in fields)
             {
-                if (!proKeys.SetProperty(ruleKey, field) || !proKeys.Property.Action.CanForward() || (proKeys.Rule.ForwardType.HasFlag(ForwardTypes.SelfMasterOnly) && !proKeys.Property.Action.CanForwardSelfOnly()))
+                if (!proKeys.SetProperty(ruleKey, field) || !proKeys.Property.Action.CanForward() || (proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.SelfMasterOnly) && !proKeys.Property.Action.CanForwardSelfOnly()))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Unknown / Unimplemented field for forward action type: {Enum.GetName(proKeys.Rule.ForwardType)}", propertyName: field);
+                    Global.TraceLogger?.Log(ClassLogCode, $"Unknown / Unimplemented field for forward action type: {Enum.GetName(proKeys.Rule.ForwardOptions)}", propertyName: field);
                     continue;
                 }
 
-                bool firstMod = true;
-
-                if (proKeys.Rule.HasForwardType(ForwardTypeFlags.SelfMasterOnly))
+                if (proKeys.Rule.HasForwardType(ForwardOptions.SelfMasterOnly))
                 {
-                    foreach (var mod in orderedMods)
-                    {
-                        if (proKeys.Rule.ForwardType.HasFlag(ForwardTypes.DefaultThenSelfMasterOnly))
-                        {
-                            if (firstMod)
-                            {   // First mod of DefaultThenSelfMasterOnly
-                                if (mod.Value == null) // We don't continue if first mod can't be default forwarded
-                                    break;
-
-                                if (proKeys.Rule.OnlyIfDefault)
-                                    Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
-
-                                if (proKeys.Rule.OnlyIfDefault && !proKeys.Property.Action.MatchesOrigin(proKeys))
-                                {
-                                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: proKeys.Property.PropertyName);
-                                    break;
-                                }
-
-                                Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: Default From: {mod.Value.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
-
-                                //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", propertyName: proKeys.Property.PropertyName);
-                                int changes = proKeys.Property.Action.Forward(proKeys, mod.Value);
-                                if (changes < 0)
-                                {   // If default forward fails we do not continue with the SelfMasterOnly forwards
-                                    Global.TraceLogger?.Log(ClassLogCode, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.");
-                                    break;
-                                }
-                                else
-                                {
-                                    changed += changes;
-                                    firstMod = false;
-                                }
-                            }
-                            else if (mod.Value != null)
-                            {   // All other mods in DefaultThenSelfMasterOnly - No need to check origin
-                                Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {nameof(ForwardTypes.SelfMasterOnly)} From: {mod.Value.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
-
-                                //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.ForwardSelfOnly)}", propertyName: proKeys.Property.PropertyName);
-
-                                int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, mod.Value);
-                                if (changes > 0)  // Could be -1 which we don't add to changed
-                                    changed += changes;
-                            }
-                        }
-                        else if (proKeys.Rule.ForwardType.HasFlag(ForwardTypes.SelfMasterOnly) && mod.Value != null)
-                        {   //  SelfMasterOnly
-                            if (proKeys.Rule.OnlyIfDefault)
-                                Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
-
-                            if (proKeys.HasPatchRecord && proKeys.Rule.OnlyIfDefault && !proKeys.Property.Action.MatchesOrigin(proKeys))
-                            {
-                                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: proKeys.Property.PropertyName);
-                                break;
-                            }
-
-                            Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {nameof(ForwardTypes.SelfMasterOnly)} From: {mod.Value.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
-
-                            //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.ForwardSelfOnly)}", propertyName: proKeys.Property.PropertyName);
-                            int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, mod.Value);
-                            if (changes > 0)
-                                changed += changes;
-                        }
-                        else if (mod.Value != null)
-                        {   // Should never reach here as Default already handled outside of foreach loop.
-                            throw new Exception("WTF. Code should never reach this point.");
-                        }
-                    }
+                    changed = processForwardSelfMasterOnly(proKeys, mods, AllRecordMods);
                 }
                 else
                 {   // Default Forward Type
                     // Find modContext of forwarding record
-                    var filtered = orderedMods.Where(x => x.Value != null).ToList(); // This will always return at least 1 entry due to previous checks
-                    int index = filtered.Count != 1 && proKeys.Rule.HasForwardType(ForwardTypeFlags.Random) ? proKeys.GetRandom().Next(filtered.Count) : 0;
-                    var modContext = filtered.ElementAt(index).Value ?? throw new Exception("WTF Should never hit this!");
-
-                    // If forwarding context mod is same as current lets not waste time continuing
-                    if (modContext.ModKey.Equals(proKeys.Context.ModKey))
-                    {
-                        Global.TraceLogger?.Log(ClassLogCode, "Skipping forward as cannot forward to self", propertyName: proKeys.Property.PropertyName);
+                    int index = getIndex(proKeys, mods, AllRecordMods);
+                    if (index == -1)
                         continue;
-                    }
 
-                    if (proKeys.Rule.OnlyIfDefault)
-                        Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
+                    int count = mods.Count();
 
-                    if (proKeys.Rule.OnlyIfDefault && !proKeys.Property.Action.MatchesOrigin(proKeys))
-                    {
-                        Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: proKeys.Property.PropertyName);
+                    var modContext = AllRecordMods[mods.ElementAt(index)] ?? throw new Exception("WTF Should never hit this!");
+
+                    if (proKeys.CheckOnlyIfDefault())
                         continue;
-                    }
 
-                    if (filtered.Count > 1)
-                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.ModKey.FileName}. Selected #{index + 1} from {filtered.Count} available mods.", propertyName: proKeys.Property.PropertyName);
+                    if (count > 1)
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardOptions)} From: {modContext.ModKey.FileName}. Selected #{index + 1} from {count} available mods.", propertyName: proKeys.Property.PropertyName);
                     else
-                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardType)} From: {modContext.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardOptions)} From: {modContext.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
 
                     Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", propertyName: proKeys.Property.PropertyName);
                     int changes = proKeys.Property.Action.Forward(proKeys, modContext);
@@ -438,7 +437,90 @@ namespace GenericSynthesisPatcher
             return changed;
         }
 
-        private static int ProcessMergeRecord (ProcessingKeys proKeys)
+        /// <summary>
+        ///     Process a Forward of type SelfMasterOnly rule against current record
+        /// </summary>
+        /// <param name="proKeys">Current processing keys</param>
+        /// <param name="ruleKey">Current key of current rule</param>
+        /// <returns>
+        ///     Number of updates made to current record. -1 if record didn't meet requirements for
+        ///     this rule
+        /// </returns>
+        private static int processForwardSelfMasterOnly (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods)
+        {
+            bool firstMod = true;
+            int changed = 0;
+
+            foreach (var mod in mods)
+            {
+                var forwardFrom = AllRecordMods[mod];
+                if (proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.DefaultThenSelfMasterOnly))
+                {
+                    if (firstMod)
+                    {   // First mod of DefaultThenSelfMasterOnly
+                        if (forwardFrom == null) // We don't continue if first mod can't be default forwarded
+                            break;
+
+                        if (proKeys.CheckOnlyIfDefault())
+                            break;
+
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: Default From: {forwardFrom.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
+
+                        //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", propertyName: proKeys.Property.PropertyName);
+                        int changes = proKeys.Property.Action.Forward(proKeys, forwardFrom);
+                        if (changes < 0)
+                        {   // If default forward fails we do not continue with the SelfMasterOnly forwards
+                            Global.TraceLogger?.Log(ClassLogCode, "DefaultThenSelfMasterOnly: Default forward failed so skipping SelfMasterOnly mods.");
+                            break;
+                        }
+                        else
+                        {
+                            changed += changes;
+                            firstMod = false;
+                        }
+                    }
+                    else if (forwardFrom != null)
+                    {   // All other mods in DefaultThenSelfMasterOnly - No need to check origin
+                        Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {nameof(ForwardOptions.SelfMasterOnly)} From: {forwardFrom.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
+
+                        //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.ForwardSelfOnly)}", propertyName: proKeys.Property.PropertyName);
+
+                        int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, forwardFrom);
+                        if (changes > 0)  // Could be -1 which we don't add to changed
+                            changed += changes;
+                    }
+                }
+                else if (proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.SelfMasterOnly) && forwardFrom != null)
+                {   //  SelfMasterOnly
+                    if (proKeys.CheckOnlyIfDefault())
+                        break;
+
+                    Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {nameof(ForwardOptions.SelfMasterOnly)} From: {forwardFrom.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
+
+                    //Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.ForwardSelfOnly)}", propertyName: proKeys.Property.PropertyName);
+                    int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, forwardFrom);
+                    if (changes > 0)
+                        changed += changes;
+                }
+                else if (forwardFrom != null)
+                {   // Should never reach here as Default already handled outside of foreach loop.
+                    throw new Exception("WTF. Code should never reach this point.");
+                }
+            }
+
+            return changed;
+        }
+
+        /// <summary>
+        ///     Process a Merge rule against current record
+        /// </summary>
+        /// <param name="proKeys">Current processing keys</param>
+        /// <param name="ruleKey">Current key of current rule</param>
+        /// <returns>
+        ///     Number of updates made to current record. -1 if record didn't meet requirements for
+        ///     this rule
+        /// </returns>
+        private static int processMergeRecord (ProcessingKeys proKeys)
         {
             if (!proKeys.Property.Action.CanMerge())
             {
@@ -446,14 +528,8 @@ namespace GenericSynthesisPatcher
                 return -1;
             }
 
-            if (proKeys.Rule.OnlyIfDefault)
-                Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: proKeys.Property.PropertyName);
-
-            if (proKeys.Rule.OnlyIfDefault && !proKeys.Property.Action.MatchesOrigin(proKeys))
-            {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: proKeys.Property.PropertyName);
+            if (proKeys.CheckOnlyIfDefault())
                 return -1;
-            }
 
             Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Merge)}", propertyName: proKeys.Property.PropertyName);
             int changed = proKeys.Property.Action.Merge(proKeys);
@@ -464,7 +540,16 @@ namespace GenericSynthesisPatcher
             return changed;
         }
 
-        private static int ProcessRule (ProcessingKeys proKeys)
+        /// <summary>
+        ///     Process rule against current record
+        /// </summary>
+        /// <param name="proKeys">Current processing keys</param>
+        /// <param name="ruleKey">Current key of current rule</param>
+        /// <returns>
+        ///     Number of updates made to current record. -1 if record didn't meet requirements for
+        ///     this rule
+        /// </returns>
+        private static int processRule (ProcessingKeys proKeys)
         {
             var rule = proKeys.Rule;
 
@@ -496,7 +581,7 @@ namespace GenericSynthesisPatcher
                                 continue;
                             }
 
-                            int changed = ProcessMergeRecord(proKeys);
+                            int changed = processMergeRecord(proKeys);
 
                             if (changed >= 0)
                                 changes = (changes == -1) ? changed : changes + changed;
@@ -508,7 +593,7 @@ namespace GenericSynthesisPatcher
 
             foreach (var x in rule.Forward)
             {
-                int changed = ProcessForwardRecord(proKeys, x.Key);
+                int changed = processForwardRecord(proKeys, x.Key);
 
                 if (changed >= 0)
                     changes = (changes == -1) ? changed : changes + changed;
@@ -516,7 +601,7 @@ namespace GenericSynthesisPatcher
 
             foreach (var x in rule.Fill)
             {
-                int changed = ProcessFillRecord(proKeys, x.Key);
+                int changed = processFillRecord(proKeys, x.Key);
 
                 if (changed >= 0)
                     changes = (changes == -1) ? changed : changes + changed;

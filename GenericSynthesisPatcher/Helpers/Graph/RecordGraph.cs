@@ -11,7 +11,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
     public class RecordGraph<TItem> : RecordNode<TItem>, IRecordNode
         where TItem : class
     {
-        protected RecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context, modKeys, predicate, debugPredicate)
+        private RecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
         {
         }
 
@@ -19,29 +19,29 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         {
             var modKeys = proKeys.Rule.Merge[proKeys.RuleKey];
 
-            var master = Mod.FindOriginContext(proKeys.Context);
-
-            if (master == null)
+            if (proKeys.Context.IsMaster())
             {
                 Global.TraceLogger?.WriteLine("No record overwrites found");
                 return null;
             }
 
+            var master = Mod.FindOriginContext(proKeys.Context);
+
             var root = new RecordGraph<TItem>(master, modKeys, predicate, debugPredicate);
-            Populate(root);
+            populate(root);
 
             if (Global.TraceLogger != null)
             {
                 Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
-                root.Print(string.Empty);
+                root.print(string.Empty);
             }
 
-            root.CleanUp();
+            root.cleanUp();
 
             if (Global.TraceLogger != null)
             {
                 Global.TraceLogger?.WriteLine("Graph Post Cleanup");
-                root.Print(string.Empty);
+                root.print(string.Empty);
             }
 
             return root;
@@ -49,13 +49,13 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
         public bool Merge ([NotNullWhen(true)] out IReadOnlyList<TItem>? newList)
         {
-            if (!Merge(null, out _, out _, out _))
+            if (!performMerge(null, out _, out _, out _))
             {
                 newList = null;
                 return false;
             }
 
-            newList = workingList.AsReadOnly();
+            newList = WorkingList.AsReadOnly();
             return true;
         }
     }

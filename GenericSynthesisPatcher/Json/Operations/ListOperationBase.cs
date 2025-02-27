@@ -11,10 +11,12 @@ namespace GenericSynthesisPatcher.Json.Operations
     [JsonConverter(typeof(OperationsConverter))]
     public abstract class ListOperationBase<TValue> : OperationBase<ListLogic>, IEquatable<ListOperationBase<TValue>>
     {
-        protected static readonly IReadOnlyDictionary<char, ListLogic> ValidPrefixes = new ReadOnlyDictionary<char, ListLogic>(new Dictionary<char, ListLogic>() {
+        protected static readonly IReadOnlyDictionary<char, ListLogic> ValidPrefixes = new ReadOnlyDictionary<char, ListLogic>(new Dictionary<char, ListLogic>()
+        {
             { '-', ListLogic.DEL },
             { '!', ListLogic.NOT },
-            { '+', ListLogic.ADD } });
+            { '+', ListLogic.ADD }
+        });
 
         private TValue? value;
 
@@ -27,8 +29,8 @@ namespace GenericSynthesisPatcher.Json.Operations
             }
             else
             {
-                (Operation, string v) = Split(value, ValidPrefixes);
-                Value = ConvertValue(v);
+                (Operation, string v) = split(value, ValidPrefixes);
+                Value = convertValue(v);
             }
         }
 
@@ -46,7 +48,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             protected set
             {
                 this.@value = value;
-                ValueUpdated();
+                valueUpdated();
             }
         }
 
@@ -63,7 +65,7 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public int GetHashCode ([DisallowNull] TValue obj) => throw new NotImplementedException();
 
-        public override ListOperationBase<TValue> Inverse () => System.Activator.CreateInstance(GetType(), [Inverse(Operation), Value]) is ListOperationBase<TValue> result ? result : throw new Exception("Failed to invert operation");
+        public override ListOperationBase<TValue> Inverse () => System.Activator.CreateInstance(GetType(), [getInverse(Operation), Value]) is ListOperationBase<TValue> result ? result : throw new Exception("Failed to invert operation");
 
         public override string ToString () => ToString('-');
 
@@ -84,11 +86,11 @@ namespace GenericSynthesisPatcher.Json.Operations
         public virtual bool ValueEquals (TValue? other)
             => MyEqualityComparer.Equals(Value, other);
 
-        protected static ListLogic Inverse (ListLogic logic) => logic == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
+        protected static ListLogic getInverse (ListLogic logic) => logic == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
 
-        protected abstract TValue? ConvertValue (string? value);
+        protected abstract TValue? convertValue (string? value);
 
-        protected virtual void ValueUpdated ()
+        protected virtual void valueUpdated ()
         { }
     }
 }

@@ -32,9 +32,9 @@ namespace GenericSynthesisPatcher
 
         #region Log Writers
 
-        public static LogWriter? DebugLogger { get; private set; } = null;
+        public static LogWriter? DebugLogger { get; private set; }
         public static LogWriter Logger { get; private set; } = new LogWriter(LogLevel.Information, 0x00, rule: null, context: null);
-        public static LogWriter? TraceLogger { get; private set; } = null;
+        public static LogWriter? TraceLogger { get; private set; }
 
         #endregion Log Writers
 
