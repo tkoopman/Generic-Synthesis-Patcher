@@ -1,9 +1,14 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
+
+using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -27,10 +32,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public virtual bool CanMerge () => false;
 
         public virtual int Fill (ProcessingKeys proKeys)
-            => !Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-            || !proKeys.TryGetFillValueAs(out T? newValue)
-            ? -1
-            : performFill(proKeys, curValue, newValue);
+                    => !Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                    || !proKeys.TryGetFillValueAs(out T? newValue)
+                    ? -1
+                    : performFill(proKeys, curValue, newValue);
 
         public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
         {
@@ -72,15 +77,27 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public virtual int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
-                    => (Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-            && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
-            ? performFill(proKeys, curValue, newValue)
-            : -1;
+                            => (Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                    && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
+                    ? performFill(proKeys, curValue, newValue)
+                    : -1;
 
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
+        public virtual string GetDocumentationDescription (Type propertyType)
+            => typeof(T).Equals(typeof(Percent)) ? "Decimal value between 0.00 - 1.00, or string ending in %"
+             : typeof(T).Equals(typeof(Color)) ? """Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value ("#0A0A0A0A") or named color "Blue". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted."""
+             : throw new NotImplementedException();
+
+        // <inheritdoc />
+        public virtual string GetDocumentationExample (Type propertyType, string propertyName)
+            => typeof(T).Equals(typeof(Percent)) ? $""" "{propertyName}": "30.5%" """
+             : typeof(T).Equals(typeof(Color)) ? $""" "{propertyName}": [40,50,60] """
+             : throw new NotImplementedException();
+
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
+                    => !Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
@@ -97,6 +114,30 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         public virtual int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+
+        // <inheritdoc />
+        public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = null;
+            example = null;
+
+            if (typeof(T).Equals(typeof(Percent)))
+            {
+                description = "Decimal value between 0.00 - 1.00, or string ending in %";
+                example = $"""
+                           "{propertyName}": "30.5%"
+                           """;
+            }
+            else if (typeof(T).Equals(typeof(Color)))
+            {
+                description = """Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value ("#0A0A0A0A") or named color "Blue". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.""";
+                example = $"""
+                           "{propertyName}": [40,50,60]
+                           """;
+            }
+
+            return description is not null && example is not null;
+        }
 
         protected virtual int performFill (ProcessingKeys proKeys, T? curValue, T? newValue)
         {

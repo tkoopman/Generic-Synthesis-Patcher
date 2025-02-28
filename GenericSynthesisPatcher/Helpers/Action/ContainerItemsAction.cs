@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -37,5 +39,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IContainerEntryGetter record ? record.Item.Item.FormKey : throw new ArgumentNullException(nameof(from));
 
         public override string ToString (IFormLinkContainerGetter source) => source is IContainerEntryGetter item ? $"{item.Item.Count}x{item.Item.Item.FormKey}" : throw new InvalidCastException();
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "JSON objects containing item Form Key/Editor ID and Count (QTY)";
+            example = $$"""
+                        "{{propertyName}}": { "Item": "021FED:Skyrim.esm", "Count": 3 }
+                        """;
+
+            return true;
+        }
     }
 }

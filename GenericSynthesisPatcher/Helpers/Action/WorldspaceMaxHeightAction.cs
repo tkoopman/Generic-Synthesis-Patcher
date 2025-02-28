@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
@@ -7,6 +9,15 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public static readonly WorldspaceMaxHeightAction Instance = new();
 
         public override bool CanFill () => false;
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Forward Worldspace Max Height data.";
+            example = """[{ "types": ["Worldspace"], "ForwardOptions": ["HPU", "NonNull"], "Forward": { "MHDT": [] }}]""";
+
+            return true;
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IWorldspaceMaxHeightGetter? lhs, WorldspaceMaxHeight? rhs)

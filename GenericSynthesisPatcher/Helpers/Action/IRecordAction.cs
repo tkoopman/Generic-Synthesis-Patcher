@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -82,5 +84,11 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public bool MatchesRule (ProcessingKeys proKeys);
 
         public int Merge (ProcessingKeys proKeys);
+
+        /// <summary>
+        ///     Used for generating Documentation
+        /// </summary>
+        /// <returns>If valid documentation for type found</returns>
+        public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example);
     }
 }

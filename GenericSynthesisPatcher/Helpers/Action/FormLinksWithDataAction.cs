@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data.Action;
 using GenericSynthesisPatcher.Json.Operations;
@@ -226,33 +228,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
-
-        #region Abstract
-
-        /// <summary>
-        ///     Create new TData coping values from existing Getter.
-        /// </summary>
-        /// <param name="source">Source to copy values from.</param>
-        /// <returns>New TData with Source values</returns>
-        public abstract TData? CreateFrom (IFormLinkContainerGetter source);
-
-        /// <summary>
-        ///     Check if 2 links and data are equal
-        /// </summary>
-        /// <returns>True only if both FormKey and any data match across both entries.</returns>
-        public abstract bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right);
-
-        /// <summary>
-        ///     Get FormKey of entry.
-        /// </summary>
-        /// <param name="from">Form Link to get FormKey from</param>
-        /// <returns>FormKey</returns>
-        public abstract FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from);
-
-        public abstract string ToString (IFormLinkContainerGetter source);
-
-        #endregion Abstract
+                    => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
 
         /// <summary>
         ///     Called when GSPRule.OnlyIfDefault is true
@@ -362,6 +338,35 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             return add.Count() + del.Count();
         }
+
+        // <inheritdoc />
+        public abstract bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example);
+
+        #region Abstract
+
+        /// <summary>
+        ///     Create new TData coping values from existing Getter.
+        /// </summary>
+        /// <param name="source">Source to copy values from.</param>
+        /// <returns>New TData with Source values</returns>
+        public abstract TData? CreateFrom (IFormLinkContainerGetter source);
+
+        /// <summary>
+        ///     Check if 2 links and data are equal
+        /// </summary>
+        /// <returns>True only if both FormKey and any data match across both entries.</returns>
+        public abstract bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right);
+
+        /// <summary>
+        ///     Get FormKey of entry.
+        /// </summary>
+        /// <param name="from">Form Link to get FormKey from</param>
+        /// <returns>FormKey</returns>
+        public abstract FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from);
+
+        public abstract string ToString (IFormLinkContainerGetter source);
+
+        #endregion Abstract
 
         /// <summary>
         ///     Get data from JSON value in rule.

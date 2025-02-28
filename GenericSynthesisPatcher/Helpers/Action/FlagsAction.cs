@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using EnumsNET;
 
 using GenericSynthesisPatcher.Helpers.Graph;
@@ -122,7 +124,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
+                                    => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
 
         /// <summary>
         ///     Called when GSPRule.OnlyIfDefault is true
@@ -223,6 +225,25 @@ namespace GenericSynthesisPatcher.Helpers.Action
             var root = FlagsRecordGraph.Create(proKeys);
 
             return root != null && root.Merge(out var newValue) && Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue) ? 1 : 0;
+        }
+
+        // <inheritdoc />
+        public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            propertyType = (propertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : propertyType;
+            if (!propertyType.IsEnum)
+            {
+                description = null;
+                example = null;
+                return false;
+            }
+
+            string[] flags = Enum.GetNames(propertyType);
+
+            description = $"Flags ({string.Join(", ", flags)})";
+            example = (flags.Length > 1) ? $"\"{propertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{propertyName}\": \"{flags.First()}\"";
+
+            return true;
         }
     }
 }

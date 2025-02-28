@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -192,7 +194,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
+                    => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
 
         /// <summary>
         ///     Called when GSPRule.OnlyIfDefault is true
@@ -267,6 +269,15 @@ namespace GenericSynthesisPatcher.Helpers.Action
             }
 
             return add.Count() + del.Count();
+        }
+
+        // <inheritdoc />
+        public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Form Keys or Editor IDs";
+            example = "";
+
+            return true;
         }
 
         private static bool recordsMatch (IReadOnlyList<IFormLinkGetter<TMajor>>? left, IReadOnlyList<IFormLinkGetter<TMajor>>? right)

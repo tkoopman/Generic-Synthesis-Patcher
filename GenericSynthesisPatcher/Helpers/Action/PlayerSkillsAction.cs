@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Data.Action;
 
@@ -208,5 +210,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         public virtual int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+
+        // <inheritdoc />
+        public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "JSON object containing the values under PlayerSkills you want to set";
+            example = "See ../Examples/NPC Player Skills.json";
+
+            return true;
+        }
     }
 }

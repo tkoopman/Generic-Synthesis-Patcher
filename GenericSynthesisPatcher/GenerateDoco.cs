@@ -117,8 +117,6 @@ namespace GenericSynthesisPatcher
 
                     // Get the RCD IAction type
                     var actionType = rpm.Action.GetType();
-                    string? desc = null;
-                    string exam = "";
                     string MFFSM = string.Join<char>(string.Empty,
                         [
                             rpm.Action.CanMatch() ? 'M' : '-',
@@ -130,123 +128,7 @@ namespace GenericSynthesisPatcher
 
                     var baseType = actionType.GetIfGenericTypeDefinition();
 
-                    if (actionType == typeof(ConvertibleAction<string>))
-                    {
-                        desc = "String value";
-                        exam = $"\"{rpm.PropertyName}\": \"Hello\"";
-                    }
-                    else if (actionType == typeof(ConvertibleAction<bool>))
-                    {
-                        desc = "True / False";
-                        exam = $"\"{rpm.PropertyName}\": true";
-                    }
-                    else if (actionType == typeof(ConvertibleAction<float>))
-                    {
-                        desc = "Decimal value";
-                        exam = $"\"{rpm.PropertyName}\": 3.14";
-                    }
-                    else if (baseType == typeof(ConvertibleAction<>))
-                    {
-                        desc = "Numeric value";
-                        exam = $"\"{rpm.PropertyName}\": 7";
-                    }
-                    else if (baseType == typeof(Helpers.Action.FormLinkAction<>))
-                    {
-                        desc = "Form Key or Editor ID";
-                        exam = "";
-                    }
-                    else if (baseType == typeof(FormLinksAction<>))
-                    {
-                        desc = "Form Keys or Editor IDs";
-                        exam = "";
-                    }
-                    else if (actionType == typeof(BasicAction<Percent>))
-                    {
-                        desc = "Decimal value between 0.00 - 1.00, or string ending in %";
-                        exam = $"\"{rpm.PropertyName}\": \"30.5%\"";
-                    }
-                    else if (actionType == typeof(BasicAction<Color>))
-                    {
-                        desc = "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.";
-                        exam = $"\"{rpm.PropertyName}\": [40,50,60]";
-                    }
-                    else if (actionType == typeof(ObjectBoundsAction))
-                    {
-                        desc = "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]";
-                        exam = $"\"{rpm.PropertyName}\": [6,6,6,9,9,9]";
-                    }
-                    else if (actionType == typeof(FlagsAction))
-                    {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : prop.PropertyType;
-
-                        string[] flags = Enum.GetNames(type);
-                        desc = $"Flags ({string.Join(", ", flags)})";
-                        exam = (flags.Length > 1) ? $"\"{rpm.PropertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{rpm.PropertyName}\": \"{flags.First()}\"";
-                    }
-                    else if (actionType == typeof(EnumsAction))
-                    {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : prop.PropertyType;
-                        string[] values = Enum.GetNames(type);
-                        desc = $"Possible values ({string.Join(", ", values)})";
-                        exam = $"\"{rpm.PropertyName}\": \"{values.First()}\"";
-                    }
-                    else if (actionType == typeof(ContainerItemsAction))
-                    {
-                        desc = "JSON objects containing item Form Key/Editor ID and Count (QTY)";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }}";
-                    }
-                    else if (actionType == typeof(EffectsAction))
-                    {
-                        desc = "JSON objects containing effect Form Key/Editor ID and effect data";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }}";
-                    }
-                    else if (actionType == typeof(LeveledItemAction))
-                    {
-                        desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"Item\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(LeveledNpcAction))
-                    {
-                        desc = "Array of JSON objects containing NPC Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"NPC\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(LeveledSpellAction))
-                    {
-                        desc = "Array of JSON objects containing Spell Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"Spell\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(RankPlacementAction))
-                    {
-                        desc = "JSON objects containing faction Form Key/Editor ID and Rank";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Faction\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
-                    }
-                    else if (actionType == typeof(RelationsAction))
-                    {
-                        desc = "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Target\": \"021FED:Skyrim.esm\", \"Reaction\": \"Friend\" }}";
-                    }
-                    else if (actionType == typeof(PlayerSkillsAction))
-                    {
-                        desc = "JSON object containing the values under PlayerSkills you want to set";
-                        exam = "See ../Examples/NPC Player Skills.json";
-                    }
-                    else if (actionType == typeof(MemorySliceByteAction))
-                    {
-                        desc = "Memory slice in form of array of bytes";
-                        exam = $"\"{rpm.PropertyName}\": [0x1A,0x00,0x3F]";
-                    }
-                    else if (actionType == typeof(WorldspaceMaxHeightAction))
-                    {
-                        desc = "Forward Worldspace Max Height data.";
-                        exam = """[{ "types": ["Worldspace"], "ForwardOptions": ["HPU", "NonNull"], "Forward": { "MHDT": [] }}]""";
-                    }
-                    else if (actionType == typeof(CellMaxHeightDataAction))
-                    {
-                        desc = "Forward Cell Max Height data.";
-                        exam = """[{ "types": ["Cell"], "ForwardOptions": ["HPU", "NonNull"], "Forward": { "MHDT": [] }}]""";
-                    }
-
-                    if (desc == null)
+                    if (!rpm.Action.TryGetDocumentation(prop.PropertyType, prop.Name, out string? desc, out string? exam))
                         throw new Exception("Fix missing description");
 
                     //desc ??= "????";
@@ -448,6 +330,10 @@ namespace GenericSynthesisPatcher
             else if (type == typeof(MemorySlice<byte>))
             {
                 actionClass = typeof(MemorySliceByteAction).GetClassName();
+            }
+            else if (type == typeof(Model))
+            {
+                actionClass = typeof(ModelAction).GetClassName();
             }
             else if (subType != null)
             {

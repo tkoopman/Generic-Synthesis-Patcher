@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -130,7 +132,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || curValue.IsNull;
+                    => !Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || curValue.IsNull;
 
         /// <summary>
         ///     Called when GSPRule.OnlyIfDefault is true
@@ -172,6 +174,15 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+
+        // <inheritdoc />
+        public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Form Key or Editor ID";
+            example = "";
+
+            return true;
+        }
 
         private static int performFill (ProcessingKeys proKeys, IFormLinkGetter<TMajor>? curValue, IFormLinkGetter<TMajor>? newValue)
         {

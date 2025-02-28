@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins;
@@ -15,33 +17,32 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
         }
 
+        // <inheritdoc />
         public virtual bool CanFill () => true;
 
+        // <inheritdoc />
         public virtual bool CanForward () => true;
 
+        // <inheritdoc />
         public virtual bool CanForwardSelfOnly () => false;
 
+        // <inheritdoc />
         public virtual bool CanMatch () => false;
 
+        // <inheritdoc />
         public virtual bool CanMerge () => false;
 
+        // <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys)
             => !Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
             || !proKeys.TryGetFillValueAs(out TSetter? newValue)
             ? -1
             : performFill(proKeys, curValue, newValue);
 
-        /// <summary>
-        ///     Update value on record if new and current values don't match.
-        /// </summary>
-        /// <param name="proKeys"></param>
-        /// <param name="curValue">Current value in property</param>
-        /// <param name="newValue">Value to set if different to current</param>
-        /// <returns>
-        ///     -1 if failed to get patch record 0 if both values matched already 1 if updated
-        /// </returns>
+        // <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys, TGetter? curValue, TGetter? newValue) => performFill(proKeys, curValue, getSetter(newValue));
 
+        // <inheritdoc />
         public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
         {
             bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
@@ -81,32 +82,38 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return hpu;
         }
 
+        // <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
             => (Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
             && Mod.TryGetProperty<TGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
             ? Fill(proKeys, curValue, newValue)
             : -1;
 
+        // <inheritdoc />
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
             => !Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null;
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if Enum value matches</returns>
+        // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
             || (Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
                 && Mod.TryGetProperty<TGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
                 && Equals(curValue, originValue));
 
+        // <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
+        // <inheritdoc />
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public virtual int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+
+        // <inheritdoc />
+        public abstract bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example);
 
         /// <summary>
         ///     Compare values of getter and setter.
@@ -116,6 +123,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <returns>True if values both match</returns>
         protected abstract bool compareValues (TGetter? lhs, TSetter? rhs);
 
+        /// <summary>
+        ///     Create setter from getter.
+        /// </summary>
+        /// <returns>Setter version of getter</returns>
         protected abstract TSetter? getSetter (TGetter? getter);
 
         /// <summary>

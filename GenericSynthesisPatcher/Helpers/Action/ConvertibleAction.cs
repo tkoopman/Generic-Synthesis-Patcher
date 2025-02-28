@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Operations;
 
 namespace GenericSynthesisPatcher.Helpers.Action
@@ -28,6 +30,39 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return false;
 
             return MatchesHelper.Matches(curValue, matches, propertyName: proKeys.Property.PropertyName);
+        }
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Numeric value"; // We assume if no overwritten by type checks it must be on of the many numeric types
+            example = $"""
+                       "{propertyName}": 7
+                       """;
+
+            if (typeof(T).Equals(typeof(string)))
+            {
+                description = "String value";
+                example = $"""
+                           "{propertyName}": "Hello"
+                           """;
+            }
+            else if (typeof(T).Equals(typeof(bool)))
+            {
+                description = "True / False";
+                example = $"""
+                           "{propertyName}": true
+                           """;
+            }
+            else if (typeof(T).Equals(typeof(float)))
+            {
+                description = "Decimal value";
+                example = $"""
+                           "{propertyName}": 3.14
+                           """;
+            }
+
+            return true;
         }
     }
 }

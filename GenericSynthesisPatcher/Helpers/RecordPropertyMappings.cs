@@ -418,6 +418,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRaceGetter)                  , "AttackRace"                                , FormLinkAction<IRaceGetter>.Instance);
             Add(typeof(IWeaponGetter)                , "AttackSound"                               , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IWeaponGetter)                , "AttackSound2D"                             , FormLinkAction<ISoundDescriptorGetter>.Instance);
+            Add(typeof(IWeatherGetter)               , "Aurora"                                    , ModelAction.Instance);
             Add(typeof(ICombatStyleGetter)           , "AvoidThreatChance"                         , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "BackRun"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "BackWalk"                                  , ConvertibleAction<float>.Instance);
@@ -466,6 +467,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IRaceGetter)                  , "CloseLootSound"                            , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IContainerGetter)             , "CloseSound"                                , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IDoorGetter)                  , "CloseSound"                                , FormLinkAction<ISoundDescriptorGetter>.Instance);
+            Add(typeof(IWorldspaceGetter)            , "CloudModel"                                , ModelAction.Instance);
             Add(null                                 , "CNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(ICollisionLayerGetter)        , "CollidesWith"                              , FormLinksAction<ICollisionLayerGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "CollisionLayer"                            , FormLinkAction<ICollisionLayerGetter>.Instance);
@@ -795,6 +797,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IGrassGetter)                 , "MinSlope"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ICameraShotGetter)            , "MinTime"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "MNAM"                                      , MemorySliceByteAction.Instance);
+            Add(null                                 , "Model"                                     , ModelAction.Instance);
             Add(typeof(IClimateGetter)               , "Moons"                                     , FlagsAction.Instance);
             Add(typeof(IRaceGetter)                  , "MorphRace"                                 , FormLinkAction<IRaceGetter>.Instance);
             Add(null                                 , "Music"                                     , FormLinkAction<IMusicTypeGetter>.Instance);
@@ -959,6 +962,7 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IPackageGetter)               , "ScheduleHour"                              , ConvertibleAction<sbyte>.Instance);
             Add(typeof(IPackageGetter)               , "ScheduleMinute"                            , ConvertibleAction<sbyte>.Instance);
             Add(typeof(IPackageGetter)               , "ScheduleMonth"                             , ConvertibleAction<sbyte>.Instance);
+            Add(typeof(IWeaponGetter)                , "ScopeModel"                                , ModelAction.Instance);
             Add(typeof(IMagicEffectGetter)           , "ScriptEffectAIDelayTime"                   , ConvertibleAction<float>.Instance);
             Add(typeof(IMagicEffectGetter)           , "ScriptEffectAIScore"                       , ConvertibleAction<float>.Instance);
             Add(typeof(IMagicEffectGetter)           , "SecondActorValue"                          , EnumsAction.Instance);

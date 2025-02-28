@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -173,5 +175,26 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
+
+        // <inheritdoc />
+        public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            propertyType = (propertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyType.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : propertyType;
+            if (!propertyType.IsEnum)
+            {
+                description = null;
+                example = null;
+                return false;
+            }
+
+            string[] values = Enum.GetNames(propertyType);
+
+            description = $"Possible values ({string.Join(", ", values)})";
+            example = $"""
+                       "{propertyName}": "{values.First()}"
+                       """;
+
+            return true;
+        }
     }
 }
