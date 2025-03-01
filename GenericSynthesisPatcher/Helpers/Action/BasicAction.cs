@@ -77,10 +77,10 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public virtual int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
-                            => (Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-                    && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
-                    ? performFill(proKeys, curValue, newValue)
-                    : -1;
+            => (Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+             && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue))
+             ? performFill(proKeys, curValue, newValue)
+             : -1;
 
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 

@@ -1060,7 +1060,6 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWeaponGetter)                , "UnequipSound"                              , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IGrassGetter)                 , "UnitsFromWater"                            , ConvertibleAction<ushort>.Instance);
             Add(typeof(IGrassGetter)                 , "UnitsFromWaterType"                        , EnumsAction.Instance);
-            Add(typeof(IMagicEffectGetter)           , "Unknown1"                                  , ConvertibleAction<ushort>.Instance);
             Add(typeof(IAnimatedObjectGetter)        , "UnloadEvent"                               , ConvertibleAction<string>.Instance);
             Add(typeof(ILocationGetter)              , "UnreportedCrimeFaction"                    , FormLinkAction<IFactionGetter>.Instance);
             Add(typeof(IEquipTypeGetter)             , "UseAllParents"                             , ConvertibleAction<bool>.Instance);
