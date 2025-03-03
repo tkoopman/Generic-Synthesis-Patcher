@@ -44,10 +44,9 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return -1;
             }
 
-            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyInfo))
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var flagType))
                 return -1;
 
-            var flagType = propertyInfo.PropertyType;
             curValue ??= (Enum)Enum.ToObject(flagType, 0);
             var newFlags = curValue;
 

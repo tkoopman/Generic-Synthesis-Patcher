@@ -14,8 +14,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         public FlagsRecordNode (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(modKey, record, modKeys)
         {
             PropertyName = propertyName;
-            WorkingFlags = Mod.TryGetProperty(record, PropertyName, out int value, out var propertyInfo) ? value : throw new InvalidDataException();
-            Type = propertyInfo.PropertyType;
+            WorkingFlags = Mod.TryGetProperty(record, PropertyName, out int value, out var propertyType) ? value : throw new InvalidDataException();
+            Type = propertyType;
         }
 
         protected string PropertyName { get; }

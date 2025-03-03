@@ -37,16 +37,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyInfo) || !proKeys.TryGetFillValueAs(out FormKeyListOperation<TMajor>? formKey))
+                if (!proKeys.TryGetFillValueAs(out FormKeyListOperation<TMajor>? formKey) || !Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyType))
                     return -1;
 
                 if (formKey == null || formKey.Value == FormKey.Null)
                 {
                     if (curValue != null && !curValue.IsNull)
                     {
-                        if (propertyInfo.PropertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<TMajor>)))
+                        if (propertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<TMajor>)))
                         {
-                            if (!Mod.TryGetProperty<IFormLinkNullable<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue == null)
+                            if (!Mod.TryGetPropertyValueForEditing<IFormLinkNullable<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue == null)
                                 return -1;
 
                             setValue.SetToNull();
@@ -192,7 +192,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 return 0;
             }
 
-            if (!Mod.TryGetPropertyForEditing<IFormLink<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var formLink))
+            if (!Mod.TryGetPropertyValueForEditing<IFormLink<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var formLink))
                 return -1;
 
             if (newValue == null || newValue.IsNull)

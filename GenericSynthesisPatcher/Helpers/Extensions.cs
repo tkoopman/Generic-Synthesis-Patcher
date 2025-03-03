@@ -14,6 +14,39 @@ namespace GenericSynthesisPatcher.Helpers
 {
     public static class Extensions
     {
+        private static readonly Dictionary<Type, string> Aliases = new()
+        {
+            { typeof(byte), "byte" },
+            { typeof(sbyte), "sbyte" },
+            { typeof(short), "short" },
+            { typeof(ushort), "ushort" },
+            { typeof(int), "int" },
+            { typeof(uint), "uint" },
+            { typeof(long), "long" },
+            { typeof(ulong), "ulong" },
+            { typeof(float), "float" },
+            { typeof(double), "double" },
+            { typeof(decimal), "decimal" },
+            { typeof(object), "object" },
+            { typeof(bool), "bool" },
+            { typeof(char), "char" },
+            { typeof(string), "string" },
+            { typeof(void), "void" },
+            { typeof(Nullable<byte>), "byte?" },
+            { typeof(Nullable<sbyte>), "sbyte?" },
+            { typeof(Nullable<short>), "short?" },
+            { typeof(Nullable<ushort>), "ushort?" },
+            { typeof(Nullable<int>), "int?" },
+            { typeof(Nullable<uint>), "uint?" },
+            { typeof(Nullable<long>), "long?" },
+            { typeof(Nullable<ulong>), "ulong?" },
+            { typeof(Nullable<float>), "float?" },
+            { typeof(Nullable<double>), "double?" },
+            { typeof(Nullable<decimal>), "decimal?" },
+            { typeof(Nullable<bool>), "bool?" },
+            { typeof(Nullable<char>), "char?" }
+        };
+
         public static void AddDictionary<TKey> (this HashCode hashCode, IDictionary<TKey, JToken> dictionary)
         {
             foreach (var pair in dictionary)
@@ -54,21 +87,22 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         public static T? Deserialize<T> (this JToken token)
-            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
+                    => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
              : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
              : JsonSerializer.Create(Global.SerializerSettings).Deserialize<T>(token.CreateReader());
 
-        public static string GetClassName (this Type type)
+        public static string GetClassName (this Type? type)
         {
-            string result = type.Name;
+            if (type is null)
+                return "null";
+
             if (type.IsGenericType)
             {
-                string name = type.Name[..type.Name.IndexOf('`')];
                 var genericTypes = type.GenericTypeArguments;
-                result = $"{name}<{string.Join(",", genericTypes.Select(GetClassName))}>";
+                return $"{type.Name[..type.Name.IndexOf('`')]}<{string.Join(",", genericTypes.Select(GetClassName))}>";
             }
 
-            return result;
+            return Aliases.TryGetValue(type, out string? privativeName) ? privativeName : type.Name;
         }
 
         /// <summary>
@@ -89,7 +123,8 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool IsMaster (this IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) => context.ModKey.Equals(context.Record.FormKey.ModKey);
 
         /// <summary> Same as IEnumerable<>.Any() but will return false instead of throwing
-        /// ArgumentNullException if null. </summary> <returns>False if null else result of .Any()</returns>
+        /// ArgumentNullException if null. </summary> <returns>False if null else result of
+        /// .Any()</returns>
         public static bool SafeAny<TSource> ([NotNullWhen(true)] this IEnumerable<TSource>? source) => source != null && source.Any();
 
         public static bool SafeAny<TSource> (this IEnumerable<TSource>? source, Func<TSource, bool> predicate) => source != null && source.Any(predicate);

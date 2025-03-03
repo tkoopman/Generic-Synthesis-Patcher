@@ -1276,7 +1276,6 @@ This just details where the field can currently be used.
 | TaperDuration           |           | MFF-- | Decimal value                                                                                                                                           | "TaperDuration": 3.14                            |
 | TaperWeight             |           | MFF-- | Decimal value                                                                                                                                           | "TaperWeight": 3.14                              |
 | TargetType              |           | MF--- | Possible values (Self, Touch, Aimed, TargetActor, TargetLocation)                                                                                       | "TargetType": "Self"                             |
-| Unknown1                |           | MFF-- | Numeric value                                                                                                                                           | "Unknown1": 7                                    |
 
 [⬅ Back to Types](Types.md)
 
@@ -1452,7 +1451,6 @@ This just details where the field can currently be used.
 | ShortName                          | ONAM        | MFF-- | String value                                                                                                                      | "ShortName": "Hello"                                      |
 | SkyrimMajorRecordFlags             |             | MFF-M | Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait) | "SkyrimMajorRecordFlags": [ "ESM", "-CantWait" ]          |
 | SleepingOutfit                     | SOFT        | MFF-- | Form Key or Editor ID                                                                                                             |                                                           |
-| Sound                              |             | MFF-- | Form Key or Editor ID                                                                                                             |                                                           |
 | SoundLevel                         | NAM8        | MF--- | Possible values (Loud, Normal, Silent, VeryLoud)                                                                                  | "SoundLevel": "Loud"                                      |
 | SpectatorOverridePackageList       | SPOR        | MFF-- | Form Key or Editor ID                                                                                                             |                                                           |
 | Template                           | TPLT        | MFF-- | Form Key or Editor ID                                                                                                             |                                                           |
@@ -1525,21 +1523,20 @@ This just details where the field can currently be used.
 
 ## PERK - Perk
 
-| Field                  | Alt         | MFFSM | Value Type                                                                                                       | Example                                                                                |
-| ---------------------- | ----------- | ----- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Description            | DESC        | MFF-- | String value                                                                                                     | "Description": "Hello"                                                                 |
-| EditorID               | EDID        | MFF-- | String value                                                                                                     | "EditorID": "Hello"                                                                    |
-| Effects                |             | MFFSM | JSON objects containing effect Form Key/Editor ID and effect data                                                | "Effects": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 } |
-| FormVersion            |             | MFF-- | Numeric value                                                                                                    | "FormVersion": 7                                                                       |
-| Hidden                 |             | MFF-- | True / False                                                                                                     | "Hidden": true                                                                         |
-| Level                  |             | MFF-- | Numeric value                                                                                                    | "Level": 7                                                                             |
-| MajorFlags             | RecordFlags | MFF-M | Flags (NonPlayable)                                                                                              | "MajorFlags": "NonPlayable"                                                            |
-| Name                   | FULL        | MFF-- | String value                                                                                                     | "Name": "Hello"                                                                        |
-| NextPerk               | NNAM        | MFF-- | Form Key or Editor ID                                                                                            |                                                                                        |
-| NumRanks               |             | MFF-- | Numeric value                                                                                                    | "NumRanks": 7                                                                          |
-| Playable               |             | MFF-- | True / False                                                                                                     | "Playable": true                                                                       |
-| SkyrimMajorRecordFlags |             | MFF-M | Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait) | "SkyrimMajorRecordFlags": [ "ESM", "-CantWait" ]                                       |
-| Trait                  |             | MFF-- | True / False                                                                                                     | "Trait": true                                                                          |
+| Field                  | Alt         | MFFSM | Value Type                                                                                                                                | Example                                          |
+| ---------------------- | ----------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Description            | DESC        | MFF-- | String value                                                                                                                              | "Description": "Hello"                           |
+| EditorID               | EDID        | MFF-- | String value                                                                                                                              | "EditorID": "Hello"                              |
+| FormVersion            |             | MFF-- | Numeric value                                                                                                                             | "FormVersion": 7                                 |
+| Hidden                 |             | MFF-- | True / False                                                                                                                              | "Hidden": true                                   |
+| Level                  |             | MFF-- | Numeric value                                                                                                                             | "Level": 7                                       |
+| MajorFlags             | RecordFlags | MFF-M | Flags (NonPlayable)                                                                                                                       | "MajorFlags": "NonPlayable"                      |
+| Name                   | FULL        | MFF-- | String value                                                                                                                              | "Name": "Hello"                                  |
+| NextPerk               | NNAM        | MFF-- | Form Key or Editor ID                                                                                                                     |                                                  |
+| NumRanks               |             | MFF-- | Numeric value                                                                                                                             | "NumRanks": 7                                    |
+| Playable               |             | MFF-- | True / False                                                                                                                              | "Playable": true                                 |
+| SkyrimMajorRecordFlags |             | MFF-M | Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait) | "SkyrimMajorRecordFlags": [ "ESM", "-CantWait" ] |
+| Trait                  |             | MFF-- | True / False                                                                                                                              | "Trait": true                                    |
 
 [⬅ Back to Types](Types.md)
 
@@ -1655,7 +1652,6 @@ This just details where the field can currently be used.
 | UnarmedDamage             |             | MFF-- | Decimal value                                                                                                                                       | "UnarmedDamage": 3.14                            |
 | UnarmedEquipSlot          | UNES        | MFF-- | Form Key or Editor ID                                                                                                                               |                                                  |
 | UnarmedReach              |             | MFF-- | Decimal value                                                                                                                                       | "UnarmedReach": 3.14                             |
-| Weight                    |             | MFF-- | Decimal value                                                                                                                                       | "Weight": 3.14                                   |
 
 [⬅ Back to Types](Types.md)
 

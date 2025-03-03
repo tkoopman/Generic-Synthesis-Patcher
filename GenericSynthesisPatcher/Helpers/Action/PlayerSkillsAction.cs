@@ -96,7 +96,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (newValue.Equals(curValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
             {
                 LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
                 return -1;
@@ -157,7 +157,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (curValue.Equals(newValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
             {
                 LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
                 return -1;

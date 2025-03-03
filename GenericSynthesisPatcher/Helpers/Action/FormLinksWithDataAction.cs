@@ -43,7 +43,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// </returns>
         public int Add (ProcessingKeys proKeys, TActionData data)
         {
-            if (!Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             items.Add(data.ToActionData());
@@ -136,7 +136,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var newEntry = CreateFrom(source);
 
-            if (newEntry == null || !Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (newEntry == null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             items.Add(newEntry);
@@ -292,7 +292,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         {
             var entry = CreateFrom(remove);
 
-            if (entry == null || !Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (entry == null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             if (items.Remove(entry))
@@ -327,7 +327,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             if (!add.Any() && !del.Any())
                 return 0;
 
-            if (!Mod.TryGetPropertyForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
+            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
                 return -1;
 
             foreach (var d in del)

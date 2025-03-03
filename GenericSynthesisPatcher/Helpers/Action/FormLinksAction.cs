@@ -67,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
-                        if (!Mod.TryGetPropertyForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
+                        if (!Mod.TryGetPropertyValueForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
                         {
                             Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                             return -1;
@@ -115,7 +115,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                 {
                     Global.Logger.Log(ClassLogCode, "Patch has null value.", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                     return -1;
@@ -170,7 +170,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         {
                             if (patchValueLinks == null)
                             {
-                                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                                     return -1;
 
                                 patchValueLinks = patchValue;
@@ -253,7 +253,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             try
             {
-                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
+                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
                     return -1;
 
                 foreach (var d in del)
