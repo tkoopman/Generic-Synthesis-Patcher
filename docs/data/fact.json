@@ -1,86 +1,65 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CrimeValues"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"CrimeValues.Arrest\": true",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Arrest"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Assault\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Assault"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"CrimeValues.AttackOnSight\": true",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.AttackOnSight"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Escape\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Escape"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Murder\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Murder"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Pickpocket\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Pickpocket"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"CrimeValues.StealMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.StealMult"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Trespass\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Trespass"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CrimeValues.Versioning"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Werewolf\": 7",
+    "MFFSM": "MFF--",
     "Name": "CrimeValues.Werewolf"
   },
   {
@@ -147,13 +126,6 @@
     "Name": "PlayerInventoryContainer"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Ranks"
-  },
-  {
     "Aliases": "XNAM",
     "Description": "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)",
     "Example": "\"Relations\": { \"Target\": \"021FED:Skyrim.esm\", \"Reaction\": \"Friend\" }",
@@ -190,65 +162,37 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VendorLocation"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VendorLocation.Radius"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VendorLocation.Target"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VendorValues"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.EndHour\": 7",
+    "MFFSM": "MFF--",
     "Name": "VendorValues.EndHour"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"VendorValues.NotSellBuy\": true",
+    "MFFSM": "MFF--",
     "Name": "VendorValues.NotSellBuy"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"VendorValues.OnlyBuysStolenItems\": true",
+    "MFFSM": "MFF--",
     "Name": "VendorValues.OnlyBuysStolenItems"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.Radius\": 7",
+    "MFFSM": "MFF--",
     "Name": "VendorValues.Radius"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.StartHour\": 7",
+    "MFFSM": "MFF--",
     "Name": "VendorValues.StartHour"
   }
 ]

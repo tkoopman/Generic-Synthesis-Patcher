@@ -7,27 +7,6 @@
     "Name": "Description"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Stages"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -40,27 +19,6 @@
     "Example": "\"FormVersion\": 7",
     "MFFSM": "MFF--",
     "Name": "FormVersion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.LargeIconFilename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.SmallIconFilename"
   },
   {
     "Aliases": "",
@@ -82,6 +40,48 @@
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
     "MFFSM": "-FF--",
     "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
   },
   {
     "Aliases": "YNAM",
@@ -117,13 +117,6 @@
     "Example": "\"Value\": 7",
     "MFFSM": "MFF--",
     "Name": "Value"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",

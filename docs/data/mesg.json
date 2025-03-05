@@ -42,13 +42,6 @@
     "Name": "INAM"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MenuButtons"
-  },
-  {
     "Aliases": "FULL",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",

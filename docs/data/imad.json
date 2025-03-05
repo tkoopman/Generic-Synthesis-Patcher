@@ -8,87 +8,10 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BlurRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicBrightnessAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicBrightnessMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicContrastAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicContrastMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicSaturationAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CinematicSaturationMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DepthOfFieldDistance"
-  },
-  {
-    "Aliases": "",
     "Description": "Flags (UseTarget, ModeFront, ModeBack, NoSky, BlurRadiusBit2, BlurRadiusBit1, BlurRadiusBit0)",
     "Example": "\"DepthOfFieldFlags\": [ \"UseTarget\", \"-BlurRadiusBit0\" ]",
     "MFFSM": "MFF-M",
     "Name": "DepthOfFieldFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DepthOfFieldRange"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DepthOfFieldStrength"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DoubleVisionStrength"
   },
   {
     "Aliases": "",
@@ -106,13 +29,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FadeColor"
-  },
-  {
-    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
     "MFFSM": "MFF--",
@@ -120,178 +36,17 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomBlurRadiusAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomBlurRadiusMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomScaleAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomScaleMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomThresholdAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrBloomThresholdMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrEyeAdaptSpeedAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrEyeAdaptSpeedMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrSkyScaleAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrSkyScaleMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrSunlightScaleAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrSunlightScaleMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrTargetLumMaxAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrTargetLumMaxMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrTargetLumMinAdd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdrTargetLumMinMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MotionBlurStrength"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurCenter"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"RadialBlurCenter.X\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "RadialBlurCenter.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"RadialBlurCenter.Y\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "RadialBlurCenter.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurDownStart"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurRampDown"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurRampUp"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurStart"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RadialBlurStrength"
   },
   {
     "Aliases": "",
@@ -306,12 +61,5 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TintColor"
   }
 ]

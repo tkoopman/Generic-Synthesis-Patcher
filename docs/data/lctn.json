@@ -1,45 +1,10 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ActorCellEnablePoint"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ActorCellEncounterCell"
-  },
-  {
-    "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
     "MFFSM": "MFFSM",
     "Name": "ActorCellMarkerReference"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ActorCellPersistentReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ActorCellStaticReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ActorCellUniques"
   },
   {
     "Aliases": "CNAM",
@@ -78,45 +43,10 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LocationCellEnablePoint"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LocationCellEncounterCell"
-  },
-  {
-    "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
     "MFFSM": "MFFSM",
     "Name": "LocationCellMarkerReference"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LocationCellPersistentReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LocationCellStaticReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LocationCellUniques"
   },
   {
     "Aliases": "NAM1",
@@ -138,13 +68,6 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "ParentLocation"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ReferenceCellEncounterCell"
   },
   {
     "Aliases": "",

@@ -344,20 +344,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FillTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FillTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillTextureAnimationSpeedU\": 3.14",
     "MFFSM": "MFF--",
@@ -428,20 +414,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HolesTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HolesTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Possible values (Add, Subtract, ReverseSubtract, Minimum, Maximum)",
     "Example": "\"MembraneBlendOperation\": \"Add\"",
     "MFFSM": "MF---",
@@ -453,20 +425,6 @@
     "Example": "\"MembraneDestBlendMode\": \"Zero\"",
     "MFFSM": "MF---",
     "Name": "MembraneDestBlendMode"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MembranePaletteTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MembranePaletteTexture.GivenPath"
   },
   {
     "Aliases": "",
@@ -666,20 +624,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticlePaletteTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticlePaletteTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticlePeristentCount\": 3.14",
     "MFFSM": "MFF--",
@@ -726,20 +670,6 @@
     "Example": "\"ParticleScaleKey2Time\": 3.14",
     "MFFSM": "MFF--",
     "Name": "ParticleScaleKey2Time"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticleShaderTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticleShaderTexture.GivenPath"
   },
   {
     "Aliases": "",

@@ -1,12 +1,5 @@
 [
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "DESC",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
@@ -22,13 +15,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Effects"
-  },
-  {
-    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
     "MFFSM": "MFF--",
@@ -40,27 +26,6 @@
     "Example": "\"Hidden\": true",
     "MFFSM": "MFF--",
     "Name": "Hidden"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.LargeIconFilename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.SmallIconFilename"
   },
   {
     "Aliases": "",
@@ -117,12 +82,5 @@
     "Example": "\"Trait\": true",
     "MFFSM": "MFF--",
     "Name": "Trait"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   }
 ]

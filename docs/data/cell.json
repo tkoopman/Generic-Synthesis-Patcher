@@ -43,24 +43,24 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Grid"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Quad1, Quad2, Quad3, Quad4)",
+    "Example": "\"Grid.Flags\": \"Quad1\"",
+    "MFFSM": "MF---",
     "Name": "Grid.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Grid.Point"
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.Point.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.Point.Y"
   },
   {
     "Aliases": "XCIM",
@@ -71,199 +71,108 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.EditorID"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.FormVersion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.Layers"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.Textures"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.VertexColors"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.VertexHeightMap"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Landscape.VertexNormals"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Lighting"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
+    "MFFSM": "-FF--",
     "Name": "Lighting.AmbientColor"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Lighting.AmbientColors"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
+    "MFFSM": "-FF--",
     "Name": "Lighting.DirectionalColor"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.DirectionalFade\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalFade"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationXY\": 7",
+    "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalRotationXY"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationZ\": 7",
+    "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalRotationZ"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogClipDistance\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.FogClipDistance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogFar\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.FogFar"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogFarColor\": [40,50,60]",
+    "MFFSM": "-FF--",
     "Name": "Lighting.FogFarColor"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogMax\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.FogMax"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogNear\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.FogNear"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogNearColor\": [40,50,60]",
+    "MFFSM": "-FF--",
     "Name": "Lighting.FogNearColor"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogPower\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.FogPower"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (AmbientColor, DirectionalColor, FogColor, FogNear, FogFar, DirectionalRotation, DirectionalFade, ClipDistance, FogPower, FogMax, LightFadeDistances)",
+    "Example": "\"Lighting.Inherits\": [ \"AmbientColor\", \"-LightFadeDistances\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Lighting.Inherits"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeBegin\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.LightFadeBegin"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeEnd\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Lighting.LightFadeEnd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Lighting.Versioning"
   },
   {
     "Aliases": "LTMP",
@@ -322,13 +231,6 @@
     "Name": "Name"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NavigationMeshes"
-  },
-  {
     "Aliases": "TVDT",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"OcclusionData\": [0x1A,0x00,0x3F]",
@@ -341,13 +243,6 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "Owner"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Persistent"
   },
   {
     "Aliases": "XCLR",
@@ -369,13 +264,6 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Temporary"
   },
   {
     "Aliases": "XCWT",
@@ -407,24 +295,45 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterVelocity"
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterVelocity.Angle"
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterVelocity.Offset"
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.Z"
   },
   {
     "Aliases": "",

@@ -14,32 +14,11 @@
     "Name": "AnimationGroupSection"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "EditorID"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Filename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Filename.GivenPath"
   },
   {
     "Aliases": "DataFlags",

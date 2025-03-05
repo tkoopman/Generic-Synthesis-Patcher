@@ -1,23 +1,16 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.DuckingDecibel\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.DuckingDecibel"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Data.Priority\": 7",
+    "MFFSM": "MFF--",
     "Name": "Data.Priority"
   },
   {

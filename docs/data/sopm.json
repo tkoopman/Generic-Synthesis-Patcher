@@ -1,30 +1,23 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Attenuation"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Attenuation.Curve\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "Attenuation.Curve"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MaxDistance\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Attenuation.MaxDistance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MinDistance\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Attenuation.MinDistance"
   },
   {
@@ -36,23 +29,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (AttenuatesWithDistance, AllowsRumble)",
+    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AllowsRumble\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Data.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
+    "MFFSM": "-FF--",
     "Name": "Data.ReverbSendPercent"
   },
   {
@@ -75,34 +61,6 @@
     "Example": "\"FormVersion\": 7",
     "MFFSM": "MFF--",
     "Name": "FormVersion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OutputChannels"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OutputChannels.Channel0"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OutputChannels.Channel1"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OutputChannels.Channel2"
   },
   {
     "Aliases": "",

@@ -36,30 +36,23 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BasicStats"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"BasicStats.Damage\": 7",
+    "MFFSM": "MFF--",
     "Name": "BasicStats.Damage"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"BasicStats.Value\": 7",
+    "MFFSM": "MFF--",
     "Name": "BasicStats.Value"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"BasicStats.Weight\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "BasicStats.Weight"
   },
   {
@@ -71,198 +64,163 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Critical"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Critical.Damage\": 7",
+    "MFFSM": "MFF--",
     "Name": "Critical.Damage"
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFF--",
     "Name": "Critical.Effect"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (OnDeath)",
+    "Example": "\"Critical.Flags\": \"OnDeath\"",
+    "MFFSM": "MFF-M",
     "Name": "Critical.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Critical.PercentMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Critical.PercentMult"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Critical.Unused3"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Critical.Unused4"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Critical.Versioning"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.AnimationAttackMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.AnimationAttackMult"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (HandToHand, OneHandSword, OneHandDagger, OneHandAxe, OneHandMace, TwoHandSword, TwoHandAxe, Bow, Staff, Crossbow)",
+    "Example": "\"Data.AnimationType\": \"HandToHand\"",
+    "MFFSM": "MF---",
     "Name": "Data.AnimationType"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (AttackLeft, AttackRight, Attack3, Attack4, Attack5, Attack6, Attack7, Attack8, AttackLoop, AttackSpin, AttackSpin2, PlaceMine, PlaceMine2, AttackThrow, AttackThrow2, AttackThrow3, AttackThrow4, AttackThrow5, Default)",
+    "Example": "\"Data.AttackAnimation\": \"AttackLeft\"",
+    "MFFSM": "MF---",
     "Name": "Data.AttackAnimation"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Data.BaseVATStoHitChance\": 7",
+    "MFFSM": "MFF--",
     "Name": "Data.BaseVATStoHitChance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Data.EmbeddedWeaponAV\": 7",
+    "MFFSM": "MFF--",
     "Name": "Data.EmbeddedWeaponAV"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (IgnoresNormalWeaponResistance, Automatic, HasScope, CantDrop, HideBackpack, EmbeddedWeapon, DontUseFirstPersonIsAnim, NonPlayable, PlayerOnly, NPCsUseAmmo, NoJamAfterReload, MinorCrime, RangeFixed, NotUsedInNormalCombat, DontUseThirdPersonISAnim, BurstShot, RumbleAlternate, LongBursts, NonHostile, BoundWeapon)",
+    "Example": "\"Data.Flags\": [ \"IgnoresNormalWeaponResistance\", \"-BoundWeapon\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Data.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Data.NumProjectiles\": 7",
+    "MFFSM": "MFF--",
     "Name": "Data.NumProjectiles"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (NoFormulaBehavior, DismemberOnly, ExplodeOnly, NoDismemberOrExplode)",
+    "Example": "\"Data.OnHit\": \"NoFormulaBehavior\"",
+    "MFFSM": "MF---",
     "Name": "Data.OnHit"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.RangeMax\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.RangeMax"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.RangeMin\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.RangeMin"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.Reach\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.Reach"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"Data.Resist\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "Data.Resist"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleDuration\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.RumbleDuration"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleLeftMotorStrength\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.RumbleLeftMotorStrength"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleRightMotorStrength\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.RumbleRightMotorStrength"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.SightFOV\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.SightFOV"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
+    "Example": "\"Data.Skill\": \"OneHanded\"",
+    "MFFSM": "MF---",
     "Name": "Data.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.Speed\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.Speed"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Data.Stagger\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Data.Stagger"
   },
   {
@@ -271,27 +229,6 @@
     "Example": "\"Description\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "Description"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Stages"
   },
   {
     "Aliases": "VNAM",
@@ -343,27 +280,6 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.LargeIconFilename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.SmallIconFilename"
-  },
-  {
     "Aliases": "UNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -413,6 +329,48 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "EITM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -460,12 +418,5 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "UnequipSound"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   }
 ]

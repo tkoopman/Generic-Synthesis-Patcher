@@ -43,44 +43,30 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "PerkTree"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Skill"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Skill.ImproveMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Skill.ImproveMult"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Skill.ImproveOffset\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Skill.ImproveOffset"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Skill.OffsetMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Skill.OffsetMult"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Skill.UseMult\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Skill.UseMult"
   },
   {

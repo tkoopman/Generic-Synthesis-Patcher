@@ -7,27 +7,6 @@
     "Name": "CloseSound"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Stages"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -84,6 +63,48 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "SNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -96,13 +117,6 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",

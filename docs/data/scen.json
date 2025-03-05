@@ -1,26 +1,5 @@
 [
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Actions"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Actors"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -49,13 +28,6 @@
     "Name": "LastActionIndex"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Phases"
-  },
-  {
     "Aliases": "PNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -68,13 +40,6 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",

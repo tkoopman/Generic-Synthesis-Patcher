@@ -1,80 +1,59 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Cinematic"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Brightness\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Cinematic.Brightness"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Contrast\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Cinematic.Contrast"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Saturation\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Cinematic.Saturation"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DepthOfField"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"DepthOfField.BlurRadius\": 7",
+    "MFFSM": "MFF--",
     "Name": "DepthOfField.BlurRadius"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Distance\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "DepthOfField.Distance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Range\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "DepthOfField.Range"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"DepthOfField.Sky\": true",
+    "MFFSM": "MFF--",
     "Name": "DepthOfField.Sky"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Strength\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "DepthOfField.Strength"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DepthOfField.Versioning"
   },
   {
     "Aliases": "EDID",
@@ -99,72 +78,65 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Hdr"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomBlurRadius\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.BloomBlurRadius"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomScale\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.BloomScale"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomThreshold\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.BloomThreshold"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.EyeAdaptSpeed\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.EyeAdaptSpeed"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.EyeAdaptStrength\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.EyeAdaptStrength"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.ReceiveBloomThreshold\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.ReceiveBloomThreshold"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.SkyScale\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.SkyScale"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.SunlightScale\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.SunlightScale"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.White\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Hdr.White"
   },
   {
@@ -176,23 +148,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Tint"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Tint.Amount\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Tint.Amount"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Tint.Color\": [40,50,60]",
+    "MFFSM": "-FF--",
     "Name": "Tint.Color"
   }
 ]

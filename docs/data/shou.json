@@ -47,12 +47,5 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WordsOfPower"
   }
 ]

@@ -21,20 +21,6 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icon"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icon.GivenPath"
-  },
-  {
     "Aliases": "RecordFlags",
     "Description": "Flags (NonPlayable)",
     "Example": "\"MajorFlags\": \"NonPlayable\"",

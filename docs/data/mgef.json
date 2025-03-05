@@ -1,20 +1,6 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Archetype"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Archetype.ActorValue"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseCost\": 3.14",
     "MFFSM": "MFF--",
@@ -47,13 +33,6 @@
     "Example": "\"CastType\": \"ConstantEffect\"",
     "MFFSM": "MF---",
     "Name": "CastType"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
   },
   {
     "Aliases": "",
@@ -274,13 +253,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Sounds"
-  },
-  {
-    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"SpellmakingArea\": 7",
     "MFFSM": "MFF--",
@@ -320,12 +292,5 @@
     "Example": "\"TargetType\": \"Self\"",
     "MFFSM": "MF---",
     "Name": "TargetType"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   }
 ]

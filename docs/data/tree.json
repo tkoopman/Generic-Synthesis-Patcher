@@ -78,37 +78,72 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Production"
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Fall\": 7",
+    "MFFSM": "MFF--",
     "Name": "Production.Fall"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Production.Spring\": 7",
+    "MFFSM": "MFF--",
     "Name": "Production.Spring"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Production.Summer\": 7",
+    "MFFSM": "MFF--",
     "Name": "Production.Summer"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Production.Winter\": 7",
+    "MFFSM": "MFF--",
     "Name": "Production.Winter"
   },
   {
@@ -124,12 +159,5 @@
     "Example": "\"TrunkFlexibility\": 3.14",
     "MFFSM": "MFF--",
     "Name": "TrunkFlexibility"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   }
 ]

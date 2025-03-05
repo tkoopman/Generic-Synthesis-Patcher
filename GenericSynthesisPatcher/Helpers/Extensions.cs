@@ -123,6 +123,8 @@ namespace GenericSynthesisPatcher.Helpers
         /// </summary>
         public static bool IsMaster (this IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) => context.ModKey.Equals(context.Record.FormKey.ModKey);
 
+        public static Type RemoveNullable (this Type type) => (type.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? type.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : type;
+
         /// <summary> Same as IEnumerable<>.Any() but will return false instead of throwing
         /// ArgumentNullException if null. </summary> <returns>False if null else result of
         /// .Any()</returns>

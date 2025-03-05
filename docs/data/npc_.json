@@ -8,79 +8,72 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "AIData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Unaggressive, Aggressive, VeryAggressive, Frenzied)",
+    "Example": "\"AIData.Aggression\": \"Unaggressive\"",
+    "MFFSM": "MF---",
     "Name": "AIData.Aggression"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "True / False",
+    "Example": "\"AIData.AggroRadiusBehavior\": true",
+    "MFFSM": "MFF--",
     "Name": "AIData.AggroRadiusBehavior"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (HelpsNobody, HelpsAllies, HelpsFriendsAndAllies)",
+    "Example": "\"AIData.Assistance\": \"HelpsNobody\"",
+    "MFFSM": "MF---",
     "Name": "AIData.Assistance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Attack\": 7",
+    "MFFSM": "MFF--",
     "Name": "AIData.Attack"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Cowardly, Cautious, Average, Brave, Foolhardy)",
+    "Example": "\"AIData.Confidence\": \"Cowardly\"",
+    "MFFSM": "MF---",
     "Name": "AIData.Confidence"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"AIData.EnergyLevel\": 7",
+    "MFFSM": "MFF--",
     "Name": "AIData.EnergyLevel"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Neutral, Angry, Fear, Happy, Sad, Surprised, Puzzled, Disgusted)",
+    "Example": "\"AIData.Mood\": \"Neutral\"",
+    "MFFSM": "MF---",
     "Name": "AIData.Mood"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (AnyCrime, ViolenceAgainstEnemies, PropertyCrimeOnly, NoCrime)",
+    "Example": "\"AIData.Responsibility\": \"AnyCrime\"",
+    "MFFSM": "MF---",
     "Name": "AIData.Responsibility"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Warn\": 7",
+    "MFFSM": "MFF--",
     "Name": "AIData.Warn"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"AIData.WarnOrAttack\": 7",
+    "MFFSM": "MFF--",
     "Name": "AIData.WarnOrAttack"
   },
   {
@@ -89,13 +82,6 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "AttackRace"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Attacks"
   },
   {
     "Aliases": "CNAM",
@@ -120,86 +106,72 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Configuration"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.BleedoutOverride\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.BleedoutOverride"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMaxLevel\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.CalcMaxLevel"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMinLevel\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.CalcMinLevel"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.DispositionBase\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.DispositionBase"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (Female, Essential, IsCharGenFacePreset, Respawn, AutoCalcStats, Unique, DoesntAffectStealthMeter, UseTemplate, Protected, Summonable, DoesNotBleed, BleedoutOverride, OppositeGenderAnims, SimpleActor, LoopedScript, LoopedAudio, IsGhost, Invulnerable)",
+    "Example": "\"Configuration.Flags\": [ \"Female\", \"-Invulnerable\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Configuration.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.HealthOffset\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.HealthOffset"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Configuration.Level"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.MagickaOffset\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.MagickaOffset"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.SpeedMultiplier\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.SpeedMultiplier"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.StaminaOffset\": 7",
+    "MFFSM": "MFF--",
     "Name": "Configuration.StaminaOffset"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (Traits, Stats, Factions, SpellList, AIData, AIPackages, ModelAnimation, BaseData, Inventory, Script, DefPackList, AttackData, Keywords)",
+    "Example": "\"Configuration.TemplateFlags\": [ \"Traits\", \"-Keywords\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Configuration.TemplateFlags"
   },
   {
@@ -231,27 +203,6 @@
     "Name": "DefaultPackageList"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Stages"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -260,163 +211,149 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceMorph"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsForwardVsBack\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsForwardVsBack"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsInVsOut\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsInVsOut"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.CheeksForwardVsBack\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.CheeksForwardVsBack"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.CheeksUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.CheeksUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinNarrowVsWide\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinNarrowVsWide"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinUnderbiteVsOverbite\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinUnderbiteVsOverbite"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesForwardVsBack\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesForwardVsBack"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesInVsOut\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesInVsOut"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawForwardVsBack\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.JawForwardVsBack"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawNarrowVsWide\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.JawNarrowVsWide"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.JawUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.LipsInVsOut\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.LipsInVsOut"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.LipsUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.LipsUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.NoseLongVsShort\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.NoseLongVsShort"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.NoseUpVsDown\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "FaceMorph.NoseUpVsDown"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceParts"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Eyes\": 7",
+    "MFFSM": "MFF--",
     "Name": "FaceParts.Eyes"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Mouth\": 7",
+    "MFFSM": "MFF--",
     "Name": "FaceParts.Mouth"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Nose\": 7",
+    "MFFSM": "MFF--",
     "Name": "FaceParts.Nose"
   },
   {
@@ -525,6 +462,48 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "OCOR",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -539,18 +518,46 @@
     "Name": "Packages"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Perks"
-  },
-  {
     "Aliases": "DNAM",
     "Description": "JSON object containing the values under PlayerSkills you want to set",
     "Example": "See ../Examples/NPC Player Skills.json",
     "MFFSM": "-FF--",
     "Name": "PlayerSkills"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PlayerSkills.FarAwayModelDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PlayerSkills.FarAwayModelDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.GearedUpWeapons\": 7",
+    "MFFSM": "MFF--",
+    "Name": "PlayerSkills.GearedUpWeapons"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Health\": 7",
+    "MFFSM": "MFF--",
+    "Name": "PlayerSkills.Health"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Magicka\": 7",
+    "MFFSM": "MFF--",
+    "Name": "PlayerSkills.Magicka"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Stamina\": 7",
+    "MFFSM": "MFF--",
+    "Name": "PlayerSkills.Stamina"
   },
   {
     "Aliases": "RNAM",
@@ -581,13 +588,6 @@
     "Name": "SleepingOutfit"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Sound"
-  },
-  {
     "Aliases": "NAM8",
     "Description": "Possible values (Loud, Normal, Silent, VeryLoud)",
     "Example": "\"SoundLevel\": \"Loud\"",
@@ -614,20 +614,6 @@
     "Example": "\"TextureLighting\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "TextureLighting"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TintLayers"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "VTCK",

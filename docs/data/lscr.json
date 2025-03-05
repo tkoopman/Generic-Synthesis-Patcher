@@ -1,26 +1,5 @@
 [
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CameraPath"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CameraPath.GivenPath"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "DESC",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
@@ -42,46 +21,11 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.LargeIconFilename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Icons.SmallIconFilename"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "InitialRotation"
-  },
-  {
     "Aliases": "SNAM",
     "Description": "Decimal value",
     "Example": "\"InitialScale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "InitialScale"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "InitialTranslationOffset"
   },
   {
     "Aliases": "NNAM",
@@ -99,23 +43,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "RotationOffsetConstraints"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"RotationOffsetConstraints.Max\": 7",
+    "MFFSM": "MFF--",
     "Name": "RotationOffsetConstraints.Max"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"RotationOffsetConstraints.Min\": 7",
+    "MFFSM": "MFF--",
     "Name": "RotationOffsetConstraints.Min"
   },
   {

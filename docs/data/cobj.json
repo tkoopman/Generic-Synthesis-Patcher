@@ -1,12 +1,5 @@
 [
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",

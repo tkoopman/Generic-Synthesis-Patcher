@@ -8,13 +8,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
-    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DataInputVersion\": 7",
     "MFFSM": "MFF--",
@@ -43,30 +36,23 @@
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "-----",
-    "Name": "IdleAnimations"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFFSM",
     "Name": "IdleAnimations.Animations"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"IdleAnimations.TimerSetting\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "IdleAnimations.TimerSetting"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Random, RunInSequence, RandomDoOnce, RunInSequenceDoOnce)",
+    "Example": "\"IdleAnimations.Type\": \"Random\"",
+    "MFFSM": "MF---",
     "Name": "IdleAnimations.Type"
   },
   {
@@ -85,171 +71,129 @@
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnBegin"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFF--",
     "Name": "OnBegin.Idle"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.QNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnBegin.QNAM"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCDA\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnBegin.SCDA"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCHR\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnBegin.SCHR"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCTX\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnBegin.SCTX"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.TNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnBegin.TNAM"
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnBegin.Topics"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnChange"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFF--",
     "Name": "OnChange.Idle"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.QNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnChange.QNAM"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCDA\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnChange.SCDA"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCHR\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnChange.SCHR"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCTX\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnChange.SCTX"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.TNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnChange.TNAM"
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnChange.Topics"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnEnd"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFF--",
     "Name": "OnEnd.Idle"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.QNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnEnd.QNAM"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCDA\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnEnd.SCDA"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCHR\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnEnd.SCHR"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCTX\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnEnd.SCTX"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.TNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
     "Name": "OnEnd.TNAM"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "OnEnd.Topics"
   },
   {
     "Aliases": "QNAM",
@@ -271,13 +215,6 @@
     "Example": "\"PreferredSpeed\": \"Walk\"",
     "MFFSM": "MF---",
     "Name": "PreferredSpeed"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ProcedureTree"
   },
   {
     "Aliases": "",
@@ -334,13 +271,6 @@
     "Example": "\"Type\": \"Package\"",
     "MFFSM": "MF---",
     "Name": "Type"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "XNAM",

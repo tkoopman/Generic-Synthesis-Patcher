@@ -85,20 +85,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticleTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParticleTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"RotationVelocity\": 3.14",
     "MFFSM": "MFF--",

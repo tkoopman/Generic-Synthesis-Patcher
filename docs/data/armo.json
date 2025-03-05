@@ -29,37 +29,23 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyTemplate.ActsLike44"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (LightArmor, HeavyArmor, Clothing)",
+    "Example": "\"BodyTemplate.ArmorType\": \"LightArmor\"",
+    "MFFSM": "MF---",
     "Name": "BodyTemplate.ArmorType"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01)",
+    "Example": "\"BodyTemplate.FirstPersonFlags\": [ \"Head\", \"-FX01\" ]",
+    "MFFSM": "MFF-M",
     "Name": "BodyTemplate.FirstPersonFlags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (ModulatesVoice, NonPlayable)",
+    "Example": "\"BodyTemplate.Flags\": [ \"ModulatesVoice\", \"-NonPlayable\" ]",
+    "MFFSM": "MFF-M",
     "Name": "BodyTemplate.Flags"
   },
   {
@@ -68,27 +54,6 @@
     "Example": "\"Description\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "Description"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Destructible.Stages"
   },
   {
     "Aliases": "EDID",
@@ -145,6 +110,48 @@
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
     "MFFSM": "-FF--",
     "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
   },
   {
     "Aliases": "EITM",
@@ -204,37 +211,9 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "VirtualMachineAdapter"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Weight"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WorldModel"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WorldModel.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WorldModel.Male"
   }
 ]

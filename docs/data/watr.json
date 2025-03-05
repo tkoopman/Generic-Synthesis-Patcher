@@ -1,13 +1,6 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "AngularVelocity"
-  },
-  {
-    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DamagePerSecond\": 7",
     "MFFSM": "MFF--",
@@ -106,20 +99,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FlowNormalsNoiseTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FlowNormalsNoiseTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogAboveWaterAmount\": 3.14",
     "MFFSM": "MFF--",
@@ -182,13 +161,6 @@
     "Name": "ImageSpace"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LinearVelocity"
-  },
-  {
     "Aliases": "TNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -232,20 +204,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerOneTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerOneTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NoiseLayerOneUvScale\": 3.14",
     "MFFSM": "MFF--",
@@ -274,20 +232,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerThreeTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerThreeTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NoiseLayerThreeUvScale\": 3.14",
     "MFFSM": "MFF--",
@@ -313,20 +257,6 @@
     "Example": "\"NoiseLayerTwoAmplitudeScale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "NoiseLayerTwoAmplitudeScale"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerTwoTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "NoiseLayerTwoTexture.GivenPath"
   },
   {
     "Aliases": "",

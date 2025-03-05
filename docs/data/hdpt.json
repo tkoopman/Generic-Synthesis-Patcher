@@ -57,13 +57,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Parts"
-  },
-  {
-    "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",

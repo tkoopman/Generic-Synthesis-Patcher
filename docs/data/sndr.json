@@ -14,13 +14,6 @@
     "Name": "Category"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Conditions"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -36,23 +29,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LoopAndRumble"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (None, Loop, EnvelopeFast, EnvelopeSlow)",
+    "Example": "\"LoopAndRumble.Loop\": \"None\"",
+    "MFFSM": "MF---",
     "Name": "LoopAndRumble.Loop"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.RumbleValues\": 7",
+    "MFFSM": "MFF--",
     "Name": "LoopAndRumble.RumbleValues"
   },
   {
@@ -89,13 +75,6 @@
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SoundFiles"
   },
   {
     "Aliases": "",

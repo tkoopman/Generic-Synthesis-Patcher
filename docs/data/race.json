@@ -50,13 +50,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Attacks"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseCarryWeight\": 3.14",
     "MFFSM": "MFF--",
@@ -113,23 +106,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BehaviorGraph"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"BehaviorGraph.Female\"] } }]",
+    "MFFSM": "--F--",
     "Name": "BehaviorGraph.Female"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"BehaviorGraph.Male\"] } }]",
+    "MFFSM": "--F--",
     "Name": "BehaviorGraph.Male"
   },
   {
@@ -140,27 +126,6 @@
     "Name": "BodyBipedObject"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyData.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyData.Male"
-  },
-  {
     "Aliases": "GNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -169,37 +134,23 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "BodyTemplate.ActsLike44"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (LightArmor, HeavyArmor, Clothing)",
+    "Example": "\"BodyTemplate.ArmorType\": \"LightArmor\"",
+    "MFFSM": "MF---",
     "Name": "BodyTemplate.ArmorType"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01)",
+    "Example": "\"BodyTemplate.FirstPersonFlags\": [ \"Head\", \"-FX01\" ]",
+    "MFFSM": "MFF-M",
     "Name": "BodyTemplate.FirstPersonFlags"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (ModulatesVoice, NonPlayable)",
+    "Example": "\"BodyTemplate.Flags\": [ \"ModulatesVoice\", \"-NonPlayable\" ]",
+    "MFFSM": "MFF-M",
     "Name": "BodyTemplate.Flags"
   },
   {
@@ -208,27 +159,6 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "CloseLootSound"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DecapitateArmors"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DecapitateArmors.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DecapitateArmors.Male"
   },
   {
     "Aliases": "NAM7",
@@ -243,27 +173,6 @@
     "Example": "\"DecelerationRate\": 3.14",
     "MFFSM": "MFF--",
     "Name": "DecelerationRate"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DefaultHairColors"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DefaultHairColors.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "DefaultHairColors.Male"
   },
   {
     "Aliases": "DESC",
@@ -306,132 +215,6 @@
     "Example": "",
     "MFFSM": "MFFSM",
     "Name": "Eyes"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.Aah_LipBigAah"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.BigAah_LipDST"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.BMP_LipEee"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.ChJSh_LipFV"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.DST_LipK"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.Eee_LipL"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.Eh_LipR"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.ForceNames"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.FV_LipTh"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.I"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.K"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.N"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.Oh"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.OohQ"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.R"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.Th"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FaceFxPhonemes.W"
   },
   {
     "Aliases": "UNAM",
@@ -491,44 +274,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HeadData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HeadData.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HeadData.Male"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Height"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Height.Female\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Height.Female"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Height.Male\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Height.Male"
   },
   {
@@ -575,45 +330,66 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MountData"
+    "Description": "Decimal value",
+    "Example": "\"MountData.DismountOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.DismountOffset.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MountData.DismountOffset"
+    "Description": "Decimal value",
+    "Example": "\"MountData.DismountOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.DismountOffset.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MountData.MountCameraOffset"
+    "Description": "Decimal value",
+    "Example": "\"MountData.DismountOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.DismountOffset.Z"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MountData.MountOffset"
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountCameraOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountCameraOffset.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MovementTypeNames"
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountCameraOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountCameraOffset.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MovementTypes"
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountCameraOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountCameraOffset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MountData.MountOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MountData.MountOffset.Z"
   },
   {
     "Aliases": "FULL",
@@ -652,170 +428,100 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkeletalModel"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkeletalModel.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkeletalModel.Male"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost0"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost0.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost0.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost0.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost0.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost1"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost1.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost1.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost1.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost1.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost2"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost2.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost2.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost2.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost2.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost3"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost3.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost3.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost3.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost3.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost4"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost4.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost4.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost4.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost4.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost5"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost5.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost5.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost5.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost5.Skill"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SkillBoost6"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Numeric value",
+    "Example": "\"SkillBoost6.Boost\": 7",
+    "MFFSM": "MFF--",
     "Name": "SkillBoost6.Boost"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"SkillBoost6.Skill\": \"Aggression\"",
+    "MFFSM": "MF---",
     "Name": "SkillBoost6.Skill"
   },
   {
@@ -855,44 +561,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Voices"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Voices.Female"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Voices.Male"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Weight"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Weight.Female\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Weight.Female"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"Weight.Male\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "Weight.Male"
   }
 ]

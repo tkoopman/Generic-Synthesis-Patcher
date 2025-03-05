@@ -22,23 +22,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ParentTitle"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "String value",
+    "Example": "\"ParentTitle.Female\": \"Hello\"",
+    "MFFSM": "MFF--",
     "Name": "ParentTitle.Female"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "String value",
+    "Example": "\"ParentTitle.Male\": \"Hello\"",
+    "MFFSM": "MFF--",
     "Name": "ParentTitle.Male"
   },
   {
@@ -50,23 +43,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Title"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "String value",
+    "Example": "\"Title.Female\": \"Hello\"",
+    "MFFSM": "MFF--",
     "Name": "Title.Female"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "String value",
+    "Example": "\"Title.Male\": \"Hello\"",
+    "MFFSM": "MFF--",
     "Name": "Title.Male"
   }
 ]

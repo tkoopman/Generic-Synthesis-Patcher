@@ -1,19 +1,5 @@
 [
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CanopyShadow"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "CanopyShadow.GivenPath"
-  },
-  {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -49,13 +35,6 @@
     "Name": "EncounterZone"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "FixedDimensionsCenterCell"
-  },
-  {
     "Aliases": "DataFlags",
     "Description": "Flags (SmallWorld, CannotFastTravel, NoLodWater, NoLandscape, NoSky, FixedDimensions, NoGrass)",
     "Example": "\"Flags\": [ \"SmallWorld\", \"-NoGrass\" ]",
@@ -70,34 +49,6 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdLodDiffuseTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdLodDiffuseTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdLodNormalTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "HdLodNormalTexture.GivenPath"
-  },
-  {
     "Aliases": "LTMP",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -106,31 +57,17 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LandDefaults"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultLandHeight\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "LandDefaults.DefaultLandHeight"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultWaterHeight\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "LandDefaults.DefaultWaterHeight"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "LargeReferences"
   },
   {
     "Aliases": "XLCN",
@@ -162,73 +99,66 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraInitialPitch\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "MapData.CameraInitialPitch"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraMaxHeight\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "MapData.CameraMaxHeight"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraMinHeight\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "MapData.CameraMinHeight"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapData.NorthwestCellCoords"
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.NorthwestCellCoords.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapData.SoutheastCellCoords"
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.NorthwestCellCoords.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapData.UsableDimensions"
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.SoutheastCellCoords.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapData.Versioning"
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.SoutheastCellCoords.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapImage"
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "MapImage.GivenPath"
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.Y"
   },
   {
     "Aliases": "MHDT",
@@ -253,44 +183,30 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ObjectBoundsMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.X\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "ObjectBoundsMax.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.Y\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "ObjectBoundsMax.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "ObjectBoundsMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.X\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "ObjectBoundsMin.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.Y\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "ObjectBoundsMin.Y"
   },
   {
@@ -302,23 +218,16 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "Parent"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Flags (UseLandData, UseLodData, UseMapData, UseWaterData, UseClimateData, UseImageSpaceData, UseSkyCell)",
+    "Example": "\"Parent.Flags\": [ \"UseLandData\", \"-UseSkyCell\" ]",
+    "MFFSM": "MFF-M",
     "Name": "Parent.Flags"
   },
   {
     "Aliases": "",
-    "Description": "",
+    "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "-----",
+    "MFFSM": "MFF--",
     "Name": "Parent.Worldspace"
   },
   {
@@ -329,251 +238,6 @@
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "SubCells"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.AcousticSpace"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.EditorID"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.EncounterZone"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.FactionRank"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.FormVersion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Grid"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.ImageSpace"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Landscape"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Lighting"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.LightingTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.LNAM"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Location"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.LockList"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.MajorFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.MaxHeightData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Music"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Name"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.NavigationMeshes"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.OcclusionData"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Owner"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Persistent"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Regions"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.SkyAndWeatherFromRegion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.SkyrimMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Temporary"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.Water"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.WaterEnvironmentMap"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.WaterHeight"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.WaterNoiseTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.WaterVelocity"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.XWCN"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "TopCell.XWCS"
-  },
-  {
     "Aliases": "XCWT",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -582,58 +246,23 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterEnvironmentMap"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterEnvironmentMap.GivenPath"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterNoiseTexture"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WaterNoiseTexture.GivenPath"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
-    "Name": "WorldMapCellOffset"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.X\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "WorldMapCellOffset.X"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "WorldMapCellOffset.Y"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-----",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
     "Name": "WorldMapCellOffset.Z"
   },
   {

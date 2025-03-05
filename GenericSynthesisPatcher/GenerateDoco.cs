@@ -5,6 +5,7 @@ using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Assets;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 using Mutagen.Bethesda.Synthesis;
@@ -17,13 +18,50 @@ namespace GenericSynthesisPatcher
 {
     internal static class GenerateDoco
     {
-        private static readonly string[] IgnoreDeepScan = [
-            "Conditions",
-            "PerkTree",
-            "VirtualMachineAdapter",
+        private static readonly Type[] ForceDeeperTypes = [
+            typeof(P2Double),
+            typeof(P2Float),
+            typeof(P2Int),
+            typeof(P2Int16),
+            typeof(P3Double),
+            typeof(P3Float),
+            typeof(P3Int),
+            typeof(P3Int16),
+            ];
+
+        private static readonly Type[] IgnoreDeepScanOnTypes = [
+            typeof(AMagicEffectArchetype),
+            typeof(AssetLink<>),
+            typeof(Cell),
+            typeof(CellMaxHeightData),
+            typeof(DialogResponsesAdapter),
+            typeof(ExtendedList<>),
+            typeof(FaceFxPhonemes),
+            typeof(FormLink<>),
+            typeof(FormLinkNullable<>),
+            typeof(IFormLink<>),
+            typeof(IFormLinkNullable<>),
+            typeof(Landscape),
+            typeof(LocationTargetRadius),
+            typeof(Model),
+            typeof(PackageAdapter),
+            typeof(PerkAdapter),
+            typeof(QuestAdapter),
+            typeof(RegionGrasses),
+            typeof(RegionLand),
+            typeof(RegionMap),
+            typeof(RegionObjects),
+            typeof(RegionSounds),
+            typeof(RegionWeather),
+            typeof(SceneAdapter),
+            typeof(string),
+            typeof(TranslatedString),
+            typeof(VirtualMachineAdapter),
+            typeof(WorldspaceMaxHeight),
             ];
 
         private static readonly string[] IgnoreProperty = [
+            "BodyTemplate.ActsLike44",
             "DATADataTypeState",
             "FormKey",
             "IsCompressed",
@@ -68,9 +106,12 @@ namespace GenericSynthesisPatcher
             "UnknownGroupData",
             "Unused",
             "Unused2",
+            "Unused3",
+            "Unused4",
             "UnusedNoisemaps",
             "Version2",
             "VersionControl",
+            "Versioning",
             ];
 
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
@@ -116,7 +157,7 @@ namespace GenericSynthesisPatcher
                     List<string[]> propertyLines = [["Field", "Alt", "MFFSM", "Value Type", "Example"]];
                     propertyLines.Add(["-", "-", "-", "-", "-"]);
 
-                    // Output properties
+                    // Output implemented properties
                     properties.Sort((l, r) => string.Compare(l.PropertyName, r.PropertyName, StringComparison.OrdinalIgnoreCase));
                     foreach (var row in properties)
                     {
@@ -152,7 +193,7 @@ namespace GenericSynthesisPatcher
                     using (var sw = new StreamWriter($"{rtm.Name.ToLowerInvariant()}.json"))
                     using (var writer = new JsonTextWriter(sw))
                     {
-                        serializer.Serialize(writer, properties);
+                        serializer.Serialize(writer, properties.Where(p => p.RecordActionInterface is not null && p.RPM.Action is not null));
                     }
                 }
             }
@@ -177,11 +218,11 @@ namespace GenericSynthesisPatcher
              */
 
             var groupRPMs = buildRPMs.GroupBy(g => (g.PropertyName, g.RecordActionInterface),
-                                              g => (g.RTM.StaticRegistration.GetterType, g.PropertyType), (k, data) => new { PropertyName = k.PropertyName, RPM = k.RecordActionInterface, Types = data.Select(d => d.GetterType), PropertyTypes = data.Select(d => d.PropertyType).Distinct()});
+                                              g => (g.RTM.StaticRegistration.GetterType, g.PropertyType), (k, data) => new { k.PropertyName, k.RecordActionInterface, Types = data.Select(d => d.GetterType), PropertyTypes = data.Select(d => d.PropertyType).Distinct()});
 
-            var implemented = groupRPMs.Where(g => g.RPM != null);
+            var implemented = groupRPMs.Where(g => g.RecordActionInterface != null);
 
-            var notImplemented = buildRPMs.Where(r => r.RecordActionInterface == null).GroupBy(g => g.PropertyType).Select(g => new { PropertyType = g.Key, RecordTypes = g.Count(), Uses = g.Count(r => r.IsUsed) }).ToList();
+            var notImplemented = buildRPMs.Where(r => r.RecordActionInterface == null).GroupBy(g => g.PropertyType).Select(g => new { PropertyType = g.Key, RecordTypes = g.Count(), Uses = g.Count(r => r.IsUsed), SubPropertiesMin = g.Min(a => a.SubProperties), SubPropertiesMax = g.Max(a => a.SubProperties), Example = $"{g.First().RTM.FullName}.{g.First().PropertyName}" }).ToList();
 
             // Sort by uses then name
             notImplemented.Sort((l, r) =>
@@ -198,7 +239,8 @@ namespace GenericSynthesisPatcher
             });
 
             // Print Unimplemented Entries to Screen
-            foreach (var rpm in notImplemented)
+            Console.WriteLine("List of types implemented via sub-properties.");
+            foreach (var rpm in notImplemented.Where(i => i.SubPropertiesMin > 0 && i.SubPropertiesMax == i.SubPropertiesMin))
             {
                 if (state is null)
                     Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes}");
@@ -206,30 +248,40 @@ namespace GenericSynthesisPatcher
                     Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.Uses}/{rpm.RecordTypes}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("List of unimplemented types.");
+            foreach (var rpm in notImplemented.Where(i => !(i.SubPropertiesMin > 0 && i.SubPropertiesMax == i.SubPropertiesMin)))
+            {
+                if (state is null)
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes}, {rpm.Example}");
+                else
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.Example}, {rpm.Uses}/{rpm.RecordTypes}");
+            }
+
             /*
              * Output implemented to file as RPM code to paste into RecordPropertyMappings.cs
              */
 
             List<string[]> lines = [];
-            foreach (var rpm in implemented)
+            foreach (var property in implemented)
             {
-                if (rpm.Types.Count() >= 3)
+                if (property.Types.Count() >= 3)
                 {
-                    var mismatch = buildRPMs.FirstOrDefault(r => r.PropertyName.Equals(rpm.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RPM.Action is null);
+                    var mismatch = buildRPMs.FirstOrDefault(r => r.PropertyName.Equals(property.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RecordActionInterface is null);
 
                     if (mismatch is null)
                     {
-                        lines.Add(["Add(null", $"\"{rpm.PropertyName}\"", $"{rpm.RPM.GetClassName()}.Instance);"]);
+                        lines.Add(["Add(null", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
                         continue;
                     }
 
-                    Console.WriteLine($"Skipping wildcard RPM for {rpm.PropertyName} due to {mismatch.RTM.Name} - {mismatch.PropertyType.GetClassName()}");
+                    Console.WriteLine($"Skipping wildcard RPM for {property.PropertyName} due to {mismatch.RTM.Name} - {mismatch.PropertyType.GetClassName()}");
                 }
 
-                var types = rpm.Types.ToList();
+                var types = property.Types.ToList();
                 types.Sort(static (l, r) => string.Compare(l.Name, r.Name, StringComparison.Ordinal));
                 foreach (var type in types)
-                    lines.Add([$"Add(typeof({type.Name})", $"\"{rpm.PropertyName}\"", $"{rpm.RPM.GetClassName()}.Instance);"]);
+                    lines.Add([$"Add(typeof({type.Name})", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
             }
 
             lines.Sort(static (l, r) =>
@@ -262,7 +314,7 @@ namespace GenericSynthesisPatcher
 
         private static Type? calcRPMAction (Type type)
         {
-            type = (type.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? type.GetIfUnderlyingType() ?? throw new Exception("WTF - This not meant to happen") : type;
+            type = type.RemoveNullable();
 
             var mainType = type.GetIfGenericTypeDefinition();
             var subType = type.GetIfUnderlyingType()?.GetIfGenericTypeDefinition();
@@ -475,20 +527,18 @@ namespace GenericSynthesisPatcher
                 {
                     // record property mapping (RPM) was found
                     if (rpm.Action.GetType().Equals(rpmDetails.RecordActionInterface))
-                    {
                         rpmDetails.RPM = rpm;
-                        continue;
-                    }
-
-                    Console.WriteLine($"RPM mismatch on {rtm.Name}.{propertyFullName}");
+                    else
+                        Console.WriteLine($"RPM mismatch on {rtm.Name}.{propertyFullName}");
                 }
 
-                if (parentName is null)
+                if (parentName is null || ForceDeeperTypes.Contains(property.PropertyType.RemoveNullable().GetIfGenericTypeDefinition()))
                 {
-                    if (property.PropertyType.GetIfGenericTypeDefinition() != typeof(ExtendedList<>) && !IgnoreDeepScan.Contains(propertyFullName) && !IgnoreDeepScan.Contains(property.Name))
+                    if (!IgnoreDeepScanOnTypes.Contains(property.PropertyType.GetIfGenericTypeDefinition()))
                     {
                         var subProperties = processProperties(null, rtm, property.PropertyType, propertyFullName);
                         buildRPMs.AddRange(subProperties);
+                        rpmDetails.SubProperties = subProperties.Count;
                     }
 
                     if (OutputUnimplemented)
@@ -562,6 +612,7 @@ namespace GenericSynthesisPatcher
             public Type? RecordActionInterface { get; set; }
             public RecordPropertyMapping RPM { get; set; }
             public RecordTypeMapping RTM { get; set; } = rtm;
+            public int SubProperties { get; set; }
         }
     }
 }
