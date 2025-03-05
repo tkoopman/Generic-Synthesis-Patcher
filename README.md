@@ -1,7 +1,4 @@
-<!--- cSpell:enable --->
 ## About
-
-**Version 1.0 now include merge ability and a lot more implemented record types and fields!**
 
 Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types.
 It has a number of ways to filter for records to apply actions to, including matching against most implemented fields, and even using RegEx against strings or Editor IDs and also 3 main actions, fill, forward and merge.
@@ -12,9 +9,9 @@ Once a record has matched a rule following actions could be applied:
 - Forward action will find matching parent record and forward only the selected fields to the winning record.  
   This is useful when you have multiple patches for the one record all for different fields.
   It has a few extra modes for when forwarding lists, like Container/Outfit Items.
-- Merge action is the newest to be added. This would be similar to bash, but with more control, like using filters to only merge some record, only merging select fields, or excluding a plugin from a merge.
+- Merge action is the newest to be added. This would be similar to bash, but with more control, like using filters to only merge some record, only merging select fields, or excluding a plug-in from a merge.
 
-Please see [Rule Settings](docs/Settings.md), [Implemented Fields](docs/Fields.md) and [Examples](Examples/) for more details.
+Please see [Documentation](https://tkoopman.github.io/Generic-Synthesis-Patcher/) and [Examples](Examples/) for more details.
 
 While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order, or even be used post bash to assist in fixing anything missed by bash. 
 A number of current patchers would however fit into this generic category.  
@@ -32,7 +29,7 @@ Also if you want to contribute please do, even if you don't known how to program
 
 ## Configuration
 
-Config files are to be located in a subfolder of the game's Data folder, called "GSP". This directory can be changed in settings.  
+Config files are to be located in a sub-folder of the game's Data folder, called "GSP". This directory can be changed in settings.  
 x:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data\GSP\  
 
 If using MO2 or other mod manager this means you can install your configurations as a normal mod.
@@ -59,5 +56,4 @@ Configuration files in this directory must end in .json with the following forma
 
 # Links
 [Nexus Link](https://www.nexusmods.com/skyrimspecialedition/mods/130978)  
-[Doco: Available Rule Settings](docs/Settings.md)  
-[Doco: Implemented Fields](docs/Fields.md)
+[Documentation](https://tkoopman.github.io/Generic-Synthesis-Patcher/)

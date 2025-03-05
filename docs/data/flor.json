@@ -1,0 +1,149 @@
+[
+  {
+    "Aliases": "RNAM",
+    "Description": "String value",
+    "Example": "\"ActivateTextOverride\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ActivateTextOverride"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Destructible"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Destructible.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Destructible.Stages"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "FNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "HarvestSound"
+  },
+  {
+    "Aliases": "PFIG",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Ingredient"
+  },
+  {
+    "Aliases": "KWDA",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "PNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Production"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Production.Fall"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Production.Spring"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Production.Summer"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Production.Winter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "VirtualMachineAdapter"
+  }
+]

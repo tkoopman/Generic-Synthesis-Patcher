@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="./include/main.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generic Synthesis Patcher</title>
+</head>
+<body>
+    <div class="box">
+        <header>
+            <h2>Generic Synthesis Patcher</h2>
+        </header>
+        <nav class="menu">
+            <a class="active" style="margin-left:auto;" href="./index.html">About</a>
+            <a href="./config.html">Config</a>
+            <a href="./fields.html">Implemented Fields</a>
+            <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978" target="_blank">Nexus Link</a>
+        </nav>
+        <div class="main">
+            <h1>About</h1>
+            <p>
+                Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types.<br />
+                It has a number of ways to filter for records to apply actions to, including matching against most implemented fields, and even using RegEx against strings or Editor IDs and also 3 main actions, fill, forward and merge.<br />
+                Rules can even be grouped to share some common filters, or stop processing rules after one has matched.
+            </p>
+
+            Once a record has matched a rule following actions could be applied:
+            <ul>
+                <li>Fill action will apply static changes to the winning record. Could be used to rename items, or add / remove keywords for example.</li>
+                <li>
+                    Forward action will find matching parent record and forward only the selected fields to the winning record.
+                    This is useful when you have multiple patches for the one record all for different fields.
+                    It has a few extra modes for when forwarding lists, like Container/Outfit Items.
+                </li>
+                <li>Merge action is similar to bash, but with more control, like using filters to only merge some record, only merging select fields, or excluding a plug-in from a merge.</li>
+                <li>
+                    HPU or Highest Priority Unique, will determine which record value to forward by searching all values for the last unique value. So if other mods override with a value that has already been set, unless when that value was first seen was after all others it won't be used.
+                    However it does respect masters so if one of those overriding mods listed a master, even if the master's value was unique it would use the overridden value, assuming no other higher priority options.
+                </li>
+            </ul>
+
+            <p>
+                Please see <a href="./config.html">config help</a>, <a href="./fields.html">implemented fields</a> and <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/tree/master/Examples">examples on GitHub</a> for more details.
+            </p>
+
+            While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order, or even be used post bash to assist in fixing anything missed by bash.<br />
+            A number of current patchers would however fit into this generic category.<br />
+            I have only tested this with latest Skyrim SE however it should work on other versions.
+
+            <h2>Prerequisites</h2>
+
+            This of course requires [Synthesis](https://github.com/Mutagen-Modding/Synthesis)
+
+            <h2>Bugs, Requests and Contributions</h2>
+
+            Please log any bugs or requests you may have via <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/issues">GitHub Issues</a> or over on the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978?tab=bugs">Nexus bug page</a>.<br />
+            While I make no guarantee to fixing or implementing new requests due to other commitments, I will try, especially fixing bugs.<br />
+            Also if you want to contribute please do, even if you don't known how to program, just improving my awful documentation would help others.<br />
+
+            <h2>Configuration</h2>
+
+            <p>
+                Config files are to be located in a sub-folder of the game's Data folder, called "GSP". This directory can be changed in settings.
+                x:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data\GSP\
+            </p>
+
+            <p>If using MO2 or other mod manager this means you can install your configurations as a normal mod.</p>
+
+            Configuration files in this directory must end in .json with the following format. See examples directory for real world examples.
+            <pre>
+          [
+          {
+          "priority": 0,
+          "types": [ "AMMO" ],
+          "editorID": "...",
+          "formID": "123ABC:Skyrim.esm",
+          "fill": {
+          "field": "value",
+          "keywords": [ "KeyWord", "-Keyword" ],
+          "value": 100,
+          "weight": 1.234
+          },
+          "forward": {
+          "mod.esp": [ "fields" ]
+          }
+          }
+          ]
+        </pre>
+        </div>
+    </div>
+</body>
+</html>

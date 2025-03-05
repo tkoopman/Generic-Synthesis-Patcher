@@ -1,0 +1,443 @@
+[
+  {
+    "Aliases": "XCAS",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AcousticSpace"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "XEZN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "XRNK",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "DataFlags",
+    "Description": "Flags (IsInteriorCell, HasWater, CantTravelFromHere, NoLodWater, PublicArea, HandChanged, ShowSky, UseSkyLighting)",
+    "Example": "\"Flags\": [ \"IsInteriorCell\", \"-UseSkyLighting\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Grid"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Grid.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Grid.Point"
+  },
+  {
+    "Aliases": "XCIM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.Layers"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.Textures"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.VertexColors"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.VertexHeightMap"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Landscape.VertexNormals"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.AmbientColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.AmbientColors"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.DirectionalColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.DirectionalFade"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.DirectionalRotationXY"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.DirectionalRotationZ"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogClipDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogFarColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogNearColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.FogPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.Inherits"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.LightFadeBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.LightFadeEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Lighting.Versioning"
+  },
+  {
+    "Aliases": "LTMP",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LightingTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"LNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "LNAM"
+  },
+  {
+    "Aliases": "XLCN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Location"
+  },
+  {
+    "Aliases": "XILL",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LockList"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (Persistent, OffLimits, CantWait)",
+    "Example": "\"MajorFlags\": [ \"Persistent\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "MHDT",
+    "Description": "Forward Cell Max Height data.",
+    "Example": "[{ \"types\": [\"Cell\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "MFFSM": "--F--",
+    "Name": "MaxHeightData"
+  },
+  {
+    "Aliases": "XCMO",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Music"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "NavigationMeshes"
+  },
+  {
+    "Aliases": "TVDT",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OcclusionData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "OcclusionData"
+  },
+  {
+    "Aliases": "XOWN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Persistent"
+  },
+  {
+    "Aliases": "XCLR",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Regions"
+  },
+  {
+    "Aliases": "XCCM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SkyAndWeatherFromRegion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Temporary"
+  },
+  {
+    "Aliases": "XCWT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Water"
+  },
+  {
+    "Aliases": "XWEM",
+    "Description": "String value",
+    "Example": "\"WaterEnvironmentMap\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WaterEnvironmentMap"
+  },
+  {
+    "Aliases": "XCLW",
+    "Description": "Decimal value",
+    "Example": "\"WaterHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterHeight"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "String value",
+    "Example": "\"WaterNoiseTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WaterNoiseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "WaterVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "WaterVelocity.Angle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "WaterVelocity.Offset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCN\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "XWCN"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCS\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "XWCS"
+  }
+]

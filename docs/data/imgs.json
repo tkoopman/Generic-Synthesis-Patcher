@@ -1,0 +1,198 @@
+[
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Cinematic"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Cinematic.Brightness"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Cinematic.Contrast"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Cinematic.Saturation"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.BlurRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.Distance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.Range"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.Sky"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.Strength"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "DepthOfField.Versioning"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"ENAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "ENAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.BloomBlurRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.BloomScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.BloomThreshold"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.EyeAdaptSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.EyeAdaptStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.ReceiveBloomThreshold"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.SkyScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.SunlightScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Hdr.White"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Tint"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Tint.Amount"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Tint.Color"
+  }
+]

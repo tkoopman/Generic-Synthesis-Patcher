@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.Drawing;
-using System.Globalization;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
@@ -10,12 +9,20 @@ using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 using Mutagen.Bethesda.Synthesis;
 
+using Newtonsoft.Json;
+
 using Noggog;
 
 namespace GenericSynthesisPatcher
 {
     internal static class GenerateDoco
     {
+        private static readonly string[] IgnoreDeepScan = [
+            "Conditions",
+            "PerkTree",
+            "VirtualMachineAdapter",
+            ];
+
         private static readonly string[] IgnoreProperty = [
             "DATADataTypeState",
             "FormKey",
@@ -72,6 +79,11 @@ namespace GenericSynthesisPatcher
 
         internal static void generate (IPatcherState<ISkyrimMod, ISkyrimModGetter>? state)
         {
+            var serializer = new JsonSerializer
+            {
+                Formatting = Formatting.Indented,
+            };
+
             bool OutputUnimplemented = state is not null;
             if (state is not null)
                 Global.State = state;
@@ -111,13 +123,19 @@ namespace GenericSynthesisPatcher
                         if (row.RPM.Action is not null && row.RecordActionInterface is not null)
                         {
                             if (row.RPM.Action.TryGetDocumentation(row.PropertyType, row.PropertyName, out string? description, out string? example))
-                                propertyLines.Add([row.PropertyName, string.Join(';', row.GetAliases()), row.GetMFFSM(), description, example]);
-                            else
-                                propertyLines.Add([row.PropertyName, string.Join(';', row.GetAliases()), row.GetMFFSM(), "", ""]);
+                            {
+                                row.Description = description;
+                                row.Example = example;
+                            }
+
+                            propertyLines.Add([row.PropertyName, row.Aliases, row.MFFSM, row.Description, row.Example]);
                         }
                         else if (OutputUnimplemented)
                         {
-                            propertyLines.Add([$"*{row.PropertyName}", "", "-----", $"{row.PropertyType.GetClassName()} - {row.RecordActionInterface.GetClassName()}", row.PropertyName.Contains('.') ? "" : row.IsUsed.ToString()]);
+                            row.Description = $"{row.PropertyType.GetClassName()} - {row.RecordActionInterface.GetClassName()}";
+
+                            string prefix = row.RecordActionInterface is null ? "*":"#";
+                            propertyLines.Add([$"{prefix}{row.PropertyName}", "", "-----", row.Description, row.Example]);
                         }
                     }
 
@@ -126,6 +144,16 @@ namespace GenericSynthesisPatcher
                     // Footer
                     sw.WriteLine();
                     sw.WriteLine("[⬅ Back to Types](Types.md)");
+
+                    /*
+                     * Output Implemented Types
+                     */
+
+                    using (var sw = new StreamWriter($"{rtm.Name.ToLowerInvariant()}.json"))
+                    using (var writer = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(writer, properties);
+                    }
                 }
             }
 
@@ -133,23 +161,11 @@ namespace GenericSynthesisPatcher
              * Output Implemented Types
              */
 
-            sw.WriteLine();
-            List<string[]> lines = [["Type", "Synonyms"]];
-            lines.Add(["-", "-"]);
-            foreach (var rtm in ImplementedRTMs)
+            using (var streamWriter = new StreamWriter(@"types.json"))
+            using (var writer = new JsonTextWriter(streamWriter))
             {
-                string anchor = rtm.Name.ToLower(CultureInfo.InvariantCulture);
-                string fullName = "";
-                if (!rtm.Name.Equals(rtm.FullName, StringComparison.OrdinalIgnoreCase))
-                {
-                    fullName = rtm.FullName;
-                    anchor += "---" + fullName.ToLower(CultureInfo.InvariantCulture);
-                }
-
-                lines.Add([$"[{rtm.Name}](Fields.md#{anchor})", fullName]);
+                serializer.Serialize(writer, ImplementedRTMs);
             }
-
-            printTableRow(lines);
 
             // Write Types and Implemented Properties to Temp File
             using var fw = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSPDoco.txt"), false);
@@ -194,7 +210,7 @@ namespace GenericSynthesisPatcher
              * Output implemented to file as RPM code to paste into RecordPropertyMappings.cs
              */
 
-            lines = [];
+            List<string[]> lines = [];
             foreach (var rpm in implemented)
             {
                 if (rpm.Types.Count() >= 3)
@@ -446,7 +462,7 @@ namespace GenericSynthesisPatcher
                 string propertyFullName = parentName is null ? property.Name : $"{parentName}.{property.Name}";
                 if (property.GetGetMethod()?.GetParameters().Length != 0)
                     continue;
-                if (IgnoreProperty.Contains(propertyFullName))
+                if (IgnoreProperty.Contains(propertyFullName) || IgnoreProperty.Contains(property.Name))
                     continue;
 
                 var rpmDetails = new RPMDetails (rtm, propertyFullName, property.PropertyType);
@@ -469,8 +485,11 @@ namespace GenericSynthesisPatcher
 
                 if (parentName is null)
                 {
-                    //var subProperties = processProperties(null, rtm, property.PropertyType, propertyFullName);
-                    //buildRPMs.AddRange(subProperties);
+                    if (property.PropertyType.GetIfGenericTypeDefinition() != typeof(ExtendedList<>) && !IgnoreDeepScan.Contains(propertyFullName) && !IgnoreDeepScan.Contains(property.Name))
+                    {
+                        var subProperties = processProperties(null, rtm, property.PropertyType, propertyFullName);
+                        buildRPMs.AddRange(subProperties);
+                    }
 
                     if (OutputUnimplemented)
                     {
@@ -498,28 +517,34 @@ namespace GenericSynthesisPatcher
             return buildRPMs;
         }
 
+        [JsonObject(MemberSerialization.OptIn)]
         public class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
         {
-            public bool IsUsed { get; set; }
-            public string PropertyName { get; set; } = propertyName;
-            public Type PropertyType { get; set; } = propertyType;
-            public Type? RecordActionInterface { get; set; }
-            public RecordPropertyMapping RPM { get; set; }
-            public RecordTypeMapping RTM { get; set; } = rtm;
-
-            public string[] GetAliases ()
+            [JsonProperty]
+            public string Aliases
             {
-                if (RecordActionInterface is null)
-                    return [];
+                get
+                {
+                    if (RecordActionInterface is null)
+                        return "";
 
-                var names = RecordPropertyMappings.GetAllAliases(RTM.StaticRegistration.GetterType, PropertyName).ToList();
-                names.Sort();
+                    var names = RecordPropertyMappings.GetAllAliases(RTM.StaticRegistration.GetterType, PropertyName).ToList();
+                    names.Sort();
 
-                return [.. names];
+                    return string.Join(';', names);
+                }
             }
 
-            public string GetMFFSM ()
-                => RPM.Action is null
+            [JsonProperty]
+            public string Description { get; set; } = "";
+
+            [JsonProperty]
+            public string Example { get; set; } = "";
+
+            public bool IsUsed { get; set; }
+
+            [JsonProperty]
+            public string MFFSM => RPM.Action is null
                 ? "-----"
                 : string.Join<char>(string.Empty,
                 [
@@ -529,6 +554,14 @@ namespace GenericSynthesisPatcher
                     RPM.Action.CanForwardSelfOnly() ? 'S': '-',
                     RPM.Action.CanMerge() ? 'M': '-',
                 ]);
+
+            [JsonProperty(propertyName: "Name")]
+            public string PropertyName { get; set; } = propertyName;
+
+            public Type PropertyType { get; set; } = propertyType;
+            public Type? RecordActionInterface { get; set; }
+            public RecordPropertyMapping RPM { get; set; }
+            public RecordTypeMapping RTM { get; set; } = rtm;
         }
     }
 }

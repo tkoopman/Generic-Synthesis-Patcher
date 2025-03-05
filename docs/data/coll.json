@@ -1,0 +1,65 @@
+[
+  {
+    "Aliases": "CNAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "CollidesWith"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DebugColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "DebugColor"
+  },
+  {
+    "Aliases": "DESC",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "DataFlags;GNAM",
+    "Description": "Flags (TriggerVolume, Sensor, NavmeshObstacle)",
+    "Example": "\"Flags\": [ \"TriggerVolume\", \"-NavmeshObstacle\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "BNAM",
+    "Description": "Numeric value",
+    "Example": "\"Index\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Index"
+  },
+  {
+    "Aliases": "FULL;MNAM",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  }
+]

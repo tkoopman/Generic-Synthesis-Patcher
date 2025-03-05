@@ -1,0 +1,786 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AddonModels"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsFadeInTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsFadeInTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsFadeOutTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsFadeOutTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsScaleEnd\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsScaleEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsScaleInTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsScaleInTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsScaleOutTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsScaleOutTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AddonModelsScaleStart\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AddonModelsScaleStart"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AmbientSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BirthPositionOffset\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BirthPositionOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BirthPositionOffsetRangePlusMinus\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BirthPositionOffsetRangePlusMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"ColorKey1\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "ColorKey1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey1Alpha\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey1Alpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey1Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey1Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"ColorKey2\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "ColorKey2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey2Alpha\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey2Alpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey2Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey2Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"ColorKey3\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "ColorKey3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey3Alpha\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey3Alpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorKey3Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorKey3Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ColorScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"EdgeColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "EdgeColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectAlphaFadeInTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectAlphaFadeInTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectAlphaFadeOutTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectAlphaFadeOutTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectAlphaPulseAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectAlphaPulseAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectAlphaPulseFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectAlphaPulseFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"EdgeEffectColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "EdgeEffectColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectFallOff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectFallOff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectFullAlphaRatio\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectFullAlphaRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectFullAlphaTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectFullAlphaTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeEffectPersistentAlphaRatio\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeEffectPersistentAlphaRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EdgeWidth\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EdgeWidth"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ExplosionWindSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ExplosionWindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillAlphaFadeInTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillAlphaFadeInTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillAlphaPulseAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillAlphaPulseAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillAlphaPulseFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillAlphaPulseFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FillColorKey1\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FillColorKey1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey1Scale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey1Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey1Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey1Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FillColorKey2\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FillColorKey2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey2Scale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey2Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey2Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey2Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FillColorKey3\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FillColorKey3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey3Scale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey3Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillColorKey3Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillColorKey3Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillFadeOutTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillFadeOutTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillFullAlphaRatio\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillFullAlphaRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillFullAlphaTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillFullAlphaTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillPersistentAlphaRatio\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillPersistentAlphaRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "FillTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "FillTexture.GivenPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillTextureAnimationSpeedU\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillTextureAnimationSpeedU"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillTextureAnimationSpeedV\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillTextureAnimationSpeedV"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillTextureScaleU\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillTextureScaleU"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FillTextureScaleV\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FillTextureScaleV"
+  },
+  {
+    "Aliases": "DataFlags",
+    "Description": "Flags (NoMembraneShader, MembraneGrayscaleColor, MembraneGrayscaleAlpha, NoParticleShader, EdgeEffectInverse, AffectSkinOnly, TextureEffectIgnoreAlpha, TextureEffectProjectUVs, IgnoreBaseGeometryAlpha, TextureEffectLighting, TextureEffectNoWeapons, ParticleAnimated, ParticleGrayscaleColor, ParticleGrayscaleAlpha, UseBloodGeometry)",
+    "Example": "\"Flags\": [ \"NoMembraneShader\", \"-UseBloodGeometry\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HolesEndTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HolesEndTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HolesEndValue\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HolesEndValue"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HolesStartTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HolesStartTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HolesStartValue\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HolesStartValue"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "HolesTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "HolesTexture.GivenPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Add, Subtract, ReverseSubtract, Minimum, Maximum)",
+    "Example": "\"MembraneBlendOperation\": \"Add\"",
+    "MFFSM": "MF---",
+    "Name": "MembraneBlendOperation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
+    "Example": "\"MembraneDestBlendMode\": \"Zero\"",
+    "MFFSM": "MF---",
+    "Name": "MembraneDestBlendMode"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "MembranePaletteTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "MembranePaletteTexture.GivenPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
+    "Example": "\"MembraneSourceBlendMode\": \"Zero\"",
+    "MFFSM": "MF---",
+    "Name": "MembraneSourceBlendMode"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (EqualTo, Normal, GreaterThan, GreaterThanOrEqualTo, AlwaysShow)",
+    "Example": "\"MembraneZTest\": \"EqualTo\"",
+    "MFFSM": "MF---",
+    "Name": "MembraneZTest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleAcceleration1\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAcceleration1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleAcceleration2\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAcceleration2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleAcceleration3\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAcceleration3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleAccelerationAlongNormal\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAccelerationAlongNormal"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedEndFrame\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedEndFrame"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedFrameCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedFrameCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedFrameCountVariation\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedFrameCountVariation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedLoopStartFrame\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedLoopStartFrame"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedLoopStartVariation\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedLoopStartVariation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedStartFrame\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedStartFrame"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ParticleAnimatedStartFrameVariation\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ParticleAnimatedStartFrameVariation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleBirthRampDownTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleBirthRampDownTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleBirthRampUpTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleBirthRampUpTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Add, Subtract, ReverseSubtract, Minimum, Maximum)",
+    "Example": "\"ParticleBlendOperation\": \"Add\"",
+    "MFFSM": "MF---",
+    "Name": "ParticleBlendOperation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
+    "Example": "\"ParticleDestBlendMode\": \"Zero\"",
+    "MFFSM": "MF---",
+    "Name": "ParticleDestBlendMode"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleFullBirthRatio\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleFullBirthRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleFullBirthTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleFullBirthTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialRotationDegree\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialRotationDegree"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialRotationDegreePlusMinus\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialRotationDegreePlusMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialSpeedAlongNormal\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialSpeedAlongNormal"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialSpeedAlongNormalPlusMinus\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialSpeedAlongNormalPlusMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialVelocity1\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialVelocity1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialVelocity2\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialVelocity2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleInitialVelocity3\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleInitialVelocity3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleLifetime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleLifetime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleLifetimePlusMinus\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleLifetimePlusMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "ParticlePaletteTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "ParticlePaletteTexture.GivenPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticlePeristentCount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticlePeristentCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleRotationSpeedDegreePerSec\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleRotationSpeedDegreePerSec"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleRotationSpeedDegreePerSecPlusMinus\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleRotationSpeedDegreePerSecPlusMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleScaleKey1\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleScaleKey1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleScaleKey1Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleScaleKey1Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleScaleKey2\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleScaleKey2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ParticleScaleKey2Time\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ParticleScaleKey2Time"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "ParticleShaderTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "ParticleShaderTexture.GivenPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
+    "Example": "\"ParticleSourceBlendMode\": \"Zero\"",
+    "MFFSM": "MF---",
+    "Name": "ParticleSourceBlendMode"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (EqualTo, Normal, GreaterThan, GreaterThanOrEqualTo, AlwaysShow)",
+    "Example": "\"ParticleZTest\": \"EqualTo\"",
+    "MFFSM": "MF---",
+    "Name": "ParticleZTest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SceneGraphEmitDepthLimit\": 7",
+    "MFFSM": "MFF--",
+    "Name": "SceneGraphEmitDepthLimit"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"TextureCountU\": 7",
+    "MFFSM": "MFF--",
+    "Name": "TextureCountU"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"TextureCountV\": 7",
+    "MFFSM": "MFF--",
+    "Name": "TextureCountV"
+  }
+]

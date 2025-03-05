@@ -1,0 +1,86 @@
+[
+  {
+    "Aliases": "BNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Branch"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Topic, Favor, Scene, Combat, Favors, Detection, Service, Misc)",
+    "Example": "\"Category\": \"Topic\"",
+    "MFFSM": "MF---",
+    "Name": "Category"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "PNAM",
+    "Description": "Decimal value",
+    "Example": "\"Priority\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Priority"
+  },
+  {
+    "Aliases": "QNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Quest"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Responses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "Possible values (Custom, ForceGreet, Rumors, Intimidate, Flatter, Bribe, AskGift, Gift, AskFavor, Favor, ShowRelationships, Follow, Reject, Scene, Show, Agree, Refuse, ExitFavorState, MoralRefusal, FlyingMountLand, FlyingMountCancelLand, FlyingMountAcceptTarget, FlyingMountRejectTarget, FlyingMountNoTarget, FlyingMountDestinationReached, Attack, PowerAttack, Bash, Hit, Flee, Bleedout, AvoidThreat, Death, GroupStrategy, Block, Taunt, AllyKilled, Steal, Yield, AcceptYield, PickpocketCombat, Assault, Murder, AssaultNC, MurderNC, PickpocketNC, StealFromNC, TrespassAgainstNC, Trespass, WerewolfTransformCrime, VoicePowerStartShort, VoicePowerStartLong, VoicePowerEndShort, VoicePowerEndLong, AlertIdle, LostIdle, NormalToAlert, AlertToCombat, NormalToCombat, AlertToNormal, CombatToNormal, CombatToLost, LostToNormal, LostToCombat, DetectFriendDie, ServiceRefusal, Repair, Travel, Training, BarterExit, RepairExit, Recharge, RechargeExit, TrainingExit, ObserveCombat, NoticeCorpse, TimeToGo, Goodbye, Hello, SwingMeleeWeapon, ShootBow, ZKeyObject, Jump, KnockOverObject, DestroyObject, StandOnFurniture, LockedObject, PickpocketTopic, PursueIdleTopic, SharedInfo, PlayerCastProjectileSpell, PlayerCastSelfSpell, PlayerShout, Idle, EnterSprintBreath, EnterBowZoomBreath, ExitBowZoomBreath, ActorCollideWithActor, PlayerInIronSights, OutOfBreath, CombatGrunt, LeaveWaterBreath)",
+    "Example": "\"Subtype\": \"Custom\"",
+    "MFFSM": "MF---",
+    "Name": "Subtype"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "SubtypeName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (DoAllBeforeRepeating)",
+    "Example": "\"TopicFlags\": \"DoAllBeforeRepeating\"",
+    "MFFSM": "MFF-M",
+    "Name": "TopicFlags"
+  }
+]

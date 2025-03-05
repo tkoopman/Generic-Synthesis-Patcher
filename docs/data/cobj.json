@@ -1,0 +1,58 @@
+[
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "CNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "CreatedObject"
+  },
+  {
+    "Aliases": "NAM1",
+    "Description": "Numeric value",
+    "Example": "\"CreatedObjectCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "CreatedObjectCount"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "Item",
+    "Description": "JSON objects containing item Form Key/Editor ID and Count (QTY)",
+    "Example": "\"Items\": { \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }",
+    "MFFSM": "MFFSM",
+    "Name": "Items"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "BNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "WorkbenchKeyword"
+  }
+]

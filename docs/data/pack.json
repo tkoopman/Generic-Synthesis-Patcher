@@ -1,0 +1,352 @@
+[
+  {
+    "Aliases": "CNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "CombatStyle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DataInputVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DataInputVersion"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "DataFlags",
+    "Description": "Flags (OffersServices, MustComplete, MaintainSpeedAtGoal, UnlockDoorsAtPackageStart, UnlockDoorsAtPackageEnd, ContinueIfPcNear, OncePerDay, PreferredSpeed, AlwaysSneak, AllowSwimming, IgnoreCombat, WeaponsUnequipped, WeaponDrawn, WearSleepOutfit, NoCombatAlert)",
+    "Example": "\"Flags\": [ \"OffersServices\", \"-NoCombatAlert\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "IdleAnimations"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "IdleAnimations.Animations"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "IdleAnimations.TimerSetting"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "IdleAnimations.Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Spectator, ObserveDead, GuardWarn, Combat)",
+    "Example": "\"InterruptOverride\": \"None\"",
+    "MFFSM": "MF---",
+    "Name": "InterruptOverride"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions)",
+    "Example": "\"InteruptFlags\": [ \"HellosToPlayer\", \"-WorldInteractions\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "InteruptFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.TNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnBegin.Topics"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.TNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnChange.Topics"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.TNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "OnEnd.Topics"
+  },
+  {
+    "Aliases": "QNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OwnerQuest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PackageTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Walk, Jog, Run, FastWalk)",
+    "Example": "\"PreferredSpeed\": \"Walk\"",
+    "MFFSM": "MF---",
+    "Name": "PreferredSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "ProcedureTree"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ScheduleDate\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ScheduleDate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Weekdays, Weekends, MondayWednesdayFriday, TuesdayThursday, Any)",
+    "Example": "\"ScheduleDayOfWeek\": \"Sunday\"",
+    "MFFSM": "MF---",
+    "Name": "ScheduleDayOfWeek"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ScheduleDurationInMinutes\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ScheduleDurationInMinutes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ScheduleHour\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ScheduleHour"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ScheduleMinute\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ScheduleMinute"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ScheduleMonth\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ScheduleMonth"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Package, PackageTemplate)",
+    "Example": "\"Type\": \"Package\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XnamMarker\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "XnamMarker"
+  }
+]

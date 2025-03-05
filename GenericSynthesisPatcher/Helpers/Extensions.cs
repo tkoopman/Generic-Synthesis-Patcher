@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 using DynamicData;
 
@@ -12,7 +13,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    public static class Extensions
+    public static partial class Extensions
     {
         private static readonly Dictionary<Type, string> Aliases = new()
         {
@@ -129,6 +130,8 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static bool SafeAny<TSource> (this IEnumerable<TSource>? source, Func<TSource, bool> predicate) => source != null && source.Any(predicate);
 
+        public static string SeparateWords (this string input) => InsertSpaces().Replace(input, "$1 ");
+
         // Handles duplicates. If 3 in source and 1 in notInList result will have 2 copies in it
         public static IEnumerable<T> WhereNotIn<T> (this IEnumerable<T>? source, IEnumerable<T>? notInList) where T : class
         {
@@ -145,5 +148,8 @@ namespace GenericSynthesisPatcher.Helpers
 
             return list;
         }
+
+        [GeneratedRegex("([a-z](?=[A-Z])|[A-Z](?=[A-Z][a-z]))")]
+        private static partial Regex InsertSpaces ();
     }
 }

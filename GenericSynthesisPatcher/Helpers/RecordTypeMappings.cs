@@ -179,7 +179,12 @@ namespace GenericSynthesisPatcher.Helpers
             var map = new RecordTypeMapping(staticRegistration, getWinningContexts);
             ByName.Add(map.Type.Type, map);
             if (!map.Type.Type.Equals(map.StaticRegistration.Name, StringComparison.OrdinalIgnoreCase))
+            {
                 ByName.Add(map.StaticRegistration.Name, map);
+                if (!map.StaticRegistration.Name.Equals(map.StaticRegistration.Name.SeparateWords(), StringComparison.OrdinalIgnoreCase))
+                    ByName.Add(map.StaticRegistration.Name.SeparateWords(), map);
+            }
+
             ByType.Add(map.StaticRegistration.GetterType, map);
             ByType.Add(map.StaticRegistration.SetterType, map);
 

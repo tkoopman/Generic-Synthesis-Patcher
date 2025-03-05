@@ -1,0 +1,191 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngleThreshold\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngleThreshold"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.Color"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.Depth"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.MaxHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.MaxWidth"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.MinHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.MinWidth"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.ParallaxPasses"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.ParallaxScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Decal.Shininess"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Duration\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Duration"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "NAM2",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Hazard"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"NoDecalData\": true",
+    "MFFSM": "MFF--",
+    "Name": "NoDecalData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (SurfaceNormal, ProjectileVector, ProjectileReflection)",
+    "Example": "\"Orientation\": \"SurfaceNormal\"",
+    "MFFSM": "MF---",
+    "Name": "Orientation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PlacementRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PlacementRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Destroy, Bounce, Impale, Stick)",
+    "Example": "\"Result\": \"Default\"",
+    "MFFSM": "MF---",
+    "Name": "Result"
+  },
+  {
+    "Aliases": "ENAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SecondaryTextureSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Sound1"
+  },
+  {
+    "Aliases": "NAM1",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Sound2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Loud, Normal, Silent, VeryLoud)",
+    "Example": "\"SoundLevel\": \"Loud\"",
+    "MFFSM": "MF---",
+    "Name": "SoundLevel"
+  },
+  {
+    "Aliases": "DNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "TextureSet"
+  }
+]

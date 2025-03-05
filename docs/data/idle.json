@@ -1,0 +1,93 @@
+[
+  {
+    "Aliases": "ENAM",
+    "Description": "String value",
+    "Example": "\"AnimationEvent\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "AnimationEvent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AnimationGroupSection\": 7",
+    "MFFSM": "MFF--",
+    "Name": "AnimationGroupSection"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Filename"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Filename.GivenPath"
+  },
+  {
+    "Aliases": "DataFlags",
+    "Description": "Flags (Parent, Sequence, NoAttacking, Blocking)",
+    "Example": "\"Flags\": [ \"Parent\", \"-Blocking\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopingSecondsMax\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LoopingSecondsMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopingSecondsMin\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LoopingSecondsMin"
+  },
+  {
+    "Aliases": "ANAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "RelatedIdles"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ReplayDelay\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ReplayDelay"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  }
+]

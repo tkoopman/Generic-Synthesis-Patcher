@@ -1,0 +1,310 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AvoidThreatChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AvoidThreatChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange.CircleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange.FallbackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange.FlankDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange.StalkTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "CloseRange.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"CSGDDataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "CSGDDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CSMD\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "CSMD"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DefensiveMult"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMagic\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultMagic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMelee\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultMelee"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultRanged\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultRanged"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultShout\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultShout"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultStaff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultStaff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultUnarmed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultUnarmed"
+  },
+  {
+    "Aliases": "DataFlags",
+    "Description": "Flags (Dueling, Flanking, AllowDualWielding)",
+    "Example": "\"Flags\": [ \"Dueling\", \"-AllowDualWielding\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.DiveBombChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.FlyingAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.GroundAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.GroundAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.HoverChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.HoverTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.PerchAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.PerchAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Flight.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroupOffensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "GroupOffensiveMult"
+  },
+  {
+    "Aliases": "CSLR",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeStrafeMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeStrafeMult"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (AllowDualWielding)",
+    "Example": "\"MajorFlags\": \"AllowDualWielding\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.AttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.BashAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.BashMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.BashPowerAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.BashRecoilMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.PowerAttackBlockingMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.PowerAttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.SpecialAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-----",
+    "Name": "Melee.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OffensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "OffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  }
+]

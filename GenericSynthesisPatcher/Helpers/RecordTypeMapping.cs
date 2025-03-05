@@ -4,8 +4,11 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Skyrim;
 
+using Newtonsoft.Json;
+
 namespace GenericSynthesisPatcher.Helpers
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public readonly struct RecordTypeMapping : IEquatable<RecordTypeMapping>, IEquatable<RecordType>, IEquatable<ILoquiRegistration>, IEquatable<string>
     {
         public RecordTypeMapping (ILoquiRegistration staticRegistration, WinningContextOverridesDelegate winningContextOverrides)
@@ -20,8 +23,14 @@ namespace GenericSynthesisPatcher.Helpers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>")]
         public delegate IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverridesDelegate ();
 
+        [JsonProperty(propertyName: "name")]
+        public string DisplayName => StaticRegistration.Name.SeparateWords();
+
         public string FullName => StaticRegistration.Name;
+
+        [JsonProperty(propertyName: "id")]
         public string Name => Type.CheckedType;
+
         public ILoquiRegistration StaticRegistration { get; }
         public RecordType Type { get; }
         public readonly WinningContextOverridesDelegate WinningContextOverrides { get; }
