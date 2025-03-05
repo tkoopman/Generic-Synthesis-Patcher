@@ -35,6 +35,20 @@
     "Name": "EncounterZone"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FixedDimensionsCenterCell.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FixedDimensionsCenterCell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FixedDimensionsCenterCell.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FixedDimensionsCenterCell.Y"
+  },
+  {
     "Aliases": "DataFlags",
     "Description": "Flags (SmallWorld, CannotFastTravel, NoLodWater, NoLandscape, NoSky, FixedDimensions, NoGrass)",
     "Example": "\"Flags\": [ \"SmallWorld\", \"-NoGrass\" ]",

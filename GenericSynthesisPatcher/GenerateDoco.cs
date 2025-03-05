@@ -74,6 +74,7 @@ namespace GenericSynthesisPatcher
             "TemporaryTimestamp",
             "TemporaryUnknownGroupData",
             "Timestamp",
+            "TopCell",
             "Unknown",
             "Unknown08",
             "Unknown09",
@@ -505,7 +506,6 @@ namespace GenericSynthesisPatcher
         private static List<RPMDetails> processProperties (IPatcherState<ISkyrimMod, ISkyrimModGetter>? state, RecordTypeMapping rtm, Type parentType, string? parentName)
         {
             List<RPMDetails> buildRPMs = [];
-
             bool OutputUnimplemented = state is not null;
 
             var properties = parentType.GetPublicProperties().Where(p => (p.CanRead && p.CanWrite) || p.PropertyType.GetIfGenericTypeDefinition() == typeof(ExtendedList<>)).DistinctBy(p => p.Name);
@@ -534,9 +534,26 @@ namespace GenericSynthesisPatcher
 
                 if (parentName is null || ForceDeeperTypes.Contains(property.PropertyType.RemoveNullable().GetIfGenericTypeDefinition()))
                 {
-                    if (!IgnoreDeepScanOnTypes.Contains(property.PropertyType.GetIfGenericTypeDefinition()))
+                    var type = property.PropertyType;
+
+                    if (type.IsNullable())
                     {
-                        var subProperties = processProperties(null, rtm, property.PropertyType, propertyFullName);
+                        type = type.RemoveNullable();
+
+                        // Confirm you can create new instance
+                        try
+                        {
+                            _ = System.Activator.CreateInstance(type);
+                        }
+                        catch
+                        {
+                            type = null;
+                        }
+                    }
+
+                    if (type is not null && !IgnoreDeepScanOnTypes.Contains(type.GetIfGenericTypeDefinition()))
+                    {
+                        var subProperties = processProperties(null, rtm, type, propertyFullName);
                         buildRPMs.AddRange(subProperties);
                         rpmDetails.SubProperties = subProperties.Count;
                     }

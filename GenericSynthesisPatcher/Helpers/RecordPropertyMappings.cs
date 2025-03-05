@@ -424,6 +424,9 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IImpactGetter)                , "AngleThreshold"                            , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "AngularAccelerationRate"                   , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "AngularTolerance"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "AngularVelocity.X"                         , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "AngularVelocity.Y"                         , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "AngularVelocity.Z"                         , ConvertibleAction<float>.Instance);
             Add(typeof(IImageSpaceAdapterGetter)     , "Animatable"                                , ConvertibleAction<bool>.Instance);
             Add(typeof(IMovementTypeGetter)          , "AnimationChangeThresholds.Directional"     , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "AnimationChangeThresholds.MovementSpeed"   , ConvertibleAction<float>.Instance);
@@ -792,6 +795,8 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(IWeaponGetter)                , "FirstPersonModel"                          , FormLinkAction<IStaticGetter>.Instance);
             Add(typeof(IArmorAddonGetter)            , "FirstPersonModel.Female"                   , ModelAction.Instance);
             Add(typeof(IArmorAddonGetter)            , "FirstPersonModel.Male"                     , ModelAction.Instance);
+            Add(typeof(IWorldspaceGetter)            , "FixedDimensionsCenterCell.X"               , ConvertibleAction<short>.Instance);
+            Add(typeof(IWorldspaceGetter)            , "FixedDimensionsCenterCell.Y"               , ConvertibleAction<short>.Instance);
             Add(null                                 , "Flags"                                     , FlagsAction.Instance);
             Add(typeof(ILightGetter)                 , "FlickerIntensityAmplitude"                 , ConvertibleAction<float>.Instance);
             Add(typeof(ILightGetter)                 , "FlickerMovementAmplitude"                  , ConvertibleAction<float>.Instance);
@@ -922,8 +927,14 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ITreeGetter)                  , "Ingredient"                                , FormLinkAction<IHarvestTargetGetter>.Instance);
             Add(typeof(IIngredientGetter)            , "IngredientValue"                           , ConvertibleAction<int>.Instance);
             Add(typeof(IDualCastDataGetter)          , "InheritScale"                              , FlagsAction.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialRotation.X"                         , ConvertibleAction<short>.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialRotation.Y"                         , ConvertibleAction<short>.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialRotation.Z"                         , ConvertibleAction<short>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "InitialRotationRange"                      , ConvertibleAction<float>.Instance);
             Add(typeof(ILoadScreenGetter)            , "InitialScale"                              , ConvertibleAction<float>.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialTranslationOffset.X"                , ConvertibleAction<float>.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialTranslationOffset.Y"                , ConvertibleAction<float>.Instance);
+            Add(typeof(ILoadScreenGetter)            , "InitialTranslationOffset.Z"                , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "InjuredHealthPercent"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IActivatorGetter)             , "InteractionKeyword"                        , FormLinkAction<IKeywordGetter>.Instance);
             Add(typeof(IFurnitureGetter)             , "InteractionKeyword"                        , FormLinkAction<IKeywordGetter>.Instance);
@@ -970,6 +981,9 @@ namespace GenericSynthesisPatcher.Helpers
             Add(typeof(ICellGetter)                  , "LightingTemplate"                          , FormLinkAction<ILightingTemplateGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "LightningColor"                            , BasicAction<Color>.Instance);
             Add(typeof(IHazardGetter)                , "Limit"                                     , ConvertibleAction<uint>.Instance);
+            Add(typeof(IWaterGetter)                 , "LinearVelocity.X"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "LinearVelocity.Y"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IWaterGetter)                 , "LinearVelocity.Z"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ISoulGemGetter)               , "LinkedTo"                                  , FormLinkAction<ISoulGemGetter>.Instance);
             Add(typeof(ICellGetter)                  , "LNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IWeatherGetter)               , "LNAM"                                      , MemorySliceByteAction.Instance);
