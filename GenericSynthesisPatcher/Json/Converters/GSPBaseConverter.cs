@@ -12,8 +12,8 @@ namespace GenericSynthesisPatcher.Json.Converters
             // Load JObject from stream
             var jObject = JObject.Load(reader);
 
-            var target = jObject["Rules"] != null ? new GSPGroup() : (GSPBase)new GSPRule();
             // Create target object based on JObject
+            var target = jObject["Rules"] != null ? new GSPGroup() : (GSPBase)new GSPRule();
 
             // Populate the object properties
             serializer.Populate(jObject.CreateReader(), target);
