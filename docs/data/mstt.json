@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (OnLocalMap)",
     "Example": "\"Flags\": \"OnLocalMap\"",
     "MFFSM": "MFF-M",

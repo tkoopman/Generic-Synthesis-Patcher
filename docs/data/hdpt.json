@@ -21,7 +21,7 @@
     "Name": "ExtraParts"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (Playable, Male, Female, IsExtraPart, UseSolidTint)",
     "Example": "\"Flags\": [ \"Playable\", \"-UseSolidTint\" ]",
     "MFFSM": "MFF-M",
@@ -77,7 +77,7 @@
     "Name": "Type"
   },
   {
-    "Aliases": "Race;Races;RNAM",
+    "Aliases": "RNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",

@@ -35,7 +35,7 @@
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "DATA",
     "Description": "Flags (Default, Disable, ShotList)",
     "Example": "\"Zoom\": [ \"Default\", \"-ShotList\" ]",
     "MFFSM": "MFF-M",

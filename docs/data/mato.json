@@ -21,7 +21,7 @@
     "Name": "FalloffScale"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (SinglePass)",
     "Example": "\"Flags\": \"SinglePass\"",
     "MFFSM": "MFF-M",

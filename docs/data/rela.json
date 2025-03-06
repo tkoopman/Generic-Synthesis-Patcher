@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Secret)",
     "Example": "\"Flags\": \"Secret\"",
     "MFFSM": "MFF-M",

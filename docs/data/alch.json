@@ -49,7 +49,7 @@
     "Name": "EquipmentType"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (NoAutoCalc, FoodItem, Medicine, Poison)",
     "Example": "\"Flags\": [ \"NoAutoCalc\", \"-Poison\" ]",
     "MFFSM": "MFF-M",

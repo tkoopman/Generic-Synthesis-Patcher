@@ -56,7 +56,7 @@
     "Name": "EquipmentType"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (ManualCostCalc, PCStartSpell, AreaEffectIgnoresLOS, IgnoreResistance, NoAbsorbOrReflect, NoDualCastModification)",
     "Example": "\"Flags\": [ \"ManualCostCalc\", \"-NoDualCastModification\" ]",
     "MFFSM": "MFF-M",

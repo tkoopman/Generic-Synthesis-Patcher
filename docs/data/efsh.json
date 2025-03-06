@@ -371,7 +371,7 @@
     "Name": "FillTextureScaleV"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (NoMembraneShader, MembraneGrayscaleColor, MembraneGrayscaleAlpha, NoParticleShader, EdgeEffectInverse, AffectSkinOnly, TextureEffectIgnoreAlpha, TextureEffectProjectUVs, IgnoreBaseGeometryAlpha, TextureEffectLighting, TextureEffectNoWeapons, ParticleAnimated, ParticleGrayscaleColor, ParticleGrayscaleAlpha, UseBloodGeometry)",
     "Example": "\"Flags\": [ \"NoMembraneShader\", \"-UseBloodGeometry\" ]",
     "MFFSM": "MFF-M",

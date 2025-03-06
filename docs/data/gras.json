@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (VertexLighting, UniformScaling, FitToSlope)",
     "Example": "\"Flags\": [ \"VertexLighting\", \"-FitToSlope\" ]",
     "MFFSM": "MFF-M",

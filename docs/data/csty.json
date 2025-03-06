@@ -105,7 +105,7 @@
     "Name": "EquipmentScoreMultUnarmed"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (Dueling, Flanking, AllowDualWielding)",
     "Example": "\"Flags\": [ \"Dueling\", \"-AllowDualWielding\" ]",
     "MFFSM": "MFF-M",

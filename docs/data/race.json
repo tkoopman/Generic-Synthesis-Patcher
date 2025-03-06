@@ -231,7 +231,7 @@
     "Name": "FacegenMainClamp"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Playable, FaceGenHead, Child, TiltFrontBack, TiltLeftRight, NoShadow, Swims, Flies, Walks, Immobile, NotPunishable, NoCombatInWater, NoRotatingToHeadTrack, DontShowBloodSpray, DontShowBloodDecal, UsesHeadTrackAnims, SpellsAlignWithMagicNode, UseWorldRaycastsForFootIK, AllowRagdollCollision, RegenHpInCombat, CantOpenDoors, AllowPcDialog, NoKnockdowns, AllowPickpocket, AlwaysUseProxyController, DontShowWeaponBlood, OverlayHeadPartList, OverrideHeadPartList, CanPickupItems, AllowMultipleMembraneShaders, CanDualWield, AvoidsRoads, UseAdvancedAvoidance, NonHostile, AllowMountedCombat)",
     "Example": "\"Flags\": [ \"Playable\", \"-AllowMountedCombat\" ]",
     "MFFSM": "MFF-M",

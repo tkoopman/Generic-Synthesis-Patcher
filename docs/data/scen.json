@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (BeginOnQuestStart, StopQuestOnEnd, RepeatConditionsWhileTrue, Interruptable)",
     "Example": "\"Flags\": [ \"BeginOnQuestStart\", \"-Interruptable\" ]",
     "MFFSM": "MFF-M",

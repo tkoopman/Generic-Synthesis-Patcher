@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (PositionFollowsLocation, RotationFollowsTarget, DoNotFollowBone, FirstPersonCamera, NoTracer, StartAtTimeZero)",
     "Example": "\"Flags\": [ \"PositionFollowsLocation\", \"-StartAtTimeZero\" ]",
     "MFFSM": "MFF-M",

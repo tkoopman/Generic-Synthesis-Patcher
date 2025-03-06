@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Parent, Sequence, NoAttacking, Blocking)",
     "Example": "\"Flags\": [ \"Parent\", \"-Blocking\" ]",
     "MFFSM": "MFF-M",

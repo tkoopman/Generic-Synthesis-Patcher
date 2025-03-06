@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM;MNAM",
     "Description": "Flags (IgnoredBySandbox, DisablesActivation, IsPerch, MustExitToTalk)",
     "Example": "\"Flags\": [ \"IgnoredBySandbox\", \"-MustExitToTalk\" ]",
     "MFFSM": "MFF-M",

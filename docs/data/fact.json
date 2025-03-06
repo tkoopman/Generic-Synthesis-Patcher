@@ -77,7 +77,7 @@
     "Name": "ExteriorJailMarker"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (HiddenFromPC, SpecialCombat, TrackCrime, IgnoreMurder, IgnoreAssault, IgnoreStealing, IgnoreTrespass, DoNotReportCrimesAgainstMembers, CrimeGoldUseDefaults, IgnorePickpocket, Vendor, CanBeOwner, IgnoreWerewolf)",
     "Example": "\"Flags\": [ \"HiddenFromPC\", \"-IgnoreWerewolf\" ]",
     "MFFSM": "MFF-M",

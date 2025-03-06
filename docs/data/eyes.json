@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (Playable, NotMale, NotFemale)",
     "Example": "\"Flags\": [ \"Playable\", \"-NotFemale\" ]",
     "MFFSM": "MFF-M",

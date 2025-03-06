@@ -112,7 +112,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (CausesDamage, EnableFlowmap, BlendNormals)",
     "Example": "\"Flags\": [ \"CausesDamage\", \"-BlendNormals\" ]",
     "MFFSM": "MFF-M",

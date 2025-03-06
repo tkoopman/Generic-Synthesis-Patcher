@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (MuteWhenSubmerged, ShouldAppearOnMenu)",
     "Example": "\"Flags\": [ \"MuteWhenSubmerged\", \"-ShouldAppearOnMenu\" ]",
     "MFFSM": "MFF-M",

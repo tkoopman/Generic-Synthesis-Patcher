@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DNAM",
     "Description": "Flags (MessageBox, AutoDisplay)",
     "Example": "\"Flags\": [ \"MessageBox\", \"-AutoDisplay\" ]",
     "MFFSM": "MFF-M",

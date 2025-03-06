@@ -84,7 +84,7 @@
     "Name": "FadeDuration"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Hitscan, Explosion, AltTrigger, MuzzleFlash, CanBeDisabled, CanBePickedUp, Supersonic, PinsLimbs, PassThroughSmallTransparent, DisableCombatAimCorrection, Rotation)",
     "Example": "\"Flags\": [ \"Hitscan\", \"-Rotation\" ]",
     "MFFSM": "MFF-M",

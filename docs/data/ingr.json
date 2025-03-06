@@ -21,7 +21,7 @@
     "Name": "EquipType"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (NoAutoCalculation, FoodItem, ReferencesPersist)",
     "Example": "\"Flags\": [ \"NoAutoCalculation\", \"-ReferencesPersist\" ]",
     "MFFSM": "MFF-M",

@@ -77,7 +77,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DNAM",
     "Description": "Flags (NoSpecularMap, FaceGenTextures, HasModelSpaceNormalMap)",
     "Example": "\"Flags\": [ \"NoSpecularMap\", \"-HasModelSpaceNormalMap\" ]",
     "MFFSM": "MFF-M",

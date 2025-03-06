@@ -1,6 +1,6 @@
 [
   {
-    "Aliases": "DESC",
+    "Aliases": "NNAM",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -21,7 +21,7 @@
     "Name": "Filter"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (StartGameEnabled, AllowRepeatedStages, RunOnce, ExcludeFromDialogExport, WarnOnAliasFillFailure)",
     "Example": "\"Flags\": [ \"StartGameEnabled\", \"-WarnOnAliasFillFailure\" ]",
     "MFFSM": "MFF-M",

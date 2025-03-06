@@ -63,7 +63,7 @@
     "Name": "ENITDataTypeState"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (NoAutoCalc, ExtendDurationOnRecast)",
     "Example": "\"Flags\": [ \"NoAutoCalc\", \"-ExtendDurationOnRecast\" ]",
     "MFFSM": "MFF-M",

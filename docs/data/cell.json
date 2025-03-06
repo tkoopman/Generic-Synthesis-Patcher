@@ -28,7 +28,7 @@
     "Name": "FactionRank"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DATA",
     "Description": "Flags (IsInteriorCell, HasWater, CantTravelFromHere, NoLodWater, PublicArea, HandChanged, ShowSky, UseSkyLighting)",
     "Example": "\"Flags\": [ \"IsInteriorCell\", \"-UseSkyLighting\" ]",
     "MFFSM": "MFF-M",

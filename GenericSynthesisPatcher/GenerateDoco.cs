@@ -18,6 +18,31 @@ namespace GenericSynthesisPatcher
 {
     internal static class GenerateDoco
     {
+        private const string RPMPopulateFooter = """
+            #pragma warning restore format
+                    }
+                }
+            }
+            """;
+
+        private const string RPMPopulateHeader = """
+            using System.Drawing;
+
+            using GenericSynthesisPatcher.Helpers.Action;
+
+            using Mutagen.Bethesda.Skyrim;
+
+            using Noggog;
+
+            namespace GenericSynthesisPatcher.Helpers
+            {
+                public static partial class RecordPropertyMappings
+                {
+                    private static void populateMappings ()
+                    {
+            #pragma warning disable format
+            """;
+
         private static readonly Type[] ForceDeeperTypes = [
             typeof(P2Double),
             typeof(P2Float),
@@ -130,9 +155,6 @@ namespace GenericSynthesisPatcher
             if (state is not null)
                 Global.State = state;
 
-            checkAliases();
-            Console.WriteLine();
-
             List<RecordTypeMapping> ImplementedRTMs = [];
             List<RPMDetails> buildRPMs = [];
 
@@ -149,16 +171,7 @@ namespace GenericSynthesisPatcher
                 {
                     ImplementedRTMs.Add(rtm);
 
-                    sw.WriteLine();
-                    string h = rtm.Name;
-                    h += rtm.Name.Equals(rtm.FullName, StringComparison.Ordinal) ? "" : $" - {rtm.FullName}";
-                    sw.WriteLine($"## {h}");
-                    sw.WriteLine();
-
-                    List<string[]> propertyLines = [["Field", "Alt", "MFFSM", "Value Type", "Example"]];
-                    propertyLines.Add(["-", "-", "-", "-", "-"]);
-
-                    // Output implemented properties
+                    // Sort and populate documentation fields
                     properties.Sort((l, r) => string.Compare(l.PropertyName, r.PropertyName, StringComparison.OrdinalIgnoreCase));
                     foreach (var row in properties)
                     {
@@ -169,26 +182,15 @@ namespace GenericSynthesisPatcher
                                 row.Description = description;
                                 row.Example = example;
                             }
-
-                            propertyLines.Add([row.PropertyName, row.Aliases, row.MFFSM, row.Description, row.Example]);
                         }
                         else if (OutputUnimplemented)
                         {
                             row.Description = $"{row.PropertyType.GetClassName()} - {row.RecordActionInterface.GetClassName()}";
-
-                            string prefix = row.RecordActionInterface is null ? "*":"#";
-                            propertyLines.Add([$"{prefix}{row.PropertyName}", "", "-----", row.Description, row.Example]);
                         }
                     }
 
-                    printTableRow(propertyLines);
-
-                    // Footer
-                    sw.WriteLine();
-                    sw.WriteLine("[⬅ Back to Types](Types.md)");
-
                     /*
-                     * Output Implemented Types
+                     * Output Implemented Properties
                      */
 
                     using (var sw = new StreamWriter($"{rtm.Name.ToLowerInvariant()}.json"))
@@ -208,11 +210,6 @@ namespace GenericSynthesisPatcher
             {
                 serializer.Serialize(writer, ImplementedRTMs);
             }
-
-            // Write Types and Implemented Properties to Temp File
-            using var fw = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSPDoco.txt"), false);
-            fw.Write(sw.ToString());
-            fw.Close();
 
             /*
              * Output RPM code for all identified property types
@@ -303,13 +300,14 @@ namespace GenericSynthesisPatcher
             });
 
             sw = new();
-
+            sw.WriteLine(RPMPopulateHeader);
             printTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
+            sw.WriteLine(RPMPopulateFooter);
+
             using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_RPM.txt"), false);
             rpmFW.Write(sw.ToString());
             rpmFW.Close();
 
-            //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSPDoco.txt")}\"");
             //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSP_RPM.txt")}\"");
         }
 
@@ -404,48 +402,6 @@ namespace GenericSynthesisPatcher
             }
 
             return null;
-        }
-
-        private static void checkAliases ()
-        {
-            var AllAliases = RecordPropertyMappings.AllAliases;
-            var grouped = AllAliases.GroupBy(x => x.PropertyName).Where(g => g.Count() > 1).ToList();
-
-            // Check for typed RPMs that match existing null typed Also remove any groups that
-            // contain null typed after checking as no longer required
-            foreach (var g in grouped.ToArray().Where(g => g.Any(x => x.Type == null)))
-            {
-                string nullRPM = g.First(x => x.Type == null).RealPropertyName;
-                foreach (var gg in g.Where(x => x.Type != null && x.RealPropertyName == nullRPM))
-                    Console.WriteLine($"{gg.Type?.GetClassName()}.{g.Key} = {nullRPM} is same as existing null type entry.");
-
-                _ = grouped.Remove(g);
-            }
-
-            // Check for where all typed instances match so could be made a single nulled typed
-            // Remove these groups after checking as no longer required
-            foreach (var g in grouped.ToArray().Where(g => g.Select(x => x.RealPropertyName).Distinct().Count() == 1))
-            {
-                Console.WriteLine($"{g.Key} = {g.First().RealPropertyName} on all {g.Count()} aliases");
-                _ = grouped.Remove(g);
-            }
-
-            // Check for if one alias mapping is dominant over others so could maybe create null
-            // typed for that subset
-            foreach (var g in grouped)
-            {
-                var gg = g.GroupBy(x => x.RealPropertyName).Select(x => new { RealPropertyName = x.Key, Count = x.Count(), Types = x.Select(y => y.Type?.GetClassName()) });
-                int max = gg.Select(x => x.Count).Max();
-                if (max > 1)
-                {
-                    var ggMax = gg.Where(x => x.Count == max);
-                    if (ggMax.Count() == 1)
-                    {
-                        var gMax = ggMax.First();
-                        Console.WriteLine($"{g.Key} = {gMax.RealPropertyName} on {gMax.Types.Count()} alias types ({string.Join(", ", gMax.Types)}).");
-                    }
-                }
-            }
         }
 
         private static void printTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)

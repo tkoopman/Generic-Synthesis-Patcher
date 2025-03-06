@@ -14,7 +14,7 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "Item",
+    "Aliases": "INAM",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
     "MFFSM": "MFFSM",

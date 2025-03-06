@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DNAM",
     "Description": "Flags (AllowDefaultDialog, Female)",
     "Example": "\"Flags\": [ \"AllowDefaultDialog\", \"-Female\" ]",
     "MFFSM": "MFF-M",

@@ -14,7 +14,7 @@
     "Name": "EffectArt"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (RotateToFaceTarget, AttachToCamera, InheritRotation)",
     "Example": "\"Flags\": [ \"RotateToFaceTarget\", \"-InheritRotation\" ]",
     "MFFSM": "MFF-M",

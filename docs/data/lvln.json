@@ -21,7 +21,7 @@
     "Name": "Entries"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "LVLF",
     "Description": "Flags (CalculateFromAllLevelsLessThanOrEqualPlayer, CalculateForEachItemInCount)",
     "Example": "\"Flags\": [ \"CalculateFromAllLevelsLessThanOrEqualPlayer\", \"-CalculateForEachItemInCount\" ]",
     "MFFSM": "MFF-M",

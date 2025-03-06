@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "DNAM",
     "Description": "Flags (TopLevel, Blocking, Exclusive)",
     "Example": "\"Flags\": [ \"TopLevel\", \"-Exclusive\" ]",
     "MFFSM": "MFF-M",

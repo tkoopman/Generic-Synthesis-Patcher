@@ -28,7 +28,7 @@
     "Name": "FalloffExponent"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Dynamic, CanBeCarried, Negative, Flicker, OffByDefault, FlickerSlow, Pulse, PulseSlow, SpotLight, ShadowSpotlight, ShadowHemisphere, ShadowOmnidirectional, PortalStrict)",
     "Example": "\"Flags\": [ \"Dynamic\", \"-PortalStrict\" ]",
     "MFFSM": "MFF-M",

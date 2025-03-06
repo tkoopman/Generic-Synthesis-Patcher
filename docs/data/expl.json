@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (AlwaysUsesWorldOrientation, KnockDownAlways, KnockDownByFormula, IgnoreLosCheck, PushExplosionSourceRefOnly, IgnoreImageSpaceSwap, Chain, NoControllerVibration)",
     "Example": "\"Flags\": [ \"AlwaysUsesWorldOrientation\", \"-NoControllerVibration\" ]",
     "MFFSM": "MFF-M",

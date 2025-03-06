@@ -28,7 +28,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags;GNAM",
+    "Aliases": "GNAM",
     "Description": "Flags (TriggerVolume, Sensor, NavmeshObstacle)",
     "Example": "\"Flags\": [ \"TriggerVolume\", \"-NavmeshObstacle\" ]",
     "MFFSM": "MFF-M",
@@ -49,7 +49,7 @@
     "Name": "Index"
   },
   {
-    "Aliases": "FULL;MNAM",
+    "Aliases": "MNAM",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
     "MFFSM": "MFF--",

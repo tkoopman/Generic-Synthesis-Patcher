@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (IgnoresNormalWeaponResistance, NonPlayable, NonBolt)",
     "Example": "\"Flags\": [ \"IgnoresNormalWeaponResistance\", \"-NonBolt\" ]",
     "MFFSM": "MFF-M",

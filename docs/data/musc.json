@@ -28,7 +28,7 @@
     "Name": "FadeDuration"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (PlaysOneSelection, AbruptTransition, CycleTracks, MaintainTrackOrder, DucksCurrentTrack, DoesNotQueue)",
     "Example": "\"Flags\": [ \"PlaysOneSelection\", \"-DoesNotQueue\" ]",
     "MFFSM": "MFF-M",

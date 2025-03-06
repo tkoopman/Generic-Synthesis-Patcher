@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (AffectsPlayerOnly, InheritDurationFromSpawnSpell, AlignToImpactNormal, InheritRadiusFromSpawnSpell, DropToGround)",
     "Example": "\"Flags\": [ \"AffectsPlayerOnly\", \"-DropToGround\" ]",
     "MFFSM": "MFF-M",

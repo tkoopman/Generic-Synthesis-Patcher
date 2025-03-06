@@ -42,7 +42,7 @@
     "Name": "CounterEffects"
   },
   {
-    "Aliases": "DESC;DNAM",
+    "Aliases": "DNAM",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -105,7 +105,7 @@
     "Name": "Explosion"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Hostile, Recover, Detrimental, SnapToNavmesh, NoHitEvent, DispelWithKeywords, NoDuration, NoMagnitude, NoArea, FXPersist, GoryVisuals, HideInUI, NoRecast, PowerAffectsMagnitude, PowerAffectsDuration, Painless, NoHitEffect, NoDeathDispel)",
     "Example": "\"Flags\": [ \"Hostile\", \"-NoDeathDispel\" ]",
     "MFFSM": "MFF-M",

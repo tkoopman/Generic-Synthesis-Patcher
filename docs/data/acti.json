@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (NoDisplacement, IgnoredBySandbox)",
     "Example": "\"Flags\": [ \"NoDisplacement\", \"-IgnoredBySandbox\" ]",
     "MFFSM": "MFF-M",

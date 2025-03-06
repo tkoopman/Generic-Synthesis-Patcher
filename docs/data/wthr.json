@@ -154,7 +154,7 @@
     "Name": "EffectLightingColor.Sunset"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (Pleasant, Cloudy, Rainy, Snow, SkyStaticsAlwaysVisible, SkyStaticsFollowsSunPosition)",
     "Example": "\"Flags\": [ \"Pleasant\", \"-SkyStaticsFollowsSunPosition\" ]",
     "MFFSM": "MFF-M",

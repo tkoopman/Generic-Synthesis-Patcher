@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (ConsideredSnow)",
     "Example": "\"Flags\": \"ConsideredSnow\"",
     "MFFSM": "MFF-M",

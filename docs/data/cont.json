@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (AllowSoundsWhenAnimation, Respawns, ShowOwner)",
     "Example": "\"Flags\": [ \"AllowSoundsWhenAnimation\", \"-ShowOwner\" ]",
     "MFFSM": "MFF-M",

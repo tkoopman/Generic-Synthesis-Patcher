@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (NeverResets, MatchPcBelowMinimumLevel, DisableCombatBoundary)",
     "Example": "\"Flags\": [ \"NeverResets\", \"-DisableCombatBoundary\" ]",
     "MFFSM": "MFF-M",

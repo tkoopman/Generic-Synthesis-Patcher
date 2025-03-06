@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags;IDLF",
+    "Aliases": "IDLF",
     "Description": "Flags (RunInSequence, DoOnce, IgnoredBySandbox)",
     "Example": "\"Flags\": [ \"RunInSequence\", \"-IgnoredBySandbox\" ]",
     "MFFSM": "MFF-M",

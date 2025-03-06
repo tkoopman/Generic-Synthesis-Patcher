@@ -567,7 +567,7 @@
     "Name": "Race"
   },
   {
-    "Aliases": "ONAM",
+    "Aliases": "SHRT",
     "Description": "String value",
     "Example": "\"ShortName\": \"Hello\"",
     "MFFSM": "MFF--",

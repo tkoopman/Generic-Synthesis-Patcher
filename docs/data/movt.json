@@ -77,7 +77,7 @@
     "Name": "LeftWalk"
   },
   {
-    "Aliases": "FULL",
+    "Aliases": "MNAM",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
     "MFFSM": "MFF--",

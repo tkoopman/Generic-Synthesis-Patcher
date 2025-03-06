@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (StairMaterial, ArrowsStick)",
     "Example": "\"Flags\": [ \"StairMaterial\", \"-ArrowsStick\" ]",
     "MFFSM": "MFF-M",
@@ -42,7 +42,7 @@
     "Name": "HavokImpactDataSet"
   },
   {
-    "Aliases": "FULL",
+    "Aliases": "MNAM",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
     "MFFSM": "MFF--",

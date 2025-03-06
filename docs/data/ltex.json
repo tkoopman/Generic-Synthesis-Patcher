@@ -7,7 +7,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "INAM",
     "Description": "Flags (IsSnow)",
     "Example": "\"Flags\": \"IsSnow\"",
     "MFFSM": "MFF-M",

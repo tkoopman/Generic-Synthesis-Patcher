@@ -1,13 +1,13 @@
 [
   {
-    "Aliases": "DESC",
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"BookText\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "BookText"
   },
   {
-    "Aliases": "CNAM;DESC",
+    "Aliases": "CNAM",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -21,7 +21,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "",
     "Description": "Flags (CantBeTaken)",
     "Example": "\"Flags\": \"CantBeTaken\"",
     "MFFSM": "MFF-M",

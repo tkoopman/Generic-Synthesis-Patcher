@@ -14,21 +14,21 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
+    "Aliases": "DATA",
     "Description": "True / False",
     "Example": "\"IsFamily\": true",
     "MFFSM": "MFF--",
     "Name": "IsFamily"
   },
   {
-    "Aliases": "",
+    "Aliases": "FPRT",
     "Description": "String value",
     "Example": "\"ParentTitle.Female\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "ParentTitle.Female"
   },
   {
-    "Aliases": "",
+    "Aliases": "MPRT",
     "Description": "String value",
     "Example": "\"ParentTitle.Male\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -42,14 +42,14 @@
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "FCHT",
     "Description": "String value",
     "Example": "\"Title.Female\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "Title.Female"
   },
   {
-    "Aliases": "",
+    "Aliases": "MCHT",
     "Description": "String value",
     "Example": "\"Title.Male\": \"Hello\"",
     "MFFSM": "MFF--",

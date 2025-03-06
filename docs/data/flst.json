@@ -14,7 +14,7 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "FormID;FormIDs;Item;LNAM",
+    "Aliases": "FormID;FormIDs;LNAM",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
     "MFFSM": "MFFSM",

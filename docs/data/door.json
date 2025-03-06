@@ -14,7 +14,7 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "DataFlags",
+    "Aliases": "FNAM",
     "Description": "Flags (Automatic, Hidden, MinimalUse, Sliding, DoNotOpenInCombatSearch)",
     "Example": "\"Flags\": [ \"Automatic\", \"-DoNotOpenInCombatSearch\" ]",
     "MFFSM": "MFF-M",
