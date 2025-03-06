@@ -11,27 +11,23 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class FlagsRecordNode : RecordNodeBase
     {
-        protected int workingList;
-
         public FlagsRecordNode (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(modKey, record, modKeys)
         {
             PropertyName = propertyName;
-            workingList = Mod.TryGetProperty(record, PropertyName, out int value, out var propertyInfo) ? value : throw new Exception();
-            Type = propertyInfo.PropertyType;
-        }
-
-        public FlagsRecordNode (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : this(context.ModKey, context.Record, modKeys, propertyName)
-        {
+            WorkingFlags = Mod.TryGetProperty(record, PropertyName, out int value, out var propertyType) ? value : throw new InvalidDataException();
+            Type = propertyType;
         }
 
         protected string PropertyName { get; }
         protected Type Type { get; }
+        protected int WorkingFlags { get; set; }
 
-        protected override RecordNodeBase CreateChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context, modKeys, PropertyName);
+        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context.ModKey, context.Record, modKeys, PropertyName);
 
-        protected bool Merge (int parentValue, out int add, out int forceAdd, out int remove)
+        protected bool performMerge (int parentValue, out int add, out int forceAdd, out int remove)
         {
-            // Done with List instead of Hashtable as in rare cases may have same entry multiple times.
+            // Done with List instead of Hashtable as in rare cases may have same entry multiple
+            // times.
             int myAdds = default;
             int myRemoves = default;
             int forceAdds = default;
@@ -40,7 +36,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             foreach (var node in OverwrittenBy)
             {
-                if (node is FlagsRecordNode myNode && myNode.Merge(workingList, out var _add, out var _forceAdds, out var _remove))
+                if (node is FlagsRecordNode myNode && myNode.performMerge(WorkingFlags, out int _add, out int _forceAdds, out int _remove))
                 {
                     int a = FlagEnums.GetFlagCount(Type, _add);
                     if (a > 0)
@@ -69,32 +65,33 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             // Combine this records items with any other force adds
             if (_forceAdd)
-                forceAdds = (int)FlagEnums.CombineFlags(Type, forceAdds, workingList);
+                forceAdds = (int)FlagEnums.CombineFlags(Type, forceAdds, WorkingFlags);
 
             forceAdd = forceAdds;
 
             if (myRemoves > 0)
             {
                 Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Del: {FlagEnums.FormatFlags(Type, myRemoves)}");
-                workingList = (int)FlagEnums.RemoveFlags(Type, workingList, myRemoves);
+                WorkingFlags = (int)FlagEnums.RemoveFlags(Type, WorkingFlags, myRemoves);
             }
 
             if (myAdds > 0)
             {
                 Global.TraceLogger?.WriteLine($"Merge {ModKey.FileName} << All. Add: {FlagEnums.FormatFlags(Type, myAdds)}");
-                workingList = (int)FlagEnums.CombineFlags(Type, workingList, myAdds);
+                WorkingFlags = (int)FlagEnums.CombineFlags(Type, WorkingFlags, myAdds);
             }
 
             if (parentValue == -1)
             {
-                // Just return current results as will be ignored by RecordGraph which is only one to call this with no parent
+                // Just return current results as will be ignored by RecordGraph which is only one
+                // to call this with no parent
                 add = myAdds;
                 remove = myRemoves;
 
                 // Time to actually force add now
-                int f =  FlagEnums.GetFlagCount(Type, workingList);
-                workingList = workingList | forceAdds;
-                f = FlagEnums.GetFlagCount(Type, workingList) - f;
+                int f =  FlagEnums.GetFlagCount(Type, WorkingFlags);
+                WorkingFlags |= forceAdds;
+                f = FlagEnums.GetFlagCount(Type, WorkingFlags) - f;
 
                 Global.TraceLogger?.WriteLine($"Merge All. Force Added: {f}/{FlagEnums.GetFlagCount(Type, forceAdds)}");
 
@@ -103,8 +100,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             else
             {
                 // Work out changes in workingList compared to parent
-                add = _forceAdd ? default : workingList & ((int)FlagEnums.GetAllFlags(Type) ^ parentValue);
-                remove = parentValue & ((int)FlagEnums.GetAllFlags(Type) ^ workingList);
+                add = _forceAdd ? default : WorkingFlags & ((int)FlagEnums.GetAllFlags(Type) ^ parentValue);
+                remove = parentValue & ((int)FlagEnums.GetAllFlags(Type) ^ WorkingFlags);
             }
 
             return add > 0 || remove > 0 || forceAdd > 0;

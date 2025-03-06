@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
 using GenericSynthesisPatcher.Helpers;
@@ -9,8 +8,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Order;
-using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,9 +21,7 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogCode = 0x04;
         private List<ListOperation>? editorIDs;
         private List<FormKeyListOperation>? formIDs;
-        private bool forwardIndexedByField;
-        private ForwardTypes forwardType;
-        private int HashCode = 0;
+        private int HashCode;
 
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
@@ -62,8 +57,8 @@ namespace GenericSynthesisPatcher.Json.Data
         public List<ListOperation>? EditorIDNot { set => EditorIDDel = value; }
 
         /// <summary>
-        /// Add Fill action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
+        ///     Add Fill action(s) to this rule. This is only used for adding to joint Fill/Forward
+        ///     store.
         /// </summary>
         [JsonProperty(PropertyName = "Fill", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
@@ -103,41 +98,49 @@ namespace GenericSynthesisPatcher.Json.Data
         public List<FormKeyListOperation>? FormIDNot { set => FormIDDel = value; }
 
         /// <summary>
-        /// Add Forward action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
+        ///     Add Forward action(s) to this rule. This is only used for adding to joint
+        ///     Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Forward", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
         public Dictionary<FilterOperation, JToken> Forward { get; set; } = [];
 
         /// <summary>
-        /// Changes JSON format for Forward from being the default "mod.esp" : [ "field1", "field2" ]
-        /// to be "field": [ "Mod1.esp", "Mod2.esp" ]
+        ///     Changes JSON format for Forward from being the default "mod.esp" : [ "field1",
+        ///     "field2" ] to be "field": [ "Mod1.esp", "Mod2.esp" ]
         /// </summary>
         [JsonProperty(PropertyName = "ForwardIndexedByField", NullValueHandling = NullValueHandling.Ignore)]
+        [Obsolete("""ForwardIndexedByField is deprecated. Should use "ForwardFlags": ["IndexedByField"]""")]
         public bool ForwardIndexedByField
         {
-            get => forwardIndexedByField;
+            get => ForwardOptions.HasFlag(ForwardOptions.IndexedByField);
             set
             {
-                if (HasForwardType(ForwardTypeFlags.IndexedByField) && !value)
-                    throw new ArgumentException("", "ForwardIndexedByField");
-                forwardIndexedByField = value;
+                Global.Logger.Log(0, """ForwardIndexedByField is deprecated. Should use "ForwardOptions": ["IndexedByField"]""", logLevel: LogLevel.Warning);
+
+                ForwardOptions = ForwardOptions.SetFlag(ForwardOptions.IndexedByField, value);
             }
         }
 
         /// <summary>
-        /// ForwardType can change how Forwarding actions work.
+        ///     ForwardType can change how Forwarding actions work.
+        /// </summary>
+        [JsonProperty(PropertyName = "ForwardOptions", NullValueHandling = NullValueHandling.Ignore)]
+        public ForwardOptions ForwardOptions { get; set; }
+
+        /// <summary>
+        ///     ForwardType can change how Forwarding actions work.
         /// </summary>
         [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
-        public ForwardTypes ForwardType
+        [Obsolete("""ForwardIndexedByField is deprecated. Should use "ForwardFlags": ["..."]""")]
+        public ForwardOptions ForwardType
         {
-            get => forwardType;
+            get => ForwardOptions;
             set
             {
-                forwardType = value;
-                if (HasForwardType(ForwardTypeFlags.IndexedByField))
-                    forwardIndexedByField = true;
+                Global.Logger.Log(0, """ForwardType is deprecated. Should use "ForwardOptions": ["..."]""", logLevel: LogLevel.Warning);
+
+                ForwardOptions |= value;
             }
         }
 
@@ -145,15 +148,15 @@ namespace GenericSynthesisPatcher.Json.Data
         public GSPGroup? Group { get; private set; } = null;
 
         /// <summary>
-        /// Add Forward action(s) to this rule.
-        /// This is only used for adding to joint Fill/Forward store.
+        ///     Add Forward action(s) to this rule. This is only used for adding to joint
+        ///     Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Matches", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
         public Dictionary<FilterOperation, JToken> Match { get; set; } = [];
 
         /// <summary>
-        /// List of merge actions to perform.
+        ///     List of merge actions to perform.
         /// </summary>
         [JsonProperty(PropertyName = "Merge", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, List<ModKeyListOperation>>))]
@@ -187,12 +190,32 @@ namespace GenericSynthesisPatcher.Json.Data
         #region GetValues
 
         private readonly Dictionary<FilterOperation, object?> fillCache = [];
-        private readonly Dictionary<FilterOperation, (IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>, string[])?> forwardCache = [];
+        private readonly Dictionary<FilterOperation, (IEnumerable<ModKey>, string[])?> forwardCache = [];
         private readonly Dictionary<FilterOperation, object?> matchCache = [];
 
-        public bool TryGetFillValueAs<T> (FilterOperation key, out T? valueAs) => TryGetValueAs(Fill, fillCache, key, out _, out valueAs);
+        /// <summary>
+        ///     Get the value data for a selected rule's action value key parsed to selected class
+        ///     type.
+        /// </summary>
+        public bool TryGetFillValueAs<T> (FilterOperation key, out T? valueAs) => tryGetValueAs(Fill, fillCache, key, out _, out valueAs);
 
-        public bool TryGetForward (FilterOperation key, [NotNullWhen(true)] out IReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>? mods, [NotNullWhen(true)] out string[]? fields)
+        /// <summary>
+        ///     Gets forward data for current key. If indexed by field, will always have 1 field,
+        ///     but 1 or more mods outputted. If indexed by mod, will always have 1 mod, but 1 or
+        ///     more fields outputted.
+        /// </summary>
+        /// <param name="proKeys">Used to see what order mods should be returned in.</param>
+        /// <param name="key"></param>
+        /// <param name="mods">
+        ///     Output of listed mods. List will be in order entered. If no mods were entered when
+        ///     indexed by field, then will populate with all mods.
+        /// </param>
+        /// <param name="fields">Output of field names from config for current key</param>
+        /// <returns>
+        ///     If valid combination of fields and mods found in config will return true, else
+        ///     false.
+        /// </returns>
+        public bool TryGetForward (ProcessingKeys proKeys, FilterOperation key, [NotNullWhen(true)] out IEnumerable<ModKey>? mods, [NotNullWhen(true)] out string[]? fields)
         {
             if (forwardCache.TryGetValue(key, out var value))
             {
@@ -208,30 +231,63 @@ namespace GenericSynthesisPatcher.Json.Data
                 return true;
             }
 
-            Dictionary<ModKey, IModListing<ISkyrimModGetter>> buildMods = [];
+            bool sortMods = proKeys.Rule.HasForwardType(ForwardOptions._sortMods);
+            List<ModKey> buildMods = [];
             List<string> buildFields = [];
 
-            if (ForwardIndexedByField)
+            if (ForwardOptions.HasFlag(ForwardOptions.IndexedByField))
             {
                 buildFields.Add(key.Value);
-                if (TryGetValueAs(Forward, [], key, out _, out List<ModKey>? values))
+                if (tryGetValueAs(Forward, [], key, out _, out List<ModKeyListOperation>? values))
                 {
-                    foreach (var mod in values ?? [])
-                        buildMods.Add(mod, Global.State.LoadOrder[mod]);
+                    bool hasIncludeMods = values?.Any(m => m.Operation == ListLogic.Default) ?? false;
+                    bool hasExcludeMods = values?.Any(m => m.Operation == ListLogic.NOT) ?? false;
+                    sortMods |= hasExcludeMods || !values.SafeAny();
+
+                    if (hasIncludeMods && hasExcludeMods)
+                    {
+                        Global.Logger.Log(ClassLogCode, $"When indexed by field, array of mods must not include both include and excluded mods.");
+                    }
+                    else
+                    {
+                        if (hasExcludeMods || !values.SafeAny())
+                        {
+                            // Include all mods except excluded
+                            foreach (var addMod in Global.State.LoadOrder)
+                            {
+                                if (addMod.Value.Enabled // Mod must be enabled
+                                    && (!hasExcludeMods || !values.SafeAny(v => v.Value.Equals(addMod.Key)))) // Exclude anything excluded in config
+                                {
+                                    buildMods.Add(addMod.Key);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Just include mods listed against field
+                            foreach (var mod in values ?? [])
+                                buildMods.Add(mod.Value);
+                        }
+                    }
                 }
             }
             else
             {
                 if (ModKey.TryFromFileName(new FileName(key.Value), out var mod))
-                    buildMods.Add(mod, Global.State.LoadOrder[mod]);
+                    buildMods.Add(mod);
 
-                if (TryGetValueAs(Forward, [], key, out _, out List<string>? values))
+                if (tryGetValueAs(Forward, [], key, out _, out List<string>? values))
                     buildFields = values ?? buildFields;
             }
 
             if (buildMods.Count != 0 && buildFields.Count != 0)
             {
-                mods = new ReadOnlyDictionary<ModKey, IModListing<ISkyrimModGetter>>(buildMods);
+                mods = sortMods
+                     ? proKeys.Rule.HasForwardType(ForwardOptions._randomMod)
+                         ? buildMods.OrderBy(_ => proKeys.GetRandom().Next())
+                         : buildMods.OrderByDescending(Global.State.LoadOrder.IndexOf)
+                     : buildMods;
+
                 fields = [.. buildFields];
 
                 forwardCache.Add(key, (mods, fields));
@@ -245,12 +301,13 @@ namespace GenericSynthesisPatcher.Json.Data
             return false;
         }
 
-        public bool TryGetMatchValueAs<T> (FilterOperation key, out bool fromCache, out T? valueAs) => TryGetValueAs(Match, matchCache, key, out fromCache, out valueAs);
+        public bool TryGetMatchValueAs<T> (FilterOperation key, out bool fromCache, out T? valueAs) => tryGetValueAs(Match, matchCache, key, out fromCache, out valueAs);
 
         /// <summary>
-        /// Get the value data for a selected rule's action value key parsed to selected class type.
+        ///     Get the value data for a selected rule's action value key parsed to selected class
+        ///     type.
         /// </summary>
-        private static bool TryGetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key, out bool fromCache, out T? valueAs)
+        private static bool tryGetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key, out bool fromCache, out T? valueAs)
         {
             if (cache.TryGetValue(key, out object? cachedValue))
             {
@@ -266,6 +323,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 else
                 {
                     valueAs = default;
+
                     // If value != null then failed to cast to correct type
                     return cachedValue == null;
                 }
@@ -291,8 +349,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 var hash = new HashCode();
                 hash.Add(base.GetHashCode());
 
-                hash.Add(ForwardIndexedByField);
-                hash.Add(ForwardType);
+                hash.Add(ForwardOptions);
                 hash.Add(OnlyIfDefault);
                 if (EditorID != null)
                     hash.AddEnumerable(EditorID);
@@ -311,10 +368,10 @@ namespace GenericSynthesisPatcher.Json.Data
             return HashCode;
         }
 
-        public bool HasForwardType (ForwardTypeFlags flag) => ((ForwardTypeFlags)ForwardType).HasFlag(flag);
+        public bool HasForwardType (ForwardOptions flag) => ForwardOptions.HasFlag(flag);
 
         /// <summary>
-        /// Checks if rule filter(s) match current context's record.
+        ///     Checks if rule filter(s) match current context's record.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="Origin"></param>

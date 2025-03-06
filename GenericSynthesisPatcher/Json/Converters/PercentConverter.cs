@@ -1,3 +1,5 @@
+using System.Globalization;
+
 using Newtonsoft.Json;
 
 using Noggog;
@@ -22,7 +24,7 @@ namespace GenericSynthesisPatcher.Json.Converters
                 case JsonToken.String:
                     string str = reader.ReadAsString() ?? throw new JsonSerializationException("Unable to read percent");
                     bool signed = str.EndsWith('%');
-                    double pd = double.Parse(str.TrimEnd('%'));
+                    double pd = double.Parse(str.TrimEnd('%'), CultureInfo.InvariantCulture);
                     if (signed)
                         pd /= 100;
                     return new Percent(pd);

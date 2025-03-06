@@ -1,0 +1,352 @@
+[
+  {
+    "Aliases": "XCAS",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AcousticSpace"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "XEZN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "XRNK",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "DATA",
+    "Description": "Flags (IsInteriorCell, HasWater, CantTravelFromHere, NoLodWater, PublicArea, HandChanged, ShowSky, UseSkyLighting)",
+    "Example": "\"Flags\": [ \"IsInteriorCell\", \"-UseSkyLighting\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "XCLX.Flags",
+    "Description": "Possible values (Quad1, Quad2, Quad3, Quad4)",
+    "Example": "\"Grid.Flags\": \"Quad1\"",
+    "MFFSM": "MF---",
+    "Name": "Grid.Flags"
+  },
+  {
+    "Aliases": "XCLX.Point.X",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.Point.X"
+  },
+  {
+    "Aliases": "XCLX.Point.Y",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.Point.Y"
+  },
+  {
+    "Aliases": "XCIM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "XCLL.AmbientColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.AmbientColor"
+  },
+  {
+    "Aliases": "XCLL.DirectionalColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.DirectionalColor"
+  },
+  {
+    "Aliases": "XCLL.DirectionalFade",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.DirectionalFade\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalFade"
+  },
+  {
+    "Aliases": "XCLL.DirectionalRotationXY",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationXY\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalRotationXY"
+  },
+  {
+    "Aliases": "XCLL.DirectionalRotationZ",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationZ\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalRotationZ"
+  },
+  {
+    "Aliases": "XCLL.FogClipDistance",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogClipDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogClipDistance"
+  },
+  {
+    "Aliases": "XCLL.FogFar",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogFar\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogFar"
+  },
+  {
+    "Aliases": "XCLL.FogFarColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogFarColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.FogFarColor"
+  },
+  {
+    "Aliases": "XCLL.FogMax",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogMax\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogMax"
+  },
+  {
+    "Aliases": "XCLL.FogNear",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogNear\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogNear"
+  },
+  {
+    "Aliases": "XCLL.FogNearColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogNearColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.FogNearColor"
+  },
+  {
+    "Aliases": "XCLL.FogPower",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogPower\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogPower"
+  },
+  {
+    "Aliases": "XCLL.Inherits",
+    "Description": "Flags (AmbientColor, DirectionalColor, FogColor, FogNear, FogFar, DirectionalRotation, DirectionalFade, ClipDistance, FogPower, FogMax, LightFadeDistances)",
+    "Example": "\"Lighting.Inherits\": [ \"AmbientColor\", \"-LightFadeDistances\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Lighting.Inherits"
+  },
+  {
+    "Aliases": "XCLL.LightFadeBegin",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeBegin\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.LightFadeBegin"
+  },
+  {
+    "Aliases": "XCLL.LightFadeEnd",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeEnd\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.LightFadeEnd"
+  },
+  {
+    "Aliases": "LTMP",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LightingTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"LNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "LNAM"
+  },
+  {
+    "Aliases": "XLCN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Location"
+  },
+  {
+    "Aliases": "XILL",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LockList"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (Persistent, OffLimits, CantWait)",
+    "Example": "\"MajorFlags\": [ \"Persistent\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "MHDT",
+    "Description": "Forward Cell Max Height data.",
+    "Example": "[{ \"types\": [\"Cell\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "MFFSM": "--F--",
+    "Name": "MaxHeightData"
+  },
+  {
+    "Aliases": "XCMO",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Music"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "TVDT",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OcclusionData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "OcclusionData"
+  },
+  {
+    "Aliases": "XOWN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "XCLR",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Regions"
+  },
+  {
+    "Aliases": "XCCM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SkyAndWeatherFromRegion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "XCWT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Water"
+  },
+  {
+    "Aliases": "XWEM",
+    "Description": "String value",
+    "Example": "\"WaterEnvironmentMap\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WaterEnvironmentMap"
+  },
+  {
+    "Aliases": "XCLW",
+    "Description": "Decimal value",
+    "Example": "\"WaterHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterHeight"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "String value",
+    "Example": "\"WaterNoiseTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WaterNoiseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Angle.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterVelocity.Offset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCN\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "XWCN"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCS\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "XWCS"
+  }
+]

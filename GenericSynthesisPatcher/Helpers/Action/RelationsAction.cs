@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -41,5 +43,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IRelationGetter record ? record.Target.FormKey : throw new ArgumentNullException(nameof(from));
 
         public override string ToString (IFormLinkContainerGetter source) => source is IRelationGetter relation ? $"{relation.Reaction}-{relation.Target.FormKey}" : throw new InvalidCastException();
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)";
+            example = $$"""
+                        "{{propertyName}}": { "Target": "021FED:Skyrim.esm", "Reaction": "Friend" }
+                        """;
+
+            return true;
+        }
     }
 }

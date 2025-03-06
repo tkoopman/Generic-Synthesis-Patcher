@@ -1,0 +1,86 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Attenuation.Curve\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Attenuation.Curve"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MaxDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Attenuation.MaxDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MinDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Attenuation.MinDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "CNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AttenuatesWithDistance, AllowsRumble)",
+    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AllowsRumble\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
+    "MFFSM": "-FF--",
+    "Name": "Data.ReverbSendPercent"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "FNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"SNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "SNAM"
+  },
+  {
+    "Aliases": "MNAM",
+    "Description": "Possible values (UsesHrtf, DefinedSpeakerOutput)",
+    "Example": "\"Type\": \"UsesHrtf\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  }
+]

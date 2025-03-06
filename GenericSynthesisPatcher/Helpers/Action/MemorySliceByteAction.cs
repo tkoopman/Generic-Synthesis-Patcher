@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers.Action
@@ -6,8 +8,19 @@ namespace GenericSynthesisPatcher.Helpers.Action
     {
         public static readonly MemorySliceByteAction Instance = new();
 
-        protected override bool CompareValues (ReadOnlyMemorySlice<byte> lhs, MemorySlice<byte> rhs) => lhs.SequenceEqual(rhs);
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Memory slice in form of array of bytes";
+            example = $$"""
+                        "{{propertyName}}": [0x1A,0x00,0x3F]
+                        """;
 
-        protected override MemorySlice<byte> GetSetter (ReadOnlyMemorySlice<byte> getter) => new MemorySlice<byte>([.. getter]);
+            return true;
+        }
+
+        protected override bool compareValues (ReadOnlyMemorySlice<byte> lhs, MemorySlice<byte> rhs) => lhs.SequenceEqual(rhs);
+
+        protected override MemorySlice<byte> getSetter (ReadOnlyMemorySlice<byte> getter) => new([.. getter]);
     }
 }

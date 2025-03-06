@@ -1,0 +1,51 @@
+[
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "Flags (BeginOnQuestStart, StopQuestOnEnd, RepeatConditionsWhileTrue, Interruptable)",
+    "Example": "\"Flags\": [ \"BeginOnQuestStart\", \"-Interruptable\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "INAM",
+    "Description": "Numeric value",
+    "Example": "\"LastActionIndex\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LastActionIndex"
+  },
+  {
+    "Aliases": "PNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Quest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"VNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "VNAM"
+  }
+]

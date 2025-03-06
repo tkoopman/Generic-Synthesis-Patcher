@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -39,5 +41,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IRankPlacementGetter record ? record.Faction.FormKey : throw new ArgumentNullException(nameof(from));
 
         public override string ToString (IFormLinkContainerGetter source) => source is IRankPlacementGetter rank ? $"{rank.Rank}-{rank.Faction.FormKey}" : throw new InvalidCastException();
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "JSON objects containing faction Form Key/Editor ID and Rank";
+            example = $$"""
+                        "{{propertyName}}": { "Faction": "021FED:Skyrim.esm", "Rank": 0 }
+                        """;
+
+            return true;
+        }
     }
 }

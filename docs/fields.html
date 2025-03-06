@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="./include/main.css" rel="stylesheet" />
+    <!-- Includes all JS & CSS for the JavaScript Data Grid -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="./include/fields.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generic Synthesis Patcher</title>
+</head>
+<body onload="onLoad()">
+    <div class="box">
+        <header>
+            <h2>Generic Synthesis Patcher</h2>
+        </header>
+        <nav class="menu">
+            <a style="margin-left:auto;" href="index.html">About</a>
+            <a href="config.html">Config</a>
+            <a class="active" href="./fields.html">Implemented Fields</a>
+            <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978" target="_blank">Nexus Link</a>
+        </nav>
+        <div class="controls" style="width:100%;">
+            <div>
+                <h5>Type:</h5>
+                <select id="dataTypes" onchange="loadType()"></select>
+            </div>
+            <div>
+                <h5>Alias:</h5>
+                <div id="typeAlias" style="display: inline"></div>
+            </div>
+        </div>
+        <div class="main">
+            <div id="myGrid" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+</body>
+</html>

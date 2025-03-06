@@ -1,13 +1,16 @@
 using System.Collections.Immutable;
 using System.Drawing;
-using System.Reflection;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Assets;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
+using Mutagen.Bethesda.Synthesis;
+
+using Newtonsoft.Json;
 
 using Noggog;
 
@@ -15,7 +18,75 @@ namespace GenericSynthesisPatcher
 {
     internal static class GenerateDoco
     {
+        private const string RPMPopulateFooter = """
+            #pragma warning restore format
+                    }
+                }
+            }
+            """;
+
+        private const string RPMPopulateHeader = """
+            using System.Drawing;
+
+            using GenericSynthesisPatcher.Helpers.Action;
+
+            using Mutagen.Bethesda.Skyrim;
+
+            using Noggog;
+
+            namespace GenericSynthesisPatcher.Helpers
+            {
+                public static partial class RecordPropertyMappings
+                {
+                    private static void populateMappings ()
+                    {
+            #pragma warning disable format
+            """;
+
+        private static readonly Type[] ForceDeeperTypes = [
+            typeof(P2Double),
+            typeof(P2Float),
+            typeof(P2Int),
+            typeof(P2Int16),
+            typeof(P3Double),
+            typeof(P3Float),
+            typeof(P3Int),
+            typeof(P3Int16),
+            ];
+
+        private static readonly Type[] IgnoreDeepScanOnTypes = [
+            typeof(AMagicEffectArchetype),
+            typeof(AssetLink<>),
+            typeof(Cell),
+            typeof(CellMaxHeightData),
+            typeof(DialogResponsesAdapter),
+            typeof(ExtendedList<>),
+            typeof(FaceFxPhonemes),
+            typeof(FormLink<>),
+            typeof(FormLinkNullable<>),
+            typeof(IFormLink<>),
+            typeof(IFormLinkNullable<>),
+            typeof(Landscape),
+            typeof(LocationTargetRadius),
+            typeof(Model),
+            typeof(PackageAdapter),
+            typeof(PerkAdapter),
+            typeof(QuestAdapter),
+            typeof(RegionGrasses),
+            typeof(RegionLand),
+            typeof(RegionMap),
+            typeof(RegionObjects),
+            typeof(RegionSounds),
+            typeof(RegionWeather),
+            typeof(SceneAdapter),
+            typeof(string),
+            typeof(TranslatedString),
+            typeof(VirtualMachineAdapter),
+            typeof(WorldspaceMaxHeight),
+            ];
+
         private static readonly string[] IgnoreProperty = [
+            "BodyTemplate.ActsLike44",
             "DATADataTypeState",
             "FormKey",
             "IsCompressed",
@@ -23,12 +94,12 @@ namespace GenericSynthesisPatcher
             "MajorRecordFlagsRaw",
             "PersistentTimestamp",
             "PersistentUnknownGroupData",
-            "StaticRegistration",
             "SubCellsTimestamp",
             "SubCellsUnknown",
             "TemporaryTimestamp",
             "TemporaryUnknownGroupData",
             "Timestamp",
+            "TopCell",
             "Unknown",
             "Unknown08",
             "Unknown09",
@@ -38,6 +109,7 @@ namespace GenericSynthesisPatcher
             "Unknown0D",
             "Unknown0E",
             "Unknown0F",
+            "Unknown1",
             "Unknown10",
             "Unknown14",
             "Unknown2",
@@ -60,434 +132,341 @@ namespace GenericSynthesisPatcher
             "UnknownGroupData",
             "Unused",
             "Unused2",
+            "Unused3",
+            "Unused4",
+            "UnusedNoisemaps",
             "Version2",
             "VersionControl",
-            "VirtualMachineAdapter",
+            "Versioning",
             ];
 
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
+
         private static StringWriter sw = new();
 
-        internal static void Generate ()
+        internal static void generate (IPatcherState<ISkyrimMod, ISkyrimModGetter>? state)
         {
-            CheckAliases();
-            Console.WriteLine();
+            var serializer = new JsonSerializer
+            {
+                Formatting = Formatting.Indented,
+            };
 
-            List<string[]> lines = [];
+            bool OutputUnimplemented = state is not null;
+            if (state is not null)
+                Global.State = state;
 
             List<RecordTypeMapping> ImplementedRTMs = [];
-            Dictionary<(Type, Type?), string> Implemented = [];
-            List<(Type, string, string?, Type)> buildRPMs = [];
+            List<RPMDetails> buildRPMs = [];
+            List<string[]> subPropertyAliases = [];
 
             // Output Implemented Properties per Record type
             foreach (var rtm in RecordTypeMappings.All)
             {
                 // Loop all properties of setter looking for implemented properties
-                List<string[]> Properties = [];
+                var properties = processProperties(state, rtm, rtm.StaticRegistration.SetterType, null);
 
-                var props = rtm.StaticRegistration.SetterType.GetPublicProperties().Where(p => ((p.CanRead && p.CanWrite) || p.PropertyType.GetIfGenericTypeDefinition() == typeof(ExtendedList<>)) && !IgnoreProperty.Contains(p.Name)).DistinctBy(p => p.Name);
-                foreach (var prop in props)
-                {
-                    if (IgnoreProperty.Contains(prop.Name))
-                        continue;
-
-                    buildRPMs.Add(CalcRPM(rtm, prop));
-
-                    // Check for matching RPM
-                    if (!RecordPropertyMappings.TryFindMapping(rtm.StaticRegistration.GetterType, prop.Name, out var rpm))
-                    {
-                        // Include Unimplemented
-                        //Properties.Add([$"*{prop.Name}", "", "-----", prop.PropertyType.GetClassName(), ""]);
-                        continue;
-                    }
-
-                    var pt = prop.PropertyType;
-                    Type? pst = null;
-                    if (pt.IsGenericType)
-                    {
-                        pst = pt.GenericTypeArguments[0];
-                        pt = pt.GetGenericTypeDefinition();
-                    }
-
-                    _ = Implemented.TryAdd((pt, pst), $"{rtm.StaticRegistration.GetterType.Name}.{prop.Name}");
-
-                    var names = RecordPropertyMappings.GetAllAliases(rtm.StaticRegistration.GetterType, prop.Name).ToList();
-                    names.Sort();
-
-                    // Get the RCD IAction type
-                    var actionType = rpm.Action.GetType();
-                    string? desc = null;
-                    string exam = "";
-                    string MFFSM = string.Join<char>(string.Empty,
-                        [
-                            rpm.Action.CanMatch() ? 'M' : '-',
-                            rpm.Action.CanFill() ? 'F' : '-',
-                            rpm.Action.CanForward() ? 'F': '-',
-                            rpm.Action.CanForwardSelfOnly() ? 'S': '-',
-                            rpm.Action.CanMerge() ? 'M': '-',
-                        ]);
-
-                    var baseType = actionType.GetIfGenericTypeDefinition();
-                    var subType = actionType.GetIfUnderlyingType();
-
-                    if (actionType == typeof(ConvertibleAction<string>))
-                    {
-                        desc = "String value";
-                        exam = $"\"{rpm.PropertyName}\": \"Hello\"";
-                    }
-                    else if (actionType == typeof(ConvertibleAction<bool>))
-                    {
-                        desc = "True / False";
-                        exam = $"\"{rpm.PropertyName}\": true";
-                    }
-                    else if (actionType == typeof(ConvertibleAction<float>))
-                    {
-                        desc = "Decimal value";
-                        exam = $"\"{rpm.PropertyName}\": 3.14";
-                    }
-                    else if (baseType == typeof(ConvertibleAction<>))
-                    {
-                        desc = "Numeric value";
-                        exam = $"\"{rpm.PropertyName}\": 7";
-                    }
-                    else if (baseType == typeof(Helpers.Action.FormLinkAction<>))
-                    {
-                        desc = "Form Key or Editor ID";
-                        exam = "";
-                    }
-                    else if (baseType == typeof(FormLinksAction<>))
-                    {
-                        desc = "Form Keys or Editor IDs";
-                        exam = "";
-                    }
-                    else if (actionType == typeof(BasicAction<Percent>))
-                    {
-                        desc = "Decimal value between 0.00 - 1.00, or string ending in %";
-                        exam = $"\"{rpm.PropertyName}\": \"30.5%\"";
-                    }
-                    else if (actionType == typeof(BasicAction<Color>))
-                    {
-                        desc = "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.";
-                        exam = $"\"{rpm.PropertyName}\": [40,50,60]";
-                    }
-                    else if (actionType == typeof(ObjectBoundsAction))
-                    {
-                        desc = "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]";
-                        exam = $"\"{rpm.PropertyName}\": [6,6,6,9,9,9]";
-                    }
-                    else if (actionType == typeof(FlagsAction))
-                    {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
-
-                        string[] flags = Enum.GetNames(type ?? throw new Exception($"Failed to get flags - {rtm.Name} - {rpm.PropertyName}"));
-                        desc = $"Flags ({string.Join(", ", flags)})";
-                        exam = (flags.Length > 1) ? $"\"{rpm.PropertyName}\": [ \"{flags.First()}\", \"-{flags.Last()}\" ]" : $"\"{rpm.PropertyName}\": \"{flags.First()}\"";
-                    }
-                    else if (actionType == typeof(EnumsAction))
-                    {
-                        var type = (prop.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? prop.PropertyType.GetIfUnderlyingType() ?? prop.PropertyType : prop.PropertyType;
-                        string[] values = Enum.GetNames(type);
-                        desc = $"Possible values ({string.Join(", ", values)})";
-                        exam = $"\"{rpm.PropertyName}\": \"{values.First()}\"";
-                    }
-                    else if (actionType == typeof(ContainerItemsAction))
-                    {
-                        desc = "JSON objects containing item Form Key/Editor ID and Count (QTY)";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }}";
-                    }
-                    else if (actionType == typeof(EffectsAction))
-                    {
-                        desc = "JSON objects containing effect Form Key/Editor ID and effect data";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }}";
-                    }
-                    else if (actionType == typeof(LeveledItemAction))
-                    {
-                        desc = "Array of JSON objects containing Item Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"Item\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(LeveledNpcAction))
-                    {
-                        desc = "Array of JSON objects containing NPC Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"NPC\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(LeveledSpellAction))
-                    {
-                        desc = "Array of JSON objects containing Spell Form Key/Editor ID and level/count data";
-                        exam = $"\"{rpm.PropertyName}\": [{{ \"Spell\": \"000ABC:Skyrim.esm\", \"Level\": 36, \"Count\": 1 }}]";
-                    }
-                    else if (actionType == typeof(RankPlacementAction))
-                    {
-                        desc = "JSON objects containing faction Form Key/Editor ID and Rank";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Faction\": \"021FED:Skyrim.esm\", \"Rank\": 0 }}";
-                    }
-                    else if (actionType == typeof(RelationsAction))
-                    {
-                        desc = "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)";
-                        exam = $"\"{rpm.PropertyName}\": {{ \"Target\": \"021FED:Skyrim.esm\", \"Reaction\": \"Friend\" }}";
-                    }
-                    else if (actionType == typeof(PlayerSkillsAction))
-                    {
-                        desc = "JSON object containing the values under PlayerSkills you want to set";
-                        exam = $"See ../Examples/NPC Player Skills.json";
-                    }
-                    else if (actionType == typeof(MemorySliceByteAction))
-                    {
-                        desc = "Memory slice in form of array of bytes";
-                        exam = $"[0x1A,0x00,0x3F]";
-                    }
-
-                    if (desc == null)
-                        throw new Exception("Fix Missing Doco");
-                    //desc ??= "????";
-
-                    Properties.Add([rpm.PropertyName, string.Join(';', names), MFFSM, desc, exam]);
-                }
+                buildRPMs.AddRange(properties);
 
                 // Output heading per record type
-                if (Properties.Count > 0)
+                if ((OutputUnimplemented && properties.Count > 0) || properties.Any(p => p.RPM.Action is not null && p.RecordActionInterface is not null))
                 {
                     ImplementedRTMs.Add(rtm);
 
-                    sw.WriteLine();
-                    string h = rtm.Name;
-                    h += rtm.Name.Equals(rtm.FullName) ? "" : $" - {rtm.FullName}";
-                    sw.WriteLine($"## {h}");
-                    sw.WriteLine();
+                    // Sort and populate documentation fields
+                    properties.Sort((l, r) => string.Compare(l.PropertyName, r.PropertyName, StringComparison.OrdinalIgnoreCase));
+                    foreach (var row in properties)
+                    {
+                        if (row.RPM.Action is not null && row.RecordActionInterface is not null)
+                        {
+                            if (row.RPM.Action.TryGetDocumentation(row.PropertyType, row.PropertyName, out string? description, out string? example))
+                            {
+                                row.Description = description;
+                                row.Example = example;
+                            }
+                        }
+                        else if (OutputUnimplemented)
+                        {
+                            row.Description = $"{row.PropertyType.GetClassName()} - {row.RecordActionInterface.GetClassName()}";
+                        }
+                    }
 
-                    lines.Add(["Field", "Alt", "MFFSM", "Value Type", "Example"]);
-                    lines.Add(["-", "-", "-", "-", "-"]);
+                    subPropertyAliases.AddRange(generateSubPropertyAliases(properties));
 
-                    // Output properties
-                    Properties.Sort((l, r) => string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase));
-                    foreach (string[] row in Properties)
-                        lines.Add(row);
+                    /*
+                     * Output Implemented Properties
+                     */
 
-                    PrintTableRow(lines);
-                    lines = [];
-
-                    // Footer
-                    sw.WriteLine();
-                    sw.WriteLine("[⬅ Back to Types](Types.md)");
+                    using (var sw = new StreamWriter($"{rtm.Name.ToLowerInvariant()}.json"))
+                    using (var writer = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(writer, properties.Where(p => p.RecordActionInterface is not null && p.RPM.Action is not null));
+                    }
                 }
             }
+
+            /*
+             * Output Sub-properties Aliases
+             */
+
+            subPropertyAliases.Sort(static (l, r) =>
+            {
+                int comp = string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase);
+                return comp != 0 ? comp : string.Compare(l[1], r[1], StringComparison.OrdinalIgnoreCase);
+            });
+
+            sw = new();
+            sw.WriteLine(RPMPopulateHeader.Replace("populateMappings", "populateSubAliases"));
+            printTableRow(subPropertyAliases, sep: ",", prefix: "            ", suffix: "", padLast: false);
+            sw.WriteLine(RPMPopulateFooter);
+
+            using var aliasesFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_Aliases.txt"), false);
+            aliasesFW.Write(sw.ToString());
+            aliasesFW.Close();
 
             /*
              * Output Implemented Types
              */
 
-            sw.WriteLine();
-            lines.Add(["Type", "Synonyms"]);
-            lines.Add(["-", "-"]);
-            foreach (var rtm in ImplementedRTMs)
+            using (var streamWriter = new StreamWriter(@"types.json"))
+            using (var writer = new JsonTextWriter(streamWriter))
             {
-                string anchor = rtm.Name.ToLower();
-                string fullName = "";
-                if (!rtm.Name.Equals(rtm.FullName, StringComparison.OrdinalIgnoreCase))
-                {
-                    fullName = rtm.FullName;
-                    anchor += "---" + fullName.ToLower();
-                }
-
-                lines.Add([$"[{rtm.Name}](Fields.md#{anchor})", fullName]);
+                serializer.Serialize(writer, ImplementedRTMs);
             }
-
-            PrintTableRow(lines);
-            lines = [];
-
-            // Write Types and Implemented Properties to Temp File
-            using var fw = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSPDoco.txt"), false);
-            fw.Write(sw.ToString());
-            fw.Close();
 
             /*
              * Output RPM code for all identified property types
              */
 
-            var groupRPMs = buildRPMs.GroupBy(g => (g.Item2, g.Item3),
-                                              g => (g.Item1, g.Item4), (k, data) => new { PropertyName = k.Item1, RPM = k.Item2, Types = data.Select(d => d.Item1), PropertyTypes = data.Select(d => d.Item2).Distinct()});
+            var groupRPMs = buildRPMs.GroupBy(g => (g.PropertyName, g.RecordActionInterface),
+                                              g => (g.RTM.StaticRegistration.GetterType, g.PropertyType), (k, data) => new { k.PropertyName, k.RecordActionInterface, Types = data.Select(d => d.GetterType), PropertyTypes = data.Select(d => d.PropertyType).Distinct()});
 
-            var implemented = groupRPMs.Where(g => g.RPM != null);
+            var implemented = groupRPMs.Where(g => g.RecordActionInterface != null);
 
-            //var notImplemented = groupRPMs.Where(g => g.RPM == null).ToList();
-            var notImplemented = buildRPMs.Where(r => r.Item3 == null).GroupBy(g => g.Item4).Select(g => new { PropertyType = g.Key, RecordTypes = g.Select(r => $"{r.Item1.GetClassName()}.{r.Item2}") }).ToList();
+            var notImplemented = buildRPMs.Where(r => r.RecordActionInterface == null).GroupBy(g => g.PropertyType).Select(g => new { PropertyType = g.Key, RecordTypes = g.Count(), Uses = g.Count(r => r.IsUsed), SubPropertiesMin = g.Min(a => a.SubProperties), SubPropertiesMax = g.Max(a => a.SubProperties), Example = $"{g.First().RTM.FullName}.{g.First().PropertyName}" }).ToList();
+
             // Sort by uses then name
             notImplemented.Sort((l, r) =>
             {
-                int i = l.RecordTypes.Count().CompareTo(r.RecordTypes.Count());
+                int i = l.Uses.CompareTo(r.Uses);
+
                 if (i == 0)
-                    i = l.PropertyType.GetClassName().CompareTo(r.PropertyType.GetClassName());
+                    i = l.RecordTypes.CompareTo(r.RecordTypes);
+
+                if (i == 0)
+                    i = string.Compare(l.PropertyType.GetClassName(), r.PropertyType.GetClassName(), StringComparison.Ordinal);
 
                 return i;
             });
 
             // Print Unimplemented Entries to Screen
-            foreach (var rpm in notImplemented)
-                Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes.Count()}");
+            Console.WriteLine("List of types implemented via sub-properties.");
+            foreach (var rpm in notImplemented.Where(i => i.SubPropertiesMin > 0 && i.SubPropertiesMax == i.SubPropertiesMin))
+            {
+                if (state is null)
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes}");
+                else
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.Uses}/{rpm.RecordTypes}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("List of unimplemented types.");
+            foreach (var rpm in notImplemented.Where(i => !(i.SubPropertiesMin > 0 && i.SubPropertiesMax == i.SubPropertiesMin)))
+            {
+                if (state is null)
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.RecordTypes}, {rpm.Example}");
+                else
+                    Console.WriteLine($"{rpm.PropertyType.GetClassName()}, {rpm.Example}, {rpm.Uses}/{rpm.RecordTypes}");
+            }
 
             /*
              * Output implemented to file as RPM code to paste into RecordPropertyMappings.cs
              */
 
-            lines = [];
-            foreach (var rpm in implemented)
+            List<string[]> lines = [];
+            foreach (var property in implemented)
             {
-                if (rpm.Types.Count() < 3)
+                if (property.Types.Count() >= 3)
                 {
-                    var types = rpm.Types.ToList();
-                    types.Sort(static (l, r) => l.Name.CompareTo(r.Name));
-                    foreach (var type in types)
-                        lines.Add([$"Add(typeof({type.Name})", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
+                    var mismatch = buildRPMs.FirstOrDefault(r => r.PropertyName.Equals(property.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RecordActionInterface is null);
+
+                    if (mismatch is null)
+                    {
+                        lines.Add(["Add(null", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
+                        continue;
+                    }
+
+                    Console.WriteLine($"Skipping wildcard RPM for {property.PropertyName} due to {mismatch.RTM.Name} - {mismatch.PropertyType.GetClassName()}");
                 }
-                else
-                {
-                    lines.Add(["Add(null", $"\"{rpm.PropertyName}\"", $"{rpm.RPM}.Instance);"]);
-                }
+
+                var types = property.Types.ToList();
+                types.Sort(static (l, r) => string.Compare(l.Name, r.Name, StringComparison.Ordinal));
+                foreach (var type in types)
+                    lines.Add([$"Add(typeof({type.Name})", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
             }
 
             lines.Sort(static (l, r) =>
             {
-                int comp = string.Compare(l[1], r[1], true);
+                int comp = string.Compare(l[1], r[1], StringComparison.OrdinalIgnoreCase);
                 if (comp != 0)
                     return comp;
 
                 if (l[0] == "Add(null")
                     return 1;
 
+#pragma warning disable IDE0046 // Convert to conditional expression
                 if (r[0] == "Add(null")
                     return -1;
+#pragma warning restore IDE0046 // Convert to conditional expression
 
-                return string.Compare(l[0], r[0], true);
+                return string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase);
             });
 
             sw = new();
+            sw.WriteLine(RPMPopulateHeader);
+            printTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
+            sw.WriteLine(RPMPopulateFooter);
 
-            PrintTableRow(lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
             using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_RPM.txt"), false);
             rpmFW.Write(sw.ToString());
             rpmFW.Close();
 
-            //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSPDoco.txt")}\"");
             //_ = System.Diagnostics.Process.Start("explorer", $"\"{Path.Combine(Path.GetTempPath(), "GSP_RPM.txt")}\"");
         }
 
-        private static (Type type, string name, string? iAction, Type propertyType) CalcRPM (RecordTypeMapping rtm, PropertyInfo propertyInfo)
+        private static Type? calcRPMAction (Type type)
         {
-            string name = propertyInfo.Name;
-            string? actionClass = null;
-            var type = (propertyInfo.PropertyType.GetIfGenericTypeDefinition() == typeof(Nullable<>)) ? propertyInfo.PropertyType.GetIfUnderlyingType() ?? propertyInfo.PropertyType : propertyInfo.PropertyType;
+            type = type.RemoveNullable();
 
             var mainType = type.GetIfGenericTypeDefinition();
             var subType = type.GetIfUnderlyingType()?.GetIfGenericTypeDefinition();
             var subSubType = type.GetIfUnderlyingType()?.GetIfUnderlyingType();
 
             if (type.IsEnum)
+                return type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? typeof(EnumsAction) : typeof(FlagsAction);
+
+            if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
+                return typeof(ConvertibleAction<string>);
+
+            if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
             {
-                actionClass = type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? nameof(EnumsAction) : nameof(FlagsAction);
-            }
-            else if (type.IsAssignableTo(typeof(ITranslatedStringGetter)))
-                actionClass = $"{nameof(ConvertibleAction<string>)}<string>";
-            else if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
-            {
-                string? n = type.Name switch
+                return type.Name switch
                 {
-                    nameof(Boolean) => "bool",
-                    nameof(Byte) => "byte",
-                    nameof(Char) => "char",
-                    nameof(Int16) => "short",
-                    nameof(Int32) => "int",
-                    nameof(SByte) => "sbyte",
-                    nameof(Single) => "float",
-                    nameof(String) => "string",
-                    nameof(UInt16) => "ushort",
-                    nameof(UInt32) => "uint",
-                    _ => type.Name
+                    nameof(Boolean) => typeof(ConvertibleAction<bool>),
+                    nameof(Byte) => typeof(ConvertibleAction<byte>),
+                    nameof(Char) => typeof(ConvertibleAction<char>),
+                    nameof(Int16) => typeof(ConvertibleAction<short>),
+                    nameof(Int32) => typeof(ConvertibleAction<int>),
+                    nameof(SByte) => typeof(ConvertibleAction<sbyte>),
+                    nameof(Single) => typeof(ConvertibleAction<float>),
+                    nameof(String) => typeof(ConvertibleAction<string>),
+                    nameof(UInt16) => typeof(ConvertibleAction<ushort>),
+                    nameof(UInt32) => typeof(ConvertibleAction<uint>),
+                    _ => null
                 };
-                if (n != null)
-                    actionClass = $"{nameof(ConvertibleAction<byte>)}<{n}>";
             }
             else if (type == typeof(Percent))
-                actionClass = typeof(BasicAction<Percent>).GetClassName();
+            {
+                return typeof(BasicAction<Percent>);
+            }
             else if (type == typeof(Color))
-                actionClass = typeof(BasicAction<Color>).GetClassName();
+            {
+                return typeof(BasicAction<Color>);
+            }
             else if (type.IsAssignableTo(typeof(IObjectBoundsGetter)))
-                actionClass = typeof(ObjectBoundsAction).GetClassName();
+            {
+                return typeof(ObjectBoundsAction);
+            }
             else if (type.IsAssignableTo(typeof(IPlayerSkillsGetter)))
-                actionClass = typeof(PlayerSkillsAction).GetClassName();
+            {
+                return typeof(PlayerSkillsAction);
+            }
+            else if (type == typeof(WorldspaceMaxHeight))
+            {
+                return typeof(WorldspaceMaxHeightAction);
+            }
+            else if (type == typeof(CellMaxHeightData))
+            {
+                return typeof(CellMaxHeightDataAction);
+            }
             else if (type == typeof(MemorySlice<byte>))
-                actionClass = typeof(MemorySliceByteAction).GetClassName();
+            {
+                return typeof(MemorySliceByteAction);
+            }
+            else if (type == typeof(Model))
+            {
+                return typeof(ModelAction);
+            }
             else if (subType != null)
             {
                 if (mainType.IsAssignableTo(typeof(IFormLink<>)) || mainType.IsAssignableTo(typeof(IFormLinkNullable<>)))
-                    actionClass = $"{nameof(FormLinkAction<IActionRecordGetter>)}<{subType.Name}>";
+                {
+                    return typeof(FormLinkAction<>).MakeGenericType(subType);
+                }
                 else if (mainType.IsAssignableTo(typeof(ExtendedList<>)))
                 {
                     if (subType.IsAssignableTo(typeof(IFormLinkGetter<>)) && subSubType != null)
-                        actionClass = $"{nameof(FormLinksAction<IActionRecordGetter>)}<{subSubType.Name}>";
-                    else if (subType.IsAssignableTo(typeof(IContainerEntryGetter)))
-                        actionClass = nameof(ContainerItemsAction);
-                    else if (subType.IsAssignableTo(typeof(IEffectGetter)))
-                        actionClass = nameof(EffectsAction);
-                    else if (subType.IsAssignableTo(typeof(ILeveledItemEntryGetter)))
-                        actionClass = nameof(LeveledItemAction);
-                    else if (subType.IsAssignableTo(typeof(ILeveledNpcEntryGetter)))
-                        actionClass = nameof(LeveledNpcAction);
-                    else if (subType.IsAssignableTo(typeof(ILeveledSpellEntryGetter)))
-                        actionClass = nameof(LeveledSpellAction);
-                    else if (subType.IsAssignableTo(typeof(IRankPlacementGetter)))
-                        actionClass = nameof(RankPlacementAction);
-                    else if (subType.IsAssignableTo(typeof(IRelationGetter)))
-                        actionClass = nameof(RelationsAction);
+                        return typeof(FormLinksAction<>).MakeGenericType(subSubType);
+                    if (subType.IsAssignableTo(typeof(IContainerEntryGetter)))
+                        return typeof(ContainerItemsAction);
+                    if (subType.IsAssignableTo(typeof(IEffectGetter)))
+                        return typeof(EffectsAction);
+                    if (subType.IsAssignableTo(typeof(ILeveledItemEntryGetter)))
+                        return typeof(LeveledItemAction);
+                    if (subType.IsAssignableTo(typeof(ILeveledNpcEntryGetter)))
+                        return typeof(LeveledNpcAction);
+                    if (subType.IsAssignableTo(typeof(ILeveledSpellEntryGetter)))
+                        return typeof(LeveledSpellAction);
+                    if (subType.IsAssignableTo(typeof(IRankPlacementGetter)))
+                        return typeof(RankPlacementAction);
+                    if (subType.IsAssignableTo(typeof(IRelationGetter)))
+                        return typeof(RelationsAction);
                 }
             }
 
-            return (rtm.StaticRegistration.GetterType, name, actionClass, type);
+            return null;
         }
 
-        private static void CheckAliases ()
+        private static List<string[]> generateSubPropertyAliases (List<RPMDetails> properties)
         {
-            var AllAliases = RecordPropertyMappings.AllAliases;
-            var grouped = AllAliases.GroupBy(x => x.PropertyName).Where(g => g.Count() > 1).ToList();
+            List<string[]> lines = [];
+            properties = [.. properties.Where(p => p.PropertyName.Contains('.'))];
+            properties.Sort(static (l, r) => string.Compare(l.PropertyName, r.PropertyName, StringComparison.OrdinalIgnoreCase));
 
-            // Check for typed RPMs that match existing null typed
-            // Also remove any groups that contain null typed after checking as no longer required
-            foreach (var g in grouped.ToArray().Where(g => g.Any(x => x.Type == null)))
+            Type? lastType = null;
+            string? lastName = null;
+            string? lastAlias = null;
+
+            foreach (var property in properties)
             {
-                string nullRPM = g.First(x => x.Type == null).RealPropertyName;
-                foreach (var gg in g.Where(x => x.Type != null && x.RealPropertyName == nullRPM))
-                    Console.WriteLine($"{gg.Type?.GetClassName()}.{g.Key} = {nullRPM} is same as existing null type entry.");
-
-                _ = grouped.Remove(g);
-            }
-
-            // Check for where all typed instances match so could be made a single nulled typed
-            // Remove these groups after checking as no longer required
-            foreach (var g in grouped.ToArray().Where(g => g.Select(x => x.RealPropertyName).Distinct().Count() == 1))
-            {
-                Console.WriteLine($"{g.Key} = {g.First().RealPropertyName} on all {g.Count()} aliases");
-                _ = grouped.Remove(g);
-            }
-
-            // Check for if one alias mapping is dominant over others so could maybe create null typed for that subset
-            foreach (var g in grouped)
-            {
-                var gg = g.GroupBy(x => x.RealPropertyName).Select(x => new { RealPropertyName = x.Key, Count = x.Count(), Types = x.Select(y => y.Type?.GetClassName()) });
-                int max = gg.Select(x => x.Count).Max();
-                if (max > 1)
+                if (lastType is null || !property.RTM.StaticRegistration.GetterType.Equals(lastType))
                 {
-                    var ggMax = gg.Where(x => x.Count == max);
-                    if (ggMax.Count() == 1)
-                    {
-                        var gMax = ggMax.First();
-                        Console.WriteLine($"{g.Key} = {gMax.RealPropertyName} on {gMax.Types.Count()} alias types ({string.Join(", ", gMax.Types)}).");
-                    }
+                    lastType = property.RTM.StaticRegistration.GetterType;
+                    lastName = null;
+                    lastAlias = null;
                 }
+
+                // Skip if already covered by null alias
+                if (RecordPropertyMappings.GetNullAliases(property.PropertyName).Any())
+                    continue;
+
+                string name = property.PropertyName[..property.PropertyName.IndexOf('.')];
+                if (!name.Equals(lastName, StringComparison.Ordinal))
+                {
+                    lastName = name;
+                    lastAlias = RecordPropertyMappings.GetAllAliases(lastType, name).FirstOrDefault();
+                }
+
+                if (lastAlias is not null)
+                    lines.Add([$"AddAlias(typeof({lastType.Name})", $"\"{lastAlias}{property.PropertyName[property.PropertyName.IndexOf('.')..]}\"", $"\"{property.PropertyName}\");"]);
             }
+
+            return lines;
         }
 
-        private static void PrintTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)
+        private static void printTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)
         {
             if (lines.Count == 0 || lines.Any(v => v.Length != lines[0].Length))
-                throw new Exception("Nope! Try again");
+                throw new Exception($"Nope! Try again");
 
             int[] widths = new int[lines[0].Length - (padLast ? 0:1)];
             for (int i = 0; i < widths.Length; i++)
@@ -537,6 +516,135 @@ namespace GenericSynthesisPatcher
 
                 sw.WriteLine();
             }
+        }
+
+        private static List<RPMDetails> processProperties (IPatcherState<ISkyrimMod, ISkyrimModGetter>? state, RecordTypeMapping rtm, Type parentType, string? parentName)
+        {
+            List<RPMDetails> buildRPMs = [];
+            bool OutputUnimplemented = state is not null;
+
+            var properties = parentType.GetPublicProperties().Where(p => (p.CanRead && p.CanWrite) || p.PropertyType.GetIfGenericTypeDefinition() == typeof(ExtendedList<>)).DistinctBy(p => p.Name);
+            foreach (var property in properties)
+            {
+                string propertyFullName = parentName is null ? property.Name : $"{parentName}.{property.Name}";
+                if (property.GetGetMethod()?.GetParameters().Length != 0)
+                    continue;
+                if (IgnoreProperty.Contains(propertyFullName) || IgnoreProperty.Contains(property.Name))
+                    continue;
+
+                var rpmDetails = new RPMDetails (rtm, propertyFullName, property.PropertyType);
+                buildRPMs.Add(rpmDetails);
+
+                rpmDetails.RecordActionInterface = calcRPMAction(property.PropertyType);
+                rpmDetails.IsUsed = rpmDetails.RecordActionInterface is not null;
+
+                if (RecordPropertyMappings.tryFindMapping(rtm.StaticRegistration.GetterType, propertyFullName, out var rpm))
+                {
+                    // record property mapping (RPM) was found
+                    if (rpm.Action.GetType().Equals(rpmDetails.RecordActionInterface))
+                        rpmDetails.RPM = rpm;
+                    else
+                        Console.WriteLine($"RPM mismatch on {rtm.Name}.{propertyFullName}");
+                }
+
+                if (parentName is null || ForceDeeperTypes.Contains(property.PropertyType.RemoveNullable().GetIfGenericTypeDefinition()))
+                {
+                    var type = property.PropertyType;
+
+                    if (type.IsNullable())
+                    {
+                        type = type.RemoveNullable();
+
+                        // Confirm you can create new instance
+                        try
+                        {
+                            _ = System.Activator.CreateInstance(type);
+                        }
+                        catch
+                        {
+                            type = null;
+                        }
+                    }
+
+                    if (type is not null && !IgnoreDeepScanOnTypes.Contains(type.GetIfGenericTypeDefinition()))
+                    {
+                        var subProperties = processProperties(null, rtm, type, propertyFullName);
+                        buildRPMs.AddRange(subProperties);
+                        rpmDetails.SubProperties = subProperties.Count;
+                    }
+
+                    if (OutputUnimplemented)
+                    {
+                        // Check if property used (On at least 1 record has a non-null, non-default
+                        // or list count > 0)
+                        FormKey? used = null;
+
+                        if (state is not null)
+                        {
+                            foreach (var c in rtm.WinningContextOverrides())
+                            {
+                                // Check if any record has value set to a non-null value
+                                if (Mod.TryGetProperty(c.Record, propertyFullName, out object? value) && !Mod.IsNullOrEmpty(value))
+                                {
+                                    used = c.Record.FormKey;
+                                    rpmDetails.IsUsed = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return buildRPMs;
+        }
+
+        [JsonObject(MemberSerialization.OptIn)]
+        public class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
+        {
+            [JsonProperty]
+            public string Aliases
+            {
+                get
+                {
+                    if (RecordActionInterface is null)
+                        return "";
+
+                    var names = RecordPropertyMappings.GetAllAliases(RTM.StaticRegistration.GetterType, PropertyName).ToList();
+                    names.Sort();
+
+                    return string.Join(';', names);
+                }
+            }
+
+            [JsonProperty]
+            public string Description { get; set; } = "";
+
+            [JsonProperty]
+            public string Example { get; set; } = "";
+
+            public bool IsUsed { get; set; }
+
+            [JsonProperty]
+            public string MFFSM => RPM.Action is null
+                ? "-----"
+                : string.Join<char>(string.Empty,
+                [
+                    RPM.Action.CanMatch() ? 'M' : '-',
+                    RPM.Action.CanFill() ? 'F' : '-',
+                    RPM.Action.CanForward() ? 'F': '-',
+                    RPM.Action.CanForwardSelfOnly() ? 'S': '-',
+                    RPM.Action.CanMerge() ? 'M': '-',
+                ]);
+
+            [JsonProperty(propertyName: "Name")]
+            public string PropertyName { get; set; } = propertyName;
+
+            public Type PropertyType { get; set; } = propertyType;
+            public Type? RecordActionInterface { get; set; }
+            public RecordPropertyMapping RPM { get; set; }
+            public RecordTypeMapping RTM { get; set; } = rtm;
+            public int SubProperties { get; set; }
         }
     }
 }

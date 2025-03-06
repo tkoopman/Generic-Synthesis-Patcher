@@ -9,6 +9,7 @@ namespace GenericSynthesisPatcher
         public int Matched { get; set; } = matched;
 
         public Stopwatch Stopwatch { get; } = new Stopwatch();
+
         public int Total { get; set; } = total;
 
         public int Updated { get; set; } = updated;

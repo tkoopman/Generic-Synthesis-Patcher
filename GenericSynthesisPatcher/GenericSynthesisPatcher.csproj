@@ -6,6 +6,8 @@
     <ImplicitUsings>true</ImplicitUsings>
     <PlatformTarget>x64</PlatformTarget>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>

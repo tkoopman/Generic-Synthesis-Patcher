@@ -33,7 +33,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
                     Count = Count
                 },
 
-                ExtraData = CreateExtraData()
+                ExtraData = createExtraData()
             };
 
             return entry;

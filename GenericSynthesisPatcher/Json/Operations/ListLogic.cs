@@ -12,9 +12,11 @@ namespace GenericSynthesisPatcher.Json.Operations
 
     internal static class ListLogicPrefixes
     {
-        internal static readonly ReadOnlyDictionary<char, ListLogic> Prefixes = new(new Dictionary<char, ListLogic>() {
+        internal static readonly ReadOnlyDictionary<char, ListLogic> Prefixes = new(new Dictionary<char, ListLogic>()
+        {
             { '-', ListLogic.DEL },
             { '!', ListLogic.NOT },
-            { '+', ListLogic.ADD } });
+            { '+', ListLogic.ADD }
+        });
     }
 }

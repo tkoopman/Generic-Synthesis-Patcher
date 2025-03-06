@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -37,14 +39,14 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
             if (sourceRecord.ExtraData != null)
             {
-                entry.ExtraData = CreateExtraData(sourceRecord);
+                entry.ExtraData = createExtraData(sourceRecord);
             }
 
             return entry;
         }
 
         public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-                    => left is ILeveledSpellEntryGetter l
+            => left is ILeveledSpellEntryGetter l
             && right is ILeveledSpellEntryGetter r
             && l.Data?.Count == r.Data?.Count
             && l.Data?.Level == r.Data?.Level
@@ -54,6 +56,17 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is ILeveledSpellEntryGetter record ? (record.Data?.Reference.FormKey ?? default) : throw new ArgumentNullException(nameof(from));
 
-        public override string ToString (IFormLinkContainerGetter source) => source is ILeveledSpellEntryGetter entry ? $"[Lvl{entry.Data?.Level}] {entry.Data?.Count}x{entry.Data?.Reference.FormKey}" : throw new InvalidCastException();
+        public override string ToString (IFormLinkContainerGetter source) => source is ILeveledSpellEntryGetter entry ? $"[LVL{entry.Data?.Level}] {entry.Data?.Count}x{entry.Data?.Reference.FormKey}" : throw new InvalidCastException();
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Array of JSON objects containing Spell Form Key/Editor ID and level/count data";
+            example = $$"""
+                        "{{propertyName}}": [{ "Spell": "000ABC:Skyrim.esm", "Level": 36, "Count": 1 }]
+                        """;
+
+            return true;
+        }
     }
 }

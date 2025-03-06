@@ -15,6 +15,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "NPC")]
         public FormKeyListOperationAdvanced<INpcGetter>? NPC { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (NpcOwner? l, NpcOwner? r)
         {
             if (ReferenceEquals(l, r))

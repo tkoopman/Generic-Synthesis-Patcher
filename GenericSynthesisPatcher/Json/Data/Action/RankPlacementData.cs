@@ -11,12 +11,12 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 {
     public class RankPlacementData (FormKeyListOperation<IFactionGetter> formKey, sbyte rank) : FormLinksWithDataActionDataBase<IFactionGetter, RankPlacement>, IEquatable<RankPlacementData>
     {
-        [JsonProperty(PropertyName = "Rank", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue(1)]
-        public sbyte Rank = rank;
-
         [JsonProperty(PropertyName = "Faction", Required = Required.Always)]
         public override FormKeyListOperation<IFactionGetter> FormKey { get; } = formKey ?? new(null);
+
+        [JsonProperty(PropertyName = "Rank", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(1)]
+        public sbyte Rank { get; set; } = rank;
 
         public static bool Equals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
             => left is IRankPlacementGetter l

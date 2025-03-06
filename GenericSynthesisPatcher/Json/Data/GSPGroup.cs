@@ -15,16 +15,15 @@ namespace GenericSynthesisPatcher.Json.Data
         private const int ClassLogCode = 0x05;
 
         /// <summary>
-        /// Rules contained in this group.
-        /// NOTE: Rule Priority is ignored when in a group.
-        ///       Only the Group's Priority is used.
+        ///     Rules contained in this group.
+        ///     NOTE: Rule Priority is ignored when in a group. Only the Group's Priority is used.
         /// </summary>
         [JsonProperty(PropertyName = "Rules", Required = Required.Always)]
         [JsonConverter(typeof(SingleOrArrayConverter<GSPRule>))]
         public List<GSPRule> Rules { get; set; } = [];
 
         /// <summary>
-        /// If true processing will stop after finding a single matched rule for a record.
+        ///     If true processing will stop after finding a single matched rule for a record.
         /// </summary>
         [JsonProperty(PropertyName = "SingleMatch")]
         public bool SingleMatch { get; set; } = false;
@@ -45,13 +44,14 @@ namespace GenericSynthesisPatcher.Json.Data
                 if (!rule.ClaimAndValidate(this))
                     return false;
 
-                // Claiming rule will also Rule type if current None to either match Group Types or All if group types is None
-                // So AllTypes will be All if a single rule and group were None
-                // So can overwrite Group Types once all rules claimed safely.
+                // Claiming rule will also Rule type if current None to either match Group Types or
+                // All if group types is None So AllTypes will be All if a single rule and group
+                // were None So can overwrite Group Types once all rules claimed safely.
                 AllTypes.Add(rule.Types);
             }
 
-            // Output message if groups types defined and all rule types defined but combined to less than current group types.
+            // Output message if groups types defined and all rule types defined but combined to
+            // less than current group types.
             if (Types.Count != 0 && AllTypes.Count < Types.Count)
                 LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes.Count} from {Types.Count} as extra types not used.", rule: this);
 

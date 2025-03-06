@@ -1,0 +1,191 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Damage\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Damage"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AlwaysUsesWorldOrientation, KnockDownAlways, KnockDownByFormula, IgnoreLosCheck, PushExplosionSourceRefOnly, IgnoreImageSpaceSwap, Chain, NoControllerVibration)",
+    "Example": "\"Flags\": [ \"AlwaysUsesWorldOrientation\", \"-NoControllerVibration\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Force\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Force"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "MNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImageSpaceModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ISRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ISRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Light"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "EITM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ObjectEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PlacedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Radius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Sound1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Sound2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Loud, Normal, Silent, VeryLoud)",
+    "Example": "\"SoundLevel\": \"Loud\"",
+    "MFFSM": "MF---",
+    "Name": "SoundLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SpawnProjectile"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"VerticalOffsetMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "VerticalOffsetMult"
+  }
+]

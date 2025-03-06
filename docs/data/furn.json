@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "NAM1",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AssociatedSpell"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "FNAM;MNAM",
+    "Description": "Flags (IgnoredBySandbox, DisablesActivation, IsPerch, MustExitToTalk)",
+    "Example": "\"Flags\": [ \"IgnoredBySandbox\", \"-MustExitToTalk\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "KNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "InteractionKeyword"
+  },
+  {
+    "Aliases": "KWDA",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (IsPerch, HasDistantLOD, RandomAnimStart, IsMarker, MustExitToTalk, ChildCanUse)",
+    "Example": "\"MajorFlags\": [ \"IsPerch\", \"-ChildCanUse\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "PNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "WBDT.BenchType",
+    "Description": "Possible values (None, CreateObject, SmithingWeapon, Enchanting, EnchantingExperiment, Alchemy, AlchemyExperiment, SmithingArmor)",
+    "Example": "\"WorkbenchData.BenchType\": \"None\"",
+    "MFFSM": "MF---",
+    "Name": "WorkbenchData.BenchType"
+  },
+  {
+    "Aliases": "WBDT.UsesSkill",
+    "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
+    "Example": "\"WorkbenchData.UsesSkill\": \"OneHanded\"",
+    "MFFSM": "MF---",
+    "Name": "WorkbenchData.UsesSkill"
+  }
+]

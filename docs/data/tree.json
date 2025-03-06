@@ -1,0 +1,163 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BranchFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BranchFlexibility"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "HarvestSound"
+  },
+  {
+    "Aliases": "PFIG",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Ingredient"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeafAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LeafAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeafFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LeafFrequency"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (HasDistantLOD)",
+    "Example": "\"MajorFlags\": \"HasDistantLOD\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Fall\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Fall"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Spring\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Spring"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Summer\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Summer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Winter\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Winter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TrunkFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TrunkFlexibility"
+  }
+]

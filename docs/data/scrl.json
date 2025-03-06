@@ -1,0 +1,212 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"BaseCost\": 7",
+    "MFFSM": "MFF--",
+    "Name": "BaseCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CastDuration\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CastDuration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (ConstantEffect, FireAndForget, Concentration)",
+    "Example": "\"CastType\": \"ConstantEffect\"",
+    "MFFSM": "MF---",
+    "Name": "CastType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ChargeTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ChargeTime"
+  },
+  {
+    "Aliases": "DESC",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "JSON objects containing effect Form Key/Editor ID and effect data",
+    "Example": "\"Effects\": { \"Effect\": \"021FED:Skyrim.esm\", \"Area\": 3, \"Duration\": 3, \"Magnitude\": 3 }",
+    "MFFSM": "MFFSM",
+    "Name": "Effects"
+  },
+  {
+    "Aliases": "ETYP",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ManualCostCalc, PCStartSpell, AreaEffectIgnoresLOS, IgnoreResistance, NoAbsorbOrReflect, NoDualCastModification)",
+    "Example": "\"Flags\": [ \"ManualCostCalc\", \"-NoDualCastModification\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "HalfCostPerk"
+  },
+  {
+    "Aliases": "KWDA",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "MDOB",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "MenuDisplayObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
+    "MFFSM": "--F--",
+    "Name": "Model"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "YNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PickUpSound"
+  },
+  {
+    "Aliases": "ZNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PutDownSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Range\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Range"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Self, Touch, Aimed, TargetActor, TargetLocation)",
+    "Example": "\"TargetType\": \"Self\"",
+    "MFFSM": "MF---",
+    "Name": "TargetType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Spell, Disease, Power, LesserPower, Ability, Poison, Addiction, Voice)",
+    "Example": "\"Type\": \"Spell\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Value\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Weight"
+  }
+]

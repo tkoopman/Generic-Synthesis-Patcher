@@ -12,9 +12,6 @@ namespace GenericSynthesisPatcher.Json.Operations
     [JsonConverter(typeof(OperationsConverter))]
     public class FilterOperation<T> : OperationBase<FilterLogic> where T : IConvertible
     {
-        public readonly FilterLogic Operation;
-        public readonly T Value;
-
         private static readonly ReadOnlyDictionary<char, FilterLogic> ValidPrefixes = new(new Dictionary<char, FilterLogic>() {
             { '&', FilterLogic.AND },
             { '^', FilterLogic.XOR },
@@ -22,10 +19,13 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public FilterOperation (string value)
         {
-            (Operation, string? v) = Split(value, ValidPrefixes);
+            (Operation, string? v) = split(value, ValidPrefixes);
 
             Value = (T)((IConvertible)v).ToType(typeof(T), null);
         }
+
+        public FilterLogic Operation { get; }
+        public T Value { get; }
 
         public static bool operator != (FilterOperation<T> left, FilterOperation<T> right) => !(left == right);
 

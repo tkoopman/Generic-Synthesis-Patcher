@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Json.Converters
 {
-    internal class SingleOrArrayConverter<T> : JsonConverter
+    public class SingleOrArrayConverter<T> : JsonConverter
     {
         public override bool CanWrite => false;
 

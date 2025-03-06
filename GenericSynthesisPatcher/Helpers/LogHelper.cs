@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -36,15 +37,15 @@ namespace GenericSynthesisPatcher.Helpers
             Count[(int)logLevel]++;
 
             var sb = new StringBuilder(Enum.GetName(logLevel));
-            _ = sb.Append($" [#{classCode:X2}{line:X3}]");
+            _ = sb.Append(CultureInfo.InvariantCulture, $" [#{classCode:X2}{line:X3}]");
             _ = sb.Append(Divider);
 
             if (rule != null)
             {
-                _ = sb.Append($"{rule.ConfigFile}.");
+                _ = sb.Append(CultureInfo.InvariantCulture, $"{rule.ConfigFile}.");
                 if (rule is GSPRule gspRule && gspRule.Group != null)
-                    _ = sb.Append($"{gspRule.Group.ConfigRule}.");
-                _ = sb.Append($"{rule.ConfigRule}");
+                    _ = sb.Append(CultureInfo.InvariantCulture, $"{gspRule.Group.ConfigRule}.");
+                _ = sb.Append(CultureInfo.InvariantCulture, $"{rule.ConfigRule}");
                 _ = sb.Append(Divider);
             }
 

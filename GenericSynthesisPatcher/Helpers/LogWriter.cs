@@ -56,6 +56,7 @@ namespace GenericSynthesisPatcher.Helpers
             switch (value)
             {
                 case '\n':
+
                     // Time to output a log entry
                     Flush();
                     break;

@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     {
         [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(1)]
-        public short Count = count;
+        public short Count { get; set; } = count;
 
         [JsonProperty(PropertyName = "ItemCondition")]
         public float ItemCondition { get; set; } = -1;
@@ -30,7 +30,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
 
         public override string? ToString () => $"{Count}x{FormKey.Value}";
 
-        protected ExtraData? CreateExtraData ()
+        protected ExtraData? createExtraData ()
         {
             if (Owner == null && ItemCondition == -1)
             {

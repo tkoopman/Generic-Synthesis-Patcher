@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -37,7 +39,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         }
 
         public override bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-                    => left is IEffectGetter l
+            => left is IEffectGetter l
             && right is IEffectGetter r
             && l.BaseEffect.FormKey.Equals(r.BaseEffect.FormKey)
             && ((l.Data != null && r.Data != null
@@ -46,8 +48,25 @@ namespace GenericSynthesisPatcher.Helpers.Action
             && l.Data.Magnitude == r.Data.Magnitude)
             || (l.Data == null && r.Data == null));
 
-        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is IEffectGetter record ? record.BaseEffect.FormKey : throw new ArgumentNullException(nameof(from));
+        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from)
+            => from is IEffectGetter record
+            ? record.BaseEffect.FormKey
+            : throw new ArgumentNullException(nameof(from));
 
-        public override string ToString (IFormLinkContainerGetter source) => source is IEffectGetter item ? $"{item.BaseEffect.FormKey} (Area: {item.Data?.Area}, Duration: {item.Data?.Duration}, Magnitude: {item.Data?.Magnitude})" : throw new InvalidCastException();
+        public override string ToString (IFormLinkContainerGetter source)
+            => source is IEffectGetter item
+            ? $"{item.BaseEffect.FormKey} (Area: {item.Data?.Area}, Duration: {item.Data?.Duration}, Magnitude: {item.Data?.Magnitude})"
+            : throw new InvalidCastException();
+
+        // <inheritdoc />
+        public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "JSON objects containing effect Form Key/Editor ID and effect data";
+            example = $$"""
+                        "{{propertyName}}": { "Effect": "021FED:Skyrim.esm", "Area": 3, "Duration": 3, "Magnitude": 3 }
+                        """;
+
+            return true;
+        }
     }
 }

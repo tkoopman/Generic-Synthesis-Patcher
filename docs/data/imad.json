@@ -1,0 +1,65 @@
+[
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Animatable\": true",
+    "MFFSM": "MFF--",
+    "Name": "Animatable"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (UseTarget, ModeFront, ModeBack, NoSky, BlurRadiusBit2, BlurRadiusBit1, BlurRadiusBit0)",
+    "Example": "\"DepthOfFieldFlags\": [ \"UseTarget\", \"-BlurRadiusBit0\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "DepthOfFieldFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Duration\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Duration"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RadialBlurCenter.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RadialBlurCenter.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RadialBlurCenter.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RadialBlurCenter.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"RadialBlurUseTarget\": true",
+    "MFFSM": "MFF--",
+    "Name": "RadialBlurUseTarget"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  }
+]

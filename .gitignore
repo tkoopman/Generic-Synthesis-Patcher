@@ -352,3 +352,4 @@ MigrationBackup/
 .idea/
 *.sln.iml
 
+/GenericSynthesisPatcher/Properties/launchSettings.json

@@ -1,0 +1,107 @@
+[
+  {
+    "Aliases": "SNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AlternateSoundFor"
+  },
+  {
+    "Aliases": "GNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Category"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Loop, EnvelopeFast, EnvelopeSlow)",
+    "Example": "\"LoopAndRumble.Loop\": \"None\"",
+    "MFFSM": "MF---",
+    "Name": "LoopAndRumble.Loop"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.RumbleValues\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LoopAndRumble.RumbleValues"
+  },
+  {
+    "Aliases": "ONAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OutputModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"PercentFrequencyShift\": \"30.5%\"",
+    "MFFSM": "-FF--",
+    "Name": "PercentFrequencyShift"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"PercentFrequencyVariance\": \"30.5%\"",
+    "MFFSM": "-FF--",
+    "Name": "PercentFrequencyVariance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"StaticAttenuation\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "StaticAttenuation"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "String value",
+    "Example": "\"String\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "String"
+  },
+  {
+    "Aliases": "CNAM",
+    "Description": "Possible values (Standard)",
+    "Example": "\"Type\": \"Standard\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Variance\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Variance"
+  }
+]

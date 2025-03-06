@@ -7,7 +7,7 @@ namespace GenericSynthesisPatcher
 {
     public class GSPSettings
     {
-        [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a subfolder.")]
+        [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a sub-folder.")]
         public string Folder { get; set; } = "{SkyrimData}\\GSP";
 
         [Tooltip("Logging Options")]

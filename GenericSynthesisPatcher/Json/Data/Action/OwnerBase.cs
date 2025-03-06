@@ -9,6 +9,7 @@ namespace GenericSynthesisPatcher.Json.Data.Action
     [JsonConverter(typeof(OwnerBaseConverter))]
     public abstract class OwnerBase
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (OwnerBase? l, OwnerBase? r)
         {
             if (ReferenceEquals(l, r))

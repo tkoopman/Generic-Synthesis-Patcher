@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Operations;
 
@@ -65,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
 
                     if ((curKey != null && actionKey.Operation == ListLogic.DEL) || (curKey == null && actionKey.Operation == ListLogic.ADD))
                     {
-                        if (!Mod.TryGetPropertyForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
+                        if (!Mod.TryGetPropertyValueForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
                         {
                             Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                             return -1;
@@ -95,6 +97,8 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
+        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods) => throw new NotImplementedException("ForwardOption HPU invalid on this field.");
+
         public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext)
         {
             if (proKeys.Record is IFormLinkContainerGetter record)
@@ -111,7 +115,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                     return 0;
                 }
 
-                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                 {
                     Global.Logger.Log(ClassLogCode, "Patch has null value.", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                     return -1;
@@ -166,7 +170,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                         {
                             if (patchValueLinks == null)
                             {
-                                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
+                                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                                     return -1;
 
                                 patchValueLinks = patchValue;
@@ -189,14 +193,20 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return -1;
         }
 
-        public bool MatchesOrigin (ProcessingKeys proKeys)
-        {
-            var origin = proKeys.GetOriginRecord();
-            return origin != null
-                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Context.Record, proKeys.Property.PropertyName, out var checkValue)
-                        && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(origin, proKeys.Property.PropertyName, out var originValue)
-                        && FormLinksAction<TMajor>.RecordsMatch(checkValue, originValue);
-        }
+        public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+                    => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
+
+        /// <summary>
+        ///     Called when GSPRule.OnlyIfDefault is true
+        /// </summary>
+        /// <returns>True if all form keys match</returns>
+        public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext)
+            => recordContext.IsMaster()
+            || (Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var checkValue)
+                && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+                && FormLinksAction<TMajor>.recordsMatch(checkValue, originValue));
+
+        public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
         public bool MatchesRule (ProcessingKeys proKeys)
         {
@@ -227,23 +237,23 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return root != null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
-        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? _newList)
+        public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? inputList)
         {
-            if (_newList is not IReadOnlyList<IFormLinkGetter<TMajor>> newList || !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+            if (inputList is not IReadOnlyList<IFormLinkGetter<TMajor>> newList || !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
             {
                 Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
             var add = newList.WhereNotIn(curList);
-            var del = curList.WhereNotIn(newList).ToList();
+            var del = curList.WhereNotIn(newList);
 
             if (!add.Any() && !del.Any())
                 return 0;
 
             try
             {
-                if (!Mod.TryGetPropertyForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
+                if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var list))
                     return -1;
 
                 foreach (var d in del)
@@ -261,7 +271,16 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return add.Count() + del.Count();
         }
 
-        private static bool RecordsMatch (IReadOnlyList<IFormLinkGetter<TMajor>>? left, IReadOnlyList<IFormLinkGetter<TMajor>>? right)
+        // <inheritdoc />
+        public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
+        {
+            description = "Form Keys or Editor IDs";
+            example = "";
+
+            return true;
+        }
+
+        private static bool recordsMatch (IReadOnlyList<IFormLinkGetter<TMajor>>? left, IReadOnlyList<IFormLinkGetter<TMajor>>? right)
         {
             if (!left.SafeAny() && !right.SafeAny())
                 return true;

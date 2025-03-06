@@ -1,0 +1,58 @@
+[
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "DATA",
+    "Description": "True / False",
+    "Example": "\"IsFamily\": true",
+    "MFFSM": "MFF--",
+    "Name": "IsFamily"
+  },
+  {
+    "Aliases": "FPRT",
+    "Description": "String value",
+    "Example": "\"ParentTitle.Female\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ParentTitle.Female"
+  },
+  {
+    "Aliases": "MPRT",
+    "Description": "String value",
+    "Example": "\"ParentTitle.Male\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ParentTitle.Male"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "FCHT",
+    "Description": "String value",
+    "Example": "\"Title.Female\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Title.Female"
+  },
+  {
+    "Aliases": "MCHT",
+    "Description": "String value",
+    "Example": "\"Title.Male\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Title.Male"
+  }
+]

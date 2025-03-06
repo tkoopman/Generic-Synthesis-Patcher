@@ -1,0 +1,65 @@
+[
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (NeverResets, MatchPcBelowMinimumLevel, DisableCombatBoundary)",
+    "Example": "\"Flags\": [ \"NeverResets\", \"-DisableCombatBoundary\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "XLCN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Location"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxLevel\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MinLevel\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MinLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Rank\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Rank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "SkyrimMajorRecordFlags"
+  }
+]

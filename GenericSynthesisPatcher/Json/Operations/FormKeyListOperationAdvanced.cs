@@ -16,12 +16,10 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         public Regex? Regex { get; protected set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (FormKeyListOperationAdvanced<TMajor>? l, FormKeyListOperationAdvanced<TMajor>? r)
         {
             if (ReferenceEquals(l, r))
-                return true;
-
-            if (l == null && r == null)
                 return true;
 
             if (l == null || r == null)
@@ -30,7 +28,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             return l.Regex == r.Regex && l.Value == r.Value && l.Operation == r.Operation;
         }
 
-        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(Inverse(Operation), Value, Regex);
+        public override FormKeyListOperationAdvanced<TMajor> Inverse () => new(getInverse(Operation), Value, Regex);
 
         // Not just creating link, but confirming record exists
         public override IFormLinkGetter<TMajor>? ToLinkGetter () => Regex == null ? base.ToLinkGetter() : throw new InvalidOperationException("Unable to link to RegEx values.");
@@ -51,7 +49,7 @@ namespace GenericSynthesisPatcher.Json.Operations
             return result;
         }
 
-        protected override FormKey ConvertValue (string? value)
+        protected override FormKey convertValue (string? value)
         {
             if (value == null)
                 return FormKey.Null;
@@ -62,7 +60,7 @@ namespace GenericSynthesisPatcher.Json.Operations
                 return FormKey.Null;
             }
 
-            return base.ConvertValue(value);
+            return base.convertValue(value);
         }
     }
 }
