@@ -28,21 +28,21 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
+    "Aliases": "LNAM.Begins",
     "Description": "Decimal value",
     "Example": "\"LoopData.Begins\": 3.14",
     "MFFSM": "MFF--",
     "Name": "LoopData.Begins"
   },
   {
-    "Aliases": "",
+    "Aliases": "LNAM.Count",
     "Description": "Numeric value",
     "Example": "\"LoopData.Count\": 7",
     "MFFSM": "MFF--",
     "Name": "LoopData.Count"
   },
   {
-    "Aliases": "",
+    "Aliases": "LNAM.Ends",
     "Description": "Decimal value",
     "Example": "\"LoopData.Ends\": 3.14",
     "MFFSM": "MFF--",

@@ -42,28 +42,28 @@
     "Name": "Name"
   },
   {
-    "Aliases": "",
+    "Aliases": "AVSK.ImproveMult",
     "Description": "Decimal value",
     "Example": "\"Skill.ImproveMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Skill.ImproveMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "AVSK.ImproveOffset",
     "Description": "Decimal value",
     "Example": "\"Skill.ImproveOffset\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Skill.ImproveOffset"
   },
   {
-    "Aliases": "",
+    "Aliases": "AVSK.OffsetMult",
     "Description": "Decimal value",
     "Example": "\"Skill.OffsetMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Skill.OffsetMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "AVSK.UseMult",
     "Description": "Decimal value",
     "Example": "\"Skill.UseMult\": 3.14",
     "MFFSM": "MFF--",

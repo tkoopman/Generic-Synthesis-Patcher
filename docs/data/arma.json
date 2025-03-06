@@ -14,21 +14,21 @@
     "Name": "ArtObject"
   },
   {
-    "Aliases": "",
+    "Aliases": "BODT.ArmorType",
     "Description": "Possible values (LightArmor, HeavyArmor, Clothing)",
     "Example": "\"BodyTemplate.ArmorType\": \"LightArmor\"",
     "MFFSM": "MF---",
     "Name": "BodyTemplate.ArmorType"
   },
   {
-    "Aliases": "",
+    "Aliases": "BODT.FirstPersonFlags",
     "Description": "Flags (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01)",
     "Example": "\"BodyTemplate.FirstPersonFlags\": [ \"Head\", \"-FX01\" ]",
     "MFFSM": "MFF-M",
     "Name": "BodyTemplate.FirstPersonFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "BODT.Flags",
     "Description": "Flags (ModulatesVoice, NonPlayable)",
     "Example": "\"BodyTemplate.Flags\": [ \"ModulatesVoice\", \"-NonPlayable\" ]",
     "MFFSM": "MFF-M",

@@ -7,28 +7,28 @@
     "Name": "AvoidThreatChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSCR.CircleMult",
     "Description": "Decimal value",
     "Example": "\"CloseRange.CircleMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "CloseRange.CircleMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSCR.FallbackMult",
     "Description": "Decimal value",
     "Example": "\"CloseRange.FallbackMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "CloseRange.FallbackMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSCR.FlankDistance",
     "Description": "Decimal value",
     "Example": "\"CloseRange.FlankDistance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "CloseRange.FlankDistance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSCR.StalkTime",
     "Description": "Decimal value",
     "Example": "\"CloseRange.StalkTime\": 3.14",
     "MFFSM": "MFF--",
@@ -112,56 +112,56 @@
     "Name": "Flags"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.DiveBombChance",
     "Description": "Decimal value",
     "Example": "\"Flight.DiveBombChance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.DiveBombChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.FlyingAttackChance",
     "Description": "Decimal value",
     "Example": "\"Flight.FlyingAttackChance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.FlyingAttackChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.GroundAttackChance",
     "Description": "Decimal value",
     "Example": "\"Flight.GroundAttackChance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.GroundAttackChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.GroundAttackTime",
     "Description": "Decimal value",
     "Example": "\"Flight.GroundAttackTime\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.GroundAttackTime"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.HoverChance",
     "Description": "Decimal value",
     "Example": "\"Flight.HoverChance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.HoverChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.HoverTime",
     "Description": "Decimal value",
     "Example": "\"Flight.HoverTime\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.HoverTime"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.PerchAttackChance",
     "Description": "Decimal value",
     "Example": "\"Flight.PerchAttackChance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Flight.PerchAttackChance"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSFL.PerchAttackTime",
     "Description": "Decimal value",
     "Example": "\"Flight.PerchAttackTime\": 3.14",
     "MFFSM": "MFF--",
@@ -196,56 +196,56 @@
     "Name": "MajorFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.AttackStaggeredMult",
     "Description": "Decimal value",
     "Example": "\"Melee.AttackStaggeredMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.AttackStaggeredMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.BashAttackMult",
     "Description": "Decimal value",
     "Example": "\"Melee.BashAttackMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.BashAttackMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.BashMult",
     "Description": "Decimal value",
     "Example": "\"Melee.BashMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.BashMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.BashPowerAttackMult",
     "Description": "Decimal value",
     "Example": "\"Melee.BashPowerAttackMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.BashPowerAttackMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.BashRecoilMult",
     "Description": "Decimal value",
     "Example": "\"Melee.BashRecoilMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.BashRecoilMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.PowerAttackBlockingMult",
     "Description": "Decimal value",
     "Example": "\"Melee.PowerAttackBlockingMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.PowerAttackBlockingMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.PowerAttackStaggeredMult",
     "Description": "Decimal value",
     "Example": "\"Melee.PowerAttackStaggeredMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Melee.PowerAttackStaggeredMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CSME.SpecialAttackMult",
     "Description": "Decimal value",
     "Example": "\"Melee.SpecialAttackMult\": 3.14",
     "MFFSM": "MFF--",

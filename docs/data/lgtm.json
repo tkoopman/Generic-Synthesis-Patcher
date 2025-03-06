@@ -63,56 +63,56 @@
     "Name": "AmbientColors.Specular"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalXMinus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalXMinus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalXMinus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalXPlus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalXPlus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalXPlus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalYMinus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalYMinus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalYMinus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalYPlus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalYPlus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalYPlus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalZMinus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalZMinus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalZMinus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.DirectionalZPlus",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.DirectionalZPlus\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "DirectionalAmbientColors.DirectionalZPlus"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.Scale",
     "Description": "Decimal value",
     "Example": "\"DirectionalAmbientColors.Scale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "DirectionalAmbientColors.Scale"
   },
   {
-    "Aliases": "",
+    "Aliases": "DALC.Specular",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalAmbientColors.Specular\": [40,50,60]",
     "MFFSM": "-FF--",

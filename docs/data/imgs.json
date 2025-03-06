@@ -1,55 +1,55 @@
 [
   {
-    "Aliases": "",
+    "Aliases": "CNAM.Brightness",
     "Description": "Decimal value",
     "Example": "\"Cinematic.Brightness\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Cinematic.Brightness"
   },
   {
-    "Aliases": "",
+    "Aliases": "CNAM.Contrast",
     "Description": "Decimal value",
     "Example": "\"Cinematic.Contrast\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Cinematic.Contrast"
   },
   {
-    "Aliases": "",
+    "Aliases": "CNAM.Saturation",
     "Description": "Decimal value",
     "Example": "\"Cinematic.Saturation\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Cinematic.Saturation"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.BlurRadius",
     "Description": "Numeric value",
     "Example": "\"DepthOfField.BlurRadius\": 7",
     "MFFSM": "MFF--",
     "Name": "DepthOfField.BlurRadius"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Distance",
     "Description": "Decimal value",
     "Example": "\"DepthOfField.Distance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "DepthOfField.Distance"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Range",
     "Description": "Decimal value",
     "Example": "\"DepthOfField.Range\": 3.14",
     "MFFSM": "MFF--",
     "Name": "DepthOfField.Range"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Sky",
     "Description": "True / False",
     "Example": "\"DepthOfField.Sky\": true",
     "MFFSM": "MFF--",
     "Name": "DepthOfField.Sky"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Strength",
     "Description": "Decimal value",
     "Example": "\"DepthOfField.Strength\": 3.14",
     "MFFSM": "MFF--",
@@ -77,63 +77,63 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.BloomBlurRadius",
     "Description": "Decimal value",
     "Example": "\"Hdr.BloomBlurRadius\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.BloomBlurRadius"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.BloomScale",
     "Description": "Decimal value",
     "Example": "\"Hdr.BloomScale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.BloomScale"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.BloomThreshold",
     "Description": "Decimal value",
     "Example": "\"Hdr.BloomThreshold\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.BloomThreshold"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.EyeAdaptSpeed",
     "Description": "Decimal value",
     "Example": "\"Hdr.EyeAdaptSpeed\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.EyeAdaptSpeed"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.EyeAdaptStrength",
     "Description": "Decimal value",
     "Example": "\"Hdr.EyeAdaptStrength\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.EyeAdaptStrength"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.ReceiveBloomThreshold",
     "Description": "Decimal value",
     "Example": "\"Hdr.ReceiveBloomThreshold\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.ReceiveBloomThreshold"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.SkyScale",
     "Description": "Decimal value",
     "Example": "\"Hdr.SkyScale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.SkyScale"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.SunlightScale",
     "Description": "Decimal value",
     "Example": "\"Hdr.SunlightScale\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Hdr.SunlightScale"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.White",
     "Description": "Decimal value",
     "Example": "\"Hdr.White\": 3.14",
     "MFFSM": "MFF--",
@@ -147,14 +147,14 @@
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "TNAM.Amount",
     "Description": "Decimal value",
     "Example": "\"Tint.Amount\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Tint.Amount"
   },
   {
-    "Aliases": "",
+    "Aliases": "TNAM.Color",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Tint.Color\": [40,50,60]",
     "MFFSM": "-FF--",

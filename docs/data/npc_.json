@@ -7,70 +7,70 @@
     "Name": "ActorEffect"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Aggression",
     "Description": "Possible values (Unaggressive, Aggressive, VeryAggressive, Frenzied)",
     "Example": "\"AIData.Aggression\": \"Unaggressive\"",
     "MFFSM": "MF---",
     "Name": "AIData.Aggression"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.AggroRadiusBehavior",
     "Description": "True / False",
     "Example": "\"AIData.AggroRadiusBehavior\": true",
     "MFFSM": "MFF--",
     "Name": "AIData.AggroRadiusBehavior"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Assistance",
     "Description": "Possible values (HelpsNobody, HelpsAllies, HelpsFriendsAndAllies)",
     "Example": "\"AIData.Assistance\": \"HelpsNobody\"",
     "MFFSM": "MF---",
     "Name": "AIData.Assistance"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Attack",
     "Description": "Numeric value",
     "Example": "\"AIData.Attack\": 7",
     "MFFSM": "MFF--",
     "Name": "AIData.Attack"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Confidence",
     "Description": "Possible values (Cowardly, Cautious, Average, Brave, Foolhardy)",
     "Example": "\"AIData.Confidence\": \"Cowardly\"",
     "MFFSM": "MF---",
     "Name": "AIData.Confidence"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.EnergyLevel",
     "Description": "Numeric value",
     "Example": "\"AIData.EnergyLevel\": 7",
     "MFFSM": "MFF--",
     "Name": "AIData.EnergyLevel"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Mood",
     "Description": "Possible values (Neutral, Angry, Fear, Happy, Sad, Surprised, Puzzled, Disgusted)",
     "Example": "\"AIData.Mood\": \"Neutral\"",
     "MFFSM": "MF---",
     "Name": "AIData.Mood"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Responsibility",
     "Description": "Possible values (AnyCrime, ViolenceAgainstEnemies, PropertyCrimeOnly, NoCrime)",
     "Example": "\"AIData.Responsibility\": \"AnyCrime\"",
     "MFFSM": "MF---",
     "Name": "AIData.Responsibility"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.Warn",
     "Description": "Numeric value",
     "Example": "\"AIData.Warn\": 7",
     "MFFSM": "MFF--",
     "Name": "AIData.Warn"
   },
   {
-    "Aliases": "",
+    "Aliases": "AIDT.WarnOrAttack",
     "Description": "Numeric value",
     "Example": "\"AIData.WarnOrAttack\": 7",
     "MFFSM": "MFF--",
@@ -210,147 +210,147 @@
     "Name": "EditorID"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.BrowsForwardVsBack",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.BrowsForwardVsBack\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsForwardVsBack"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.BrowsInVsOut",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.BrowsInVsOut\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsInVsOut"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.BrowsUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.BrowsUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.BrowsUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.CheeksForwardVsBack",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.CheeksForwardVsBack\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.CheeksForwardVsBack"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.CheeksUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.CheeksUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.CheeksUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.ChinNarrowVsWide",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.ChinNarrowVsWide\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinNarrowVsWide"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.ChinUnderbiteVsOverbite",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.ChinUnderbiteVsOverbite\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinUnderbiteVsOverbite"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.ChinUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.ChinUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.ChinUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.EyesForwardVsBack",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.EyesForwardVsBack\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesForwardVsBack"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.EyesInVsOut",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.EyesInVsOut\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesInVsOut"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.EyesUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.EyesUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.EyesUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.JawForwardVsBack",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.JawForwardVsBack\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.JawForwardVsBack"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.JawNarrowVsWide",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.JawNarrowVsWide\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.JawNarrowVsWide"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.JawUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.JawUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.JawUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.LipsInVsOut",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.LipsInVsOut\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.LipsInVsOut"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.LipsUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.LipsUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.LipsUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.NoseLongVsShort",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.NoseLongVsShort\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.NoseLongVsShort"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM9.NoseUpVsDown",
     "Description": "Decimal value",
     "Example": "\"FaceMorph.NoseUpVsDown\": 3.14",
     "MFFSM": "MFF--",
     "Name": "FaceMorph.NoseUpVsDown"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAMA.Eyes",
     "Description": "Numeric value",
     "Example": "\"FaceParts.Eyes\": 7",
     "MFFSM": "MFF--",
     "Name": "FaceParts.Eyes"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAMA.Mouth",
     "Description": "Numeric value",
     "Example": "\"FaceParts.Mouth\": 7",
     "MFFSM": "MFF--",
     "Name": "FaceParts.Mouth"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAMA.Nose",
     "Description": "Numeric value",
     "Example": "\"FaceParts.Nose\": 7",
     "MFFSM": "MFF--",
@@ -462,42 +462,42 @@
     "Name": "ObjectBounds"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.X",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.X\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.Y",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.Y\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.Z",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.Z\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.Z"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.X",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.X\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.Second.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.Y",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.Y\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.Second.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.Z",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.Z\": 7",
     "MFFSM": "MFF--",
@@ -525,35 +525,35 @@
     "Name": "PlayerSkills"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.FarAwayModelDistance",
     "Description": "Decimal value",
     "Example": "\"PlayerSkills.FarAwayModelDistance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "PlayerSkills.FarAwayModelDistance"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.GearedUpWeapons",
     "Description": "Numeric value",
     "Example": "\"PlayerSkills.GearedUpWeapons\": 7",
     "MFFSM": "MFF--",
     "Name": "PlayerSkills.GearedUpWeapons"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Health",
     "Description": "Numeric value",
     "Example": "\"PlayerSkills.Health\": 7",
     "MFFSM": "MFF--",
     "Name": "PlayerSkills.Health"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Magicka",
     "Description": "Numeric value",
     "Example": "\"PlayerSkills.Magicka\": 7",
     "MFFSM": "MFF--",
     "Name": "PlayerSkills.Magicka"
   },
   {
-    "Aliases": "",
+    "Aliases": "DNAM.Stamina",
     "Description": "Numeric value",
     "Example": "\"PlayerSkills.Stamina\": 7",
     "MFFSM": "MFF--",

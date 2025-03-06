@@ -70,42 +70,42 @@
     "Name": "ObjectBounds"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.X",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.X\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.Y",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.Y\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.First.Z",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.Z\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.First.Z"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.X",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.X\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.Second.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.Y",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.Y\": 7",
     "MFFSM": "MFF--",
     "Name": "ObjectBounds.Second.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "OBND.Second.Z",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.Second.Z\": 7",
     "MFFSM": "MFF--",
@@ -126,14 +126,14 @@
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "",
+    "Aliases": "WBDT.BenchType",
     "Description": "Possible values (None, CreateObject, SmithingWeapon, Enchanting, EnchantingExperiment, Alchemy, AlchemyExperiment, SmithingArmor)",
     "Example": "\"WorkbenchData.BenchType\": \"None\"",
     "MFFSM": "MF---",
     "Name": "WorkbenchData.BenchType"
   },
   {
-    "Aliases": "",
+    "Aliases": "WBDT.UsesSkill",
     "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
     "Example": "\"WorkbenchData.UsesSkill\": \"OneHanded\"",
     "MFFSM": "MF---",

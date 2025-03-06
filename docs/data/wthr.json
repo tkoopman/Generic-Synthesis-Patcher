@@ -308,28 +308,28 @@
     "Name": "HorizonColor.Sunset"
   },
   {
-    "Aliases": "",
+    "Aliases": "IMSP.Day",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "ImageSpaces.Day"
   },
   {
-    "Aliases": "",
+    "Aliases": "IMSP.Night",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "ImageSpaces.Night"
   },
   {
-    "Aliases": "",
+    "Aliases": "IMSP.Sunrise",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "ImageSpaces.Sunrise"
   },
   {
-    "Aliases": "",
+    "Aliases": "IMSP.Sunset",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
@@ -735,28 +735,28 @@
     "Name": "VisualEffectEnd"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.Day",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "VolumetricLighting.Day"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.Night",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "VolumetricLighting.Night"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.Sunrise",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "VolumetricLighting.Sunrise"
   },
   {
-    "Aliases": "",
+    "Aliases": "HNAM.Sunset",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",

@@ -1,20 +1,20 @@
 [
   {
-    "Aliases": "",
+    "Aliases": "INAM.Directional",
     "Description": "Decimal value",
     "Example": "\"AnimationChangeThresholds.Directional\": 3.14",
     "MFFSM": "MFF--",
     "Name": "AnimationChangeThresholds.Directional"
   },
   {
-    "Aliases": "",
+    "Aliases": "INAM.MovementSpeed",
     "Description": "Decimal value",
     "Example": "\"AnimationChangeThresholds.MovementSpeed\": 3.14",
     "MFFSM": "MFF--",
     "Name": "AnimationChangeThresholds.MovementSpeed"
   },
   {
-    "Aliases": "",
+    "Aliases": "INAM.RotationSpeed",
     "Description": "Decimal value",
     "Example": "\"AnimationChangeThresholds.RotationSpeed\": 3.14",
     "MFFSM": "MFF--",

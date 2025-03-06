@@ -1,62 +1,62 @@
 [
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Arrest",
     "Description": "True / False",
     "Example": "\"CrimeValues.Arrest\": true",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Arrest"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Assault",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Assault\": 7",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Assault"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.AttackOnSight",
     "Description": "True / False",
     "Example": "\"CrimeValues.AttackOnSight\": true",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.AttackOnSight"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Escape",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Escape\": 7",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Escape"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Murder",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Murder\": 7",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Murder"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Pickpocket",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Pickpocket\": 7",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Pickpocket"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.StealMult",
     "Description": "Decimal value",
     "Example": "\"CrimeValues.StealMult\": 3.14",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.StealMult"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Trespass",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Trespass\": 7",
     "MFFSM": "MFF--",
     "Name": "CrimeValues.Trespass"
   },
   {
-    "Aliases": "",
+    "Aliases": "CRVA.Werewolf",
     "Description": "Numeric value",
     "Example": "\"CrimeValues.Werewolf\": 7",
     "MFFSM": "MFF--",
@@ -161,35 +161,35 @@
     "Name": "VendorBuySellList"
   },
   {
-    "Aliases": "",
+    "Aliases": "VENV.EndHour",
     "Description": "Numeric value",
     "Example": "\"VendorValues.EndHour\": 7",
     "MFFSM": "MFF--",
     "Name": "VendorValues.EndHour"
   },
   {
-    "Aliases": "",
+    "Aliases": "VENV.NotSellBuy",
     "Description": "True / False",
     "Example": "\"VendorValues.NotSellBuy\": true",
     "MFFSM": "MFF--",
     "Name": "VendorValues.NotSellBuy"
   },
   {
-    "Aliases": "",
+    "Aliases": "VENV.OnlyBuysStolenItems",
     "Description": "True / False",
     "Example": "\"VendorValues.OnlyBuysStolenItems\": true",
     "MFFSM": "MFF--",
     "Name": "VendorValues.OnlyBuysStolenItems"
   },
   {
-    "Aliases": "",
+    "Aliases": "VENV.Radius",
     "Description": "Numeric value",
     "Example": "\"VendorValues.Radius\": 7",
     "MFFSM": "MFF--",
     "Name": "VendorValues.Radius"
   },
   {
-    "Aliases": "",
+    "Aliases": "VENV.StartHour",
     "Description": "Numeric value",
     "Example": "\"VendorValues.StartHour\": 7",
     "MFFSM": "MFF--",

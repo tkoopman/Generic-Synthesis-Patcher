@@ -42,21 +42,21 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLX.Flags",
     "Description": "Possible values (Quad1, Quad2, Quad3, Quad4)",
     "Example": "\"Grid.Flags\": \"Quad1\"",
     "MFFSM": "MF---",
     "Name": "Grid.Flags"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLX.Point.X",
     "Description": "Numeric value",
     "Example": "\"Grid.Point.X\": 7",
     "MFFSM": "MFF--",
     "Name": "Grid.Point.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLX.Point.Y",
     "Description": "Numeric value",
     "Example": "\"Grid.Point.Y\": 7",
     "MFFSM": "MFF--",
@@ -70,105 +70,105 @@
     "Name": "ImageSpace"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.AmbientColor",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Lighting.AmbientColor\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "Lighting.AmbientColor"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.DirectionalColor",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "Lighting.DirectionalColor"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.DirectionalFade",
     "Description": "Decimal value",
     "Example": "\"Lighting.DirectionalFade\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalFade"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.DirectionalRotationXY",
     "Description": "Numeric value",
     "Example": "\"Lighting.DirectionalRotationXY\": 7",
     "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalRotationXY"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.DirectionalRotationZ",
     "Description": "Numeric value",
     "Example": "\"Lighting.DirectionalRotationZ\": 7",
     "MFFSM": "MFF--",
     "Name": "Lighting.DirectionalRotationZ"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogClipDistance",
     "Description": "Decimal value",
     "Example": "\"Lighting.FogClipDistance\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.FogClipDistance"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogFar",
     "Description": "Decimal value",
     "Example": "\"Lighting.FogFar\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.FogFar"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogFarColor",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Lighting.FogFarColor\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "Lighting.FogFarColor"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogMax",
     "Description": "Decimal value",
     "Example": "\"Lighting.FogMax\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.FogMax"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogNear",
     "Description": "Decimal value",
     "Example": "\"Lighting.FogNear\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.FogNear"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogNearColor",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Lighting.FogNearColor\": [40,50,60]",
     "MFFSM": "-FF--",
     "Name": "Lighting.FogNearColor"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.FogPower",
     "Description": "Decimal value",
     "Example": "\"Lighting.FogPower\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.FogPower"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.Inherits",
     "Description": "Flags (AmbientColor, DirectionalColor, FogColor, FogNear, FogFar, DirectionalRotation, DirectionalFade, ClipDistance, FogPower, FogMax, LightFadeDistances)",
     "Example": "\"Lighting.Inherits\": [ \"AmbientColor\", \"-LightFadeDistances\" ]",
     "MFFSM": "MFF-M",
     "Name": "Lighting.Inherits"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.LightFadeBegin",
     "Description": "Decimal value",
     "Example": "\"Lighting.LightFadeBegin\": 3.14",
     "MFFSM": "MFF--",
     "Name": "Lighting.LightFadeBegin"
   },
   {
-    "Aliases": "",
+    "Aliases": "XCLL.LightFadeEnd",
     "Description": "Decimal value",
     "Example": "\"Lighting.LightFadeEnd\": 3.14",
     "MFFSM": "MFF--",

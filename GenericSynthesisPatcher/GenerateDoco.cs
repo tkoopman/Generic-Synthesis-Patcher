@@ -157,6 +157,7 @@ namespace GenericSynthesisPatcher
 
             List<RecordTypeMapping> ImplementedRTMs = [];
             List<RPMDetails> buildRPMs = [];
+            List<string[]> subPropertyAliases = [];
 
             // Output Implemented Properties per Record type
             foreach (var rtm in RecordTypeMappings.All)
@@ -189,6 +190,8 @@ namespace GenericSynthesisPatcher
                         }
                     }
 
+                    subPropertyAliases.AddRange(generateSubPropertyAliases(properties));
+
                     /*
                      * Output Implemented Properties
                      */
@@ -200,6 +203,25 @@ namespace GenericSynthesisPatcher
                     }
                 }
             }
+
+            /*
+             * Output Sub-properties Aliases
+             */
+
+            subPropertyAliases.Sort(static (l, r) =>
+            {
+                int comp = string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase);
+                return comp != 0 ? comp : string.Compare(l[1], r[1], StringComparison.OrdinalIgnoreCase);
+            });
+
+            sw = new();
+            sw.WriteLine(RPMPopulateHeader.Replace("populateMappings", "populateSubAliases"));
+            printTableRow(subPropertyAliases, sep: ",", prefix: "            ", suffix: "", padLast: false);
+            sw.WriteLine(RPMPopulateFooter);
+
+            using var aliasesFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_Aliases.txt"), false);
+            aliasesFW.Write(sw.ToString());
+            aliasesFW.Close();
 
             /*
              * Output Implemented Types
@@ -402,6 +424,43 @@ namespace GenericSynthesisPatcher
             }
 
             return null;
+        }
+
+        private static List<string[]> generateSubPropertyAliases (List<RPMDetails> properties)
+        {
+            List<string[]> lines = [];
+            properties = [.. properties.Where(p => p.PropertyName.Contains('.'))];
+            properties.Sort(static (l, r) => string.Compare(l.PropertyName, r.PropertyName, StringComparison.OrdinalIgnoreCase));
+
+            Type? lastType = null;
+            string? lastName = null;
+            string? lastAlias = null;
+
+            foreach (var property in properties)
+            {
+                if (lastType is null || !property.RTM.StaticRegistration.GetterType.Equals(lastType))
+                {
+                    lastType = property.RTM.StaticRegistration.GetterType;
+                    lastName = null;
+                    lastAlias = null;
+                }
+
+                // Skip if already covered by null alias
+                if (RecordPropertyMappings.GetNullAliases(property.PropertyName).Any())
+                    continue;
+
+                string name = property.PropertyName[..property.PropertyName.IndexOf('.')];
+                if (!name.Equals(lastName, StringComparison.Ordinal))
+                {
+                    lastName = name;
+                    lastAlias = RecordPropertyMappings.GetAllAliases(lastType, name).FirstOrDefault();
+                }
+
+                if (lastAlias is not null)
+                    lines.Add([$"AddAlias(typeof({lastType.Name})", $"\"{lastAlias}{property.PropertyName[property.PropertyName.IndexOf('.')..]}\"", $"\"{property.PropertyName}\");"]);
+            }
+
+            return lines;
         }
 
         private static void printTableRow (List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)

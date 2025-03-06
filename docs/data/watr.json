@@ -1,20 +1,20 @@
 [
   {
-    "Aliases": "",
+    "Aliases": "NAM1.X",
     "Description": "Decimal value",
     "Example": "\"AngularVelocity.X\": 3.14",
     "MFFSM": "MFF--",
     "Name": "AngularVelocity.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM1.Y",
     "Description": "Decimal value",
     "Example": "\"AngularVelocity.Y\": 3.14",
     "MFFSM": "MFF--",
     "Name": "AngularVelocity.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM1.Z",
     "Description": "Decimal value",
     "Example": "\"AngularVelocity.Z\": 3.14",
     "MFFSM": "MFF--",
@@ -182,21 +182,21 @@
     "Name": "ImageSpace"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM0.X",
     "Description": "Decimal value",
     "Example": "\"LinearVelocity.X\": 3.14",
     "MFFSM": "MFF--",
     "Name": "LinearVelocity.X"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM0.Y",
     "Description": "Decimal value",
     "Example": "\"LinearVelocity.Y\": 3.14",
     "MFFSM": "MFF--",
     "Name": "LinearVelocity.Y"
   },
   {
-    "Aliases": "",
+    "Aliases": "NAM0.Z",
     "Description": "Decimal value",
     "Example": "\"LinearVelocity.Z\": 3.14",
     "MFFSM": "MFF--",
