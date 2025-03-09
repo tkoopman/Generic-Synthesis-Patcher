@@ -70,7 +70,9 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
                 Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
 
-                var masters = Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
+                var masters = Global.Settings.Value.DynamicMods.Contains(all.ElementAt(i).ModKey)
+                    ? [all.ElementAt(i + 1).ModKey]
+                    : Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
 
                 // If last entry in load order but has no masters it must be an existing GSP patch
                 // record, so link it to previous winner.
