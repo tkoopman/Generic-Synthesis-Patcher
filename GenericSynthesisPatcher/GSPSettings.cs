@@ -7,6 +7,9 @@ namespace GenericSynthesisPatcher
 {
     public class GSPSettings
     {
+        [Tooltip("Add any other Dynamic Patch Mods like SynthEBD to this list if they exist prior to this mod in load order. Causes them to be treated slightly differently in merges and similar actions.")]
+        public HashSet<ModKey> DynamicMods { get; set; } = [];
+
         [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a sub-folder.")]
         public string Folder { get; set; } = "{SkyrimData}\\GSP";
 
@@ -27,7 +30,7 @@ namespace GenericSynthesisPatcher
 
             [Tooltip("Controls the amount of logs generated. Information is recommended for normal operations.\nDebug and Trace will only output extra logs that either match Debug / Trace Form Key or for Rules with Debug option set true.")]
             [MaintainOrder(1)]
-            public LogLevel LogLevel { get; set; }
+            public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
             [Tooltip("Disable noisy logs you not interested in.")]
             [SettingName("Noisy Debug & Trace Logs")]
