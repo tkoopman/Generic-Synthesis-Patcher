@@ -1,0 +1,217 @@
+// SynthOutfits version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEAbyssLLBlackApocrypha",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletApocrypha",
+        "00EL_AbyssShoesApocrypha",
+        "00EL_AbyssDressBlackApocrypha"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLBlackGold",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssDressBlackGold",
+        "00EL_AbyssShoesGold",
+        "00EL_AbyssArmletGold"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLBlackSilver",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletSilver",
+        "00EL_AbyssShoesSilver",
+        "00EL_AbyssDressBlackSilver"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLBlueApocrypha",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletApocrypha",
+        "00EL_AbyssShoesApocrypha",
+        "00EL_AbyssDressBlueApocrypha"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLBlueGold",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssDressBlueGold",
+        "00EL_AbyssShoesGold",
+        "00EL_AbyssArmletGold"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLBlueSilver",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletSilver",
+        "00EL_AbyssShoesSilver",
+        "00EL_AbyssDressBlueSliver"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLRedApocrypha",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletApocrypha",
+        "00EL_AbyssShoesApocrypha",
+        "00EL_AbyssDressRedApocrypha"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLRedGold",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssDressRedGold",
+        "00EL_AbyssShoesGold",
+        "00EL_AbyssArmletGold"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLRedSilver",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletSilver",
+        "00EL_AbyssShoesSilver",
+        "00EL_AbyssDressRedSilver"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLWhiteApocrypha",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletApocrypha",
+        "00EL_AbyssShoesApocrypha",
+        "00EL_AbyssDressWhiteApocrypha"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLWhiteGold",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssDressWhiteGold",
+        "00EL_AbyssShoesGold",
+        "00EL_AbyssArmletGold"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLWhiteSilver",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_AbyssArmletSilver",
+        "00EL_AbyssShoesSilver",
+        "00EL_AbyssDressWhiteSilver"
+      ]
+    },
+    {
+      "Name": "ELLEAbyssLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEAbyssLLBlackApocrypha",
+        "ELLEAbyssLLBlackGold",
+        "ELLEAbyssLLBlackSilver",
+        "ELLEAbyssLLBlueApocrypha",
+        "ELLEAbyssLLBlueGold",
+        "ELLEAbyssLLBlueSilver",
+        "ELLEAbyssLLRedApocrypha",
+        "ELLEAbyssLLRedGold",
+        "ELLEAbyssLLRedSilver",
+        "ELLEAbyssLLWhiteApocrypha",
+        "ELLEAbyssLLWhiteGold",
+        "ELLEAbyssLLWhiteSilver"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEAbyssOutfitBlackApocrypha",
+      "Items": [ "ELLEAbyssLLBlackApocrypha" ],
+      "DefaultOutfit": [
+        "182A1:Dragonborn.esm" // Milore Ienth
+      ],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitBlackGold",
+      "Items": [ "ELLEAbyssLLBlackGold" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitBlackSilver",
+      "Items": [ "ELLEAbyssLLBlackSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitBlueApocrypha",
+      "Items": [ "ELLEAbyssLLBlueApocrypha" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitBlueGold",
+      "Items": [ "ELLEAbyssLLBlueGold" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitBlueSilver",
+      "Items": [ "ELLEAbyssLLBlueSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitRedApocrypha",
+      "Items": [ "ELLEAbyssLLRedApocrypha" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitRedGold",
+      "Items": [ "ELLEAbyssLLRedGold" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitRedSilver",
+      "Items": [ "ELLEAbyssLLRedSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitWhiteApocrypha",
+      "Items": [ "ELLEAbyssLLWhiteApocrypha" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitWhiteGold",
+      "Items": [ "ELLEAbyssLLWhiteGold" ],
+      "DefaultOutfit": [
+        "13BA5:Skyrim.esm" // Danica Pure-Spring
+      ],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssOutfitWhiteSilver",
+      "Items": [ "ELLEAbyssLLWhiteSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEAbyssAllOutfits",
+      "Items": [ "ELLEAbyssLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    }
+  ]
+}

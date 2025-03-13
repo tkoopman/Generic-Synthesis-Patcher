@@ -215,7 +215,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
         {
             description = "JSON object containing the values under PlayerSkills you want to set";
-            example = "See ../Examples/NPC Player Skills.json";
+            example = "See <a href=https://github.com/tkoopman/Generic-Synthesis-Patcher/blob/master/Examples/GSP/NPC%20Player%20Skills.json>NPC Player Skills.json</a>";
 
             return true;
         }

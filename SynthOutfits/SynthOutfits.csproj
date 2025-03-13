@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
-    <ImplicitUsings>true</ImplicitUsings>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Enums.NET" Version="5.0.0" />
     <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.48.1" />
     <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.32.1" />
@@ -21,4 +22,5 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+
 </Project>

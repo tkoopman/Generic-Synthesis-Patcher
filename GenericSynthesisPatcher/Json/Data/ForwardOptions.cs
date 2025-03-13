@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Json.Converters;
+using GSPShared.JsonConverters;
 
 using Newtonsoft.Json;
 

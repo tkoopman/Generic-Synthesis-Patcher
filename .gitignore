@@ -353,3 +353,4 @@ MigrationBackup/
 *.sln.iml
 
 /GenericSynthesisPatcher/Properties/launchSettings.json
+/SynthOutfits/Properties/launchSettings.json
