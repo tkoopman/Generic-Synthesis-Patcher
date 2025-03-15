@@ -101,7 +101,7 @@ namespace SynthCALIO
             }
 
             foreach (string item in SPID)
-                _ = Program.formatSPID(item, FormKey.Null, "Test", FromFile);
+                _ = Program.formatSPID(item, FormKey.Null, "Test");
         }
 
         public LeveledItem? ToLeveledItem ()

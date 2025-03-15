@@ -7,9 +7,6 @@ namespace SynthCALIO
         [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a sub-folder.")]
         public string Folder { get; set; } = "{SkyrimData}\\SynthCALIO";
 
-        [Tooltip("Add EditorID comments to each SPID entry written to INI file.")]
-        public bool IncludeEditorID { get; set; } = false;
-
         [Tooltip("Output folder for the SPID ini. Leave empty for Skyrim data folder.")]
         public string Output { get; set; } = "";
 

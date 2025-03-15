@@ -98,14 +98,14 @@ namespace SynthCALIO
             };
         }
 
-        internal static string formatSPID (string input, FormKey formKey, string defaultFormType, string? fromFile = null)
+        internal static string formatSPID (string input, FormKey formKey, string defaultFormType)
         {
             var m = RegexSPID().Match(input);
             if (!m.Success)
-                throw new InvalidDataException($"Could not phrase SPID entry {input}. File: {fromFile}");
+                throw new InvalidDataException($"Could not phrase SPID entry {input}");
 
             string formType = m.Groups.TryGetValue("FormType", out var g1) && !string.IsNullOrWhiteSpace(g1.Value) ? g1.Value : defaultFormType;
-            string spid = m.Groups.TryGetValue("SPID", out var g2) && !string.IsNullOrWhiteSpace(g2.Value) ? g2.Value :throw new InvalidDataException($"Invalid SPID entry {input}. File: {fromFile}");
+            string spid = m.Groups.TryGetValue("SPID", out var g2) && !string.IsNullOrWhiteSpace(g2.Value) ? g2.Value :throw new InvalidDataException($"Invalid SPID entry {input}");
 
             return $"{formType} = 0x{formKey.ID:X}~{formKey.ModKey}|{spid}";
         }
@@ -145,7 +145,7 @@ namespace SynthCALIO
                     State.PatchMod.LeveledItems.Add(lvlItem);
                     Console.WriteLine($"Added LeveledItem: {lvlItem.EditorID} [{lvlItem.FormKey}]");
 
-                    if (jsonLeveledItem.SPID.Length > 0)
+                    foreach (string spid in jsonLeveledItem.SPID)
                     {
                         if (!addedSPID)
                         {
@@ -154,16 +154,10 @@ namespace SynthCALIO
                             addedSPID = true;
                         }
 
-                        if (Settings.Value.IncludeEditorID)
-                        {
-                            writer.WriteLine();
-                            writer.WriteLine($"; {lvlItem.EditorID}");
-                            addedSPID = true;
-                        }
-                    }
-
-                    foreach (string spid in jsonLeveledItem.SPID)
                         writer.WriteLine(formatSPID(spid, lvlItem.FormKey, "Item"));
+
+                        //writer.WriteLine($"Item = 0x{lvlItem.FormKey.ID:X}~{lvlItem.FormKey.ModKey}|{spid}");
+                    }
                 }
             }
         }
@@ -216,7 +210,7 @@ namespace SynthCALIO
                         }
                     }
 
-                    if (jsonOutfit.SPID.Length > 0)
+                    foreach (string spid in jsonOutfit.SPID)
                     {
                         if (!addedSPID)
                         {
@@ -225,16 +219,11 @@ namespace SynthCALIO
                             addedSPID = true;
                         }
 
-                        if (Settings.Value.IncludeEditorID)
-                        {
-                            writer.WriteLine();
-                            writer.WriteLine($"; {outfit.EditorID}");
-                            addedSPID = true;
-                        }
-                    }
-
-                    foreach (string spid in jsonOutfit.SPID)
                         writer.WriteLine(formatSPID(spid, outfit.FormKey, "Outfit"));
+
+                        //writer.WriteLine($"Outfit = 0x{outfit.FormKey.ID:X}~{outfit.FormKey.ModKey}|{spid}");
+                        addedSPID = true;
+                    }
                 }
             }
 
