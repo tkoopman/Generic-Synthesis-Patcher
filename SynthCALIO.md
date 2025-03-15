@@ -11,6 +11,15 @@ SynthCALIO keeps track of IDs assigned in previous runs to make sure the same Fo
 - [Synthesis](https://github.com/Mutagen-Modding/Synthesis)
 - [Spell Perk Item Distributor (SPID)](https://www.nexusmods.com/skyrimspecialedition/mods/36869)
 
+## Using
+
+By default, the JSON configuration files should be added into a sub-folder SynthCALIO in your Skyrim's data folder. This way you can add these configuration files like normal mods in your mod manager of choice.
+Location can be overridden in the Synthesis settings of SynthCALIO.
+
+Next you will need a working Synthesis. See there documentation for getting this setup.
+
+You can then add SynthCALIO, however if adding to a Synthesis group that contains other patchers, SynthCALIO MUST be the first patcher in the group. This is so it doesn't get possible FormID conflicts.
+
 ## How SynthCALIO maintains FormID's
 
 There are 2 methods used.  
