@@ -4,13 +4,6 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericSynthesisPatcher", "GenericSynthesisPatcher\GenericSynthesisPatcher.csproj", "{8BA2E1B7-DD65-42B6-A780-17E4037A3C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynthCALIO", "SynthCALIO\SynthCALIO.csproj", "{C7CFDE82-CC0E-41E9-8F00-753199A6DAE2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{740C1C42-1C21-466D-93E3-1D467DEC983B} = {740C1C42-1C21-466D-93E3-1D467DEC983B}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSPShared", "GSPShared\GSPShared.csproj", "{740C1C42-1C21-466D-93E3-1D467DEC983B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,14 +14,6 @@ Global
 		{8BA2E1B7-DD65-42B6-A780-17E4037A3C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BA2E1B7-DD65-42B6-A780-17E4037A3C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BA2E1B7-DD65-42B6-A780-17E4037A3C1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7CFDE82-CC0E-41E9-8F00-753199A6DAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7CFDE82-CC0E-41E9-8F00-753199A6DAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7CFDE82-CC0E-41E9-8F00-753199A6DAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7CFDE82-CC0E-41E9-8F00-753199A6DAE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{740C1C42-1C21-466D-93E3-1D467DEC983B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{740C1C42-1C21-466D-93E3-1D467DEC983B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{740C1C42-1C21-466D-93E3-1D467DEC983B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{740C1C42-1C21-466D-93E3-1D467DEC983B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
-using GSPShared;
+using System.Text.RegularExpressions;
 
 using Loqui;
 
@@ -18,7 +17,7 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    internal static class Mod
+    internal static partial class Mod
     {
         private const int ClassLogCode = 0x02;
 
@@ -66,6 +65,17 @@ namespace GenericSynthesisPatcher.Helpers
             ? o : context;
 
         /// <summary>
+        ///     Adds 0 padding to String representation of a form key
+        /// </summary>
+        /// <param name="input">
+        ///     String representation of a form key that may not be padded
+        /// </param>
+        /// <returns>
+        ///     String representation of the form key with 0 padding added if required
+        /// </returns>
+        public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
+
+        /// <summary>
         ///     Checks if random object equals null or default value.
         /// </summary>
         public static bool IsNullOrEmpty<T> (T value)
@@ -76,7 +86,7 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         {
             wasEditorID = false;
-            if (FormKey.TryFactory(Common.FixFormKey(input), out formKey))
+            if (FormKey.TryFactory(FixFormKey(input), out formKey))
                 return true;
 
             if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
@@ -182,6 +192,9 @@ namespace GenericSynthesisPatcher.Helpers
             output = value;
             return true;
         }
+
+        [GeneratedRegex(@"^[0-9A-Fa-f]{1,6}")]
+        private static partial Regex RegexFormKey ();
 
         private static object? setDefaultPropertyValue (object? parent, PropertyInfo property)
         {

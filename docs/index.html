@@ -40,7 +40,7 @@
             </ul>
 
             <p>
-                Please see <a href="./config.html">config help</a>, <a href="./fields.html">implemented fields</a> and <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/tree/master/Examples/GSP">examples on GitHub</a> for more details.
+                Please see <a href="./config.html">config help</a>, <a href="./fields.html">implemented fields</a> and <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/tree/master/Examples">examples on GitHub</a> for more details.
             </p>
 
             While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order, or even be used post bash to assist in fixing anything missed by bash.<br />
@@ -68,24 +68,24 @@
 
             Configuration files in this directory must end in .json with the following format. See examples directory for real world examples.
             <pre>
-              [
-                {
-                    "priority": 0,
-                    "types": [ "AMMO" ],
-                    "editorID": "...",
-                    "formID": "123ABC:Skyrim.esm",
-                    "fill": {
-                        "field": "value",
-                        "keywords": [ "KeyWord", "-Keyword" ],
-                        "value": 100,
-                        "weight": 1.234
-                    },
-                    "forward": {
-                        "mod.esp": [ "fields" ]
-                    }
-                }
-              ]
-            </pre>
+          [
+          {
+          "priority": 0,
+          "types": [ "AMMO" ],
+          "editorID": "...",
+          "formID": "123ABC:Skyrim.esm",
+          "fill": {
+          "field": "value",
+          "keywords": [ "KeyWord", "-Keyword" ],
+          "value": 100,
+          "weight": 1.234
+          },
+          "forward": {
+          "mod.esp": [ "fields" ]
+          }
+          }
+          ]
+        </pre>
         </div>
     </div>
 </body>

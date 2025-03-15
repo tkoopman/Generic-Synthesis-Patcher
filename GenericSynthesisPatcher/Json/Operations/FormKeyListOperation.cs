@@ -1,7 +1,5 @@
 using GenericSynthesisPatcher.Helpers;
 
-using GSPShared;
-
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
@@ -73,7 +71,7 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         protected override FormKey convertValue (string? value)
             => value == null ? FormKey.Null
-             : FormKey.TryFactory(Common.FixFormKey(value), out var formKey) ? formKey
+             : FormKey.TryFactory(Mod.FixFormKey(value), out var formKey) ? formKey
              : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");
     }
 }

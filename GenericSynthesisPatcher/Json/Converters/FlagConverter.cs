@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace GSPShared.JsonConverters
+namespace GenericSynthesisPatcher.Json.Converters
 {
     public class FlagConverter : JsonConverter
     {

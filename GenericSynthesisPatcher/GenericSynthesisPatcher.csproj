@@ -15,10 +15,4 @@
     <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.48.1" />
     <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.32.1" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GSPShared\GSPShared.csproj">
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

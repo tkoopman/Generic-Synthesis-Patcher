@@ -520,7 +520,7 @@
   {
     "Aliases": "DNAM",
     "Description": "JSON object containing the values under PlayerSkills you want to set",
-    "Example": "See <a href=https://github.com/tkoopman/Generic-Synthesis-Patcher/blob/master/Examples/GSP/NPC%20Player%20Skills.json>NPC Player Skills.json</a>",
+    "Example": "See ../Examples/NPC Player Skills.json",
     "MFFSM": "-FF--",
     "Name": "PlayerSkills"
   },
