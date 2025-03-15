@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 using CsvHelper;
 
@@ -97,6 +98,18 @@ namespace SynthCALIO
             };
         }
 
+        internal static string formatSPID (string input, FormKey formKey, string defaultFormType)
+        {
+            var m = RegexSPID().Match(input);
+            if (!m.Success)
+                throw new InvalidDataException($"Could not phrase SPID entry {input}");
+
+            string formType = m.Groups.TryGetValue("FormType", out var g1) && !string.IsNullOrWhiteSpace(g1.Value) ? g1.Value : defaultFormType;
+            string spid = m.Groups.TryGetValue("SPID", out var g2) && !string.IsNullOrWhiteSpace(g2.Value) ? g2.Value :throw new InvalidDataException($"Invalid SPID entry {input}");
+
+            return $"{formType} = 0x{formKey.ID:X}~{formKey.ModKey}|{spid}";
+        }
+
         private static void createLeveledItems (StreamWriter writer)
         {
             bool addedSPID = false;
@@ -141,7 +154,9 @@ namespace SynthCALIO
                             addedSPID = true;
                         }
 
-                        writer.WriteLine($"Item = 0x{lvlItem.FormKey.ID:X}~{lvlItem.FormKey.ModKey}|{spid}");
+                        writer.WriteLine(formatSPID(spid, lvlItem.FormKey, "Item"));
+
+                        //writer.WriteLine($"Item = 0x{lvlItem.FormKey.ID:X}~{lvlItem.FormKey.ModKey}|{spid}");
                     }
                 }
             }
@@ -204,7 +219,9 @@ namespace SynthCALIO
                             addedSPID = true;
                         }
 
-                        writer.WriteLine($"Outfit = 0x{outfit.FormKey.ID:X}~{outfit.FormKey.ModKey}|{spid}");
+                        writer.WriteLine(formatSPID(spid, outfit.FormKey, "Outfit"));
+
+                        //writer.WriteLine($"Outfit = 0x{outfit.FormKey.ID:X}~{outfit.FormKey.ModKey}|{spid}");
                         addedSPID = true;
                     }
                 }
@@ -292,6 +309,9 @@ namespace SynthCALIO
                 }
             }
         }
+
+        [GeneratedRegex(@"^(?:(?'FormType'[\w]+) ?= ?\|)?(?'SPID'(?:[^\|=]*\|){0,5}[^\|=]*)$")]
+        private static partial Regex RegexSPID ();
 
         private static void writeFormIDCache ()
         {
