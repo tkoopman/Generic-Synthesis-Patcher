@@ -99,9 +99,6 @@ namespace SynthCALIO
                 if (Common.TryConvertToSkyrimID(entry.ID, out _, out _) == SkyrimIDType.Invalid)
                     throw new InvalidDataException($"LeveledItem {EditorID} from {FromFile}, contains invalid FormKey or EditorID: {entry.ID}");
             }
-
-            foreach (string item in SPID)
-                _ = Program.formatSPID(item, FormKey.Null, "Test");
         }
 
         public LeveledItem? ToLeveledItem ()

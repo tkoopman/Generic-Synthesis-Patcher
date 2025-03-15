@@ -84,7 +84,10 @@ namespace SynthCALIO
             }
 
             foreach (string item in SPID)
-                _ = Program.formatSPID(item, FormKey.Null, "Test");
+            {
+                if (item.Count(x => x == '|') > 5)
+                    throw new InvalidDataException($"Outfit {EditorID} from {FromFile}, contains invalid SPID entry: {item}");
+            }
         }
 
         public Outfit? ToOutfit ()
