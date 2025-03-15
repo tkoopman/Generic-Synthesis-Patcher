@@ -83,8 +83,9 @@ namespace SynthCALIO
                     throw new InvalidDataException($"Outfit {EditorID} from {FromFile}, contains invalid SleepingOutfit entry: {outfit}");
             }
 
+            // This is just to confirm all SPIDs provided can be parsed before actually starting
             foreach (string item in SPID)
-                _ = Program.formatSPID(item, FormKey.Null, "Test");
+                _ = Program.formatSPID(item, FormKey.Null, "Test", FromFile);
         }
 
         public Outfit? ToOutfit ()
