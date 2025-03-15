@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Json.Converters
+namespace GSPShared.JsonConverters
 {
     public class PercentConverter : JsonConverter
     {
@@ -18,11 +18,15 @@ namespace GenericSynthesisPatcher.Json.Converters
             {
                 case JsonToken.Integer:
                 case JsonToken.Float:
-                    double p = reader.ReadAsDouble() ?? throw new JsonSerializationException("Unable to read percent");
+
+                    //double p = reader.ReadAsDouble() ?? throw new JsonSerializationException("Unable to read percent");
+                    double p = (double)(reader.Value ?? throw new JsonSerializationException("Unable to read percent"));
                     return new Percent(p);
 
                 case JsonToken.String:
-                    string str = reader.ReadAsString() ?? throw new JsonSerializationException("Unable to read percent");
+
+                    //string str = reader.ReadAsString() ?? throw new JsonSerializationException("Unable to read percent");
+                    string str = (string)(reader.Value ?? throw new JsonSerializationException("Unable to read percent"));
                     bool signed = str.EndsWith('%');
                     double pd = double.Parse(str.TrimEnd('%'), CultureInfo.InvariantCulture);
                     if (signed)

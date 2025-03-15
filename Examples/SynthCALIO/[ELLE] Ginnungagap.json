@@ -1,0 +1,44 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEGinnungagapLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "00EL_GinnungagapMain",
+        "00EL_GinnungagapMainBlu",
+        "00EL_GinnungagapMainSilver"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEGinnungagapOutfitBronze",
+      "Items": [ "00EL_GinnungagapMain" ],
+      "DefaultOutfit": [
+        "336b:Dawnguard.esm" // Sorine Jurard
+      ],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEGinnungagapOutfitGlass",
+      "Items": [ "00EL_GinnungagapMainBlu" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEGinnungagapOutfitSilver",
+      "Items": [ "00EL_GinnungagapMainSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEGinnungagapAllOutfits",
+      "Items": [ "ELLEGinnungagapLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    }
+  ]
+}

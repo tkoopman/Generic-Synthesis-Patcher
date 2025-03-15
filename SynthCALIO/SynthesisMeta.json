@@ -1,0 +1,16 @@
+{
+  "Nickname": "SynthCALIO",
+  "Visibility": "Visible",
+  "OneLineDescription": "Create and Allocate, Leveled Items and Outfits",
+  "LongDescription": "You can create leveled item lists and outfits, that then can be allocated either via SPID or updating DefaultOutFit or SleepingOutfit on NPC records. Will maintain FormIDs during patcher runs, and automatically ignore creating and allocating lists that try to point to unloaded mods. All configuration is via JSON files.",
+  "PreferredAutoVersioning": "Default",
+  "RequiredMods": [],
+  "TargetedReleases": [
+    "SkyrimLE",
+    "SkyrimSE",
+    "SkyrimVR",
+    "EnderalLE",
+    "EnderalSE",
+    "SkyrimSEGog"
+  ]
+}

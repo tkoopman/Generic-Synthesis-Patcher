@@ -50,17 +50,19 @@ function onLoad() {
             { field: "Aliases" },
             { field: "MFFSM" },
             { field: "Description", wrapText: true, autoHeight: true, flex: 1 },
-            { field: "Example", wrapText: true, autoHeight: true, flex: 1 },
+            {
+                field: "Example", wrapText: true, autoHeight: true, flex: 1,
+                cellRenderer: (params) => {
+                    return params.value;
+                },
+            },
         ],
         autoSizeStrategy: {
             type: "fitCellContents",
             colIds: ["name", "Aliases", "MFFSM"],
         },
-        rowSelection: {
-            mode: 'singleRow',
-            checkboxes: false,
-            enableClickSelection: true,
-        },
+        enableCellTextSelection: true,
+        ensureDomOrder: true,
     };
 
     gridApi = agGrid.createGrid(document.querySelector("#myGrid"), gridOptions);

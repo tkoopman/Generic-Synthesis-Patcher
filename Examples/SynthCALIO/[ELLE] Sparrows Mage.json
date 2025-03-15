@@ -1,0 +1,21 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "Outfits": [
+    {
+      "Name": "ELLESparrowsMageOutfit",
+      "Items": [
+        "00EL_SparrowsMageBoots",
+        "00EL_SparrowsMageTop",
+        "00EL_SparrowsMagePants",
+        "00EL_SparrowsMageJacket",
+        "00EL_SparrowsMageGloves"
+      ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Conjurer,*Cryomancer,*Electromancer,*Mage,*Necro,*Pyromancer,*Wizard,*Warlock,*Sorcerer|||F/-C/-U||5" // Any Female Mage 5%
+      ]
+    }
+  ]
+}

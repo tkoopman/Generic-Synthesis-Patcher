@@ -453,7 +453,8 @@ namespace GenericSynthesisPatcher
                 if (!name.Equals(lastName, StringComparison.Ordinal))
                 {
                     lastName = name;
-                    lastAlias = RecordPropertyMappings.GetAllAliases(lastType, name).FirstOrDefault();
+                    var aliases = RecordPropertyMappings.GetAllAliases(lastType, name);
+                    lastAlias = aliases.Count > 0 ? aliases[0] : null;
                 }
 
                 if (lastAlias is not null)
@@ -600,7 +601,7 @@ namespace GenericSynthesisPatcher
         }
 
         [JsonObject(MemberSerialization.OptIn)]
-        public class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
+        internal sealed class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
         {
             [JsonProperty]
             public string Aliases

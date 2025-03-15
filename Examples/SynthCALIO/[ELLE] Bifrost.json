@@ -1,0 +1,19 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "Outfits": [
+    {
+      "Name": "ELLEBifrostOutfitDefault",
+      "Items": [
+        "800:[ELLE] Bifrost.esp",
+        "D66:[ELLE] Bifrost.esp",
+        "D67:[ELLE] Bifrost.esp",
+        "D68:[ELLE] Bifrost.esp",
+        "D69:[ELLE] Bifrost.esp"
+      ],
+      "DefaultOutfit": [],
+      "SPID": [ "Bandit Chief|BanditFaction||F/-C/-U||20" ]
+    }
+  ]
+}

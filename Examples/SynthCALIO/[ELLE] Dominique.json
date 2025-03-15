@@ -1,0 +1,100 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEDominiqueLLDefault",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DominiqueBoots",
+        "00EL_DominiqueTop",
+        "00EL_DominiqueGloves",
+        "00EL_DominiquePants",
+        "00EL_DominiqueThigh",
+        "00EL_DominiqueBelt"
+      ]
+    },
+    {
+      "Name": "ELLEDominiqueLLFishnets",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DominiqueBoots",
+        "00EL_DominiqueTopNets",
+        "00EL_DominiqueGloves",
+        "00EL_DominiquePants",
+        "00EL_DominiqueThigh",
+        "00EL_DominiqueBelt"
+      ]
+    },
+    {
+      "Name": "ELLEDominiqueLLFullLace",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DominiqueBoots",
+        "00EL_DominiqueTopLace",
+        "00EL_DominiqueGlovesFullLace",
+        "00EL_DominiquePants",
+        "00EL_DominiqueThigh",
+        "00EL_DominiqueBelt"
+      ]
+    },
+    {
+      "Name": "ELLEDominiqueLLHalfLace",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DominiqueBoots",
+        "00EL_DominiqueTopLace",
+        "00EL_DominiqueGlovesHalfLace",
+        "00EL_DominiquePants",
+        "00EL_DominiqueThigh",
+        "00EL_DominiqueBelt"
+      ]
+    },
+    {
+      "Name": "ELLEDominiqueLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEDominiqueLLDefault",
+        "ELLEDominiqueLLFishnets",
+        "ELLEDominiqueLLFullLace",
+        "ELLEDominiqueLLHalfLace"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEDominiqueOutfitDefault",
+      "Items": [ "ELLEDominiqueLLDefault" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDominiqueOutfitFishnets",
+      "Items": [ "ELLEDominiqueLLFishnets" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDominiqueOutfitFullLace",
+      "Items": [ "ELLEDominiqueLLFullLace" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDominiqueOutfitHalfLace",
+      "Items": [ "ELLEDominiqueLLHalfLace" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDominiqueAllOutfits",
+      "Items": [ "ELLEDominiqueLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "Thief|CombatThief||F/-C/-U||30", // Any Female Thief 30%
+        "Assassin|CombatThief||F/-C/-U||30" // Any Female Assassin 30%
+      ]
+    }
+  ]
+}

@@ -1,10 +1,4 @@
-﻿using System.Drawing;
-
-using GenericSynthesisPatcher.Helpers.Action;
-
-using Mutagen.Bethesda.Skyrim;
-
-using Noggog;
+﻿using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers
 {

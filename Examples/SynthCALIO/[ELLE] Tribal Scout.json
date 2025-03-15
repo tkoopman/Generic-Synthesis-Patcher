@@ -1,0 +1,103 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLETribalScoutLLDefault",
+      "Flags": "UseAll",
+      "Entries": [
+        "ForswornBoots",
+        "00EL_TribalScoutUpper",
+        "00EL_TribalScoutLower"
+      ]
+    },
+    {
+      "Name": "ELLETribalScoutLLGlowingBlue",
+      "Flags": "UseAll",
+      "Entries": [
+        "ForswornBoots",
+        "00EL_TribalScoutLowerBlueGlow",
+        "00EL_TribalScoutUpperBlueGlow"
+      ]
+    },
+    {
+      "Name": "ELLETribalScoutLLGlowingRed",
+      "Flags": "UseAll",
+      "Entries": [
+        "ForswornBoots",
+        "00EL_TribalScoutLowerRedGlow",
+        "00EL_TribalScoutUpperRedGlow"
+      ]
+    },
+    {
+      "Name": "ELLETribalScoutLLRed",
+      "Flags": "UseAll",
+      "Entries": [
+        "ForswornBoots",
+        "00EL_TribalScoutLowerRed",
+        "00EL_TribalScoutUpperRed"
+      ]
+    },
+    {
+      "Name": "ELLETribalScoutLLViking",
+      "Flags": "UseAll",
+      "Entries": [
+        "ForswornBoots",
+        "00EL_TribalScoutLowerViking",
+        "00EL_TribalScoutUpperViking"
+      ]
+    },
+    {
+      "Name": "ELLETribalScoutLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLETribalScoutLLDefault",
+        "ELLETribalScoutLLGlowingBlue",
+        "ELLETribalScoutLLGlowingRed",
+        "ELLETribalScoutLLRed",
+        "ELLETribalScoutLLViking"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLETribalScoutOutfitDefault",
+      "Items": [ "ELLETribalScoutLLDefault" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLETribalScoutOutfitGlowingBlue",
+      "Items": [ "ELLETribalScoutLLGlowingBlue" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLETribalScoutOutfitGlowingRed",
+      "Items": [ "ELLETribalScoutLLGlowingRed" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLETribalScoutOutfitRed",
+      "Items": [ "ELLETribalScoutLLRed" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLETribalScoutOutfitViking",
+      "Items": [ "ELLETribalScoutLLViking" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLETribalScoutAllOutfits",
+      "Items": [ "ELLETribalScoutLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Forsworn|||F/-C/-U||15" // Any Female Forsworn 15%
+      ]
+    }
+  ]
+}

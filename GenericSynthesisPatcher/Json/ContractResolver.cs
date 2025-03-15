@@ -32,7 +32,7 @@ namespace GenericSynthesisPatcher.Json
             else if (objectType.IsGenericType && objectType.GetGenericTypeDefinition().IsAssignableTo(typeof(OperationBase<,>)))
                 contract.Converter = new OperationsConverter();
             else if (objectType == typeof(Percent))
-                contract.Converter = new PercentConverter();
+                contract.Converter = new GSPShared.JsonConverters.PercentConverter();
             else if (objectType.IsAssignableTo(typeof(IObjectBoundsGetter)))
                 contract.Converter = new ObjectBoundsConverter();
             else if (objectType == typeof(Color))

@@ -1,0 +1,57 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEDevilParadeLLGold",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DevilParadeBootsGold",
+        "00EL_DevilParadeWings",
+        "00EL_DevilParadeSuitGold",
+        "00EL_DevilParadeGauntlets"
+      ]
+    },
+    {
+      "Name": "ELLEDevilParadeLLSilver",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DevilParadeBootsSilver",
+        "00EL_DevilParadeWings",
+        "00EL_DevilParadeSuitSilver",
+        "00EL_DevilParadeGauntlets"
+      ]
+    },
+    {
+      "Name": "ELLEDevilParadeLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEDevilParadeLLGold",
+        "ELLEDevilParadeLLSilver"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEDevilParadeOutfitGold",
+      "Items": [ "ELLEDevilParadeLLGold" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDevilParadeOutfitSilver",
+      "Items": [ "ELLEDevilParadeLLSilver" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDevilParadeAllOutfits",
+      "Items": [ "ELLEDevilParadeLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Vampire|||F/-C/-U||15" // Any Female Vampire 15%
+      ]
+    }
+  ]
+}
