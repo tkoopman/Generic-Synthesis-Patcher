@@ -9,10 +9,10 @@ This can patch many different records by either filling with static values, forw
 [Nexus Link](https://www.nexusmods.com/skyrimspecialedition/mods/130978)  
 [Documentation](https://tkoopman.github.io/Generic-Synthesis-Patcher/)
 
-## [SynthOutfits](SynthOutfits.md)
+## [SynthCALIO](SynthCALIO.md) - Create and Allocate Leveled Item and Outfit records
 
 This can create new LeveledItem and Outfit records, and assign them to NPC's Default or Sleeping outfits, and/or add to Spell Perk Item Distributor (SPID) file.  
-SynthOutfits keeps track of IDs assigned in previous runs to make sure the same FormKey is used each time, even if you add/remove configurations.
+SynthCALIO keeps track of IDs assigned in previous runs to make sure the same FormKey is used each time, even if you add/remove configurations.
 
 ## Prerequisites
 

@@ -1,0 +1,81 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEBioSpikeLL1",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_BS_Blindfold1",
+        "00EL_BS_Bodice1",
+        "00EL_BS_Gloves1",
+        "00EL_BS_Greaves1",
+        "00EL_BS_Shoes1",
+        "00EL_BS_Vambraces1"
+      ]
+    },
+    {
+      "Name": "ELLEBioSpikeLL2",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_BS_Blindfold2",
+        "00EL_BS_Bodice2",
+        "00EL_BS_Gloves2",
+        "00EL_BS_Greaves2",
+        "00EL_BS_Shoes2",
+        "00EL_BS_Vambraces2"
+      ]
+    },
+    {
+      "Name": "ELLEBioSpikeLL3",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_BS_Blindfold3",
+        "00EL_BS_Bodice3",
+        "00EL_BS_Gloves3",
+        "00EL_BS_Greaves3",
+        "00EL_BS_Shoes3",
+        "00EL_BS_Vambraces3"
+      ]
+    },
+    {
+      "Name": "ELLEBioSpikeLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEBioSpikeLL1",
+        "ELLEBioSpikeLL2",
+        "ELLEBioSpikeLL3"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEBioSpikeOutfit1",
+      "Items": [ "ELLEBioSpikeLL1" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEBioSpikeOutfit2",
+      "Items": [ "ELLEBioSpikeLL2" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEBioSpikeOutfit3",
+      "Items": [ "ELLEBioSpikeLL3" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEBioSpikeAllOutfits",
+      "Items": [ "ELLEBioSpikeLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Afflicted|DA13AfflictedFaction||F/-C/-U||35", // Any Female Afflicted 35%
+        "Falmer Servant|dunBlackreachFalmerServantFaction||F/-C/-U||35" // Any Female Falmer Servant 35%
+      ]
+    }
+  ]
+}

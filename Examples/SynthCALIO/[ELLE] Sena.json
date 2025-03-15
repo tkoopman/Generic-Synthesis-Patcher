@@ -1,0 +1,174 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLESenaLL1",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_ASenaArmbelt1",
+        "00EL_ASenaBelt1",
+        "00EL_ASenaBoots1",
+        "00EL_ASenaBralette1",
+        "00EL_ASenaBriefs1",
+        "00EL_ASenaCape1",
+        "00EL_ASenaCorset1",
+        "00EL_ASenaCuff1",
+        "00EL_ASenaGarter1",
+        "00EL_ASenaHoodOff1",
+        "00EL_ASenaShawl1",
+        "00EL_ASenaSkirt1",
+        "00EL_ASenaSleeve1",
+        "00EL_ASenaVest1"
+      ]
+    },
+    {
+      "Name": "ELLESenaLL2",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_ASenaArmbelt2",
+        "00EL_ASenaBelt2",
+        "00EL_ASenaBoots2",
+        "00EL_ASenaBralette2",
+        "00EL_ASenaBriefs2",
+        "00EL_ASenaCape2",
+        "00EL_ASenaCorset2",
+        "00EL_ASenaCuff2",
+        "00EL_ASenaGarter2",
+        "00EL_ASenaHoodOff2",
+        "00EL_ASenaShawl2",
+        "00EL_ASenaSkirt2",
+        "00EL_ASenaSleeve2",
+        "00EL_ASenaVest2"
+      ]
+    },
+    {
+      "Name": "ELLESenaLL3",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_ASenaArmbelt3",
+        "00EL_ASenaBelt3",
+        "00EL_ASenaBoots3",
+        "00EL_ASenaBralette3",
+        "00EL_ASenaBriefs3",
+        "00EL_ASenaCape3",
+        "00EL_ASenaCorset3",
+        "00EL_ASenaCuff3",
+        "00EL_ASenaGarter3",
+        "00EL_ASenaHoodOff3",
+        "00EL_ASenaShawl3",
+        "00EL_ASenaSkirt3",
+        "00EL_ASenaSleeve3",
+        "00EL_ASenaVest3"
+      ]
+    },
+    {
+      "Name": "ELLESenaLL4",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_ASenaArmbelt4",
+        "00EL_ASenaBelt4",
+        "00EL_ASenaBoots4",
+        "00EL_ASenaBralette4",
+        "00EL_ASenaBriefs4",
+        "00EL_ASenaCape4",
+        "00EL_ASenaCorset4",
+        "00EL_ASenaCuff4",
+        "00EL_ASenaGarter4",
+        "00EL_ASenaHoodOff4",
+        "00EL_ASenaShawl4",
+        "00EL_ASenaSkirt4",
+        "00EL_ASenaSleeve4",
+        "00EL_ASenaVest4"
+      ]
+    },
+    {
+      "Name": "ELLESenaLL5",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_ASenaArmbelt5",
+        "00EL_ASenaBelt5",
+        "00EL_ASenaBoots5",
+        "00EL_ASenaBralette5",
+        "00EL_ASenaBriefs5",
+        "00EL_ASenaCape5",
+        "00EL_ASenaCorset5",
+        "00EL_ASenaCuff5",
+        "00EL_ASenaGarter5",
+        "00EL_ASenaHoodOff5",
+        "00EL_ASenaShawl5",
+        "00EL_ASenaSkirt5",
+        "00EL_ASenaSleeve5",
+        "00EL_ASenaVest5"
+      ]
+    },
+    {
+      "Name": "ELLESenaLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLESenaLL1",
+        "ELLESenaLL2",
+        "ELLESenaLL3",
+        "ELLESenaLL4",
+        "ELLESenaLL5"
+      ]
+    },
+    {
+      "Name": "ELLESenaBowAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "937:[ELLE] Sena.esp",
+        "93C:[ELLE] Sena.esp",
+        "93D:[ELLE] Sena.esp",
+        "93E:[ELLE] Sena.esp"
+      ],
+      "SPID": [
+        "|0xCAB2F", // Angi
+        "0x73FBE|Hunter|HunterFaction||-C/-U||5" // Any Hunter 5%
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLESenaOutfit1",
+      "Items": [ "ELLESenaLL1" ],
+      "DefaultOutfit": [
+        "CAB2F:Skyrim.esm" // Angi
+      ],
+      "SPID": []
+    },
+    {
+      "Name": "ELLESenaOutfit2",
+      "Items": [ "ELLESenaLL2" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLESenaOutfit3",
+      "Items": [ "ELLESenaLL3" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLESenaOutfit4",
+      "Items": [ "ELLESenaLL4" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLESenaOutfit5",
+      "Items": [ "ELLESenaLL5" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLESenaAllOutfits",
+      "Items": [ "ELLESenaLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "Hunter|HunterFaction||F/-C/-U||30" // Any Female Hunter 30%
+      ]
+    }
+  ]
+}

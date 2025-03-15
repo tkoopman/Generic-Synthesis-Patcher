@@ -2,16 +2,16 @@
 
 using Newtonsoft.Json;
 
-namespace SynthOutfits
+namespace SynthCALIO
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class JsonConfig
     {
         [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Reuse)]
-        public HashSet<JsonLeveledItem> LeveledItems { get; } = new(new JsonLeveledItemKey());
+        public List<JsonLeveledItem> LeveledItems { get; } = [];
 
         [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Reuse)]
-        public HashSet<JsonOutfit> Outfits { get; } = new(new JsonOutfitKey());
+        public List<JsonOutfit> Outfits { get; } = [];
 
         internal static string? CurrentFile { get; set; }
 

@@ -601,7 +601,7 @@ namespace GenericSynthesisPatcher
         }
 
         [JsonObject(MemberSerialization.OptIn)]
-        public class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
+        internal sealed class RPMDetails (RecordTypeMapping rtm, string propertyName, Type propertyType)
         {
             [JsonProperty]
             public string Aliases

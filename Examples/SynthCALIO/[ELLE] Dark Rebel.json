@@ -1,0 +1,415 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLEDarkRebelLLBodysuitBlack",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBlack",
+        "00EL_DarkRebelBodysuitBlack",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketBlack",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltBlack"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitBlackMaroon",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBlack",
+        "00EL_DarkRebelBodysuitBlackMaroon",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketBlackMaroon",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltBlack"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitBlackNets",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBlack",
+        "00EL_DarkRebelBodysuitBlackNets",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketBlack",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltBlack"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitBrown",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBrown",
+        "00EL_DarkRebelBodysuitBrown",
+        "00EL_DarkRebelGloveLBrown",
+        "00EL_DarkRebelGloveRBrown",
+        "00EL_DarkRebelJacketBrown",
+        "00EL_DarkRebelKneepadsBrown",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltBlack"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitBrownBlack",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBrown",
+        "00EL_DarkRebelBodysuitBrownBlack",
+        "00EL_DarkRebelGloveLBrown",
+        "00EL_DarkRebelGloveRBrown",
+        "00EL_DarkRebelJacketBrown",
+        "00EL_DarkRebelKneepadsBrown",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltBlack"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitDeepRed",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBodysuitDeepRed",
+        "00EL_DarkRebelJacketRed",
+        "00EL_DarkRebelBeltRed",
+        "00EL_DarkRebelBootsRed",
+        "00EL_DarkRebelGloveLRed",
+        "00EL_DarkRebelGloveRRed",
+        "00EL_DarkRebelKneepadsRed",
+        "00EL_DarkRebelPantiesRed"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitGreen",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsGreen",
+        "00EL_DarkRebelBodysuitGreen",
+        "00EL_DarkRebelGloveLGreen",
+        "00EL_DarkRebelGloveRGreen",
+        "00EL_DarkRebelJacketGreen",
+        "00EL_DarkRebelKneepadsGreen",
+        "00EL_DarkRebelPantiesGreen",
+        "00EL_DarkRebelBeltGreen"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitLace",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsGrey",
+        "00EL_DarkRebelBodysuitLace",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketGrey",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesGrey",
+        "00EL_DarkRebelBeltGrey"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitLaceLatex",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsGrey",
+        "00EL_DarkRebelBodysuitLaceLatex",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketGreyCamo",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesGrey",
+        "00EL_DarkRebelBeltGrey"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitLatex",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsGrey",
+        "00EL_DarkRebelBodysuitLatex",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketLeather",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesGrey",
+        "00EL_DarkRebelBeltGrey"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitMaroon",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsBlack",
+        "00EL_DarkRebelBodysuitMaroon",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelJacketBlackMaroon",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltMaroon"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLBodysuitOrange",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelBootsOrange",
+        "00EL_DarkRebelBodysuitOrange",
+        "00EL_DarkRebelGloveLOrange",
+        "00EL_DarkRebelGloveROrange",
+        "00EL_DarkRebelJacketOrange",
+        "00EL_DarkRebelKneepadsOrange",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelBeltOrange"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressBlack",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressBlack",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelDressBlackOverlay"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressGreen",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressGreen",
+        "00EL_DarkRebelGloveLGreen",
+        "00EL_DarkRebelGloveRGreen",
+        "00EL_DarkRebelKneepadsGreen",
+        "00EL_DarkRebelPantiesGreen",
+        "00EL_DarkRebelDressGreenOverlay"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressGrey",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressGrey",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesGrey",
+        "00EL_DarkRebelDressGreyOverlay"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressMaroon",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressMaroon",
+        "00EL_DarkRebelGloveLBlack",
+        "00EL_DarkRebelGloveRBlack",
+        "00EL_DarkRebelKneepadsBlack",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelDressMaroonOverlay"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressOrange",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressOrange",
+        "00EL_DarkRebelGloveLOrange",
+        "00EL_DarkRebelGloveROrange",
+        "00EL_DarkRebelKneepadsOrange",
+        "00EL_DarkRebelPantiesBlack",
+        "00EL_DarkRebelDressOrangeOverlay"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLDressRed",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DarkRebelDressRedOverlay",
+        "00EL_DarkRebelDressRed",
+        "00EL_DarkRebelGloveLRed",
+        "00EL_DarkRebelGloveRRed",
+        "00EL_DarkRebelKneepadsRed",
+        "00EL_DarkRebelPantiesRed"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLAllBodySuits",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEDarkRebelLLBodysuitBlack",
+        "ELLEDarkRebelLLBodysuitBlackMaroon",
+        "ELLEDarkRebelLLBodysuitBlackNets",
+        "ELLEDarkRebelLLBodysuitBrown",
+        "ELLEDarkRebelLLBodysuitBrownBlack",
+        "ELLEDarkRebelLLBodysuitDeepRed",
+        "ELLEDarkRebelLLBodysuitGreen",
+        "ELLEDarkRebelLLBodysuitLace",
+        "ELLEDarkRebelLLBodysuitLaceLatex",
+        "ELLEDarkRebelLLBodysuitLatex",
+        "ELLEDarkRebelLLBodysuitMaroon",
+        "ELLEDarkRebelLLBodysuitOrange"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLAllDresses",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEDarkRebelLLDressBlack",
+        "ELLEDarkRebelLLDressGreen",
+        "ELLEDarkRebelLLDressGrey",
+        "ELLEDarkRebelLLDressMaroon",
+        "ELLEDarkRebelLLDressOrange",
+        "ELLEDarkRebelLLDressRed"
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLEDarkRebelLLAllBodySuits",
+        "ELLEDarkRebelLLAllDresses"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLEDarkRebelBodysuitBlack",
+      "Items": [ "ELLEDarkRebelLLBodysuitBlack" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitBlackMaroon",
+      "Items": [ "ELLEDarkRebelLLBodysuitBlackMaroon" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitBlackNets",
+      "Items": [ "ELLEDarkRebelLLBodysuitBlackNets" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitBrown",
+      "Items": [ "ELLEDarkRebelLLBodysuitBrown" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitBrownBlack",
+      "Items": [ "ELLEDarkRebelLLBodysuitBrownBlack" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitDeepRed",
+      "Items": [ "ELLEDarkRebelLLBodysuitDeepRed" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitGreen",
+      "Items": [ "ELLEDarkRebelLLBodysuitGreen" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitLace",
+      "Items": [ "ELLEDarkRebelLLBodysuitLace" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitLaceLatex",
+      "Items": [ "ELLEDarkRebelLLBodysuitLaceLatex" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitLatex",
+      "Items": [ "ELLEDarkRebelLLBodysuitLatex" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitMaroon",
+      "Items": [ "ELLEDarkRebelLLBodysuitMaroon" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelBodysuitOrange",
+      "Items": [ "ELLEDarkRebelLLBodysuitOrange" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressBlack",
+      "Items": [ "ELLEDarkRebelLLDressBlack" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressGreen",
+      "Items": [ "ELLEDarkRebelLLDressGreen" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressGrey",
+      "Items": [ "ELLEDarkRebelLLDressGrey" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressMaroon",
+      "Items": [ "ELLEDarkRebelLLDressMaroon" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressOrange",
+      "Items": [ "ELLEDarkRebelLLDressOrange" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelDressRed",
+      "Items": [ "ELLEDarkRebelLLDressRed" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelAllOutfits",
+      "Items": [ "ELLEDarkRebelLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Bandit|BanditFaction||F/-C/-U||5" // Any Female Bandit 5%
+      ]
+    },
+    {
+      "Name": "ELLEDarkRebelAllBodysuitOutfits",
+      "Items": [ "ELLEDarkRebelLLAllBodySuits" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLEDarkRebelAllDressOutfits",
+      "Items": [ "ELLEDarkRebelLLAllDresses" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    }
+  ]
+}

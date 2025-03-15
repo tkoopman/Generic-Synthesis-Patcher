@@ -1,4 +1,4 @@
-// SynthOutfits version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
 // https://www.nexusmods.com/skyrimspecialedition/mods/139703
 
 {
@@ -90,7 +90,9 @@
       "Name": "ELLETavernMaidAllOutfits",
       "Items": [ "ELLETavernMaidLLAll" ],
       "DefaultOutfit": [],
-      "SPID": [ "ActorTypeNPC|BarkeepClothes01,BarkeepClothes02||F/-C||35" ]
+      "SPID": [
+        "ActorTypeNPC|BarkeepClothes01,BarkeepClothes02||F/-C||35" // Replaces BarkeepClothes01 and BarkeepClothes02 35%
+      ]
     },
     {
       "Name": "ELLETavernMaidOutfit1",

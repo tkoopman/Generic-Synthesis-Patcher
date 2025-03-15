@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
 
-namespace SynthOutfits.JsonConverters
+namespace SynthCALIO.JsonConverters
 {
     public partial class JsonLeveledItemEntriesConverter : JsonConverter
     {

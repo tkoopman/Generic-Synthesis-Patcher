@@ -1,0 +1,70 @@
+// SynthCALIO config for distribution of "Open Dress" by contentcat
+// https://www.nexusmods.com/skyrimspecialedition/mods/143861
+
+{
+  "LeveledItems": [
+    {
+      "Name": "contentcatOpenDressAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "807:OpenDress.esp",
+        "809:OpenDress.esp",
+        "80B:OpenDress.esp",
+        "80D:OpenDress.esp",
+        "80F:OpenDress.esp",
+        "811:OpenDress.esp",
+        "813:OpenDress.esp"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "contentcatOpenDressOutfitRandom",
+      "Items": [ "contentcatOpenDressAll" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitLinen",
+      "Items": [ "807:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitDragon",
+      "Items": [ "809:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitChainmail",
+      "Items": [ "80B:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitDragon2",
+      "Items": [ "80D:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitLeather",
+      "Items": [ "80F:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitRagged",
+      "Items": [ "811:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "contentcatOpenDressOutfitWolf",
+      "Items": [ "813:OpenDress.esp" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    }
+  ]
+}

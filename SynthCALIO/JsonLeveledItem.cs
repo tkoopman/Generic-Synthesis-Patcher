@@ -9,9 +9,9 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-using SynthOutfits.JsonConverters;
+using SynthCALIO.JsonConverters;
 
-namespace SynthOutfits
+namespace SynthCALIO
 {
     public struct JsonLeveledItemEntry : IEquatable<JsonLeveledItemEntry>
     {
@@ -58,14 +58,27 @@ namespace SynthOutfits
         public LeveledItem.Flag Flags { get; set; }
 
         /// <summary>
-        ///     If entries that are to be added to LeveledItem are missing, should the LeveledItem
-        ///     be skipped?
-        ///     - Any (Default): Skip if any entry is missing.
-        ///     - All: Only skip if all entries are missing which would make an empty LeveledItem.
-        ///     - Never: Never skip the LeveledItem.
+        ///     Number of entries, that should be added, but are missing, that will cause
+        ///     LeveledItem to be skipped?
+        ///     - 1 (Default): Skip if any entry is missing.
+        ///     - 2+: Number of missing entries to trigger skip. If larger than number of entries in
+        ///     list then will never skip.
+        ///     - 0: Never Skip
+        ///     - -1: Skip only if all entries are missing
         /// </summary>
         [JsonProperty]
-        public SkipIfMissing SkipIfMissing { get; set; }
+        public int SkipIfMissing { get; set; } = SynthCALIO.SkipIfMissing.Any;
+
+        /// <summary>
+        ///     This is the list of SPID entries, starting from the StringFilters, that will be
+        ///     added to the INI file. Everything before StringFilters will be filled in
+        ///     automatically. As such it must contain 5 pipe (|) characters if provided.
+        ///     Item=FormID|StringFilters|FormFilters|LevelFilters|TraitFilters|CountOrPackageIndex|Chance
+        ///
+        ///     Will only add SPID entries if the LeveledItem was added to the mod.
+        /// </summary>
+        [JsonProperty]
+        public string[] SPID { get; set; } = [];
 
         /// <summary>
         ///     Stores the config file this was loaded from.
@@ -78,7 +91,7 @@ namespace SynthOutfits
         /// </summary>
         public void BasicChecks ()
         {
-            if (Entries.Count == 0 && SkipIfMissing != SkipIfMissing.Never)
+            if (Entries.Count == 0 && SkipIfMissing != SynthCALIO.SkipIfMissing.Never)
                 throw new InvalidDataException($"LeveledItem {EditorID} from {FromFile}, contains no entries");
 
             foreach (var entry in Entries)
@@ -98,7 +111,7 @@ namespace SynthOutfits
             };
 
             leveledItem.Entries ??= [];
-
+            int skipped = 0;
             foreach (var data in Entries)
             {
                 var entry = new LeveledItemEntry();
@@ -106,9 +119,9 @@ namespace SynthOutfits
                 entry.Data.Count = data.Count;
                 entry.Data.Level = data.Level;
 
-                if (!Common.TryGetRecord<IItemGetter>(data.ID, Program.State.LinkCache, out var record))
+                if (!Program.TryGetRecord<IItemGetter>(data.ID, out var record))
                 {
-                    if (SkipIfMissing == SkipIfMissing.Any)
+                    if (++skipped == SkipIfMissing)
                     {
                         Console.WriteLine($"Skipping LeveledItem: {EditorID}. Record not found: {data.ID}. Config file: {FromFile}.");
                         return null;
@@ -125,7 +138,7 @@ namespace SynthOutfits
                 }
             }
 
-            if (SkipIfMissing != SkipIfMissing.Never && leveledItem.Entries.Count == 0)
+            if (SkipIfMissing == SynthCALIO.SkipIfMissing.All && leveledItem.Entries.Count == 0)
             {
                 Console.WriteLine($"Skipping LeveledItem: {EditorID}. No valid entries found. Config file: {FromFile}.");
                 return null;

@@ -1,19 +1,32 @@
 ## About
 
-SynthOutfits can create new LeveledItem and Outfit records, and assign them to NPC's Default or Sleeping outfits, and/or add to Spell Perk Item Distributor (SPID) file.  
-SynthOutfits keeps track of IDs assigned in previous runs to make sure the same FormKey is used each time, even if you add/remove configurations.
+SynthCALIO can create new LeveledItem and Outfit records, and assign them to NPC's Default or Sleeping outfits, and/or add to Spell Perk Item Distributor (SPID) file.  
+SynthCALIO keeps track of IDs assigned in previous runs to make sure the same FormID is used each time, even if you add/remove configurations.
 
 ## Links
-[Examples](./Examples/SynthOutfits/)
+[Examples](./Examples/SynthCALIO/)
 
 ## Prerequisites
 
 - [Synthesis](https://github.com/Mutagen-Modding/Synthesis)
 - [Spell Perk Item Distributor (SPID)](https://www.nexusmods.com/skyrimspecialedition/mods/36869)
 
+## How SynthCALIO maintains FormID's
+
+There are 2 methods used.  
+First, at the end of each run it will save a file formIDCache.txt to the Synthesis data folder. This contains a mapping of each known FormID to EditorID. This is then loaded at the start of every run.
+As this file will not remove entries just because they may not of been exported this run (maybe you removed a JSON config file), it will keep those IDs available unless you manually clear the file.
+You may delete this cache if you need to reset it, but if next method is enabled it will be repopulated with any entries that exist in the current version. So disable it as well to fully reset FormIDs.
+
+Then optionally it will also read the current SynthCALIO's mod for all IDs to EditorID mappings it contains and update/add to the entries loaded from formIDCache.txt.
+In most situations this should never be required as the cache file should contain everything, but this is here as backup.
+You can disable this in the Synthesis SynthCALIO Settings, but is enabled by default.
+
+This does mean that if you rename an entry in a JSON config file, it will get a new FormID as the EditorID has changed.
+
 ## Configuration file format
 
-By default SynthOutfits will look for a sub-folder called SynthOutfits in the Skyrim Data folder for all JSON files to load.
+By default SynthCALIO will look for a sub-folder called SynthCALIO in the Skyrim Data folder for all JSON files to load.
 Each JSON configuration file has the following structure:
 ```json
 {
@@ -41,15 +54,16 @@ Each JSON configuration file has the following structure:
       "Name": "EditorID4LeveledItemAll",
       "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ], // Optional - Can have multiple flags
       "Entries": [
-        "EditorID4LeveledItem1", // Must use EditorID when referencing other records created by SynthOutfits
+        "EditorID4LeveledItem1", // Must use EditorID when referencing other records created by SynthCALIO
         "EditorID4LeveledItem2"
-      ]
+      ],
+      "SPID": [ "StringFilters|FormFilters|LevelFilters|TraitFilters|CountOrPackageIndex|Chance" ] // Optional - SPID entry to add to INI if this item is created. Excludes the starting Item=FormOrEditorID| part as that is automatically added.
     }
   ],
   "Outfits": [
     {
       "Name": "EditorID4Outfit",
-      "Items": [ "EditorID4LeveledItemAll" ], // List of items to include in the outfit. Can be FormKey or EditorID but if referencing a LeveledItem created by SynthOutfits, it must be the EditorID
+      "Items": [ "EditorID4LeveledItemAll" ], // List of items to include in the outfit. Can be FormKey or EditorID but if referencing a LeveledItem created by SynthCALIO, it must be the EditorID
       "SkipIfMissing": "Any", // Optional - Valid values are "Any" (Default), "All", "Never"
       "DefaultOutfit": [ // List of NPC records to update the Default Outfit on to point to this outfit if created.
         "ABC123:Dragonborn.esm" // Can have comments
@@ -57,7 +71,7 @@ Each JSON configuration file has the following structure:
       "SleepingOutfit": [ // List of NPC records to update the Sleeping Outfit on to point to this outfit if created.
         "321ABC:Dragonborn.esm" // Can have comments
       ],
-      "SPID": [ "StringFilters|FormFilters|LevelFilters|TraitFilters|CountOrPackageIndex|Chance" ] // SPID entry to add to INI if this outfit is created. Excludes the starting FormType=FormOrEditorID| part as that is automatically added.
+      "SPID": [ "StringFilters|FormFilters|LevelFilters|TraitFilters|CountOrPackageIndex|Chance" ] // Optional - SPID entry to add to INI if this outfit is created. Excludes the starting Outfit=FormOrEditorID| part as that is automatically added.
     }
   ]
 }

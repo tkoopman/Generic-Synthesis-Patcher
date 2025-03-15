@@ -1,11 +1,11 @@
 ﻿using Mutagen.Bethesda.WPF.Reflection.Attributes;
 
-namespace SynthOutfits
+namespace SynthCALIO
 {
     public class Settings
     {
         [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a sub-folder.")]
-        public string Folder { get; set; } = "{SkyrimData}\\SynthOutfits";
+        public string Folder { get; set; } = "{SkyrimData}\\SynthCALIO";
 
         [Tooltip("Output folder for the SPID ini. Leave empty for Skyrim data folder.")]
         public string Output { get; set; } = "";

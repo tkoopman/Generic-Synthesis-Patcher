@@ -1,0 +1,113 @@
+// SynthCALIO version of "ELLE's Armor Mods - SPID Addons" by SauteedPanda
+// https://www.nexusmods.com/skyrimspecialedition/mods/139703
+
+{
+  "LeveledItems": [
+    {
+      "Name": "ELLELovePotionLLBlack",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_PantsBlack",
+        "00EL_DressBlack"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLBlue",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_PantsBlue",
+        "00EL_DressBlue"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLFire",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_DressFire",
+        "00EL_PantsFire"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLHalloween",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_PantsHalloween",
+        "00EL_DressRHalloween"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLPatchWork",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_PantsBrown",
+        "00EL_DressBrown"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLPurple",
+      "Flags": "UseAll",
+      "Entries": [
+        "00EL_PantsPurple",
+        "00EL_DressRPurple"
+      ]
+    },
+    {
+      "Name": "ELLELovePotionLLAll",
+      "Flags": [ "CalculateFromAllLevelsLessThanOrEqualPlayer", "CalculateForEachItemInCount" ],
+      "Entries": [
+        "ELLELovePotionLLBlack",
+        "ELLELovePotionLLBlue",
+        "ELLELovePotionLLFire",
+        "ELLELovePotionLLHalloween",
+        "ELLELovePotionLLPatchWork",
+        "ELLELovePotionLLPurple"
+      ]
+    }
+  ],
+  "Outfits": [
+    {
+      "Name": "ELLELovePotionOutfitBlack",
+      "Items": [ "ELLELovePotionLLBlack" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionOutfitBlue",
+      "Items": [ "ELLELovePotionLLBlue" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionOutfitFire",
+      "Items": [ "ELLELovePotionLLFire" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionOutfitHalloween",
+      "Items": [ "ELLELovePotionLLHalloween" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionOutfitPatchWork",
+      "Items": [ "ELLELovePotionLLPatchWork" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionOutfitPurple",
+      "Items": [ "ELLELovePotionLLPurple" ],
+      "DefaultOutfit": [],
+      "SPID": []
+    },
+    {
+      "Name": "ELLELovePotionAllOutfits",
+      "Items": [ "ELLELovePotionLLAll" ],
+      "DefaultOutfit": [],
+      "SPID": [
+        "*Conjurer,*Cryomancer,*Electromancer,*Mage,*Necro,*Pyromancer,*Wizard,*Warlock,*Sorcerer|||F/-C/-U||5" // Any Female Mage 5%
+      ]
+    }
+  ]
+}
