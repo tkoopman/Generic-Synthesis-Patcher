@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             // If no values then if we are to match against any included values it will not match.
             if (!values.SafeAny())
-                return matches.Any(m => m.Operation != ListLogic.NOT);
+                return !matches.Any(m => m.Operation != ListLogic.NOT);
 
             int matchedCount = 0;
             int countIncludes = 0;

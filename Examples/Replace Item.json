@@ -1,0 +1,29 @@
+/*
+  Replaces an item with another.
+  Only gotcha is Matches and Removing items in Fill action do not check Lvl or Qty, so will be replaced all regardless with what ever you fill.
+  So in this example every Iron Sword will be replaced with 1 Wooden Sword regardless of the Qty of Iron Swords.
+  You can still add count to fill on the Wooden Sword but would still replace all with whatever Qty you specify.
+*/
+
+[
+  {
+    "types": [ "Container", "NPC" ],
+    "Matches": { "Items": "12EB7:Skyrim.esm" },
+    "Fill": {
+      "Items": [
+        { "Item": "-12EB7:Skyrim.esm" },
+        { "Item": "4D91:HearthFires.esm" }
+      ]
+    }
+  },
+  {
+    "types": "LeveledItem",
+    "Matches": { "Entries": "12EB7:Skyrim.esm" },
+    "Fill": {
+      "Entries": [
+        { "Item": "-12EB7:Skyrim.esm" },
+        { "Item": "4D91:HearthFires.esm" }
+      ]
+    }
+  }
+]
