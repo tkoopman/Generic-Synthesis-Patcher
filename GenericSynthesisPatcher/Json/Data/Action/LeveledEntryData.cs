@@ -18,7 +18,8 @@ namespace GenericSynthesisPatcher.Json.Data.Action
         [JsonProperty(PropertyName = "ItemCondition")]
         public float ItemCondition { get; set; } = -1;
 
-        [JsonProperty(PropertyName = "Level")]
+        [JsonProperty(PropertyName = "Level", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(1)]
         public short Level { get; } = level;
 
         [JsonProperty(PropertyName = "Owner")]
