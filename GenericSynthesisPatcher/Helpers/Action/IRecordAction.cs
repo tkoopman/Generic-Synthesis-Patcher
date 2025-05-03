@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Action
 {
@@ -31,7 +30,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// </returns>
         public int Fill (ProcessingKeys proKeys);
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods);
+        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods);
 
         /// <summary>
         ///     Static fill of value from JSON rule
@@ -43,7 +42,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     number of changes made. If single field value should never be &gt;1, but for lists
         ///     could include count of number of items added/removed.
         /// </returns>
-        public int Forward (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext);
+        public int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext);
 
         /// <summary>
         ///     Static fill of value from JSON rule
@@ -55,7 +54,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     number of changes made. If single field value should never be &gt;1, but for lists
         ///     could include count of number of items added/removed.
         /// </returns>
-        public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> forwardContext);
+        public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext);
 
         /// <summary>
         ///     Checks if property is currently set to Null or equivalent empty value.
@@ -63,7 +62,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <param name="proKeys"></param>
         /// <param name="recordContext"></param>
         /// <returns></returns>
-        public bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext);
+        public bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext);
 
         /// <summary>
         ///     Check if field matches in both current context and origin.
@@ -75,7 +74,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         ///     Check if field matches in both this record and origin.
         /// </summary>
         /// <returns>True if this field matches</returns>
-        public bool MatchesOrigin (ProcessingKeys proKeys, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> recordContext);
+        public bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext);
 
         /// <summary>
         ///     Check Property matches current RuleKey both set in proKeys.

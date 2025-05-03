@@ -7,6 +7,8 @@ using GenericSynthesisPatcher.Json.Data;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins.Cache;
+using Mutagen.Bethesda.Plugins.Order;
+using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 
@@ -17,7 +19,25 @@ namespace GenericSynthesisPatcher
     internal static class Global
     {
         internal static Lazy<GSPSettings> settings = null!;
-        private static IPatcherState<ISkyrimMod, ISkyrimModGetter>? state;
+
+        private static LoadOrder<IModListingGetter>? listedLoadOrder;
+
+        public static LoadOrder<IModListingGetter> LoadOrder
+        {
+            get
+            {
+                listedLoadOrder ??= State switch
+                {
+                    //TODO Add games
+                    IPatcherState<ISkyrimMod, ISkyrimModGetter> state => new(state.LoadOrder.Select(m => (IModListingGetter)m.Value)),
+                    _ => throw new InvalidCastException(),
+                };
+
+                return listedLoadOrder;
+            }
+        }
+
+        public static RecordTypeMappings RecordTypeMappings { get; private set; } = null!;
 
         public static JsonSerializerSettings SerializerSettings { get; } = new()
         {
@@ -28,17 +48,9 @@ namespace GenericSynthesisPatcher
         };
 
         public static Lazy<GSPSettings> Settings { get => settings; private set => settings = value; }
-        public static IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get => state ?? throw new Exception("Oh boy this shouldn't happen!"); set => state = value; }
+        public static IPatcherState State { get; private set; } = null!;
 
-        #region Log Writers
-
-        public static LogWriter? DebugLogger { get; private set; }
-        public static LogWriter Logger { get; private set; } = new LogWriter(LogLevel.Information, 0x00, rule: null, context: null);
-        public static LogWriter? TraceLogger { get; private set; }
-
-        #endregion Log Writers
-
-        public static void ForceTrace (int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, [CallerLineNumber] int line = 0)
+        public static void ForceTrace (int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter> context, [CallerLineNumber] int line = 0)
         {
             if (TraceLogger == null)
             {
@@ -51,7 +63,7 @@ namespace GenericSynthesisPatcher
             }
         }
 
-        public static void Processing (int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
+        public static void Processing (int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             TraceLogger = Settings.Value.Logging.LogLevel == LogLevel.Trace
                                   && ((rule != null && rule.Debug)
@@ -72,6 +84,26 @@ namespace GenericSynthesisPatcher
             Logger.Rule = rule;
             Logger.Line = line;
         }
+
+        public static void SetState (IPatcherState state)
+        {
+            State = state;
+
+            //TODO Add games
+            RecordTypeMappings = state switch
+            {
+                IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim => new Helpers.Skyrim.RecordTypeMappings(skyrim),
+                _ => throw new InvalidCastException(),
+            };
+        }
+
+        #region Log Writers
+
+        public static LogWriter? DebugLogger { get; private set; }
+        public static LogWriter Logger { get; private set; } = new LogWriter(LogLevel.Information, 0x00, rule: null, context: null);
+        public static LogWriter? TraceLogger { get; private set; }
+
+        #endregion Log Writers
 
         public static void UpdateLoggers (int classLogCode, [CallerLineNumber] int line = 0)
         {

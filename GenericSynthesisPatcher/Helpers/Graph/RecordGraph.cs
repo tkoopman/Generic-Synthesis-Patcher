@@ -4,14 +4,13 @@ using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class RecordGraph<TItem> : RecordNode<TItem>, IRecordNode
         where TItem : class
     {
-        private RecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
+        private RecordGraph (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, Func<IMajorRecordGetter, IReadOnlyList<TItem>?> predicate, Func<TItem, string> debugPredicate) : base(context.ModKey, context.Record, modKeys, predicate, debugPredicate)
         {
         }
 

@@ -5,7 +5,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
@@ -22,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Type Type { get; }
         protected int WorkingFlags { get; set; }
 
-        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context.ModKey, context.Record, modKeys, PropertyName);
+        protected override RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context.ModKey, context.Record, modKeys, PropertyName);
 
         protected bool performMerge (int parentValue, out int add, out int forceAdd, out int remove)
         {

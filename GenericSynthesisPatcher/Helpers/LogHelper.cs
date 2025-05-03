@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers
 {
@@ -29,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers
             }
         }
 
-        public static void WriteLog (LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0)
+        public static void WriteLog (LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<IMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0)
         {
             if (logLevel < Global.Settings.Value.Logging.LogLevel)
                 return;
@@ -52,7 +51,7 @@ namespace GenericSynthesisPatcher.Helpers
             record ??= context?.Record;
             if (record != null)
             {
-                _ = sb.Append(RecordTypeMappings.FindByName(record.Registration.Name).Name);
+                _ = sb.Append(Global.RecordTypeMappings.FindByName(record.Registration.Name).Name);
                 _ = sb.Append(' ');
                 _ = sb.Append(record.FormKey);
                 _ = sb.Append(Divider);

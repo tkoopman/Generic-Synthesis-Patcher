@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher
     /// <param name="parent">
     ///     Parent key for when processing groups. Parent is always for the same context.
     /// </param>
-    public class ProcessingKeys (RecordTypeMapping rtm, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context, ProcessingKeys? parent = null)
+    public class ProcessingKeys (RecordTypeMapping rtm, IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
     {
         private const int ClassLogCode = 0xFF;
         private IMajorRecordGetter? origin;
@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher
         /// <summary>
         ///     Current record context being processed
         /// </summary>
-        public IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> Context { get; } = context;
+        public IModContext<IMajorRecordGetter> Context { get; } = context;
 
         /// <summary>
         ///     Current rule group being processed if current rule belongs to a group, else null
@@ -66,7 +66,7 @@ namespace GenericSynthesisPatcher
         ///     Gets current record but if a patch record already exists it will return the patched
         ///     record, so any checks are done against updated values.
         /// </summary>
-        public IMajorRecordGetter Record => HasPatchRecord ? (patchRecord ?? GetPatchRecord()) : Context.Record;
+        public IMajorRecordGetter Record => HasPatchRecord ? (patchRecord ?? GetPatchRecord()) : (IMajorRecordGetter)(Context.Record ?? throw new Exception());
 
         /// <summary>
         ///     Gets current rule being processed. If current is a group and not a rule will throw
@@ -138,9 +138,18 @@ namespace GenericSynthesisPatcher
         public IMajorRecord GetPatchRecord ()
         {
             if (Parent == null)
-                patchRecord ??= Context.GetOrAddAsOverride(Global.State.PatchMod);
+            {
+                patchRecord = Context switch
+                {
+                    //TODO Add other games
+                    IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> skyrimContext => skyrimContext.GetOrAddAsOverride((ISkyrimMod)Global.State.PatchMod),
+                    _ => throw new InvalidCastException(),
+                };
+            }
             else
+            {
                 patchRecord ??= Parent.GetPatchRecord();
+            }
 
             return patchRecord;
         }

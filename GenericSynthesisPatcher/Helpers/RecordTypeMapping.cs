@@ -2,7 +2,7 @@ using Loqui;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Skyrim;
+using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 
@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "<Pending>")]
-        public delegate IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverridesDelegate ();
+        public delegate IEnumerable<IModContext<IMajorRecordGetter>> WinningContextOverridesDelegate ();
 
         [JsonProperty(propertyName: "name")]
         public string DisplayName => StaticRegistration.Name.SeparateWords();

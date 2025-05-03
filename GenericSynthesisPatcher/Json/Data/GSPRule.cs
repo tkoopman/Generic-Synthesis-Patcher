@@ -182,7 +182,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             bool valid = Validate();
             if (Types.Count == 0)
-                Types = RecordTypeMappings.All;
+                Types = Global.RecordTypeMappings.All;
 
             return valid;
         }
@@ -253,12 +253,12 @@ namespace GenericSynthesisPatcher.Json.Data
                         if (hasExcludeMods || !values.SafeAny())
                         {
                             // Include all mods except excluded
-                            foreach (var addMod in Global.State.LoadOrder)
+                            foreach (var addMod in Global.LoadOrder)
                             {
-                                if (addMod.Value.Enabled // Mod must be enabled
-                                    && (!hasExcludeMods || !values.SafeAny(v => v.Value.Equals(addMod.Key)))) // Exclude anything excluded in config
+                                if (addMod.Enabled // Mod must be enabled
+                                    && (!hasExcludeMods || !values.SafeAny(v => v.Value.Equals(addMod.ModKey)))) // Exclude anything excluded in config
                                 {
-                                    buildMods.Add(addMod.Key);
+                                    buildMods.Add(addMod.ModKey);
                                 }
                             }
                         }
@@ -285,7 +285,7 @@ namespace GenericSynthesisPatcher.Json.Data
                 mods = sortMods
                      ? proKeys.Rule.HasForwardType(ForwardOptions._randomMod)
                          ? buildMods.OrderBy(_ => proKeys.GetRandom().Next())
-                         : buildMods.OrderByDescending(Global.State.LoadOrder.IndexOf)
+                         : buildMods.OrderByDescending(Global.LoadOrder.IndexOf)
                      : buildMods;
 
                 fields = [.. buildFields];

@@ -10,7 +10,7 @@ namespace GenericSynthesisPatcher.Json.Converters
         {
             string? key = reader.Value?.ToString();
             return key == null ? default
-                 : RecordTypeMappings.FindByName(reader.Value?.ToString());
+                 : Global.RecordTypeMappings.FindByName(reader.Value?.ToString());
         }
 
         public override void WriteJson (JsonWriter writer, RecordTypeMapping value, JsonSerializer serializer) => throw new NotImplementedException();

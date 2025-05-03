@@ -6,7 +6,7 @@ using GenericSynthesisPatcher.Json.Data;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Skyrim;
+using Mutagen.Bethesda.Plugins.Records;
 
 namespace GenericSynthesisPatcher.Helpers
 {
@@ -14,7 +14,7 @@ namespace GenericSynthesisPatcher.Helpers
     {
         private readonly StringBuilder _log = new();
 
-        public LogWriter (LogLevel logLevel, int classLogCode, GSPBase? rule, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
+        public LogWriter (LogLevel logLevel, int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             NewLine = "\n";
             LogLevel = logLevel;
@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Helpers
         }
 
         public int ClassLogCode { get; set; }
-        public IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? Context { get; set; }
+        public IModContext<IMajorRecordGetter>? Context { get; set; }
         public override Encoding Encoding => Encoding.Default;
         public int Line { get; set; }
         public LogLevel LogLevel { get; set; }

@@ -3,7 +3,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
@@ -40,6 +39,6 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             }
         }
 
-        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new ForwardRecordNode(context.ModKey, context.Record);
+        protected override RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new ForwardRecordNode(context.ModKey, context.Record);
     }
 }

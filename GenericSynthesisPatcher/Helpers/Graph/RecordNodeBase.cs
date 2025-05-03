@@ -7,7 +7,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
@@ -53,7 +52,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         /// <param name="root">Graph node pointing to parent record</param>
         protected static void populate (RecordNodeBase root)
         {
-            var all = Global.State.LinkCache.ResolveAllContexts(root.Record.FormKey, root.Record.Registration.GetterType);
+            var all = Global.State.LinkCache.ResolveAllSimpleContexts(root.Record.FormKey, root.Record.Registration.GetterType);
             int count = all.Count() - 2;
 
             for (int i = count; i >= 0; i--)
@@ -109,7 +108,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 c.cleanUp();
         }
 
-        protected abstract RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
+        protected abstract RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
 
         protected void print (string line)
         {

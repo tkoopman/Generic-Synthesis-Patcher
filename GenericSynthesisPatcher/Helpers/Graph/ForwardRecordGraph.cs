@@ -1,12 +1,11 @@
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class ForwardRecordGraph : ForwardRecordNode, IRecordNode
     {
-        private ForwardRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) : base(context.ModKey, context.Record)
+        private ForwardRecordGraph (IModContext<IMajorRecordGetter> context) : base(context.ModKey, context.Record)
         {
         }
 

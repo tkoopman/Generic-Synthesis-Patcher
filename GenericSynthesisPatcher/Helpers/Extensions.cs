@@ -6,7 +6,6 @@ using DynamicData;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -121,7 +120,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// <summary>
         ///     Is this record context the master
         /// </summary>
-        public static bool IsMaster (this IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) => context.ModKey.Equals(context.Record.FormKey.ModKey);
+        public static bool IsMaster (this IModContext<IMajorRecordGetter> context) => context.Record is IMajorRecord record && context.ModKey.Equals(record.FormKey.ModKey);
 
         public static bool IsNullable (this Type type) => type.GetIfGenericTypeDefinition() == typeof(Nullable<>);
 

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 
 using Noggog;
@@ -59,9 +58,9 @@ namespace GenericSynthesisPatcher.Helpers
         /// <returns>
         ///     Overwritten master record's context. Null if current record context is the master.
         /// </returns>
-        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> FindOriginContext (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
+        public static IModContext<IMajorRecordGetter> FindOriginContext (IModContext<IMajorRecordGetter> context)
             => !context.IsMaster()
-            && Global.State.LinkCache.TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
+            && Global.State.LinkCache.TryResolveSimpleContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
             ? o : context;
 
         /// <summary>
@@ -100,8 +99,15 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
-        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
         {
+            if (fromRecord == null)
+            {
+                value = default;
+                propertyType = null;
+                return false;
+            }
+
             if (tryGetPropertyFromHierarchy(fromRecord, propertyName, false, out object? _value, out _, out var property) && convertPropertyNullable(propertyName, property, _value, out value))
             {
                 propertyType = property.PropertyType;
@@ -113,7 +119,7 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
-        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
 
         public static bool TryGetPropertyForSetting<T> (ILoquiObject patchRecord, string propertyName, out T? value, [NotNullWhen(true)] out object? parent, [NotNullWhen(true)] out PropertyInfo? property)
         {

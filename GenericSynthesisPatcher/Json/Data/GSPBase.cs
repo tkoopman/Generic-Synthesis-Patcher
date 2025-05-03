@@ -218,7 +218,7 @@ namespace GenericSynthesisPatcher.Json.Data
 
             if (PatchedBy != null)
             {
-                var all = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
+                var all = Global.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
                 if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))
                     return false;
             }

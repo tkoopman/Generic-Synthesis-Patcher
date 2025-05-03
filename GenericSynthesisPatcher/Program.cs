@@ -58,7 +58,7 @@ namespace GenericSynthesisPatcher
 
         public static void RunPatch (IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
         {
-            Global.State = state;
+            Global.SetState(state);
 
             if (Global.Settings.Value.Logging.LogLevel <= LogLevel.Debug)
             {
@@ -194,7 +194,7 @@ namespace GenericSynthesisPatcher
         ///     just return the first mod index that meets the NonDefault and NonNull filters
         /// </summary>
         /// <returns>-1 if no valid mod found, else index to use</returns>
-        private static int getIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods)
+        private static int getIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods)
         {
             bool nonDefault = proKeys.Rule.HasForwardType(ForwardOptions._nonDefaultMod);
             bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
@@ -304,7 +304,7 @@ namespace GenericSynthesisPatcher
 
                         LoadedRules.Add(rule);
 
-                        if (!warned && rule.Types.Count == RecordTypeMappings.All.Count)
+                        if (!warned && rule.Types.Count == Global.RecordTypeMappings.All.Count)
                         {
                             LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "Found rule with no or all defined types. For best performance you should always define at least 1 type, and only required types for the rule.");
                             warned = true;
@@ -380,7 +380,7 @@ namespace GenericSynthesisPatcher
             if (!proKeys.Rule.TryGetForward(proKeys, ruleKey, out var mods, out string[]? fields))
                 return -1;
 
-            var AllRecordMods = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => new { key = m.ModKey, value = m }).ToDictionary(x => x.key, x => x.value);
+            var AllRecordMods = Global.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => new { key = m.ModKey, value = m }).ToDictionary(x => x.key, x => x.value);
 
             // Make sure at list one listed mod contains record we currently processing Can't be
             // done under TryGetForward has different for each record
@@ -452,7 +452,7 @@ namespace GenericSynthesisPatcher
         ///     Number of updates made to current record. -1 if record didn't meet requirements for
         ///     this rule
         /// </returns>
-        private static int processForwardSelfMasterOnly (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter>> AllRecordMods)
+        private static int processForwardSelfMasterOnly (ProcessingKeys proKeys, IEnumerable<ModKey> mods, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods)
         {
             bool firstMod = true;
             int changed = 0;
@@ -570,7 +570,7 @@ namespace GenericSynthesisPatcher
 
             if (rule.Merge.Count > 0)
             {
-                int versions = Global.State.LinkCache.ResolveAllContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Count();
+                int versions = Global.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Count();
                 switch (versions)
                 {
                     case < 2:

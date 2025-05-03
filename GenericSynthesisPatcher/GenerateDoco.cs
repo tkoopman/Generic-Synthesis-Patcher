@@ -153,14 +153,14 @@ namespace GenericSynthesisPatcher
 
             bool OutputUnimplemented = state is not null;
             if (state is not null)
-                Global.State = state;
+                Global.SetState(state);
 
             List<RecordTypeMapping> ImplementedRTMs = [];
             List<RPMDetails> buildRPMs = [];
             List<string[]> subPropertyAliases = [];
 
             // Output Implemented Properties per Record type
-            foreach (var rtm in RecordTypeMappings.All)
+            foreach (var rtm in Global.RecordTypeMappings.All)
             {
                 // Loop all properties of setter looking for implemented properties
                 var properties = processProperties(state, rtm, rtm.StaticRegistration.SetterType, null);
@@ -426,6 +426,7 @@ namespace GenericSynthesisPatcher
             return null;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1826:Do not use Enumerable methods on indexable collections", Justification = "<Pending>")]
         private static List<string[]> generateSubPropertyAliases (List<RPMDetails> properties)
         {
             List<string[]> lines = [];

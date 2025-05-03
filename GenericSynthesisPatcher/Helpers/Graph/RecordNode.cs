@@ -3,7 +3,6 @@ using GenericSynthesisPatcher.Json.Operations;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
@@ -16,7 +15,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Func<IMajorRecordGetter, IReadOnlyList<TItem>?> Predicate { get; } = predicate;
         protected List<TItem> WorkingList { get; } = predicate(record)?.ToList() ?? [];
 
-        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context.ModKey, context.Record, modKeys, Predicate, DebugPredicate);
+        protected override RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context.ModKey, context.Record, modKeys, Predicate, DebugPredicate);
 
         protected bool performMerge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
         {
