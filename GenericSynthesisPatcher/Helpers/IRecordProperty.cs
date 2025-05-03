@@ -1,6 +1,6 @@
 namespace GenericSynthesisPatcher.Helpers
 {
-    internal interface IRecordProperty
+    public interface IRecordProperty
     {
         public string PropertyName { get; }
 

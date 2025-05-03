@@ -3,6 +3,7 @@ using System.Drawing;
 
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Action;
+using GenericSynthesisPatcher.Helpers.Skyrim.Action;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Assets;
@@ -29,16 +30,17 @@ namespace GenericSynthesisPatcher
             using System.Drawing;
 
             using GenericSynthesisPatcher.Helpers.Action;
+            using GenericSynthesisPatcher.Helpers.Skyrim.Action;
 
             using Mutagen.Bethesda.Skyrim;
 
             using Noggog;
 
-            namespace GenericSynthesisPatcher.Helpers
+            namespace GenericSynthesisPatcher.Helpers.Skyrim
             {
-                public static partial class RecordPropertyMappings
+                public partial class RecordPropertyMappings
                 {
-                    private static void populateMappings ()
+                    private void populateMappings ()
                     {
             #pragma warning disable format
             """;
@@ -447,14 +449,14 @@ namespace GenericSynthesisPatcher
                 }
 
                 // Skip if already covered by null alias
-                if (RecordPropertyMappings.GetNullAliases(property.PropertyName).Any())
+                if (Global.RecordPropertyMappings.GetNullAliases(property.PropertyName).Any())
                     continue;
 
                 string name = property.PropertyName[..property.PropertyName.IndexOf('.')];
                 if (!name.Equals(lastName, StringComparison.Ordinal))
                 {
                     lastName = name;
-                    lastAlias = RecordPropertyMappings.GetAllAliases(lastType, name).FirstOrDefault();
+                    lastAlias = Global.RecordPropertyMappings.GetAllAliases(lastType, name).FirstOrDefault();
                 }
 
                 if (lastAlias is not null)
@@ -539,7 +541,7 @@ namespace GenericSynthesisPatcher
                 rpmDetails.RecordActionInterface = calcRPMAction(property.PropertyType);
                 rpmDetails.IsUsed = rpmDetails.RecordActionInterface is not null;
 
-                if (RecordPropertyMappings.tryFindMapping(rtm.StaticRegistration.GetterType, propertyFullName, out var rpm))
+                if (Global.RecordPropertyMappings.tryFindMapping(rtm.StaticRegistration.GetterType, propertyFullName, out var rpm))
                 {
                     // record property mapping (RPM) was found
                     if (rpm.Action.GetType().Equals(rpmDetails.RecordActionInterface))
@@ -611,7 +613,7 @@ namespace GenericSynthesisPatcher
                     if (RecordActionInterface is null)
                         return "";
 
-                    var names = RecordPropertyMappings.GetAllAliases(RTM.StaticRegistration.GetterType, PropertyName).ToList();
+                    var names = Global.RecordPropertyMappings.GetAllAliases(RTM.StaticRegistration.GetterType, PropertyName).ToList();
                     names.Sort();
 
                     return string.Join(';', names);

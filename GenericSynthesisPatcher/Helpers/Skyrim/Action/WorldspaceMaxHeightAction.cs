@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers.Action;
+
 using Mutagen.Bethesda.Skyrim;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public class WorldspaceMaxHeightAction : BasicGetterSetterAction<IWorldspaceMaxHeightGetter, WorldspaceMaxHeight>
     {
@@ -19,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IWorldspaceMaxHeightGetter? lhs, WorldspaceMaxHeight? rhs)
         {
             if (lhs == null && rhs == null)

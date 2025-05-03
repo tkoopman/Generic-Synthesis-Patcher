@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Loqui;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public abstract class LeveledEntryAction<TActionData, TMajor, TData> : FormLinksWithDataAction<TActionData, TMajor, TData>
         where TActionData : FormLinksWithDataActionDataBase<TMajor, TData>

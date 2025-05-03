@@ -179,7 +179,7 @@ namespace GenericSynthesisPatcher
             if (RuleBase == null)
                 throw new InvalidOperationException("Must set rule first.");
 
-            if (RecordPropertyMappings.TryFind(Type.StaticRegistration.GetterType, name, out var property))
+            if (Global.RecordPropertyMappings.TryFind(Type.StaticRegistration.GetterType, name, out var property))
             {
                 Property = property;
                 RuleKey = ruleKey;

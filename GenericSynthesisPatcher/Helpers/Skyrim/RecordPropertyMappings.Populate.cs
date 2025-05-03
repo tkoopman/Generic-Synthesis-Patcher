@@ -1,16 +1,17 @@
 using System.Drawing;
 
 using GenericSynthesisPatcher.Helpers.Action;
+using GenericSynthesisPatcher.Helpers.Skyrim.Action;
 
 using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Helpers
+namespace GenericSynthesisPatcher.Helpers.Skyrim
 {
-    public static partial class RecordPropertyMappings
+    public partial class RecordPropertyMappings
     {
-        private static void populateMappings ()
+        private void populateMappings ()
         {
 #pragma warning disable format
             Add(typeof(IActorValueInformationGetter) , "Abbreviation"                              , ConvertibleAction<string>.Instance);

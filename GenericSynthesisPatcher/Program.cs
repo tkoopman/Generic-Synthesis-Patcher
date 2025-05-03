@@ -256,6 +256,7 @@ namespace GenericSynthesisPatcher
 
             string dataFolder = Global.Settings.Value.Folder;
             dataFolder = dataFolder.Replace("{SkyrimData}", Global.State.DataFolderPath);
+            dataFolder = dataFolder.Replace("{GameData}", Global.State.DataFolderPath);
             dataFolder = dataFolder.Replace("{SynthesisData}", Global.State.ExtraSettingsDataPath);
 
             if (!Directory.Exists(dataFolder))

@@ -37,6 +37,7 @@ namespace GenericSynthesisPatcher
             }
         }
 
+        public static RecordPropertyMappings RecordPropertyMappings { get; private set; } = null!;
         public static RecordTypeMappings RecordTypeMappings { get; private set; } = null!;
 
         public static JsonSerializerSettings SerializerSettings { get; } = new()
@@ -90,11 +91,16 @@ namespace GenericSynthesisPatcher
             State = state;
 
             //TODO Add games
-            RecordTypeMappings = state switch
+            switch (State)
             {
-                IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim => new Helpers.Skyrim.RecordTypeMappings(skyrim),
-                _ => throw new InvalidCastException(),
-            };
+                case IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim:
+                    RecordTypeMappings = new Helpers.Skyrim.RecordTypeMappings(skyrim);
+                    RecordPropertyMappings = new Helpers.Skyrim.RecordPropertyMappings();
+                    break;
+
+                default:
+                    throw new InvalidCastException();
+            }
         }
 
         #region Log Writers

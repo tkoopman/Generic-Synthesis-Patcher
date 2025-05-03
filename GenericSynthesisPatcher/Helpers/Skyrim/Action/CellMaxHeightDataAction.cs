@@ -1,10 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers.Action;
+
 using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public class CellMaxHeightDataAction : BasicGetterSetterAction<ICellMaxHeightDataGetter, CellMaxHeightData>
     {
@@ -21,7 +23,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (ICellMaxHeightDataGetter? lhs, CellMaxHeightData? rhs)
         {
             if (lhs == null && rhs == null)

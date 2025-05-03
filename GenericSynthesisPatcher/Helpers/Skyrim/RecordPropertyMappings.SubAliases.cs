@@ -1,16 +1,10 @@
-﻿using System.Drawing;
+﻿using Mutagen.Bethesda.Skyrim;
 
-using GenericSynthesisPatcher.Helpers.Action;
-
-using Mutagen.Bethesda.Skyrim;
-
-using Noggog;
-
-namespace GenericSynthesisPatcher.Helpers
+namespace GenericSynthesisPatcher.Helpers.Skyrim
 {
-    public static partial class RecordPropertyMappings
+    public partial class RecordPropertyMappings
     {
-        private static void populateSubAliases ()
+        private void populateSubAliases ()
         {
 #pragma warning disable format
             AddAlias(typeof(IActorValueInformationGetter), "AVSK.ImproveMult"             , "Skill.ImproveMult");

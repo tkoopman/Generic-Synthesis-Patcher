@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data;
 using GenericSynthesisPatcher.Json.Data.Action;
 
@@ -10,7 +11,7 @@ using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public class PlayerSkillsAction : IRecordAction
     {
@@ -194,7 +195,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
         /// <returns>True if all player skills data matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
                 && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
                 && curValue != null && originValue != null
                 && curValue.FarAwayModelDistance == originValue.FarAwayModelDistance
@@ -203,7 +204,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
                 && curValue.Stamina == originValue.Stamina
                 && curValue.Magicka == originValue.Magicka
                 && SkillsEqual(curValue.SkillOffsets, originValue.SkillOffsets)
-                && SkillsEqual(curValue.SkillValues, originValue.SkillValues));
+                && SkillsEqual(curValue.SkillValues, originValue.SkillValues);
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 

@@ -10,8 +10,8 @@ namespace GenericSynthesisPatcher
         [Tooltip("Add any other Dynamic Patch Mods like SynthEBD to this list if they exist prior to this mod in load order. Causes them to be treated slightly differently in merges and similar actions.")]
         public HashSet<ModKey> DynamicMods { get; set; } = [];
 
-        [Tooltip("JSON config files location. {SkyrimData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {SkyrimData} you should add a sub-folder.")]
-        public string Folder { get; set; } = "{SkyrimData}\\GSP";
+        [Tooltip("JSON config files location. {GameData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {GameData} you should add a sub-folder.")]
+        public string Folder { get; set; } = "{GameData}\\GSP";
 
         [Tooltip("Logging Options")]
         public GSPLogging Logging { get; set; } = new();

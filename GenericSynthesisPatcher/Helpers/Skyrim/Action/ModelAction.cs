@@ -1,10 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers.Action;
+
 using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public class ModelAction : BasicGetterSetterAction<IModelGetter, Model>
     {
@@ -21,7 +23,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IModelGetter? lhs, Model? rhs)
         {
             if (lhs == null && rhs == null)
@@ -42,7 +44,7 @@ namespace GenericSynthesisPatcher.Helpers.Action
             : new Model
             {
                 AlternateTextures = getAlternateTextures(getter.AlternateTextures),
-                Data = (getter.Data is null) ? null : new([.. getter.Data]),
+                Data = getter.Data is null ? null : new([.. getter.Data]),
                 File = new(getter.File)
             };
 

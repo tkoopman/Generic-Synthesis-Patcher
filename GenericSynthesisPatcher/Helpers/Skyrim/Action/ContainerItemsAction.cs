@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
+using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,7 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
-namespace GenericSynthesisPatcher.Helpers.Action
+namespace GenericSynthesisPatcher.Helpers.Skyrim.Action
 {
     public class ContainerItemsAction : FormLinksWithDataAction<ContainerItemsData, IItemGetter, ContainerEntry>
     {
