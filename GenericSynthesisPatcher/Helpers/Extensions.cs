@@ -120,7 +120,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// <summary>
         ///     Is this record context the master
         /// </summary>
-        public static bool IsMaster (this IModContext<IMajorRecordGetter> context) => context.Record is IMajorRecord record && context.ModKey.Equals(record.FormKey.ModKey);
+        public static bool IsMaster (this IModContext<IMajorRecordGetter> context) => context.ModKey.Equals(context.Record.FormKey.ModKey);
 
         public static bool IsNullable (this Type type) => type.GetIfGenericTypeDefinition() == typeof(Nullable<>);
 
