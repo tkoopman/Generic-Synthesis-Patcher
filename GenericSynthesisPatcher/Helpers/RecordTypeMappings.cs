@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using Loqui;
 
 using Mutagen.Bethesda.Plugins;

@@ -1,3 +1,5 @@
+using Common;
+
 using GenericSynthesisPatcher.Helpers;
 
 using Microsoft.Extensions.Logging;
@@ -71,7 +73,7 @@ namespace GenericSynthesisPatcher.Json.Operations
 
         protected override FormKey convertValue (string? value)
             => value == null ? FormKey.Null
-             : FormKey.TryFactory(Mod.FixFormKey(value), out var formKey) ? formKey
+             : FormKey.TryFactory(SynthCommon.FixFormKey(value), out var formKey) ? formKey
              : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");
     }
 }

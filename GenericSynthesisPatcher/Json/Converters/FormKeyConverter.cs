@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Helpers;
+using Common;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Json.Converters
         {
             string? key = reader.Value?.ToString();
             return key == null ? null
-                 : FormKey.TryFactory(Mod.FixFormKey(key), out var formKey) ? formKey
+                 : FormKey.TryFactory(SynthCommon.FixFormKey(key), out var formKey) ? formKey
                  : Global.State.LinkCache.TryResolve<T>(key, out var record) ? record.FormKey
                  : throw new JsonSerializationException($"Unable to parse \"{key}\" into valid FormKey or EditorID");
         }
@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Json.Converters
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
-            return key != null ? FormKey.Factory(Mod.FixFormKey(key)) : null;
+            return key != null ? FormKey.Factory(SynthCommon.FixFormKey(key)) : null;
         }
 
         public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();

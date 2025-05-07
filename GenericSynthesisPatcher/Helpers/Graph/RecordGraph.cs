@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;

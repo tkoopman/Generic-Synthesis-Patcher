@@ -98,11 +98,39 @@
     "Name": "Race"
   },
   {
+    "Aliases": "NAM1",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SkinTexture.Female"
+  },
+  {
+    "Aliases": "NAM0",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SkinTexture.Male"
+  },
+  {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "NAM3",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "TextureSwapList.Female"
+  },
+  {
+    "Aliases": "NAM2",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "TextureSwapList.Male"
   },
   {
     "Aliases": "",

@@ -161,6 +161,20 @@
     "Name": "CloseLootSound"
   },
   {
+    "Aliases": "DNAM.Female",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DecapitateArmors.Female"
+  },
+  {
+    "Aliases": "DNAM.Male",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DecapitateArmors.Male"
+  },
+  {
     "Aliases": "NAM7",
     "Description": "Form Key or Editor ID",
     "Example": "",
@@ -173,6 +187,20 @@
     "Example": "\"DecelerationRate\": 3.14",
     "MFFSM": "MFF--",
     "Name": "DecelerationRate"
+  },
+  {
+    "Aliases": "HCLF.Female",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DefaultHairColors.Female"
+  },
+  {
+    "Aliases": "HCLF.Male",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DefaultHairColors.Male"
   },
   {
     "Aliases": "DESC",
@@ -558,6 +586,20 @@
     "Example": "\"UnarmedReach\": 3.14",
     "MFFSM": "MFF--",
     "Name": "UnarmedReach"
+  },
+  {
+    "Aliases": "VTCK.Female",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Voices.Female"
+  },
+  {
+    "Aliases": "VTCK.Male",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Voices.Male"
   },
   {
     "Aliases": "",

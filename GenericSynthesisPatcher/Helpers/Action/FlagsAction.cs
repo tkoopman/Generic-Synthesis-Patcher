@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using EnumsNET;
 
 using GenericSynthesisPatcher.Helpers.Graph;

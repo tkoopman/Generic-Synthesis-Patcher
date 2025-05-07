@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using GenericSynthesisPatcher.Helpers.Graph;
 using GenericSynthesisPatcher.Json.Data.Action;
 using GenericSynthesisPatcher.Json.Operations;

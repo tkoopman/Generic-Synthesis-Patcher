@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 
+using Common;
+
 using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins;

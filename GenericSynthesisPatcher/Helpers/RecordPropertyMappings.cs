@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using GenericSynthesisPatcher.Helpers.Action;
 
 using Noggog;

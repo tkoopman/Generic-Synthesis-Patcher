@@ -269,11 +269,15 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(IImpactGetter)                , "Decal.Shininess"                           , ConvertibleAction<float>.Instance);
             Add(typeof(ITextureSetGetter)            , "Decal.Shininess"                           , ConvertibleAction<float>.Instance);
             Add(typeof(IProjectileGetter)            , "DecalData"                                 , FormLinkAction<ITextureSetGetter>.Instance);
+            Add(typeof(IRaceGetter)                  , "DecapitateArmors.Female"                   , FormLinkAction<IArmorGetter>.Instance);
+            Add(typeof(IRaceGetter)                  , "DecapitateArmors.Male"                     , FormLinkAction<IArmorGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "DecapitationFX"                            , FormLinkAction<IArtObjectGetter>.Instance);
             Add(typeof(IReverbParametersGetter)      , "DecayHfRatio"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IReverbParametersGetter)      , "DecayMilliseconds"                         , ConvertibleAction<ushort>.Instance);
             Add(typeof(IRaceGetter)                  , "DecelerationRate"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "DeepColor"                                 , BasicAction<Color>.Instance);
+            Add(typeof(IRaceGetter)                  , "DefaultHairColors.Female"                  , FormLinkAction<IColorRecordGetter>.Instance);
+            Add(typeof(IRaceGetter)                  , "DefaultHairColors.Male"                    , FormLinkAction<IColorRecordGetter>.Instance);
             Add(typeof(ISoundCategoryGetter)         , "DefaultMenuVolume"                         , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "DefaultOutfit"                             , FormLinkAction<IOutfitGetter>.Instance);
             Add(typeof(INpcGetter)                   , "DefaultPackageList"                        , FormLinkAction<IFormListGetter>.Instance);
@@ -673,7 +677,7 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(IWorldspaceGetter)            , "MaxHeight"                                 , WorldspaceMaxHeightAction.Instance);
             Add(typeof(ICellGetter)                  , "MaxHeightData"                             , CellMaxHeightDataAction.Instance);
             Add(typeof(ISoulGemGetter)               , "MaximumCapacity"                           , EnumsAction.Instance);
-            Add(typeof(IEncounterZoneGetter)         , "MaxLevel"                                  , ConvertibleAction<sbyte>.Instance);
+            Add(typeof(IEncounterZoneGetter)         , "MaxLevel"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IGrassGetter)                 , "MaxSlope"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ICameraShotGetter)            , "MaxTime"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IClassGetter)                 , "MaxTrainingLevel"                          , ConvertibleAction<byte>.Instance);
@@ -692,7 +696,7 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(null                                 , "MenuDisplayObject"                         , FormLinkAction<IStaticGetter>.Instance);
             Add(typeof(IFactionGetter)               , "MerchantContainer"                         , FormLinkAction<IPlacedObjectGetter>.Instance);
             Add(typeof(IMagicEffectGetter)           , "MinimumSkillLevel"                         , ConvertibleAction<uint>.Instance);
-            Add(typeof(IEncounterZoneGetter)         , "MinLevel"                                  , ConvertibleAction<sbyte>.Instance);
+            Add(typeof(IEncounterZoneGetter)         , "MinLevel"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IGrassGetter)                 , "MinSlope"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ICameraShotGetter)            , "MinTime"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IWaterGetter)                 , "MNAM"                                      , MemorySliceByteAction.Instance);
@@ -891,7 +895,7 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(ILightGetter)                 , "Radius"                                    , ConvertibleAction<uint>.Instance);
             Add(typeof(IArmorGetter)                 , "RagdollConstraintTemplate"                 , ConvertibleAction<string>.Instance);
             Add(null                                 , "Range"                                     , ConvertibleAction<float>.Instance);
-            Add(typeof(IEncounterZoneGetter)         , "Rank"                                      , ConvertibleAction<sbyte>.Instance);
+            Add(typeof(IEncounterZoneGetter)         , "Rank"                                      , ConvertibleAction<byte>.Instance);
             Add(typeof(IRelationshipGetter)          , "Rank"                                      , EnumsAction.Instance);
             Add(typeof(ILocationGetter)              , "ReferenceCellPersistentReferences"         , FormLinksAction<IPlacedSimpleGetter>.Instance);
             Add(typeof(ILocationGetter)              , "ReferenceCellStaticReferences"             , FormLinksAction<IPlacedSimpleGetter>.Instance);
@@ -963,6 +967,8 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(IRaceGetter)                  , "SkillBoost6.Skill"                         , EnumsAction.Instance);
             Add(typeof(IMagicEffectGetter)           , "SkillUsageMultiplier"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "Skin"                                      , FormLinkAction<IArmorGetter>.Instance);
+            Add(typeof(IArmorAddonGetter)            , "SkinTexture.Female"                        , FormLinkAction<ITextureSetGetter>.Instance);
+            Add(typeof(IArmorAddonGetter)            , "SkinTexture.Male"                          , FormLinkAction<ITextureSetGetter>.Instance);
             Add(typeof(ICellGetter)                  , "SkyAndWeatherFromRegion"                   , FormLinkAction<IRegionGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "SkyLowerColor.Day"                         , BasicAction<Color>.Instance);
             Add(typeof(IWeatherGetter)               , "SkyLowerColor.Night"                       , BasicAction<Color>.Instance);
@@ -1052,6 +1058,8 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(INpcGetter)                   , "TextureLighting"                           , BasicAction<Color>.Instance);
             Add(null                                 , "TextureSet"                                , FormLinkAction<ITextureSetGetter>.Instance);
             Add(typeof(ILandscapeTextureGetter)      , "TextureSpecularExponent"                   , ConvertibleAction<byte>.Instance);
+            Add(typeof(IArmorAddonGetter)            , "TextureSwapList.Female"                    , FormLinkAction<IFormListGetter>.Instance);
+            Add(typeof(IArmorAddonGetter)            , "TextureSwapList.Male"                      , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "ThunderLightningBeginFadeIn"               , BasicAction<Percent>.Instance);
             Add(typeof(IWeatherGetter)               , "ThunderLightningEndFadeOut"                , BasicAction<Percent>.Instance);
             Add(typeof(IWeatherGetter)               , "ThunderLightningFrequency"                 , BasicAction<Percent>.Instance);
@@ -1103,6 +1111,8 @@ namespace GenericSynthesisPatcher.Helpers.Skyrim
             Add(typeof(ISceneGetter)                 , "VNAM"                                      , MemorySliceByteAction.Instance);
             Add(typeof(INpcGetter)                   , "Voice"                                     , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(IClassGetter)                 , "VoicePoints"                               , ConvertibleAction<uint>.Instance);
+            Add(typeof(IRaceGetter)                  , "Voices.Female"                             , FormLinkAction<IVoiceTypeGetter>.Instance);
+            Add(typeof(IRaceGetter)                  , "Voices.Male"                               , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(ITalkingActivatorGetter)      , "VoiceType"                                 , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(IClimateGetter)               , "Volatility"                                , ConvertibleAction<byte>.Instance);
             Add(typeof(IWeatherGetter)               , "VolumetricLighting.Day"                    , FormLinkAction<IVolumetricLightingGetter>.Instance);

@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
+using Common;
+
 using DynamicData;
 
 using GenericSynthesisPatcher.Helpers;

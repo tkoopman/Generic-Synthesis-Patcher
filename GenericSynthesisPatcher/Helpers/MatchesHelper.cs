@@ -1,3 +1,5 @@
+using Common;
+
 using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
