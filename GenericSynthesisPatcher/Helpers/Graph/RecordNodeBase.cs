@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DynamicData;
 
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-using GenericSynthesisPatcher.Json.Data.Action;
+using GenericSynthesisPatcher.Games.Skyrim.Json.Action;
 
 using Microsoft.Extensions.Logging;
 

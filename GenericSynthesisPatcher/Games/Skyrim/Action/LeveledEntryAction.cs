@@ -1,6 +1,6 @@
 using GenericSynthesisPatcher.Games.Universal.Action;
+using GenericSynthesisPatcher.Games.Universal.Json.Action;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data.Action;
 
 using Loqui;
 

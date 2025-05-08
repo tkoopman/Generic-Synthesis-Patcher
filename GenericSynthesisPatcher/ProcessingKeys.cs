@@ -4,9 +4,9 @@ using Common;
 
 using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Games.Universal.Action;
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;

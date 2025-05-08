@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
 
 using Microsoft.Extensions.Logging;
 

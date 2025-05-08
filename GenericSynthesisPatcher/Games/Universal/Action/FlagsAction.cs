@@ -4,10 +4,10 @@ using Common;
 
 using EnumsNET;
 
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Graph;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 

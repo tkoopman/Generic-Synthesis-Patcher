@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;

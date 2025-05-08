@@ -2,9 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 

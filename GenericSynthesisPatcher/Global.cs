@@ -1,9 +1,8 @@
 using System.Runtime.CompilerServices;
 
 using GenericSynthesisPatcher.Games.Universal;
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json;
-using GenericSynthesisPatcher.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
@@ -21,34 +20,10 @@ namespace GenericSynthesisPatcher
     {
         internal static Lazy<GSPSettings> settings = null!;
 
-        private static LoadOrder<IModListingGetter>? listedLoadOrder;
-
-        public static LoadOrder<IModListingGetter> LoadOrder
-        {
-            get
-            {
-                listedLoadOrder ??= State switch
-                {
-                    //TODO Add games
-                    IPatcherState<ISkyrimMod, ISkyrimModGetter> state => new(state.LoadOrder.Select(m => (IModListingGetter)m.Value)),
-                    _ => throw new InvalidCastException(),
-                };
-
-                return listedLoadOrder;
-            }
-        }
-
+        public static LoadOrder<IModListingGetter> LoadOrder { get; private set; } = null!;
         public static RecordPropertyMappings RecordPropertyMappings { get; private set; } = null!;
         public static RecordTypeMappings RecordTypeMappings { get; private set; } = null!;
-
-        public static JsonSerializerSettings SerializerSettings { get; } = new()
-        {
-            ContractResolver = ContractResolver.Instance,
-            DefaultValueHandling = DefaultValueHandling.Ignore,
-            MissingMemberHandling = MissingMemberHandling.Ignore,
-            NullValueHandling = NullValueHandling.Ignore,
-        };
-
+        public static JsonSerializerSettings SerializerSettings { get; private set; } = null!;
         public static Lazy<GSPSettings> Settings { get => settings; private set => settings = value; }
         public static IPatcherState State { get; private set; } = null!;
 
@@ -97,6 +72,16 @@ namespace GenericSynthesisPatcher
                 case IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim:
                     RecordTypeMappings = new Games.Skyrim.RecordTypeMappings(skyrim);
                     RecordPropertyMappings = new Games.Skyrim.RecordPropertyMappings();
+
+                    SerializerSettings = new()
+                    {
+                        ContractResolver = Games.Skyrim.Json.ContractResolver.Instance,
+                        DefaultValueHandling = DefaultValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                    };
+
+                    LoadOrder = new(skyrim.LoadOrder.Select(m => (IModListingGetter)m.Value));
                     break;
 
                 default:

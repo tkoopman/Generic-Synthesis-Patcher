@@ -2,10 +2,10 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
+using GenericSynthesisPatcher.Games.Skyrim.Json.Action;
 using GenericSynthesisPatcher.Games.Universal.Action;
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Data;
-using GenericSynthesisPatcher.Json.Data.Action;
 
 using Microsoft.Extensions.Logging;
 
