@@ -5,6 +5,7 @@ using Common;
 
 using DynamicData;
 
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;

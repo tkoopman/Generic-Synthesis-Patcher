@@ -1,3 +1,4 @@
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json.Converters;
 

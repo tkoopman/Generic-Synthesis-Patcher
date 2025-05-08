@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 
 using Common;
 
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 
 using Mutagen.Bethesda.Plugins;
@@ -13,20 +14,20 @@ using Noggog;
 
 namespace GenericSynthesisPatcher
 {
-    public sealed class GenerateDoco (IPatcherState state, BaseGenny genny)
+    public sealed class GenerateDoco (IPatcherState state, Genny genny)
     {
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
         private readonly IPatcherState? State = state;
 
-        public static void generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
         {
-            var genny = new GenerateDoco(state, new Helpers.Skyrim.SkyrimGenny());
+            var genny = new GenerateDoco(state, new Games.Skyrim.SkyrimGenny());
             genny.Run(false);
         }
 
-        public static void generateUnused (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
+        public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
         {
-            var genny = new GenerateDoco(state, new Helpers.Skyrim.SkyrimGenny());
+            var genny = new GenerateDoco(state, new Games.Skyrim.SkyrimGenny());
             genny.Run(true);
         }
 

@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
+using GenericSynthesisPatcher.Games.Universal.Action;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Helpers.Action;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
 

@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Json.Converters;
 using GenericSynthesisPatcher.Json.Operations;
 

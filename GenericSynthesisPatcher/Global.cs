@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Json;
 using GenericSynthesisPatcher.Json.Data;
@@ -94,8 +95,8 @@ namespace GenericSynthesisPatcher
             switch (State)
             {
                 case IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim:
-                    RecordTypeMappings = new Helpers.Skyrim.RecordTypeMappings(skyrim);
-                    RecordPropertyMappings = new Helpers.Skyrim.RecordPropertyMappings();
+                    RecordTypeMappings = new Games.Skyrim.RecordTypeMappings(skyrim);
+                    RecordPropertyMappings = new Games.Skyrim.RecordPropertyMappings();
                     break;
 
                 default:
