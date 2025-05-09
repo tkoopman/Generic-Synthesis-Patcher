@@ -1,0 +1,65 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Abbreviation\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Abbreviation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefaultValue\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DefaultValue"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Skill, UsesEnum, DoNotAllowScriptEdits, IsFullAvCached, IsPermanentAvCached, DefaultToZero, DefaultToOne, DefaultToOneHundred, ContainsList, ValueLessThanOne, MinimumOne, MaximumTen, MaximumOneHundred, MultiplyByOneHundred, Percentage, DamageIsPositive, GodModeImmune, Hardcoded)",
+    "Example": "\"Flags\": [ \"Skill\", \"-Hardcoded\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (DerivedAttribute, SpecialAttribute, Skill, AiAttribute, Resistance, Condition, Charge, IntValue, Variable, Resource)",
+    "Example": "\"Type\": \"DerivedAttribute\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  }
+]

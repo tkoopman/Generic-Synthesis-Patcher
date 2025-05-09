@@ -1,0 +1,191 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CinematicBrightness\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CinematicBrightness"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CinematicContrast\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CinematicContrast"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CinematicSaturation\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CinematicSaturation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DepthOfFieldBlurRadius\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldBlurRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfFieldDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfFieldRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"DepthOfFieldSky\": true",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldSky"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfFieldStrength\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DepthOfFieldUnused\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldUnused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfFieldVignetteRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldVignetteRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfFieldVignetteStrength\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DepthOfFieldVignetteStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DNAMDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "DNAMDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrAutoExposureMax\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrAutoExposureMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrAutoExposureMin\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrAutoExposureMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrBloomScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrBloomScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrBloomThreshold\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrBloomThreshold"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrEyeAdaptSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrEyeAdaptSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrMiddleGray\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrMiddleGray"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrSkyScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrSkyScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrSunlightScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrSunlightScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HdrTonemapE\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HdrTonemapE"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Lut\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Lut"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TintAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TintAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"TintColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "TintColor"
+  }
+]

@@ -1,0 +1,310 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"ActivateTextOverride\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ActivateTextOverride"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AssociatedForm"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "AttachParentSlots"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, CreateObject, Weapons, Enchanting, EnchantingExperiment, Alchemy, AlchemyExperiment, Armor, PowerArmor, RobotMod)",
+    "Example": "\"BenchType\": \"None\"",
+    "MFFSM": "MF---",
+    "Name": "BenchType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DrinkingWater"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Front, Behind, Right, Left, Up)",
+    "Example": "\"EnabledEntryPoints\": [ \"Front\", \"-Up\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "EnabledEntryPoints"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (IgnoredBySandbox, AllowAwakeSound, EnterWithWeaponDrawn, PlayAnimWhenFull, DisablesActivation, IsPerch, MustExitToTalk, UseStaticAvoidNode, HasModel, IsSleepFurniture)",
+    "Example": "\"Flags\": [ \"IgnoredBySandbox\", \"-IsSleepFurniture\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ForcedLocRefType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasContainer, IsPerch, HasDistantLod, RandomAnimStart, IsMarker, PowerArmor, MustExitToTalk, ChildCanUse)",
+    "Example": "\"MajorFlags\": [ \"HasContainer\", \"-ChildCanUse\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MarkerModel\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MarkerModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "NativeTerminal"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NavmeshGeometry.CrcHash\": 7",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.CrcHash"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMax.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMax.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMax.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMax.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMax.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMax.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMaxDistance.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMaxDistance.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMaxDistance.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMaxDistance.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMin.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMin.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMin.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMin.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NavmeshGeometry.GridMin.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridMin.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NavmeshGeometry.GridSize\": 7",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.GridSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NavmeshGeometry.NavmeshVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "NavmeshGeometry.NavmeshVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "PNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PreviewTransform"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
+    "Example": "\"UsesSkill\": \"OneHanded\"",
+    "MFFSM": "MF---",
+    "Name": "UsesSkill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"WBDTDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "WBDTDataTypeState"
+  }
+]

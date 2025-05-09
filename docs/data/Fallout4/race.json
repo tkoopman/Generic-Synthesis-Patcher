@@ -1,0 +1,576 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AccelerationRate\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AccelerationRate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "ActorEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AimAngleTolerance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AimAngleTolerance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularAccelerationRate\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngularAccelerationRate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularTolerance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngularTolerance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AnimationSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ArmorRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "AttachParentSlots"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AttackRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BaseMovementDefault"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BaseMovementDefaultFly"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BaseMovementDefaultSneak"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BaseMovementDefaultSwim"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX, None)",
+    "Example": "\"BeardBipedObject\": \"HairTop\"",
+    "MFFSM": "MF---",
+    "Name": "BeardBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX)",
+    "Example": "\"BipedBodyTemplate.FirstPersonFlags\": [ \"HairTop\", \"-FX\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "BipedBodyTemplate.FirstPersonFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX, None)",
+    "Example": "\"BodyBipedObject\": \"HairTop\"",
+    "MFFSM": "MF---",
+    "Name": "BodyBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BodyPartData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "CollarTextureSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DecelerationRate\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DecelerationRate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DefaultHairColors.Female"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DefaultHairColors.Male"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DialogueQuest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "DispemberBloodArt"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HandToHand, OneHandSword, OneHandDagger, OneHandAxe, OneHandMace, TwoHandSword, TwoHandAxe, Bow, Staff, Gun, Grenade, Mine, Spell, Shield, Torch)",
+    "Example": "\"EquipmentFlags\": [ \"HandToHand\", \"-Torch\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "EquipmentFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableDebris"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ExplodableDebrisCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableDebrisCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ExplodableDebrisScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableDebrisScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ExplodableDecalCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableDecalCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableExplosion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ExplodableSubsegmentExplosion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"ExportingExtraNam2\": true",
+    "MFFSM": "MFF--",
+    "Name": "ExportingExtraNam2"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"FaceFxPhonemes.ForceNames\": true",
+    "MFFSM": "MFF--",
+    "Name": "FaceFxPhonemes.ForceNames"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FacegenFaceClamp\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FacegenFaceClamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FacegenMainClamp\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FacegenMainClamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Playable, FaceGenHead, Child, TiltFrontBack, TiltLeftRight, NoShadow, Swims, Flies, Walks, Immobile, NotPunishable, NoCombatInWater, NoRotatingToHeadTrack, DontShowBloodSpray, DontShowBloodDecal, UsesHeadTrackAnims, SpellsAlignWithMagicNode, UseWorldRaycastsForFootIK, AllowRagdollCollision, RegenHpInCombat, CantOpenDoors, AllowPcDialog, NoKnockdowns, AllowPickpocket, AlwaysUseProxyController, DontShowWeaponBlood, OverlayHeadPartList, OverrideHeadPartList, CanPickupItems, AllowMultipleMembraneShaders, CanDualWield, AvoidsRoads, UseAdvancedAvoidance, NonHostile, Floats, HeadAxisBit0, HeadAxisBit1, CanMeleeWhenKnockedDown, UseIdleChatterDuringCombat, Ungendered, CanMoveWhenKnockedDown, UseLargeActorPathing, UseSubsegmentedDamage, FlightDeferKill, FlightAllowProceduralCrashLand, DisableWeaponCulling, UseOptimalSpeeds, HasFacialRig, CanUseCrippledLimbs, UseQuadrupedController, LowPriorityPushable, CannotUsePlayableItems)",
+    "Example": "\"Flags\": [ \"Playable\", \"-CannotUsePlayableItems\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FlightRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FlightRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"HairColorExtendedLookupTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "HairColorExtendedLookupTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"HairColorLookupTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "HairColorLookupTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Height.Female\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Height.Female"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Height.Male\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Height.Male"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"IdleChatterTimeMax\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "IdleChatterTimeMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"IdleChatterTimeMin\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "IdleChatterTimeMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImpactMaterialType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"InjuredHealthPercent\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "InjuredHealthPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "MeatCapTextureSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "MorphRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MorphValuesLastIndex\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MorphValuesLastIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NumberOfTintsInList\": 7",
+    "MFFSM": "MFF--",
+    "Name": "NumberOfTintsInList"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleDebris"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OnCrippleDebrisCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleDebrisCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OnCrippleDebrisScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleDebrisScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OnCrippleDecalCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleDecalCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleExplosion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OnCrippleImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OrientationLimitsPitch\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "OrientationLimitsPitch"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OrientationLimitsRoll\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "OrientationLimitsRoll"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX, None)",
+    "Example": "\"PipboyBipedObject\": \"HairTop\"",
+    "MFFSM": "MF---",
+    "Name": "PipboyBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SeverableDebris"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SeverableDebrisCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "SeverableDebrisCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SeverableDebrisScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SeverableDebrisScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SeverableDecalCount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "SeverableDecalCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SeverableExplosion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SeverableImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX, None)",
+    "Example": "\"ShieldBipedObject\": \"HairTop\"",
+    "MFFSM": "MF---",
+    "Name": "ShieldBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Small, Medium, Large, ExtraLarge)",
+    "Example": "\"Size\": \"Small\"",
+    "MFFSM": "MF---",
+    "Name": "Size"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Skin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SoundCloseCorpse"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SoundOpenCorpse"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SubgraphAdditiveRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "SubgraphTemplateRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "UnarmedWeapon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Voices.Female"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Voices.Male"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"XPValue\": 7",
+    "MFFSM": "MFF--",
+    "Name": "XPValue"
+  }
+]

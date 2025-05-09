@@ -19,17 +19,25 @@ namespace GenericSynthesisPatcher
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
         private readonly IPatcherState? State = state;
 
-        public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state, bool outputUnimplemented)
         {
             var genny = new GenerateDoco(state, new Games.Skyrim.SkyrimGenny());
-            genny.Run(false);
+            genny.Run(outputUnimplemented);
         }
 
-        public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state)
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Fallout4.IFallout4Mod, Mutagen.Bethesda.Fallout4.IFallout4ModGetter> state, bool outputUnimplemented)
         {
-            var genny = new GenerateDoco(state, new Games.Skyrim.SkyrimGenny());
-            genny.Run(true);
+            var genny = new GenerateDoco(state, new Games.Fallout4.Fallout4Genny());
+            genny.Run(outputUnimplemented);
         }
+
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state) => Generate(state, false);
+
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Fallout4.IFallout4Mod, Mutagen.Bethesda.Fallout4.IFallout4ModGetter> state) => Generate(state, false);
+
+        public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state) => Generate(state, true);
+
+        public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Fallout4.IFallout4Mod, Mutagen.Bethesda.Fallout4.IFallout4ModGetter> state) => Generate(state, true);
 
         public void Run (bool outputUnimplemented)
         {
@@ -118,7 +126,7 @@ namespace GenericSynthesisPatcher
              * Output Implemented Types
              */
 
-            using (var streamWriter = new StreamWriter(@"types.json"))
+            using (var streamWriter = new StreamWriter($"{genny.GameName}/types.json"))
             using (var writer = new JsonTextWriter(streamWriter))
             {
                 serializer.Serialize(writer, ImplementedRTMs);
@@ -176,17 +184,27 @@ namespace GenericSynthesisPatcher
             List<string[]> lines = [];
             foreach (var property in implemented)
             {
-                if (property.Types.Count() >= 3)
+                if (property.Types.Count() >= 3 && property.RecordActionInterface is not null)
                 {
-                    var mismatch = buildRPMs.FirstOrDefault(r => r.PropertyName.Equals(property.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RecordActionInterface is null);
+                    var unimplementedMismatch = buildRPMs.FirstOrDefault(r => r.PropertyName.Equals(property.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RecordActionInterface is null);
 
-                    if (mismatch is null)
+                    if (unimplementedMismatch is null)
                     {
-                        lines.Add(["Add(null", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
-                        continue;
+                        var implementedMismatch = implemented.Where(r => r.PropertyName.Equals(property.PropertyName, StringComparison.OrdinalIgnoreCase) && r.RecordActionInterface is not null && !property.RecordActionInterface.Equals(r.RecordActionInterface));
+                        if (implementedMismatch.Any(r => r.Types.Count() >= property.Types.Count()))
+                        {
+                            Console.WriteLine($"Skipping wildcard RPM for {property.PropertyName} due to record types [{string.Join(',', implementedMismatch.Select(r => string.Join(',', r.PropertyTypes.Select(t => t.GetClassName()))))}] with {property.PropertyName} property types [{string.Join(',', implementedMismatch.Select(r => r.RecordActionInterface.GetClassName()))}]");
+                        }
+                        else
+                        {
+                            lines.Add(["Add(null", $"\"{property.PropertyName}\"", $"{property.RecordActionInterface.GetClassName()}.Instance);"]);
+                            continue;
+                        }
                     }
-
-                    Console.WriteLine($"Skipping wildcard RPM for {property.PropertyName} due to {mismatch.RTM.Name} - {mismatch.PropertyType.GetClassName()}");
+                    else
+                    {
+                        Console.WriteLine($"Skipping wildcard RPM for {property.PropertyName} due to unimplemented field on record type {unimplementedMismatch.RTM.Name} with property type {unimplementedMismatch.PropertyType.GetClassName()}");
+                    }
                 }
 
                 var types = property.Types.ToList();
@@ -267,7 +285,10 @@ namespace GenericSynthesisPatcher
 
         private static void printTableRow (StringWriter sw, List<string[]> lines, int maxPaddedWidth = 250, char padding = ' ', string sep = " |", string? prefix = "| ", string? suffix = " |", bool padLast = true)
         {
-            if (lines.Count == 0 || lines.Any(v => v.Length != lines[0].Length))
+            if (lines.Count == 0)
+                return;
+
+            if (lines.Any(v => v.Length != lines[0].Length))
                 throw new Exception($"Nope! Try again");
 
             int[] widths = new int[lines[0].Length - (padLast ? 0:1)];

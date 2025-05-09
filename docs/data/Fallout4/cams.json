@@ -1,0 +1,177 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Possible values (Shoot, Fly, Hit, Zoom)",
+    "Example": "\"Action\": \"Shoot\"",
+    "MFFSM": "MF---",
+    "Name": "Action"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (PositionFollowsLocation, RotationFollowsTarget, DoNotFollowBone, FirstPersonCamera, NoTracer, StartAtTimeZero, DoNotResetLocationSpring, DoNotResetTargetSpring)",
+    "Example": "\"Flags\": [ \"PositionFollowsLocation\", \"-DoNotResetTargetSpring\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImageSpaceModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Attacker, Projectile, Target, LeadActor)",
+    "Example": "\"Location\": \"Attacker\"",
+    "MFFSM": "MF---",
+    "Name": "Location"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LocationSpring\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LocationSpring"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MaxTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MaxTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MinTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MinTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NearTargetDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NearTargetDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RotationOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RotationOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RotationOffset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Attacker, Projectile, Target, LeadActor)",
+    "Example": "\"Target\": \"Attacker\"",
+    "MFFSM": "MF---",
+    "Name": "Target"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TargetPercentBetweenActors\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TargetPercentBetweenActors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TargetSpring\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TargetSpring"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TimeMultiplierGlobal\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TimeMultiplierGlobal"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TimeMultiplierPlayer\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TimeMultiplierPlayer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TimeMultiplierTarget\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TimeMultiplierTarget"
+  }
+]

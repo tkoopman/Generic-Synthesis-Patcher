@@ -3,6 +3,9 @@ let dataTypes;
 
 function loadTypes() {
     let g = game.options[game.selectedIndex].getAttribute('value');
+
+    for (a in dataTypes.options) { dataTypes.options.remove(0); }
+
     fetch("./data/" + g + "/types.json")
         .then(res => res.json())
         .then(data => {

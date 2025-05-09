@@ -20,10 +20,6 @@
     "id": "ADDN"
   },
   {
-    "name": "Alchemical Apparatus",
-    "id": "APPA"
-  },
-  {
     "name": "Ammunition",
     "id": "AMMO"
   },
@@ -104,24 +100,12 @@
     "id": "DOBJ"
   },
   {
-    "name": "Dialog Branch",
-    "id": "DLBR"
-  },
-  {
-    "name": "Dialog Topic",
-    "id": "DIAL"
-  },
-  {
     "name": "Dialog View",
     "id": "DLVW"
   },
   {
     "name": "Door",
     "id": "DOOR"
-  },
-  {
-    "name": "Dual Cast Data",
-    "id": "DUAL"
   },
   {
     "name": "Effect Shader",
@@ -138,10 +122,6 @@
   {
     "name": "Explosion",
     "id": "EXPL"
-  },
-  {
-    "name": "Eyes",
-    "id": "EYES"
   },
   {
     "name": "Faction",
@@ -240,10 +220,6 @@
     "id": "LVLN"
   },
   {
-    "name": "Leveled Spell",
-    "id": "LVSP"
-  },
-  {
     "name": "Light",
     "id": "LIGH"
   },
@@ -282,10 +258,6 @@
   {
     "name": "Misc Item",
     "id": "MISC"
-  },
-  {
-    "name": "Moveable Static",
-    "id": "MSTT"
   },
   {
     "name": "Movement Type",
@@ -344,24 +316,8 @@
     "id": "REVB"
   },
   {
-    "name": "Scene",
-    "id": "SCEN"
-  },
-  {
-    "name": "Scroll",
-    "id": "SCRL"
-  },
-  {
     "name": "Shader Particle Geometry",
     "id": "SPGD"
-  },
-  {
-    "name": "Shout",
-    "id": "SHOU"
-  },
-  {
-    "name": "Soul Gem",
-    "id": "SLGM"
   },
   {
     "name": "Sound Category",
@@ -418,10 +374,6 @@
   {
     "name": "Weather",
     "id": "WTHR"
-  },
-  {
-    "name": "Word Of Power",
-    "id": "WOOP"
   },
   {
     "name": "Worldspace",

@@ -1,0 +1,254 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BackAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BackFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BranchFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BranchFlexibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FrontAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FrontAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FrontFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FrontFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "HarvestSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Ingredient"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeafAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LeafAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeafFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LeafFlexibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeafFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LeafFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasDistantLod)",
+    "Example": "\"MajorFlags\": \"HasDistantLod\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Fall\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Fall"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Spring\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Spring"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Summer\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Summer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Production.Winter\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Production.Winter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SideAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SideAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SideFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SideFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TrunkAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TrunkAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TrunkFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "TrunkFlexibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.Version"
+  }
+]

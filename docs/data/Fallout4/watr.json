@@ -1,0 +1,520 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularVelocity.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngularVelocity.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularVelocity.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngularVelocity.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularVelocity.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AngularVelocity.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ConsumeSpell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ContactSpell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"DATA\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "DATA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DNAMDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "DNAMDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Dangerous, DirectionalSound)",
+    "Example": "\"Flags\": [ \"Dangerous\", \"-DirectionalSound\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogAlphaDeepRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogAlphaDeepRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogAlphaShallowRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogAlphaShallowRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogColorDeepRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogColorDeepRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogColorShallowRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogColorShallowRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDeepAlpha\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogDeepAlpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FogDeepColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FogDeepColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDepthAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogDepthAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogShallowAlpha\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogShallowAlpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FogShallowColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FogShallowColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderwaterAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogUnderwaterAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"FogUnderwaterColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "FogUnderwaterColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderwaterFar\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogUnderwaterFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderwaterNear\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FogUnderwaterNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"GNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "GNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LinearVelocity.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LinearVelocity.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LinearVelocity.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LinearVelocity.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LinearVelocity.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LinearVelocity.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Material"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.AmplitudeScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.NoiseFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerOne.Texture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.UvScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.WindDirection\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.WindSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerOne.WindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.AmplitudeScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.NoiseFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerThree.Texture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.UvScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.WindDirection\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.WindSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerThree.WindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.AmplitudeScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.NoiseFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerTwo.Texture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.UvScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.WindDirection\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.WindSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "NoiseLayerTwo.WindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Opacity\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Opacity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OpenSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDeepNormalFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDeepNormalFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDisplacementSimulatorDampener\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDisplacementSimulatorDampener"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDisplacementSimulatorFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDisplacementSimulatorFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDisplacementSimulatorForce\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDisplacementSimulatorForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDisplacementSimulatorStartingSize\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDisplacementSimulatorStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalDisplacementSimulatorVelocity\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalDisplacementSimulatorVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalFresnelAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalFresnelAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalNormalMagnitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalNormalMagnitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"PhysicalReflectionColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "PhysicalReflectionColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalReflectivityAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalReflectivityAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalShallowNormalFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalShallowNormalFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhysicalSurfaceEffectFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PhysicalSurfaceEffectFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"ScreenSpaceReflections\": true",
+    "MFFSM": "MFF--",
+    "Name": "ScreenSpaceReflections"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SiltAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SiltAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"SiltDarkColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "SiltDarkColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"SiltLightColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "SiltLightColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularInteriorSpecularBrightness\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularInteriorSpecularBrightness"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularInteriorSpecularPower\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularInteriorSpecularPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularInteriorSpecularRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularInteriorSpecularRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSparkleMagnitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularSunSparkleMagnitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSparklePower\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularSunSparklePower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSpecularMagnitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularSunSpecularMagnitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSpecularPower\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "SpecularSunSpecularPower"
+  }
+]

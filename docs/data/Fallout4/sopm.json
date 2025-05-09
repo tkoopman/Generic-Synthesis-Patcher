@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Flags (AttenuatesWithDistance, AllowsRumble, AppliesDoppler, AppliesDistanceDelay, PlayerOutputModel, TryPlayOnController, CausesDucking, AvoidsDucking)",
+    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AvoidsDucking\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
+    "MFFSM": "-FF--",
+    "Name": "Data.ReverbSendPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue1\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInCurveValue1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue2\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInCurveValue2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue3\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInCurveValue3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue4\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInCurveValue4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeInDistanceEnd\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInDistanceEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeInDistanceStart\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeInDistanceStart"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue1\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutCurveValue1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue2\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutCurveValue2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue3\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutCurveValue3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue4\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutCurveValue4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeOutDistanceEnd\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutDistanceEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeOutDistanceStart\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DynamicAttentuation.FadeOutDistanceStart"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "EffectChain"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"StaticAttenuation\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "StaticAttenuation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (UsesHrtf, DefinedSpeakerOutput)",
+    "Example": "\"Type\": \"UsesHrtf\"",
+    "MFFSM": "MF---",
+    "Name": "Type"
+  }
+]

@@ -1,0 +1,373 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"CanopyShadow\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "CanopyShadow"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CellSizeData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "CellSizeData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Climate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloudModel.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloudModel.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CloudModel.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "CloudModel.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"CloudModel.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "CloudModel.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"CloudModel.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "CloudModel.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "CloudModel.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"DefaultLevelData.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "DefaultLevelData.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLodMultiplier\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DistantLodMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FixedDimensionsCenterCell.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FixedDimensionsCenterCell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FixedDimensionsCenterCell.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FixedDimensionsCenterCell.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (SmallWorld, CannotFastTravel, NoLodWater, NoLandscape, NoSky, FixedDimensions, NoGrass)",
+    "Example": "\"Flags\": [ \"SmallWorld\", \"-NoGrass\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"HdLodDiffuseTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "HdLodDiffuseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"HdLodNormalTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "HdLodNormalTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "InteriorLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultLandHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LandDefaults.DefaultLandHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultWaterHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LandDefaults.DefaultWaterHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Location"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LodWater"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LodWaterHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LodWaterHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (CanNotWait)",
+    "Example": "\"MajorFlags\": \"CanNotWait\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.NorthwestCellCoords.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.NorthwestCellCoords.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.SoutheastCellCoords.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.SoutheastCellCoords.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MapImage\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MapImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"MaxHeight.CellData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "MaxHeight.CellData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxHeight.Max.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxHeight.Max.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxHeight.Max.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxHeight.Max.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxHeight.Min.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxHeight.Min.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxHeight.Min.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxHeight.Min.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Music"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMax.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMax.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMin.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMin.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OffsetData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "OffsetData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (UseLandData, UseLodData, UseMapData, UseWaterData, UseClimateData, UseImageSpaceData, UseSkyCell)",
+    "Example": "\"Parent.Flags\": [ \"UseLandData\", \"-UseSkyCell\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Parent.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Parent.Worldspace"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Water"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"WaterEnvironmentMap\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WaterEnvironmentMap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WorldMapCellOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WorldMapCellOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WorldMapCellOffset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapOffsetScale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WorldMapOffsetScale"
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AlternateSoundFor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Category"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Descriptors"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Loop, EnvelopeFast, EnvelopeSlow)",
+    "Example": "\"LoopAndRumble.Loop\": \"None\"",
+    "MFFSM": "MF---",
+    "Name": "LoopAndRumble.Loop"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.RumbleValues\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LoopAndRumble.RumbleValues"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.Sidechain\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LoopAndRumble.Sidechain"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Notes\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Notes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "OutputModel"
+  }
+]

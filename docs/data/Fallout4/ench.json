@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "BaseEnchantment"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (ConstantEffect, FireAndForget, Concentration, Scroll)",
+    "Example": "\"CastType\": \"ConstantEffect\"",
+    "MFFSM": "MF---",
+    "Name": "CastType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ChargeTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ChargeTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"EnchantmentAmount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "EnchantmentAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"EnchantmentCost\": 7",
+    "MFFSM": "MFF--",
+    "Name": "EnchantmentCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Enchantment, StaffEnchantment)",
+    "Example": "\"EnchantType\": \"Enchantment\"",
+    "MFFSM": "MF---",
+    "Name": "EnchantType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"ENITDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "ENITDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (NoAutoCalc, ExtendDurationOnRecast)",
+    "Example": "\"Flags\": [ \"NoAutoCalc\", \"-ExtendDurationOnRecast\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Self, Touch, Aimed, TargetActor, TargetLocation)",
+    "Example": "\"TargetType\": \"Self\"",
+    "MFFSM": "MF---",
+    "Name": "TargetType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "WornRestrictions"
+  }
+]

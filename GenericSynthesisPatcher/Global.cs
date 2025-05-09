@@ -6,6 +6,7 @@ using GenericSynthesisPatcher.Helpers;
 
 using Microsoft.Extensions.Logging;
 
+using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Plugins.Records;
@@ -69,8 +70,8 @@ namespace GenericSynthesisPatcher
             //TODO Add games
             switch (State)
             {
-                case IPatcherState<ISkyrimMod, ISkyrimModGetter> skyrim:
-                    RecordTypeMappings = new Games.Skyrim.RecordTypeMappings(skyrim);
+                case IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState:
+                    RecordTypeMappings = new Games.Skyrim.RecordTypeMappings(gameState);
                     RecordPropertyMappings = new Games.Skyrim.RecordPropertyMappings();
 
                     SerializerSettings = new()
@@ -81,7 +82,22 @@ namespace GenericSynthesisPatcher
                         NullValueHandling = NullValueHandling.Ignore,
                     };
 
-                    LoadOrder = new(skyrim.LoadOrder.Select(m => (IModListingGetter)m.Value));
+                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
+                    break;
+
+                case IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState:
+                    RecordTypeMappings = new Games.Fallout4.RecordTypeMappings(gameState);
+                    RecordPropertyMappings = new Games.Fallout4.RecordPropertyMappings();
+
+                    SerializerSettings = new()
+                    {
+                        ContractResolver = Games.Fallout4.Json.ContractResolver.Instance,
+                        DefaultValueHandling = DefaultValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                    };
+
+                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
                     break;
 
                 default:

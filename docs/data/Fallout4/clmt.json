@@ -1,0 +1,93 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Masser, Secunda)",
+    "Example": "\"Moons\": [ \"Masser\", \"-Secunda\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Moons"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PhaseLength\": 7",
+    "MFFSM": "MFF--",
+    "Name": "PhaseLength"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"SunGlareTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "SunGlareTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"SunTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "SunTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Volatility\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Volatility"
+  }
+]

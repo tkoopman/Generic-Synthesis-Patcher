@@ -1,0 +1,394 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AvoidThreatChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "AvoidThreatChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargeDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargeDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingDisengageProbability\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargingDisengageProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingSideswipeProbability\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargingSideswipeProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingSprintFastProbability\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargingSprintFastProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CloseRangeChargingThrowMaxTargets\": 7",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargingThrowMaxTargets"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingThrowProbability\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeChargingThrowProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeDuelingCircleMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeDuelingCircleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeDuelingFallbackMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeDuelingFallbackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeFlankDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankingStalkTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeFlankingStalkTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankingVariance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CloseRangeFlankingVariance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CoverSearchDistanceMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CoverSearchDistanceMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"CSLRDataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "CSLRDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CSMD\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "CSMD"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"CSMEDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "CSMEDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DefensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DiveBombChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DiveBombChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DodgeThreadChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DodgeThreadChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMagic\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultMagic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMelee\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultMelee"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultRanged\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultRanged"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultShout\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultShout"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultStaff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultStaff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultUnarmed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EquipmentScoreMultUnarmed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EvadeThreatChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "EvadeThreatChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Dueling, Flanking, AllowDualWeilding, Charging, RetargetAnyNearbyMeleeTarget)",
+    "Example": "\"Flags\": [ \"Dueling\", \"-RetargetAnyNearbyMeleeTarget\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FlyingAttackChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FlyingAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroundAttackChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "GroundAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroundAttackTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "GroundAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroupOffensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "GroupOffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HoverChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HoverChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HoverTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "HoverTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeAdjustRangeMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeAdjustRangeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeCrouchMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeCrouchMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeRangeMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeRangeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeStrafeMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeStrafeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeWaitMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "LongRangeWaitMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AllowDualWeilding)",
+    "Example": "\"MajorFlags\": \"AllowDualWeilding\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeAttackStaggeredMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeAttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeAttackWhenStaggeredMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeAttackWhenStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashAttackMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeBashAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeBashMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashPowerAttackMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeBashPowerAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashRecoilMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeBashRecoilMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBlockWhenStaggeredMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeBlockWhenStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleePowerAttackBlockingMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleePowerAttackBlockingMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleePowerAttackStaggeredMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleePowerAttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeSpecialAttackMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MeleeSpecialAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OffensiveMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "OffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PerchAttackChance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PerchAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PerchAttackTime\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "PerchAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RangedAccuracyMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RangedAccuracyMult"
+  }
+]
