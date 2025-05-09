@@ -53,30 +53,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             addMapping([typeof(ExtendedList<>), typeof(IRelationGetter)], false, typeof(RelationsAction));
         }
 
-        public override string RPMPopulateFooter => """
-            #pragma warning restore format
-                    }
-                }
-            }
-            """;
-
-        public override string RPMPopulateHeader => """
-            using System.Drawing;
-
-            using GenericSynthesisPatcher.Helpers.Action;
-            using GenericSynthesisPatcher.Helpers.Skyrim.Action;
-
-            using Mutagen.Bethesda.Skyrim;
-
-            using Noggog;
-
-            namespace GenericSynthesisPatcher.Helpers.Skyrim
-            {
-                public partial class RecordPropertyMappings
-                {
-                    private void populateMappings ()
-                    {
-            #pragma warning disable format
-            """;
+        public override string GameName => "Skyrim";
     }
 }

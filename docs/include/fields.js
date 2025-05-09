@@ -2,7 +2,8 @@ let gridApi;
 let dataTypes;
 
 function loadTypes() {
-    fetch("./data/types.json")
+    let g = game.options[game.selectedIndex].getAttribute('value');
+    fetch("./data/" + g + "/types.json")
         .then(res => res.json())
         .then(data => {
             data.forEach(type => {
@@ -15,6 +16,7 @@ function loadTypes() {
 }
 
 function loadType() {
+    let g = game.options[game.selectedIndex].getAttribute('value');
     let value = dataTypes.options[dataTypes.selectedIndex].getAttribute('value');
     let name = dataTypes.options[dataTypes.selectedIndex].innerHTML.replace(/\s/g, '');
     if (name.toLowerCase() == value.toLowerCase()) {
@@ -23,7 +25,7 @@ function loadType() {
         name = value + "; " + name;
     }
     document.getElementById("typeAlias").innerHTML = name;
-    fetch("./data/" + value.toLowerCase() + ".json")
+    fetch("./data/" + g + "/" + value.toLowerCase() + ".json")
         .then((response) => response.json())
         .then((data) => gridApi.setGridOption("rowData", data))
         .then(() => gridApi.autoSizeColumns(["Name", "Aliases", "MFFSM"]));

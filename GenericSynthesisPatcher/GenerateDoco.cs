@@ -82,7 +82,7 @@ namespace GenericSynthesisPatcher
                      * Output Implemented Properties
                      */
 
-                    using (var sw = new StreamWriter($"{rtm.Name.ToLowerInvariant()}.json"))
+                    using (var sw = new StreamWriter($"{genny.GameName}/{rtm.Name.ToLowerInvariant()}.json"))
                     using (var writer = new JsonTextWriter(sw))
                     {
                         if (outputUnimplemented)
@@ -105,11 +105,11 @@ namespace GenericSynthesisPatcher
 
             using (StringWriter sw = new())
             {
-                sw.WriteLine(genny.RPMPopulateHeader.Replace("populateMappings", "populateSubAliases"));
+                sw.WriteLine(genny.RPMPopulateHeader("populateSubAliases"));
                 printTableRow(sw, subPropertyAliases, sep: ",", prefix: "            ", suffix: "", padLast: false);
-                sw.WriteLine(genny.RPMPopulateFooter);
+                sw.WriteLine(genny.RPMPopulateFooter());
 
-                using var aliasesFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_Aliases.txt"), false);
+                using var aliasesFW = new StreamWriter(Path.Combine(Path.GetTempPath(), $"{genny.GameName}RecordPropertyMappings.SubAliases.txt"), false);
                 aliasesFW.Write(sw.ToString());
                 aliasesFW.Close();
             }
@@ -215,11 +215,11 @@ namespace GenericSynthesisPatcher
             using (StringWriter sw = new())
             {
                 ;
-                sw.WriteLine(genny.RPMPopulateHeader);
+                sw.WriteLine(genny.RPMPopulateHeader("populateMappings"));
                 printTableRow(sw, lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
-                sw.WriteLine(genny.RPMPopulateFooter);
+                sw.WriteLine(genny.RPMPopulateFooter());
 
-                using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), "GSP_RPM.txt"), false);
+                using var rpmFW = new StreamWriter(Path.Combine(Path.GetTempPath(), $"{genny.GameName}RecordPropertyMappings.Populate.txt"), false);
                 rpmFW.Write(sw.ToString());
                 rpmFW.Close();
             }

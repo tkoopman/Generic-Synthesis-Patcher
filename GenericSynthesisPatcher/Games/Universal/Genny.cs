@@ -48,6 +48,8 @@ namespace GenericSynthesisPatcher.Games.Universal
             typeof(P3Int16),
             ];
 
+        public abstract string GameName { get; }
+
         public Type[] IgnoreDeepScanOnTypes { get; protected set; } =
             [
             typeof(AssetLink<>),
@@ -116,10 +118,6 @@ namespace GenericSynthesisPatcher.Games.Universal
             "Versioning",
             ];
 
-        public abstract string RPMPopulateFooter { get; }
-
-        public abstract string RPMPopulateHeader { get; }
-
         private Dictionary<Type?[], Type> Mappings { get; } = [];
 
         private Dictionary<Type?[], Type> MappingsAssignableTo { get; } = [];
@@ -151,6 +149,32 @@ namespace GenericSynthesisPatcher.Games.Universal
 
             return checkMappings(type, true, Mappings) ?? checkMappings(type, false, MappingsAssignableTo);
         }
+
+        public virtual string RPMPopulateFooter () => """
+            #pragma warning restore format
+                    }
+                }
+            }
+            """;
+
+        public virtual string RPMPopulateHeader (string methodName) => $$"""
+            using System.Drawing;
+
+            using GenericSynthesisPatcher.Games.Universal.Action;
+            using GenericSynthesisPatcher.Games.{{GameName}}.Action;
+
+            using Mutagen.Bethesda.{{GameName}};
+
+            using Noggog;
+
+            namespace GenericSynthesisPatcher.Games.{{GameName}}
+            {
+                public partial class RecordPropertyMappings
+                {
+                    private void {{methodName}} ()
+                    {
+            #pragma warning disable format
+            """;
 
         /// <summary>
         ///     Adds a mapping that will be used in GetRPMAction. Type being checked will be
