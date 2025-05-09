@@ -19,6 +19,7 @@ namespace GenericSynthesisPatcher
         private static readonly int[] PropCols = [0, 0, 0, 100, 100];
         private readonly IPatcherState? State = state;
 
+        //TODO Add games x3
         public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state, bool outputUnimplemented)
         {
             var genny = new GenerateDoco(state, new Games.Skyrim.SkyrimGenny());
@@ -31,13 +32,23 @@ namespace GenericSynthesisPatcher
             genny.Run(outputUnimplemented);
         }
 
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Oblivion.IOblivionMod, Mutagen.Bethesda.Oblivion.IOblivionModGetter> state, bool outputUnimplemented)
+        {
+            var genny = new GenerateDoco(state, new Games.Oblivion.OblivionGenny());
+            genny.Run(outputUnimplemented);
+        }
+
         public static void Generate (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state) => Generate(state, false);
 
         public static void Generate (IPatcherState<Mutagen.Bethesda.Fallout4.IFallout4Mod, Mutagen.Bethesda.Fallout4.IFallout4ModGetter> state) => Generate(state, false);
 
+        public static void Generate (IPatcherState<Mutagen.Bethesda.Oblivion.IOblivionMod, Mutagen.Bethesda.Oblivion.IOblivionModGetter> state) => Generate(state, false);
+
         public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Skyrim.ISkyrimMod, Mutagen.Bethesda.Skyrim.ISkyrimModGetter> state) => Generate(state, true);
 
         public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Fallout4.IFallout4Mod, Mutagen.Bethesda.Fallout4.IFallout4ModGetter> state) => Generate(state, true);
+
+        public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Oblivion.IOblivionMod, Mutagen.Bethesda.Oblivion.IOblivionModGetter> state) => Generate(state, true);
 
         public void Run (bool outputUnimplemented)
         {

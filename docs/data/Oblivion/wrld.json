@@ -1,0 +1,156 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Climate"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (SmallWorld, CantFastTravel, OblivionWorldspace, NoLODWater)",
+    "Example": "\"Flags\": [ \"SmallWorld\", \"-NoLODWater\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icon\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesNWCell.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.CellCoordinatesNWCell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesNWCell.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.CellCoordinatesNWCell.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesSECell.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.CellCoordinatesSECell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesSECell.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.CellCoordinatesSECell.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapData.UsableDimensions.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Public, Dungeon)",
+    "Example": "\"Music\": \"Default\"",
+    "MFFSM": "MF---",
+    "Name": "Music"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMax.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMax.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMin.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBoundsMin.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OffsetData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "OffsetData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Parent"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Road.EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Road.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Road.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Road.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Water"
+  }
+]

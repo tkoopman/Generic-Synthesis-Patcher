@@ -1,0 +1,240 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Climate"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (IsInteriorCell, HasWater, InvertFastTravelBehavior, ForceHideLand, PublicPlace, HandChanged, BehaveLikeExteriod)",
+    "Example": "\"Flags\": [ \"IsInteriorCell\", \"-BehaveLikeExteriod\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "GlobalVariable"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grid.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grid.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.DATA\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Landscape.DATA"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Landscape.EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Landscape.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Landscape.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Landscape.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Landscape.Textures"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexColors\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Landscape.VertexColors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexHeightMap\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Landscape.VertexHeightMap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexNormals\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Landscape.VertexNormals"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.AmbientColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.DirectionalColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.DirectionalFade\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalFade"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationXY\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalRotationXY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationZ\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.DirectionalRotationZ"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogClipDistance\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogClipDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Lighting.FogColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogFar\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogNear\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Lighting.FogNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Public, Dungeon)",
+    "Example": "\"MusicType\": \"Default\"",
+    "MFFSM": "MF---",
+    "Name": "MusicType"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"PathGrid.EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "PathGrid.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"PathGrid.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "PathGrid.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PathGrid.PGAG\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "PathGrid.PGAG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Regions"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VisibleWhenDistantTimestamp\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VisibleWhenDistantTimestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Water"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterHeight\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WaterHeight"
+  }
+]

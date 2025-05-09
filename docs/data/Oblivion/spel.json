@@ -1,0 +1,51 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Cost\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Cost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ManualSpellCost, ImmuneToSilence1, PlayerStartSpell, ImmuneToSilence2, AoeIgnoresLos, ScriptEffectAlwaysApplies, DisallowAbsorbAndReflect, TouchSpellExplodesWithoutTarget)",
+    "Example": "\"Data.Flag\": [ \"ManualSpellCost\", \"-TouchSpellExplodesWithoutTarget\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flag"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Apprentice, Novice, Journeyman, Expert, Master)",
+    "Example": "\"Data.Level\": \"Apprentice\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Level"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Spell, Disease, Power, LesserPower, Ability, Poison)",
+    "Example": "\"Data.Type\": \"Spell\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  }
+]

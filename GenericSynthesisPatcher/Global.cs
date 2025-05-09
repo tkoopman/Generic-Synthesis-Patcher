@@ -7,6 +7,7 @@ using GenericSynthesisPatcher.Helpers;
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Fallout4;
+using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Plugins.Records;
@@ -92,6 +93,21 @@ namespace GenericSynthesisPatcher
                     SerializerSettings = new()
                     {
                         ContractResolver = Games.Fallout4.Json.ContractResolver.Instance,
+                        DefaultValueHandling = DefaultValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                    };
+
+                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
+                    break;
+
+                case IPatcherState<IOblivionMod, IOblivionModGetter> gameState:
+                    RecordTypeMappings = new Games.Oblivion.RecordTypeMappings(gameState);
+                    RecordPropertyMappings = new Games.Oblivion.RecordPropertyMappings();
+
+                    SerializerSettings = new()
+                    {
+                        ContractResolver = Games.Oblivion.Json.ContractResolver.Instance,
                         DefaultValueHandling = DefaultValueHandling.Ignore,
                         MissingMemberHandling = MissingMemberHandling.Ignore,
                         NullValueHandling = NullValueHandling.Ignore,

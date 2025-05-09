@@ -1,0 +1,121 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ColorRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.ColorRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Density\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Density"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (VertexLighting, UniformScaling, FitToSlope)",
+    "Example": "\"Data.Flags\": [ \"VertexLighting\", \"-FitToSlope\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Fluff1\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Fluff1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Fluff2\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Fluff2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.HeightRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.HeightRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.MaxSlope\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.MaxSlope"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.MinSlope\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.MinSlope"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.PositionRange\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.PositionRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.UnitFromWaterAmount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.UnitFromWaterAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (AboveAtLeast, AboveAtMost, BelowAtLeast, BelowAtMost, EitherAtLeast, EitherAtMost, EitherAtMostAbove, EitherAtMostBelow)",
+    "Example": "\"Data.UnitFromWaterMode\": \"AboveAtLeast\"",
+    "MFFSM": "MF---",
+    "Name": "Data.UnitFromWaterMode"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WavePeriod\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.WavePeriod"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Hashes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  }
+]

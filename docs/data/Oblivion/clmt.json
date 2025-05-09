@@ -1,0 +1,72 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Possible values (NoMoon, Masser, Secunda, MasserSecunda)",
+    "Example": "\"Data.Phase\": \"NoMoon\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Phase"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.PhaseLength\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.PhaseLength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Volatility\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Volatility"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Hashes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"SunGlareTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "SunGlareTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"SunTexture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "SunTexture"
+  }
+]

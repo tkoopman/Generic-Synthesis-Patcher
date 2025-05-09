@@ -9,6 +9,7 @@ using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 
 using Mutagen.Bethesda.Fallout4;
+using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
@@ -148,6 +149,7 @@ namespace GenericSynthesisPatcher
                     //TODO Add other games
                     IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((ISkyrimMod)Global.State.PatchMod),
                     IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IFallout4Mod)Global.State.PatchMod),
+                    IModContext<IOblivionMod, IOblivionModGetter, IOblivionMajorRecord, IOblivionMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IOblivionMod)Global.State.PatchMod),
                     _ => throw new InvalidCastException(),
                 };
             }

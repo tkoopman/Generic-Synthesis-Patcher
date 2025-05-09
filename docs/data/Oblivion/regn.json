@@ -1,0 +1,128 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Grasses.Flags\": \"Override\"",
+    "MFFSM": "MFF-M",
+    "Name": "Grasses.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Grasses.Grasses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grasses.Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Grasses.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icon\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"MapColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "MapColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"MapName.Flags\": \"Override\"",
+    "MFFSM": "MFF-M",
+    "Name": "MapName.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MapName.Map\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MapName.Map"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapName.Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MapName.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Objects.Flags\": \"Override\"",
+    "MFFSM": "MFF-M",
+    "Name": "Objects.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Objects.Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Objects.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Sounds.Flags\": \"Override\"",
+    "MFFSM": "MFF-M",
+    "Name": "Sounds.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Public, Dungeon)",
+    "Example": "\"Sounds.MusicType\": \"Default\"",
+    "MFFSM": "MF---",
+    "Name": "Sounds.MusicType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Sounds.Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Sounds.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Weather.Flags\": \"Override\"",
+    "MFFSM": "MFF-M",
+    "Name": "Weather.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Weather.Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Weather.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Worldspace"
+  }
+]

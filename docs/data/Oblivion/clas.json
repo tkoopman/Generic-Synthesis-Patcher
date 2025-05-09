@@ -1,0 +1,58 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Flags (Weapons, Armor, Clothing, Books, Ingredients, Lights, Apparatus, Miscellaneous, Spells, MagicItems, Potions, Training, Recharge, Repair)",
+    "Example": "\"Data.ClassServices\": [ \"Weapons\", \"-Repair\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.ClassServices"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Playable, Guard)",
+    "Example": "\"Data.Flags\": [ \"Playable\", \"-Guard\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Combat, Magic, Stealth)",
+    "Example": "\"Data.Specialization\": \"Combat\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Specialization"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icon\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  }
+]

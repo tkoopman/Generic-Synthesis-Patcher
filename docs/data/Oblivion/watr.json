@@ -1,0 +1,254 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Damage\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.Damage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.DeepColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Data.DeepColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorDampner\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.DisplacementSimulatorDampner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.DisplacementSimulatorFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorForce\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.DisplacementSimulatorForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorStartingSize\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.DisplacementSimulatorStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorVelocity\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.DisplacementSimulatorVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FogDistanceFarPlane\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.FogDistanceFarPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FogDistanceNearPlane\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.FogDistanceNearPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FresnelAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.FresnelAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorDampner\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.RainSimulatorDampner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorFalloff\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.RainSimulatorFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorForce\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.RainSimulatorForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorStartingSize\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.RainSimulatorStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorVelocity\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.RainSimulatorVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.ReflectionColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Data.ReflectionColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ReflectivityAmount\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.ReflectivityAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ScrollXSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.ScrollXSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ScrollYSpeed\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.ScrollYSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.ShallowColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "Data.ShallowColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.SunPower\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.SunPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.TextureBlend\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.TextureBlend"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WaveAmplitude\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.WaveAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WaveFrequency\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.WaveFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WindDirection\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WindVelocity\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.WindVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (CausesDamage, Reflective)",
+    "Example": "\"Flags\": [ \"CausesDamage\", \"-Reflective\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MaterialID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MaterialID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Opacity\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Opacity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "RelatedWaters.RelatedWaterDaytime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "RelatedWaters.RelatedWaterNighttime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "RelatedWaters.RelatedWaterUnderwater"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Sound"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Texture\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Texture"
+  }
+]

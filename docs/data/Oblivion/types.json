@@ -1,0 +1,150 @@
+[
+  {
+    "name": "Activator",
+    "id": "ACTI"
+  },
+  {
+    "name": "Ammunition",
+    "id": "AMMO"
+  },
+  {
+    "name": "Animated Object",
+    "id": "ANIO"
+  },
+  {
+    "name": "Armor",
+    "id": "ARMO"
+  },
+  {
+    "name": "Book",
+    "id": "BOOK"
+  },
+  {
+    "name": "Cell",
+    "id": "CELL"
+  },
+  {
+    "name": "Class",
+    "id": "CLAS"
+  },
+  {
+    "name": "Climate",
+    "id": "CLMT"
+  },
+  {
+    "name": "Combat Style",
+    "id": "CSTY"
+  },
+  {
+    "name": "Container",
+    "id": "CONT"
+  },
+  {
+    "name": "Dialog Topic",
+    "id": "DIAL"
+  },
+  {
+    "name": "Door",
+    "id": "DOOR"
+  },
+  {
+    "name": "Effect Shader",
+    "id": "EFSH"
+  },
+  {
+    "name": "Faction",
+    "id": "FACT"
+  },
+  {
+    "name": "Flora",
+    "id": "FLOR"
+  },
+  {
+    "name": "Furniture",
+    "id": "FURN"
+  },
+  {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
+    "name": "Grass",
+    "id": "GRAS"
+  },
+  {
+    "name": "Idle Animation",
+    "id": "IDLE"
+  },
+  {
+    "name": "Ingredient",
+    "id": "INGR"
+  },
+  {
+    "name": "Key",
+    "id": "KEYM"
+  },
+  {
+    "name": "Leveled Item",
+    "id": "LVLI"
+  },
+  {
+    "name": "Light",
+    "id": "LIGH"
+  },
+  {
+    "name": "Load Screen",
+    "id": "LSCR"
+  },
+  {
+    "name": "Magic Effect",
+    "id": "MGEF"
+  },
+  {
+    "name": "Npc",
+    "id": "NPC_"
+  },
+  {
+    "name": "Quest",
+    "id": "QUST"
+  },
+  {
+    "name": "Race",
+    "id": "RACE"
+  },
+  {
+    "name": "Region",
+    "id": "REGN"
+  },
+  {
+    "name": "Spell",
+    "id": "SPEL"
+  },
+  {
+    "name": "Static",
+    "id": "STAT"
+  },
+  {
+    "name": "Tree",
+    "id": "TREE"
+  },
+  {
+    "name": "Water",
+    "id": "WATR"
+  },
+  {
+    "name": "Weapon",
+    "id": "WEAP"
+  },
+  {
+    "name": "Weather",
+    "id": "WTHR"
+  },
+  {
+    "name": "Worldspace",
+    "id": "WRLD"
+  }
+]
