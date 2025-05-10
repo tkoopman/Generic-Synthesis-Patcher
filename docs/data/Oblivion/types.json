@@ -4,6 +4,14 @@
     "id": "ACTI"
   },
   {
+    "name": "AI Package",
+    "id": "PACK"
+  },
+  {
+    "name": "Alchemical Apparatus",
+    "id": "APPA"
+  },
+  {
     "name": "Ammunition",
     "id": "AMMO"
   },
@@ -14,6 +22,10 @@
   {
     "name": "Armor",
     "id": "ARMO"
+  },
+  {
+    "name": "Birthsign",
+    "id": "BSGN"
   },
   {
     "name": "Book",
@@ -32,12 +44,20 @@
     "id": "CLMT"
   },
   {
+    "name": "Clothing",
+    "id": "CLOT"
+  },
+  {
     "name": "Combat Style",
     "id": "CSTY"
   },
   {
     "name": "Container",
     "id": "CONT"
+  },
+  {
+    "name": "Creature",
+    "id": "CREA"
   },
   {
     "name": "Dialog Topic",
@@ -50,6 +70,14 @@
   {
     "name": "Effect Shader",
     "id": "EFSH"
+  },
+  {
+    "name": "Enchantment",
+    "id": "ENCH"
+  },
+  {
+    "name": "Eye",
+    "id": "EYES"
   },
   {
     "name": "Faction",
@@ -76,6 +104,10 @@
     "id": "GRAS"
   },
   {
+    "name": "Hair",
+    "id": "HAIR"
+  },
+  {
     "name": "Idle Animation",
     "id": "IDLE"
   },
@@ -88,8 +120,20 @@
     "id": "KEYM"
   },
   {
+    "name": "Land Texture",
+    "id": "LTEX"
+  },
+  {
+    "name": "Leveled Creature",
+    "id": "LVLC"
+  },
+  {
     "name": "Leveled Item",
     "id": "LVLI"
+  },
+  {
+    "name": "Leveled Spell",
+    "id": "LVSP"
   },
   {
     "name": "Light",
@@ -104,8 +148,16 @@
     "id": "MGEF"
   },
   {
+    "name": "Miscellaneous",
+    "id": "MISC"
+  },
+  {
     "name": "Npc",
     "id": "NPC_"
+  },
+  {
+    "name": "Potion",
+    "id": "ALCH"
   },
   {
     "name": "Quest",
@@ -120,12 +172,36 @@
     "id": "REGN"
   },
   {
+    "name": "Script",
+    "id": "SCPT"
+  },
+  {
+    "name": "Sigil Stone",
+    "id": "SGST"
+  },
+  {
+    "name": "Skill Record",
+    "id": "SKIL"
+  },
+  {
+    "name": "Soul Gem",
+    "id": "SLGM"
+  },
+  {
+    "name": "Sound",
+    "id": "SOUN"
+  },
+  {
     "name": "Spell",
     "id": "SPEL"
   },
   {
     "name": "Static",
     "id": "STAT"
+  },
+  {
+    "name": "Subspace",
+    "id": "SBSP"
   },
   {
     "name": "Tree",

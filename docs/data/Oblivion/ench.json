@@ -1,0 +1,51 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.ChargeAmount\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.ChargeAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.EnchantCost\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Data.EnchantCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ManualEnchantCost)",
+    "Example": "\"Data.Flags\": \"ManualEnchantCost\"",
+    "MFFSM": "MFF-M",
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Scroll, Staff, Weapon, Apparel)",
+    "Example": "\"Data.Type\": \"Scroll\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  }
+]

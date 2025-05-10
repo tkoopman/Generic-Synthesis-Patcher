@@ -54,5 +54,22 @@ namespace GenericSynthesisPatcher.Games.Skyrim
         }
 
         public override string GameName => "Skyrim";
+
+        public override Type[] IgnoreMajorRecordGetterTypes
+            => [
+                typeof(IStoryManagerBranchNodeGetter),
+                typeof(IStoryManagerEventNodeGetter),
+                typeof(IStoryManagerQuestNodeGetter),
+                typeof(IHairGetter), // No implemented fields
+                typeof(ILensFlareGetter), // No implemented fields
+                typeof(INavigationMeshInfoMapGetter), // No implemented fields
+                typeof(IVolumetricLightingGetter), // No implemented fields
+                typeof(IDebrisGetter), // No implemented fields
+                typeof(IDefaultObjectManagerGetter), // No implemented fields
+                typeof(IGlobalGetter), // No implemented fields
+                typeof(IGameSettingGetter), // No implemented fields
+                typeof(IImpactDataSetGetter), // No implemented fields
+                typeof(IVoiceTypeGetter), // No implemented fields
+                ];
     }
 }

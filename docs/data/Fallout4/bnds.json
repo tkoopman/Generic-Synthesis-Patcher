@@ -1,0 +1,121 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DefaultColor\": [40,50,60]",
+    "MFFSM": "-FF--",
+    "Name": "DefaultColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DefaultNumberOfSlices\": 7",
+    "MFFSM": "MFF--",
+    "Name": "DefaultNumberOfSlices"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefaultNumberOfTiles\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "DefaultNumberOfTiles"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"DefaultNumberOfTilesIsRelativeToLength\": true",
+    "MFFSM": "MFF--",
+    "Name": "DefaultNumberOfTilesIsRelativeToLength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DNAMDataTypeState\": \"Break0\"",
+    "MFFSM": "MFF-M",
+    "Name": "DNAMDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WindFlexibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WindFlexibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WindSensibility\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "WindSensibility"
+  }
+]

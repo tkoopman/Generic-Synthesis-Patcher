@@ -96,14 +96,6 @@
     "id": "CONT"
   },
   {
-    "name": "Debris",
-    "id": "DEBR"
-  },
-  {
-    "name": "Default Object Manager",
-    "id": "DOBJ"
-  },
-  {
     "name": "Dialog Branch",
     "id": "DLBR"
   },
@@ -168,14 +160,6 @@
     "id": "FURN"
   },
   {
-    "name": "Game Setting",
-    "id": "GMST"
-  },
-  {
-    "name": "Global",
-    "id": "GLOB"
-  },
-  {
     "name": "Grass",
     "id": "GRAS"
   },
@@ -202,10 +186,6 @@
   {
     "name": "Image Space",
     "id": "IMGS"
-  },
-  {
-    "name": "Impact Data Set",
-    "id": "IPDS"
   },
   {
     "name": "Impact",
@@ -402,10 +382,6 @@
   {
     "name": "Visual Effect",
     "id": "RFCT"
-  },
-  {
-    "name": "Voice Type",
-    "id": "VTYP"
   },
   {
     "name": "Water",

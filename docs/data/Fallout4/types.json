@@ -28,6 +28,10 @@
     "id": "ANIO"
   },
   {
+    "name": "A Object Modification",
+    "id": "OMOD"
+  },
+  {
     "name": "Armor Addon",
     "id": "ARMA"
   },
@@ -42,6 +46,10 @@
   {
     "name": "Association Type",
     "id": "ASTP"
+  },
+  {
+    "name": "Bendable Spline",
+    "id": "BNDS"
   },
   {
     "name": "Body Part Data",
@@ -84,20 +92,16 @@
     "id": "CSTY"
   },
   {
+    "name": "Component",
+    "id": "CMPO"
+  },
+  {
     "name": "Constructible Object",
     "id": "COBJ"
   },
   {
     "name": "Container",
     "id": "CONT"
-  },
-  {
-    "name": "Debris",
-    "id": "DEBR"
-  },
-  {
-    "name": "Default Object Manager",
-    "id": "DOBJ"
   },
   {
     "name": "Dialog View",
@@ -148,14 +152,6 @@
     "id": "FURN"
   },
   {
-    "name": "Game Setting",
-    "id": "GMST"
-  },
-  {
-    "name": "Global",
-    "id": "GLOB"
-  },
-  {
     "name": "Grass",
     "id": "GRAS"
   },
@@ -166,6 +162,10 @@
   {
     "name": "Head Part",
     "id": "HDPT"
+  },
+  {
+    "name": "Holotape",
+    "id": "NOTE"
   },
   {
     "name": "Idle Animation",
@@ -184,10 +184,6 @@
     "id": "IMGS"
   },
   {
-    "name": "Impact Data Set",
-    "id": "IPDS"
-  },
-  {
     "name": "Impact",
     "id": "IPCT"
   },
@@ -198,6 +194,10 @@
   {
     "name": "Ingredient",
     "id": "INGR"
+  },
+  {
+    "name": "Instance Naming Rules",
+    "id": "INNR"
   },
   {
     "name": "Key",
@@ -260,6 +260,10 @@
     "id": "MISC"
   },
   {
+    "name": "Movable Static",
+    "id": "MSTT"
+  },
+  {
     "name": "Movement Type",
     "id": "MOVT"
   },
@@ -270,6 +274,10 @@
   {
     "name": "Music Type",
     "id": "MUSC"
+  },
+  {
+    "name": "Navigation Mesh Info Map",
+    "id": "NAVI"
   },
   {
     "name": "Npc",
@@ -286,6 +294,10 @@
   {
     "name": "Package",
     "id": "PACK"
+  },
+  {
+    "name": "Pack In",
+    "id": "PKIN"
   },
   {
     "name": "Perk",
@@ -328,6 +340,10 @@
     "id": "SNDR"
   },
   {
+    "name": "Sound Keyword Mapping",
+    "id": "KSSM"
+  },
+  {
     "name": "Sound Marker",
     "id": "SOUN"
   },
@@ -340,12 +356,20 @@
     "id": "SPEL"
   },
   {
+    "name": "Static Collection",
+    "id": "SCOL"
+  },
+  {
     "name": "Static",
     "id": "STAT"
   },
   {
     "name": "Talking Activator",
     "id": "TACT"
+  },
+  {
+    "name": "Terminal",
+    "id": "TERM"
   },
   {
     "name": "Texture Set",
@@ -358,10 +382,6 @@
   {
     "name": "Visual Effect",
     "id": "RFCT"
-  },
-  {
-    "name": "Voice Type",
-    "id": "VTYP"
   },
   {
     "name": "Water",
@@ -378,5 +398,9 @@
   {
     "name": "Worldspace",
     "id": "WRLD"
+  },
+  {
+    "name": "Zoom",
+    "id": "ZOOM"
   }
 ]

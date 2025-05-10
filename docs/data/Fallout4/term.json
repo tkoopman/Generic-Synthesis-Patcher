@@ -1,0 +1,198 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AllowAwakeSound, EnterWithWeaponDrawn, PlayAnimWhenFull, DisablesActivation, IsPerch, MustExitToTalk, UseStaticAvoidNode, HasModel, IsSleepFurniture)",
+    "Example": "\"Flags\": [ \"AllowAwakeSound\", \"-IsSleepFurniture\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "FNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"HeaderText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "HeaderText"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LoopingSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasDistantLod, RandomAnimStart)",
+    "Example": "\"MajorFlags\": [ \"HasDistantLod\", \"-RandomAnimStart\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MarkerModel\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MarkerModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "PNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "PreviewTransform"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "MFFSM": "MFF--",
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"WelcomeText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "WelcomeText"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"WorkbenchData\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "WorkbenchData"
+  }
+]

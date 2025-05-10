@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "AttachParentSlots"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "AttachPoint"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Filter\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Filter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "FilterKeywords"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LevelTierScaledOffset\": 7",
+    "MFFSM": "MFF--",
+    "Name": "LevelTierScaledOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "LooseMod"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (LegendaryMod, ModCollection)",
+    "Example": "\"MajorFlags\": [ \"LegendaryMod\", \"-ModCollection\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MaxRank\": 7",
+    "MFFSM": "MFF--",
+    "Name": "MaxRank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "MFFSM": "-FF--",
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Priority\": 7",
+    "MFFSM": "MFF--",
+    "Name": "Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "MFFSM": "MFFSM",
+    "Name": "TargetOmodKeywords"
+  }
+]

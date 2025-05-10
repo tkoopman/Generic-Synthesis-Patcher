@@ -62,6 +62,8 @@ namespace GenericSynthesisPatcher.Games.Universal
             typeof(TranslatedString),
             ];
 
+        public abstract Type[] IgnoreMajorRecordGetterTypes { get; }
+
         public string[] IgnoreProperty { get; protected set; } =
             [
             "BodyTemplate.ActsLike44",
@@ -157,7 +159,7 @@ namespace GenericSynthesisPatcher.Games.Universal
             }
             """;
 
-        public virtual string RPMPopulateHeader (string methodName) => $$"""
+        public virtual string RPMPopulateHeader (string classLine, string methodName) => $$"""
             using System.Drawing;
 
             using GenericSynthesisPatcher.Games.Universal.Action;
@@ -169,9 +171,9 @@ namespace GenericSynthesisPatcher.Games.Universal
 
             namespace GenericSynthesisPatcher.Games.{{GameName}}
             {
-                public partial class RecordPropertyMappings
+                {{classLine}}
                 {
-                    private void {{methodName}} ()
+                    private void {{methodName}}
                     {
             #pragma warning disable format
             """;

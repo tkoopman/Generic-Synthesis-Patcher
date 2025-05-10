@@ -1,0 +1,100 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"ApprenticeText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ApprenticeText"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.Action\": \"Strength\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Action"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.Attribute\": \"Strength\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Attribute"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Combat, Magic, Stealth)",
+    "Example": "\"Data.Specialization\": \"Combat\"",
+    "MFFSM": "MF---",
+    "Name": "Data.Specialization"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.UseValueFirst\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.UseValueFirst"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.UseValueSecond\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Data.UseValueSecond"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"ExpertText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "ExpertText"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icon\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"JourneymanText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "JourneymanText"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MasterText\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "MasterText"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Skill\": \"Strength\"",
+    "MFFSM": "MF---",
+    "Name": "Skill"
+  }
+]

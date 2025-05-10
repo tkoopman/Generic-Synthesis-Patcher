@@ -5,6 +5,9 @@ using Common;
 using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 
+using Loqui;
+
+using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Synthesis;
 
@@ -50,6 +53,48 @@ namespace GenericSynthesisPatcher
 
         public static void GenerateUnused (IPatcherState<Mutagen.Bethesda.Oblivion.IOblivionMod, Mutagen.Bethesda.Oblivion.IOblivionModGetter> state) => Generate(state, true);
 
+        public void GetTypes ()
+        {
+            var t = Global.State.GetType();
+
+            var modType = t.GetGenericArguments().First();
+            List<string[]> types = [];
+
+            foreach (var p in modType.GetProperties())
+            {
+                if (p.PropertyType.IsGenericType && p.PropertyType.GetGenericArguments().FirstOrDefault() is Type propType)
+                {
+                    var srProp = propType.GetProperty("StaticRegistration");
+                    if (srProp?.GetValue(null) is ILoquiRegistration rego && !genny.IgnoreMajorRecordGetterTypes.Contains(rego.GetterType))
+                    {
+                        string getter = rego.GetterType.GetClassName();
+                        string method = rego.Name;
+                        string state = "";
+                        if (method.Equals("CellBlock", StringComparison.Ordinal))
+                        {
+                            getter = "ICellGetter";
+                            method = "Cell";
+                            state = "state.LinkCache";
+                        }
+
+                        types.Add([$"Add({getter}.StaticRegistration", $"() => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().{method}().WinningContextOverrides({state}));"]);
+                    }
+                }
+            }
+
+            types.Sort((l, r) => string.Compare(l[0], r[0], StringComparison.OrdinalIgnoreCase));
+
+            using (StringWriter sw = new())
+            {
+                sw.WriteLine(genny.RPMPopulateHeader("public class RecordTypeMappings : Universal.RecordTypeMappings", $"RecordTypeMappings ({t.GetClassName()} state)"));
+                printTableRow(sw, types, sep: ",", prefix: "            ", suffix: "", padLast: false);
+                sw.WriteLine(genny.RPMPopulateFooter());
+                using var file = new StreamWriter(Path.Combine(Path.GetTempPath(), $"{genny.GameName}RecordTypeMappings.txt"), false);
+                file.Write(sw.ToString());
+                file.Close();
+            }
+        }
+
         public void Run (bool outputUnimplemented)
         {
             var serializer = new JsonSerializer
@@ -59,6 +104,8 @@ namespace GenericSynthesisPatcher
 
             if (State is not null)
                 Global.SetState(State);
+
+            GetTypes();
 
             List<RecordTypeMapping> ImplementedRTMs = [];
             List<RPMDetails> buildRPMs = [];
@@ -124,7 +171,7 @@ namespace GenericSynthesisPatcher
 
             using (StringWriter sw = new())
             {
-                sw.WriteLine(genny.RPMPopulateHeader("populateSubAliases"));
+                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "populateSubAliases ()"));
                 printTableRow(sw, subPropertyAliases, sep: ",", prefix: "            ", suffix: "", padLast: false);
                 sw.WriteLine(genny.RPMPopulateFooter());
 
@@ -244,7 +291,7 @@ namespace GenericSynthesisPatcher
             using (StringWriter sw = new())
             {
                 ;
-                sw.WriteLine(genny.RPMPopulateHeader("populateMappings"));
+                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "populateMappings ()"));
                 printTableRow(sw, lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
                 sw.WriteLine(genny.RPMPopulateFooter());
 

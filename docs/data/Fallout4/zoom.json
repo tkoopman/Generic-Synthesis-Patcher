@@ -1,0 +1,65 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CameraOffset.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CameraOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CameraOffset.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CameraOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CameraOffset.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "CameraOffset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FovMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "FovMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "MFFSM": "MFF--",
+    "Name": "ImagespaceModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Fine, Duplex, German, Dot, MilDot, Circle, OldRangefind, ModernRangefind, SVD, HandPainted, Binoculars, Cross, DoubleZero, Rangefinder1, Rangefinder2, Rectangle)",
+    "Example": "\"Overlay\": \"Default\"",
+    "MFFSM": "MF---",
+    "Name": "Overlay"
+  }
+]

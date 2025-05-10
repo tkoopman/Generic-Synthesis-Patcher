@@ -2,6 +2,8 @@
 
 using GenericSynthesisPatcher.Games.Universal;
 
+using Mutagen.Bethesda.Fallout4;
+
 using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Fallout4
@@ -17,5 +19,36 @@ namespace GenericSynthesisPatcher.Games.Fallout4
         }
 
         public override string GameName => "Fallout4";
+
+        public override Type[] IgnoreMajorRecordGetterTypes
+            => [
+                typeof(IStoryManagerBranchNodeGetter),
+                typeof(IStoryManagerEventNodeGetter),
+                typeof(IStoryManagerQuestNodeGetter),
+                typeof(IAudioEffectChainGetter), // No implemented fields
+                typeof(IAimModelGetter), // No implemented fields
+                typeof(IAttractionRuleGetter), // No implemented fields
+                typeof(IDebrisGetter), // No implemented fields
+                typeof(IDefaultObjectGetter), // No implemented fields
+                typeof(IADamageTypeGetter), // No implemented fields
+                typeof(IDefaultObjectManagerGetter), // No implemented fields
+                typeof(IGodRaysGetter), // No implemented fields
+                typeof(IGlobalGetter), // No implemented fields
+                typeof(IGameSettingGetter), // No implemented fields
+                typeof(IInstanceNamingRuleGetter), // No implemented fields
+                typeof(IImpactDataSetGetter), // No implemented fields
+                typeof(ILayerGetter), // No implemented fields
+                typeof(ILensFlareGetter), // No implemented fields
+                typeof(IMaterialSwapGetter), // No implemented fields
+                typeof(INavigationMapInfoGetter), // No implemented fields
+                typeof(INavigationMeshObstacleManagerGetter), // No implemented fields
+                typeof(IObjectVisibilityManagerGetter), // No implemented fields
+                typeof(IReferenceGroupGetter), // No implemented fields
+                typeof(ISceneCollectionGetter), // No implemented fields
+                typeof(IAudioCategorySnapshotGetter), // No implemented fields
+                typeof(IAnimationSoundTagSetGetter), // No implemented fields
+                typeof(ITransformGetter), // No implemented fields
+                typeof(IVoiceTypeGetter), // No implemented fields
+                ];
     }
 }

@@ -22,9 +22,9 @@
   },
   {
     "Aliases": "",
-    "Description": "Flags (Constant)",
-    "Example": "\"MajorFlags\": \"Constant\"",
+    "Description": "Flags (None, Armor, Furniture, Weapon, Actor)",
+    "Example": "\"Target\": [ \"None\", \"-Actor\" ]",
     "MFFSM": "MFF-M",
-    "Name": "MajorFlags"
+    "Name": "Target"
   }
 ]
