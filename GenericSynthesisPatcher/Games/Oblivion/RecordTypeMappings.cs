@@ -32,8 +32,6 @@ namespace GenericSynthesisPatcher.Games.Oblivion
             Add(IFactionGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Faction().WinningContextOverrides());
             Add(IFloraGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Flora().WinningContextOverrides());
             Add(IFurnitureGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Furniture().WinningContextOverrides());
-            Add(IGameSettingGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().GameSetting().WinningContextOverrides());
-            Add(IGlobalGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Global().WinningContextOverrides());
             Add(IGrassGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Grass().WinningContextOverrides());
             Add(IHairGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Hair().WinningContextOverrides());
             Add(IIdleAnimationGetter.StaticRegistration      , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().IdleAnimation().WinningContextOverrides());
@@ -52,7 +50,6 @@ namespace GenericSynthesisPatcher.Games.Oblivion
             Add(IQuestGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Quest().WinningContextOverrides());
             Add(IRaceGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Race().WinningContextOverrides());
             Add(IRegionGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Region().WinningContextOverrides());
-            Add(IScriptGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Script().WinningContextOverrides());
             Add(ISigilStoneGetter.StaticRegistration         , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SigilStone().WinningContextOverrides());
             Add(ISkillRecordGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SkillRecord().WinningContextOverrides());
             Add(ISoulGemGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SoulGem().WinningContextOverrides());

@@ -92,14 +92,6 @@
     "id": "FURN"
   },
   {
-    "name": "Game Setting",
-    "id": "GMST"
-  },
-  {
-    "name": "Global",
-    "id": "GLOB"
-  },
-  {
     "name": "Grass",
     "id": "GRAS"
   },
@@ -170,10 +162,6 @@
   {
     "name": "Region",
     "id": "REGN"
-  },
-  {
-    "name": "Script",
-    "id": "SCPT"
   },
   {
     "name": "Sigil Stone",
