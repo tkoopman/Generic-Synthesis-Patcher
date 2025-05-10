@@ -36,6 +36,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(INpcGetter)                   , "AggroRadiusWarnOrAttack"                   , ConvertibleAction<uint>.Instance);
             Add(typeof(IRaceGetter)                  , "AimAngleTolerance"                         , ConvertibleAction<float>.Instance);
             Add(typeof(IWeaponGetter)                , "AimModel"                                  , FormLinkAction<IAimModelGetter>.Instance);
+            Add(typeof(IGodRaysGetter)               , "AirColor"                                  , BasicAction<Color>.Instance);
+            Add(typeof(IGodRaysGetter)               , "AirColorScale"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IArmorGetter)                 , "AlternateBlockMaterial"                    , FormLinkAction<IMaterialTypeGetter>.Instance);
             Add(typeof(IWeaponGetter)                , "AlternateBlockMaterial"                    , FormLinkAction<IMaterialTypeGetter>.Instance);
             Add(typeof(ISoundDescriptorGetter)       , "AlternateSoundFor"                         , FormLinkAction<ISoundDescriptorGetter>.Instance);
@@ -95,7 +97,10 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IComponentGetter)             , "AutoCalcValue"                             , ConvertibleAction<uint>.Instance);
             Add(typeof(ICombatStyleGetter)           , "AvoidThreatChance"                         , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "BackAmplitude"                             , ConvertibleAction<float>.Instance);
+            Add(typeof(IGodRaysGetter)               , "BackColor"                                 , BasicAction<Color>.Instance);
+            Add(typeof(IGodRaysGetter)               , "BackColorScale"                            , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "BackFrequency"                             , ConvertibleAction<float>.Instance);
+            Add(typeof(IGodRaysGetter)               , "BackPhase"                                 , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "BackRun"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "BackSprint"                                , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "BackStanding"                              , ConvertibleAction<float>.Instance);
@@ -109,6 +114,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IRaceGetter)                  , "BaseMovementDefaultFly"                    , FormLinkAction<IMovementTypeGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "BaseMovementDefaultSneak"                  , FormLinkAction<IMovementTypeGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "BaseMovementDefaultSwim"                   , FormLinkAction<IMovementTypeGetter>.Instance);
+            Add(typeof(IAimModelGetter)              , "BaseStability"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "BeardBipedObject"                          , EnumsAction.Instance);
             Add(typeof(IIdleAnimationGetter)         , "BehaviorGraph"                             , ConvertibleAction<string>.Instance);
             Add(typeof(IFurnitureGetter)             , "BenchType"                                 , EnumsAction.Instance);
@@ -205,11 +211,19 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IProjectileGetter)            , "CollisionRadius"                           , ConvertibleAction<float>.Instance);
             Add(typeof(IHeadPartGetter)              , "Color"                                     , FormLinkAction<IColorRecordGetter>.Instance);
             Add(null                                 , "Color"                                     , BasicAction<Color>.Instance);
+            Add(typeof(ILensFlareGetter)             , "ColorInfluence"                            , ConvertibleAction<float>.Instance);
             Add(typeof(IGrassGetter)                 , "ColorRange"                                , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "CombatOverridePackageList"                 , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(INpcGetter)                   , "CombatStyle"                               , FormLinkAction<ICombatStyleGetter>.Instance);
             Add(typeof(IPackageGetter)               , "CombatStyle"                               , FormLinkAction<ICombatStyleGetter>.Instance);
             Add(typeof(IEquipTypeGetter)             , "ConditionActorValue"                       , FormLinkAction<IActorValueInformationGetter>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireDecreaseDelayMilliseconds"       , ConvertibleAction<uint>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireIncreasePerSec"                  , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireIncreasePerShot"                 , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireIronSightsMult"                  , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireMaxAngle"                        , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireMinAngle"                        , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "ConeOfFireSneakMult"                       , ConvertibleAction<float>.Instance);
             Add(typeof(IProjectileGetter)            , "ConeSpread"                                , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "Confidence"                                , EnumsAction.Instance);
             Add(typeof(ILightGetter)                 , "Constant"                                  , ConvertibleAction<float>.Instance);
@@ -437,6 +451,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(INpcGetter)                   , "FacialHairColor"                           , FormLinkAction<IColorRecordGetter>.Instance);
             Add(typeof(INpcGetter)                   , "FacialMorphIntensity"                      , ConvertibleAction<float>.Instance);
             Add(typeof(ICellGetter)                  , "FactionRank"                               , ConvertibleAction<int>.Instance);
+            Add(typeof(ILensFlareGetter)             , "FadeDistanceRadiusScale"                   , ConvertibleAction<float>.Instance);
             Add(typeof(IMusicTypeGetter)             , "FadeDuration"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IProjectileGetter)            , "FadeDuration"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IMusicTrackGetter)            , "FadeOut"                                   , ConvertibleAction<float>.Instance);
@@ -583,6 +598,9 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IExplosionGetter)             , "Force"                                     , ConvertibleAction<float>.Instance);
             Add(null                                 , "ForcedLocRefType"                          , FormLinkAction<ILocationReferenceTypeGetter>.Instance);
             Add(null                                 , "FormVersion"                               , ConvertibleAction<ushort>.Instance);
+            Add(typeof(IGodRaysGetter)               , "ForwardColor"                              , BasicAction<Color>.Instance);
+            Add(typeof(IGodRaysGetter)               , "ForwardColorScale"                         , ConvertibleAction<float>.Instance);
+            Add(typeof(IGodRaysGetter)               , "ForwardPhase"                              , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "ForwardRun"                                , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "ForwardSprint"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IMovementTypeGetter)          , "ForwardStanding"                           , ConvertibleAction<float>.Instance);
@@ -720,11 +738,13 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ICellGetter)                  , "InPreVisFileOf"                            , FormLinkAction<ICellGetter>.Instance);
             Add(typeof(IArmorGetter)                 , "InstanceNaming"                            , FormLinkAction<IInstanceNamingRulesGetter>.Instance);
             Add(typeof(IWeaponGetter)                , "InstanceNaming"                            , FormLinkAction<IInstanceNamingRulesGetter>.Instance);
+            Add(typeof(IGodRaysGetter)               , "Intensity"                                 , ConvertibleAction<float>.Instance);
             Add(typeof(IActivatorGetter)             , "InteractionKeyword"                        , FormLinkAction<IKeywordGetter>.Instance);
             Add(typeof(IWorldspaceGetter)            , "InteriorLighting"                          , FormLinkAction<ILightingTemplateGetter>.Instance);
             Add(typeof(IPackageGetter)               , "InterruptOverride"                         , EnumsAction.Instance);
             Add(typeof(IPackageGetter)               , "InteruptFlags"                             , FlagsAction.Instance);
             Add(typeof(IBookGetter)                  , "InventoryArt"                              , FormLinkAction<IStaticGetter>.Instance);
+            Add(typeof(IAttractionRuleGetter)        , "IsCombatTarget"                            , ConvertibleAction<bool>.Instance);
             Add(typeof(IAssociationTypeGetter)       , "IsFamily"                                  , ConvertibleAction<bool>.Instance);
             Add(typeof(IAcousticSpaceGetter)         , "IsInterior"                                , ConvertibleAction<bool>.Instance);
             Add(typeof(IExplosionGetter)             , "ISRadius"                                  , ConvertibleAction<float>.Instance);
@@ -853,6 +873,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IStaticGetter)                , "MaxAngle"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(ILeveledItemGetter)           , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ILeveledNpcGetter)            , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
+            Add(typeof(IAttractionRuleGetter)        , "MaxDelay"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(IWorldspaceGetter)            , "MaxHeight.CellData"                        , MemorySliceByteAction.Instance);
             Add(typeof(IWorldspaceGetter)            , "MaxHeight.Max.X"                           , ConvertibleAction<short>.Instance);
             Add(typeof(IWorldspaceGetter)            , "MaxHeight.Max.Y"                           , ConvertibleAction<short>.Instance);
@@ -885,6 +906,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IMagicEffectGetter)           , "MenuDisplayObject"                         , FormLinkAction<IStaticGetter>.Instance);
             Add(typeof(ISoundCategoryGetter)         , "MenuSlider"                                , FormLinkAction<ISoundCategoryGetter>.Instance);
             Add(typeof(IFactionGetter)               , "MerchantContainer"                         , FormLinkAction<IPlacedObjectGetter>.Instance);
+            Add(typeof(IAttractionRuleGetter)        , "MinDelay"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(ISoundCategoryGetter)         , "MinFrequencyMultiplier"                    , ConvertibleAction<float>.Instance);
             Add(typeof(IMagicEffectGetter)           , "MinimumSkillLevel"                         , ConvertibleAction<uint>.Instance);
             Add(typeof(IEncounterZoneGetter)         , "MinLevel"                                  , ConvertibleAction<byte>.Instance);
@@ -974,6 +996,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IShaderParticleGeometryGetter), "NumSubtexturesX"                           , ConvertibleAction<float>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "NumSubtexturesY"                           , ConvertibleAction<float>.Instance);
             Add(typeof(INavigationMeshInfoMapGetter) , "NVSI"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(IDefaultObjectGetter)         , "Object"                                    , FormLinkAction<IFallout4MajorRecordGetter>.Instance);
             Add(null                                 , "ObjectBounds.First.X"                      , ConvertibleAction<short>.Instance);
             Add(null                                 , "ObjectBounds.First.Y"                      , ConvertibleAction<short>.Instance);
             Add(null                                 , "ObjectBounds.First.Z"                      , ConvertibleAction<short>.Instance);
@@ -1020,6 +1043,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ICellGetter)                  , "Ownership.Owner"                           , FormLinkAction<IOwnerGetter>.Instance);
             Add(typeof(INpcGetter)                   , "Packages"                                  , FormLinksAction<IPackageGetter>.Instance);
             Add(typeof(IPackageGetter)               , "PackageTemplate"                           , FormLinkAction<IPackageGetter>.Instance);
+            Add(typeof(ILayerGetter)                 , "Parent"                                    , FormLinkAction<ILayerGetter>.Instance);
             Add(typeof(IMaterialTypeGetter)          , "Parent"                                    , FormLinkAction<IMaterialTypeGetter>.Instance);
             Add(typeof(IRelationshipGetter)          , "Parent"                                    , FormLinkAction<INpcGetter>.Instance);
             Add(typeof(ISoundCategoryGetter)         , "Parent"                                    , FormLinkAction<ISoundCategoryGetter>.Instance);
@@ -1064,6 +1088,9 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IFactionGetter)               , "PlayerInventoryContainer"                  , FormLinkAction<IPlacedObjectGetter>.Instance);
             Add(typeof(ITalkingActivatorGetter)      , "PNAM"                                      , ConvertibleAction<int>.Instance);
             Add(null                                 , "PNAM"                                      , MemorySliceByteAction.Instance);
+            Add(typeof(ITransformGetter)             , "Position.X"                                , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "Position.Y"                                , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "Position.Z"                                , ConvertibleAction<float>.Instance);
             Add(typeof(IGrassGetter)                 , "PositionRange"                             , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "PowerArmorStand"                           , FormLinkAction<IFurnitureGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "Precipitation"                             , FormLinkAction<IShaderParticleGeometryGetter>.Instance);
@@ -1077,6 +1104,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ICellGetter)                  , "PreVisFilesTimestamp"                      , ConvertibleAction<ushort>.Instance);
             Add(typeof(ISoundKeywordMappingGetter)   , "PrimaryDescriptor"                         , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IAObjectModificationGetter)   , "Priority"                                  , ConvertibleAction<byte>.Instance);
+            Add(typeof(IAudioCategorySnapshotGetter) , "Priority"                                  , ConvertibleAction<ushort>.Instance);
             Add(typeof(IArmorAddonGetter)            , "Priority.Female"                           , ConvertibleAction<byte>.Instance);
             Add(typeof(IArmorAddonGetter)            , "Priority.Male"                             , ConvertibleAction<byte>.Instance);
             Add(typeof(IFloraGetter)                 , "Production.Fall"                           , ConvertibleAction<byte>.Instance);
@@ -1094,6 +1122,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IMaterialObjectGetter)        , "ProjectionVector.Z"                        , ConvertibleAction<float>.Instance);
             Add(null                                 , "PutDownSound"                              , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IDialogViewGetter)            , "Quest"                                     , FormLinkAction<IQuestGetter>.Instance);
+            Add(typeof(ISceneCollectionGetter)       , "Quest"                                     , FormLinkAction<IQuestGetter>.Instance);
             Add(typeof(IQuestGetter)                 , "QuestCompletionXp"                         , FormLinkAction<IGlobalGetter>.Instance);
             Add(typeof(IQuestGetter)                 , "QuestGroup"                                , FormLinkAction<IKeywordGetter>.Instance);
             Add(null                                 , "Race"                                      , FormLinkAction<IRaceGetter>.Instance);
@@ -1105,6 +1134,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IActivatorGetter)             , "RadioReceiver.SoundModel"                  , FormLinkAction<ISoundOutputModelGetter>.Instance);
             Add(typeof(IActivatorGetter)             , "RadioReceiver.StartsActive"                , ConvertibleAction<bool>.Instance);
             Add(typeof(IActivatorGetter)             , "RadioReceiver.Volume"                      , ConvertibleAction<float>.Instance);
+            Add(typeof(IAttractionRuleGetter)        , "Radius"                                    , ConvertibleAction<float>.Instance);
             Add(typeof(IHazardGetter)                , "Radius"                                    , ConvertibleAction<float>.Instance);
             Add(typeof(ILightGetter)                 , "Radius"                                    , ConvertibleAction<uint>.Instance);
             Add(typeof(IProjectileGetter)            , "Range"                                     , ConvertibleAction<float>.Instance);
@@ -1113,6 +1143,14 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IEncounterZoneGetter)         , "Rank"                                      , ConvertibleAction<byte>.Instance);
             Add(typeof(IRelationshipGetter)          , "Rank"                                      , EnumsAction.Instance);
             Add(typeof(IWeaponGetter)                , "Reach"                                     , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilArc"                                 , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilArcRotate"                           , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilDiminishSightsMult"                  , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilDiminishSpringForce"                 , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilHipMult"                             , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilMaxPerShot"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RecoilMinPerShot"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IReferenceGroupGetter)        , "Reference"                                 , FormLinkAction<ILinkedReferenceGetter>.Instance);
             Add(typeof(ILocationGetter)              , "ReferenceCellPersistentReferences"         , FormLinksAction<IPlacedSimpleGetter>.Instance);
             Add(typeof(ILocationGetter)              , "ReferenceCellStaticReferences"             , FormLinksAction<IPlacedSimpleGetter>.Instance);
             Add(typeof(ILocationGetter)              , "ReferenceCellUnique"                       , FormLinksAction<INpcGetter>.Instance);
@@ -1127,6 +1165,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ISoundMarkerGetter)           , "Repeat.MinTime"                            , ConvertibleAction<float>.Instance);
             Add(typeof(ISoundMarkerGetter)           , "Repeat.Stackable"                          , ConvertibleAction<bool>.Instance);
             Add(typeof(IIdleAnimationGetter)         , "ReplayDelay"                               , ConvertibleAction<ushort>.Instance);
+            Add(typeof(IAttractionRuleGetter)        , "RequiresLineOfSight"                       , ConvertibleAction<bool>.Instance);
             Add(typeof(IWeaponGetter)                , "Resist"                                    , FormLinkAction<IActorValueInformationGetter>.Instance);
             Add(typeof(IMagicEffectGetter)           , "ResistValue"                               , FormLinkAction<IActorValueInformationGetter>.Instance);
             Add(typeof(INpcGetter)                   , "Responsibility"                            , EnumsAction.Instance);
@@ -1146,12 +1185,17 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IReverbParametersGetter)      , "RoomHfFilter"                              , ConvertibleAction<sbyte>.Instance);
             Add(typeof(ILoadScreenGetter)            , "Rotation.Max"                              , ConvertibleAction<short>.Instance);
             Add(typeof(ILoadScreenGetter)            , "Rotation.Min"                              , ConvertibleAction<short>.Instance);
+            Add(typeof(ITransformGetter)             , "Rotation.X"                                , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "Rotation.Y"                                , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "Rotation.Z"                                , ConvertibleAction<float>.Instance);
             Add(typeof(ICameraShotGetter)            , "RotationOffset.X"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ICameraShotGetter)            , "RotationOffset.Y"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ICameraShotGetter)            , "RotationOffset.Z"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "RotationVelocity"                          , ConvertibleAction<float>.Instance);
+            Add(typeof(IAimModelGetter)              , "RunawayRecoilShots"                        , ConvertibleAction<uint>.Instance);
             Add(typeof(IFootstepSetGetter)           , "RunFootsteps"                              , FormLinksAction<IFootstepGetter>.Instance);
             Add(typeof(ILightGetter)                 , "Scalar"                                    , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "Scale"                                     , ConvertibleAction<float>.Instance);
             Add(typeof(IPackageGetter)               , "ScheduleDate"                              , ConvertibleAction<byte>.Instance);
             Add(typeof(IPackageGetter)               , "ScheduleDayOfWeek"                         , EnumsAction.Instance);
             Add(typeof(IPackageGetter)               , "ScheduleDurationInMinutes"                 , ConvertibleAction<int>.Instance);
@@ -1367,6 +1411,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IPerkGetter)                  , "Trait"                                     , ConvertibleAction<bool>.Instance);
             Add(typeof(IWeatherGetter)               , "TransDelta"                                , ConvertibleAction<float>.Instance);
             Add(typeof(ILoadScreenGetter)            , "Transform"                                 , FormLinkAction<ITransformGetter>.Instance);
+            Add(typeof(IMaterialSwapGetter)          , "TreeFolder"                                , ConvertibleAction<string>.Instance);
             Add(typeof(ITreeGetter)                  , "TrunkAmplitude"                            , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "TrunkFlexibility"                          , ConvertibleAction<float>.Instance);
             Add(typeof(ICellGetter)                  , "TVDT"                                      , MemorySliceByteAction.Instance);
@@ -1419,6 +1464,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeatherGetter)               , "VisualEffect"                              , FormLinkAction<IVisualEffectGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffectBegin"                         , BasicAction<Percent>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffectEnd"                           , BasicAction<Percent>.Instance);
+            Add(typeof(ISceneCollectionGetter)       , "VNAM"                                      , ConvertibleAction<int>.Instance);
+            Add(typeof(ISceneCollectionGetter)       , "VNAM2"                                     , ConvertibleAction<int>.Instance);
             Add(typeof(INpcGetter)                   , "Voice"                                     , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "Voices.Female"                             , FormLinkAction<IVoiceTypeGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "Voices.Male"                               , FormLinkAction<IVoiceTypeGetter>.Instance);
@@ -1500,6 +1547,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeaponGetter)                , "Zoom"                                      , FormLinkAction<IZoomGetter>.Instance);
             Add(typeof(ILoadScreenGetter)            , "Zoom.Max"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(ILoadScreenGetter)            , "Zoom.Min"                                  , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "ZoomMax"                                   , ConvertibleAction<float>.Instance);
+            Add(typeof(ITransformGetter)             , "ZoomMin"                                   , ConvertibleAction<float>.Instance);
 #pragma warning restore format
         }
     }

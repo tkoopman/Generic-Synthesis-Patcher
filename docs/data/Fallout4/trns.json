@@ -1,0 +1,93 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AroundOrigin)",
+    "Example": "\"MajorFlags\": \"AroundOrigin\"",
+    "MFFSM": "MFF-M",
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.X\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.Y\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.Z\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Rotation.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Scale\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ZoomMax\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ZoomMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ZoomMin\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ZoomMin"
+  }
+]

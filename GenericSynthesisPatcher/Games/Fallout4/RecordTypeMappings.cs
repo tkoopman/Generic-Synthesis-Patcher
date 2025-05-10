@@ -14,6 +14,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IActivatorGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Activator().WinningContextOverrides());
             Add(IActorValueInformationGetter.StaticRegistration , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ActorValueInformation().WinningContextOverrides());
             Add(IAddonNodeGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AddonNode().WinningContextOverrides());
+            Add(IAimModelGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AimModel().WinningContextOverrides());
             Add(IAmmunitionGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Ammunition().WinningContextOverrides());
             Add(IAnimatedObjectGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AnimatedObject().WinningContextOverrides());
             Add(IAObjectModificationGetter.StaticRegistration   , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AObjectModification().WinningContextOverrides());
@@ -21,6 +22,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IArmorGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Armor().WinningContextOverrides());
             Add(IArtObjectGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ArtObject().WinningContextOverrides());
             Add(IAssociationTypeGetter.StaticRegistration       , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AssociationType().WinningContextOverrides());
+            Add(IAttractionRuleGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AttractionRule().WinningContextOverrides());
+            Add(IAudioCategorySnapshotGetter.StaticRegistration , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AudioCategorySnapshot().WinningContextOverrides());
             Add(IBendableSplineGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().BendableSpline().WinningContextOverrides());
             Add(IBodyPartDataGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().BodyPartData().WinningContextOverrides());
             Add(IBookGetter.StaticRegistration                  , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Book().WinningContextOverrides());
@@ -35,6 +38,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IComponentGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Component().WinningContextOverrides());
             Add(IConstructibleObjectGetter.StaticRegistration   , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ConstructibleObject().WinningContextOverrides());
             Add(IContainerGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Container().WinningContextOverrides());
+            Add(IDefaultObjectGetter.StaticRegistration         , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().DefaultObject().WinningContextOverrides());
             Add(IDialogViewGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().DialogView().WinningContextOverrides());
             Add(IDoorGetter.StaticRegistration                  , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Door().WinningContextOverrides());
             Add(IEffectShaderGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().EffectShader().WinningContextOverrides());
@@ -47,6 +51,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IFootstepSetGetter.StaticRegistration           , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().FootstepSet().WinningContextOverrides());
             Add(IFormListGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().FormList().WinningContextOverrides());
             Add(IFurnitureGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Furniture().WinningContextOverrides());
+            Add(IGodRaysGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().GodRays().WinningContextOverrides());
             Add(IGrassGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Grass().WinningContextOverrides());
             Add(IHazardGetter.StaticRegistration                , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Hazard().WinningContextOverrides());
             Add(IHeadPartGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().HeadPart().WinningContextOverrides());
@@ -62,6 +67,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IKeyGetter.StaticRegistration                   , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Key().WinningContextOverrides());
             Add(IKeywordGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Keyword().WinningContextOverrides());
             Add(ILandscapeTextureGetter.StaticRegistration      , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().LandscapeTexture().WinningContextOverrides());
+            Add(ILayerGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Layer().WinningContextOverrides());
+            Add(ILensFlareGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().LensFlare().WinningContextOverrides());
             Add(ILeveledItemGetter.StaticRegistration           , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().LeveledItem().WinningContextOverrides());
             Add(ILeveledNpcGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().LeveledNpc().WinningContextOverrides());
             Add(ILightGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Light().WinningContextOverrides());
@@ -71,6 +78,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(ILocationReferenceTypeGetter.StaticRegistration , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().LocationReferenceType().WinningContextOverrides());
             Add(IMagicEffectGetter.StaticRegistration           , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MagicEffect().WinningContextOverrides());
             Add(IMaterialObjectGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MaterialObject().WinningContextOverrides());
+            Add(IMaterialSwapGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MaterialSwap().WinningContextOverrides());
             Add(IMaterialTypeGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MaterialType().WinningContextOverrides());
             Add(IMessageGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Message().WinningContextOverrides());
             Add(IMiscItemGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().MiscItem().WinningContextOverrides());
@@ -88,9 +96,11 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IProjectileGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Projectile().WinningContextOverrides());
             Add(IQuestGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Quest().WinningContextOverrides());
             Add(IRaceGetter.StaticRegistration                  , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Race().WinningContextOverrides());
+            Add(IReferenceGroupGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ReferenceGroup().WinningContextOverrides());
             Add(IRegionGetter.StaticRegistration                , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Region().WinningContextOverrides());
             Add(IRelationshipGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Relationship().WinningContextOverrides());
             Add(IReverbParametersGetter.StaticRegistration      , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ReverbParameters().WinningContextOverrides());
+            Add(ISceneCollectionGetter.StaticRegistration       , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SceneCollection().WinningContextOverrides());
             Add(IShaderParticleGeometryGetter.StaticRegistration, () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().ShaderParticleGeometry().WinningContextOverrides());
             Add(ISoundCategoryGetter.StaticRegistration         , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SoundCategory().WinningContextOverrides());
             Add(ISoundDescriptorGetter.StaticRegistration       , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SoundDescriptor().WinningContextOverrides());
@@ -103,6 +113,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(ITalkingActivatorGetter.StaticRegistration      , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().TalkingActivator().WinningContextOverrides());
             Add(ITerminalGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Terminal().WinningContextOverrides());
             Add(ITextureSetGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().TextureSet().WinningContextOverrides());
+            Add(ITransformGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Transform().WinningContextOverrides());
             Add(ITreeGetter.StaticRegistration                  , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Tree().WinningContextOverrides());
             Add(IVisualEffectGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().VisualEffect().WinningContextOverrides());
             Add(IWaterGetter.StaticRegistration                 , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Water().WinningContextOverrides());

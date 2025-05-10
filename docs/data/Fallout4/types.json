@@ -20,6 +20,10 @@
     "id": "ADDN"
   },
   {
+    "name": "Aim Model",
+    "id": "AMDL"
+  },
+  {
     "name": "Ammunition",
     "id": "AMMO"
   },
@@ -46,6 +50,14 @@
   {
     "name": "Association Type",
     "id": "ASTP"
+  },
+  {
+    "name": "Attraction Rule",
+    "id": "AORU"
+  },
+  {
+    "name": "Audio Category Snapshot",
+    "id": "SCSN"
   },
   {
     "name": "Bendable Spline",
@@ -104,6 +116,10 @@
     "id": "CONT"
   },
   {
+    "name": "Default Object",
+    "id": "DFOB"
+  },
+  {
     "name": "Dialog View",
     "id": "DLVW"
   },
@@ -150,6 +166,10 @@
   {
     "name": "Furniture",
     "id": "FURN"
+  },
+  {
+    "name": "God Rays",
+    "id": "GDRY"
   },
   {
     "name": "Grass",
@@ -212,6 +232,14 @@
     "id": "LTEX"
   },
   {
+    "name": "Layer",
+    "id": "LAYR"
+  },
+  {
+    "name": "Lens Flare",
+    "id": "LENS"
+  },
+  {
     "name": "Leveled Item",
     "id": "LVLI"
   },
@@ -246,6 +274,10 @@
   {
     "name": "Material Object",
     "id": "MATO"
+  },
+  {
+    "name": "Material Swap",
+    "id": "MSWP"
   },
   {
     "name": "Material Type",
@@ -316,6 +348,10 @@
     "id": "RACE"
   },
   {
+    "name": "Reference Group",
+    "id": "RFGP"
+  },
+  {
     "name": "Region",
     "id": "REGN"
   },
@@ -326,6 +362,10 @@
   {
     "name": "Reverb Parameters",
     "id": "REVB"
+  },
+  {
+    "name": "Scene Collection",
+    "id": "SCCO"
   },
   {
     "name": "Shader Particle Geometry",
@@ -374,6 +414,10 @@
   {
     "name": "Texture Set",
     "id": "TXST"
+  },
+  {
+    "name": "Transform",
+    "id": "TRNS"
   },
   {
     "name": "Tree",

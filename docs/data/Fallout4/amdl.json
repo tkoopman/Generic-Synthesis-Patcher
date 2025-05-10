@@ -1,0 +1,135 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BaseStability\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "BaseStability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ConeOfFireDecreaseDelayMilliseconds\": 7",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireDecreaseDelayMilliseconds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIncreasePerSec\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireIncreasePerSec"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIncreasePerShot\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireIncreasePerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIronSightsMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireIronSightsMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireMaxAngle\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireMaxAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireMinAngle\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireMinAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireSneakMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "ConeOfFireSneakMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilArc\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilArc"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilArcRotate\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilArcRotate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilDiminishSightsMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilDiminishSightsMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilDiminishSpringForce\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilDiminishSpringForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilHipMult\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilHipMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilMaxPerShot\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilMaxPerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilMinPerShot\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "RecoilMinPerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"RunawayRecoilShots\": 7",
+    "MFFSM": "MFF--",
+    "Name": "RunawayRecoilShots"
+  }
+]

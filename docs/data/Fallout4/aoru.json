@@ -1,0 +1,58 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "MFFSM": "MFF--",
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "MFFSM": "MFF-M",
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "MFFSM": "MFF--",
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCombatTarget\": true",
+    "MFFSM": "MFF--",
+    "Name": "IsCombatTarget"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MaxDelay\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MaxDelay"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MinDelay\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "MinDelay"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Radius\": 3.14",
+    "MFFSM": "MFF--",
+    "Name": "Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"RequiresLineOfSight\": true",
+    "MFFSM": "MFF--",
+    "Name": "RequiresLineOfSight"
+  }
+]

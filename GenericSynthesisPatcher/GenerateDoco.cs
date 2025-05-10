@@ -86,7 +86,7 @@ namespace GenericSynthesisPatcher
 
             using (StringWriter sw = new())
             {
-                sw.WriteLine(genny.RPMPopulateHeader("public class RecordTypeMappings : Universal.RecordTypeMappings", $"RecordTypeMappings ({t.GetClassName()} state)"));
+                sw.WriteLine(genny.RPMPopulateHeader("public class RecordTypeMappings : Universal.RecordTypeMappings", $"public RecordTypeMappings ({t.GetClassName().Replace("SynthesisState", "IPatcherState")} state)"));
                 printTableRow(sw, types, sep: ",", prefix: "            ", suffix: "", padLast: false);
                 sw.WriteLine(genny.RPMPopulateFooter());
                 using var file = new StreamWriter(Path.Combine(Path.GetTempPath(), $"{genny.GameName}RecordTypeMappings.txt"), false);
@@ -171,7 +171,7 @@ namespace GenericSynthesisPatcher
 
             using (StringWriter sw = new())
             {
-                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "populateSubAliases ()"));
+                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "private void populateSubAliases ()"));
                 printTableRow(sw, subPropertyAliases, sep: ",", prefix: "            ", suffix: "", padLast: false);
                 sw.WriteLine(genny.RPMPopulateFooter());
 
@@ -291,7 +291,7 @@ namespace GenericSynthesisPatcher
             using (StringWriter sw = new())
             {
                 ;
-                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "populateMappings ()"));
+                sw.WriteLine(genny.RPMPopulateHeader("public partial class RecordPropertyMappings", "private void populateMappings ()"));
                 printTableRow(sw, lines, sep: ",", prefix: "            ", suffix: "", padLast: false);
                 sw.WriteLine(genny.RPMPopulateFooter());
 

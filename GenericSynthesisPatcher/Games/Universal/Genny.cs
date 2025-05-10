@@ -159,13 +159,15 @@ namespace GenericSynthesisPatcher.Games.Universal
             }
             """;
 
-        public virtual string RPMPopulateHeader (string classLine, string methodName) => $$"""
+        public virtual string RPMPopulateHeader (string classLine, string methodLine) => $$"""
             using System.Drawing;
 
             using GenericSynthesisPatcher.Games.Universal.Action;
             using GenericSynthesisPatcher.Games.{{GameName}}.Action;
 
+            using Mutagen.Bethesda;
             using Mutagen.Bethesda.{{GameName}};
+            using Mutagen.Bethesda.Synthesis;
 
             using Noggog;
 
@@ -173,7 +175,7 @@ namespace GenericSynthesisPatcher.Games.Universal
             {
                 {{classLine}}
                 {
-                    private void {{methodName}}
+                    {{methodLine}}
                     {
             #pragma warning disable format
             """;
