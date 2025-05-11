@@ -103,19 +103,5 @@
     "Example": "\"Trait\": true",
     "MFFSM": "MFF--",
     "Name": "Trait"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
   }
 ]

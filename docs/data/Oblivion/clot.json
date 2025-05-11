@@ -50,27 +50,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"FemaleBipedModel.BoundRadius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "FemaleBipedModel.BoundRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"FemaleBipedModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "FemaleBipedModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FemaleBipedModel.Hashes\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FemaleBipedModel.Hashes"
-  },
-  {
-    "Aliases": "",
     "Description": "String value",
     "Example": "\"FemaleIcon\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -78,73 +57,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"FemaleWorldModel.BoundRadius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "FemaleWorldModel.BoundRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"FemaleWorldModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "FemaleWorldModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FemaleWorldModel.Hashes\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FemaleWorldModel.Hashes"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MaleBipedModel.BoundRadius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MaleBipedModel.BoundRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"MaleBipedModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "MaleBipedModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"MaleBipedModel.Hashes\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "MaleBipedModel.Hashes"
-  },
-  {
-    "Aliases": "",
     "Description": "String value",
     "Example": "\"MaleIcon\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "MaleIcon"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MaleWorldModel.BoundRadius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MaleWorldModel.BoundRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"MaleWorldModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "MaleWorldModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"MaleWorldModel.Hashes\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "MaleWorldModel.Hashes"
   },
   {
     "Aliases": "",

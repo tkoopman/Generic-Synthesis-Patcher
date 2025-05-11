@@ -1,5 +1,6 @@
 ﻿using Common;
 
+using GenericSynthesisPatcher.Games.Fallout4.Action;
 using GenericSynthesisPatcher.Games.Universal;
 
 using Mutagen.Bethesda.Fallout4;
@@ -14,8 +15,29 @@ namespace GenericSynthesisPatcher.Games.Fallout4
         {
             IgnoreDeepScanOnTypes = IgnoreDeepScanOnTypes.AddRange(
                 [
-
+                typeof(AMagicEffectArchetype),
+                typeof(Cell),
+                typeof(CellMaxHeightData),
+                typeof(DialogResponsesAdapter),
+                typeof(FaceFxPhonemes),
+                typeof(Landscape),
+                typeof(LocationTargetRadius),
+                typeof(Model),
+                typeof(PackageAdapter),
+                typeof(PerkAdapter),
+                typeof(QuestAdapter),
+                typeof(RegionGrasses),
+                typeof(RegionLand),
+                typeof(RegionMap),
+                typeof(RegionObjects),
+                typeof(RegionSounds),
+                typeof(RegionWeather),
+                typeof(SceneAdapter),
+                typeof(VirtualMachineAdapter),
+                typeof(WorldspaceMaxHeight),
                 ]);
+
+            addMapping([typeof(ExtendedList<>), typeof(IContainerEntryGetter)], false, typeof(ContainerItemsAction));
         }
 
         public override string GameName => "Fallout4";
@@ -38,6 +60,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
                 typeof(IObjectVisibilityManagerGetter), // No implemented fields
                 typeof(IAnimationSoundTagSetGetter), // No implemented fields
                 typeof(IVoiceTypeGetter), // No implemented fields
+                typeof(IBodyPartDataGetter), // No implemented fields
                 ];
     }
 }

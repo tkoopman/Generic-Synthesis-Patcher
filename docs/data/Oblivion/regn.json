@@ -8,27 +8,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Flags (Override)",
-    "Example": "\"Grasses.Flags\": \"Override\"",
-    "MFFSM": "MFF-M",
-    "Name": "Grasses.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Keys or Editor IDs",
-    "Example": "",
-    "MFFSM": "MFFSM",
-    "Name": "Grasses.Grasses"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Grasses.Priority\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Grasses.Priority"
-  },
-  {
-    "Aliases": "",
     "Description": "String value",
     "Example": "\"Icon\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -43,80 +22,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Flags (Override)",
-    "Example": "\"MapName.Flags\": \"Override\"",
-    "MFFSM": "MFF-M",
-    "Name": "MapName.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"MapName.Map\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "MapName.Map"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapName.Priority\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapName.Priority"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Override)",
-    "Example": "\"Objects.Flags\": \"Override\"",
-    "MFFSM": "MFF-M",
-    "Name": "Objects.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Objects.Priority\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Objects.Priority"
-  },
-  {
-    "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "MFFSM": "MFF-M",
     "Name": "OblivionMajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Override)",
-    "Example": "\"Sounds.Flags\": \"Override\"",
-    "MFFSM": "MFF-M",
-    "Name": "Sounds.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Default, Public, Dungeon)",
-    "Example": "\"Sounds.MusicType\": \"Default\"",
-    "MFFSM": "MF---",
-    "Name": "Sounds.MusicType"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Sounds.Priority\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Sounds.Priority"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Override)",
-    "Example": "\"Weather.Flags\": \"Override\"",
-    "MFFSM": "MFF-M",
-    "Name": "Weather.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Weather.Priority\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Weather.Priority"
   },
   {
     "Aliases": "",

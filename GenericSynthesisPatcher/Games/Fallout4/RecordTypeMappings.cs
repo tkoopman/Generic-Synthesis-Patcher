@@ -25,7 +25,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(IAttractionRuleGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AttractionRule().WinningContextOverrides());
             Add(IAudioCategorySnapshotGetter.StaticRegistration , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().AudioCategorySnapshot().WinningContextOverrides());
             Add(IBendableSplineGetter.StaticRegistration        , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().BendableSpline().WinningContextOverrides());
-            Add(IBodyPartDataGetter.StaticRegistration          , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().BodyPartData().WinningContextOverrides());
             Add(IBookGetter.StaticRegistration                  , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Book().WinningContextOverrides());
             Add(ICameraPathGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().CameraPath().WinningContextOverrides());
             Add(ICameraShotGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().CameraShot().WinningContextOverrides());

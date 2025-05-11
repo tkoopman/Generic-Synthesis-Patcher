@@ -55,7 +55,6 @@ namespace GenericSynthesisPatcher.Games.Oblivion
             Add(ISoulGemGetter.StaticRegistration            , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().SoulGem().WinningContextOverrides());
             Add(ISoundGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Sound().WinningContextOverrides());
             Add(ISpellGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Spell().WinningContextOverrides());
-            Add(IStaticGetter.StaticRegistration             , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Static().WinningContextOverrides());
             Add(ISubspaceGetter.StaticRegistration           , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Subspace().WinningContextOverrides());
             Add(ITreeGetter.StaticRegistration               , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Tree().WinningContextOverrides());
             Add(IWaterGetter.StaticRegistration              , () => state.LoadOrder.PriorityOrder.OnlyEnabledAndExisting().Water().WinningContextOverrides());

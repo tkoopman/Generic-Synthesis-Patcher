@@ -176,20 +176,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
-  },
-  {
-    "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"XnamMarker\": [0x1A,0x00,0x3F]",
     "MFFSM": "-FF--",

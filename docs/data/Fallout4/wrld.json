@@ -22,41 +22,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"CloudModel.ColorRemappingIndex\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "CloudModel.ColorRemappingIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"CloudModel.Data\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "CloudModel.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"CloudModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "CloudModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
-    "Example": "\"CloudModel.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "CloudModel.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "CloudModel.MaterialSwap"
-  },
-  {
-    "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"DefaultLevelData.Data\": [0x1A,0x00,0x3F]",
     "MFFSM": "-FF--",
@@ -229,41 +194,6 @@
     "Example": "\"MapImage\": \"Hello\"",
     "MFFSM": "MFF--",
     "Name": "MapImage"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"MaxHeight.CellData\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "MaxHeight.CellData"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MaxHeight.Max.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MaxHeight.Max.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MaxHeight.Max.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MaxHeight.Max.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MaxHeight.Min.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MaxHeight.Min.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MaxHeight.Min.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MaxHeight.Min.Y"
   },
   {
     "Aliases": "",

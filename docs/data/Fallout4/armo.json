@@ -211,20 +211,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
     "MFFSM": "MFF--",

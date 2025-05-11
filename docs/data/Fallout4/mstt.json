@@ -43,41 +43,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Model.ColorRemappingIndex\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Model.ColorRemappingIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "Model.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Model.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Model.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
-    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Model.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Model.MaterialSwap"
-  },
-  {
-    "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
     "MFFSM": "MFF--",
@@ -138,19 +103,5 @@
     "Example": "",
     "MFFSM": "MFF--",
     "Name": "PreviewTransform"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
   }
 ]

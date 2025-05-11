@@ -239,13 +239,6 @@
   },
   {
     "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"FaceFxPhonemes.ForceNames\": true",
-    "MFFSM": "MFF--",
-    "Name": "FaceFxPhonemes.ForceNames"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FacegenFaceClamp\": 3.14",
     "MFFSM": "MFF--",

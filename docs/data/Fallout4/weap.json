@@ -288,41 +288,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"FirstPersonModel.ColorRemappingIndex\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "FirstPersonModel.ColorRemappingIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FirstPersonModel.Data\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FirstPersonModel.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"FirstPersonModel.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "FirstPersonModel.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
-    "Example": "\"FirstPersonModel.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "FirstPersonModel.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "FirstPersonModel.MaterialSwap"
-  },
-  {
-    "Aliases": "",
     "Description": "Flags (PlayerOnly, NpcsUseAmmo, NoJamAfterReload, ChargingReload, MinorCrime, FixedRange, NotUsedInNormalCombat, CritEffectOnDeath, ChargingAttack, HoldInputToPower, NonHostile, BoundWeapon, IgnoresNormalWeaponResistence, Automatic, RepeatableSingleFire, CannotDrop, HideBackpack, EmbeddedWeapon, NotPlayable, HasScope, BoltAction, SecondaryWeapon, DisableShells)",
     "Example": "\"Flags\": [ \"PlayerOnly\", \"-DisableShells\" ]",
     "MFFSM": "MFF-M",
@@ -425,41 +390,6 @@
     "Example": "\"MO4F\": 7",
     "MFFSM": "MFF--",
     "Name": "MO4F"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Model.ColorRemappingIndex\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Model.ColorRemappingIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "Model.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Model.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Model.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
-    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Model.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Model.MaterialSwap"
   },
   {
     "Aliases": "",
@@ -628,20 +558,6 @@
     "Example": "\"Value\": 7",
     "MFFSM": "MFF--",
     "Name": "Value"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "",

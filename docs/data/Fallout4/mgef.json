@@ -1,13 +1,6 @@
 [
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Archetype.ActorValue"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseCost\": 3.14",
     "MFFSM": "MFF--",
@@ -306,19 +299,5 @@
     "Example": "\"TargetType\": \"Self\"",
     "MFFSM": "MF---",
     "Name": "TargetType"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
   }
 ]

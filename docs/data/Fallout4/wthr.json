@@ -57,41 +57,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Aurora.ColorRemappingIndex\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Aurora.ColorRemappingIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"Aurora.Data\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "Aurora.Data"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Aurora.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Aurora.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
-    "Example": "\"Aurora.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Aurora.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Aurora.MaterialSwap"
-  },
-  {
-    "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"CloudLodAmbientColor.Day\": [40,50,60]",
     "MFFSM": "-FF--",

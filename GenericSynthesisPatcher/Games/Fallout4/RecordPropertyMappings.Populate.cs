@@ -1,5 +1,6 @@
 using System.Drawing;
 
+using GenericSynthesisPatcher.Games.Fallout4.Action;
 using GenericSynthesisPatcher.Games.Universal.Action;
 
 using Mutagen.Bethesda.Fallout4;
@@ -71,7 +72,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IIdleMarkerGetter)            , "Animations"                                , FormLinksAction<IIdleAnimationGetter>.Instance);
             Add(null                                 , "AnimationSound"                            , FormLinkAction<IAnimationSoundTagSetGetter>.Instance);
             Add(typeof(IWeaponGetter)                , "AnimationType"                             , EnumsAction.Instance);
-            Add(typeof(IMagicEffectGetter)           , "Archetype.ActorValue"                      , FormLinkAction<IActorValueInformationGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "ArmorRace"                                 , FormLinkAction<IRaceGetter>.Instance);
             Add(typeof(IArmorGetter)                 , "ArmorRating"                               , ConvertibleAction<ushort>.Instance);
             Add(typeof(IArmorAddonGetter)            , "ArtObject"                                 , FormLinkAction<IArtObjectGetter>.Instance);
@@ -89,11 +89,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeaponGetter)                , "AttackSound"                               , FormLinkAction<ISoundDescriptorGetter>.Instance);
             Add(typeof(IActionRecordGetter)          , "AttractionRule"                            , FormLinkAction<IAttractionRuleGetter>.Instance);
             Add(typeof(IKeywordGetter)               , "AttractionRule"                            , FormLinkAction<IAttractionRuleGetter>.Instance);
-            Add(typeof(IWeatherGetter)               , "Aurora.ColorRemappingIndex"                , ConvertibleAction<float>.Instance);
-            Add(typeof(IWeatherGetter)               , "Aurora.Data"                               , MemorySliceByteAction.Instance);
-            Add(typeof(IWeatherGetter)               , "Aurora.File"                               , ConvertibleAction<string>.Instance);
-            Add(typeof(IWeatherGetter)               , "Aurora.Flags"                              , FlagsAction.Instance);
-            Add(typeof(IWeatherGetter)               , "Aurora.MaterialSwap"                       , FormLinkAction<IMaterialSwapGetter>.Instance);
             Add(typeof(IComponentGetter)             , "AutoCalcValue"                             , ConvertibleAction<uint>.Instance);
             Add(typeof(ICombatStyleGetter)           , "AvoidThreatChance"                         , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "BackAmplitude"                             , ConvertibleAction<float>.Instance);
@@ -200,11 +195,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeatherGetter)               , "CloudLodDiffuseColor.Night"                , BasicAction<Color>.Instance);
             Add(typeof(IWeatherGetter)               , "CloudLodDiffuseColor.Sunrise"              , BasicAction<Color>.Instance);
             Add(typeof(IWeatherGetter)               , "CloudLodDiffuseColor.Sunset"               , BasicAction<Color>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "CloudModel.ColorRemappingIndex"            , ConvertibleAction<float>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "CloudModel.Data"                           , MemorySliceByteAction.Instance);
-            Add(typeof(IWorldspaceGetter)            , "CloudModel.File"                           , ConvertibleAction<string>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "CloudModel.Flags"                          , FlagsAction.Instance);
-            Add(typeof(IWorldspaceGetter)            , "CloudModel.MaterialSwap"                   , FormLinkAction<IMaterialSwapGetter>.Instance);
             Add(typeof(IRaceGetter)                  , "CollarTextureSet"                          , FormLinkAction<ITextureSetGetter>.Instance);
             Add(typeof(ICollisionLayerGetter)        , "CollidesWith"                              , FormLinksAction<ICollisionLayerGetter>.Instance);
             Add(typeof(IProjectileGetter)            , "CollisionLayer"                            , FormLinkAction<ICollisionLayerGetter>.Instance);
@@ -445,7 +435,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeaponGetter)                , "ExtraData.RumbleRightMotorStrength"        , ConvertibleAction<float>.Instance);
             Add(typeof(IWeaponGetter)                , "ExtraData.SightedTransitionSeconds"        , ConvertibleAction<float>.Instance);
             Add(typeof(IHeadPartGetter)              , "ExtraParts"                                , FormLinksAction<IHeadPartGetter>.Instance);
-            Add(typeof(IRaceGetter)                  , "FaceFxPhonemes.ForceNames"                 , ConvertibleAction<bool>.Instance);
             Add(typeof(IRaceGetter)                  , "FacegenFaceClamp"                          , ConvertibleAction<float>.Instance);
             Add(typeof(IRaceGetter)                  , "FacegenMainClamp"                          , ConvertibleAction<float>.Instance);
             Add(typeof(INpcGetter)                   , "FacialHairColor"                           , FormLinkAction<IColorRecordGetter>.Instance);
@@ -490,11 +479,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IAObjectModificationGetter)   , "FilterKeywords"                            , FormLinksAction<IKeywordGetter>.Instance);
             Add(typeof(IContainerGetter)             , "FilterList"                                , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(IMusicTrackGetter)            , "FinaleFilename"                            , ConvertibleAction<string>.Instance);
-            Add(typeof(IWeaponGetter)                , "FirstPersonModel.ColorRemappingIndex"      , ConvertibleAction<float>.Instance);
-            Add(typeof(IWeaponGetter)                , "FirstPersonModel.Data"                     , MemorySliceByteAction.Instance);
-            Add(typeof(IWeaponGetter)                , "FirstPersonModel.File"                     , ConvertibleAction<string>.Instance);
-            Add(typeof(IWeaponGetter)                , "FirstPersonModel.Flags"                    , FlagsAction.Instance);
-            Add(typeof(IWeaponGetter)                , "FirstPersonModel.MaterialSwap"             , FormLinkAction<IMaterialSwapGetter>.Instance);
             Add(typeof(IWorldspaceGetter)            , "FixedDimensionsCenterCell.X"               , ConvertibleAction<short>.Instance);
             Add(typeof(IWorldspaceGetter)            , "FixedDimensionsCenterCell.Y"               , ConvertibleAction<short>.Instance);
             Add(typeof(IEquipTypeGetter)             , "Flag"                                      , FlagsAction.Instance);
@@ -630,10 +614,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeatherGetter)               , "GodRays.GodRaySunset"                      , FormLinkAction<IGodRaysGetter>.Instance);
             Add(typeof(ILightGetter)                 , "GodRaysNearClip"                           , ConvertibleAction<float>.Instance);
             Add(typeof(ILandscapeTextureGetter)      , "Grasses"                                   , FormLinksAction<IGrassGetter>.Instance);
-            Add(typeof(IRegionGetter)                , "Grasses.Flags"                             , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Grasses.LodDisplayDistanceMultiplier"      , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Grasses.OcclusionAccuracyDist"             , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Grasses.Priority"                          , ConvertibleAction<byte>.Instance);
             Add(typeof(IProjectileGetter)            , "Gravity"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IShaderParticleGeometryGetter), "GravityVelocity"                           , ConvertibleAction<float>.Instance);
             Add(typeof(ICellGetter)                  , "Grid.Flags"                                , EnumsAction.Instance);
@@ -749,21 +729,15 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IAcousticSpaceGetter)         , "IsInterior"                                , ConvertibleAction<bool>.Instance);
             Add(typeof(IExplosionGetter)             , "ISRadius"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(IMaterialObjectGetter)        , "IsSinglePass"                              , ConvertibleAction<bool>.Instance);
+            Add(typeof(IContainerGetter)             , "Items"                                     , ContainerItemsAction.Instance);
             Add(typeof(IFormListGetter)              , "Items"                                     , FormLinksAction<IFallout4MajorRecordGetter>.Instance);
+            Add(typeof(IFurnitureGetter)             , "Items"                                     , ContainerItemsAction.Instance);
+            Add(typeof(INpcGetter)                   , "Items"                                     , ContainerItemsAction.Instance);
             Add(typeof(IOutfitGetter)                , "Items"                                     , FormLinksAction<IOutfitTargetGetter>.Instance);
             Add(typeof(IFactionGetter)               , "JailOutfit"                                , FormLinkAction<IOutfitGetter>.Instance);
             Add(null                                 , "Keywords"                                  , FormLinksAction<IKeywordGetter>.Instance);
-            Add(typeof(IRegionGetter)                , "Land.Flags"                                , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Land.LodDisplayDistanceMultiplier"         , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Land.OcclusionAccuracyDist"                , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Land.Priority"                             , ConvertibleAction<byte>.Instance);
             Add(typeof(IWorldspaceGetter)            , "LandDefaults.DefaultLandHeight"            , ConvertibleAction<float>.Instance);
             Add(typeof(IWorldspaceGetter)            , "LandDefaults.DefaultWaterHeight"           , ConvertibleAction<float>.Instance);
-            Add(typeof(ICellGetter)                  , "Landscape.DATA"                            , MemorySliceByteAction.Instance);
-            Add(typeof(ICellGetter)                  , "Landscape.EditorID"                        , ConvertibleAction<string>.Instance);
-            Add(typeof(ICellGetter)                  , "Landscape.Fallout4MajorRecordFlags"        , FlagsAction.Instance);
-            Add(typeof(ICellGetter)                  , "Landscape.FormVersion"                     , ConvertibleAction<ushort>.Instance);
-            Add(typeof(ICellGetter)                  , "Landscape.Textures"                        , FormLinksAction<ILandscapeTextureGetter>.Instance);
             Add(typeof(IStaticGetter)                , "LeafAmplitude"                             , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "LeafAmplitude"                             , ConvertibleAction<float>.Instance);
             Add(typeof(ITreeGetter)                  , "LeafFlexibility"                           , ConvertibleAction<float>.Instance);
@@ -848,11 +822,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWeatherGetter)               , "Magic.OnWeatherActivateThreshold"          , ConvertibleAction<float>.Instance);
             Add(typeof(IMagicEffectGetter)           , "MagicSkill"                                , FormLinkAction<IActorValueInformationGetter>.Instance);
             Add(null                                 , "MajorFlags"                                , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Map.Flags"                                 , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Map.LodDisplayDistanceMultiplier"          , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Map.Name"                                  , ConvertibleAction<string>.Instance);
-            Add(typeof(IRegionGetter)                , "Map.OcclusionAccuracyDist"                 , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Map.Priority"                              , ConvertibleAction<byte>.Instance);
             Add(typeof(IRegionGetter)                , "MapColor"                                  , BasicAction<Color>.Instance);
             Add(typeof(IWorldspaceGetter)            , "MapData.NorthwestCellCoords.X"             , ConvertibleAction<short>.Instance);
             Add(typeof(IWorldspaceGetter)            , "MapData.NorthwestCellCoords.Y"             , ConvertibleAction<short>.Instance);
@@ -874,12 +843,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ILeveledItemGetter)           , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ILeveledNpcGetter)            , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IAttractionRuleGetter)        , "MaxDelay"                                  , ConvertibleAction<float>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "MaxHeight.CellData"                        , MemorySliceByteAction.Instance);
-            Add(typeof(IWorldspaceGetter)            , "MaxHeight.Max.X"                           , ConvertibleAction<short>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "MaxHeight.Max.Y"                           , ConvertibleAction<short>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "MaxHeight.Min.X"                           , ConvertibleAction<short>.Instance);
-            Add(typeof(IWorldspaceGetter)            , "MaxHeight.Min.Y"                           , ConvertibleAction<short>.Instance);
-            Add(typeof(ICellGetter)                  , "MaxHeightData.Offset"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IEncounterZoneGetter)         , "MaxLevel"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IWeaponGetter)                , "MaxRange"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(IAObjectModificationGetter)   , "MaxRank"                                   , ConvertibleAction<byte>.Instance);
@@ -915,11 +878,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IGrassGetter)                 , "MinSlope"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ICameraShotGetter)            , "MinTime"                                   , ConvertibleAction<float>.Instance);
             Add(typeof(IWeaponGetter)                , "MO4F"                                      , ConvertibleAction<int>.Instance);
-            Add(null                                 , "Model.ColorRemappingIndex"                 , ConvertibleAction<float>.Instance);
-            Add(null                                 , "Model.Data"                                , MemorySliceByteAction.Instance);
-            Add(null                                 , "Model.File"                                , ConvertibleAction<string>.Instance);
-            Add(null                                 , "Model.Flags"                               , FlagsAction.Instance);
-            Add(null                                 , "Model.MaterialSwap"                        , FormLinkAction<IMaterialSwapGetter>.Instance);
             Add(typeof(IMaterialTypeGetter)          , "ModelData"                                 , MemorySliceByteAction.Instance);
             Add(typeof(IAmmunitionGetter)            , "ModelInfo"                                 , MemorySliceByteAction.Instance);
             Add(typeof(IComponentGetter)             , "ModScrapScalar"                            , FormLinkAction<IGlobalGetter>.Instance);
@@ -1008,10 +966,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IWorldspaceGetter)            , "ObjectBoundsMin.X"                         , ConvertibleAction<float>.Instance);
             Add(typeof(IWorldspaceGetter)            , "ObjectBoundsMin.Y"                         , ConvertibleAction<float>.Instance);
             Add(null                                 , "ObjectEffect"                              , FormLinkAction<IEffectRecordGetter>.Instance);
-            Add(typeof(IRegionGetter)                , "Objects.Flags"                             , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Objects.LodDisplayDistanceMultiplier"      , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Objects.OcclusionAccuracyDist"             , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Objects.Priority"                          , ConvertibleAction<byte>.Instance);
             Add(typeof(INpcGetter)                   , "ObserveDeadBodyOverridePackageList"        , FormLinkAction<IFormListGetter>.Instance);
             Add(typeof(ICombatStyleGetter)           , "OffensiveMult"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IWorldspaceGetter)            , "OffsetData"                                , MemorySliceByteAction.Instance);
@@ -1277,11 +1231,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IProjectileGetter)            , "SoundLevel"                                , ConvertibleAction<uint>.Instance);
             Add(null                                 , "SoundLevel"                                , EnumsAction.Instance);
             Add(typeof(IRaceGetter)                  , "SoundOpenCorpse"                           , FormLinkAction<ISoundDescriptorGetter>.Instance);
-            Add(typeof(IRegionGetter)                , "Sounds.Flags"                              , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Sounds.LodDisplayDistanceMultiplier"       , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Sounds.Music"                              , FormLinkAction<IMusicTypeGetter>.Instance);
-            Add(typeof(IRegionGetter)                , "Sounds.OcclusionAccuracyDist"              , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Sounds.Priority"                           , ConvertibleAction<byte>.Instance);
             Add(typeof(INpcGetter)                   , "SoundsFinalize"                            , MemorySliceByteAction.Instance);
             Add(typeof(IExplosionGetter)             , "SpawnCount"                                , ConvertibleAction<uint>.Instance);
             Add(typeof(IExplosionGetter)             , "SpawnPosition.X"                           , ConvertibleAction<float>.Instance);
@@ -1447,8 +1396,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IProjectileGetter)            , "VATSProjectile"                            , FormLinkAction<IProjectileGetter>.Instance);
             Add(typeof(ISoundKeywordMappingGetter)   , "VatsThreshold"                             , ConvertibleAction<float>.Instance);
             Add(typeof(IFactionGetter)               , "VendorBuySellList"                         , FormLinkAction<IFormListGetter>.Instance);
-            Add(typeof(IFactionGetter)               , "VendorLocation.CollectionIndex"            , ConvertibleAction<uint>.Instance);
-            Add(typeof(IFactionGetter)               , "VendorLocation.Radius"                     , ConvertibleAction<uint>.Instance);
             Add(typeof(IFactionGetter)               , "VendorValues.BuySellEverythingNotInList"   , ConvertibleAction<bool>.Instance);
             Add(typeof(IFactionGetter)               , "VendorValues.BuysNonStolenItems"           , ConvertibleAction<bool>.Instance);
             Add(typeof(IFactionGetter)               , "VendorValues.BuysStolenItems"              , ConvertibleAction<bool>.Instance);
@@ -1457,9 +1404,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IFactionGetter)               , "VendorValues.StartHour"                    , ConvertibleAction<ushort>.Instance);
             Add(typeof(IPackInGetter)                , "Version"                                   , ConvertibleAction<uint>.Instance);
             Add(typeof(IExplosionGetter)             , "VerticalOffsetMult"                        , ConvertibleAction<float>.Instance);
-            Add(typeof(IQuestGetter)                 , "VirtualMachineAdapter.ExtraBindDataVersion", ConvertibleAction<byte>.Instance);
-            Add(null                                 , "VirtualMachineAdapter.ObjectFormat"        , ConvertibleAction<ushort>.Instance);
-            Add(null                                 , "VirtualMachineAdapter.Version"             , ConvertibleAction<short>.Instance);
+            Add(typeof(ITerminalGetter)              , "VirtualMachineAdapter.ObjectFormat"        , ConvertibleAction<ushort>.Instance);
+            Add(typeof(ITerminalGetter)              , "VirtualMachineAdapter.Version"             , ConvertibleAction<short>.Instance);
             Add(typeof(IWeatherGetter)               , "VisibilityMult"                            , ConvertibleAction<float>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffect"                              , FormLinkAction<IVisualEffectGetter>.Instance);
             Add(typeof(IWeatherGetter)               , "VisualEffectBegin"                         , BasicAction<Percent>.Instance);
@@ -1496,10 +1442,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IGrassGetter)                 , "WavePeriod"                                , ConvertibleAction<float>.Instance);
             Add(typeof(IFurnitureGetter)             , "WBDTDataTypeState"                         , FlagsAction.Instance);
             Add(typeof(IArmorAddonGetter)            , "WeaponAdjust"                              , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Weather.Flags"                             , FlagsAction.Instance);
-            Add(typeof(IRegionGetter)                , "Weather.LodDisplayDistanceMultiplier"      , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Weather.OcclusionAccuracyDist"             , ConvertibleAction<float>.Instance);
-            Add(typeof(IRegionGetter)                , "Weather.Priority"                          , ConvertibleAction<byte>.Instance);
             Add(typeof(IAcousticSpaceGetter)         , "WeatherAttenuationDb"                      , ConvertibleAction<float>.Instance);
             Add(typeof(IAmmunitionGetter)            , "Weight"                                    , ConvertibleAction<float>.Instance);
             Add(typeof(IArmorGetter)                 , "Weight"                                    , ConvertibleAction<float>.Instance);

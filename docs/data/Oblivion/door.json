@@ -29,27 +29,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Model.BoundRadius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Model.BoundRadius"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Model.File\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Model.File"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "Model.Hashes"
-  },
-  {
-    "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
     "MFFSM": "MFF--",

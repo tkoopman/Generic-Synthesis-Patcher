@@ -1,5 +1,6 @@
 ﻿using Common;
 
+using GenericSynthesisPatcher.Games.Oblivion.Action;
 using GenericSynthesisPatcher.Games.Universal;
 
 using Mutagen.Bethesda.Oblivion;
@@ -14,8 +15,18 @@ namespace GenericSynthesisPatcher.Games.Oblivion
         {
             IgnoreDeepScanOnTypes = IgnoreDeepScanOnTypes.AddRange(
                 [
+                typeof(Cell),
+                typeof(Landscape),
+                typeof(Model),
+                typeof(RegionGrasses),
+                typeof(RegionMap),
+                typeof(RegionObjects),
+                typeof(RegionSounds),
+                typeof(RegionWeather),
 
                 ]);
+
+            addMapping([typeof(ExtendedList<>), typeof(IContainerItemGetter)], false, typeof(ContainerItemsAction));
         }
 
         public override string GameName => "Oblivion";
@@ -25,6 +36,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion
                 typeof(IGlobalGetter), // No implemented fields
                 typeof(IGameSettingGetter), // No implemented fields
                 typeof(IScriptGetter), // No implemented fields
+                typeof(IStaticGetter), // No implemented fields
                 ];
     }
 }

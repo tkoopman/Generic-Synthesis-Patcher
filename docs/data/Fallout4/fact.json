@@ -155,20 +155,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VendorLocation.CollectionIndex\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VendorLocation.CollectionIndex"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VendorLocation.Radius\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VendorLocation.Radius"
-  },
-  {
-    "Aliases": "",
     "Description": "True / False",
     "Example": "\"VendorValues.BuySellEverythingNotInList\": true",
     "MFFSM": "MFF--",
