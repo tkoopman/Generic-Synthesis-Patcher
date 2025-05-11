@@ -23,7 +23,6 @@ namespace GenericSynthesisPatcher.Games.Oblivion
                 typeof(RegionObjects),
                 typeof(RegionSounds),
                 typeof(RegionWeather),
-
                 ]);
 
             addMapping([typeof(ExtendedList<>), typeof(IContainerItemGetter)], false, typeof(ContainerItemsAction));
