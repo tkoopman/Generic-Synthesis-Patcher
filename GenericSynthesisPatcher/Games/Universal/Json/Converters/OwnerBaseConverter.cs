@@ -13,11 +13,11 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             var jObject = JObject.Load(reader);
 
             // Create target object based on JObject
-            var target = jObject["NPC"] != null ? new NpcOwner()
-                : jObject["Faction"] != null ? (OwnerBase)new FactionOwner()
+            var target = jObject["NPC"] is not null ? new NpcOwner()
+                : jObject["Faction"] is not null ? (OwnerBase)new FactionOwner()
                 : null;
 
-            if (target == null)
+            if (target is null)
                 return null;
 
             // Populate the object properties

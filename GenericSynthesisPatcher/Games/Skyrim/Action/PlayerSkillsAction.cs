@@ -91,13 +91,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
             if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
                 || !proKeys.TryGetFillValueAs(out PlayerSkillsData? newValue)
-                || curValue == null
-                || newValue == null)
+                || curValue is null
+                || newValue is null)
             {
                 return -1;
             }
 
-            if (newValue.Equals(curValue))
+            if (newValue.NonNullEquals(curValue))
                 return 0;
 
             if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
@@ -152,8 +152,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
             if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
                 || !Mod.TryGetProperty<IPlayerSkillsGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
-                || curValue == null
-                || newValue == null)
+                || curValue is null
+                || newValue is null)
             {
                 return -1;
             }
@@ -198,16 +198,16 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         /// <returns>True if all player skills data matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
                 && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-                && curValue != null && originValue != null
+                && curValue is not null && originValue is not null
                 && curValue.FarAwayModelDistance == originValue.FarAwayModelDistance
                 && curValue.GearedUpWeapons == originValue.GearedUpWeapons
                 && curValue.Health == originValue.Health
                 && curValue.Stamina == originValue.Stamina
                 && curValue.Magicka == originValue.Magicka
                 && SkillsEqual(curValue.SkillOffsets, originValue.SkillOffsets)
-                && SkillsEqual(curValue.SkillValues, originValue.SkillValues);
+                && SkillsEqual(curValue.SkillValues, originValue.SkillValues));
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 

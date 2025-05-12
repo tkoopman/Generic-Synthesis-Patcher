@@ -26,10 +26,10 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IModelGetter? lhs, Model? rhs)
         {
-            if (lhs == null && rhs == null)
+            if (lhs is null && rhs is null)
                 return true;
 
-            if (lhs == null || rhs == null)
+            if (lhs is null || rhs is null)
                 return false;
 
             return
@@ -39,7 +39,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         }
 
         protected override Model? getSetter (IModelGetter? getter)
-            => getter == null
+            => getter is null
             ? null
             : new Model
             {

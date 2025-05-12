@@ -27,7 +27,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             List<TItem> myRemoves = [];
 
             List<TItem> forceAdds = [];
-            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
+            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) is not null; // Must be + as - wouldn't have a node
 
             foreach (var node in OverwrittenBy)
             {
@@ -67,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 WorkingList.Add(myAdd);
             }
 
-            if (parent == null)
+            if (parent is null)
             {
                 // Just return current results as will be ignored by RecordGraph which is only one
                 // to call this with no parent

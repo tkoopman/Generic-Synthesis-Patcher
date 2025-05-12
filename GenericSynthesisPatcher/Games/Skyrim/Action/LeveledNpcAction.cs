@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
 
             LeveledNpcEntry entry = new();
 
-            if (sourceRecord.Data != null)
+            if (sourceRecord.Data is not null)
             {
                 entry.Data = new LeveledNpcEntryData
                 {
@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
                 };
             }
 
-            if (sourceRecord.ExtraData != null)
+            if (sourceRecord.ExtraData is not null)
                 entry.ExtraData = createExtraData(sourceRecord);
 
             return entry;
@@ -50,9 +50,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             && l.Data?.Level == r.Data?.Level
             && l.Data?.Reference.FormKey == r.Data?.Reference.FormKey
             && l.ExtraData?.ItemCondition == r.ExtraData?.ItemCondition
-            && (l.ExtraData?.Owner.Equals(r.ExtraData?.Owner) ?? l.ExtraData?.Owner == null && r.ExtraData?.Owner == null);
+            && object.Equals(l.ExtraData?.Owner, r.ExtraData?.Owner);
 
-        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is ILeveledNpcEntryGetter record ? record.Data?.Reference.FormKey ?? default : throw new ArgumentNullException(nameof(from));
+        public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from) => from is ILeveledNpcEntryGetter record ? (record.Data?.Reference.FormKey ?? default) : throw new ArgumentNullException(nameof(from));
 
         public override string ToString (IFormLinkContainerGetter source) => source is ILeveledNpcEntryGetter entry ? $"[LVL{entry.Data?.Level}] {entry.Data?.Count}x{entry.Data?.Reference.FormKey}" : throw new InvalidCastException();
 

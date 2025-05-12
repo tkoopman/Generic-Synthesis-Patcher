@@ -26,7 +26,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
 
             var effect = new Effect();
             effect.BaseEffect.FormKey = sourceRecord.BaseEffect.FormKey;
-            if (sourceRecord.Data != null)
+            if (sourceRecord.Data is not null)
             {
                 effect.Data = new EffectData
                 {
@@ -43,11 +43,11 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             => left is IEffectGetter l
             && right is IEffectGetter r
             && l.BaseEffect.FormKey.Equals(r.BaseEffect.FormKey)
-            && (l.Data != null && r.Data != null
-            && l.Data.Area == r.Data.Area
-            && l.Data.Duration == r.Data.Duration
-            && l.Data.Magnitude == r.Data.Magnitude
-            || l.Data == null && r.Data == null);
+            && ((l.Data is not null && r.Data is not null
+                && l.Data.Area == r.Data.Area
+                && l.Data.Duration == r.Data.Duration
+                && l.Data.Magnitude == r.Data.Magnitude)
+                || (l.Data is null && r.Data is null));
 
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from)
             => from is IEffectGetter record

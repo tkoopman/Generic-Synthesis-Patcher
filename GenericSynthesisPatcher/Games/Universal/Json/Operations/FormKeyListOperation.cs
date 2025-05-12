@@ -16,9 +16,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         private bool exists;
         private bool existsChecked;
 
-        public FormKeyListOperation (string? value) : base(value)
-        {
-        }
+        // Required for OperationsConverter
+        public FormKeyListOperation (string? value) : base(value) { }
 
         public FormKeyListOperation (ListLogic operation, FormKey value) : base(operation, value)
         {
@@ -47,7 +46,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         protected override FormKey convertValue (string? value)
         {
-            if (value == null)
+            if (value is null)
                 return FormKey.Null;
 
             if (!Mod.TryFindFormKey<TMajor>(value, out var formKey, out existsChecked))
@@ -61,9 +60,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
     public class FormKeyListOperation : ListOperationBase<FormKey>
     {
-        public FormKeyListOperation (string? value) : base(value)
-        {
-        }
+        // Required for OperationsConverter
+        public FormKeyListOperation (string? value) : base(value) { }
 
         public FormKeyListOperation (ListLogic operation, FormKey value) : base(operation, value)
         {
@@ -72,7 +70,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         public override FormKeyListOperation Inverse () => (FormKeyListOperation)base.Inverse();
 
         protected override FormKey convertValue (string? value)
-            => value == null ? FormKey.Null
+            => value is null ? FormKey.Null
              : FormKey.TryFactory(SynthCommon.FixFormKey(value), out var formKey) ? formKey
              : throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey");
     }

@@ -6,9 +6,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 {
     public class ModKeyListOperation : ListOperationBase<ModKey>
     {
-        public ModKeyListOperation (string value) : base(value)
-        {
-        }
+        // Required for OperationsConverter
+        public ModKeyListOperation (string value) : base(value) { }
 
         public ModKeyListOperation (ListLogic operation, ModKey value) : base(operation, value)
         {
@@ -18,6 +17,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         public override bool ValueEquals (ModKey other) => Value.Equals(other);
 
-        protected override ModKey convertValue (string? value) => value == null ? ModKey.Null : ModKey.FromFileName(new FileName(value));
+        protected override ModKey convertValue (string? value) => value is null ? ModKey.Null : ModKey.FromFileName(new FileName(value));
     }
 }

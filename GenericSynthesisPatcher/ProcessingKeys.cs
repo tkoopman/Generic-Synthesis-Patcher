@@ -47,7 +47,7 @@ namespace GenericSynthesisPatcher
         ///     Checks if we have created a patched record for the current context yet. If parent
         ///     exists will call against parent.
         /// </summary>
-        public bool HasPatchRecord => Parent == null ? patchRecord != null : Parent.HasPatchRecord;
+        public bool HasPatchRecord => Parent is null ? patchRecord is not null : Parent.HasPatchRecord;
 
         /// <summary>
         ///     Is current rule being processed a group of rules
@@ -142,7 +142,7 @@ namespace GenericSynthesisPatcher
         /// <returns>Editable version of current record</returns>
         public IMajorRecord GetPatchRecord ()
         {
-            if (Parent == null)
+            if (Parent is null)
             {
                 patchRecord = Context switch
                 {
@@ -183,7 +183,7 @@ namespace GenericSynthesisPatcher
         [MemberNotNullWhen(true, nameof(RuleBase))]
         public bool SetProperty (FilterOperation ruleKey, string name)
         {
-            if (RuleBase == null)
+            if (RuleBase is null)
                 throw new InvalidOperationException("Must set rule first.");
 
             if (Global.RecordPropertyMappings.TryFind(Type.StaticRegistration.GetterType, name, out var property))

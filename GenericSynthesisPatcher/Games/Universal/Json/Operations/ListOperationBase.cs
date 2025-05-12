@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
@@ -10,7 +9,7 @@ using Newtonsoft.Json;
 namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
-    public abstract class ListOperationBase<TValue> : OperationBase<ListLogic>, IEquatable<ListOperationBase<TValue>>
+    public abstract class ListOperationBase<TValue> : OperationBase<ListLogic>
     {
         protected static readonly IReadOnlyDictionary<char, ListLogic> ValidPrefixes = new ReadOnlyDictionary<char, ListLogic>(new Dictionary<char, ListLogic>()
         {
@@ -21,9 +20,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         private TValue? value;
 
+        // Required for OperationsConverter
         public ListOperationBase (string? value)
         {
-            if (value == null)
+            if (value is null)
             {
                 Operation = default;
                 Value = default;
@@ -53,18 +53,17 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
             }
         }
 
-        public override bool Equals (object? obj) => obj switch
-        {
-            ListOperationBase<TValue> other => Equals(other),
-            TValue other => Equals(other),
-            _ => false
-        };
+        public override bool Equals (object? obj)
+            => obj switch
+            {
+                ListOperationBase<TValue> other => Equals(other),
+                TValue other => Equals(other), // TODO This makes no sense
+                _ => false
+            };
 
-        public virtual bool Equals (ListOperationBase<TValue>? other) => other != null && Operation == other.Operation && ValueEquals(other.Value);
+        public virtual bool Equals (ListOperationBase<TValue>? other) => other is not null && Operation == other.Operation && ValueEquals(other.Value);
 
         public override int GetHashCode () => HashCode.Combine(Value);
-
-        public int GetHashCode ([DisallowNull] TValue obj) => throw new NotImplementedException();
 
         public override ListOperationBase<TValue> Inverse () => Activator.CreateInstance(GetType(), [getInverse(Operation), Value]) is ListOperationBase<TValue> result ? result : throw new Exception("Failed to invert operation");
 
@@ -72,7 +71,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         public string ToString (char delPrefix)
         {
-            if (Value == null)
+            if (Value is null)
                 return "null";
 
             char? prefix = Operation switch
@@ -81,11 +80,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
                 _ => null,
             };
 
-            return prefix != null ? prefix + (Value.ToString() ?? "?") : Value.ToString() ?? "?";
+            return prefix is not null ? prefix + (Value.ToString() ?? "?") : Value.ToString() ?? "?";
         }
 
-        public virtual bool ValueEquals (TValue? other)
-            => MyEqualityComparer.Equals(Value, other);
+        public virtual bool ValueEquals (TValue? other) => MyEqualityComparer.Equals(Value, other);
 
         protected static ListLogic getInverse (ListLogic logic) => logic == ListLogic.NOT ? ListLogic.Default : ListLogic.NOT;
 

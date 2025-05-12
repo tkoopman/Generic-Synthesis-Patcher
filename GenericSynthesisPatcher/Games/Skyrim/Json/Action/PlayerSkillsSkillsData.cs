@@ -1,12 +1,10 @@
-using System.Diagnostics.CodeAnalysis;
-
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 {
-    public class PlayerSkillsSkillsData : IEquatable<PlayerSkillsSkillsData>, IEquatable<IReadOnlyDictionary<Skill, byte>>
+    public class PlayerSkillsSkillsData
     {
         [JsonProperty(PropertyName = "Alchemy")]
         public byte? Alchemy { get; set; } = null;
@@ -62,73 +60,57 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         [JsonProperty(PropertyName = "TwoHanded")]
         public byte? TwoHanded { get; set; } = null;
 
-        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
-        public static bool Equals (PlayerSkillsSkillsData? left, PlayerSkillsSkillsData? right)
-        {
-            if (ReferenceEquals(left, right))
-                return true;
+        /// <summary>
+        ///     Compares to PlayerSkillsData Values and Offsets however if a value is null here then
+        ///     ignores checking PlayerSkillsData Values and Offsets. If all values are null then
+        ///     will match all.
+        /// </summary>
+        /// <returns>
+        ///     Returns true if any defined player skill matches PlayerSkillsData Values and Offsets
+        /// </returns>
+        public static bool NonNullEquals (PlayerSkillsSkillsData? lhs, IReadOnlyDictionary<Skill, byte>? rhs)
+            => lhs is null || (rhs is not null
+            && (lhs.OneHanded is null || lhs.OneHanded == rhs[Skill.OneHanded])
+            && (lhs.TwoHanded is null || lhs.TwoHanded == rhs[Skill.TwoHanded])
+            && (lhs.Archery is null || lhs.Archery == rhs[Skill.Archery])
+            && (lhs.Block is null || lhs.Block == rhs[Skill.Block])
+            && (lhs.Smithing is null || lhs.Smithing == rhs[Skill.Smithing])
+            && (lhs.HeavyArmor is null || lhs.HeavyArmor == rhs[Skill.HeavyArmor])
+            && (lhs.LightArmor is null || lhs.LightArmor == rhs[Skill.LightArmor])
+            && (lhs.Pickpocket is null || lhs.Pickpocket == rhs[Skill.Pickpocket])
+            && (lhs.Lockpicking is null || lhs.Lockpicking == rhs[Skill.Lockpicking])
+            && (lhs.Sneak is null || lhs.Sneak == rhs[Skill.Sneak])
+            && (lhs.Alchemy is null || lhs.Alchemy == rhs[Skill.Alchemy])
+            && (lhs.Speech is null || lhs.Speech == rhs[Skill.Speech])
+            && (lhs.Alteration is null || lhs.Alteration == rhs[Skill.Alteration])
+            && (lhs.Conjuration is null || lhs.Conjuration == rhs[Skill.Conjuration])
+            && (lhs.Destruction is null || lhs.Destruction == rhs[Skill.Destruction])
+            && (lhs.Illusion is null || lhs.Illusion == rhs[Skill.Illusion])
+            && (lhs.Restoration is null || lhs.Restoration == rhs[Skill.Restoration])
+            && (lhs.Enchanting is null || lhs.Enchanting == rhs[Skill.Enchanting]));
 
-            if (left == null || right == null)
-                return false;
+        public bool Equals (PlayerSkillsSkillsData? other)
+            => other is not null
+            && OneHanded == other.OneHanded
+            && TwoHanded == other.TwoHanded
+            && Archery == other.Archery
+            && Block == other.Block
+            && Smithing == other.Smithing
+            && HeavyArmor == other.HeavyArmor
+            && LightArmor == other.LightArmor
+            && Pickpocket == other.Pickpocket
+            && Lockpicking == other.Lockpicking
+            && Sneak == other.Sneak
+            && Alchemy == other.Alchemy
+            && Speech == other.Speech
+            && Alteration == other.Alteration
+            && Conjuration == other.Conjuration
+            && Destruction == other.Destruction
+            && Illusion == other.Illusion
+            && Restoration == other.Restoration
+            && Enchanting == other.Enchanting;
 
-            return
-                left.OneHanded == right.OneHanded
-                && left.TwoHanded == right.TwoHanded
-                && left.Archery == right.Archery
-                && left.Block == right.Block
-                && left.Smithing == right.Smithing
-                && left.HeavyArmor == right.HeavyArmor
-                && left.LightArmor == right.LightArmor
-                && left.Pickpocket == right.Pickpocket
-                && left.Lockpicking == right.Lockpicking
-                && left.Sneak == right.Sneak
-                && left.Alchemy == right.Alchemy
-                && left.Speech == right.Speech
-                && left.Alteration == right.Alteration
-                && left.Conjuration == right.Conjuration
-                && left.Destruction == right.Destruction
-                && left.Illusion == right.Illusion
-                && left.Restoration == right.Restoration
-                && left.Enchanting == right.Enchanting;
-        }
-
-        public bool Equals (PlayerSkillsSkillsData? other) => Equals(this, other);
-
-        public bool Equals (IReadOnlyDictionary<Skill, byte>? other)
-            => other != null
-            && (OneHanded == null || OneHanded == other[Skill.OneHanded])
-            && (TwoHanded == null || TwoHanded == other[Skill.TwoHanded])
-            && (Archery == null || Archery == other[Skill.Archery])
-            && (Block == null || Block == other[Skill.Block])
-            && (Smithing == null || Smithing == other[Skill.Smithing])
-            && (HeavyArmor == null || HeavyArmor == other[Skill.HeavyArmor])
-            && (LightArmor == null || LightArmor == other[Skill.LightArmor])
-            && (Pickpocket == null || Pickpocket == other[Skill.Pickpocket])
-            && (Lockpicking == null || Lockpicking == other[Skill.Lockpicking])
-            && (Sneak == null || Sneak == other[Skill.Sneak])
-            && (Alchemy == null || Alchemy == other[Skill.Alchemy])
-            && (Speech == null || Speech == other[Skill.Speech])
-            && (Alteration == null || Alteration == other[Skill.Alteration])
-            && (Conjuration == null || Conjuration == other[Skill.Conjuration])
-            && (Destruction == null || Destruction == other[Skill.Destruction])
-            && (Illusion == null || Illusion == other[Skill.Illusion])
-            && (Restoration == null || Restoration == other[Skill.Restoration])
-            && (Enchanting == null || Enchanting == other[Skill.Enchanting]);
-
-        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
-        public override bool Equals (object? obj)
-        {
-            if (obj is null)
-                return false;
-
-            if (obj is PlayerSkillsSkillsData psdObj)
-                return Equals(psdObj);
-
-            if (obj is IReadOnlyDictionary<Skill, byte> rodObj)
-                return Equals(rodObj);
-
-            return false;
-        }
+        public override bool Equals (object? obj) => Equals(obj as PlayerSkillsSkillsData);
 
         public override int GetHashCode ()
         {
@@ -158,109 +140,109 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         {
             int count = 0;
 
-            if (OneHanded != null && OneHanded != update[Skill.OneHanded])
+            if (OneHanded is not null && OneHanded != update[Skill.OneHanded])
             {
                 count++;
                 update[Skill.OneHanded] = (byte)OneHanded;
             }
 
-            if (TwoHanded != null && TwoHanded != update[Skill.TwoHanded])
+            if (TwoHanded is not null && TwoHanded != update[Skill.TwoHanded])
             {
                 count++;
                 update[Skill.TwoHanded] = (byte)TwoHanded;
             }
 
-            if (Archery != null && Archery != update[Skill.Archery])
+            if (Archery is not null && Archery != update[Skill.Archery])
             {
                 count++;
                 update[Skill.Archery] = (byte)Archery;
             }
 
-            if (Block != null && Block != update[Skill.Block])
+            if (Block is not null && Block != update[Skill.Block])
             {
                 count++;
                 update[Skill.Block] = (byte)Block;
             }
 
-            if (Smithing != null && Smithing != update[Skill.Smithing])
+            if (Smithing is not null && Smithing != update[Skill.Smithing])
             {
                 count++;
                 update[Skill.Smithing] = (byte)Smithing;
             }
 
-            if (HeavyArmor != null && HeavyArmor != update[Skill.HeavyArmor])
+            if (HeavyArmor is not null && HeavyArmor != update[Skill.HeavyArmor])
             {
                 count++;
                 update[Skill.HeavyArmor] = (byte)HeavyArmor;
             }
 
-            if (LightArmor != null && LightArmor != update[Skill.LightArmor])
+            if (LightArmor is not null && LightArmor != update[Skill.LightArmor])
             {
                 count++;
                 update[Skill.LightArmor] = (byte)LightArmor;
             }
 
-            if (Pickpocket != null && Pickpocket != update[Skill.Pickpocket])
+            if (Pickpocket is not null && Pickpocket != update[Skill.Pickpocket])
             {
                 count++;
                 update[Skill.Pickpocket] = (byte)Pickpocket;
             }
 
-            if (Lockpicking != null && Lockpicking != update[Skill.Lockpicking])
+            if (Lockpicking is not null && Lockpicking != update[Skill.Lockpicking])
             {
                 count++;
                 update[Skill.Lockpicking] = (byte)Lockpicking;
             }
 
-            if (Sneak != null && Sneak != update[Skill.Sneak])
+            if (Sneak is not null && Sneak != update[Skill.Sneak])
             {
                 count++;
                 update[Skill.Sneak] = (byte)Sneak;
             }
 
-            if (Alchemy != null && Alchemy != update[Skill.Alchemy])
+            if (Alchemy is not null && Alchemy != update[Skill.Alchemy])
             {
                 count++;
                 update[Skill.Alchemy] = (byte)Alchemy;
             }
 
-            if (Speech != null && Speech != update[Skill.Speech])
+            if (Speech is not null && Speech != update[Skill.Speech])
             {
                 count++;
                 update[Skill.Speech] = (byte)Speech;
             }
 
-            if (Alteration != null && Alteration != update[Skill.Alteration])
+            if (Alteration is not null && Alteration != update[Skill.Alteration])
             {
                 count++;
                 update[Skill.Alteration] = (byte)Alteration;
             }
 
-            if (Conjuration != null && Conjuration != update[Skill.Conjuration])
+            if (Conjuration is not null && Conjuration != update[Skill.Conjuration])
             {
                 count++;
                 update[Skill.Conjuration] = (byte)Conjuration;
             }
 
-            if (Destruction != null && Destruction != update[Skill.Destruction])
+            if (Destruction is not null && Destruction != update[Skill.Destruction])
             {
                 count++;
                 update[Skill.Destruction] = (byte)Destruction;
             }
 
-            if (Illusion != null && Illusion != update[Skill.Illusion])
+            if (Illusion is not null && Illusion != update[Skill.Illusion])
             {
                 count++;
                 update[Skill.Illusion] = (byte)Illusion;
             }
 
-            if (Restoration != null && Restoration != update[Skill.Restoration])
+            if (Restoration is not null && Restoration != update[Skill.Restoration])
             {
                 count++;
                 update[Skill.Restoration] = (byte)Restoration;
             }
 
-            if (Enchanting != null && Enchanting != update[Skill.Enchanting])
+            if (Enchanting is not null && Enchanting != update[Skill.Enchanting])
             {
                 count++;
                 update[Skill.Enchanting] = (byte)Enchanting;

@@ -1,12 +1,10 @@
-using System.Diagnostics.CodeAnalysis;
-
 using Mutagen.Bethesda.Skyrim;
 
 using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 {
-    public class PlayerSkillsData : IEquatable<PlayerSkillsData>, IEquatable<IPlayerSkillsGetter>
+    public class PlayerSkillsData
     {
         [JsonProperty(PropertyName = "FarAwayModelDistance")]
         public float? FarAwayModelDistance { get; set; }
@@ -31,68 +29,46 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 
         public PlayerSkillsStatsData Stats { get; set; } = new PlayerSkillsStatsData();
 
-        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public bool Equals (PlayerSkillsData? other)
-        {
-            if (other is null)
-                return false;
+            => other is not null
+            && FarAwayModelDistance == other.FarAwayModelDistance
+            && GearedUpWeapons == other.GearedUpWeapons
+            && object.Equals(Stats, other.Stats)
+            && object.Equals(SkillOffsets, other.SkillOffsets)
+            && object.Equals(SkillValues, other.SkillValues);
 
-            if (ReferenceEquals(this, other))
-                return true;
-
-            return
-                FarAwayModelDistance == other.FarAwayModelDistance &&
-                GearedUpWeapons == other.GearedUpWeapons &&
-                PlayerSkillsStatsData.Equals(Stats, other.Stats) &&
-                PlayerSkillsSkillsData.Equals(SkillOffsets, other.SkillOffsets) &&
-                PlayerSkillsSkillsData.Equals(SkillValues, other.SkillValues);
-        }
-
-        public bool Equals (IPlayerSkillsGetter? other)
-            => other != null
-            && (FarAwayModelDistance == null || FarAwayModelDistance == other.FarAwayModelDistance)
-            && (GearedUpWeapons == null || GearedUpWeapons == other.GearedUpWeapons)
-            && Stats.Equals(other)
-            && (SkillOffsets == null || SkillOffsets.Equals(other.SkillOffsets))
-            && (SkillValues == null || SkillValues.Equals(other.SkillValues));
-
-        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
-        public override bool Equals (object? obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (obj is PlayerSkillsData psdObj)
-                return Equals(psdObj);
-
-            if (obj is IPlayerSkillsGetter psgObj)
-                return Equals(psgObj);
-
-            return false;
-        }
+        public override bool Equals (object? obj) => Equals(obj as PlayerSkillsData);
 
         public override int GetHashCode () => HashCode.Combine(FarAwayModelDistance, GearedUpWeapons, Stats.GetHashCode());
+
+        public bool NonNullEquals (IPlayerSkillsGetter? other)
+            => other is not null
+            && (FarAwayModelDistance is null || FarAwayModelDistance == other.FarAwayModelDistance)
+            && (GearedUpWeapons is null || GearedUpWeapons == other.GearedUpWeapons)
+            && Stats.NonNullEquals(other)
+            && PlayerSkillsSkillsData.NonNullEquals(SkillOffsets, other.SkillOffsets)
+            && PlayerSkillsSkillsData.NonNullEquals(SkillValues, other.SkillValues);
 
         public int UpdateRecord (IPlayerSkills update)
         {
             int count = 0;
 
-            if (FarAwayModelDistance != null && FarAwayModelDistance != update.FarAwayModelDistance)
+            if (FarAwayModelDistance is not null && FarAwayModelDistance != update.FarAwayModelDistance)
             {
                 count++;
                 update.FarAwayModelDistance = (float)FarAwayModelDistance;
             }
 
-            if (GearedUpWeapons != null && GearedUpWeapons != update.GearedUpWeapons)
+            if (GearedUpWeapons is not null && GearedUpWeapons != update.GearedUpWeapons)
             {
                 count++;
                 update.GearedUpWeapons = (byte)GearedUpWeapons;
             }
 
             count += Stats.Update(update);
-            if (SkillOffsets != null)
+            if (SkillOffsets is not null)
                 count += SkillOffsets.Update(update.SkillOffsets);
-            if (SkillValues != null)
+            if (SkillValues is not null)
                 count += SkillValues.Update(update.SkillValues);
 
             return count;

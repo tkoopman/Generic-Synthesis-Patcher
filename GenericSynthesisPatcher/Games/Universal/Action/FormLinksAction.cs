@@ -50,7 +50,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 {
                     if (actionKey.Value == FormKey.Null)
                     {
-                        if (curList != null && curList.Count > 0)
+                        if (curList is not null && curList.Count > 0)
                         {
                             if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName))
                             {
@@ -67,7 +67,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
                     var curKey = curList?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.Value) ?? false, null);
 
-                    if (curKey != null && actionKey.Operation == ListLogic.DEL || curKey == null && actionKey.Operation == ListLogic.ADD)
+                    if ((curKey is not null && actionKey.Operation == ListLogic.DEL) || (curKey is null && actionKey.Operation == ListLogic.ADD))
                     {
                         if (!Mod.TryGetPropertyValueForEditing<List<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setList))
                         {
@@ -125,7 +125,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
                 int changes = patchValue.RemoveAll(_ => true);
 
-                if (newValue != null)
+                if (newValue is not null)
                 {
                     patchValue.AddRange(newValue);
                     changes += newValue.Count;
@@ -168,9 +168,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 {
                     if (item.FormKey.ModKey == forwardContext.ModKey)
                     {
-                        if (curValue == null || !curValue.Contains(item))
+                        if (curValue is null || !curValue.Contains(item))
                         {
-                            if (patchValueLinks == null)
+                            if (patchValueLinks is null)
                             {
                                 if (!Mod.TryGetPropertyValueForEditing<ExtendedList<IFormLinkGetter<TMajor>>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var patchValue))
                                     return -1;
@@ -236,7 +236,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 record => Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
                 item => $"{item.FormKey}");
 
-            return root != null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
+            return root is not null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? inputList)

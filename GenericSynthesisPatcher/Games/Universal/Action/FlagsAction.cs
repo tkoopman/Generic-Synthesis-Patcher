@@ -40,7 +40,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         public int Fill (ProcessingKeys proKeys)
         {
-            if (!proKeys.TryGetFillValueAs(out List<ListOperation>? flags) || flags == null)
+            if (!proKeys.TryGetFillValueAs(out List<ListOperation>? flags) || flags is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, "No flags to set.", propertyName: proKeys.Property.PropertyName);
                 return -1;
@@ -54,7 +54,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
             foreach (var flag in flags)
             {
-                if (flag.Value == null)
+                if (flag.Value is null)
                     newFlags = (Enum)Enum.ToObject(flagType, 0);
                 else if (Enum.TryParse(flagType, flag.Value, true, out object? setFlag))
                 {
@@ -150,7 +150,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 return true;
 
             // If no values then if we are to match against any included values it will not match.
-            if (curFlags == null)
+            if (curFlags is null)
                 return matches.Any(m => m.Operation != ListLogic.NOT);
 
             var flagType = curFlags.GetType();
@@ -164,7 +164,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             foreach (var m in matches)
             {
                 loopFinished = false;
-                if (!Enum.TryParse(flagType, m.Value, true, out object? mFlag) || mFlag == null)
+                if (!Enum.TryParse(flagType, m.Value, true, out object? mFlag) || mFlag is null)
                 {
                     Global.Logger.Log(ClassLogCode, $"{m.Value} is not a valid flag for flag type {flagType.Name}. Ignoring this entry.", logLevel: LogLevel.Warning);
                     loopFinished = true;
@@ -223,7 +223,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
             var root = FlagsRecordGraph.Create(proKeys);
 
-            return root != null && root.Merge(out var newValue) && Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue) ? 1 : 0;
+            return root is not null && root.Merge(out var newValue) && Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue) ? 1 : 0;
         }
 
         // <inheritdoc />

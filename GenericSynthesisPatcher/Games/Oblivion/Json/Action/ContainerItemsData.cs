@@ -15,22 +15,19 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Json.Action
     /// </summary>
     /// <param name="formKey">FormKey of item</param>
     /// <param name="count">QTY</param>
-    public class ContainerItemsData (FormKeyListOperation<IItemGetter> formKey, uint count) : FormLinksWithDataActionDataBase<IItemGetter, ContainerItem>, IEquatable<ContainerItemsData>
+    public class ContainerItemsData (FormKeyListOperation<IItemGetter> formKey, uint count) : FormLinksWithDataActionDataBase<IItemGetter, ContainerItem>
     {
         [JsonProperty(PropertyName = "Count", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(1)]
         public uint Count { get; set; } = count;
 
         [JsonProperty(PropertyName = "Item", Required = Required.Always)]
-        public override FormKeyListOperation<IItemGetter> FormKey { get; } = formKey ?? new(null);
+        public override FormKeyListOperation<IItemGetter> FormKey { get; } = formKey;
 
-        public static bool Equals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-            => left is IContainerItemGetter l
-            && right is IContainerItemGetter r
-            && l.Item.FormKey.Equals(r.Item.FormKey)
-            && l.Count == r.Count;
-
-        public bool Equals (ContainerItemsData? other) => FormKey.Equals(other?.FormKey) && Count.Equals(other?.Count);
+        public bool Equals (ContainerItemsData? other)
+            => other is not null
+            && FormKey.Equals(other.FormKey)
+            && Count == other.Count;
 
         public override bool Equals (object? obj) => Equals(obj as ContainerItemsData);
 

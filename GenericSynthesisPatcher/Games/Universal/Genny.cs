@@ -124,12 +124,13 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         private Dictionary<Type?[], Type> MappingsAssignableTo { get; } = [];
 
+        [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public virtual Type? GetRPMAction (Type type)
         {
             type = type.RemoveNullable();
 
             if (type.IsEnum)
-                return type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null ? typeof(EnumsAction) : typeof(FlagsAction);
+                return type.GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() is null ? typeof(EnumsAction) : typeof(FlagsAction);
 
             if (type.IsAssignableTo(typeof(IConvertible)) && (type.IsPrimitive || type == typeof(string)))
             {

@@ -58,7 +58,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             for (int i = count; i >= 0; i--)
             {
                 var m = root.ModKeys?.FirstOrDefault(m => m.Value.Equals(all.ElementAt(i).ModKey));
-                if (m != null && m.Operation == ListLogic.NOT)
+                if (m is not null && m.Operation == ListLogic.NOT)
                 {
                     Global.TraceLogger?.WriteLine($"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
                     continue;

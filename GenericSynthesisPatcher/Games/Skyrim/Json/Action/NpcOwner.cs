@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
@@ -15,28 +17,30 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         [JsonProperty(PropertyName = "NPC")]
         public FormKeyListOperationAdvanced<INpcGetter>? NPC { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
-        public static bool Equals (NpcOwner? l, NpcOwner? r)
-        {
-            if (ReferenceEquals(l, r))
-                return true;
+        public static bool IsNull ([NotNullWhen(false)] NpcOwner? owner) => owner is null || ((owner.NPC is null || owner.NPC.Value == FormKey.Null) && (owner.Global is null || owner.Global.Value == FormKey.Null));
 
-            if (l == null || r == null)
-                return false;
+        public override bool Equals (object? obj) => obj is NpcOwner owner && Equals(owner);
 
-            return FormKeyListOperationAdvanced<IGlobalGetter>.Equals(l.Global, r.Global) && FormKeyListOperationAdvanced<INpcGetter>.Equals(r.NPC, l.NPC);
-        }
+        public bool Equals (NpcOwner? other)
+            => (IsNull() && IsNull(other))
+            || (!IsNull() && !IsNull(other)
+            && object.Equals(Global, other.Global)
+            && object.Equals(NPC, other.NPC));
+
+        public override int GetHashCode () => HashCode.Combine(Global, NPC);
+
+        public bool IsNull () => IsNull(this);
 
         public override OwnerTarget ToActionData ()
         {
-            if ((NPC == null || NPC.Value == FormKey.Null) && (Global == null || Global.Value == FormKey.Null))
+            if (IsNull())
                 return new NoOwner();
 
             var owner = new Mutagen.Bethesda.Skyrim.NpcOwner();
-            if (NPC != null && NPC.Value != FormKey.Null)
+            if (NPC is not null && NPC.Value != FormKey.Null)
                 owner.Npc = NPC.Value.ToLink<INpcGetter>();
 
-            if (Global != null && Global.Value != FormKey.Null)
+            if (Global is not null && Global.Value != FormKey.Null)
                 owner.Global = Global.Value.ToLink<IGlobalGetter>();
 
             return owner;

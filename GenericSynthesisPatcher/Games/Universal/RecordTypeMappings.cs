@@ -36,7 +36,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         public bool TryFindByName (string? value, out RecordTypeMapping mapping)
         {
             mapping = default;
-            return value != null && ByName.TryGetValue(value, out mapping);
+            return value is not null && ByName.TryGetValue(value, out mapping);
         }
 
         public bool TryFindByType (IMajorRecordGetter record, out RecordTypeMapping mapping)

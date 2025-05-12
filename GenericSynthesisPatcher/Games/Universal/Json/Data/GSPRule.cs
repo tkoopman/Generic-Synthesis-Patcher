@@ -169,7 +169,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
         public bool ClaimAndValidate (GSPGroup group)
         {
-            if (Group != null)
+            if (Group is not null)
                 throw new Exception("Rule already claimed.");
 
             Group = group;
@@ -221,7 +221,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         {
             if (forwardCache.TryGetValue(key, out var value))
             {
-                if (value == null || !value.HasValue)
+                if (value is null || !value.HasValue)
                 {
                     mods = null;
                     fields = null;
@@ -324,8 +324,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                 {
                     valueAs = default;
 
-                    // If value != null then failed to cast to correct type
-                    return cachedValue == null;
+                    // If value is not null then failed to cast to correct type
+                    return cachedValue is null;
                 }
             }
 
@@ -333,7 +333,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             valueAs = default;
             bool valid = values.TryGetValue(key, out var jsonValue);
 
-            if (valid && jsonValue != null)
+            if (valid && jsonValue is not null)
                 valueAs = jsonValue.Deserialize<T>();
 
             cache.Add(key, valueAs);
@@ -351,15 +351,15 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
                 hash.Add(ForwardOptions);
                 hash.Add(OnlyIfDefault);
-                if (EditorID != null)
+                if (EditorID is not null)
                     hash.AddEnumerable(EditorID);
-                if (FormID != null)
+                if (FormID is not null)
                     hash.AddEnumerable(FormID);
-                if (Match != null)
+                if (Match is not null)
                     hash.AddDictionary(Match);
-                if (Fill != null)
+                if (Fill is not null)
                     hash.AddDictionary(Fill);
-                if (Forward != null)
+                if (Forward is not null)
                     hash.AddDictionary(Forward);
 
                 HashCode = hash.ToHashCode();
@@ -381,10 +381,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (!base.Matches(proKeys))
                 return false;
 
-            if (FormID != null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: ", Global.Settings.Value.Logging.NoisyLogs.FormIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.FormIDMatchFailed))
+            if (FormID is not null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: ", Global.Settings.Value.Logging.NoisyLogs.FormIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.FormIDMatchFailed))
                 return false;
 
-            if (EditorID != null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched EditorID: ", Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchFailed))
+            if (EditorID is not null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched EditorID: ", Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchFailed))
                 return false;
 
             foreach (var x in Match)

@@ -17,7 +17,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             string? key = reader.Value?.ToString();
 
             var constructor = objectType.GetConstructor([typeof(string)]);
-            if (constructor == null)
+            if (constructor is null)
             {
                 Global.Logger.Log(0xFF, "Failed to construct new value form JSON.", logLevel: LogLevel.Error);
                 return false;

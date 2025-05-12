@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
-            return key != null ? ModKey.FromFileName(key) : ModKey.Null;
+            return key is not null ? ModKey.FromFileName(key) : ModKey.Null;
         }
 
         public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();

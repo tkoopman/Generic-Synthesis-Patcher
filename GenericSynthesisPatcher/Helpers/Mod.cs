@@ -32,7 +32,7 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
-            if (property == null)
+            if (property is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;
@@ -40,7 +40,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             object? value = System.Activator.CreateInstance(property.PropertyType);
 
-            if (value == null)
+            if (value is null)
             {
                 Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} value for clear.", logLevel: LogLevel.Error, propertyName: propertyName);
                 return false;
@@ -91,7 +91,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
         {
-            if (fromRecord == null)
+            if (fromRecord is null)
             {
                 value = default;
                 propertyType = null;
@@ -149,7 +149,7 @@ namespace GenericSynthesisPatcher.Helpers
                 return false;
             }
 
-            if (value == null)
+            if (value is null)
                 property.SetValue(parent, null);
             else if (value is string strValue && property.PropertyType == typeof(TranslatedString))
                 property.SetValue(parent, new TranslatedString(Language.English, strValue));
@@ -165,13 +165,13 @@ namespace GenericSynthesisPatcher.Helpers
         {
             output = default;
 
-            if (input == null)
+            if (input is null)
                 return true;
 
             if (typeof(T) == typeof(string) && input is ITranslatedStringGetter translatedString)
             {
                 input = translatedString.String;
-                if (input == null)
+                if (input is null)
                     return true;
             }
             else if (typeof(T) == typeof(int) && property.PropertyType.IsEnum)
@@ -240,7 +240,7 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 string name = propertyNames[i];
                 property = parentType.GetProperty(name);
-                if (property == null)
+                if (property is null)
                 {
                     Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                     return false;
@@ -268,7 +268,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             // Check property is not null one last time just for off chance propertyNames had no
             // entries
-            if (property == null)
+            if (property is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;

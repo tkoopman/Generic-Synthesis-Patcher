@@ -74,9 +74,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 foreach (var actionData in links ?? [])
                 {
                     // Check if action wanting to clear all
-                    if (actionData?.FormKey == null || actionData.FormKey.Value == FormKey.Null)
+                    if (actionData?.FormKey is null || actionData.FormKey.Value == FormKey.Null)
                     {
-                        if (curList != null && curList.Count > 0)
+                        if (curList is not null && curList.Count > 0)
                         {
                             if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName))
                             {
@@ -93,13 +93,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
                     var e = FindRecord(curList, actionData.FormKey.Value);
 
-                    if (e != null && (actionData.FormKey.Operation == ListLogic.DEL || !actionData.Equals(e)))
+                    if (e is not null && (actionData.FormKey.Operation == ListLogic.DEL || !actionData.Equals(e)))
                     {
                         _ = Remove(proKeys, e);
                         changes++;
                     }
 
-                    if (actionData.FormKey.Operation == ListLogic.ADD && (e == null || e != null && !actionData.Equals(e)))
+                    if (actionData.FormKey.Operation == ListLogic.ADD && (e is null || !actionData.Equals(e)))
                     {
                         _ = Add(proKeys, actionData);
                         changes++;
@@ -124,7 +124,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <param name="list">List to search</param>
         /// <param name="key">FormKey to find</param>
         /// <returns>Getter of found entry or null if not found.</returns>
-        public IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s != null && GetFormKeyFromRecord(s).Equals(key), null);
+        public IFormLinkContainerGetter? FindRecord (IEnumerable<IFormLinkContainerGetter>? list, FormKey key) => list?.FirstOrDefault(s => s is not null && GetFormKeyFromRecord(s).Equals(key), null);
 
         /// <summary>
         ///     Add source entry to patch record.
@@ -138,7 +138,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             var newEntry = CreateFrom(source);
 
-            if (newEntry == null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (newEntry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             items.Add(newEntry);
@@ -200,18 +200,18 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 foreach (var item in newList)
                 {
                     var key = GetFormKeyFromRecord(item);
-                    if (key != null && key.ModKey == forwardContext.ModKey)
+                    if (key.ModKey == forwardContext.ModKey)
                     {
                         var i = FindRecord(curList, key);
 
-                        if (i != null && !DataEquals(item, i))
+                        if (i is not null && !DataEquals(item, i))
                         {
                             _ = Remove(proKeys, i);
                             _ = Forward(proKeys, item);
                             changes++;
                         }
 
-                        if (i == null)
+                        if (i is null)
                         {
                             _ = Forward(proKeys, item);
                             changes++;
@@ -238,9 +238,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if all form keys and data matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(recordContext.Record, proKeys.Property.PropertyName, out var curList)
+            || (Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(recordContext.Record, proKeys.Property.PropertyName, out var curList)
                 && Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originList)
-                && recordsMatch(curList, originList);
+                && recordsMatch(curList, originList));
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
@@ -279,7 +279,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 record => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
                 ToString);
 
-            return root != null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
+            return root is not null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             var entry = CreateFrom(remove);
 
-            if (entry == null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (entry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
                 return -1;
 
             if (items.Remove(entry))

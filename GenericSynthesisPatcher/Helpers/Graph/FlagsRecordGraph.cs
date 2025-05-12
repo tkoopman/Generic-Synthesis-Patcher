@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             var root = new FlagsRecordGraph(master, modKeys, proKeys.Property.PropertyName);
             populate(root);
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
                 root.print(string.Empty);
@@ -36,7 +36,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             root.cleanUp();
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Post Cleanup");
                 root.print(string.Empty);

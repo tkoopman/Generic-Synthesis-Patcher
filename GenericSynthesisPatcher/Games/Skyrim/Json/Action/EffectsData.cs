@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 {
-    public class EffectsData (FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude) : FormLinksWithDataActionDataBase<IMagicEffectGetter, Effect>, IEquatable<EffectsData>
+    public class EffectsData (FormKeyListOperation<IMagicEffectGetter> formKey, int area, int duration, float magnitude) : FormLinksWithDataActionDataBase<IMagicEffectGetter, Effect>
     {
         [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         public int Duration { get; set; } = duration;
 
         [JsonProperty(PropertyName = "Effect", Required = Required.Always)]
-        public override FormKeyListOperation<IMagicEffectGetter> FormKey { get; } = formKey ?? new(null);
+        public override FormKeyListOperation<IMagicEffectGetter> FormKey { get; } = formKey;
 
         [JsonProperty(PropertyName = "Magnitude", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
@@ -30,12 +30,17 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         public override bool Equals (IFormLinkContainerGetter? other)
             => other is IEffectGetter effect
             && FormKey.ValueEquals(effect.BaseEffect.FormKey)
-            && effect.Data != null
+            && effect.Data is not null
             && effect.Data.Area == Area
             && effect.Data.Duration == Duration
             && effect.Data.Magnitude == Magnitude;
 
-        public bool Equals (EffectsData? other) => other != null && Area == other.Area && Duration == other.Duration && Magnitude == other.Magnitude && FormKey == other.FormKey;
+        public bool Equals (EffectsData? other)
+            => other is not null
+            && Area == other.Area
+            && Duration == other.Duration
+            && Magnitude == other.Magnitude
+            && FormKey == other.FormKey;
 
         public override bool Equals (object? obj) => Equals(obj as EffectsData);
 

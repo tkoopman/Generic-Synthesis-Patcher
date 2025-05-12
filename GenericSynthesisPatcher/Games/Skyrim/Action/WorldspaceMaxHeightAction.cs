@@ -24,10 +24,10 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IWorldspaceMaxHeightGetter? lhs, WorldspaceMaxHeight? rhs)
         {
-            if (lhs == null && rhs == null)
+            if (lhs is null && rhs is null)
                 return true;
 
-            if (lhs == null || rhs == null)
+            if (lhs is null || rhs is null)
                 return false;
 
             return
@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         }
 
         protected override WorldspaceMaxHeight? getSetter (IWorldspaceMaxHeightGetter? getter)
-            => getter == null
+            => getter is null
             ? null
             : new WorldspaceMaxHeight
             {

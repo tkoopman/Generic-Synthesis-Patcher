@@ -9,9 +9,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
     [JsonConverter(typeof(OperationsConverter))]
     public sealed class ListOperation : ListOperation<string>
     {
-        public ListOperation (string? value) : base(value)
-        {
-        }
+        // Required for OperationsConverter
+        public ListOperation (string? value) : base(value) { }
 
         public ListOperation (ListLogic operation, string? value) : base(operation, value)
         {
@@ -23,13 +22,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         public override bool ValueEquals (string? check)
         {
-            if (Value == null && check == null)
+            if (Value is null && check is null)
                 return true;
 
-            if (Value == null || check == null)
+            if (Value is null || check is null)
                 return false;
 
-            if (Regex == null)
+            if (Regex is null)
                 return string.Equals(Value, check, StringComparison.OrdinalIgnoreCase);
 
             bool result = Regex.IsMatch(check);
@@ -42,7 +41,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
         protected override void valueUpdated ()
         {
-            if (Value != null && Value.StartsWith('/') && Value.EndsWith('/'))
+            if (Value is not null && Value.StartsWith('/') && Value.EndsWith('/'))
                 Regex = new Regex(Value.Trim('/'), RegexOptions.IgnoreCase);
         }
     }
@@ -58,6 +57,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         {
         }
 
-        protected override T? convertValue (string? value) => value != null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
+        protected override T? convertValue (string? value) => value is not null ? (T)((IConvertible)value).ToType(typeof(T), null) : default;
     }
 }

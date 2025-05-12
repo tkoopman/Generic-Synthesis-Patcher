@@ -197,9 +197,9 @@ namespace GenericSynthesisPatcher
             var groupRPMs = buildRPMs.GroupBy(g => (g.PropertyName, g.RecordActionInterface),
                                               g => (g.RTM.StaticRegistration.GetterType, g.PropertyType), (k, data) => new { k.PropertyName, k.RecordActionInterface, Types = data.Select(d => d.GetterType), PropertyTypes = data.Select(d => d.PropertyType).Distinct()});
 
-            var implemented = groupRPMs.Where(g => g.RecordActionInterface != null);
+            var implemented = groupRPMs.Where(g => g.RecordActionInterface is not null);
 
-            var notImplemented = buildRPMs.Where(r => r.RecordActionInterface == null).GroupBy(g => g.PropertyType).Select(g => new { PropertyType = g.Key, RecordTypes = g.Count(), Uses = g.Count(r => r.IsUsed), SubPropertiesMin = g.Min(a => a.SubProperties), SubPropertiesMax = g.Max(a => a.SubProperties), Example = $"{g.First().RTM.FullName}.{g.First().PropertyName}" }).ToList();
+            var notImplemented = buildRPMs.Where(r => r.RecordActionInterface is null).GroupBy(g => g.PropertyType).Select(g => new { PropertyType = g.Key, RecordTypes = g.Count(), Uses = g.Count(r => r.IsUsed), SubPropertiesMin = g.Min(a => a.SubProperties), SubPropertiesMax = g.Max(a => a.SubProperties), Example = $"{g.First().RTM.FullName}.{g.First().PropertyName}" }).ToList();
 
             // Sort by uses then name
             notImplemented.Sort((l, r) =>
@@ -369,7 +369,7 @@ namespace GenericSynthesisPatcher
 
             foreach (string[] line in lines)
             {
-                if (prefix != null)
+                if (prefix is not null)
                     sw.Write(prefix);
 
                 bool spacer = padLast && line[0].Length == 1 && line.Count(l => l == line[0]) == line.Length;
@@ -392,7 +392,7 @@ namespace GenericSynthesisPatcher
                         sw.Write($" {line[^1]}");
                 }
 
-                if (suffix != null)
+                if (suffix is not null)
                     sw.Write(suffix);
 
                 sw.WriteLine();

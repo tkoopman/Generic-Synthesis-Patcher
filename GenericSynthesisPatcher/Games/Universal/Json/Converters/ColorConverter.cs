@@ -22,7 +22,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 
                 case JsonToken.StartArray:
                     var data = serializer.Deserialize<List<short>>(reader);
-                    if (data == null || data.Count < 3 || data.Count > 4)
+                    if (data is null || data.Count < 3 || data.Count > 4)
                         throw new JsonSerializationException("Unable to read object bounds. Array requires 3 or 4 numbers [A,R,G,B] or [R,G,B]");
 
                     if (data.Count == 3)

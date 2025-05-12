@@ -19,7 +19,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Converters
             {
                 case JsonToken.StartArray:
                     var data = serializer.Deserialize<List<short>>(reader);
-                    if (data == null || data.Count != 6)
+                    if (data is null || data.Count != 6)
                         throw new JsonSerializationException("Unable to read object bounds. Array requires 6 numbers [x1,y1,z1,x2,y2,z2]");
 
                     return new ObjectBounds()
@@ -38,7 +38,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Converters
                      && jObject.ContainsKey("z2"))
                     {
                         var obj = serializer.Deserialize<Dictionary<string, short>>(jObject.CreateReader());
-                        if (obj != null)
+                        if (obj is not null)
                         {
                             return new ObjectBounds()
                             {

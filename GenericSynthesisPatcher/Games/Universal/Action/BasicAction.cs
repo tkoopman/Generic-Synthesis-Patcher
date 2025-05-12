@@ -109,9 +109,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if value matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || (Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
             && Mod.TryGetProperty<T>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-            && Equals(curValue, originValue);
+            && Equals(curValue, originValue));
 
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 

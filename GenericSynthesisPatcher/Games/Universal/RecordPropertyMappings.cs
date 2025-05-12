@@ -18,9 +18,9 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public IReadOnlyList<string> GetAllAliases (Type type, string propertyName)
         {
-            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && (pam.RealPropertyName?.Equals(propertyName, StringComparison.Ordinal) ?? true) && (pam.Type == null || pam.Type == type)).Select(p => (PropertyAliasMapping)p).ToList();
+            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && (pam.RealPropertyName?.Equals(propertyName, StringComparison.Ordinal) ?? true) && (pam.Type is null || pam.Type == type)).Select(p => (PropertyAliasMapping)p).ToList();
 
-            foreach (var item in list.ToArray().Where(l => l.Type == null && list.Count(i => i.PropertyName == l.PropertyName) > 1))
+            foreach (var item in list.ToArray().Where(l => l.Type is null && list.Count(i => i.PropertyName == l.PropertyName) > 1))
                 _ = list.Remove(item);
 
             return list.Where(i => i.RealPropertyName is not null).Select(l => l.PropertyName).ToList().AsReadOnly();
@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public IReadOnlyList<string> GetNullAliases (string propertyName)
         {
-            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && (pam.RealPropertyName?.Equals(propertyName, StringComparison.Ordinal) ?? true) && pam.Type == null).Select(p => (PropertyAliasMapping)p).ToList();
+            var list = propertyAliases.Where(p => p is PropertyAliasMapping pam && (pam.RealPropertyName?.Equals(propertyName, StringComparison.Ordinal) ?? true) && pam.Type is null).Select(p => (PropertyAliasMapping)p).ToList();
 
             return list.Where(i => i.RealPropertyName is not null).Select(l => l.PropertyName).ToList().AsReadOnly();
         }
@@ -47,7 +47,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         internal bool tryFindMapping (Type? type, string key, out RecordPropertyMapping rpm)
         {
-            if (type != null && propertyMappings.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is RecordPropertyMapping _RPM)
+            if (type is not null && propertyMappings.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is RecordPropertyMapping _RPM)
             {
                 rpm = _RPM;
                 return true;
@@ -84,7 +84,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         private bool tryFindAlias (Type? type, string key, out PropertyAliasMapping pam)
         {
-            if (type != null && propertyAliases.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is PropertyAliasMapping _PAM)
+            if (type is not null && propertyAliases.TryGetValue(new RecordProperty(type, key), out var _rpm) && _rpm is PropertyAliasMapping _PAM)
             {
                 pam = _PAM;
                 return true;
@@ -118,10 +118,10 @@ namespace GenericSynthesisPatcher.Games.Universal
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public static bool Equals (IRecordProperty? x, IRecordProperty? y)
         {
-            if (x == null && y == null)
+            if (x is null && y is null)
                 return true;
 
-            if (x == null || y == null)
+            if (x is null || y is null)
                 return false;
 
             return x.Type == y.Type && x.PropertyName.Equals(y.PropertyName, StringComparison.OrdinalIgnoreCase);

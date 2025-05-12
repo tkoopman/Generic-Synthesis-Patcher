@@ -20,6 +20,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Action
 
         public abstract bool Equals (IFormLinkContainerGetter? other);
 
+        public abstract override bool Equals (object? obj);
+
+        public abstract override int GetHashCode ();
+
         public abstract TData ToActionData ();
     }
 }

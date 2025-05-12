@@ -26,19 +26,19 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (ICellMaxHeightDataGetter? lhs, CellMaxHeightData? rhs)
         {
-            if (lhs == null && rhs == null)
+            if (lhs is null && rhs is null)
                 return true;
 
-            if (lhs == null || rhs == null)
+            if (lhs is null || rhs is null)
                 return false;
 
             return
-                lhs.Offset.Equals(rhs.Offset) &&
+                lhs.Offset == rhs.Offset &&
                 lhs.HeightMap.SequenceEqual(rhs.HeightMap);
         }
 
         protected override CellMaxHeightData? getSetter (ICellMaxHeightDataGetter? getter)
-            => getter == null
+            => getter is null
             ? null
             : new CellMaxHeightData
             {

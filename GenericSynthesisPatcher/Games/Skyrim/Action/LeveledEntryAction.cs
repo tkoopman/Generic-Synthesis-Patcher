@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
 
         protected ExtraData? createExtraData (ILoquiObject source)
         {
-            if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData == null)
+            if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, $"No extra data to copy", logLevel: LogLevel.Error);
                 return null;

@@ -42,13 +42,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 if (!proKeys.TryGetFillValueAs(out FormKeyListOperation<TMajor>? formKey) || !Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, out var propertyType))
                     return -1;
 
-                if (formKey == null || formKey.Value == FormKey.Null)
+                if (formKey is null || formKey.Value == FormKey.Null)
                 {
-                    if (curValue != null && !curValue.IsNull)
+                    if (curValue is not null && !curValue.IsNull)
                     {
                         if (propertyType.IsAssignableTo(typeof(IFormLinkNullableGetter<TMajor>)))
                         {
-                            if (!Mod.TryGetPropertyValueForEditing<IFormLinkNullable<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue == null)
+                            if (!Mod.TryGetPropertyValueForEditing<IFormLinkNullable<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var setValue) || setValue is null)
                                 return -1;
 
                             setValue.SetToNull();
@@ -65,7 +65,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                     return 0;
                 }
 
-                if (formKey.ToLinkGetter() == null)
+                if (formKey.ToLinkGetter() is null)
                 {
                     Global.Logger.Log(ClassLogCode, $"Unable to find {formKey?.Value.ToString() ?? "FormKey"}", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
                     return -1;
@@ -142,12 +142,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if form link matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || (Mod.TryGetProperty<IFormLinkGetter<TMajor>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
                 && Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-                && !(curValue == null ^ originValue == null)
-                && !(curValue != null ^ originValue != null)
-                && (curValue == null && originValue == null
-                    || curValue != null && originValue != null && curValue.FormKey.Equals(originValue.FormKey));
+                && ((curValue is null && originValue is null)
+                    || (curValue is not null && originValue is not null && curValue.FormKey.Equals(originValue.FormKey))));
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
@@ -169,7 +167,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!fromCache && !MatchesHelper.Validate(matches))
                 throw new InvalidDataException("Json data for matches invalid");
 
-            if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.TryGetProperty<IFormLinkGetter<TMajor>>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null)
                 return !matches.Any(k => k.Operation != ListLogic.NOT);
 
             return MatchesHelper.Matches(curValue.FormKey, matches, propertyName: proKeys.Property.PropertyName);
@@ -188,7 +186,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         private static int performFill (ProcessingKeys proKeys, IFormLinkGetter<TMajor>? curValue, IFormLinkGetter<TMajor>? newValue)
         {
-            if (curValue != null && newValue != null && curValue.FormKey.Equals(newValue.FormKey))
+            if (curValue is not null && newValue is not null && curValue.FormKey.Equals(newValue.FormKey))
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: proKeys.Property.PropertyName);
                 return 0;
@@ -197,7 +195,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!Mod.TryGetPropertyValueForEditing<IFormLink<TMajor>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var formLink))
                 return -1;
 
-            if (newValue == null || newValue.IsNull)
+            if (newValue is null || newValue.IsNull)
                 formLink.SetToNull();
             else
                 formLink.SetTo(newValue.FormKey);

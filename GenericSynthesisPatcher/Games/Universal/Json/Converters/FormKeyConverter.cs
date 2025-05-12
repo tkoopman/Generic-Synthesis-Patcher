@@ -12,7 +12,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
-            return key == null ? null
+            return key is null ? null
                  : FormKey.TryFactory(SynthCommon.FixFormKey(key), out var formKey) ? formKey
                  : Global.State.LinkCache.TryResolve<T>(key, out var record) ? record.FormKey
                  : throw new JsonSerializationException($"Unable to parse \"{key}\" into valid FormKey or EditorID");
@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
-            return key != null ? FormKey.Factory(SynthCommon.FixFormKey(key)) : null;
+            return key is not null ? FormKey.Factory(SynthCommon.FixFormKey(key)) : null;
         }
 
         public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();

@@ -497,7 +497,7 @@ namespace GenericSynthesisPatcher
                 {
                     if (firstMod)
                     {   // First mod of DefaultThenSelfMasterOnly
-                        if (forwardFrom == null) // We don't continue if first mod can't be default forwarded
+                        if (forwardFrom is null) // We don't continue if first mod can't be default forwarded
                             break;
 
                         if (proKeys.CheckOnlyIfDefault())
@@ -518,7 +518,7 @@ namespace GenericSynthesisPatcher
                             firstMod = false;
                         }
                     }
-                    else if (forwardFrom != null)
+                    else if (forwardFrom is not null)
                     {   // All other mods in DefaultThenSelfMasterOnly - No need to check origin
                         Global.TraceLogger?.Log(ClassLogCode, $"Forwarding Type: {nameof(ForwardOptions.SelfMasterOnly)} From: {forwardFrom.ModKey.FileName}.", propertyName: proKeys.Property.PropertyName);
 
@@ -529,7 +529,7 @@ namespace GenericSynthesisPatcher
                             changed += changes;
                     }
                 }
-                else if (proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.SelfMasterOnly) && forwardFrom != null)
+                else if (proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.SelfMasterOnly) && forwardFrom is not null)
                 {   //  SelfMasterOnly
                     if (proKeys.CheckOnlyIfDefault())
                         break;
@@ -541,7 +541,7 @@ namespace GenericSynthesisPatcher
                     if (changes > 0)
                         changed += changes;
                 }
-                else if (forwardFrom != null)
+                else if (forwardFrom is not null)
                 {   // Should never reach here as Default already handled outside of foreach loop.
                     throw new Exception("WTF. Code should never reach this point.");
                 }

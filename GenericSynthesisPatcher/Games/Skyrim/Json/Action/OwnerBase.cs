@@ -9,22 +9,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
     [JsonConverter(typeof(OwnerBaseConverter))]
     public abstract class OwnerBase
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
-        public static bool Equals (OwnerBase? l, OwnerBase? r)
-        {
-            if (ReferenceEquals(l, r))
-                return true;
-            if (l == null || r == null)
-                return false;
+        public abstract override bool Equals (object? obj);
 
-            if (l is FactionOwner lf && r is FactionOwner rf)
-                return FactionOwner.Equals(lf, rf);
-
-            if (l is NpcOwner ln && r is NpcOwner rn)
-                return NpcOwner.Equals(ln, rn);
-
-            return false;
-        }
+        public abstract override int GetHashCode ();
 
         public abstract OwnerTarget ToActionData ();
     }

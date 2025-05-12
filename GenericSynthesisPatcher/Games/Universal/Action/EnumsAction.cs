@@ -37,13 +37,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         public int Fill (ProcessingKeys proKeys)
         {
-            if (!proKeys.TryGetFillValueAs(out string? setValueStr) || setValueStr == null)
+            if (!proKeys.TryGetFillValueAs(out string? setValueStr) || setValueStr is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, $"No {proKeys.Property.PropertyName} to set.", propertyName: proKeys.Property.PropertyName);
                 return -1;
             }
 
-            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue == null)
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null)
                 return -1;
 
             var enumType = curValue.GetType();
@@ -137,7 +137,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!checkValues.SafeAny())
                 return true;
 
-            if (curValue == null)
+            if (curValue is null)
                 return !checkValues.Any(k => k.Operation == ListLogic.Default);
 
             var valueType = curValue.GetType();
@@ -149,7 +149,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             foreach (var checkValueOp in checkValues)
             {
                 loopFinished = false;
-                if (!Enum.TryParse(valueType, checkValueOp.Value, true, out object? checkValue) || checkValue == null)
+                if (!Enum.TryParse(valueType, checkValueOp.Value, true, out object? checkValue) || checkValue is null)
                 {
                     Global.Logger.Log(ClassLogCode, $"{checkValueOp.Value} is not a valid value for enum type {valueType.Name}. Ignoring this entry.", logLevel: LogLevel.Warning);
                     loopFinished = true;

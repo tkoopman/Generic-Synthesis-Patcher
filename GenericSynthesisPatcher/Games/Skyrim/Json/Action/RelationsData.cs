@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
     public class RelationsData (FormKeyListOperation<IRelatableGetter> formKey, int modifier, CombatReaction reaction) : FormLinksWithDataActionDataBase<IRelatableGetter, Relation>, IEquatable<RelationsData>
     {
         [JsonProperty(PropertyName = "Target", Required = Required.Always)]
-        public override FormKeyListOperation<IRelatableGetter> FormKey { get; } = formKey ?? new(null);
+        public override FormKeyListOperation<IRelatableGetter> FormKey { get; } = formKey;
 
         [JsonProperty(PropertyName = "Modifier", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
@@ -21,13 +21,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 
         [JsonProperty(PropertyName = "Reaction", Required = Required.Always)]
         public CombatReaction Reaction { get; set; } = reaction;
-
-        public static bool Equals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
-            => left is IRelationGetter l
-            && right is IRelationGetter r
-            && l.Target.FormKey.Equals(r.Target.FormKey)
-            && l.Modifier == r.Modifier
-            && l.Reaction == r.Reaction;
 
         public bool Equals (RelationsData? other) => FormKey.Equals(other?.FormKey) && Modifier == other?.Modifier && Reaction == other?.Reaction;
 

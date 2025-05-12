@@ -181,7 +181,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         ///     Should only be used for sorting by Priority
         /// </summary>
         public int CompareTo (GSPBase? other)
-            => other == null ? 1
+            => other is null ? 1
              : other == this ? 0
              : Priority.CompareTo(other.Priority);
 
@@ -191,7 +191,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             hash.Add(Priority);
             hash.Add(Types);
-            if (Masters != null)
+            if (Masters is not null)
                 hash.AddEnumerable(Masters);
 
             return hash.ToHashCode();
@@ -215,10 +215,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchSuccessful)
                 Global.TraceLogger?.Log(ClassLogCode, "Matched: True", propertyName: "Record Type");
 
-            if (Masters != null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, nameof(Masters), Global.Settings.Value.Logging.NoisyLogs.MastersMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.MastersMatchFailed))
+            if (Masters is not null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, nameof(Masters), Global.Settings.Value.Logging.NoisyLogs.MastersMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.MastersMatchFailed))
                 return false;
 
-            if (PatchedBy != null)
+            if (PatchedBy is not null)
             {
                 var all = Global.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
                 if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))

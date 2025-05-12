@@ -7,7 +7,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
         public override RecordTypeMapping ReadJson (JsonReader reader, Type objectType, RecordTypeMapping existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             string? key = reader.Value?.ToString();
-            return key == null ? default
+            return key is null ? default
                  : Global.RecordTypeMappings.FindByName(reader.Value?.ToString());
         }
 

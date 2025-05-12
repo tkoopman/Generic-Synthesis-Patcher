@@ -18,6 +18,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
             { '^', FilterLogic.XOR },
             { '|', FilterLogic.OR } });
 
+        // Required for OperationsConverter
         public FilterOperation (string value)
         {
             (Operation, string? v) = split(value, ValidPrefixes);
@@ -35,7 +36,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         public override bool Equals (object? obj)
                     => obj is FilterOperation<T> other
                     && Operation == other.Operation
-                    && (Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase)
+                    && ((Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase))
                     || Value.Equals(other.Value));
 
         public override int GetHashCode ()
@@ -61,7 +62,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
                 _ => null,
             };
 
-            return prefix != null ? prefix + Value.ToString() : Value.ToString();
+            return prefix is not null ? prefix + Value.ToString() : Value.ToString();
         }
     }
 }

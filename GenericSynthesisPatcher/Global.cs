@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher
 
         public static void ForceTrace (int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter> context, [CallerLineNumber] int line = 0)
         {
-            if (TraceLogger == null)
+            if (TraceLogger is null)
             {
                 TraceLogger = new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line);
             }
@@ -45,15 +45,15 @@ namespace GenericSynthesisPatcher
         public static void Processing (int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter>? context, [CallerLineNumber] int line = 0)
         {
             TraceLogger = Settings.Value.Logging.LogLevel == LogLevel.Trace
-                                  && ((rule != null && rule.Debug)
-                                  || (context != null && Settings.Value.Logging.FormKey == context.Record.FormKey)
+                                  && ((rule is not null && rule.Debug)
+                                  || (context is not null && Settings.Value.Logging.FormKey == context.Record.FormKey)
                                   || Settings.Value.Logging.All)
                      ? new LogWriter(LogLevel.Trace, classLogCode, rule, context, line: line)
                      : null;
 
             DebugLogger = Settings.Value.Logging.LogLevel <= LogLevel.Debug
-                                  && ((rule != null && rule.Debug)
-                                  || (context != null && Settings.Value.Logging.FormKey == context.Record.FormKey)
+                                  && ((rule is not null && rule.Debug)
+                                  || (context is not null && Settings.Value.Logging.FormKey == context.Record.FormKey)
                                   || Settings.Value.Logging.All)
                      ? new LogWriter(LogLevel.Debug, classLogCode, rule, context, line: line)
                      : null;
@@ -131,19 +131,19 @@ namespace GenericSynthesisPatcher
 
         public static void UpdateLoggers (int classLogCode, [CallerLineNumber] int line = 0)
         {
-            if (TraceLogger != null)
+            if (TraceLogger is not null)
             {
                 TraceLogger.ClassLogCode = classLogCode;
                 TraceLogger.Line = line;
             }
 
-            if (DebugLogger != null)
+            if (DebugLogger is not null)
             {
                 DebugLogger.ClassLogCode = classLogCode;
                 DebugLogger.Line = line;
             }
 
-            if (Logger != null)
+            if (Logger is not null)
             {
                 Logger.ClassLogCode = classLogCode;
                 Logger.Line = line;

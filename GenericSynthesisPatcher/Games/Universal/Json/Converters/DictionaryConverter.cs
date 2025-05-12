@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 
                 foreach (var x in value ?? [])
                 {
-                    if (x.Value != null)
+                    if (x.Value is not null)
                     {
                         var key = typeof(TKey) == typeof(string) ? (TKey)(object)x.Key : new JValue(x.Key).Deserialize<TKey>() ?? throw new JsonReaderException($"Failed to Deserialize directory key to type {typeof(TKey)}.");
 

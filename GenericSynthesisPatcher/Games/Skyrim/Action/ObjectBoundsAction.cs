@@ -24,10 +24,10 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         protected override bool compareValues (IObjectBoundsGetter? lhs, ObjectBounds? rhs)
         {
-            if (lhs == null && rhs == null)
+            if (lhs is null && rhs is null)
                 return true;
 
-            if (lhs == null || rhs == null)
+            if (lhs is null || rhs is null)
                 return false;
 
             return
@@ -36,7 +36,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         }
 
         protected override ObjectBounds? getSetter (IObjectBoundsGetter? getter)
-            => getter == null
+            => getter is null
             ? null
             : new ObjectBounds
             {

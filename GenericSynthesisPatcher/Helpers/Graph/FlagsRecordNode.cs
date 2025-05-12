@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             int myRemoves = default;
             int forceAdds = default;
 
-            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
+            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) is not null; // Must be + as - wouldn't have a node
 
             foreach (var node in OverwrittenBy)
             {
