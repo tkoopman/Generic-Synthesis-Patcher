@@ -37,6 +37,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
                 typeof(WorldspaceMaxHeight),
                 ]);
 
+            addMapping(typeof(IObjectBoundsGetter), false, typeof(ObjectBoundsAction));
+
             addMapping([typeof(ExtendedList<>), typeof(IContainerEntryGetter)], false, typeof(ContainerItemsAction));
         }
 

@@ -955,6 +955,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(IShaderParticleGeometryGetter), "NumSubtexturesY"                           , ConvertibleAction<float>.Instance);
             Add(typeof(INavigationMeshInfoMapGetter) , "NVSI"                                      , MemorySliceByteAction.Instance);
             Add(typeof(IDefaultObjectGetter)         , "Object"                                    , FormLinkAction<IFallout4MajorRecordGetter>.Instance);
+            Add(null                                 , "ObjectBounds"                              , ObjectBoundsAction.Instance);
             Add(null                                 , "ObjectBounds.First.X"                      , ConvertibleAction<short>.Instance);
             Add(null                                 , "ObjectBounds.First.Y"                      , ConvertibleAction<short>.Instance);
             Add(null                                 , "ObjectBounds.First.Z"                      , ConvertibleAction<short>.Instance);

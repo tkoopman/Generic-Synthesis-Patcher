@@ -1,3 +1,7 @@
+using GenericSynthesisPatcher.Games.Fallout4.Json.Converters;
+
+using Mutagen.Bethesda.Fallout4;
+
 using Newtonsoft.Json.Serialization;
 
 namespace GenericSynthesisPatcher.Games.Fallout4.Json
@@ -10,8 +14,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4.Json
         {
             var contract = base.CreateContract(objectType);
 
-            //if (objectType.IsAssignableTo(typeof(IObjectBoundsGetter)))
-            //    contract.Converter = new ObjectBoundsConverter();
+            if (objectType.IsAssignableTo(typeof(IObjectBoundsGetter)))
+                contract.Converter = new ObjectBoundsConverter();
 
             return contract;
         }

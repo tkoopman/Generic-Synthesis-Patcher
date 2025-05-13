@@ -407,6 +407,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ObjectBounds.First.X\": 7",
     "MFFSM": "MFF--",
