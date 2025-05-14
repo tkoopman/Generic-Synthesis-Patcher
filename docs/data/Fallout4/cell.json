@@ -309,6 +309,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Forward Cell Max Height data.",
+    "Example": "[{ \"types\": [\"Cell\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "MFFSM": "--F--",
+    "Name": "MaxHeightData"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",

@@ -183,6 +183,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Forward Worldspace Max Height data.",
+    "Example": "[{ \"types\": [\"Worldspace\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "MFFSM": "--F--",
+    "Name": "MaxHeight"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
     "MFFSM": "MFF--",

@@ -832,6 +832,8 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             Add(typeof(ILeveledItemGetter)           , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(ILeveledNpcGetter)            , "MaxCount"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IAttractionRuleGetter)        , "MaxDelay"                                  , ConvertibleAction<float>.Instance);
+            Add(typeof(IWorldspaceGetter)            , "MaxHeight"                                 , WorldspaceMaxHeightAction.Instance);
+            Add(typeof(ICellGetter)                  , "MaxHeightData"                             , CellMaxHeightDataAction.Instance);
             Add(typeof(IEncounterZoneGetter)         , "MaxLevel"                                  , ConvertibleAction<byte>.Instance);
             Add(typeof(IWeaponGetter)                , "MaxRange"                                  , ConvertibleAction<float>.Instance);
             Add(typeof(IAObjectModificationGetter)   , "MaxRank"                                   , ConvertibleAction<byte>.Instance);
