@@ -24,6 +24,17 @@ namespace GenericSynthesisPatcher.Games.Universal
             addMapping(typeof(Percent), true, typeof(BasicAction<Percent>));
             addMapping(typeof(Color), true, typeof(BasicAction<Color>));
             addMapping(typeof(MemorySlice<byte>), true, typeof(MemorySliceByteAction));
+            addMapping(typeof(P2Double), true, typeof(BasicAction<P2Double>));
+            addMapping(typeof(P2Float), true, typeof(BasicAction<P2Float>));
+            addMapping(typeof(P2Int), true, typeof(BasicAction<P2Int>));
+            addMapping(typeof(P2Int16), true, typeof(BasicAction<P2Int16>));
+            addMapping(typeof(P2UInt8), true, typeof(BasicAction<P2UInt8>));
+            addMapping(typeof(P3Double), true, typeof(BasicAction<P3Double>));
+            addMapping(typeof(P3Float), true, typeof(BasicAction<P3Float>));
+            addMapping(typeof(P3Int), true, typeof(BasicAction<P3Int>));
+            addMapping(typeof(P3Int16), true, typeof(BasicAction<P3Int16>));
+            addMapping(typeof(P3UInt16), true, typeof(BasicAction<P3UInt16>));
+            addMapping(typeof(P3UInt8), true, typeof(BasicAction<P3UInt8>));
 
             addMapping([typeof(IFormLink<>), null], false, typeof(FormLinkAction<>));
             addMapping([typeof(IFormLinkGetter<>), null], false, typeof(FormLinkAction<>));
@@ -36,30 +47,31 @@ namespace GenericSynthesisPatcher.Games.Universal
             addMapping([typeof(ExtendedList<>), typeof(IFormLinkNullableGetter<>), null], false, typeof(FormLinksAction<>));
         }
 
-        public Type[] ForceDeeperTypes { get; protected set; } =
-                    [
-            typeof(P2Double),
-            typeof(P2Float),
-            typeof(P2Int),
-            typeof(P2Int16),
-            typeof(P3Double),
-            typeof(P3Float),
-            typeof(P3Int),
-            typeof(P3Int16),
-            ];
+        public Type[] ForceDeeperTypes { get; protected set; } = [];
 
         public abstract string GameName { get; }
 
         public Type[] IgnoreDeepScanOnTypes { get; protected set; } =
             [
-            typeof(AssetLink<>),
-            typeof(ExtendedList<>),
-            typeof(FormLink<>),
-            typeof(FormLinkNullable<>),
-            typeof(IFormLink<>),
-            typeof(IFormLinkNullable<>),
-            typeof(string),
-            typeof(TranslatedString),
+                typeof(P2Double),
+                typeof(P2Float),
+                typeof(P2Int),
+                typeof(P2Int16),
+                typeof(P2UInt8),
+                typeof(P3Double),
+                typeof(P3Float),
+                typeof(P3Int),
+                typeof(P3Int16),
+                typeof(P3UInt16),
+                typeof(P3UInt8),
+                typeof(AssetLink<>),
+                typeof(ExtendedList<>),
+                typeof(FormLink<>),
+                typeof(FormLinkNullable<>),
+                typeof(IFormLink<>),
+                typeof(IFormLinkNullable<>),
+                typeof(string),
+                typeof(TranslatedString),
             ];
 
         public abstract Type[] IgnoreMajorRecordGetterTypes { get; }

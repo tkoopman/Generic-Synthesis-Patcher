@@ -22,24 +22,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExteriorLod.Offset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExteriorLod.Offset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExteriorLod.Offset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExteriorLod.Offset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExteriorLod.Offset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExteriorLod.Offset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ExteriorLod.Offset"
   },
   {
     "Aliases": "",
@@ -92,17 +78,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Grid.Point.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Grid.Point.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Grid.Point.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Grid.Point.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "Grid.Point"
   },
   {
     "Aliases": "",
@@ -435,45 +414,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Angle.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Angle.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "WaterVelocity.Angle"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Angle.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Angle.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Angle.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Angle.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Offset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Offset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Offset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Offset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WaterVelocity.Offset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WaterVelocity.Offset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "WaterVelocity.Offset"
   },
   {
     "Aliases": "",

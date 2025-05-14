@@ -36,17 +36,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Grid.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Grid.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Grid.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Grid.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "Grid"
   },
   {
     "Aliases": "",

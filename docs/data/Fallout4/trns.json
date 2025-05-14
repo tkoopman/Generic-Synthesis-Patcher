@@ -29,45 +29,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Position.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Position.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "Position"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Position.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Position.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Position.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Position.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Rotation.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Rotation.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Rotation.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Rotation.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Rotation.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Rotation.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "Rotation"
   },
   {
     "Aliases": "",

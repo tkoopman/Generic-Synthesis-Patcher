@@ -35,8 +35,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             AddAlias(typeof(ICellGetter)                 , "XCLL.LightFadeEnd"            , "Lighting.LightFadeEnd");
             AddAlias(typeof(ICellGetter)                 , "XCLX.Flags"                   , "Grid.Flags");
             AddAlias(typeof(ICellGetter)                 , "XCLX.Point"                   , "Grid.Point");
-            AddAlias(typeof(ICellGetter)                 , "XCLX.Point.X"                 , "Grid.Point.X");
-            AddAlias(typeof(ICellGetter)                 , "XCLX.Point.Y"                 , "Grid.Point.Y");
             AddAlias(typeof(ICombatStyleGetter)          , "CSCR.CircleMult"              , "CloseRange.CircleMult");
             AddAlias(typeof(ICombatStyleGetter)          , "CSCR.FallbackMult"            , "CloseRange.FallbackMult");
             AddAlias(typeof(ICombatStyleGetter)          , "CSCR.FlankDistance"           , "CloseRange.FlankDistance");
@@ -116,12 +114,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             AddAlias(typeof(ILightingTemplateGetter)     , "DALC.Specular"                , "DirectionalAmbientColors.Specular");
             AddAlias(typeof(ILoadScreenGetter)           , "ONAM.Max"                     , "RotationOffsetConstraints.Max");
             AddAlias(typeof(ILoadScreenGetter)           , "ONAM.Min"                     , "RotationOffsetConstraints.Min");
-            AddAlias(typeof(ILoadScreenGetter)           , "RNAM.X"                       , "InitialRotation.X");
-            AddAlias(typeof(ILoadScreenGetter)           , "RNAM.Y"                       , "InitialRotation.Y");
-            AddAlias(typeof(ILoadScreenGetter)           , "RNAM.Z"                       , "InitialRotation.Z");
-            AddAlias(typeof(ILoadScreenGetter)           , "XNAM.X"                       , "InitialTranslationOffset.X");
-            AddAlias(typeof(ILoadScreenGetter)           , "XNAM.Y"                       , "InitialTranslationOffset.Y");
-            AddAlias(typeof(ILoadScreenGetter)           , "XNAM.Z"                       , "InitialTranslationOffset.Z");
             AddAlias(typeof(IMovementTypeGetter)         , "INAM.Directional"             , "AnimationChangeThresholds.Directional");
             AddAlias(typeof(IMovementTypeGetter)         , "INAM.MovementSpeed"           , "AnimationChangeThresholds.MovementSpeed");
             AddAlias(typeof(IMovementTypeGetter)         , "INAM.RotationSpeed"           , "AnimationChangeThresholds.RotationSpeed");
@@ -188,12 +180,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             AddAlias(typeof(ITextureSetGetter)           , "DODT.ParallaxPasses"          , "Decal.ParallaxPasses");
             AddAlias(typeof(ITextureSetGetter)           , "DODT.ParallaxScale"           , "Decal.ParallaxScale");
             AddAlias(typeof(ITextureSetGetter)           , "DODT.Shininess"               , "Decal.Shininess");
-            AddAlias(typeof(IWaterGetter)                , "NAM0.X"                       , "LinearVelocity.X");
-            AddAlias(typeof(IWaterGetter)                , "NAM0.Y"                       , "LinearVelocity.Y");
-            AddAlias(typeof(IWaterGetter)                , "NAM0.Z"                       , "LinearVelocity.Z");
-            AddAlias(typeof(IWaterGetter)                , "NAM1.X"                       , "AngularVelocity.X");
-            AddAlias(typeof(IWaterGetter)                , "NAM1.Y"                       , "AngularVelocity.Y");
-            AddAlias(typeof(IWaterGetter)                , "NAM1.Z"                       , "AngularVelocity.Z");
             AddAlias(typeof(IWeatherGetter)              , "DALC.Day"                     , "DirectionalAmbientLightingColors.Day");
             AddAlias(typeof(IWeatherGetter)              , "DALC.Night"                   , "DirectionalAmbientLightingColors.Night");
             AddAlias(typeof(IWeatherGetter)              , "DALC.Sunrise"                 , "DirectionalAmbientLightingColors.Sunrise");
@@ -212,20 +198,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             AddAlias(typeof(IWorldspaceGetter)           , "MNAM.CameraMaxHeight"         , "MapData.CameraMaxHeight");
             AddAlias(typeof(IWorldspaceGetter)           , "MNAM.CameraMinHeight"         , "MapData.CameraMinHeight");
             AddAlias(typeof(IWorldspaceGetter)           , "MNAM.NorthwestCellCoords"     , "MapData.NorthwestCellCoords");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.NorthwestCellCoords.X"   , "MapData.NorthwestCellCoords.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.NorthwestCellCoords.Y"   , "MapData.NorthwestCellCoords.Y");
             AddAlias(typeof(IWorldspaceGetter)           , "MNAM.SoutheastCellCoords"     , "MapData.SoutheastCellCoords");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.SoutheastCellCoords.X"   , "MapData.SoutheastCellCoords.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.SoutheastCellCoords.Y"   , "MapData.SoutheastCellCoords.Y");
             AddAlias(typeof(IWorldspaceGetter)           , "MNAM.UsableDimensions"        , "MapData.UsableDimensions");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.UsableDimensions.X"      , "MapData.UsableDimensions.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "MNAM.UsableDimensions.Y"      , "MapData.UsableDimensions.Y");
-            AddAlias(typeof(IWorldspaceGetter)           , "NAM0.X"                       , "ObjectBoundsMin.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "NAM0.Y"                       , "ObjectBoundsMin.Y");
-            AddAlias(typeof(IWorldspaceGetter)           , "NAM9.X"                       , "ObjectBoundsMax.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "NAM9.Y"                       , "ObjectBoundsMax.Y");
-            AddAlias(typeof(IWorldspaceGetter)           , "WCTR.X"                       , "FixedDimensionsCenterCell.X");
-            AddAlias(typeof(IWorldspaceGetter)           , "WCTR.Y"                       , "FixedDimensionsCenterCell.Y");
 #pragma warning restore format
         }
     }

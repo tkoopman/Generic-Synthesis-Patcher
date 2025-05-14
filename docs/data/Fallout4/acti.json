@@ -113,59 +113,24 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMax.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMax.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "NavmeshGeometry.GridMax"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMax.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMax.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "NavmeshGeometry.GridMaxDistance"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMax.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMax.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMaxDistance.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMaxDistance.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMaxDistance.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMaxDistance.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMin.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMin.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMin.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMin.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"NavmeshGeometry.GridMin.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridMin.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "NavmeshGeometry.GridMin"
   },
   {
     "Aliases": "",
@@ -190,45 +155,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds.First"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",

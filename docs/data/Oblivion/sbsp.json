@@ -15,23 +15,9 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Point.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Point.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Point.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Point.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Point.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Point.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "Point"
   }
 ]

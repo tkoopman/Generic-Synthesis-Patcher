@@ -23,6 +23,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim
                 typeof(Landscape),
                 typeof(LocationTargetRadius),
                 typeof(Model),
+                typeof(ObjectBounds),
                 typeof(PackageAdapter),
                 typeof(PerkAdapter),
                 typeof(QuestAdapter),

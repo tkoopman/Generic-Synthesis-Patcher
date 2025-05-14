@@ -21,25 +21,11 @@
     "Name": "FormVersion"
   },
   {
-    "Aliases": "RNAM.X",
-    "Description": "Numeric value",
-    "Example": "\"InitialRotation.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "InitialRotation.X"
-  },
-  {
-    "Aliases": "RNAM.Y",
-    "Description": "Numeric value",
-    "Example": "\"InitialRotation.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "InitialRotation.Y"
-  },
-  {
-    "Aliases": "RNAM.Z",
-    "Description": "Numeric value",
-    "Example": "\"InitialRotation.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "InitialRotation.Z"
+    "Aliases": "RNAM",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "InitialRotation"
   },
   {
     "Aliases": "SNAM",
@@ -49,25 +35,11 @@
     "Name": "InitialScale"
   },
   {
-    "Aliases": "XNAM.X",
-    "Description": "Decimal value",
-    "Example": "\"InitialTranslationOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "InitialTranslationOffset.X"
-  },
-  {
-    "Aliases": "XNAM.Y",
-    "Description": "Decimal value",
-    "Example": "\"InitialTranslationOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "InitialTranslationOffset.Y"
-  },
-  {
-    "Aliases": "XNAM.Z",
-    "Description": "Decimal value",
-    "Example": "\"InitialTranslationOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "InitialTranslationOffset.Z"
+    "Aliases": "XNAM",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "InitialTranslationOffset"
   },
   {
     "Aliases": "NNAM",

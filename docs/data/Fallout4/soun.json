@@ -29,45 +29,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds.First"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",

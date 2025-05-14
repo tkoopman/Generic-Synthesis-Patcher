@@ -462,48 +462,6 @@
     "Name": "ObjectBounds"
   },
   {
-    "Aliases": "OBND.First.X",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.X"
-  },
-  {
-    "Aliases": "OBND.First.Y",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Y"
-  },
-  {
-    "Aliases": "OBND.First.Z",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.First.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.First.Z"
-  },
-  {
-    "Aliases": "OBND.Second.X",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.X"
-  },
-  {
-    "Aliases": "OBND.Second.Y",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Y"
-  },
-  {
-    "Aliases": "OBND.Second.Z",
-    "Description": "Numeric value",
-    "Example": "\"ObjectBounds.Second.Z\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBounds.Second.Z"
-  },
-  {
     "Aliases": "OCOR",
     "Description": "Form Key or Editor ID",
     "Example": "",

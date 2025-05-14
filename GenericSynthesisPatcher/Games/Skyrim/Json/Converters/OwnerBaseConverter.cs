@@ -3,7 +3,7 @@ using GenericSynthesisPatcher.Games.Skyrim.Json.Action;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
+namespace GenericSynthesisPatcher.Games.Skyrim.Json.Converters
 {
     public class OwnerBaseConverter : JsonConverter<OwnerBase>
     {

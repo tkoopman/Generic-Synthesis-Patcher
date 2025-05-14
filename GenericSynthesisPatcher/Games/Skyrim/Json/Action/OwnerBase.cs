@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Games.Universal.Json.Converters;
+using GenericSynthesisPatcher.Games.Skyrim.Json.Converters;
 
 using Mutagen.Bethesda.Skyrim;
 

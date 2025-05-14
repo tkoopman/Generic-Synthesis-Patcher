@@ -27,6 +27,28 @@ namespace GenericSynthesisPatcher.Games.Universal.Json
                 contract.Converter = new PercentConverter();
             else if (objectType == typeof(System.Drawing.Color))
                 contract.Converter = new ColorConverter();
+            else if (objectType == typeof(P2Double))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P2Float))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P2Int))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P2Int16))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P2UInt8))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3Double))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3Float))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3Int))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3Int16))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3UInt16))
+                contract.Converter = new NoggogPxConverter();
+            else if (objectType == typeof(P3UInt8))
+                contract.Converter = new NoggogPxConverter();
 
             return contract;
         }

@@ -1,24 +1,10 @@
 [
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"CameraOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "CameraOffset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"CameraOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "CameraOffset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"CameraOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "CameraOffset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "CameraOffset"
   },
   {
     "Aliases": "",

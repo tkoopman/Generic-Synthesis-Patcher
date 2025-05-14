@@ -29,45 +29,24 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.CellCoordinatesNWCell.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.CellCoordinatesNWCell.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.CellCoordinatesNWCell"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.CellCoordinatesNWCell.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.CellCoordinatesNWCell.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.CellCoordinatesSECell"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.CellCoordinatesSECell.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.CellCoordinatesSECell.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.CellCoordinatesSECell.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.CellCoordinatesSECell.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.UsableDimensions.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.UsableDimensions.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.UsableDimensions.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.UsableDimensions.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.UsableDimensions"
   },
   {
     "Aliases": "",
@@ -85,31 +64,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMax.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMax.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBoundsMax"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMax.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMax.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMin.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMin.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMin.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMin.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBoundsMin"
   },
   {
     "Aliases": "",

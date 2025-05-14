@@ -358,66 +358,24 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.DismountOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.DismountOffset.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MountData.DismountOffset"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.DismountOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.DismountOffset.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MountData.MountCameraOffset"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.DismountOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.DismountOffset.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountCameraOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountCameraOffset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountCameraOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountCameraOffset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountCameraOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountCameraOffset.Z"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountOffset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountOffset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"MountData.MountOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "MountData.MountOffset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MountData.MountOffset"
   },
   {
     "Aliases": "FULL",

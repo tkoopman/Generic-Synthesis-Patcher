@@ -78,24 +78,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RotationOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RotationOffset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RotationOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RotationOffset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RotationOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RotationOffset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "RotationOffset"
   },
   {
     "Aliases": "",

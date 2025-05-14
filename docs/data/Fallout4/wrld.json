@@ -29,6 +29,20 @@
   },
   {
     "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "DefaultLevelData.NorthwestCellCoords"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "DefaultLevelData.NorthwestCellSize"
+  },
+  {
+    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"DistantLodMultiplier\": 3.14",
     "MFFSM": "MFF--",
@@ -57,17 +71,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"FixedDimensionsCenterCell.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "FixedDimensionsCenterCell.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"FixedDimensionsCenterCell.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "FixedDimensionsCenterCell.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "FixedDimensionsCenterCell"
   },
   {
     "Aliases": "",
@@ -148,45 +155,24 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.NorthwestCellCoords.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.NorthwestCellCoords.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.NorthwestCellCoords"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.NorthwestCellCoords.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.NorthwestCellCoords.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.SoutheastCellCoords"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.SoutheastCellCoords.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.SoutheastCellCoords.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.SoutheastCellCoords.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.SoutheastCellCoords.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.UsableDimensions.X\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.UsableDimensions.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"MapData.UsableDimensions.Y\": 7",
-    "MFFSM": "MFF--",
-    "Name": "MapData.UsableDimensions.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "MapData.UsableDimensions"
   },
   {
     "Aliases": "",
@@ -211,31 +197,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMax.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMax.X"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBoundsMax"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMax.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMax.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMin.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMin.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ObjectBoundsMin.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ObjectBoundsMin.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ObjectBoundsMin"
   },
   {
     "Aliases": "",
@@ -274,24 +246,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WorldMapCellOffset.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WorldMapCellOffset.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WorldMapCellOffset.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WorldMapCellOffset.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"WorldMapCellOffset.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "WorldMapCellOffset.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "WorldMapCellOffset"
   },
   {
     "Aliases": "",

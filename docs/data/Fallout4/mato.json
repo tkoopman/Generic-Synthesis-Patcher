@@ -64,24 +64,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ProjectionVector.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ProjectionVector.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ProjectionVector.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ProjectionVector.Y"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ProjectionVector.Z\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ProjectionVector.Z"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "ProjectionVector"
   },
   {
     "Aliases": "",

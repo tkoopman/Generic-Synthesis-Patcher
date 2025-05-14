@@ -36,17 +36,10 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RadialBlurCenter.X\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RadialBlurCenter.X"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RadialBlurCenter.Y\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RadialBlurCenter.Y"
+    "Description": "",
+    "Example": "",
+    "MFFSM": "-FF--",
+    "Name": "RadialBlurCenter"
   },
   {
     "Aliases": "",
