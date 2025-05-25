@@ -43,6 +43,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
             addMapping(typeof(IObjectBoundsGetter), false, typeof(ObjectBoundsAction));
 
             addMapping([typeof(ExtendedList<>), typeof(IContainerEntryGetter)], false, typeof(ContainerItemsAction));
+            addMapping([typeof(ExtendedList<>), typeof(IEffectGetter)], false, typeof(EffectsAction));
         }
 
         public override string GameName => "Fallout4";

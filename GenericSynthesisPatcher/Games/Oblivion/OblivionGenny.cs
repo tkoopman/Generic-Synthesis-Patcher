@@ -26,6 +26,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion
                 ]);
 
             addMapping([typeof(ExtendedList<>), typeof(IContainerItemGetter)], false, typeof(ContainerItemsAction));
+            addMapping([typeof(ExtendedList<>), typeof(IEffectGetter)], false, typeof(EffectsAction));
         }
 
         public override string GameName => "Oblivion";

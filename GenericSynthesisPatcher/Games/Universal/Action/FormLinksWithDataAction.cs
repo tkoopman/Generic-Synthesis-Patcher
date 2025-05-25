@@ -357,7 +357,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         ///     Check if 2 links and data are equal
         /// </summary>
         /// <returns>True only if both FormKey and any data match across both entries.</returns>
-        public abstract bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right);
+        public virtual bool DataEquals (IFormLinkContainerGetter left, IFormLinkContainerGetter right)
+            => Equals(left, right);
 
         /// <summary>
         ///     Get FormKey of entry.
