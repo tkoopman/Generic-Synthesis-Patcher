@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Action
 
         public override FormKey GetFormKeyFromRecord (IFormLinkContainerGetter from)
             => from is IEffectGetter record
-            ? (record.Data.MagicEffect.TryResolveFormKey(Global.State.LinkCache, out var key) ? key : throw new ArgumentNullException(nameof(from)))
+            ? (record.Data.MagicEffect.TryResolveFormKey(Global.Game.State.LinkCache, out var key) ? key : throw new ArgumentNullException(nameof(from)))
             : throw new ArgumentNullException(nameof(from));
 
         public override string ToString (IFormLinkContainerGetter source)

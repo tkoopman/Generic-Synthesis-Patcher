@@ -11,7 +11,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Converters
     {
         public override bool CanWrite => false;
 
-        public override bool CanConvert (Type objectType) => objectType == typeof(ObjectBounds);
+        public override bool CanConvert (Type objectType) => objectType.IsAssignableTo(typeof(IObjectBoundsGetter));
 
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {

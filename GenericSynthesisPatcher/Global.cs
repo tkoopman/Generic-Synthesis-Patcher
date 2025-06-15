@@ -9,12 +9,9 @@ using Microsoft.Extensions.Logging;
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
-
-using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher
 {
@@ -22,12 +19,12 @@ namespace GenericSynthesisPatcher
     {
         internal static Lazy<GSPSettings> settings = null!;
 
-        public static LoadOrder<IModListingGetter> LoadOrder { get; private set; } = null!;
-        public static RecordPropertyMappings RecordPropertyMappings { get; private set; } = null!;
-        public static RecordTypeMappings RecordTypeMappings { get; private set; } = null!;
-        public static JsonSerializerSettings SerializerSettings { get; private set; } = null!;
+        /// <summary>
+        ///     Global Game instance that contains all game specific information.
+        /// </summary>
+        public static BaseGame Game { get; private set; } = null!;
+
         public static Lazy<GSPSettings> Settings { get => settings; private set => settings = value; }
-        public static IPatcherState State { get; private set; } = null!;
 
         public static void ForceTrace (int classLogCode, GSPBase? rule, IModContext<IMajorRecordGetter> context, [CallerLineNumber] int line = 0)
         {
@@ -64,62 +61,15 @@ namespace GenericSynthesisPatcher
             Logger.Line = line;
         }
 
+        //TODO Add games
         public static void SetState (IPatcherState state)
-        {
-            State = state;
-
-            //TODO Add games
-            switch (State)
+            => Game = state switch
             {
-                case IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState:
-                    RecordTypeMappings = new Games.Skyrim.RecordTypeMappings(gameState);
-                    RecordPropertyMappings = new Games.Skyrim.RecordPropertyMappings();
-
-                    SerializerSettings = new()
-                    {
-                        ContractResolver = Games.Skyrim.Json.ContractResolver.Instance,
-                        DefaultValueHandling = DefaultValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                        NullValueHandling = NullValueHandling.Ignore,
-                    };
-
-                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
-                    break;
-
-                case IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState:
-                    RecordTypeMappings = new Games.Fallout4.RecordTypeMappings(gameState);
-                    RecordPropertyMappings = new Games.Fallout4.RecordPropertyMappings();
-
-                    SerializerSettings = new()
-                    {
-                        ContractResolver = Games.Fallout4.Json.ContractResolver.Instance,
-                        DefaultValueHandling = DefaultValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                        NullValueHandling = NullValueHandling.Ignore,
-                    };
-
-                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
-                    break;
-
-                case IPatcherState<IOblivionMod, IOblivionModGetter> gameState:
-                    RecordTypeMappings = new Games.Oblivion.RecordTypeMappings(gameState);
-                    RecordPropertyMappings = new Games.Oblivion.RecordPropertyMappings();
-
-                    SerializerSettings = new()
-                    {
-                        ContractResolver = Games.Oblivion.Json.ContractResolver.Instance,
-                        DefaultValueHandling = DefaultValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                        NullValueHandling = NullValueHandling.Ignore,
-                    };
-
-                    LoadOrder = new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value));
-                    break;
-
-                default:
-                    throw new InvalidCastException();
-            }
-        }
+                IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState => new Games.Skyrim.SkyrimGame(gameState),
+                IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState => new Games.Fallout4.Fallout4Game(gameState),
+                IPatcherState<IOblivionMod, IOblivionModGetter> gameState => new Games.Oblivion.OblivionGame(gameState),
+                _ => throw new InvalidCastException(),
+            };
 
         #region Log Writers
 

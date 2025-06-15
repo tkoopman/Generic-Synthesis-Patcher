@@ -52,7 +52,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         /// <param name="root">Graph node pointing to parent record</param>
         protected static void populate (RecordNodeBase root)
         {
-            var all = Global.State.LinkCache.ResolveAllSimpleContexts(root.Record.FormKey, root.Record.Registration.GetterType);
+            var all = Global.Game.State.LinkCache.ResolveAllSimpleContexts(root.Record.FormKey, root.Record.Registration.GetterType);
             int count = all.Count() - 2;
 
             for (int i = count; i >= 0; i--)
@@ -65,13 +65,13 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 }
 
                 var node = root.createChild(all.ElementAt(i), root.ModKeys);
-                int index = Global.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
+                int index = Global.Game.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
 
                 Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
 
                 var masters = Global.Settings.Value.DynamicMods.Contains(all.ElementAt(i).ModKey)
                     ? [all.ElementAt(i + 1).ModKey]
-                    : Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
+                    : Global.Game.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
 
                 // If last entry in load order but has no masters it must be an existing GSP patch
                 // record, so link it to previous winner.

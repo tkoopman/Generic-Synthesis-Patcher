@@ -174,17 +174,17 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             Group = group;
 
-            if (Types.Count == 0)
+            if (!Types.Any())
                 Types = Group.Types;  // This may also be NONE but we do extra check for that after validation.
-            else if (Group.Types.Count > 0 && Types.Any(t => !Group.Types.Contains(t)))
+            else if (Group.Types.Any() && Types.Any(t => !Group.Types.Contains(t)))
                 throw new Exception($"Record under group tries to filter for Type(s) that are excluded at by group.");
 
             if (Priority != 0)
                 LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
 
             bool valid = Validate();
-            if (Types.Count == 0)
-                Types = Global.RecordTypeMappings.All;
+            if (!Types.Any())
+                Types = Global.Game.AllRecordTypes();
 
             return valid;
         }
@@ -253,7 +253,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                         if (hasExcludeMods || !values.SafeAny())
                         {
                             // Include all mods except excluded
-                            foreach (var addMod in Global.LoadOrder)
+                            foreach (var addMod in Global.Game.LoadOrder)
                             {
                                 if (addMod.Enabled // Mod must be enabled
                                     && (!hasExcludeMods || !values.SafeAny(v => v.Value.Equals(addMod.ModKey)))) // Exclude anything excluded in config
@@ -285,7 +285,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                 mods = sortMods
                      ? proKeys.Rule.HasForwardType(ForwardOptions._randomMod)
                          ? buildMods.OrderBy(_ => proKeys.GetRandom().Next())
-                         : buildMods.OrderByDescending(Global.LoadOrder.IndexOf)
+                         : buildMods.OrderByDescending(Global.Game.LoadOrder.IndexOf)
                      : buildMods;
 
                 fields = [.. buildFields];
@@ -408,7 +408,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (!base.Validate())
                 return false;
 
-            if (Types.Count == 0)
+            if (!Types.Any())
             {
                 LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Rules must specify record type(s) either directly in the rule or via type(s) added at a group level.", rule: this);
                 return false;

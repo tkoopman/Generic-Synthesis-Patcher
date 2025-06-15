@@ -57,7 +57,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
             => obj switch
             {
                 ListOperationBase<TValue> other => Equals(other),
-                TValue other => Equals(other), // TODO This makes no sense
+                TValue other => ValueEquals(other),
                 _ => false
             };
 

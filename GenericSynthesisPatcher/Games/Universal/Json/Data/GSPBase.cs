@@ -9,6 +9,8 @@ using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 
+using Loqui;
+
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
@@ -55,8 +57,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         ///     List of record types this rule should match
         /// </summary>
         [JsonProperty(PropertyName = "Types")]
-        [JsonConverter(typeof(SingleOrArrayConverter<RecordTypeMapping>))]
-        public IReadOnlyList<RecordTypeMapping> Types { get; protected set; } = [];
+        [JsonConverter(typeof(SingleOrArrayConverter<ILoquiRegistration>))]
+        public IEnumerable<ILoquiRegistration> Types { get; protected set; } = [];
 
         #region Masters
 
@@ -220,7 +222,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             if (PatchedBy is not null)
             {
-                var all = Global.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
+                var all = Global.Game.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
                 if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))
                     return false;
             }

@@ -31,7 +31,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Json.Action
 
         public override bool Equals (IFormLinkContainerGetter? other)
             => other is IEffectGetter effect
-            && (effect.ScriptEffect?.Data?.VisualEffect.TryResolveFormKey(Global.State.LinkCache, out var key) ?? false)
+            && (effect.ScriptEffect?.Data?.VisualEffect.TryResolveFormKey(Global.Game.State.LinkCache, out var key) ?? false)
             && FormKey.ValueEquals(key)
             && effect.Data is not null
             && effect.Data.Area == Area
@@ -52,8 +52,8 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Json.Action
         public override Effect ToActionData ()
         {
             var effect = new Effect();
-            IPatcherState<IOblivionMod, IOblivionModGetter> state = Global.State as IPatcherState<IOblivionMod, IOblivionModGetter> ?? throw new InvalidCastException();
-            if (!Global.State.LinkCache.TryResolve<IMagicEffect>(FormKey.Value, out var rec))
+            IPatcherState<IOblivionMod, IOblivionModGetter> state = Global.Game.State as IPatcherState<IOblivionMod, IOblivionModGetter> ?? throw new InvalidCastException();
+            if (!Global.Game.State.LinkCache.TryResolve<IMagicEffect>(FormKey.Value, out var rec))
             {
                 Global.Logger.Log(0x00, $"Unable to find Magic Effect {FormKey.Value}", Microsoft.Extensions.Logging.LogLevel.Error);
                 return null!;

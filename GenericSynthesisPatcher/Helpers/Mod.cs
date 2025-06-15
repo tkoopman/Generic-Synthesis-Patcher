@@ -61,7 +61,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// </returns>
         public static IModContext<IMajorRecordGetter> FindOriginContext (IModContext<IMajorRecordGetter> context)
             => !context.IsMaster()
-            && Global.State.LinkCache.TryResolveSimpleContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
+            && Global.Game.State.LinkCache.TryResolveSimpleContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
             ? o : context;
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace GenericSynthesisPatcher.Helpers
             if (FormKey.TryFactory(SynthCommon.FixFormKey(input), out formKey))
                 return true;
 
-            if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
+            if (Global.Game.State.LinkCache.TryResolve<TMajor>(input, out var record))
             {
                 wasEditorID = true;
                 formKey = record.FormKey;

@@ -75,7 +75,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                             return -1;
                         }
 
-                        if (!Global.State.LinkCache.TryResolve(actionKey.Value, typeof(TMajor), out var link))
+                        if (!Global.Game.State.LinkCache.TryResolve(actionKey.Value, typeof(TMajor), out var link))
                         {
                             Global.Logger.Log(ClassLogCode, $"Unable to find {actionKey}", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
                             continue;

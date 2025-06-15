@@ -51,7 +51,7 @@ namespace GenericSynthesisPatcher.Helpers
             record ??= context?.Record;
             if (record is not null)
             {
-                _ = sb.Append(Global.RecordTypeMappings.FindByName(record.Registration.Name).Name);
+                _ = sb.Append(record.Registration.Name);
                 _ = sb.Append(' ');
                 _ = sb.Append(record.FormKey);
                 _ = sb.Append(Divider);

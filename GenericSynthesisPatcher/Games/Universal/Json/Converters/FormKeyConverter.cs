@@ -14,7 +14,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             string? key = reader.Value?.ToString();
             return key is null ? null
                  : FormKey.TryFactory(SynthCommon.FixFormKey(key), out var formKey) ? formKey
-                 : Global.State.LinkCache.TryResolve<T>(key, out var record) ? record.FormKey
+                 : Global.Game.State.LinkCache.TryResolve<T>(key, out var record) ? record.FormKey
                  : throw new JsonSerializationException($"Unable to parse \"{key}\" into valid FormKey or EditorID");
         }
     }

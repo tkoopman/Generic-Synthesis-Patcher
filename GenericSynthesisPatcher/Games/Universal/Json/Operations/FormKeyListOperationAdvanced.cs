@@ -37,7 +37,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
             if (Regex is null)
                 return Value.Equals(other);
 
-            if (!other.ToLinkGetter<TMajor>().TryResolve(Global.State.LinkCache, out var link) || link.EditorID is null)
+            if (!other.ToLinkGetter<TMajor>().TryResolve(Global.Game.State.LinkCache, out var link) || link.EditorID is null)
                 return false;
 
             bool result = Regex.IsMatch(link.EditorID);

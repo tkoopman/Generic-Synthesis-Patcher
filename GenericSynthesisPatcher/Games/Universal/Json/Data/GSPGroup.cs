@@ -1,6 +1,8 @@
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
 
+using Loqui;
+
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
@@ -33,7 +35,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (!base.Validate())
                 return false;
 
-            HashSet<RecordTypeMapping> AllTypes = [];
+            HashSet<ILoquiRegistration> AllTypes = [];
 
             int ruleCount = 1;
             foreach (var rule in Rules)
@@ -52,8 +54,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             // Output message if groups types defined and all rule types defined but combined to
             // less than current group types.
-            if (Types.Count != 0 && AllTypes.Count < Types.Count)
-                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes.Count} from {Types.Count} as extra types not used.", rule: this);
+            if (Types.Any() && AllTypes.Count < Types.Count())
+                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes.Count} from {Types.Count()} as extra types not used.", rule: this);
 
             Types = AllTypes.ToList().AsReadOnly();
 

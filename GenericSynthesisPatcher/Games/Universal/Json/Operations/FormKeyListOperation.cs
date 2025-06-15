@@ -33,7 +33,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         {
             if (!existsChecked)
             {
-                exists = Global.State.LinkCache.TryResolve<TMajor>(Value, out _);
+                exists = Global.Game.State.LinkCache.TryResolve<TMajor>(Value, out _);
 
                 if (!exists)
                     Global.Logger.Log(0xFF, $"Unable to find {Value} to link to.", logLevel: LogLevel.Warning);

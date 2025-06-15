@@ -8,6 +8,8 @@ using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 
+using Loqui;
+
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -25,7 +27,7 @@ namespace GenericSynthesisPatcher
     /// <param name="parent">
     ///     Parent key for when processing groups. Parent is always for the same context.
     /// </param>
-    public class ProcessingKeys (RecordTypeMapping rtm, IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
+    public class ProcessingKeys (ILoquiRegistration rtm, IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
     {
         private const int ClassLogCode = 0xFF;
         private IMajorRecordGetter? origin;
@@ -63,9 +65,9 @@ namespace GenericSynthesisPatcher
         public bool IsRule => RuleBase is GSPRule;
 
         /// <summary>
-        ///     Current property being processed on current context.
+        ///     Record Property Action for current selected property.
         /// </summary>
-        public RecordPropertyMapping Property { get; private set; }
+        public PropertyAction Property { get; private set; }
 
         /// <summary>
         ///     Gets current record but if a patch record already exists it will return the patched
@@ -87,7 +89,7 @@ namespace GenericSynthesisPatcher
         /// <summary>
         ///     Gets current record type mapping being processed
         /// </summary>
-        public RecordTypeMapping Type { get; } = rtm;
+        public ILoquiRegistration Type { get; } = rtm;
 
         /// <summary>
         ///     Parent processing key
@@ -147,9 +149,9 @@ namespace GenericSynthesisPatcher
                 patchRecord = Context switch
                 {
                     //TODO Add other games
-                    IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((ISkyrimMod)Global.State.PatchMod),
-                    IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IFallout4Mod)Global.State.PatchMod),
-                    IModContext<IOblivionMod, IOblivionModGetter, IOblivionMajorRecord, IOblivionMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IOblivionMod)Global.State.PatchMod),
+                    IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((ISkyrimMod)Global.Game.State.PatchMod),
+                    IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IFallout4Mod)Global.Game.State.PatchMod),
+                    IModContext<IOblivionMod, IOblivionModGetter, IOblivionMajorRecord, IOblivionMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IOblivionMod)Global.Game.State.PatchMod),
                     _ => throw new InvalidCastException(),
                 };
             }
@@ -170,30 +172,29 @@ namespace GenericSynthesisPatcher
         /// <returns>Seeded Random class</returns>
         public Random GetRandom ()
         {
-            random ??= new(Type.Type.TypeInt ^ Record.FormKey.GetHashCode() ^ (RuleBase?.GetHashCode() ?? 0) ^ Property.PropertyName.GetHashCode());
+            random ??= new(Type.Name.GetHashCode() ^ Record.FormKey.GetHashCode() ^ (RuleBase?.GetHashCode() ?? 0) ^ Property.Properties[0].Name.GetHashCode());
             return random;
         }
 
         /// <summary>
         ///     Sets the current property being looked at by either Matches or Action.
         /// </summary>
-        /// <returns>True if RPM for property found for current record type</returns>
+        /// <returns>True if valid property found for current record type</returns>
         [MemberNotNullWhen(true, nameof(RuleKey))]
-        [MemberNotNullWhen(true, nameof(Property))]
         [MemberNotNullWhen(true, nameof(RuleBase))]
         public bool SetProperty (FilterOperation ruleKey, string name)
         {
             if (RuleBase is null)
                 throw new InvalidOperationException("Must set rule first.");
 
-            if (Global.RecordPropertyMappings.TryFind(Type.StaticRegistration.GetterType, name, out var property))
+            Property = Global.Game.GetAction(Type, name);
+
+            if (Property.IsValid)
             {
-                Property = property;
                 RuleKey = ruleKey;
                 return true;
             }
 
-            Property = default;
             this.ruleKey = null;
             return false;
         }
@@ -206,7 +207,7 @@ namespace GenericSynthesisPatcher
         public bool SetRule (GSPBase rule)
         {
             RuleBase = rule;
-            Property = default;
+            Property = new(null, [], string.Empty, null);
             random = null;
             ruleKey = null;
             return true;
