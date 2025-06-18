@@ -2,12 +2,11 @@ using System.Diagnostics.CodeAnalysis;
 
 using DynamicData;
 
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
@@ -53,26 +52,26 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         /// <param name="root">Graph node pointing to parent record</param>
         protected static void populate (RecordNodeBase root)
         {
-            var all = Global.State.LinkCache.ResolveAllContexts(root.Record.FormKey, root.Record.Registration.GetterType);
+            var all = Global.Game.State.LinkCache.ResolveAllSimpleContexts(root.Record.FormKey, root.Record.Registration.GetterType);
             int count = all.Count() - 2;
 
             for (int i = count; i >= 0; i--)
             {
                 var m = root.ModKeys?.FirstOrDefault(m => m.Value.Equals(all.ElementAt(i).ModKey));
-                if (m != null && m.Operation == ListLogic.NOT)
+                if (m is not null && m.Operation == ListLogic.NOT)
                 {
                     Global.TraceLogger?.WriteLine($"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
                     continue;
                 }
 
                 var node = root.createChild(all.ElementAt(i), root.ModKeys);
-                int index = Global.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
+                int index = Global.Game.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
 
                 Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
 
                 var masters = Global.Settings.Value.DynamicMods.Contains(all.ElementAt(i).ModKey)
                     ? [all.ElementAt(i + 1).ModKey]
-                    : Global.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
+                    : Global.Game.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
 
                 // If last entry in load order but has no masters it must be an existing GSP patch
                 // record, so link it to previous winner.
@@ -109,7 +108,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 c.cleanUp();
         }
 
-        protected abstract RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
+        protected abstract RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys);
 
         protected void print (string line)
         {

@@ -1,0 +1,149 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DecayHfRatio\": 3.14",
+    "Flags": 28,
+    "Name": "DecayHfRatio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DecayMilliseconds\": 7",
+    "Flags": 28,
+    "Name": "DecayMilliseconds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"DensityPercent\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "DensityPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"DiffusionPercent\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "DiffusionPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"HfReferenceHertz\": 7",
+    "Flags": 28,
+    "Name": "HfReferenceHertz"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ReflectDelayMS\": 7",
+    "Flags": 28,
+    "Name": "ReflectDelayMS"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Reflections\": 7",
+    "Flags": 28,
+    "Name": "Reflections"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ReverbAmp\": 7",
+    "Flags": 28,
+    "Name": "ReverbAmp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, ClassA, ClassB, ClassC, ClassD, ClassE)",
+    "Example": "\"ReverbClass\": \"Default\"",
+    "Flags": 12,
+    "Name": "ReverbClass"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ReverbDelayMS\": 7",
+    "Flags": 28,
+    "Name": "ReverbDelayMS"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"RoomFilter\": 7",
+    "Flags": 28,
+    "Name": "RoomFilter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"RoomHfFilter\": 7",
+    "Flags": 28,
+    "Name": "RoomHfFilter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

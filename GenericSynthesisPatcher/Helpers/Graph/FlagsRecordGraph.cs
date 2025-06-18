@@ -1,14 +1,15 @@
-using GenericSynthesisPatcher.Json.Operations;
+using Common;
+
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class FlagsRecordGraph : FlagsRecordNode, IRecordNode
     {
-        private FlagsRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
+        private FlagsRecordGraph (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
         {
         }
 
@@ -27,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             var root = new FlagsRecordGraph(master, modKeys, proKeys.Property.PropertyName);
             populate(root);
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
                 root.print(string.Empty);
@@ -35,7 +36,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             root.cleanUp();
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Post Cleanup");
                 root.print(string.Empty);

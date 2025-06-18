@@ -1,0 +1,303 @@
+[
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ActivateParents"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Base"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Comments\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Comments"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Count\": 7",
+    "Flags": 28,
+    "Name": "Count"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Emittance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EnableParent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "Flags": 28,
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FavorCost\": 3.14",
+    "Flags": 28,
+    "Name": "FavorCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HeadTrackingWeight\": 3.14",
+    "Flags": 28,
+    "Name": "HeadTrackingWeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Health\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "Health"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsActivationPoint\": true",
+    "Flags": 28,
+    "Name": "IsActivationPoint"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsIgnoredBySandbox\": true",
+    "Flags": 28,
+    "Name": "IsIgnoredBySandbox"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsIgnoredBySandbox2\": true",
+    "Flags": 28,
+    "Name": "IsIgnoredBySandbox2"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsLinkedRefTransient\": true",
+    "Flags": 28,
+    "Name": "IsLinkedRefTransient"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Layer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Easy, Medium, Hard, VeryHard)",
+    "Example": "\"LevelModifier\": \"Easy\"",
+    "Flags": 12,
+    "Name": "LevelModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "LinkedReferences"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LocationReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "LocationRefTypes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (StartsDead, Persistent, InitiallyDisabled, StartsUnconscious, NoAiAcquire, DoNotHavokSettle)",
+    "Example": "\"MajorFlags\": [ \"StartsDead\", \"-DoNotHavokSettle\" ]",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MultiboundReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Ownership"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Patrol"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "PersistentLocation"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Radius\": 3.14",
+    "Flags": 28,
+    "Name": "Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "RagdollBipedRotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RagdollData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ReferenceGroup"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Scale\": 3.14",
+    "Flags": 28,
+    "Name": "Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SplineConnections"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
+  }
+]

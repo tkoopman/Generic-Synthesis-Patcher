@@ -1,11 +1,10 @@
 using EnumsNET;
 
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
@@ -22,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Type Type { get; }
         protected int WorkingFlags { get; set; }
 
-        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context.ModKey, context.Record, modKeys, PropertyName);
+        protected override RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new FlagsRecordNode(context.ModKey, context.Record, modKeys, PropertyName);
 
         protected bool performMerge (int parentValue, out int add, out int forceAdd, out int remove)
         {
@@ -32,7 +31,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             int myRemoves = default;
             int forceAdds = default;
 
-            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
+            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) is not null; // Must be + as - wouldn't have a node
 
             foreach (var node in OverwrittenBy)
             {

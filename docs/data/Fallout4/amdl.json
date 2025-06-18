@@ -1,0 +1,170 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BaseStability\": 3.14",
+    "Flags": 28,
+    "Name": "BaseStability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ConeOfFireDecreaseDelayMilliseconds\": 7",
+    "Flags": 28,
+    "Name": "ConeOfFireDecreaseDelayMilliseconds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIncreasePerSec\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireIncreasePerSec"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIncreasePerShot\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireIncreasePerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireIronSightsMult\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireIronSightsMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireMaxAngle\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireMaxAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireMinAngle\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireMinAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ConeOfFireSneakMult\": 3.14",
+    "Flags": 28,
+    "Name": "ConeOfFireSneakMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilArc\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilArc"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilArcRotate\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilArcRotate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilDiminishSightsMult\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilDiminishSightsMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilDiminishSpringForce\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilDiminishSpringForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilHipMult\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilHipMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilMaxPerShot\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilMaxPerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RecoilMinPerShot\": 3.14",
+    "Flags": 28,
+    "Name": "RecoilMinPerShot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"RunawayRecoilShots\": 7",
+    "Flags": 28,
+    "Name": "RunawayRecoilShots"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

@@ -1,0 +1,555 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AccelerationRate\": 3.14",
+    "Flags": 28,
+    "Name": "AccelerationRate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "ActorEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AimAngleTolerance\": 3.14",
+    "Flags": 28,
+    "Name": "AimAngleTolerance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularAccelerationRate\": 3.14",
+    "Flags": 28,
+    "Name": "AngularAccelerationRate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AngularTolerance\": 3.14",
+    "Flags": 28,
+    "Name": "AngularTolerance"
+  },
+  {
+    "Aliases": "RNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ArmorRace"
+  },
+  {
+    "Aliases": "ATKR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AttackRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Attacks"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BaseCarryWeight\": 3.14",
+    "Flags": 28,
+    "Name": "BaseCarryWeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BaseMass\": 3.14",
+    "Flags": 28,
+    "Name": "BaseMass"
+  },
+  {
+    "Aliases": "FLMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultFly"
+  },
+  {
+    "Aliases": "RNMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultRun"
+  },
+  {
+    "Aliases": "SNMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultSneak"
+  },
+  {
+    "Aliases": "SPMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultSprint"
+  },
+  {
+    "Aliases": "SWMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultSwim"
+  },
+  {
+    "Aliases": "WKMV",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BaseMovementDefaultWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BehaviorGraph"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01, None)",
+    "Example": "\"BodyBipedObject\": \"Head\"",
+    "Flags": 12,
+    "Name": "BodyBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyData"
+  },
+  {
+    "Aliases": "GNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "BodyPartData"
+  },
+  {
+    "Aliases": "BOD2",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyTemplate"
+  },
+  {
+    "Aliases": "LNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CloseLootSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DATADataTypeState\": \"Break0\"",
+    "Flags": 92,
+    "Name": "DATADataTypeState"
+  },
+  {
+    "Aliases": "DNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DecapitateArmors"
+  },
+  {
+    "Aliases": "NAM7",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "DecapitationFX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DecelerationRate\": 3.14",
+    "Flags": 28,
+    "Name": "DecelerationRate"
+  },
+  {
+    "Aliases": "HCLF",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DefaultHairColors"
+  },
+  {
+    "Aliases": "DESC",
+    "Description": "String value",
+    "Example": "\"Description\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Description"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "VNAM",
+    "Description": "Flags (HandToHand, OneHandSword, OneHandDagger, OneHandAxe, OneHandMace, TwoHandSword, TwoHandAxe, Bow, Staff, Spell, Shield, Torch, Crossbow)",
+    "Example": "\"EquipmentFlags\": [ \"HandToHand\", \"-Crossbow\" ]",
+    "Flags": 92,
+    "Name": "EquipmentFlags"
+  },
+  {
+    "Aliases": "QNAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "EquipmentSlots"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"ExportingExtraNam2\": true",
+    "Flags": 28,
+    "Name": "ExportingExtraNam2"
+  },
+  {
+    "Aliases": "ENAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Eyes"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceFxPhonemes"
+  },
+  {
+    "Aliases": "UNAM",
+    "Description": "Decimal value",
+    "Example": "\"FacegenFaceClamp\": 3.14",
+    "Flags": 28,
+    "Name": "FacegenFaceClamp"
+  },
+  {
+    "Aliases": "PNAM",
+    "Description": "Decimal value",
+    "Example": "\"FacegenMainClamp\": 3.14",
+    "Flags": 28,
+    "Name": "FacegenMainClamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Playable, FaceGenHead, Child, TiltFrontBack, TiltLeftRight, NoShadow, Swims, Flies, Walks, Immobile, NotPunishable, NoCombatInWater, NoRotatingToHeadTrack, DontShowBloodSpray, DontShowBloodDecal, UsesHeadTrackAnims, SpellsAlignWithMagicNode, UseWorldRaycastsForFootIK, AllowRagdollCollision, RegenHpInCombat, CantOpenDoors, AllowPcDialog, NoKnockdowns, AllowPickpocket, AlwaysUseProxyController, DontShowWeaponBlood, OverlayHeadPartList, OverrideHeadPartList, CanPickupItems, AllowMultipleMembraneShaders, CanDualWield, AvoidsRoads, UseAdvancedAvoidance, NonHostile, AllowMountedCombat)",
+    "Example": "\"Flags\": [ \"Playable\", \"-AllowMountedCombat\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FlightRadius\": 3.14",
+    "Flags": 28,
+    "Name": "FlightRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01, None)",
+    "Example": "\"HairBipedObject\": \"Head\"",
+    "Flags": 12,
+    "Name": "HairBipedObject"
+  },
+  {
+    "Aliases": "HNAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Hairs"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01, None)",
+    "Example": "\"HeadBipedObject\": \"Head\"",
+    "Flags": 12,
+    "Name": "HeadBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HeadData"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Height"
+  },
+  {
+    "Aliases": "NAM5",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"InjuredHealthPercent\": 3.14",
+    "Flags": 28,
+    "Name": "InjuredHealthPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "KWDA",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (Critter)",
+    "Example": "\"MajorFlags\": \"Critter\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "NAM4",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MaterialType"
+  },
+  {
+    "Aliases": "NAM8",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MorphRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MountData"
+  },
+  {
+    "Aliases": "MTNM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MovementTypeNames"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MovementTypes"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NumberOfTintsInList\": 7",
+    "Flags": 28,
+    "Name": "NumberOfTintsInList"
+  },
+  {
+    "Aliases": "ONAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "OpenLootSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01, None)",
+    "Example": "\"ShieldBipedObject\": \"Head\"",
+    "Flags": 12,
+    "Name": "ShieldBipedObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Small, Medium, Large, ExtraLarge)",
+    "Example": "\"Size\": \"Small\"",
+    "Flags": 12,
+    "Name": "Size"
+  },
+  {
+    "Aliases": "ANAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkeletalModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost0"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost1"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost2"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost3"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost4"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost5"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkillBoost6"
+  },
+  {
+    "Aliases": "WNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Skin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"UnarmedDamage\": 3.14",
+    "Flags": 28,
+    "Name": "UnarmedDamage"
+  },
+  {
+    "Aliases": "UNES",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "UnarmedEquipSlot"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"UnarmedReach\": 3.14",
+    "Flags": 28,
+    "Name": "UnarmedReach"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "VTCK",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Voices"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Weight"
+  }
+]

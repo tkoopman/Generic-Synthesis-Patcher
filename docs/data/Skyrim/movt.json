@@ -1,0 +1,156 @@
+[
+  {
+    "Aliases": "INAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AnimationChangeThresholds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackRun\": 3.14",
+    "Flags": 28,
+    "Name": "BackRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackWalk\": 3.14",
+    "Flags": 28,
+    "Name": "BackWalk"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardRun\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardWalk\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftRun\": 3.14",
+    "Flags": 28,
+    "Name": "LeftRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftWalk\": 3.14",
+    "Flags": 28,
+    "Name": "LeftWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "MNAM",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightRun\": 3.14",
+    "Flags": 28,
+    "Name": "RightRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightWalk\": 3.14",
+    "Flags": 28,
+    "Name": "RightWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotateInPlaceRun\": 3.14",
+    "Flags": 28,
+    "Name": "RotateInPlaceRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotateInPlaceWalk\": 3.14",
+    "Flags": 28,
+    "Name": "RotateInPlaceWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotateWhileMovingRun\": 3.14",
+    "Flags": 28,
+    "Name": "RotateWhileMovingRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"SPEDDataTypeState\": \"Break0\"",
+    "Flags": 92,
+    "Name": "SPEDDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

@@ -1,0 +1,380 @@
+[
+  {
+    "Aliases": "SPLO",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "ActorEffect"
+  },
+  {
+    "Aliases": "AIDT",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AIData"
+  },
+  {
+    "Aliases": "ATKR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AttackRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Attacks"
+  },
+  {
+    "Aliases": "CNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Class"
+  },
+  {
+    "Aliases": "ECOR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CombatOverridePackageList"
+  },
+  {
+    "Aliases": "ZNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CombatStyle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Configuration"
+  },
+  {
+    "Aliases": "CRIF",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CrimeFaction"
+  },
+  {
+    "Aliases": "INAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "DeathItem"
+  },
+  {
+    "Aliases": "DOFT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "DefaultOutfit"
+  },
+  {
+    "Aliases": "DPLT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "DefaultPackageList"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "NAM9",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceMorph"
+  },
+  {
+    "Aliases": "NAMA",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceParts"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "JSON objects containing faction Form Key/Editor ID and Rank",
+    "Example": "\"Factions\": { \"Faction\": \"021FED:Skyrim.esm\", \"Rank\": 0 }",
+    "Flags": 124,
+    "Name": "Factions"
+  },
+  {
+    "Aliases": "ANAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "FarAwayModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "GNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "GiftFilter"
+  },
+  {
+    "Aliases": "GWOR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "GuardWarnOverridePackageList"
+  },
+  {
+    "Aliases": "HCLF",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "HairColor"
+  },
+  {
+    "Aliases": "PNAM",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "HeadParts"
+  },
+  {
+    "Aliases": "FTST",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "HeadTexture"
+  },
+  {
+    "Aliases": "NAM6",
+    "Description": "Decimal value",
+    "Example": "\"Height\": 3.14",
+    "Flags": 28,
+    "Name": "Height"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "Item",
+    "Description": "JSON objects containing item Form Key/Editor ID and Count (QTY)",
+    "Example": "\"Items\": { \"Item\": \"021FED:Skyrim.esm\", \"Count\": 3 }",
+    "Flags": 124,
+    "Name": "Items"
+  },
+  {
+    "Aliases": "KWDA",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Keywords"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (BleedoutOverride)",
+    "Example": "\"MajorFlags\": \"BleedoutOverride\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NAM5\": 7",
+    "Flags": 28,
+    "Name": "NAM5"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "OBND",
+    "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
+    "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
+    "Flags": 24,
+    "Name": "ObjectBounds"
+  },
+  {
+    "Aliases": "OCOR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ObserveDeadBodyOverridePackageList"
+  },
+  {
+    "Aliases": "PKID",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Packages"
+  },
+  {
+    "Aliases": "PRKR",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Perks"
+  },
+  {
+    "Aliases": "DNAM",
+    "Description": "JSON object containing the values under PlayerSkills you want to set",
+    "Example": "See ../Examples/NPC Player Skills.json",
+    "Flags": 24,
+    "Name": "PlayerSkills"
+  },
+  {
+    "Aliases": "RNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Race"
+  },
+  {
+    "Aliases": "SHRT",
+    "Description": "String value",
+    "Example": "\"ShortName\": \"Hello\"",
+    "Flags": 28,
+    "Name": "ShortName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "SOFT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SleepingOutfit"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sound"
+  },
+  {
+    "Aliases": "NAM8",
+    "Description": "Possible values (Loud, Normal, Silent, VeryLoud)",
+    "Example": "\"SoundLevel\": \"Loud\"",
+    "Flags": 12,
+    "Name": "SoundLevel"
+  },
+  {
+    "Aliases": "SPOR",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SpectatorOverridePackageList"
+  },
+  {
+    "Aliases": "TPLT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Template"
+  },
+  {
+    "Aliases": "QNAM",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"TextureLighting\": [40,50,60]",
+    "Flags": 24,
+    "Name": "TextureLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TintLayers"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "VMAD",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VTCK",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Voice"
+  },
+  {
+    "Aliases": "NAM7",
+    "Description": "Decimal value",
+    "Example": "\"Weight\": 3.14",
+    "Flags": 28,
+    "Name": "Weight"
+  },
+  {
+    "Aliases": "WNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "WornArmor"
+  }
+]

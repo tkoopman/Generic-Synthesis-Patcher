@@ -1,0 +1,466 @@
+[
+  {
+    "name": "Acoustic Space",
+    "id": "ASPC"
+  },
+  {
+    "name": "Action Record",
+    "id": "AACT"
+  },
+  {
+    "name": "Activator",
+    "id": "ACTI"
+  },
+  {
+    "name": "Actor Value Information",
+    "id": "AVIF"
+  },
+  {
+    "name": "Addon Node",
+    "id": "ADDN"
+  },
+  {
+    "name": "Alchemical Apparatus",
+    "id": "APPA"
+  },
+  {
+    "name": "Ammunition",
+    "id": "AMMO"
+  },
+  {
+    "name": "Animated Object",
+    "id": "ANIO"
+  },
+  {
+    "name": "Armor",
+    "id": "ARMO"
+  },
+  {
+    "name": "Armor Addon",
+    "id": "ARMA"
+  },
+  {
+    "name": "Art Object",
+    "id": "ARTO"
+  },
+  {
+    "name": "Association Type",
+    "id": "ASTP"
+  },
+  {
+    "name": "Body Part Data",
+    "id": "BPTD"
+  },
+  {
+    "name": "Book",
+    "id": "BOOK"
+  },
+  {
+    "name": "Camera Path",
+    "id": "CPTH"
+  },
+  {
+    "name": "Camera Shot",
+    "id": "CAMS"
+  },
+  {
+    "name": "Cell",
+    "id": "CELL"
+  },
+  {
+    "name": "Class",
+    "id": "CLAS"
+  },
+  {
+    "name": "Climate",
+    "id": "CLMT"
+  },
+  {
+    "name": "Collision Layer",
+    "id": "COLL"
+  },
+  {
+    "name": "Color Record",
+    "id": "CLFM"
+  },
+  {
+    "name": "Combat Style",
+    "id": "CSTY"
+  },
+  {
+    "name": "Constructible Object",
+    "id": "COBJ"
+  },
+  {
+    "name": "Container",
+    "id": "CONT"
+  },
+  {
+    "name": "Debris",
+    "id": "DEBR"
+  },
+  {
+    "name": "Default Object Manager",
+    "id": "DOBJ"
+  },
+  {
+    "name": "Dialog Branch",
+    "id": "DLBR"
+  },
+  {
+    "name": "Dialog Responses",
+    "id": "INFO"
+  },
+  {
+    "name": "Dialog Topic",
+    "id": "DIAL"
+  },
+  {
+    "name": "Dialog View",
+    "id": "DLVW"
+  },
+  {
+    "name": "Door",
+    "id": "DOOR"
+  },
+  {
+    "name": "Dual Cast Data",
+    "id": "DUAL"
+  },
+  {
+    "name": "Effect Shader",
+    "id": "EFSH"
+  },
+  {
+    "name": "Encounter Zone",
+    "id": "ECZN"
+  },
+  {
+    "name": "Equip Type",
+    "id": "EQUP"
+  },
+  {
+    "name": "Explosion",
+    "id": "EXPL"
+  },
+  {
+    "name": "Eyes",
+    "id": "EYES"
+  },
+  {
+    "name": "Faction",
+    "id": "FACT"
+  },
+  {
+    "name": "Flora",
+    "id": "FLOR"
+  },
+  {
+    "name": "Footstep",
+    "id": "FSTP"
+  },
+  {
+    "name": "Footstep Set",
+    "id": "FSTS"
+  },
+  {
+    "name": "Form List",
+    "id": "FLST"
+  },
+  {
+    "name": "Furniture",
+    "id": "FURN"
+  },
+  {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
+    "name": "Grass",
+    "id": "GRAS"
+  },
+  {
+    "name": "Hair",
+    "id": "HAIR"
+  },
+  {
+    "name": "Hazard",
+    "id": "HAZD"
+  },
+  {
+    "name": "Head Part",
+    "id": "HDPT"
+  },
+  {
+    "name": "Idle Animation",
+    "id": "IDLE"
+  },
+  {
+    "name": "Idle Marker",
+    "id": "IDLM"
+  },
+  {
+    "name": "Image Space",
+    "id": "IMGS"
+  },
+  {
+    "name": "Image Space Adapter",
+    "id": "IMAD"
+  },
+  {
+    "name": "Impact",
+    "id": "IPCT"
+  },
+  {
+    "name": "Impact Data Set",
+    "id": "IPDS"
+  },
+  {
+    "name": "Ingestible",
+    "id": "ALCH"
+  },
+  {
+    "name": "Ingredient",
+    "id": "INGR"
+  },
+  {
+    "name": "Key",
+    "id": "KEYM"
+  },
+  {
+    "name": "Keyword",
+    "id": "KYWD"
+  },
+  {
+    "name": "Landscape",
+    "id": "LAND"
+  },
+  {
+    "name": "Landscape Texture",
+    "id": "LTEX"
+  },
+  {
+    "name": "Lens Flare",
+    "id": "LENS"
+  },
+  {
+    "name": "Leveled Item",
+    "id": "LVLI"
+  },
+  {
+    "name": "Leveled Npc",
+    "id": "LVLN"
+  },
+  {
+    "name": "Leveled Spell",
+    "id": "LVSP"
+  },
+  {
+    "name": "Light",
+    "id": "LIGH"
+  },
+  {
+    "name": "Lighting Template",
+    "id": "LGTM"
+  },
+  {
+    "name": "Load Screen",
+    "id": "LSCR"
+  },
+  {
+    "name": "Location",
+    "id": "LCTN"
+  },
+  {
+    "name": "Location Reference Type",
+    "id": "LCRT"
+  },
+  {
+    "name": "Magic Effect",
+    "id": "MGEF"
+  },
+  {
+    "name": "Material Object",
+    "id": "MATO"
+  },
+  {
+    "name": "Material Type",
+    "id": "MATT"
+  },
+  {
+    "name": "Message",
+    "id": "MESG"
+  },
+  {
+    "name": "Misc Item",
+    "id": "MISC"
+  },
+  {
+    "name": "Moveable Static",
+    "id": "MSTT"
+  },
+  {
+    "name": "Movement Type",
+    "id": "MOVT"
+  },
+  {
+    "name": "Music Track",
+    "id": "MUST"
+  },
+  {
+    "name": "Music Type",
+    "id": "MUSC"
+  },
+  {
+    "name": "Navigation Mesh",
+    "id": "NAVM"
+  },
+  {
+    "name": "Navigation Mesh Info Map",
+    "id": "NAVI"
+  },
+  {
+    "name": "Npc",
+    "id": "NPC_"
+  },
+  {
+    "name": "Object Effect",
+    "id": "ENCH"
+  },
+  {
+    "name": "Outfit",
+    "id": "OTFT"
+  },
+  {
+    "name": "Package",
+    "id": "PACK"
+  },
+  {
+    "name": "Perk",
+    "id": "PERK"
+  },
+  {
+    "name": "Placed Npc",
+    "id": "ACHR"
+  },
+  {
+    "name": "Placed Object",
+    "id": "REFR"
+  },
+  {
+    "name": "Projectile",
+    "id": "PROJ"
+  },
+  {
+    "name": "Quest",
+    "id": "QUST"
+  },
+  {
+    "name": "Race",
+    "id": "RACE"
+  },
+  {
+    "name": "Region",
+    "id": "REGN"
+  },
+  {
+    "name": "Relationship",
+    "id": "RELA"
+  },
+  {
+    "name": "Reverb Parameters",
+    "id": "REVB"
+  },
+  {
+    "name": "Scene",
+    "id": "SCEN"
+  },
+  {
+    "name": "Scroll",
+    "id": "SCRL"
+  },
+  {
+    "name": "Shader Particle Geometry",
+    "id": "SPGD"
+  },
+  {
+    "name": "Shout",
+    "id": "SHOU"
+  },
+  {
+    "name": "Soul Gem",
+    "id": "SLGM"
+  },
+  {
+    "name": "Sound Category",
+    "id": "SNCT"
+  },
+  {
+    "name": "Sound Descriptor",
+    "id": "SNDR"
+  },
+  {
+    "name": "Sound Marker",
+    "id": "SOUN"
+  },
+  {
+    "name": "Sound Output Model",
+    "id": "SOPM"
+  },
+  {
+    "name": "Spell",
+    "id": "SPEL"
+  },
+  {
+    "name": "Static",
+    "id": "STAT"
+  },
+  {
+    "name": "Talking Activator",
+    "id": "TACT"
+  },
+  {
+    "name": "Texture Set",
+    "id": "TXST"
+  },
+  {
+    "name": "Tree",
+    "id": "TREE"
+  },
+  {
+    "name": "Visual Effect",
+    "id": "RFCT"
+  },
+  {
+    "name": "Voice Type",
+    "id": "VTYP"
+  },
+  {
+    "name": "Volumetric Lighting",
+    "id": "VOLI"
+  },
+  {
+    "name": "Water",
+    "id": "WATR"
+  },
+  {
+    "name": "Weapon",
+    "id": "WEAP"
+  },
+  {
+    "name": "Weather",
+    "id": "WTHR"
+  },
+  {
+    "name": "Word Of Power",
+    "id": "WOOP"
+  },
+  {
+    "name": "Worldspace",
+    "id": "WRLD"
+  }
+]

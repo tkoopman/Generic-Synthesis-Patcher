@@ -1,0 +1,296 @@
+[
+  {
+    "Aliases": "NNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CanopyShadow"
+  },
+  {
+    "Aliases": "CNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Climate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"CloudModel\"] } }]",
+    "Flags": 16,
+    "Name": "CloudModel"
+  },
+  {
+    "Aliases": "NAMA",
+    "Description": "Decimal value",
+    "Example": "\"DistantLodMultiplier\": 3.14",
+    "Flags": 28,
+    "Name": "DistantLodMultiplier"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "XEZN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "WCTR",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "FixedDimensionsCenterCell"
+  },
+  {
+    "Aliases": "DATA",
+    "Description": "Flags (SmallWorld, CannotFastTravel, NoLodWater, NoLandscape, NoSky, FixedDimensions, NoGrass)",
+    "Example": "\"Flags\": [ \"SmallWorld\", \"-NoGrass\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "TNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdLodDiffuseTexture"
+  },
+  {
+    "Aliases": "UNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdLodNormalTexture"
+  },
+  {
+    "Aliases": "LTMP",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "InteriorLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "DNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "LandDefaults"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "LargeReferences"
+  },
+  {
+    "Aliases": "XLCN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Location"
+  },
+  {
+    "Aliases": "NAM3",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LodWater"
+  },
+  {
+    "Aliases": "NAM4",
+    "Description": "Decimal value",
+    "Example": "\"LodWaterHeight\": 3.14",
+    "Flags": 28,
+    "Name": "LodWaterHeight"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (CanNotWait)",
+    "Example": "\"MajorFlags\": \"CanNotWait\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "MNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MapData"
+  },
+  {
+    "Aliases": "ICON",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MapImage"
+  },
+  {
+    "Aliases": "MHDT",
+    "Description": "Forward Worldspace Max Height data.",
+    "Example": "[{ \"types\": [\"Worldspace\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "Flags": 16,
+    "Name": "MaxHeight"
+  },
+  {
+    "Aliases": "ZNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Music"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "NAM9",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "ObjectBoundsMax"
+  },
+  {
+    "Aliases": "NAM0",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "ObjectBoundsMin"
+  },
+  {
+    "Aliases": "OFST",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OffsetData\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "OffsetData"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Parent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SubCells"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SubCellsTimestamp\": 7",
+    "Flags": 28,
+    "Name": "SubCellsTimestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SubCellsUnknown\": 7",
+    "Flags": 28,
+    "Name": "SubCellsUnknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TopCell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "NAM2",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Water"
+  },
+  {
+    "Aliases": "XWEM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterEnvironmentMap"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterNoiseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "WorldMapCellOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapOffsetScale\": 3.14",
+    "Flags": 28,
+    "Name": "WorldMapOffsetScale"
+  }
+]

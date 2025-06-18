@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Activator",
+    "id": "ACTI"
+  },
+  {
+    "name": "AI Package",
+    "id": "PACK"
+  },
+  {
+    "name": "Alchemical Apparatus",
+    "id": "APPA"
+  },
+  {
+    "name": "Ammunition",
+    "id": "AMMO"
+  },
+  {
+    "name": "Animated Object",
+    "id": "ANIO"
+  },
+  {
+    "name": "Armor",
+    "id": "ARMO"
+  },
+  {
+    "name": "Birthsign",
+    "id": "BSGN"
+  },
+  {
+    "name": "Book",
+    "id": "BOOK"
+  },
+  {
+    "name": "Cell",
+    "id": "CELL"
+  },
+  {
+    "name": "Class",
+    "id": "CLAS"
+  },
+  {
+    "name": "Climate",
+    "id": "CLMT"
+  },
+  {
+    "name": "Clothing",
+    "id": "CLOT"
+  },
+  {
+    "name": "Combat Style",
+    "id": "CSTY"
+  },
+  {
+    "name": "Container",
+    "id": "CONT"
+  },
+  {
+    "name": "Creature",
+    "id": "CREA"
+  },
+  {
+    "name": "Dialog Item",
+    "id": "INFO"
+  },
+  {
+    "name": "Dialog Topic",
+    "id": "DIAL"
+  },
+  {
+    "name": "Door",
+    "id": "DOOR"
+  },
+  {
+    "name": "Effect Shader",
+    "id": "EFSH"
+  },
+  {
+    "name": "Enchantment",
+    "id": "ENCH"
+  },
+  {
+    "name": "Eye",
+    "id": "EYES"
+  },
+  {
+    "name": "Faction",
+    "id": "FACT"
+  },
+  {
+    "name": "Flora",
+    "id": "FLOR"
+  },
+  {
+    "name": "Furniture",
+    "id": "FURN"
+  },
+  {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
+    "name": "Grass",
+    "id": "GRAS"
+  },
+  {
+    "name": "Hair",
+    "id": "HAIR"
+  },
+  {
+    "name": "Idle Animation",
+    "id": "IDLE"
+  },
+  {
+    "name": "Ingredient",
+    "id": "INGR"
+  },
+  {
+    "name": "Key",
+    "id": "KEYM"
+  },
+  {
+    "name": "Land Texture",
+    "id": "LTEX"
+  },
+  {
+    "name": "Landscape",
+    "id": "LAND"
+  },
+  {
+    "name": "Leveled Creature",
+    "id": "LVLC"
+  },
+  {
+    "name": "Leveled Item",
+    "id": "LVLI"
+  },
+  {
+    "name": "Leveled Spell",
+    "id": "LVSP"
+  },
+  {
+    "name": "Light",
+    "id": "LIGH"
+  },
+  {
+    "name": "Load Screen",
+    "id": "LSCR"
+  },
+  {
+    "name": "Magic Effect",
+    "id": "MGEF"
+  },
+  {
+    "name": "Miscellaneous",
+    "id": "MISC"
+  },
+  {
+    "name": "Npc",
+    "id": "NPC_"
+  },
+  {
+    "name": "Path Grid",
+    "id": "PGRD"
+  },
+  {
+    "name": "Placed Creature",
+    "id": "ACRE"
+  },
+  {
+    "name": "Placed Npc",
+    "id": "ACHR"
+  },
+  {
+    "name": "Placed Object",
+    "id": "REFR"
+  },
+  {
+    "name": "Potion",
+    "id": "ALCH"
+  },
+  {
+    "name": "Quest",
+    "id": "QUST"
+  },
+  {
+    "name": "Race",
+    "id": "RACE"
+  },
+  {
+    "name": "Region",
+    "id": "REGN"
+  },
+  {
+    "name": "Road",
+    "id": "ROAD"
+  },
+  {
+    "name": "Script",
+    "id": "SCPT"
+  },
+  {
+    "name": "Sigil Stone",
+    "id": "SGST"
+  },
+  {
+    "name": "Skill Record",
+    "id": "SKIL"
+  },
+  {
+    "name": "Soul Gem",
+    "id": "SLGM"
+  },
+  {
+    "name": "Sound",
+    "id": "SOUN"
+  },
+  {
+    "name": "Spell",
+    "id": "SPEL"
+  },
+  {
+    "name": "Spell Leveled",
+    "id": "LVSP"
+  },
+  {
+    "name": "Static",
+    "id": "STAT"
+  },
+  {
+    "name": "Subspace",
+    "id": "SBSP"
+  },
+  {
+    "name": "Tree",
+    "id": "TREE"
+  },
+  {
+    "name": "Water",
+    "id": "WATR"
+  },
+  {
+    "name": "Weapon",
+    "id": "WEAP"
+  },
+  {
+    "name": "Weather",
+    "id": "WTHR"
+  },
+  {
+    "name": "Worldspace",
+    "id": "WRLD"
+  }
+]

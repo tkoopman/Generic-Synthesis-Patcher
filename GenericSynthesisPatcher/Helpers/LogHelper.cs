@@ -2,13 +2,12 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-using GenericSynthesisPatcher.Json.Data;
+using GenericSynthesisPatcher.Games.Universal.Json.Data;
 
 using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers
 {
@@ -29,7 +28,7 @@ namespace GenericSynthesisPatcher.Helpers
             }
         }
 
-        public static void WriteLog (LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0)
+        public static void WriteLog (LogLevel logLevel, int classCode, string log, GSPBase? rule = null, IModContext<IMajorRecordGetter>? context = null, IMajorRecordGetter? record = null, string? propertyName = null, [CallerLineNumber] int line = 0)
         {
             if (logLevel < Global.Settings.Value.Logging.LogLevel)
                 return;
@@ -40,31 +39,31 @@ namespace GenericSynthesisPatcher.Helpers
             _ = sb.Append(CultureInfo.InvariantCulture, $" [#{classCode:X2}{line:X3}]");
             _ = sb.Append(Divider);
 
-            if (rule != null)
+            if (rule is not null)
             {
                 _ = sb.Append(CultureInfo.InvariantCulture, $"{rule.ConfigFile}.");
-                if (rule is GSPRule gspRule && gspRule.Group != null)
+                if (rule is GSPRule gspRule && gspRule.Group is not null)
                     _ = sb.Append(CultureInfo.InvariantCulture, $"{gspRule.Group.ConfigRule}.");
                 _ = sb.Append(CultureInfo.InvariantCulture, $"{rule.ConfigRule}");
                 _ = sb.Append(Divider);
             }
 
             record ??= context?.Record;
-            if (record != null)
+            if (record is not null)
             {
-                _ = sb.Append(RecordTypeMappings.FindByName(record.Registration.Name).Name);
+                _ = sb.Append(record.Registration.Name);
                 _ = sb.Append(' ');
                 _ = sb.Append(record.FormKey);
                 _ = sb.Append(Divider);
             }
 
-            if (context != null && (record == null || context.ModKey != record.FormKey.ModKey))
+            if (context is not null && (record is null || context.ModKey != record.FormKey.ModKey))
             {
                 _ = sb.Append(context.ModKey.FileName);
                 _ = sb.Append(Divider);
             }
 
-            if (propertyName != null)
+            if (propertyName is not null)
             {
                 _ = sb.Append(propertyName);
                 _ = sb.Append(Divider);

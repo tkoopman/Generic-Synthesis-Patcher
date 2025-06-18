@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Text.RegularExpressions;
+
+using Common;
 
 using Loqui;
 
@@ -10,14 +11,13 @@ using Microsoft.Extensions.Logging;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Strings;
 
 using Noggog;
 
 namespace GenericSynthesisPatcher.Helpers
 {
-    internal static partial class Mod
+    internal static class Mod
     {
         private const int ClassLogCode = 0x02;
 
@@ -32,7 +32,7 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
-            if (property == null)
+            if (property is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;
@@ -40,7 +40,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             object? value = System.Activator.CreateInstance(property.PropertyType);
 
-            if (value == null)
+            if (value is null)
             {
                 Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} value for clear.", logLevel: LogLevel.Error, propertyName: propertyName);
                 return false;
@@ -59,21 +59,10 @@ namespace GenericSynthesisPatcher.Helpers
         /// <returns>
         ///     Overwritten master record's context. Null if current record context is the master.
         /// </returns>
-        public static IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> FindOriginContext (IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> context)
+        public static IModContext<IMajorRecordGetter> FindOriginContext (IModContext<IMajorRecordGetter> context)
             => !context.IsMaster()
-            && Global.State.LinkCache.TryResolveContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
+            && Global.Game.State.LinkCache.TryResolveSimpleContext(context.Record.FormKey, context.Record.Registration.GetterType, out var o, ResolveTarget.Origin)
             ? o : context;
-
-        /// <summary>
-        ///     Adds 0 padding to String representation of a form key
-        /// </summary>
-        /// <param name="input">
-        ///     String representation of a form key that may not be padded
-        /// </param>
-        /// <returns>
-        ///     String representation of the form key with 0 padding added if required
-        /// </returns>
-        public static string FixFormKey (string input) => RegexFormKey().Replace(input, m => m.Value.PadLeft(6, '0'));
 
         /// <summary>
         ///     Checks if random object equals null or default value.
@@ -86,10 +75,10 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         {
             wasEditorID = false;
-            if (FormKey.TryFactory(FixFormKey(input), out formKey))
+            if (FormKey.TryFactory(SynthCommon.FixFormKey(input), out formKey))
                 return true;
 
-            if (Global.State.LinkCache.TryResolve<TMajor>(input, out var record))
+            if (Global.Game.State.LinkCache.TryResolve<TMajor>(input, out var record))
             {
                 wasEditorID = true;
                 formKey = record.FormKey;
@@ -100,8 +89,15 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
-        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
         {
+            if (fromRecord is null)
+            {
+                value = default;
+                propertyType = null;
+                return false;
+            }
+
             if (tryGetPropertyFromHierarchy(fromRecord, propertyName, false, out object? _value, out _, out var property) && convertPropertyNullable(propertyName, property, _value, out value))
             {
                 propertyType = property.PropertyType;
@@ -113,17 +109,17 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
-        public static bool TryGetProperty<T> (ILoquiObject fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
 
         public static bool TryGetPropertyForSetting<T> (ILoquiObject patchRecord, string propertyName, out T? value, [NotNullWhen(true)] out object? parent, [NotNullWhen(true)] out PropertyInfo? property)
         {
             value = default;
-            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property) && property.CanWrite && convertPropertyNullable(propertyName, property, _value, out value);
+            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property) && property.IsValidPropertyType() && convertPropertyNullable(propertyName, property, _value, out value);
         }
 
         public static bool TryGetPropertyValueForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
         {
-            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property) || !property.CanWrite || parent is null)
+            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property) || !property.IsValidPropertyType() || parent is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 value = default;
@@ -153,7 +149,7 @@ namespace GenericSynthesisPatcher.Helpers
                 return false;
             }
 
-            if (value == null)
+            if (value is null)
                 property.SetValue(parent, null);
             else if (value is string strValue && property.PropertyType == typeof(TranslatedString))
                 property.SetValue(parent, new TranslatedString(Language.English, strValue));
@@ -169,13 +165,13 @@ namespace GenericSynthesisPatcher.Helpers
         {
             output = default;
 
-            if (input == null)
+            if (input is null)
                 return true;
 
             if (typeof(T) == typeof(string) && input is ITranslatedStringGetter translatedString)
             {
                 input = translatedString.String;
-                if (input == null)
+                if (input is null)
                     return true;
             }
             else if (typeof(T) == typeof(int) && property.PropertyType.IsEnum)
@@ -193,12 +189,9 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        [GeneratedRegex(@"^[0-9A-Fa-f]{1,6}")]
-        private static partial Regex RegexFormKey ();
-
         private static object? setDefaultPropertyValue (object? parent, PropertyInfo property)
         {
-            if (!property.CanWrite)
+            if (!property.IsValidPropertyType())
             {
                 Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} parent value for editing as not writable.", logLevel: LogLevel.Error, propertyName: property.Name);
                 return null;
@@ -247,7 +240,7 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 string name = propertyNames[i];
                 property = parentType.GetProperty(name);
-                if (property == null)
+                if (property is null)
                 {
                     Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                     return false;
@@ -273,9 +266,8 @@ namespace GenericSynthesisPatcher.Helpers
                 }
             }
 
-            // Check property is not null one last time just for off chance propertyNames had no
-            // entries
-            if (property == null)
+            // Check property is not null one last time just for off chance propertyNames had no entries
+            if (property is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 return false;

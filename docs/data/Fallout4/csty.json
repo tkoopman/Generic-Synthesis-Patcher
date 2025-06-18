@@ -1,0 +1,429 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AvoidThreatChance\": 3.14",
+    "Flags": 28,
+    "Name": "AvoidThreatChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargeDistance\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeChargeDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingDisengageProbability\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeChargingDisengageProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingSideswipeProbability\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeChargingSideswipeProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingSprintFastProbability\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeChargingSprintFastProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CloseRangeChargingThrowMaxTargets\": 7",
+    "Flags": 28,
+    "Name": "CloseRangeChargingThrowMaxTargets"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeChargingThrowProbability\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeChargingThrowProbability"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeDuelingCircleMult\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeDuelingCircleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeDuelingFallbackMult\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeDuelingFallbackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankDistance\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeFlankDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankingStalkTime\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeFlankingStalkTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CloseRangeFlankingVariance\": 3.14",
+    "Flags": 28,
+    "Name": "CloseRangeFlankingVariance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CoverSearchDistanceMult\": 3.14",
+    "Flags": 28,
+    "Name": "CoverSearchDistanceMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"CSLRDataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 92,
+    "Name": "CSLRDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CSMD\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "CSMD"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"CSMEDataTypeState\": \"Break0\"",
+    "Flags": 92,
+    "Name": "CSMEDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "DefensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DiveBombChance\": 3.14",
+    "Flags": 28,
+    "Name": "DiveBombChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DodgeThreadChance\": 3.14",
+    "Flags": 28,
+    "Name": "DodgeThreadChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMagic\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultMagic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMelee\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultMelee"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultRanged\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultRanged"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultShout\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultShout"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultStaff\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultStaff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultUnarmed\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultUnarmed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EvadeThreatChance\": 3.14",
+    "Flags": 28,
+    "Name": "EvadeThreatChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Dueling, Flanking, AllowDualWeilding, Charging, RetargetAnyNearbyMeleeTarget)",
+    "Example": "\"Flags\": [ \"Dueling\", \"-RetargetAnyNearbyMeleeTarget\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FlyingAttackChance\": 3.14",
+    "Flags": 28,
+    "Name": "FlyingAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroundAttackChance\": 3.14",
+    "Flags": 28,
+    "Name": "GroundAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroundAttackTime\": 3.14",
+    "Flags": 28,
+    "Name": "GroundAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroupOffensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "GroupOffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HoverChance\": 3.14",
+    "Flags": 28,
+    "Name": "HoverChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HoverTime\": 3.14",
+    "Flags": 28,
+    "Name": "HoverTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeAdjustRangeMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeAdjustRangeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeCrouchMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeCrouchMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeRangeMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeRangeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeStrafeMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeStrafeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeWaitMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeWaitMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AllowDualWeilding)",
+    "Example": "\"MajorFlags\": \"AllowDualWeilding\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeAttackStaggeredMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeAttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeAttackWhenStaggeredMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeAttackWhenStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashAttackMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeBashAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeBashMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashPowerAttackMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeBashPowerAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBashRecoilMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeBashRecoilMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeBlockWhenStaggeredMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeBlockWhenStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleePowerAttackBlockingMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleePowerAttackBlockingMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleePowerAttackStaggeredMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleePowerAttackStaggeredMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MeleeSpecialAttackMult\": 3.14",
+    "Flags": 28,
+    "Name": "MeleeSpecialAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OffensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "OffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PerchAttackChance\": 3.14",
+    "Flags": 28,
+    "Name": "PerchAttackChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PerchAttackTime\": 3.14",
+    "Flags": 28,
+    "Name": "PerchAttackTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RangedAccuracyMult\": 3.14",
+    "Flags": 28,
+    "Name": "RangedAccuracyMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

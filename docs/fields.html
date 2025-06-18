@@ -21,6 +21,14 @@
         </nav>
         <div class="controls" style="width:100%;">
             <div>
+                <h5>Game:</h5>
+                <select id="game" onchange="loadTypes()">
+                    <option value="Fallout4">Fallout 4 - Beta</option>
+                    <option value="Oblivion">Oblivion - Beta</option>
+                    <option value="Skyrim">Skyrim</option>
+                </select>
+            </div>
+            <div>
                 <h5>Type:</h5>
                 <select id="dataTypes" onchange="loadType()"></select>
             </div>
@@ -33,5 +41,6 @@
             <div id="myGrid" style="width: 100%; height: 100%;"></div>
         </div>
     </div>
+    <div style="padding: 10px 15px; font-size: smaller;">Vectors and icons by <a href="https://www.svgrepo.com" target="_blank">SVG Repo</a></div>
 </body>
 </html>

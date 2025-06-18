@@ -1,0 +1,289 @@
+[
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AnimationChangeThresholds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackRun\": 3.14",
+    "Flags": 28,
+    "Name": "BackRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackSprint\": 3.14",
+    "Flags": 28,
+    "Name": "BackSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackStanding\": 3.14",
+    "Flags": 28,
+    "Name": "BackStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BackWalk\": 3.14",
+    "Flags": 28,
+    "Name": "BackWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FlightAngleGain\": 3.14",
+    "Flags": 28,
+    "Name": "FlightAngleGain"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FloatHeight\": 3.14",
+    "Flags": 28,
+    "Name": "FloatHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardRun\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardSprint\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardStanding\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ForwardWalk\": 3.14",
+    "Flags": 28,
+    "Name": "ForwardWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftRun\": 3.14",
+    "Flags": 28,
+    "Name": "LeftRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftSprint\": 3.14",
+    "Flags": 28,
+    "Name": "LeftSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftStanding\": 3.14",
+    "Flags": 28,
+    "Name": "LeftStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LeftWalk\": 3.14",
+    "Flags": 28,
+    "Name": "LeftWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PitchRun\": 3.14",
+    "Flags": 28,
+    "Name": "PitchRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PitchSprint\": 3.14",
+    "Flags": 28,
+    "Name": "PitchSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PitchStanding\": 3.14",
+    "Flags": 28,
+    "Name": "PitchStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PitchWalk\": 3.14",
+    "Flags": 28,
+    "Name": "PitchWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightRun\": 3.14",
+    "Flags": 28,
+    "Name": "RightRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightSprint\": 3.14",
+    "Flags": 28,
+    "Name": "RightSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightStanding\": 3.14",
+    "Flags": 28,
+    "Name": "RightStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RightWalk\": 3.14",
+    "Flags": 28,
+    "Name": "RightWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RollRun\": 3.14",
+    "Flags": 28,
+    "Name": "RollRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RollSprint\": 3.14",
+    "Flags": 28,
+    "Name": "RollSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RollStanding\": 3.14",
+    "Flags": 28,
+    "Name": "RollStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RollWalk\": 3.14",
+    "Flags": 28,
+    "Name": "RollWalk"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1, Break2)",
+    "Example": "\"SPEDDataTypeState\": [ \"Break0\", \"-Break2\" ]",
+    "Flags": 92,
+    "Name": "SPEDDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"YawRun\": 3.14",
+    "Flags": 28,
+    "Name": "YawRun"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"YawSprint\": 3.14",
+    "Flags": 28,
+    "Name": "YawSprint"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"YawStanding\": 3.14",
+    "Flags": 28,
+    "Name": "YawStanding"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"YawWalk\": 3.14",
+    "Flags": 28,
+    "Name": "YawWalk"
+  }
+]

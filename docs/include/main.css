@@ -21,7 +21,7 @@ body {
     flex-flow: column;
     height: 100%;
     margin: 0 10px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 a[href] {
@@ -143,6 +143,29 @@ pre {
     margin: 0 20px 20px;
     padding: 5px 10px;
     background-color: #333;
+}
+
+.imgSpan {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.flagSVG {
+    display: block;
+    width: 15px;
+    height: auto;
+    max-height: 50%;
+    margin-right: 2px;
+}
+
+.flag-enabled {
+    filter: invert(74%) sepia(64%) saturate(498%) hue-rotate(83deg) brightness(99%) contrast(105%);
+}
+
+.flag-disabled {
+    filter: invert(100%) sepia(1%) saturate(3645%) hue-rotate(151deg) brightness(132%) contrast(73%);
 }
 
 @media only screen and (max-width:800px) {

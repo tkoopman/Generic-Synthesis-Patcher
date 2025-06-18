@@ -1,9 +1,10 @@
-using GenericSynthesisPatcher.Json.Operations;
+using Common;
+
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 using Noggog;
 
@@ -16,7 +17,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
         protected Func<IMajorRecordGetter, IReadOnlyList<TItem>?> Predicate { get; } = predicate;
         protected List<TItem> WorkingList { get; } = predicate(record)?.ToList() ?? [];
 
-        protected override RecordNodeBase createChild (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context.ModKey, context.Record, modKeys, Predicate, DebugPredicate);
+        protected override RecordNodeBase createChild (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys) => new RecordNode<TItem>(context.ModKey, context.Record, modKeys, Predicate, DebugPredicate);
 
         protected bool performMerge (IReadOnlyList<TItem>? parent, out IEnumerable<TItem> add, out IEnumerable<TItem> forceAdd, out IEnumerable<TItem> remove)
         {
@@ -26,7 +27,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             List<TItem> myRemoves = [];
 
             List<TItem> forceAdds = [];
-            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) != null; // Must be + as - wouldn't have a node
+            bool _forceAdd = ModKeys?.FirstOrDefault(m => m.Value.Equals(ModKey)) is not null; // Must be + as - wouldn't have a node
 
             foreach (var node in OverwrittenBy)
             {
@@ -66,7 +67,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 WorkingList.Add(myAdd);
             }
 
-            if (parent == null)
+            if (parent is null)
             {
                 // Just return current results as will be ignored by RecordGraph which is only one
                 // to call this with no parent

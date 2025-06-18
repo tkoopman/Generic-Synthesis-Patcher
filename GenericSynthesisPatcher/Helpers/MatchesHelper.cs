@@ -1,4 +1,6 @@
-using GenericSynthesisPatcher.Json.Operations;
+using Common;
+
+using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
 using Microsoft.Extensions.Logging;
 

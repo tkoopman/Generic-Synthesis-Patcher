@@ -1,0 +1,478 @@
+[
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Animatable\": true",
+    "Flags": 28,
+    "Name": "Animatable"
+  },
+  {
+    "Aliases": "BNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BlurRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicBrightnessAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicBrightnessMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicContrastAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicContrastMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicSaturationAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CinematicSaturationMult"
+  },
+  {
+    "Aliases": "YNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DepthOfFieldDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (UseTarget, ModeFront, ModeBack, NoSky, BlurRadiusBit2, BlurRadiusBit1, BlurRadiusBit0)",
+    "Example": "\"DepthOfFieldFlags\": [ \"UseTarget\", \"-BlurRadiusBit0\" ]",
+    "Flags": 92,
+    "Name": "DepthOfFieldFlags"
+  },
+  {
+    "Aliases": "ZNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DepthOfFieldRange"
+  },
+  {
+    "Aliases": "WNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DepthOfFieldStrength"
+  },
+  {
+    "Aliases": "VNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DoubleVisionStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Duration\": 3.14",
+    "Flags": 28,
+    "Name": "Duration"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "NAM3",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FadeColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomBlurRadiusAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomBlurRadiusMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomScaleAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomScaleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomThresholdAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrBloomThresholdMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrEyeAdaptSpeedAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrEyeAdaptSpeedMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrSkyScaleAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrSkyScaleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrSunlightScaleAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrSunlightScaleMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrTargetLumMaxAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrTargetLumMaxMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrTargetLumMinAdd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HdrTargetLumMinMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "NAM4",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MotionBlurStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "RadialBlurCenter"
+  },
+  {
+    "Aliases": "NAM2",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadialBlurDownStart"
+  },
+  {
+    "Aliases": "NAM1",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadialBlurRampDown"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadialBlurRampUp"
+  },
+  {
+    "Aliases": "UNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadialBlurStart"
+  },
+  {
+    "Aliases": "RNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadialBlurStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"RadialBlurUseTarget\": true",
+    "Flags": 28,
+    "Name": "RadialBlurUseTarget"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "TNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TintColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown08"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown09"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0A"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0B"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0C"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0D"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0E"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown0F"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown10"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown14"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown48"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown49"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4A"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4B"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4C"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4D"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4E"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown4F"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown50"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Unknown54"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

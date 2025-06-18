@@ -1,0 +1,184 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AvoidThreatChance\": 3.14",
+    "Flags": 28,
+    "Name": "AvoidThreatChance"
+  },
+  {
+    "Aliases": "CSCR",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloseRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"CSGDDataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 92,
+    "Name": "CSGDDataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CSMD\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "CSMD"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DefensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "DefensiveMult"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMagic\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultMagic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultMelee\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultMelee"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultRanged\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultRanged"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultShout\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultShout"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultStaff\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultStaff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"EquipmentScoreMultUnarmed\": 3.14",
+    "Flags": 28,
+    "Name": "EquipmentScoreMultUnarmed"
+  },
+  {
+    "Aliases": "DATA",
+    "Description": "Flags (Dueling, Flanking, AllowDualWielding)",
+    "Example": "\"Flags\": [ \"Dueling\", \"-AllowDualWielding\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "CSFL",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Flight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"GroupOffensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "GroupOffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "CSLR",
+    "Description": "Decimal value",
+    "Example": "\"LongRangeStrafeMult\": 3.14",
+    "Flags": 28,
+    "Name": "LongRangeStrafeMult"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (AllowDualWielding)",
+    "Example": "\"MajorFlags\": \"AllowDualWielding\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "CSME",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Melee"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OffensiveMult\": 3.14",
+    "Flags": 28,
+    "Name": "OffensiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

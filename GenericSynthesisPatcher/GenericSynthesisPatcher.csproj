@@ -12,7 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="Enums.NET" Version="5.0.0" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.48.1" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.32.1" />
+    <PackageReference Include="GoriSynthCommon" Version="1.5.0" />
+    <PackageReference Include="Mutagen.Bethesda.Fallout4" Version="0.50.2" />
+    <PackageReference Include="Mutagen.Bethesda.Oblivion" Version="0.50.2" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.50.2" />
+    <PackageReference Include="Mutagen.Bethesda.Starfield" Version="0.50.2" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.34.0" />
+    <InternalsVisibleTo Include="GSPTestProject" />
   </ItemGroup>
 </Project>

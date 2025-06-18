@@ -1,0 +1,128 @@
+[
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"AnimationEvent\": \"Hello\"",
+    "Flags": 28,
+    "Name": "AnimationEvent"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"AnimationFile\": \"Hello\"",
+    "Flags": 28,
+    "Name": "AnimationFile"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AnimationGroupSection\": 7",
+    "Flags": 28,
+    "Name": "AnimationGroupSection"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"BehaviorGraph\": \"Hello\"",
+    "Flags": 28,
+    "Name": "BehaviorGraph"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Parent, Sequence, NoAttacking, Blocking)",
+    "Example": "\"Flags\": [ \"Parent\", \"-Blocking\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopingSecondsMax\": 7",
+    "Flags": 28,
+    "Name": "LoopingSecondsMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopingSecondsMin\": 7",
+    "Flags": 28,
+    "Name": "LoopingSecondsMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "RelatedIdles"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ReplayDelay\": 7",
+    "Flags": 28,
+    "Name": "ReplayDelay"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

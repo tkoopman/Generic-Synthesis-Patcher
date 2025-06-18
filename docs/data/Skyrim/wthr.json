@@ -1,0 +1,485 @@
+[
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AmbientColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"ANAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "ANAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Forward Model data.",
+    "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Aurora\"] } }]",
+    "Flags": 16,
+    "Name": "Aurora"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"BNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "BNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudLodAmbientColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudLodDiffuseColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Clouds"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudTextures"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "CNAM"
+  },
+  {
+    "Aliases": "DALC",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DirectionalAmbientLightingColors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"DNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "DNAM"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EffectLightingColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Pleasant, Cloudy, Rainy, Snow, SkyStaticsAlwaysVisible, SkyStaticsFollowsSunPosition)",
+    "Example": "\"Flags\": [ \"Pleasant\", \"-SkyStaticsFollowsSunPosition\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceDayFar\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceDayFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceDayMax\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceDayMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceDayNear\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceDayNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceDayPower\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceDayPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceNightFar\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceNightFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceNightMax\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceNightMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceNightNear\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceNightNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistanceNightPower\": 3.14",
+    "Flags": 28,
+    "Name": "FogDistanceNightPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FogFarColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FogNearColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HorizonColor"
+  },
+  {
+    "Aliases": "IMSP",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ImageSpaces"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"LightningColor\": [40,50,60]",
+    "Flags": 24,
+    "Name": "LightningColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"LNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "LNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MoonGlareColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"NAM0DataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 92,
+    "Name": "NAM0DataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"NAM2\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "NAM2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"NAM3\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "NAM3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"ONAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "ONAM"
+  },
+  {
+    "Aliases": "MNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Precipitation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"PrecipitationBeginFadeIn\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "PrecipitationBeginFadeIn"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"PrecipitationEndFadeOut\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "PrecipitationEndFadeOut"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyLowerColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "SkyStatics"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyStaticsColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyUpperColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "StarsColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"SunDamage\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "SunDamage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"SunGlare\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "SunGlare"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunGlareColor"
+  },
+  {
+    "Aliases": "GNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SunGlareLensFlare"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunlightColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"ThunderLightningBeginFadeIn\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "ThunderLightningBeginFadeIn"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"ThunderLightningEndFadeOut\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "ThunderLightningEndFadeOut"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"ThunderLightningFrequency\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "ThunderLightningFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TransDelta\": 3.14",
+    "Flags": 28,
+    "Name": "TransDelta"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "UnknownColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "NNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "VisualEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"VisualEffectBegin\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "VisualEffectBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"VisualEffectEnd\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "VisualEffectEnd"
+  },
+  {
+    "Aliases": "HNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VolumetricLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterMultiplierColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WindDirection\": 3.14",
+    "Flags": 28,
+    "Name": "WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WindDirectionRange\": 3.14",
+    "Flags": 28,
+    "Name": "WindDirectionRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"WindSpeed\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "WindSpeed"
+  }
+]

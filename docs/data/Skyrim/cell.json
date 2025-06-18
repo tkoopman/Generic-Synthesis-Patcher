@@ -1,0 +1,310 @@
+[
+  {
+    "Aliases": "XCAS",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AcousticSpace"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "XEZN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "XRNK",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "Flags": 28,
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "DATA",
+    "Description": "Flags (IsInteriorCell, HasWater, CantTravelFromHere, NoLodWater, PublicArea, HandChanged, ShowSky, UseSkyLighting)",
+    "Example": "\"Flags\": [ \"IsInteriorCell\", \"-UseSkyLighting\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "XCLX",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Grid"
+  },
+  {
+    "Aliases": "XCIM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Landscape"
+  },
+  {
+    "Aliases": "XCLL",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Lighting"
+  },
+  {
+    "Aliases": "LTMP",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LightingTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"LNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "LNAM"
+  },
+  {
+    "Aliases": "XLCN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Location"
+  },
+  {
+    "Aliases": "XILL",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LockList"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (Persistent, OffLimits, CantWait)",
+    "Example": "\"MajorFlags\": [ \"Persistent\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "MHDT",
+    "Description": "Forward Cell Max Height data.",
+    "Example": "[{ \"types\": [\"Cell\"], \"ForwardOptions\": [\"HPU\", \"NonNull\"], \"Forward\": { \"MHDT\": [] }}]",
+    "Flags": 16,
+    "Name": "MaxHeightData"
+  },
+  {
+    "Aliases": "XCMO",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Music"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "NavigationMeshes"
+  },
+  {
+    "Aliases": "TVDT",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OcclusionData\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "OcclusionData"
+  },
+  {
+    "Aliases": "XOWN",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Persistent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PersistentTimestamp\": 7",
+    "Flags": 28,
+    "Name": "PersistentTimestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PersistentUnknownGroupData\": 7",
+    "Flags": 28,
+    "Name": "PersistentUnknownGroupData"
+  },
+  {
+    "Aliases": "XCLR",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "Regions"
+  },
+  {
+    "Aliases": "XCCM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SkyAndWeatherFromRegion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Temporary"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"TemporaryTimestamp\": 7",
+    "Flags": 28,
+    "Name": "TemporaryTimestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"TemporaryUnknownGroupData\": 7",
+    "Flags": 28,
+    "Name": "TemporaryUnknownGroupData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Timestamp\": 7",
+    "Flags": 28,
+    "Name": "Timestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"UnknownGroupData\": 7",
+    "Flags": 28,
+    "Name": "UnknownGroupData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "XCWT",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Water"
+  },
+  {
+    "Aliases": "XWEM",
+    "Description": "String value",
+    "Example": "\"WaterEnvironmentMap\": \"Hello\"",
+    "Flags": 28,
+    "Name": "WaterEnvironmentMap"
+  },
+  {
+    "Aliases": "XCLW",
+    "Description": "Decimal value",
+    "Example": "\"WaterHeight\": 3.14",
+    "Flags": 28,
+    "Name": "WaterHeight"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "String value",
+    "Example": "\"WaterNoiseTexture\": \"Hello\"",
+    "Flags": 28,
+    "Name": "WaterNoiseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCN\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XWCN"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCS\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XWCS"
+  }
+]

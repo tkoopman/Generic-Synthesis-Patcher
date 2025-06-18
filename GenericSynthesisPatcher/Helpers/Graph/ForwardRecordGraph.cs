@@ -1,12 +1,13 @@
+using Common;
+
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Skyrim;
 
 namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class ForwardRecordGraph : ForwardRecordNode, IRecordNode
     {
-        private ForwardRecordGraph (IModContext<ISkyrimMod, ISkyrimModGetter, IMajorRecord, IMajorRecordGetter> context) : base(context.ModKey, context.Record)
+        private ForwardRecordGraph (IModContext<IMajorRecordGetter> context) : base(context.ModKey, context.Record)
         {
         }
 
@@ -23,7 +24,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             var root = new ForwardRecordGraph(master);
             populate(root);
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
                 root.print(string.Empty);
@@ -31,7 +32,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             root.cleanUp();
 
-            if (Global.TraceLogger != null)
+            if (Global.TraceLogger is not null)
             {
                 Global.TraceLogger?.WriteLine("Graph Post Cleanup");
                 root.print(string.Empty);

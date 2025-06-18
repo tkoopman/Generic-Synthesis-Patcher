@@ -1,0 +1,226 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Flags (UseDefault, Activate, Open, OpenByDefault)",
+    "Example": "\"ActionFlags\": [ \"UseDefault\", \"-OpenByDefault\" ]",
+    "Flags": 92,
+    "Name": "ActionFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Base"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Charge\": 3.14",
+    "Flags": 28,
+    "Name": "Charge"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Petty, Lesser, Common, Greater, Grand)",
+    "Example": "\"ContainedSoul\": \"None\"",
+    "Flags": 12,
+    "Name": "ContainedSoul"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Count\": 7",
+    "Flags": 28,
+    "Name": "Count"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DistantLODData"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EnableParent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "Flags": 28,
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FULLFluff\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "FULLFluff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "GlobalVariable"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Health\": 7",
+    "Flags": 28,
+    "Name": "Health"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LevelModifier\": 7",
+    "Flags": 28,
+    "Name": "LevelModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Location"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Lock"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MapMarker"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"OpenByDefault\": true",
+    "Flags": 28,
+    "Name": "OpenByDefault"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"RagdollData\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "RagdollData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Scale\": 3.14",
+    "Flags": 28,
+    "Name": "Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"SpeedTreeSeed\": 7",
+    "Flags": 28,
+    "Name": "SpeedTreeSeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Target"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TeleportDestination"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XAAG\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XAAG"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"XACN\": \"Hello\"",
+    "Flags": 28,
+    "Name": "XACN"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XPCIFluff\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XPCIFluff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "XRTM"
+  }
+]

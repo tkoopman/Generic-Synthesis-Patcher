@@ -1,0 +1,534 @@
+[
+  {
+    "Aliases": "NAM1",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "AngularVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DamagePerSecond\": 7",
+    "Flags": 28,
+    "Name": "DamagePerSecond"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DeepColor\": [40,50,60]",
+    "Flags": 24,
+    "Name": "DeepColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthNormals\": 3.14",
+    "Flags": 28,
+    "Name": "DepthNormals"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthReflections\": 3.14",
+    "Flags": 28,
+    "Name": "DepthReflections"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthRefraction\": 3.14",
+    "Flags": 28,
+    "Name": "DepthRefraction"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DepthSpecularLighting\": 3.14",
+    "Flags": 28,
+    "Name": "DepthSpecularLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DisplacementDampner\": 3.14",
+    "Flags": 28,
+    "Name": "DisplacementDampner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DisplacementFalloff\": 3.14",
+    "Flags": 28,
+    "Name": "DisplacementFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DisplacementFoce\": 3.14",
+    "Flags": 28,
+    "Name": "DisplacementFoce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DisplacementStartingSize\": 3.14",
+    "Flags": 28,
+    "Name": "DisplacementStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DisplacementVelocity\": 3.14",
+    "Flags": 28,
+    "Name": "DisplacementVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DNAMDataTypeState\": \"Break0\"",
+    "Flags": 92,
+    "Name": "DNAMDataTypeState"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "Flags (CausesDamage, EnableFlowmap, BlendNormals)",
+    "Example": "\"Flags\": [ \"CausesDamage\", \"-BlendNormals\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "NAM5",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FlowNormalsNoiseTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogAboveWaterAmount\": 3.14",
+    "Flags": 28,
+    "Name": "FogAboveWaterAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogAboveWaterDistanceFarPlane\": 3.14",
+    "Flags": 28,
+    "Name": "FogAboveWaterDistanceFarPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogAboveWaterDistanceNearPlane\": 3.14",
+    "Flags": 28,
+    "Name": "FogAboveWaterDistanceNearPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderWaterAmount\": 3.14",
+    "Flags": 28,
+    "Name": "FogUnderWaterAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderWaterDistanceFarPlane\": 3.14",
+    "Flags": 28,
+    "Name": "FogUnderWaterDistanceFarPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogUnderWaterDistanceNearPlane\": 3.14",
+    "Flags": 28,
+    "Name": "FogUnderWaterDistanceNearPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"GNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "GNAM"
+  },
+  {
+    "Aliases": "INAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "NAM0",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "LinearVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "TNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Material"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"MNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "MNAM"
+  },
+  {
+    "Aliases": "FULL",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseFalloff\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseFlowmapScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseFlowmapScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOneAmplitudeScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerOneAmplitudeScale"
+  },
+  {
+    "Aliases": "NAM2",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "NoiseLayerOneTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOneUvScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerOneUvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOneWindDirection\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerOneWindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOneWindSpeed\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerOneWindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThreeAmplitudeScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerThreeAmplitudeScale"
+  },
+  {
+    "Aliases": "NAM4",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "NoiseLayerThreeTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThreeUvScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerThreeUvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThreeWindDirection\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerThreeWindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThreeWindSpeed\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerThreeWindSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwoAmplitudeScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerTwoAmplitudeScale"
+  },
+  {
+    "Aliases": "NAM3",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "NoiseLayerTwoTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwoUvScale\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerTwoUvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwoWindDirection\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerTwoWindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwoWindSpeed\": 3.14",
+    "Flags": 28,
+    "Name": "NoiseLayerTwoWindSpeed"
+  },
+  {
+    "Aliases": "ANAM",
+    "Description": "Numeric value",
+    "Example": "\"Opacity\": 7",
+    "Flags": 28,
+    "Name": "Opacity"
+  },
+  {
+    "Aliases": "SNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "OpenSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"ReflectionColor\": [40,50,60]",
+    "Flags": 24,
+    "Name": "ReflectionColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"ShallowColor\": [40,50,60]",
+    "Flags": 24,
+    "Name": "ShallowColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularBrightness\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularBrightness"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularPower\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularRadius\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunPower\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularSunPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSparkleMagnitude\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularSunSparkleMagnitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSparklePower\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularSunSparklePower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SpecularSunSpecularMagnitude\": 3.14",
+    "Flags": 28,
+    "Name": "SpecularSunSpecularMagnitude"
+  },
+  {
+    "Aliases": "XNAM",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Spell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown2\": 7",
+    "Flags": 28,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown3\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown4\": 7",
+    "Flags": 28,
+    "Name": "Unknown4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown5\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown5"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown6\": 7",
+    "Flags": 28,
+    "Name": "Unknown6"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown7\": 7",
+    "Flags": 28,
+    "Name": "Unknown7"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "UnusedNoisemaps"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterFresnel\": 3.14",
+    "Flags": 28,
+    "Name": "WaterFresnel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterReflectionMagnitude\": 3.14",
+    "Flags": 28,
+    "Name": "WaterReflectionMagnitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterReflectivity\": 3.14",
+    "Flags": 28,
+    "Name": "WaterReflectivity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterRefractionMagnitude\": 3.14",
+    "Flags": 28,
+    "Name": "WaterRefractionMagnitude"
+  }
+]
