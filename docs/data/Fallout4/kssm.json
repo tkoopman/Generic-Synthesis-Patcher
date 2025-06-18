@@ -3,56 +3,98 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ExteriorTail"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "PrimaryDescriptor"
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
+    "Name": "PrimaryDescriptor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
     "Name": "VatsDescriptor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"VatsThreshold\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "VatsThreshold"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

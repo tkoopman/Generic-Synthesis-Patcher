@@ -1,9 +1,7 @@
-﻿using GSPTestProject.GameData.Universal;
-
-using Mutagen.Bethesda;
+﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Oblivion;
 
-namespace GSPTestProject.GameData.Oblivion
+namespace GSPTestProject.GameData.GlobalGame.Fixtures
 {
     public sealed class OblivionFixture : BaseFixture<IOblivionMod, IOblivionModGetter>
     {

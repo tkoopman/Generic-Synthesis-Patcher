@@ -3,336 +3,420 @@
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AmbientSound"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"DATA\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "DATA"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectAlphaFadeInTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectAlphaFadeInTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectAlphaFadeOutTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectAlphaFadeOutTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectAlphaPulseAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectAlphaPulseAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectAlphaPulseFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectAlphaPulseFrequency"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"EdgeEffectColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "EdgeEffectColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectFallOff\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectFallOff"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectFullAlphaRatio\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectFullAlphaRatio"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectFullAlphaTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectFullAlphaTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"EdgeEffectPersistentAlphaRatio\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EdgeEffectPersistentAlphaRatio"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillAlphaFadeInTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillAlphaFadeInTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillAlphaPulseAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillAlphaPulseAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillAlphaPulseFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillAlphaPulseFrequency"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FillColorKey1\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FillColorKey1"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey1Scale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey1Scale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey1Time\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey1Time"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FillColorKey2\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FillColorKey2"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey2Scale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey2Scale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey2Time\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey2Time"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FillColorKey3\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FillColorKey3"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey3Scale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey3Scale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillColorKey3Time\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillColorKey3Time"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillFadeOutTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillFadeOutTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillFullAlphaRatio\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillFullAlphaRatio"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillFullAlphaTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillFullAlphaTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillPersistentAlphaRatio\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillPersistentAlphaRatio"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"FillTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillTexture"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillTextureAnimationSpeedU\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillTextureAnimationSpeedU"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillTextureAnimationSpeedV\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillTextureAnimationSpeedV"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillTextureScaleU\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillTextureScaleU"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FillTextureScaleV\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FillTextureScaleV"
   },
   {
     "Aliases": "",
     "Description": "Flags (NoMembraneShader, MembraneGrayscaleColor, MembraneGrayscaleAlpha, NoParticleShader, EdgeEffectInverse, AffectSkinOnly, TextureEffectIgnoreAlpha, TextureEffectProjectUVs, IgnoreBaseGeometryAlpha, TextureEffectLighting, TextureEffectNoWeapons, ParticleAnimated, ParticleGrayscaleColor, ParticleGrayscaleAlpha, UseBloodGeometry)",
     "Example": "\"Flags\": [ \"NoMembraneShader\", \"-UseBloodGeometry\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HolesAnimationEndTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HolesAnimationEndTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HolesAnimationEndValue\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HolesAnimationEndValue"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HolesAnimationStartTime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HolesAnimationStartTime"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HolesAnimationStartValue\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HolesAnimationStartValue"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"HolesTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HolesTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Add, Subtract, ReverseSubtract, Minimum, Maximum)",
     "Example": "\"MembraneBlendOperation\": \"Add\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MembraneBlendOperation"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
     "Example": "\"MembraneDestBlendMode\": \"Zero\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MembraneDestBlendMode"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"MembranePaletteTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MembranePaletteTexture"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Zero, One, SourceColor, SourceInverseColor, SourceAlpha, SourceInvertedAlpha, DestAlpha, DestInvertedAlpha, DestColor, DestInverseColor, SourceAlphaSat)",
     "Example": "\"MembraneSourceBlendMode\": \"Zero\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MembraneSourceBlendMode"
   },
   {
     "Aliases": "",
     "Description": "Possible values (EqualTo, GreaterThan, GreaterThanOrEqualTo)",
     "Example": "\"MembraneZTest\": \"EqualTo\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MembraneZTest"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ParticlePaletteTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticlePaletteTexture"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ParticleShaderTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleShaderTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown2\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown3\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown4\": 7",
+    "Flags": 28,
+    "Name": "Unknown4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown5\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown5"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown6\": 7",
+    "Flags": 28,
+    "Name": "Unknown6"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

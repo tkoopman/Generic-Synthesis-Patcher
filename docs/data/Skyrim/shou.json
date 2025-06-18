@@ -3,49 +3,91 @@
     "Aliases": "DESC",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "RecordFlags",
     "Description": "Flags (TreatSpellsAsPowers)",
     "Example": "\"MajorFlags\": \"TreatSpellsAsPowers\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "MDOB",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MenuDisplayObject"
   },
   {
     "Aliases": "FULL",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WordsOfPower"
   }
 ]

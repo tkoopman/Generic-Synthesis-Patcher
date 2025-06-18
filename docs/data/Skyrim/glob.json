@@ -1,0 +1,72 @@
+[
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "RecordFlags",
+    "Description": "Flags (Constant)",
+    "Example": "\"MajorFlags\": \"Constant\"",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RawFloat\": 3.14",
+    "Flags": 28,
+    "Name": "RawFloat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

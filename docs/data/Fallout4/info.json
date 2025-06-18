@@ -1,0 +1,212 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AudioOutputOverride"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Easy, Medium, Hard, AlwaysSucceeds, EasyRepeatable, MediumRepeatable, HardRepeatable)",
+    "Example": "\"Challenge\": \"None\"",
+    "Flags": 12,
+    "Name": "Challenge"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "DialogGroup"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ForcedAlias\": 7",
+    "Flags": 28,
+    "Name": "ForcedAlias"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"GreetDistance\": 7",
+    "Flags": 28,
+    "Name": "GreetDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"INTV\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "INTV"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (InfoGroup, ExcludeFromExport, ActorChanged)",
+    "Example": "\"MajorFlags\": [ \"InfoGroup\", \"-ActorChanged\" ]",
+    "Flags": 92,
+    "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"OverrideFileName\": \"Hello\"",
+    "Flags": 28,
+    "Name": "OverrideFileName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "PreviousDialog"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Prompt\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Prompt"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ResetGlobal"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Responses"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SetParentQuestStage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SharedDialog"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Speaker"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "StartScene"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"StartScenePhase\": \"Hello\"",
+    "Flags": 28,
+    "Name": "StartScenePhase"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Low, Normal, Force)",
+    "Example": "\"SubtitlePriority\": \"Low\"",
+    "Flags": 12,
+    "Name": "SubtitlePriority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Topic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
+  }
+]

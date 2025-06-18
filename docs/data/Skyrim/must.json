@@ -1,72 +1,121 @@
 [
   {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CuePoints"
+  },
+  {
     "Aliases": "FLTV",
     "Description": "Decimal value",
     "Example": "\"Duration\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Duration"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "DNAM",
     "Description": "Decimal value",
     "Example": "\"FadeOut\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FadeOut"
+  },
+  {
+    "Aliases": "BNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FinaleFilename"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
-    "Aliases": "LNAM.Begins",
-    "Description": "Decimal value",
-    "Example": "\"LoopData.Begins\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "LoopData.Begins"
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
   },
   {
-    "Aliases": "LNAM.Count",
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "LNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "LoopData"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"LoopData.Count\": 7",
-    "MFFSM": "MFF--",
-    "Name": "LoopData.Count"
-  },
-  {
-    "Aliases": "LNAM.Ends",
-    "Description": "Decimal value",
-    "Example": "\"LoopData.Ends\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "LoopData.Ends"
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "ANAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TrackFilename"
   },
   {
     "Aliases": "SNAM",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Tracks"
   },
   {
     "Aliases": "CNAM",
     "Description": "Possible values (Palette, SingleTrack, SilentTrack)",
     "Example": "\"Type\": \"Palette\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

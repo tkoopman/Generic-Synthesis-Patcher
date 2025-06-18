@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Branch"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Player, Command, Scene, Combat, Favor, Detection, Service, Misc)",
+    "Example": "\"Category\": \"Player\"",
+    "Flags": 12,
+    "Name": "Category"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Keyword"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Priority\": 3.14",
+    "Flags": 28,
+    "Name": "Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Quest"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Responses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Custom0, ForceGreet, Rumors, Custom3, Call, Follow, Move, Attack, Inspect, Retrieve, Stay, Release, ShowRelationships, Reject, Heal, Assign, Enter, Custom17, Show, Agree, Refuse, ExitFavorState, MoralRefusal, Trade, PathingRefusal, Attack25, PowerAttack, Bash, Hit, Flee, BleedOut, AvoidThreat, Death, Block, Taunt, ThrowGrenade, AllyKilled, OrderFallback, OrderMoveUp, OrderFlank, OrderTakeCover, Retreat, CoverMe, SuppressiveFire, CrippledLimb, PairedAttack, Steal, Yield, AcceptYield, PickpocketCombat, Assault, Murder, AssaultNC, MurderNC, PickpocketNC, StealFromNC, TrespassAgainstNC, Trespass, UNUSED01, VoicePowerStartShort, VoicePowerStartLong, VoicePowerEndShort, VoicePowerEndLong, AlertIdle, LostIdle, NormalToAlert, NormalToCombat, NormalToLost, AlertToNormal, AlertToCombat, CombatToNormal, CombatToLost, LostToNormal, LostToCombat, DetectFriendDie, ServiceRefusal, Repair, Travel, Training, BarterExit, RepairExit, Recharge, RechargeExit, TrainingExit, ObserveCombat, NoticeCorpse, TimeToGo, Goodbye, Hello, SwingMeleeWeapon, ShootBow, ZKeyObject, Jump, KnockOverObject, DestroyObject, StandonFurniture, LockedObject, PickpocketTopic, PursueIdleTopic, SharedInfo, SceneChoice, PlayerCastProjectileSpell, PlayerCastSelfSpell, PlayerShout, Idle, EnterSprintBreath, EnterBowZoomBreath, ExitBowZoomBreath, ActorCollidewithActor, PlayerinIronSights, OutofBreath, CombatGrunt, LeaveWaterBreath, ImpatientPositive, ImpatientNegative, ImpatientNeutral, ImpatientQuestion, WaitingForPlayerInput, Greeting, PlayerActivateDoor, PlayerActivateTerminals, PlayerActivateFurniture, PlayerActivateActivators, PlayerActivateContainer, PlayerAquireFeaturedItem)",
+    "Example": "\"Subtype\": \"Custom0\"",
+    "Flags": 12,
+    "Name": "Subtype"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SubtypeName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Timestamp\": 7",
+    "Flags": 28,
+    "Name": "Timestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (DoAllBeforeRepeating)",
+    "Example": "\"TopicFlags\": \"DoAllBeforeRepeating\"",
+    "Flags": 92,
+    "Name": "TopicFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

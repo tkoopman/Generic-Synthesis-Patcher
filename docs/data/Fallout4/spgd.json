@@ -3,140 +3,231 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"BoxSize\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BoxSize"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CenterOffsetMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CenterOffsetMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CenterOffsetMin\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CenterOffsetMin"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"GravityVelocity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GravityVelocity"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"InitialRotation\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InitialRotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NumSubtexturesX\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NumSubtexturesX"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NumSubtexturesY\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NumSubtexturesY"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleDensity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleDensity"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleSizeX\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleSizeX"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleSizeY\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleSizeY"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ParticleTexture\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleTexture"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"RotationVelocity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "RotationVelocity"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Rain, Snow)",
     "Example": "\"Type\": \"Rain\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Type"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
+    "Example": "\"Unknown1\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown10\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown10"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
     "Example": "\"Unknown11\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Unknown11"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Unknown12\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Unknown12"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
+    "Example": "\"Unknown2\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown3\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown4\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown5\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown5"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown6\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown6"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown7\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown7"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
     "Example": "\"Unknown8\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Unknown8"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Unknown9\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Unknown9"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

@@ -60,6 +60,10 @@
     "id": "CREA"
   },
   {
+    "name": "Dialog Item",
+    "id": "INFO"
+  },
+  {
     "name": "Dialog Topic",
     "id": "DIAL"
   },
@@ -92,6 +96,14 @@
     "id": "FURN"
   },
   {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
     "name": "Grass",
     "id": "GRAS"
   },
@@ -114,6 +126,10 @@
   {
     "name": "Land Texture",
     "id": "LTEX"
+  },
+  {
+    "name": "Landscape",
+    "id": "LAND"
   },
   {
     "name": "Leveled Creature",
@@ -148,6 +164,22 @@
     "id": "NPC_"
   },
   {
+    "name": "Path Grid",
+    "id": "PGRD"
+  },
+  {
+    "name": "Placed Creature",
+    "id": "ACRE"
+  },
+  {
+    "name": "Placed Npc",
+    "id": "ACHR"
+  },
+  {
+    "name": "Placed Object",
+    "id": "REFR"
+  },
+  {
     "name": "Potion",
     "id": "ALCH"
   },
@@ -162,6 +194,14 @@
   {
     "name": "Region",
     "id": "REGN"
+  },
+  {
+    "name": "Road",
+    "id": "ROAD"
+  },
+  {
+    "name": "Script",
+    "id": "SCPT"
   },
   {
     "name": "Sigil Stone",
@@ -182,6 +222,14 @@
   {
     "name": "Spell",
     "id": "SPEL"
+  },
+  {
+    "name": "Spell Leveled",
+    "id": "LVSP"
+  },
+  {
+    "name": "Static",
+    "id": "STAT"
   },
   {
     "name": "Subspace",

@@ -19,15 +19,23 @@ namespace GenericSynthesisPatcher.Games.Fallout4
 {
     public class Fallout4Game : Universal.BaseGame
     {
-        private readonly IEnumerable<IModListing<IFallout4ModGetter>> OnlyEnabledAndExisting;
+        private Fallout4Game () => State = null!;
 
-        public Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value)))
+        private Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value)))
         {
             State = gameState;
-            OnlyEnabledAndExisting = State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting();
-            SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+        }
 
-            IgnoreSubPropertiesOnTypes.Add(
+        public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
+
+        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+
+        public static Fallout4Game Constructor (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState)
+        {
+            var game = gameState is null ? new Fallout4Game () : new Fallout4Game(gameState);
+            game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+
+            game.IgnoreSubPropertiesOnTypes.Add(
                 [
                 typeof(AMagicEffectArchetype),
                 typeof(Cell),
@@ -51,17 +59,17 @@ namespace GenericSynthesisPatcher.Games.Fallout4
                 typeof(WorldspaceMaxHeight),
                 ]);
 
-            addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
-            addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
-        }
+            game.addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
+            game.addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
 
-        public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
+            return game;
+        }
 
         public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
         {
             var m = typeof(TypeOptionSolidifierMixIns).GetMethod(recordType.Name, BindingFlags.Public | BindingFlags.Static, [typeof(IEnumerable<IModListingGetter<IFallout4ModGetter>>)]) ?? throw new InvalidOperationException($"No method found for record type {recordType.Name}.");
 
-            object records = m.Invoke(null, [OnlyEnabledAndExisting]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
+            object records = m.Invoke(null, [State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting()]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
 
             m = records.GetType().GetMethod("WinningContextOverrides") ?? throw new InvalidOperationException($"No WinningContextOverrides method found for record type {recordType.Name}.");
 
@@ -99,25 +107,6 @@ namespace GenericSynthesisPatcher.Games.Fallout4
                 default:
                     return null;
             }
-        }
-
-        protected override IEnumerable<ILoquiRegistration> getRecordTypes ()
-        {
-            List<ILoquiRegistration> types = [];
-
-            foreach (var method in typeof(TypeOptionSolidifierMixIns).GetMethods())
-            {
-                if (!method.ReturnType.IsGenericType || method.ReturnType.GenericTypeArguments.Length == 0)
-                    continue;
-
-                var returnType = method.ReturnType.GenericTypeArguments[^1];
-
-                var regoProperty = returnType.GetProperty("StaticRegistration");
-                if (regoProperty?.GetValue(null) is ILoquiRegistration rego)
-                    types.Add(rego);
-            }
-
-            return types;
         }
     }
 }

@@ -1,814 +1,485 @@
 [
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"AmbientColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "AmbientColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"AmbientColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "AmbientColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"AmbientColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "AmbientColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"AmbientColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "AmbientColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AmbientColor"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"ANAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ANAM"
   },
   {
     "Aliases": "",
     "Description": "Forward Model data.",
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Aurora\"] } }]",
-    "MFFSM": "--F--",
+    "Flags": 16,
     "Name": "Aurora"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"BNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "BNAM"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodAmbientColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodAmbientColor.Day"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudLodAmbientColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodAmbientColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodAmbientColor.Night"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudLodDiffuseColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodAmbientColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodAmbientColor.Sunrise"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Clouds"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodAmbientColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodAmbientColor.Sunset"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodDiffuseColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodDiffuseColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodDiffuseColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodDiffuseColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodDiffuseColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodDiffuseColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"CloudLodDiffuseColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "CloudLodDiffuseColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CloudTextures"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"CNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "CNAM"
+  },
+  {
+    "Aliases": "DALC",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DirectionalAmbientLightingColors"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"DNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "DNAM"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"EffectLightingColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "EffectLightingColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"EffectLightingColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "EffectLightingColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"EffectLightingColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "EffectLightingColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"EffectLightingColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "EffectLightingColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EffectLightingColor"
   },
   {
     "Aliases": "",
     "Description": "Flags (Pleasant, Cloudy, Rainy, Snow, SkyStaticsAlwaysVisible, SkyStaticsFollowsSunPosition)",
     "Example": "\"Flags\": [ \"Pleasant\", \"-SkyStaticsFollowsSunPosition\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceDayFar\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceDayFar"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceDayMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceDayMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceDayNear\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceDayNear"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceDayPower\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceDayPower"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceNightFar\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceNightFar"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceNightMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceNightMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceNightNear\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceNightNear"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogDistanceNightPower\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogDistanceNightPower"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogFarColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogFarColor.Day"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FogFarColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogFarColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogFarColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogFarColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogFarColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogFarColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogFarColor.Sunset"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogNearColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogNearColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogNearColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogNearColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogNearColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogNearColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"FogNearColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "FogNearColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FogNearColor"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"HorizonColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "HorizonColor.Day"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "HorizonColor"
+  },
+  {
+    "Aliases": "IMSP",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ImageSpaces"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"HorizonColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "HorizonColor.Night"
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"HorizonColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "HorizonColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"HorizonColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "HorizonColor.Sunset"
-  },
-  {
-    "Aliases": "IMSP.Day",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "ImageSpaces.Day"
-  },
-  {
-    "Aliases": "IMSP.Night",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "ImageSpaces.Night"
-  },
-  {
-    "Aliases": "IMSP.Sunrise",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "ImageSpaces.Sunrise"
-  },
-  {
-    "Aliases": "IMSP.Sunset",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "ImageSpaces.Sunset"
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"LightningColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "LightningColor"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"LNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "LNAM"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"MoonGlareColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "MoonGlareColor.Day"
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"MoonGlareColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "MoonGlareColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"MoonGlareColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "MoonGlareColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"MoonGlareColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "MoonGlareColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MoonGlareColor"
   },
   {
     "Aliases": "",
     "Description": "Flags (Break0, Break1)",
     "Example": "\"NAM0DataTypeState\": [ \"Break0\", \"-Break1\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "NAM0DataTypeState"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"NAM2\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "NAM2"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"NAM3\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "NAM3"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"ONAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ONAM"
   },
   {
     "Aliases": "MNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Precipitation"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"PrecipitationBeginFadeIn\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "PrecipitationBeginFadeIn"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"PrecipitationEndFadeOut\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "PrecipitationEndFadeOut"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyLowerColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyLowerColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyLowerColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyLowerColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyLowerColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyLowerColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyLowerColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyLowerColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyLowerColor"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "SkyStatics"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyStaticsColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyStaticsColor.Day"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyStaticsColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyStaticsColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyStaticsColor.Night"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SkyUpperColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyStaticsColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyStaticsColor.Sunrise"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sounds"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyStaticsColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyStaticsColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "StarsColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyUpperColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyUpperColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyUpperColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyUpperColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyUpperColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyUpperColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SkyUpperColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SkyUpperColor.Sunset"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"StarsColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "StarsColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"StarsColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "StarsColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"StarsColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "StarsColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"StarsColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "StarsColor.Sunset"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"SunDamage\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "SunDamage"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"SunGlare\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "SunGlare"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunGlareColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunGlareColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunGlareColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunGlareColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunGlareColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunGlareColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunGlareColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunGlareColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunGlareColor"
   },
   {
     "Aliases": "GNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SunGlareLensFlare"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunlightColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunlightColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunlightColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunlightColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunlightColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunlightColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"SunlightColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "SunlightColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunlightColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"ThunderLightningBeginFadeIn\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ThunderLightningBeginFadeIn"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"ThunderLightningEndFadeOut\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ThunderLightningEndFadeOut"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"ThunderLightningFrequency\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ThunderLightningFrequency"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TransDelta\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TransDelta"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"UnknownColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "UnknownColor.Day"
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"UnknownColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "UnknownColor.Night"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "UnknownColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"UnknownColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "UnknownColor.Sunrise"
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"UnknownColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "UnknownColor.Sunset"
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   },
   {
     "Aliases": "NNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "VisualEffect"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"VisualEffectBegin\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "VisualEffectBegin"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"VisualEffectEnd\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "VisualEffectEnd"
   },
   {
-    "Aliases": "HNAM.Day",
-    "Description": "Form Key or Editor ID",
+    "Aliases": "HNAM",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "VolumetricLighting.Day"
-  },
-  {
-    "Aliases": "HNAM.Night",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "VolumetricLighting.Night"
-  },
-  {
-    "Aliases": "HNAM.Sunrise",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "VolumetricLighting.Sunrise"
-  },
-  {
-    "Aliases": "HNAM.Sunset",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "VolumetricLighting.Sunset"
+    "Flags": 144,
+    "Name": "VolumetricLighting"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"WaterMultiplierColor.Day\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "WaterMultiplierColor.Day"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"WaterMultiplierColor.Night\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "WaterMultiplierColor.Night"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"WaterMultiplierColor.Sunrise\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "WaterMultiplierColor.Sunrise"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"WaterMultiplierColor.Sunset\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "WaterMultiplierColor.Sunset"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterMultiplierColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"WindDirection\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WindDirection"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"WindDirectionRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WindDirectionRange"
   },
   {
     "Aliases": "",
     "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
     "Example": "\"WindSpeed\": \"30.5%\"",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "WindSpeed"
   }
 ]

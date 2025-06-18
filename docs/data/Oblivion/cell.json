@@ -3,182 +3,203 @@
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Climate"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FactionRank\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FactionRank"
   },
   {
     "Aliases": "",
     "Description": "Flags (IsInteriorCell, HasWater, InvertFastTravelBehavior, ForceHideLand, PublicPlace, HandChanged, BehaveLikeExteriod)",
     "Example": "\"Flags\": [ \"IsInteriorCell\", \"-BehaveLikeExteriod\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GlobalVariable"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "Grid"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "Lighting.AmbientColor"
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "Lighting.DirectionalColor"
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Lighting.DirectionalFade\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.DirectionalFade"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Landscape"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Lighting"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"Lighting.DirectionalRotationXY\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.DirectionalRotationXY"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Lighting.DirectionalRotationZ\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.DirectionalRotationZ"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Lighting.FogClipDistance\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.FogClipDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"Lighting.FogColor\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "Lighting.FogColor"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Lighting.FogFar\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.FogFar"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Lighting.FogNear\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Lighting.FogNear"
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Default, Public, Dungeon)",
     "Example": "\"MusicType\": \"Default\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MusicType"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Owner"
   },
   {
     "Aliases": "",
-    "Description": "String value",
-    "Example": "\"PathGrid.EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "PathGrid.EditorID"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "PathGrid"
   },
   {
     "Aliases": "",
-    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
-    "Example": "\"PathGrid.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "PathGrid.OblivionMajorRecordFlags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Persistent"
   },
   {
     "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"PathGrid.PGAG\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "PathGrid.PGAG"
+    "Description": "Numeric value",
+    "Example": "\"PersistentTimestamp\": 7",
+    "Flags": 28,
+    "Name": "PersistentTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Regions"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Temporary"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"TemporaryTimestamp\": 7",
+    "Flags": 28,
+    "Name": "TemporaryTimestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Timestamp\": 7",
+    "Flags": 28,
+    "Name": "Timestamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VisibleWhenDistant"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VisibleWhenDistantTimestamp\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "VisibleWhenDistantTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Water"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"WaterHeight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WaterHeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XLRL\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XLRL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XTLI\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XTLI"
   }
 ]

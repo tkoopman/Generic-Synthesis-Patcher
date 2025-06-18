@@ -3,133 +3,175 @@
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AdditionalRaces"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ArtObject"
   },
   {
     "Aliases": "",
-    "Description": "Flags (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX)",
-    "Example": "\"BodyTemplate.FirstPersonFlags\": [ \"HairTop\", \"-FX\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "BodyTemplate.FirstPersonFlags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BoneData"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DetectionSoundValue\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DetectionSoundValue"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FirstPersonModel"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FootstepSound"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Flags (NoUnderarmorScaling, HiResFirstPersonOnly)",
     "Example": "\"MajorFlags\": [ \"NoUnderarmorScaling\", \"-HiResFirstPersonOnly\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"Priority.Female\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Priority.Female"
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Priority.Male\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Priority.Male"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Priority"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Race"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "SkinTexture.Female"
+    "Flags": 144,
+    "Name": "SkinTexture"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "SkinTexture.Male"
+    "Flags": 144,
+    "Name": "TextureSwapList"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TextureSwapList.Female"
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TextureSwapList.Male"
+    "Description": "Numeric value",
+    "Example": "\"Unknown2\": 7",
+    "Flags": 28,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"WeaponAdjust\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WeaponAdjust"
   },
   {
     "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"WeightSliderEnabled.Female\": true",
-    "MFFSM": "MFF--",
-    "Name": "WeightSliderEnabled.Female"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WeightSliderEnabled"
   },
   {
     "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"WeightSliderEnabled.Male\": true",
-    "MFFSM": "MFF--",
-    "Name": "WeightSliderEnabled.Male"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WorldModel"
   }
 ]

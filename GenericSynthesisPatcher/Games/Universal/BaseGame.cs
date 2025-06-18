@@ -28,15 +28,26 @@ namespace GenericSynthesisPatcher.Games.Universal
     /// <summary>
     ///     Base class for all games supported by Generic Synthesis Patcher.
     /// </summary>
-    /// <param name="recordTypeMappings"></param>
-    /// <param name="recordPropertyMappings"></param>
-    /// <param name="loadOrder"></param>
-    public abstract class BaseGame (LoadOrder<IModListingGetter> loadOrder)
+    public abstract class BaseGame
     {
         private readonly HashSet<PropertyAliasMapping> propertyAliases = [];
-
         private ReadOnlyDictionary<string, ILoquiRegistration>? _recordTypes;
 
+        public BaseGame (LoadOrder<IModListingGetter> loadOrder) => LoadOrder = loadOrder;
+
+        /// <summary>
+        ///     Create stateless version. Many functions won't work. Only designed for use by Testing.
+        /// </summary>
+        internal BaseGame () => LoadOrder = null!;
+
+        /// <summary>
+        ///     All known property alias mappings. Used to find aliases for documentation.
+        /// </summary>
+        public IReadOnlyCollection<PropertyAliasMapping> AliasMappings => propertyAliases.ToList().AsReadOnly();
+
+        /// <summary>
+        ///     Types contained in this set will not be traversed for sub-properties.
+        /// </summary>
         public HashSet<Type> IgnoreSubPropertiesOnTypes { get; protected set; } =
                     [
                 typeof(P2Double),
@@ -60,8 +71,14 @@ namespace GenericSynthesisPatcher.Games.Universal
                 typeof(TranslatedString),
             ];
 
-        public LoadOrder<IModListingGetter> LoadOrder { get; } = loadOrder;
+        /// <summary>
+        ///     Load order of the game.
+        /// </summary>
+        public LoadOrder<IModListingGetter> LoadOrder { get; }
 
+        /// <summary>
+        ///     All record types that are supported by this game.
+        /// </summary>
         public ReadOnlyDictionary<string, ILoquiRegistration> RecordTypes
         {
             get
@@ -70,14 +87,18 @@ namespace GenericSynthesisPatcher.Games.Universal
                 {
                     var recordTypes = new Dictionary<string, ILoquiRegistration>(StringComparer.OrdinalIgnoreCase);
 
-                    foreach (var recordType in getRecordTypes())
+                    foreach (var method in TypeOptionSolidifierMixIns.GetMethods())
                     {
-                        if (!TranslationMaskFactory.TryGetTranslationMaskType(recordType, out _))
+                        if (!method.ReturnType.IsGenericType || method.ReturnType.GenericTypeArguments.Length == 0 ||
+                            !SynthCommon.TryGetStaticRegistration(method.ReturnType.GenericTypeArguments[^1], out var recordType) ||
+                            !recordType.IsValidRecordType(out var type))
+                        {
                             continue;
+                        }
 
+                        _ = recordTypes.TryAdd(type.Type, recordType);
                         _ = recordTypes.TryAdd(recordType.Name, recordType);
-                        if (recordType.GetType().GetField("TriggeringRecordType")?.GetValue(recordType) is RecordType type)
-                            _ = recordTypes.TryAdd(type.Type, recordType);
+                        _ = recordTypes.TryAdd(recordType.Name.SeparateWords(), recordType);
                     }
 
                     _recordTypes = recordTypes.AsReadOnly();
@@ -106,7 +127,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         };
 
         public abstract IPatcherState State { get; }
-
+        protected abstract Type TypeOptionSolidifierMixIns { get; }
         private Dictionary<PropertyKey, PropertyAction?> PropertyMappings { get; } = [];
 
         private Dictionary<Type, IRecordAction?> TypeMappingsExact { get; } = new()
@@ -186,9 +207,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         ///     if it is an alias.
         /// </summary>
         /// <param name="type">Record type property being accessed references.</param>
-        /// <param name="name">
-        ///     Property name that was provided to check if it is a valid alias.
-        /// </param>
+        /// <param name="name">Property name that was provided to check if it is a valid alias.</param>
         /// <returns>Proper property name or null</returns>
         public string? GetRealPropertyName (ILoquiRegistration recordType, string name)
             => propertyAliases.TryGetValue(new PropertyAliasMapping(recordType.ClassType, name, null), out var alias)
@@ -203,13 +222,10 @@ namespace GenericSynthesisPatcher.Games.Universal
         /// <summary>
         ///     Get the action for a given property name in a record type.
         /// </summary>
-        /// <param name="recordType">
-        ///     Static Registration of major record type being accessed.
-        /// </param>
+        /// <param name="recordType">Static Registration of major record type being accessed.</param>
         /// <param name="propertyName">Name of property</param>
         /// <param name="stringComparison">
-        ///     String comparison to use when searching for property. Exact match always checked for
-        ///     first.
+        ///     String comparison to use when searching for property. Exact match always checked for first.
         /// </param>
         /// <returns>Record action class if found else null.</returns>
         public bool TryGetProperties (ILoquiRegistration recordType, string propertyName, out PropertyInfo[] properties, out string correctedPropertyName, StringComparison stringComparison = StringComparison.Ordinal)
@@ -321,10 +337,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         ///     Discover the action type for a given type exploded into 1-3 parts. This is called
         ///     from the base discoverAction method.
         /// </summary>
-        /// <param name="explodedType">
-        ///     Array of the exploded type (MaxDepth=3).
-        ///     <see cref="Common.Extensions.Explode(Type, int)" />
-        /// </param>
+        /// <param name="explodedType">Array of the exploded type (MaxDepth=3). <see cref="Common.Extensions.Explode(Type, int)" /></param>
         /// <returns></returns>
         protected virtual IRecordAction? discoverAction (Type[] explodedType)
         {
@@ -372,8 +385,6 @@ namespace GenericSynthesisPatcher.Games.Universal
                     return null;
             }
         }
-
-        protected abstract IEnumerable<ILoquiRegistration> getRecordTypes ();
 
         private static bool tryGetProperty (Type type, string propertyName, [NotNullWhen(true)] out PropertyInfo? property, StringComparison stringComparison = StringComparison.Ordinal)
         {

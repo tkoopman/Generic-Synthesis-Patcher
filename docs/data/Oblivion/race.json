@@ -1,135 +1,163 @@
 [
   {
     "Aliases": "",
-    "Description": "Flags (Playable)",
-    "Example": "\"Data.Flags\": \"Playable\"",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyData"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "DefaultHair.Female"
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "DefaultHair.Male"
+    "Flags": 144,
+    "Name": "DefaultHair"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DefaultHairColor\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DefaultHairColor"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Eyes"
   },
   {
     "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FaceGenData.AsymmetricGeometry\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FaceGenData.AsymmetricGeometry"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceData"
   },
   {
     "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FaceGenData.SymmetricGeometry\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FaceGenData.SymmetricGeometry"
-  },
-  {
-    "Aliases": "",
-    "Description": "Memory slice in form of array of bytes",
-    "Example": "\"FaceGenData.SymmetricTexture\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
-    "Name": "FaceGenData.SymmetricTexture"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceGenData"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FaceGenFaceClamp\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FaceGenFaceClamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FaceGenMainClamp\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FaceGenMainClamp"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Hairs"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RaceStats"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Relations"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"SNAM\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SNAM"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Spells"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Voices.Female"
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Voices.Male"
+    "Flags": 144,
+    "Name": "Voices"
   }
 ]

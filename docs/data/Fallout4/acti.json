@@ -3,217 +3,210 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ActivateTextOverride\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ActivateTextOverride"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ActivationSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AnimationSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (NoDisplacement, IgnoredBySandbox, IsARadio)",
     "Example": "\"Flags\": [ \"NoDisplacement\", \"-IsARadio\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ForcedLocRefType"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InteractionKeyword"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LoopingSound"
   },
   {
     "Aliases": "",
     "Description": "Flags (NeverFades, NonOccluder, HeadingMarker, MustUpdateAnims, HiddenFromLocalMap, HeadtrackMarker, UsedAsPlatform, PackInUseOnly, HasDistantLod, RandomAnimStart, Dangerous, IgnoreObjectInteraction, IsMarker, Obstacle, NavMeshGenerationFilter, NavMeshGenerationBoundingBox, ChildCanUse, NavMeshGenerationGround)",
     "Example": "\"MajorFlags\": [ \"NeverFades\", \"-NavMeshGenerationGround\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"MarkerColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "MarkerColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NativeTerminal"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.CrcHash\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.CrcHash"
-  },
-  {
-    "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMaxDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.GridSize\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridSize"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.NavmeshVersion\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.NavmeshVersion"
+    "Flags": 144,
+    "Name": "NavmeshGeometry"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
-  },
-  {
-    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RadioReceiver.Frequency\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RadioReceiver.Frequency"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Properties"
   },
   {
     "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"RadioReceiver.NoSignalStatic\": true",
-    "MFFSM": "MFF--",
-    "Name": "RadioReceiver.NoSignalStatic"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RadioReceiver"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "RadioReceiver.SoundModel"
-  },
-  {
-    "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"RadioReceiver.StartsActive\": true",
-    "MFFSM": "MFF--",
-    "Name": "RadioReceiver.StartsActive"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"RadioReceiver.Volume\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "RadioReceiver.Volume"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WaterType"
   }
 ]

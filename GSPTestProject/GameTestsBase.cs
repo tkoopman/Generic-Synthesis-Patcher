@@ -5,9 +5,10 @@ using Common;
 using GenericSynthesisPatcher;
 using GenericSynthesisPatcher.Helpers;
 
-using GSPTestProject.GameData.Universal;
+using GSPTestProject.GameData;
+using GSPTestProject.GameData.GlobalGame;
 
-using Loqui;
+using Mutagen.Bethesda;
 
 using Xunit.Abstractions;
 
@@ -16,26 +17,23 @@ namespace GSPTestProject
     [Collection("Sequential")]
     public abstract class GameTestsBase (ITestOutputHelper output)
     {
+        protected abstract GameRelease GameRelease { get; }
+
         [Theory]
-        [ClassData(typeof(AllRecordTypes_TestData))]
-        public void ConfirmActionForEveryEditableProperty (ILoquiRegistration recordType)
+        [ClassData(typeof(RecordTypes))]
+        public void ConfirmActionForEveryEditableProperty (GameRecordType gameRecordType)
         {
             int count = 0;
             int valid = 0;
 
+            var recordType = gameRecordType.RecordType;
             _ = TranslationMaskFactory.TryGetTranslationMaskType(recordType, out var mask);
 
-            var properties = recordType.ClassType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy).ToList();
+            var properties = gameRecordType.Properties.ToList();
             properties.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
 
             foreach (var property in properties)
             {
-                if (!property.CanWrite && mask?.GetField(property.Name, BindingFlags.Public | BindingFlags.Instance) is null)
-                {
-                    output.WriteLine($"{property.Name}: *** Read Only ***");
-                    continue;
-                }
-
                 count++;
 
                 var action = Global.Game.GetAction(recordType, property.Name);
@@ -52,6 +50,19 @@ namespace GSPTestProject
 
             Assert.Equal(count, valid);
             output.WriteLine($"{recordType.Name}: {valid}/{count}");
+        }
+
+        [Theory]
+        [ClassData(typeof(RecordTypes))]
+        public void ValidateStatelessData (GameRecordType gameRecordType)
+        {
+            var properties = gameRecordType.RecordType.ClassType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy).Where(p => p.IsValidPropertyType());
+
+            var statelessMissing = properties.Where(p => !gameRecordType.Properties.Contains(p));
+            Assert.Empty(statelessMissing);
+
+            var statelessExtra = gameRecordType.Properties.Where(p => ! properties.Contains(p));
+            Assert.Empty(statelessExtra);
         }
     }
 }

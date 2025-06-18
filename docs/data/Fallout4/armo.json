@@ -3,196 +3,266 @@
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AlternateBlockMaterial"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Armatures"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ArmorRating\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ArmorRating"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"BaseAddonIndex\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BaseAddonIndex"
   },
   {
     "Aliases": "",
-    "Description": "Flags (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX)",
-    "Example": "\"BipedBodyTemplate.FirstPersonFlags\": [ \"HairTop\", \"-FX\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "BipedBodyTemplate.FirstPersonFlags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BipedBodyTemplate"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BlockBashImpactDataSet"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EquipmentType"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Health\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Health"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InstanceNaming"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Flags (NonPlayable, Shield)",
     "Example": "\"MajorFlags\": [ \"NonPlayable\", \"-Shield\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
-  },
-  {
-    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ObjectEffect"
   },
   {
     "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ObjectTemplates"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PickUpSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PutDownSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Race"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Resistances"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"StaggerRating\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "StaggerRating"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TemplateArmor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unused"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Value\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Weight"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WorldModel"
   }
 ]

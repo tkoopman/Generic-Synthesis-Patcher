@@ -3,553 +3,560 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"AccuracyBonus\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AccuracyBonus"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ActionPointCost\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ActionPointCost"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AimModel"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AlternateBlockMaterial"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Ammo"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"AnimationAttackSeconds\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AnimationAttackSeconds"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AnimationSound"
   },
   {
     "Aliases": "",
     "Description": "Possible values (HandToHandMelee, OneHandSword, OneHandDagger, OneHandAxe, OneHandMace, TwoHandSword, TwoHandAxe, Bow, Staff, Gun, Grenade, Mine)",
     "Example": "\"AnimationType\": \"HandToHandMelee\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "AnimationType"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Attack2dSound"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"AttackDelay\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackDelay"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackFailSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackLoopSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackSound"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"BaseDamage\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BaseDamage"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BlockBashImpactDataSet"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Capacity\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Capacity"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CritChargeBonus\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CritChargeBonus"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CritDamageMult\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CritDamageMult"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CritEffect"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"DamageOutOfRangeMult\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DamageOutOfRangeMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DamageTypes"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EmbeddedWeaponMod"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"EnchantmentAmount\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EnchantmentAmount"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EquipmentType"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EquipSound"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.AnimationFireSeconds\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.AnimationFireSeconds"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.AnimationReloadSeconds\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.AnimationReloadSeconds"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.BoltAnimSeconds\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.BoltAnimSeconds"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ExtraData.NumProjectiles\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.NumProjectiles"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Constant, Square, Triangle, Sawtooth)",
-    "Example": "\"ExtraData.Pattern\": \"Constant\"",
-    "MFFSM": "MF---",
-    "Name": "ExtraData.Pattern"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.ProjectileOverride"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.RumbleDuration\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.RumbleDuration"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.RumbleLeftMotorStrength\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.RumbleLeftMotorStrength"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"ExtraData.RumblePeriodMs\": 7",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.RumblePeriodMs"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.RumbleRightMotorStrength\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.RumbleRightMotorStrength"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"ExtraData.SightedTransitionSeconds\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "ExtraData.SightedTransitionSeconds"
+    "Flags": 144,
+    "Name": "ExtraData"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FastEquipSound"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Filter\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Filter"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FirstPersonModel"
   },
   {
     "Aliases": "",
     "Description": "Flags (PlayerOnly, NpcsUseAmmo, NoJamAfterReload, ChargingReload, MinorCrime, FixedRange, NotUsedInNormalCombat, CritEffectOnDeath, ChargingAttack, HoldInputToPower, NonHostile, BoundWeapon, IgnoresNormalWeaponResistence, Automatic, RepeatableSingleFire, CannotDrop, HideBackpack, EmbeddedWeapon, NotPlayable, HasScope, BoltAction, SecondaryWeapon, DisableShells)",
     "Example": "\"Flags\": [ \"PlayerOnly\", \"-DisableShells\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FullPowerSeconds\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FullPowerSeconds"
   },
   {
     "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Icons.InventoryImage\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Icons.InventoryImage"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Icons.MessageIcon\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Icons.MessageIcon"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Icons"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "IdleSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ImpactDataSet"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InstanceNaming"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Flags (NonPlayable, HighResFirstPersonOnly)",
     "Example": "\"MajorFlags\": [ \"NonPlayable\", \"-HighResFirstPersonOnly\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"MaxRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MaxRange"
   },
   {
     "Aliases": "",
     "Description": "Possible values (VerySlow, Slow, Medium, Fast, VeryFast)",
     "Example": "\"MeleeSpeed\": \"VerySlow\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "MeleeSpeed"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"MinPowerPerShot\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MinPowerPerShot"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"MinRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MinRange"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MO4F\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MO4F"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NpcAddAmmoList"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ObjectEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ObjectTemplates"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Normal, DismemberOnly, ExplodeOnly, NoDismemberOrExplode)",
     "Example": "\"OnHit\": \"Normal\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "OnHit"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PickUpSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PutDownSound"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Reach\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Reach"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ReloadSpeed\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ReloadSpeed"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Resist"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"SecondaryDamage\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SecondaryDamage"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Skill"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Loud, Normal, Silent, VeryLoud, Quiet)",
     "Example": "\"SoundLevel\": \"Loud\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "SoundLevel"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Speed\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Speed"
   },
   {
     "Aliases": "",
     "Description": "Possible values (None, Small, Medium, Large, ExtraLarge)",
     "Example": "\"Stagger\": \"None\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Stagger"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Template"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "UnequipSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Unknown\": 3.14",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown2\": 7",
+    "Flags": 28,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown3\": 7",
+    "Flags": 28,
+    "Name": "Unknown3"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Value\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Weight"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Zoom"
   }
 ]

@@ -1,7 +1,8 @@
-﻿using GSPTestProject.GameData.SkyrimSE;
+﻿using GSPTestProject.GameData.GlobalGame.Fixtures;
 
 using Loqui;
 
+using Mutagen.Bethesda;
 using Mutagen.Bethesda.Skyrim;
 
 using Xunit.Abstractions;
@@ -15,6 +16,8 @@ namespace GSPTestProject
     public sealed class SkyrimTests (SkyrimSEFixture skyrimFixture, ITestOutputHelper output) : GameTestsBase(output), IClassFixture<SkyrimSEFixture>
 #pragma warning restore CS9113 // Parameter is unread.
     {
+        protected override GameRelease GameRelease => GameRelease.SkyrimSE;
+
         [Fact]
         public void ConfirmAllRecordTypes ()
         {

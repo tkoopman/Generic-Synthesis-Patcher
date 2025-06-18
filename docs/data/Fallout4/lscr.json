@@ -3,84 +3,112 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"CameraPath\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CameraPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LoadingScreenNif"
   },
   {
     "Aliases": "",
     "Description": "Flags (DisplaysInMainMenu, NoRotation)",
     "Example": "\"MajorFlags\": [ \"DisplaysInMainMenu\", \"-NoRotation\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"Rotation.Max\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Rotation.Max"
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Rotation.Min\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Rotation.Min"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Rotation"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Transform"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Zoom.Max\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Zoom.Max"
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Zoom.Min\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Zoom.Min"
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Zoom"
   }
 ]

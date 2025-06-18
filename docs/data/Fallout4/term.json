@@ -1,142 +1,198 @@
 [
   {
     "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyTexts"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (AllowAwakeSound, EnterWithWeaponDrawn, PlayAnimWhenFull, DisablesActivation, IsPerch, MustExitToTalk, UseStaticAvoidNode, HasModel, IsSleepFurniture)",
     "Example": "\"Flags\": [ \"AllowAwakeSound\", \"-IsSleepFurniture\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"FNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FNAM"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"HeaderText\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HeaderText"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Holotapes"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LoopingSound"
   },
   {
     "Aliases": "",
     "Description": "Flags (HasDistantLod, RandomAnimStart)",
     "Example": "\"MajorFlags\": [ \"HasDistantLod\", \"-RandomAnimStart\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"MarkerModel\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MarkerModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MarkerParameters"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MenuItems"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "PNAM"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.ObjectFormat"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Properties"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"VirtualMachineAdapter.Version\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VirtualMachineAdapter.Version"
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"WelcomeText\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "WelcomeText"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"WorkbenchData\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "WorkbenchData"
   }
 ]

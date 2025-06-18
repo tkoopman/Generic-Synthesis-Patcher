@@ -3,210 +3,252 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ActivateTextOverride\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ActivateTextOverride"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AssociatedForm"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Possible values (None, CreateObject, Weapons, Enchanting, EnchantingExperiment, Alchemy, AlchemyExperiment, Armor, PowerArmor, RobotMod)",
     "Example": "\"BenchType\": \"None\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "BenchType"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DrinkingWater"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (Front, Behind, Right, Left, Up)",
     "Example": "\"EnabledEntryPoints\": [ \"Front\", \"-Up\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "EnabledEntryPoints"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (IgnoredBySandbox, AllowAwakeSound, EnterWithWeaponDrawn, PlayAnimWhenFull, DisablesActivation, IsPerch, MustExitToTalk, UseStaticAvoidNode, HasModel, IsSleepFurniture)",
     "Example": "\"Flags\": [ \"IgnoredBySandbox\", \"-IsSleepFurniture\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ForcedLocRefType"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "JSON objects containing item Form Key/Editor ID and Count (QTY)",
     "Example": "\"Items\": { \"Item\": \"021FED:Fallout4.esm\", \"Count\": 3 }",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Items"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Flags (HasContainer, IsPerch, HasDistantLod, RandomAnimStart, IsMarker, PowerArmor, MustExitToTalk, ChildCanUse)",
     "Example": "\"MajorFlags\": [ \"HasContainer\", \"-ChildCanUse\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MarkerEntryPoints"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"MarkerModel\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MarkerModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MarkerParameters"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NativeTerminal"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.CrcHash\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.CrcHash"
-  },
-  {
-    "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMaxDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "NavmeshGeometry.GridMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.GridSize\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.GridSize"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"NavmeshGeometry.NavmeshVersion\": 7",
-    "MFFSM": "MFF--",
-    "Name": "NavmeshGeometry.NavmeshVersion"
+    "Flags": 144,
+    "Name": "NavmeshGeometry"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
+    "Flags": 144,
+    "Name": "ObjectTemplates"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"PNAM\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "PNAM"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Properties"
   },
   {
     "Aliases": "",
     "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
     "Example": "\"UsesSkill\": \"OneHanded\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "UsesSkill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Flags (Break0)",
     "Example": "\"WBDTDataTypeState\": \"Break0\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "WBDTDataTypeState"
   }
 ]

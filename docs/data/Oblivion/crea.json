@@ -1,317 +1,205 @@
 [
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"AIData.Aggression\": 7",
-    "MFFSM": "MFF--",
-    "Name": "AIData.Aggression"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Weapons, Armor, Clothing, Books, Ingredients, Lights, Apparatus, Miscellaneous, Spells, MagicItems, Potions, Training, Recharge, Repair)",
-    "Example": "\"AIData.BuySellServices\": [ \"Weapons\", \"-Repair\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "AIData.BuySellServices"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"AIData.Confidence\": 7",
-    "MFFSM": "MFF--",
-    "Name": "AIData.Confidence"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"AIData.EnergyLevel\": 7",
-    "MFFSM": "MFF--",
-    "Name": "AIData.EnergyLevel"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"AIData.MaximumTrainingLevel\": 7",
-    "MFFSM": "MFF--",
-    "Name": "AIData.MaximumTrainingLevel"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"AIData.Responsibility\": 7",
-    "MFFSM": "MFF--",
-    "Name": "AIData.Responsibility"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
-    "Example": "\"AIData.Teaches\": \"Armorer\"",
-    "MFFSM": "MF---",
-    "Name": "AIData.Teaches"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "AIData"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AIPackages"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Animations"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"AttackReach\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackReach"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BaseScale"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"BloodDecal\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BloodDecal"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"BloodSpray\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BloodSpray"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CombatStyle"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.BarterGold\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.BarterGold"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Configuration"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.BaseSpellPoints\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.BaseSpellPoints"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.CalcMax\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.CalcMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.CalcMin\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.CalcMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.Fatigue\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.Fatigue"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Biped, Essential, WeaponAndShield, Respawn, Swims, Flies, Walks, PCLevelOffset, NoLowLevelProcessing, NoBloodSpray, NoBloodDecal, NoHead, NoRightArm, NoLeftArm, NoCombatInWater, NoShadow, NoCorpseCheck)",
-    "Example": "\"Configuration.Flags\": [ \"Biped\", \"-NoCorpseCheck\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Configuration.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Configuration.LevelOffset\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Configuration.LevelOffset"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Agility\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Agility"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.AttackDamage\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.AttackDamage"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.CombatSkill\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.CombatSkill"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Endurance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Endurance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Health\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Health"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Intelligence\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Intelligence"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Luck\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Luck"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.MagicSkill\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.MagicSkill"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Personality\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Personality"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (None, Petty, Lesser, Common, Greater, Grand)",
-    "Example": "\"Data.SoulLevel\": \"None\"",
-    "MFFSM": "MF---",
-    "Name": "Data.SoulLevel"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Speed\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Speed"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.StealthSkill\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.StealthSkill"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Strength\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Strength"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Creature, Daedra, Undead, Humanoid, Horse, Giant)",
-    "Example": "\"Data.Type\": \"Creature\"",
-    "MFFSM": "MF---",
-    "Name": "Data.Type"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Willpower\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Willpower"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DeathItem"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Factions"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FootWeight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FootWeight"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InheritsSoundFrom"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Items"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Models"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"NIFT\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "NIFT"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Script"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sounds"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Spells"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TurningSpeed\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TurningSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

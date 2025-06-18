@@ -3,259 +3,266 @@
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"AmbientColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "AmbientColor"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalXMinus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalXMinus"
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"DATADataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 92,
+    "Name": "DATADataTypeState"
   },
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalXPlus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalXPlus"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalYMinus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalYMinus"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalYPlus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalYPlus"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalZMinus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalZMinus"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.DirectionalZPlus\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.DirectionalZPlus"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"DirectionalAmbientColors.Scale\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "DirectionalAmbientColors.Scale"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"DirectionalAmbientColors.Specular\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "DirectionalAmbientColors.Specular"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DirectionalAmbientColors"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"DirectionalColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "DirectionalColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"DirectionalFade\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DirectionalFade"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DirectionalRotationXY\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DirectionalRotationXY"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DirectionalRotationZ\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DirectionalRotationZ"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogClipDistance\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogClipDistance"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FogColorHighFar\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FogColorHighFar"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FogColorHighNear\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FogColorHighNear"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogFar\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogFar"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FogFarColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FogFarColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogFarScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogFarScale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogHeightMid\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogHeightMid"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogHeightRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogHeightRange"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogHighFarScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogHighFarScale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogHighNearScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogHighNearScale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogNear\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogNear"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"FogNearColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "FogNearColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogNearScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogNearScale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FogPower\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FogPower"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GodRays"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HighDensityScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HighDensityScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"LightFadeEndDistance\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LightFadeEndDistance"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"LightFadeStartDistance\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LightFadeStartDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NearHeightMid\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NearHeightMid"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NearHeightRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NearHeightRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

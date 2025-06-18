@@ -1,7 +1,8 @@
-﻿using GSPTestProject.GameData.Oblivion;
+﻿using GSPTestProject.GameData.GlobalGame.Fixtures;
 
 using Loqui;
 
+using Mutagen.Bethesda;
 using Mutagen.Bethesda.Oblivion;
 
 using Xunit.Abstractions;
@@ -15,6 +16,8 @@ namespace GSPTestProject
     public sealed class OblivionTests (OblivionFixture oblivionFixture, ITestOutputHelper output) : GameTestsBase(output), IClassFixture<OblivionFixture>
 #pragma warning restore CS9113 // Parameter is unread.
     {
+        protected override GameRelease GameRelease => GameRelease.OblivionRE;
+
         [Fact]
         public void ConfirmAllRecordTypes ()
         {

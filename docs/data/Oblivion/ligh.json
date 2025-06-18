@@ -1,107 +1,93 @@
 [
   {
     "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"Data.Color\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "Data.Color"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.FalloffExponent\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.FalloffExponent"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Dynamic, CanBeCarried, Negative, Flicker, OffByDefault, FlickerSlow, Pulse, PulseSlow, SpotLight, SpotShadow)",
-    "Example": "\"Data.Flags\": [ \"Dynamic\", \"-SpotShadow\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.FOV\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.FOV"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Radius\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Radius"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Time\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Time"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Value\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Value"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.Weight\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.Weight"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Fade\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Fade"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Icon\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Script"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Sound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

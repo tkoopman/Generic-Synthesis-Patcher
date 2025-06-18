@@ -3,56 +3,77 @@
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "DATA",
     "Description": "True / False",
     "Example": "\"IsFamily\": true",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "IsFamily"
   },
   {
-    "Aliases": "FPRT",
-    "Description": "String value",
-    "Example": "\"ParentTitle.Female\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "ParentTitle.Female"
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
-    "Aliases": "MPRT",
-    "Description": "String value",
-    "Example": "\"ParentTitle.Male\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "ParentTitle.Male"
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ParentTitle"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
   },
   {
-    "Aliases": "FCHT",
-    "Description": "String value",
-    "Example": "\"Title.Female\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Title.Female"
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Title"
   },
   {
-    "Aliases": "MCHT",
-    "Description": "String value",
-    "Example": "\"Title.Male\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Title.Male"
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

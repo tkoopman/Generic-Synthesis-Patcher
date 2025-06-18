@@ -3,182 +3,238 @@
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CombatStyle"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DataInputVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DataInputVersion"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (OffersServices, MustComplete, MaintainSpeedAtGoal, TreatAsPlayerFollower, UnlockDoorsAtPackageStart, UnlockDoorsAtPackageEnd, RequestBlockIdles, ContinueIfPcNear, OncePerDay, SkipLoadIntoFurniture, PreferredSpeed, AlwaysSneak, AllowSwimming, IgnoreCombat, WeaponsUnequipped, WeaponDrawn, WearSleepOutfit, NoCombatAlert)",
     "Example": "\"Flags\": [ \"OffersServices\", \"-NoCombatAlert\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
-    "Description": "Form Keys or Editor IDs",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFFSM",
-    "Name": "IdleAnimations.Animations"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"IdleAnimations.IDLB\": 7",
-    "MFFSM": "MFF--",
-    "Name": "IdleAnimations.IDLB"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"IdleAnimations.TimerSetting\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "IdleAnimations.TimerSetting"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Random, RunInSequence, RandomDoOnce, RunInSequenceDoOnce)",
-    "Example": "\"IdleAnimations.Type\": \"Random\"",
-    "MFFSM": "MF---",
-    "Name": "IdleAnimations.Type"
+    "Flags": 144,
+    "Name": "IdleAnimations"
   },
   {
     "Aliases": "",
     "Description": "Possible values (None, Spectator, ObserveDead, GuardWarn, Combat, CommandTravel, CommandActivate, LeaveWorkstation)",
     "Example": "\"InterruptOverride\": \"None\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "InterruptOverride"
   },
   {
     "Aliases": "",
     "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions, OffForImportantScene)",
     "Example": "\"InteruptFlags\": [ \"HellosToPlayer\", \"-OffForImportantScene\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "InteruptFlags"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "OnBegin.Idle"
+    "Flags": 144,
+    "Name": "OnBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "OnChange"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "OnEnd"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "OnChange.Idle"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "OnEnd.Idle"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "OwnerQuest"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PackageTemplate"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Walk, Jog, Run, FastWalk)",
     "Example": "\"PreferredSpeed\": \"Walk\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "PreferredSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ProcedureTree"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ScheduleDate\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ScheduleDate"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Weekdays, Weekends, MondayWednesdayFriday, TuesdayThursday, Any)",
     "Example": "\"ScheduleDayOfWeek\": \"Sunday\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "ScheduleDayOfWeek"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ScheduleDurationInMinutes\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ScheduleDurationInMinutes"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ScheduleHour\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ScheduleHour"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ScheduleMinute\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ScheduleMinute"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"ScheduleMonth\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ScheduleMonth"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Package, PackageTemplate)",
     "Example": "\"Type\": \"Package\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown2\": 7",
+    "Flags": 28,
+    "Name": "Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unknown3\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "Unknown3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"XnamMarker\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "XnamMarker"
   }
 ]

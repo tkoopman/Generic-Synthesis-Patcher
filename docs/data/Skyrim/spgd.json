@@ -3,105 +3,154 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"BoxSize\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BoxSize"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CenterOffsetMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CenterOffsetMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"CenterOffsetMin\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CenterOffsetMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"DATADataTypeState\": \"Break0\"",
+    "Flags": 92,
+    "Name": "DATADataTypeState"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"GravityVelocity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GravityVelocity"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"InitialRotationRange\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InitialRotationRange"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"NumSubtexturesX\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NumSubtexturesX"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"NumSubtexturesY\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NumSubtexturesY"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleDensity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleDensity"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleSizeX\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleSizeX"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ParticleSizeY\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ParticleSizeY"
+  },
+  {
+    "Aliases": "ICON",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ParticleTexture"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"RotationVelocity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "RotationVelocity"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Rain, Snow)",
     "Example": "\"Type\": \"Rain\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

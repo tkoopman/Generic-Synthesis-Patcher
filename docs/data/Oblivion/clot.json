@@ -1,86 +1,128 @@
 [
   {
     "Aliases": "",
-    "Description": "Flags (Head, Hair, UpperBody, LowerBody, Hand, Foot, RightRing, LeftRing, Amulet, Weapon, BackWeapon, SideWeapon, Quiver, Shield, Torch, Tail)",
-    "Example": "\"ClothingFlags.BipedFlags\": [ \"Head\", \"-Tail\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "ClothingFlags.BipedFlags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ClothingFlags"
   },
   {
     "Aliases": "",
-    "Description": "Flags (HideRings, HideAmulets, NonPlayable, HeavyArmor)",
-    "Example": "\"ClothingFlags.GeneralFlags\": [ \"HideRings\", \"-HeavyArmor\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "ClothingFlags.GeneralFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.Value\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.Value"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.Weight\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.Weight"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Enchantment"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"EnchantmentPoints\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EnchantmentPoints"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FemaleBipedModel"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"FemaleIcon\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FemaleIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FemaleWorldModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MaleBipedModel"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"MaleIcon\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MaleIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MaleWorldModel"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Script"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

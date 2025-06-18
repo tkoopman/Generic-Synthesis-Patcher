@@ -1,5 +1,13 @@
 [
   {
+    "name": "A Damage Type",
+    "id": "DMGT"
+  },
+  {
+    "name": "A Object Modification",
+    "id": "OMOD"
+  },
+  {
     "name": "Acoustic Space",
     "id": "ASPC"
   },
@@ -32,16 +40,16 @@
     "id": "ANIO"
   },
   {
-    "name": "A Object Modification",
-    "id": "OMOD"
-  },
-  {
-    "name": "Armor Addon",
-    "id": "ARMA"
+    "name": "Animation Sound Tag Set",
+    "id": "STAG"
   },
   {
     "name": "Armor",
     "id": "ARMO"
+  },
+  {
+    "name": "Armor Addon",
+    "id": "ARMA"
   },
   {
     "name": "Art Object",
@@ -60,8 +68,16 @@
     "id": "SCSN"
   },
   {
+    "name": "Audio Effect Chain",
+    "id": "AECH"
+  },
+  {
     "name": "Bendable Spline",
     "id": "BNDS"
+  },
+  {
+    "name": "Body Part Data",
+    "id": "BPTD"
   },
   {
     "name": "Book",
@@ -112,8 +128,28 @@
     "id": "CONT"
   },
   {
+    "name": "Debris",
+    "id": "DEBR"
+  },
+  {
     "name": "Default Object",
     "id": "DFOB"
+  },
+  {
+    "name": "Default Object Manager",
+    "id": "DOBJ"
+  },
+  {
+    "name": "Dialog Branch",
+    "id": "DLBR"
+  },
+  {
+    "name": "Dialog Responses",
+    "id": "INFO"
+  },
+  {
+    "name": "Dialog Topic",
+    "id": "DIAL"
   },
   {
     "name": "Dialog View",
@@ -122,6 +158,10 @@
   {
     "name": "Door",
     "id": "DOOR"
+  },
+  {
+    "name": "Dual Cast Data",
+    "id": "DUAL"
   },
   {
     "name": "Effect Shader",
@@ -164,6 +204,14 @@
     "id": "FURN"
   },
   {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
     "name": "God Rays",
     "id": "GDRY"
   },
@@ -192,16 +240,20 @@
     "id": "IDLM"
   },
   {
-    "name": "Image Space Adapter",
-    "id": "IMAD"
-  },
-  {
     "name": "Image Space",
     "id": "IMGS"
   },
   {
+    "name": "Image Space Adapter",
+    "id": "IMAD"
+  },
+  {
     "name": "Impact",
     "id": "IPCT"
+  },
+  {
+    "name": "Impact Data Set",
+    "id": "IPDS"
   },
   {
     "name": "Ingestible",
@@ -222,6 +274,10 @@
   {
     "name": "Keyword",
     "id": "KYWD"
+  },
+  {
+    "name": "Landscape",
+    "id": "LAND"
   },
   {
     "name": "Landscape Texture",
@@ -304,8 +360,16 @@
     "id": "MUSC"
   },
   {
+    "name": "Navigation Mesh",
+    "id": "NAVM"
+  },
+  {
     "name": "Navigation Mesh Info Map",
     "id": "NAVI"
+  },
+  {
+    "name": "Navigation Mesh Obstacle Manager",
+    "id": "NOCM"
   },
   {
     "name": "Npc",
@@ -316,20 +380,32 @@
     "id": "ENCH"
   },
   {
-    "name": "Outfit",
-    "id": "OTFT"
+    "name": "Object Visibility Manager",
+    "id": "OVIS"
   },
   {
-    "name": "Package",
-    "id": "PACK"
+    "name": "Outfit",
+    "id": "OTFT"
   },
   {
     "name": "Pack In",
     "id": "PKIN"
   },
   {
+    "name": "Package",
+    "id": "PACK"
+  },
+  {
     "name": "Perk",
     "id": "PERK"
+  },
+  {
+    "name": "Placed Npc",
+    "id": "ACHR"
+  },
+  {
+    "name": "Placed Object",
+    "id": "REFR"
   },
   {
     "name": "Projectile",
@@ -358,6 +434,10 @@
   {
     "name": "Reverb Parameters",
     "id": "REVB"
+  },
+  {
+    "name": "Scene",
+    "id": "SCEN"
   },
   {
     "name": "Scene Collection",
@@ -392,12 +472,12 @@
     "id": "SPEL"
   },
   {
-    "name": "Static Collection",
-    "id": "SCOL"
-  },
-  {
     "name": "Static",
     "id": "STAT"
+  },
+  {
+    "name": "Static Collection",
+    "id": "SCOL"
   },
   {
     "name": "Talking Activator",
@@ -422,6 +502,10 @@
   {
     "name": "Visual Effect",
     "id": "RFCT"
+  },
+  {
+    "name": "Voice Type",
+    "id": "VTYP"
   },
   {
     "name": "Water",

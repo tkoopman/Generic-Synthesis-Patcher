@@ -1,93 +1,86 @@
 [
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.BaseCost\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.BaseCost"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.CounterEffectCount\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.CounterEffectCount"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Data.EffectShader"
+    "Flags": 144,
+    "Name": "CounterEffects"
   },
   {
     "Aliases": "",
-    "Description": "Flags (Hostile, Recover, Detrimental, MagnitudePercent, Self, Touch, Target, NoDuration, NoMagnitude, NoArea, FXPersist, Spellmaking, Enchanting, NoIngredient, UNKNOWN_14, UNKNOWN_15, UseWeapon, UseArmor, UseCreature, UseSkill, UseAttribute, UNKNWOWN_21, UNKNWOWN_22, UNKNWOWN_23, UseActorValue, SprayProjectileOrFog, BoltProjectile, NoHitEffect, UNKNOWN_28, UNKNOWN_29, UNKNOWN_30)",
-    "Example": "\"Data.Flags\": [ \"Hostile\", \"-UNKNOWN_30\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Data.Light"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration)",
-    "Example": "\"Data.MagicSchool\": \"Alteration\"",
-    "MFFSM": "MF---",
-    "Name": "Data.MagicSchool"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.ProjectileSpeed\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.ProjectileSpeed"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (ResistFire, ResistFrost, ResistDisease, ResistMagic, ResistNormalWeapons, ResistParalysis, ResistPoison, ResistShock, None)",
-    "Example": "\"Data.Resistance\": \"ResistFire\"",
-    "MFFSM": "MF---",
-    "Name": "Data.Resistance"
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Icon\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Icon"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

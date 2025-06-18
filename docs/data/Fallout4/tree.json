@@ -3,182 +3,196 @@
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BackAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BackAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BackFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BackFrequency"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BranchFlexibility\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BranchFlexibility"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FrontAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FrontAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FrontFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FrontFrequency"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HarvestSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Ingredient"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"LeafAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LeafAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"LeafFlexibility\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LeafFlexibility"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"LeafFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LeafFrequency"
   },
   {
     "Aliases": "",
     "Description": "Flags (HasDistantLod)",
     "Example": "\"MajorFlags\": \"HasDistantLod\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Production.Fall\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Production.Fall"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Production.Spring\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Production.Spring"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Production.Summer\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Production.Summer"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Production.Winter\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Production.Winter"
+    "Flags": 144,
+    "Name": "Production"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"SideAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SideAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"SideFrequency\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SideFrequency"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TrunkAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TrunkAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TrunkFlexibility\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TrunkFlexibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   }
 ]

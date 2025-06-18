@@ -1,0 +1,569 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AcousticRestriction"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (UseDefault, Activate, Open, OpenByDefault)",
+    "Example": "\"Action\": \"UseDefault\"",
+    "Flags": 12,
+    "Name": "Action"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ActivateParents"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Alpha"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AmmoCount\": 7",
+    "Flags": 28,
+    "Name": "AmmoCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "AttachRef"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Base"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "BoundHalfExtents"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CollisionLayer\": 7",
+    "Flags": 28,
+    "Name": "CollisionLayer"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Comments\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Comments"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CurrentZoneCell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "CurrentZoneReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DistantLodData"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Emittance"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EnableParent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "EncounterZone"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FactionRank\": 7",
+    "Flags": 28,
+    "Name": "FactionRank"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "Fallout4MajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FavorCost\": 3.14",
+    "Flags": 28,
+    "Name": "FavorCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HeadTrackingWeight\": 3.14",
+    "Flags": 28,
+    "Name": "HeadTrackingWeight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"HealthPercent\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "HealthPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ImageSpace"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsActivationPoint\": true",
+    "Flags": 28,
+    "Name": "IsActivationPoint"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsIgnoredBySandbox\": true",
+    "Flags": 28,
+    "Name": "IsIgnoredBySandbox"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsLinkedRefTransient\": true",
+    "Flags": 28,
+    "Name": "IsLinkedRefTransient"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsMultiBoundPrimitive\": true",
+    "Flags": 28,
+    "Name": "IsMultiBoundPrimitive"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ItemCount\": 7",
+    "Flags": 28,
+    "Name": "ItemCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "Layer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LeveledItemBaseObject"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Easy, Medium, Hard, VeryHard)",
+    "Example": "\"LevelModifier\": \"Easy\"",
+    "Flags": 12,
+    "Name": "LevelModifier"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Lighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LightingTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "LinkedReferences"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "LinkedRooms"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "LitWater"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LocationReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "LocationRefType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "",
+    "Flags": 124,
+    "Name": "LocationRefTypes"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Lock"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "MapMarker"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "MultiboundReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "NavigationDoorLink"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "OcclusionPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"OpenByDefault\": true",
+    "Flags": 28,
+    "Name": "OpenByDefault"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Ownership"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Patrol"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "PersistentLocation"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Portals"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "PowerGridConnections"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Primitive"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ProjectedDecal"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Radio"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Radius\": 3.14",
+    "Flags": 28,
+    "Name": "Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "RagdollBipedRotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RagdollData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "ReferenceGroup"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RoomPortal"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 24,
+    "Name": "Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Scale\": 3.14",
+    "Flags": 28,
+    "Name": "Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "SpawnContainer"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Spline"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SplineConnections"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "TeleportDestination"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "",
+    "Flags": 28,
+    "Name": "TeleportLocName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WaterVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XCVL\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XCVL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XCVR\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XCVR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XCZA\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XCZA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XORD\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XORD"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"XWCN\": [0x1A,0x00,0x3F]",
+    "Flags": 24,
+    "Name": "XWCN"
+  }
+]

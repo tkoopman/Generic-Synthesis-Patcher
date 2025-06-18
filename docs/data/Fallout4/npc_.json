@@ -3,686 +3,679 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ActivateTextOverride\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ActivateTextOverride"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "ActorEffect"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Unaggressive, Aggressive, VeryAggressive, Frenzied)",
     "Example": "\"Aggression\": \"Unaggressive\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Aggression"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"AggroRadiusAttack\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AggroRadiusAttack"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"AggroRadiusBehaviorEnabled\": true",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AggroRadiusBehaviorEnabled"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"AggroRadiusWarn\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AggroRadiusWarn"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"AggroRadiusWarnOrAttack\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AggroRadiusWarnOrAttack"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AnimationSound"
   },
   {
     "Aliases": "",
     "Description": "Possible values (HelpsNobody, HelpsAllies, HelpsFriendsAndAllies)",
     "Example": "\"Assistance\": \"HelpsNobody\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Assistance"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "AttackRace"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Attacks"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"BleedoutOverride\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "BleedoutOverride"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"BodyMorphRegionValues.Arms\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "BodyMorphRegionValues.Arms"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"BodyMorphRegionValues.Head\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "BodyMorphRegionValues.Head"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"BodyMorphRegionValues.Legs\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "BodyMorphRegionValues.Legs"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"BodyMorphRegionValues.LowerTorso\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "BodyMorphRegionValues.LowerTorso"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"BodyMorphRegionValues.UpperTorso\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "BodyMorphRegionValues.UpperTorso"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "BodyMorphRegionValues"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"CalcMaxLevel\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CalcMaxLevel"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"CalcMinLevel\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CalcMinLevel"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"CalculatedActionPoints\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CalculatedActionPoints"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"CalculatedHealth\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CalculatedHealth"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Class"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CombatOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CombatStyle"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Cowardly, Cautious, Average, Brave, Foolhardy)",
     "Example": "\"Confidence\": \"Cowardly\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Confidence"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "CrimeFaction"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DeathItem"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DefaultOutfit"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DefaultPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DefaultTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"DispositionBase\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DispositionBase"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"EnergyLevel\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EnergyLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceMorphs"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "FaceTintingLayers"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FacialHairColor"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FacialMorphIntensity\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FacialMorphIntensity"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Factions"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FarAwayModel"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FarAwayModelDistance\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FarAwayModelDistance"
   },
   {
     "Aliases": "",
     "Description": "Flags (Female, Essential, IsCharGenFacePreset, Respawn, AutoCalcStats, Unique, DoesntAffectStealthMeter, CalcForEachTemplate, Protected, Summonable, DoesNotBleed, BleedoutOverride, OppositeGenderAnims, SimpleActor, NoActivationOrHellos, DiffuseAlphaTest, IsGhost, Invulnerable)",
     "Example": "\"Flags\": [ \"Female\", \"-Invulnerable\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FollowerCommandPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FollowerElevatorPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ForcedLocRefType"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"GearedUpWeapons\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GearedUpWeapons"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GiftFilter"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GuardWarnOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HairColor"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "HeadParts"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HeadTexture"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HeightMax\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HeightMax"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"HeightMin\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HeightMin"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InheritsSoundsFrom"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "JSON objects containing item Form Key/Editor ID and Count (QTY)",
     "Example": "\"Items\": { \"Item\": \"021FED:Fallout4.esm\", \"Count\": 3 }",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Items"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LegendaryChance"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LegendaryTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Level"
   },
   {
     "Aliases": "",
     "Description": "Flags (BleedoutOverride)",
     "Example": "\"MajorFlags\": \"BleedoutOverride\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Neutral, Angry, Fear, Happy, Sad, Surprised, Puzzled, Disgusted)",
     "Example": "\"Mood\": \"Neutral\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Mood"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Morphs"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"NAM5\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "NAM5"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NAM7\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NAM7"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NativeTerminal"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"NoSlowApproach\": true",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NoSlowApproach"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
+    "Flags": 144,
+    "Name": "ObjectTemplates"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ObserveDeadBodyOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Packages"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Perks"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PowerArmorStand"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Properties"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Race"
   },
   {
     "Aliases": "",
     "Description": "Possible values (AnyCrime, ViolenceAgainstEnemies, PropertyCrimeOnly, NoCrime)",
     "Example": "\"Responsibility\": \"AnyCrime\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Responsibility"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"ShortName\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ShortName"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Skin"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SleepingOutfit"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Loud, Normal, Silent, VeryLoud, Quiet)",
     "Example": "\"SoundLevel\": \"Loud\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "SoundLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Sounds"
   },
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
     "Example": "\"SoundsFinalize\": [0x1A,0x00,0x3F]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "SoundsFinalize"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SpectatorOverridePackageList"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.AiDataTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.AiPackagesTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.AttackDataTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.BaseDataTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.DefPackListTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.FactionsTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.InventoryTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.KeywordsTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.ModelOrAnimationTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.ScriptTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.SpellListTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.StatsTemplate"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Key or Editor ID",
-    "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "TemplateActors.TraitTemplate"
+    "Flags": 144,
+    "Name": "TemplateActors"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"TextureLighting\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "TextureLighting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unknown\": 7",
+    "Flags": 28,
+    "Name": "Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Unused\": 7",
+    "Flags": 28,
+    "Name": "Unused"
   },
   {
     "Aliases": "",
     "Description": "Possible values (Traits, Stats, Factions, SpellList, AiData, AiPackages, ModelOrAnimation, BaseData, Inventory, Script, DefPackList, AttackData, Keywords)",
     "Example": "\"UseTemplateActors\": \"Traits\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "UseTemplateActors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Voice"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Weight.Fat\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Weight.Fat"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Weight.Muscular\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Weight.Muscular"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Weight.Thin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Weight.Thin"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Weight"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"XpValueOffset\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "XpValueOffset"
   }
 ]

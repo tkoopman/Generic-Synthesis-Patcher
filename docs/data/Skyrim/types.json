@@ -32,12 +32,12 @@
     "id": "ANIO"
   },
   {
-    "name": "Armor Addon",
-    "id": "ARMA"
-  },
-  {
     "name": "Armor",
     "id": "ARMO"
+  },
+  {
+    "name": "Armor Addon",
+    "id": "ARMA"
   },
   {
     "name": "Art Object",
@@ -96,8 +96,20 @@
     "id": "CONT"
   },
   {
+    "name": "Debris",
+    "id": "DEBR"
+  },
+  {
+    "name": "Default Object Manager",
+    "id": "DOBJ"
+  },
+  {
     "name": "Dialog Branch",
     "id": "DLBR"
+  },
+  {
+    "name": "Dialog Responses",
+    "id": "INFO"
   },
   {
     "name": "Dialog Topic",
@@ -160,8 +172,20 @@
     "id": "FURN"
   },
   {
+    "name": "Game Setting",
+    "id": "GMST"
+  },
+  {
+    "name": "Global",
+    "id": "GLOB"
+  },
+  {
     "name": "Grass",
     "id": "GRAS"
+  },
+  {
+    "name": "Hair",
+    "id": "HAIR"
   },
   {
     "name": "Hazard",
@@ -180,16 +204,20 @@
     "id": "IDLM"
   },
   {
-    "name": "Image Space Adapter",
-    "id": "IMAD"
-  },
-  {
     "name": "Image Space",
     "id": "IMGS"
   },
   {
+    "name": "Image Space Adapter",
+    "id": "IMAD"
+  },
+  {
     "name": "Impact",
     "id": "IPCT"
+  },
+  {
+    "name": "Impact Data Set",
+    "id": "IPDS"
   },
   {
     "name": "Ingestible",
@@ -208,8 +236,16 @@
     "id": "KYWD"
   },
   {
+    "name": "Landscape",
+    "id": "LAND"
+  },
+  {
     "name": "Landscape Texture",
     "id": "LTEX"
+  },
+  {
+    "name": "Lens Flare",
+    "id": "LENS"
   },
   {
     "name": "Leveled Item",
@@ -280,6 +316,14 @@
     "id": "MUSC"
   },
   {
+    "name": "Navigation Mesh",
+    "id": "NAVM"
+  },
+  {
+    "name": "Navigation Mesh Info Map",
+    "id": "NAVI"
+  },
+  {
     "name": "Npc",
     "id": "NPC_"
   },
@@ -298,6 +342,14 @@
   {
     "name": "Perk",
     "id": "PERK"
+  },
+  {
+    "name": "Placed Npc",
+    "id": "ACHR"
+  },
+  {
+    "name": "Placed Object",
+    "id": "REFR"
   },
   {
     "name": "Projectile",
@@ -382,6 +434,14 @@
   {
     "name": "Visual Effect",
     "id": "RFCT"
+  },
+  {
+    "name": "Voice Type",
+    "id": "VTYP"
+  },
+  {
+    "name": "Volumetric Lighting",
+    "id": "VOLI"
   },
   {
     "name": "Water",

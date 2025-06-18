@@ -1,0 +1,142 @@
+[
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorB\": 3.14",
+    "Flags": 28,
+    "Name": "ColorB"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorG\": 3.14",
+    "Flags": 28,
+    "Name": "ColorG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ColorR\": 3.14",
+    "Flags": 28,
+    "Name": "ColorR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CustomColorContribution\": 3.14",
+    "Flags": 28,
+    "Name": "CustomColorContribution"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DensityContribution\": 3.14",
+    "Flags": 28,
+    "Name": "DensityContribution"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DensityFallingSpeed\": 3.14",
+    "Flags": 28,
+    "Name": "DensityFallingSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DensitySize\": 3.14",
+    "Flags": 28,
+    "Name": "DensitySize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DensityWindSpeed\": 3.14",
+    "Flags": 28,
+    "Name": "DensityWindSpeed"
+  },
+  {
+    "Aliases": "EDID",
+    "Description": "String value",
+    "Example": "\"EditorID\": \"Hello\"",
+    "Flags": 28,
+    "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"FormVersion\": 7",
+    "Flags": 28,
+    "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Intensity\": 3.14",
+    "Flags": 28,
+    "Name": "Intensity"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhaseFunctionContribution\": 3.14",
+    "Flags": 28,
+    "Name": "PhaseFunctionContribution"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"PhaseFunctionScattering\": 3.14",
+    "Flags": 28,
+    "Name": "PhaseFunctionScattering"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"SamplingRepartitionRangeFactor\": 3.14",
+    "Flags": 28,
+    "Name": "SamplingRepartitionRangeFactor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  }
+]

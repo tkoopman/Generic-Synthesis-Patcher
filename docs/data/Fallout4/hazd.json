@@ -3,147 +3,175 @@
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Effect"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (AffectsPlayerOnly, InheritDurationFromSpawnSpell, AlignToImpactNormal, InheritRadiusFromSpawnSpell, DropToGround, TaperEffectivenessByProximity)",
     "Example": "\"Flags\": [ \"AffectsPlayerOnly\", \"-TaperEffectivenessByProximity\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ImageSpaceModifier"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ImageSpaceRadius\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ImageSpaceRadius"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ImpactDataSet"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Lifetime\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Lifetime"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Light"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Limit\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Limit"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Radius\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Radius"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Sound"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TaperCurse\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TaperCurse"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TaperFullEffectRadius\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TaperFullEffectRadius"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TaperWeight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TaperWeight"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"TargetInterval\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "TargetInterval"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

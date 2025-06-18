@@ -1,79 +1,128 @@
 [
   {
+    "Aliases": "MOD2",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CameraPath"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
+  },
+  {
     "Aliases": "DESC",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Description"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Icons"
   },
   {
     "Aliases": "RNAM",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "InitialRotation"
   },
   {
     "Aliases": "SNAM",
     "Description": "Decimal value",
     "Example": "\"InitialScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "InitialScale"
   },
   {
     "Aliases": "XNAM",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "InitialTranslationOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "NNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "LoadingScreenNif"
   },
   {
     "Aliases": "RecordFlags",
     "Description": "Flags (DisplaysInMainMenu)",
     "Example": "\"MajorFlags\": \"DisplaysInMainMenu\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
   },
   {
-    "Aliases": "ONAM.Max",
+    "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"RotationOffsetConstraints.Max\": 7",
-    "MFFSM": "MFF--",
-    "Name": "RotationOffsetConstraints.Max"
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
-    "Aliases": "ONAM.Min",
-    "Description": "Numeric value",
-    "Example": "\"RotationOffsetConstraints.Min\": 7",
-    "MFFSM": "MFF--",
-    "Name": "RotationOffsetConstraints.Min"
+    "Aliases": "ONAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "RotationOffsetConstraints"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

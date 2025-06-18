@@ -114,12 +114,12 @@ namespace GenericSynthesisPatcher.Helpers
         public static bool TryGetPropertyForSetting<T> (ILoquiObject patchRecord, string propertyName, out T? value, [NotNullWhen(true)] out object? parent, [NotNullWhen(true)] out PropertyInfo? property)
         {
             value = default;
-            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property) && property.CanWrite && convertPropertyNullable(propertyName, property, _value, out value);
+            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property) && property.IsValidPropertyType() && convertPropertyNullable(propertyName, property, _value, out value);
         }
 
         public static bool TryGetPropertyValueForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
         {
-            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property) || !property.CanWrite || parent is null)
+            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property) || !property.IsValidPropertyType() || parent is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
                 value = default;
@@ -191,7 +191,7 @@ namespace GenericSynthesisPatcher.Helpers
 
         private static object? setDefaultPropertyValue (object? parent, PropertyInfo property)
         {
-            if (!property.CanWrite)
+            if (!property.IsValidPropertyType())
             {
                 Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} parent value for editing as not writable.", logLevel: LogLevel.Error, propertyName: property.Name);
                 return null;
@@ -266,8 +266,7 @@ namespace GenericSynthesisPatcher.Helpers
                 }
             }
 
-            // Check property is not null one last time just for off chance propertyNames had no
-            // entries
+            // Check property is not null one last time just for off chance propertyNames had no entries
             if (property is null)
             {
                 Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);

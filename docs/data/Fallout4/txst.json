@@ -1,191 +1,142 @@
 [
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Decal.AlphaThreshold\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Decal.AlphaThreshold"
-  },
-  {
-    "Aliases": "",
-    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
-    "Example": "\"Decal.Color\": [40,50,60]",
-    "MFFSM": "-FF--",
-    "Name": "Decal.Color"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.Depth\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.Depth"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (POMShadows, AlphaBlending, AlphaTesting, NoSubtextures, MultiplicativeBlending)",
-    "Example": "\"Decal.Flags\": [ \"POMShadows\", \"-MultiplicativeBlending\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Decal.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.MaxHeight\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.MaxHeight"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.MaxWidth\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.MaxWidth"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.MinHeight\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.MinHeight"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.MinWidth\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.MinWidth"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Decal.ParallaxPasses\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Decal.ParallaxPasses"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.ParallaxScale\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.ParallaxScale"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Decal.Shininess\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Decal.Shininess"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Decal"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Diffuse\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Diffuse"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Environment\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Environment"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (NoSpecularMap, FaceGenTextures, HasModelSpaceNormalMap)",
     "Example": "\"Flags\": [ \"NoSpecularMap\", \"-HasModelSpaceNormalMap\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Glow\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Glow"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Height\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Height"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Material\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Material"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Multilayer\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Multilayer"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"NormalOrGloss\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NormalOrGloss"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"SmoothSpec\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SmoothSpec"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Wrinkles\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Wrinkles"
   }
 ]

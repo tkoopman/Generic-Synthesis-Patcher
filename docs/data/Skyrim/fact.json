@@ -1,198 +1,170 @@
 [
   {
-    "Aliases": "CRVA.Arrest",
-    "Description": "True / False",
-    "Example": "\"CrimeValues.Arrest\": true",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Arrest"
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
   },
   {
-    "Aliases": "CRVA.Assault",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Assault\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Assault"
-  },
-  {
-    "Aliases": "CRVA.AttackOnSight",
-    "Description": "True / False",
-    "Example": "\"CrimeValues.AttackOnSight\": true",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.AttackOnSight"
-  },
-  {
-    "Aliases": "CRVA.Escape",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Escape\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Escape"
-  },
-  {
-    "Aliases": "CRVA.Murder",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Murder\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Murder"
-  },
-  {
-    "Aliases": "CRVA.Pickpocket",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Pickpocket\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Pickpocket"
-  },
-  {
-    "Aliases": "CRVA.StealMult",
-    "Description": "Decimal value",
-    "Example": "\"CrimeValues.StealMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.StealMult"
-  },
-  {
-    "Aliases": "CRVA.Trespass",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Trespass\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Trespass"
-  },
-  {
-    "Aliases": "CRVA.Werewolf",
-    "Description": "Numeric value",
-    "Example": "\"CrimeValues.Werewolf\": 7",
-    "MFFSM": "MFF--",
-    "Name": "CrimeValues.Werewolf"
+    "Aliases": "CRVA",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "CrimeValues"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "JAIL",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "ExteriorJailMarker"
   },
   {
     "Aliases": "DATA",
     "Description": "Flags (HiddenFromPC, SpecialCombat, TrackCrime, IgnoreMurder, IgnoreAssault, IgnoreStealing, IgnoreTrespass, DoNotReportCrimesAgainstMembers, CrimeGoldUseDefaults, IgnorePickpocket, Vendor, CanBeOwner, IgnoreWerewolf)",
     "Example": "\"Flags\": [ \"HiddenFromPC\", \"-IgnoreWerewolf\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "WAIT",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FollowerWaitMarker"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "JOUT",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "JailOutfit"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "VENC",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MerchantContainer"
   },
   {
     "Aliases": "FULL",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "PLCN",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PlayerInventoryContainer"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Ranks"
   },
   {
     "Aliases": "XNAM",
     "Description": "JSON objects containing target Form Key/Editor ID, Reaction (Neutral, Enemy, Ally, Friend) and Modifier (Defaults to 0)",
     "Example": "\"Relations\": { \"Target\": \"021FED:Skyrim.esm\", \"Reaction\": \"Friend\" }",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Relations"
   },
   {
     "Aliases": "CRGR",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SharedCrimeFactionList"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
   },
   {
     "Aliases": "STOL",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "StolenGoodsContainer"
   },
   {
     "Aliases": "VEND",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "VendorBuySellList"
   },
   {
-    "Aliases": "VENV.EndHour",
+    "Aliases": "PLVD",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VendorLocation"
+  },
+  {
+    "Aliases": "VENV",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VendorValues"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"VendorValues.EndHour\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VendorValues.EndHour"
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
   },
   {
-    "Aliases": "VENV.NotSellBuy",
-    "Description": "True / False",
-    "Example": "\"VendorValues.NotSellBuy\": true",
-    "MFFSM": "MFF--",
-    "Name": "VendorValues.NotSellBuy"
-  },
-  {
-    "Aliases": "VENV.OnlyBuysStolenItems",
-    "Description": "True / False",
-    "Example": "\"VendorValues.OnlyBuysStolenItems\": true",
-    "MFFSM": "MFF--",
-    "Name": "VendorValues.OnlyBuysStolenItems"
-  },
-  {
-    "Aliases": "VENV.Radius",
+    "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"VendorValues.Radius\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VendorValues.Radius"
-  },
-  {
-    "Aliases": "VENV.StartHour",
-    "Description": "Numeric value",
-    "Example": "\"VendorValues.StartHour\": 7",
-    "MFFSM": "MFF--",
-    "Name": "VendorValues.StartHour"
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

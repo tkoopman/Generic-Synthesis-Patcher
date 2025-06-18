@@ -1,9 +1,7 @@
-﻿using GSPTestProject.GameData.Universal;
-
-using Mutagen.Bethesda;
+﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Skyrim;
 
-namespace GSPTestProject.GameData.SkyrimSE
+namespace GSPTestProject.GameData.GlobalGame.Fixtures
 {
     public sealed class SkyrimSEFixture : BaseFixture<ISkyrimMod, ISkyrimModGetter>
     {

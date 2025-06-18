@@ -9,7 +9,7 @@ using Noggog;
 
 using Global = GenericSynthesisPatcher.Global;
 
-namespace GSPTestProject.GameData.Universal
+namespace GSPTestProject.GameData.GlobalGame.Fixtures
 {
     public abstract class BaseFixture<TModSetter, TModGetter>
         where TModSetter : class, IContextMod<TModSetter, TModGetter>, TModGetter

@@ -3,49 +3,133 @@
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Forward Model data.",
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
-    "MFFSM": "--F--",
+    "Flags": 16,
     "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "Flags (Masser, Secunda)",
     "Example": "\"Moons\": [ \"Masser\", \"-Secunda\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Moons"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"PhaseLength\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PhaseLength"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "GNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunGlareTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunriseBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunriseEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunsetBegin"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunsetEnd"
+  },
+  {
+    "Aliases": "FNAM",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "SunTexture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Volatility\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Volatility"
+  },
+  {
+    "Aliases": "WLST",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WeatherTypes"
   }
 ]

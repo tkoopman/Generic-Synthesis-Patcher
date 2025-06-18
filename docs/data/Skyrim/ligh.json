@@ -3,154 +3,210 @@
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Color\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "Color"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "FNAM",
     "Description": "Decimal value",
     "Example": "\"FadeValue\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FadeValue"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FalloffExponent\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FalloffExponent"
   },
   {
     "Aliases": "",
     "Description": "Flags (Dynamic, CanBeCarried, Negative, Flicker, OffByDefault, FlickerSlow, Pulse, PulseSlow, SpotLight, ShadowSpotlight, ShadowHemisphere, ShadowOmnidirectional, PortalStrict)",
     "Example": "\"Flags\": [ \"Dynamic\", \"-PortalStrict\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerIntensityAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerIntensityAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerMovementAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerMovementAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerPeriod\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerPeriod"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FOV\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FOV"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Icons"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "LNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Lens"
   },
   {
     "Aliases": "RecordFlags",
     "Description": "Flags (RandomAnimStart, PortalStrict, Obstacle)",
     "Example": "\"MajorFlags\": [ \"RandomAnimStart\", \"-Obstacle\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Forward Model data.",
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
-    "MFFSM": "--F--",
+    "Flags": 16,
     "Name": "Model"
   },
   {
     "Aliases": "FULL",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NearClip\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NearClip"
   },
   {
     "Aliases": "OBND",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Radius\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Radius"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
   },
   {
     "Aliases": "SNAM",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Sound"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Time\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Time"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Value\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "VMAD",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Weight"
   }
 ]

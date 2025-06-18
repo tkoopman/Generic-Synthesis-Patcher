@@ -1,107 +1,79 @@
 [
   {
     "Aliases": "",
-    "Description": "Flags (OffersServices, MustReachLocation, MustComplete, LockDoorsAtPackageStart, LockDoorsAtPackageEnd, LockDoorsAtLocation, UnlockDoorsAtPackageStart, UnlockDoorsAtPackageEnd, UnlockDoorsAtLocation, ContinueIfPCNear, OncePerDay, Unused, SkipFalloutBehavior, AlwaysRun, AlwaysSneak, AllowSwimming, AllowFalls, ArmorUnequpped, WeaponsUnequipped, DefensiveCombat, UseHorse, NoIdleAnims)",
-    "Example": "\"Data.Flags\": [ \"OffersServices\", \"-NoIdleAnims\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Conditions"
   },
   {
     "Aliases": "",
-    "Description": "Possible values (Find, Follow, Escort, Eat, Sleep, Wander, Travel, Accompany, UseItemAt, Ambush, FleeNotCombat, CastMagic)",
-    "Example": "\"Data.Type\": \"Find\"",
-    "MFFSM": "MF---",
-    "Name": "Data.Type"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
-    "Description": "Form Key or Editor ID",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
     "Example": "",
-    "MFFSM": "MFF--",
-    "Name": "Location.LocationReference"
+    "Flags": 144,
+    "Name": "Location"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Location.Radius\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Location.Radius"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (NearReference, InCell, NearCurrentLocation, NearEditorLocation, ObjectID, ObjectType)",
-    "Example": "\"Location.Type\": \"NearReference\"",
-    "MFFSM": "MF---",
-    "Name": "Location.Type"
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Schedule.Day\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Schedule.Day"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Schedule"
   },
   {
     "Aliases": "",
-    "Description": "Possible values (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Weekday, Weekend, MondayWednesdayFriday, TuesdayThursday, Any)",
-    "Example": "\"Schedule.DayOfWeek\": \"Sunday\"",
-    "MFFSM": "MF---",
-    "Name": "Schedule.DayOfWeek"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Schedule.Duration\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Schedule.Duration"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (January, February, March, April, May, June, July, August, September, October, November, December, Any)",
-    "Example": "\"Schedule.Month\": \"January\"",
-    "MFFSM": "MF---",
-    "Name": "Schedule.Month"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Target"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
-    "Example": "\"Schedule.Time\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Schedule.Time"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Target.Count\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Target.Count"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Target.Object\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Target.Object"
-  },
-  {
-    "Aliases": "",
-    "Description": "Possible values (SpecificReference, ObjectID, ObjectType)",
-    "Example": "\"Target.ObjectType\": \"SpecificReference\"",
-    "MFFSM": "MF---",
-    "Name": "Target.ObjectType"
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

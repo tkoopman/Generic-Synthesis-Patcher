@@ -1,6 +1,7 @@
 using System.Reflection;
 
 using GenericSynthesisPatcher.Games.Oblivion.Action;
+using GenericSynthesisPatcher.Games.Skyrim;
 using GenericSynthesisPatcher.Games.Universal.Action;
 
 using Loqui;
@@ -18,16 +19,21 @@ namespace GenericSynthesisPatcher.Games.Oblivion
 {
     public class OblivionGame : Universal.BaseGame
     {
-        private readonly IEnumerable<IModListing<IOblivionModGetter>> OnlyEnabledAndExisting;
+        private OblivionGame () => State = null!;
 
-        public OblivionGame (IPatcherState<IOblivionMod, IOblivionModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value)))
+        private OblivionGame (IPatcherState<IOblivionMod, IOblivionModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
+
+        public override IPatcherState<IOblivionMod, IOblivionModGetter> State { get; }
+
+        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+
+        public static OblivionGame Constructor (IPatcherState<IOblivionMod, IOblivionModGetter> gameState)
         {
-            State = gameState;
-            OnlyEnabledAndExisting = State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting();
+            var game = gameState is null ? new OblivionGame () : new OblivionGame(gameState);
 
-            //SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+            //game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
 
-            IgnoreSubPropertiesOnTypes.Add(
+            game.IgnoreSubPropertiesOnTypes.Add(
                 [
                 typeof(Cell),
                 typeof(Landscape),
@@ -38,15 +44,15 @@ namespace GenericSynthesisPatcher.Games.Oblivion
                 typeof(RegionSounds),
                 typeof(RegionWeather),
                 ]);
-        }
 
-        public override IPatcherState<IOblivionMod, IOblivionModGetter> State { get; }
+            return game;
+        }
 
         public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
         {
             var m = typeof(TypeOptionSolidifierMixIns).GetMethod(recordType.Name, BindingFlags.Public | BindingFlags.Static, [typeof(IEnumerable<IModListingGetter<IOblivionModGetter>>)]) ?? throw new InvalidOperationException($"No method found for record type {recordType.Name}.");
 
-            object records = m.Invoke(null, [OnlyEnabledAndExisting]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
+            object records = m.Invoke(null, [State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting()]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
 
             m = records.GetType().GetMethod("WinningContextOverrides") ?? throw new InvalidOperationException($"No WinningContextOverrides method found for record type {recordType.Name}.");
 
@@ -78,25 +84,6 @@ namespace GenericSynthesisPatcher.Games.Oblivion
                 default:
                     return null;
             }
-        }
-
-        protected override IEnumerable<ILoquiRegistration> getRecordTypes ()
-        {
-            List<ILoquiRegistration> types = [];
-
-            foreach (var method in typeof(TypeOptionSolidifierMixIns).GetMethods())
-            {
-                if (!method.ReturnType.IsGenericType || method.ReturnType.GenericTypeArguments.Length == 0)
-                    continue;
-
-                var returnType = method.ReturnType.GenericTypeArguments[^1];
-
-                var regoProperty = returnType.GetProperty("StaticRegistration");
-                if (regoProperty?.GetValue(null) is ILoquiRegistration rego)
-                    types.Add(rego);
-            }
-
-            return types;
         }
     }
 }

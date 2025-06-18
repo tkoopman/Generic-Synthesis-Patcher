@@ -1,93 +1,142 @@
 [
   {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1, Break2)",
+    "Example": "\"DATADataTypeState\": [ \"Break0\", \"-Break2\" ]",
+    "Flags": 92,
+    "Name": "DATADataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DNAMs"
+  },
+  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FalloffBias\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FalloffBias"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FalloffScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FalloffScale"
   },
   {
     "Aliases": "",
     "Description": "Flags (SinglePass)",
     "Example": "\"Flags\": \"SinglePass\"",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"HasSnow\": true",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "HasSnow"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"MaterialUvScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MaterialUvScale"
   },
   {
     "Aliases": "",
     "Description": "Forward Model data.",
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
-    "MFFSM": "--F--",
+    "Flags": 16,
     "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NoiseUvScale\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NoiseUvScale"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NormalDampener\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NormalDampener"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ProjectionVector"
   },
   {
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"SinglePassColor\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "SinglePassColor"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

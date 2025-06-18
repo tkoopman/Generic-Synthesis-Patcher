@@ -1,142 +1,100 @@
 [
   {
     "Aliases": "",
-    "Description": "Flags (AttenuatesWithDistance, AllowsRumble, AppliesDoppler, AppliesDistanceDelay, PlayerOutputModel, TryPlayOnController, CausesDucking, AvoidsDucking)",
-    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AvoidsDucking\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
-    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
-    "MFFSM": "-FF--",
-    "Name": "Data.ReverbSendPercent"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeInCurveValue1\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInCurveValue1"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeInCurveValue2\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInCurveValue2"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeInCurveValue3\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInCurveValue3"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeInCurveValue4\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInCurveValue4"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"DynamicAttentuation.FadeInDistanceEnd\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInDistanceEnd"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"DynamicAttentuation.FadeInDistanceStart\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeInDistanceStart"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeOutCurveValue1\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutCurveValue1"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeOutCurveValue2\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutCurveValue2"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeOutCurveValue3\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutCurveValue3"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"DynamicAttentuation.FadeOutCurveValue4\": 7",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutCurveValue4"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"DynamicAttentuation.FadeOutDistanceEnd\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutDistanceEnd"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"DynamicAttentuation.FadeOutDistanceStart\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "DynamicAttentuation.FadeOutDistanceStart"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DynamicAttentuation"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EffectChain"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "OutputChannels"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"StaticAttenuation\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "StaticAttenuation"
   },
   {
     "Aliases": "",
     "Description": "Possible values (UsesHrtf, DefinedSpeakerOutput)",
     "Example": "\"Type\": \"UsesHrtf\"",
-    "MFFSM": "MF---",
+    "Flags": 12,
     "Name": "Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

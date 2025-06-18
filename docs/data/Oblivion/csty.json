@@ -1,415 +1,58 @@
 [
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.AttackDuringBlockMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.AttackDuringBlockMult"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Advanced"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.AttackNotUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.AttackNotUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.AttackSkillModifierBase\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.AttackSkillModifierBase"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.AttackSkillModifierMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.AttackSkillModifierMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.AttackWhileUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.AttackWhileUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.BlockNotUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.BlockNotUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.BlockSkillModifierBase\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.BlockSkillModifierBase"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.BlockSkillModifierMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.BlockSkillModifierMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.BlockWhileUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.BlockWhileUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeBackNotUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeBackNotUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeBackWhileUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeBackWhileUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeFatigueModBase\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeFatigueModBase"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeFatigueModMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeFatigueModMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeForwardNotUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeForwardNotUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeForwardWhileUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeForwardWhileUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeNotUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeNotUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.DodgeWhileUnderAttackMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.DodgeWhileUnderAttackMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.EncumbSpeedModBase\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.EncumbSpeedModBase"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.EncumbSpeedModMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.EncumbSpeedModMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.PowerAttackFatigueModBase\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.PowerAttackFatigueModBase"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Advanced.PowerAttackFatigueModMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Advanced.PowerAttackFatigueModMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.AcrobaticDodgePercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.AcrobaticDodgePercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.AttackPercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.AttackPercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.BlockPercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.BlockPercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.BuffStandoffDistance\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.BuffStandoffDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeBackTimerMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeBackTimerMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeBackTimerMin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeBackTimerMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeForwardTimerMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeForwardTimerMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeForwardTimerMin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeForwardTimerMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeLeftRightTimerMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeLeftRightTimerMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.DodgeLeftRightTimerMin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgeLeftRightTimerMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.DodgePercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.DodgePercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (Advanced, ChooseAttackUsingPercentChance, IgnoreAlliesInArea, WillYield, RejectsYields, FleeingDisabled, PrefersRanged, MeleeAlertOK, DoNotAcquire)",
-    "Example": "\"Data.Flags\": [ \"Advanced\", \"-DoNotAcquire\" ]",
-    "MFFSM": "MFF-M",
-    "Name": "Data.Flags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.GroupStandoffDistance\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.GroupStandoffDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.HandToHandBonusToAttack\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.HandToHandBonusToAttack"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.HoldTimerMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.HoldTimerMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.HoldTimerMin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.HoldTimerMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.IdleTimerMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.IdleTimerMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.IdleTimerMin\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.IdleTimerMin"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.LeftRightPercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.LeftRightPercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackBack\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackBack"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackForward\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackForward"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackLeft\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackLeft"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackNormal\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackNormal"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackPercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackPercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.PowerAttackRight\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.PowerAttackRight"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RangedStandoffDistance\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RangedStandoffDistance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RangeMultMax\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RangeMultMax"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RangeMultOptimal\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RangeMultOptimal"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RecoilStaggerBonusToAttack\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RecoilStaggerBonusToAttack"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RecoilStaggerBonusToPowerAttack\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RecoilStaggerBonusToPowerAttack"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.RushingAttackDistanceMult\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.RushingAttackDistanceMult"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Data.RushingAttackPercentChance\": 7",
-    "MFFSM": "MFF--",
-    "Name": "Data.RushingAttackPercentChance"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.SwitchDistanceMelee\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.SwitchDistanceMelee"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.SwitchDistanceRanged\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.SwitchDistanceRanged"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.UnconsciousBonusToAttack\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.UnconsciousBonusToAttack"
-  },
-  {
-    "Aliases": "",
-    "Description": "Decimal value",
-    "Example": "\"Data.UnconsciousBonusToPowerAttack\": 3.14",
-    "MFFSM": "MFF--",
-    "Name": "Data.UnconsciousBonusToPowerAttack"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Data"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

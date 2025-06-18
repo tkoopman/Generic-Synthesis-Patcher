@@ -3,77 +3,112 @@
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"DefaultMenuVolume\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "DefaultMenuVolume"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (MuteWhenSubmerged, ShouldAppearOnMenu, ImmuneToTimeSpeedup, PauseDuringMenusImmediately, PauseDuringMenusFade, ExcludeFromPlayerOpmOverride, PauseDuringStartMenu)",
     "Example": "\"Flags\": [ \"MuteWhenSubmerged\", \"-PauseDuringStartMenu\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MenuSlider"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"MinFrequencyMultiplier\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "MinFrequencyMultiplier"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Parent"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"SidechainTargetMultiplier\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "SidechainTargetMultiplier"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"StaticVolumeMultiplier\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "StaticVolumeMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
   }
 ]

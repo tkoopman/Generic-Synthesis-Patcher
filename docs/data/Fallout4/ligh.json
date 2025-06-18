@@ -3,231 +3,280 @@
     "Aliases": "",
     "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
     "Example": "\"Color\": [40,50,60]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "Color"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Constant\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Constant"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"DATADataTypeState\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 92,
+    "Name": "DATADataTypeState"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Destructible"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "EditorID"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Exponent\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Exponent"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FadeValue\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FadeValue"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FalloffExponent\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FalloffExponent"
   },
   {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Fallout4MajorRecordFlags"
   },
   {
     "Aliases": "",
     "Description": "Flags (CanBeCarried, Flicker, OffByDefault, Pulse, ShadowSpotlight, ShadowHemisphere, ShadowOmnidirectional, NonShadowSpotlight, NonSpecular, AttenuationOnly, NonShadowBox, IgnoreRoughness, NoRimLighting, AmbientOnly)",
     "Example": "\"Flags\": [ \"CanBeCarried\", \"-AmbientOnly\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "Flags"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerIntensityAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerIntensityAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerMovementAmplitude\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerMovementAmplitude"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FlickerPeriod\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FlickerPeriod"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"FOV\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "FOV"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Gobo\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Gobo"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GodRays"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"GodRaysNearClip\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "GodRaysNearClip"
   },
   {
     "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Icons.InventoryImage\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Icons.InventoryImage"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Icons"
   },
   {
     "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Icons.MessageIcon\": \"Hello\"",
-    "MFFSM": "MFF--",
-    "Name": "Icons.MessageIcon"
+    "Description": "True / False",
+    "Example": "\"IsCompressed\": true",
+    "Flags": 28,
+    "Name": "IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"IsDeleted\": true",
+    "Flags": 28,
+    "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
     "Example": "",
-    "MFFSM": "MFFSM",
+    "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Lens"
   },
   {
     "Aliases": "",
     "Description": "Flags (RandomAnimStart, Obstacle, PortalStrict)",
     "Example": "\"MajorFlags\": [ \"RandomAnimStart\", \"-PortalStrict\" ]",
-    "MFFSM": "MFF-M",
+    "Flags": 92,
     "Name": "MajorFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MajorRecordFlagsRaw\": 7",
+    "Flags": 28,
+    "Name": "MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Model"
   },
   {
     "Aliases": "",
     "Description": "String value",
     "Example": "\"Name\": \"Hello\"",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Name"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NearClip\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "NearClip"
   },
   {
     "Aliases": "",
     "Description": "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]",
     "Example": "\"ObjectBounds\": [6,6,6,9,9,9]",
-    "MFFSM": "-FF--",
+    "Flags": 24,
     "Name": "ObjectBounds"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.First"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "MFFSM": "-FF--",
-    "Name": "ObjectBounds.Second"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "PreviewTransform"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Properties"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Radius\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Radius"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Scalar\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Scalar"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Sound"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Time\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Time"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Value\": 7",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Version2\": 7",
+    "Flags": 28,
+    "Name": "Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VersionControl\": 7",
+    "Flags": 28,
+    "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "VirtualMachineAdapter"
   },
   {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Weight\": 3.14",
-    "MFFSM": "MFF--",
+    "Flags": 28,
     "Name": "Weight"
   }
 ]
