@@ -15,6 +15,125 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.BaseCost\": 3.14",
+    "Flags": 29,
+    "Name": "Data.BaseCost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.CounterEffectCount\": 7",
+    "Flags": 29,
+    "Name": "Data.CounterEffectCount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.EffectShader\": \"123:Skyrim.esm\" or \"Data.EffectShader\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.EffectShader"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Hostile, Recover, Detrimental, MagnitudePercent, Self, Touch, Target, NoDuration, NoMagnitude, NoArea, FXPersist, Spellmaking, Enchanting, NoIngredient, UNKNOWN_14, UNKNOWN_15, UseWeapon, UseArmor, UseCreature, UseSkill, UseAttribute, UNKNWOWN_21, UNKNWOWN_22, UNKNWOWN_23, UseActorValue, SprayProjectileOrFog, BoltProjectile, NoHitEffect, UNKNOWN_28, UNKNOWN_29, UNKNOWN_30)",
+    "Example": "\"Data.Flags\": [ \"Hostile\", \"-UNKNOWN_30\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.Light\": \"123:Skyrim.esm\" or \"Data.Light\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.Light"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration)",
+    "Example": "\"Data.MagicSchool\": \"Alteration\"",
+    "Flags": 13,
+    "Name": "Data.MagicSchool"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ProjectileSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.ProjectileSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (ResistFire, ResistFrost, ResistDisease, ResistMagic, ResistNormalWeapons, ResistParalysis, ResistPoison, ResistShock, None)",
+    "Example": "\"Data.Resistance\": \"ResistFire\"",
+    "Flags": 13,
+    "Name": "Data.Resistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.SubData.AreaSound\": \"123:Skyrim.esm\" or \"Data.SubData.AreaSound\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.SubData.AreaSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.SubData.BoltSound\": \"123:Skyrim.esm\" or \"Data.SubData.BoltSound\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.SubData.BoltSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.SubData.CastingSound\": \"123:Skyrim.esm\" or \"Data.SubData.CastingSound\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.SubData.CastingSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.SubData.ConstantEffectBarterFactor\": 3.14",
+    "Flags": 29,
+    "Name": "Data.SubData.ConstantEffectBarterFactor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.SubData.ConstantEffectEnchantmentFactor\": 3.14",
+    "Flags": 29,
+    "Name": "Data.SubData.ConstantEffectEnchantmentFactor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.SubData.EnchantEffect\": \"123:Skyrim.esm\" or \"Data.SubData.EnchantEffect\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.SubData.EnchantEffect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Data.SubData.HitSound\": \"123:Skyrim.esm\" or \"Data.SubData.HitSound\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Data.SubData.HitSound"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unused\": 7",
+    "Flags": 29,
+    "Name": "Data.Unused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"Data.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Data.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "Flags": 28,
@@ -38,21 +157,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -61,6 +180,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Hashes"
   },
   {
     "Aliases": "",
@@ -80,7 +220,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

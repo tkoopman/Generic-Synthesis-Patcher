@@ -15,6 +15,97 @@
   },
   {
     "Aliases": "",
+    "Description": "Possible values (None, Pleasant, Cloudy, Unknown3, Rainy, Snow, Pleasant2)",
+    "Example": "\"Data.Classification\": \"None\"",
+    "Flags": 13,
+    "Name": "Data.Classification"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.CloudSpeedLower\": 7",
+    "Flags": 29,
+    "Name": "Data.CloudSpeedLower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.CloudSpeedUpper\": 7",
+    "Flags": 29,
+    "Name": "Data.CloudSpeedUpper"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.LightningColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Data.LightningColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.PrecipitationBeginFadeIn\": 7",
+    "Flags": 29,
+    "Name": "Data.PrecipitationBeginFadeIn"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.PrecipitationEndFadeOut\": 7",
+    "Flags": 29,
+    "Name": "Data.PrecipitationEndFadeOut"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SunDamage\": 7",
+    "Flags": 29,
+    "Name": "Data.SunDamage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SunGlare\": 7",
+    "Flags": 29,
+    "Name": "Data.SunGlare"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.ThunderLightningBeginFadeIn\": 7",
+    "Flags": 29,
+    "Name": "Data.ThunderLightningBeginFadeIn"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.ThunderLightningEndFadeOut\": 7",
+    "Flags": 29,
+    "Name": "Data.ThunderLightningEndFadeOut"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.ThunderLightningFrequency\": 7",
+    "Flags": 29,
+    "Name": "Data.ThunderLightningFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.TransDelta\": 7",
+    "Flags": 29,
+    "Name": "Data.TransDelta"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.WindSpeed\": 7",
+    "Flags": 29,
+    "Name": "Data.WindSpeed"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -29,6 +120,34 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistance.DayFar\": 3.14",
+    "Flags": 29,
+    "Name": "FogDistance.DayFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistance.DayNear\": 3.14",
+    "Flags": 29,
+    "Name": "FogDistance.DayNear"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistance.NightFar\": 3.14",
+    "Flags": 29,
+    "Name": "FogDistance.NightFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FogDistance.NightNear\": 3.14",
+    "Flags": 29,
+    "Name": "FogDistance.NightNear"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -36,23 +155,121 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.BlurPasses\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.BlurPasses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.BlurRadius\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.BlurRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.BrightClamp\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.BrightClamp"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.BrightScale\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.BrightScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.EmissiveMult\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.EmissiveMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.EyeAdaptSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.EyeAdaptSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.GrassDimmer\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.GrassDimmer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.LumRampMax\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.LumRampMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.LumRampMin\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.LumRampMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.LumRampNoTex\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.LumRampNoTex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.SunlightDimmer\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.SunlightDimmer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.TargetLum\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.TargetLum"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.TreeDimmer\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.TreeDimmer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"HDRData.UpperLumClamp\": 3.14",
+    "Flags": 29,
+    "Name": "HDRData.UpperLumClamp"
+  },
+  {
+    "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -61,6 +278,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Hashes"
   },
   {
     "Aliases": "",
@@ -94,7 +332,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

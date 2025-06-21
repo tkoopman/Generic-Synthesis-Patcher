@@ -24,7 +24,7 @@
     "Aliases": "",
     "Description": "Flags (Break0)",
     "Example": "\"DATADataTypeState\": \"Break0\"",
-    "Flags": 92,
+    "Flags": 94,
     "Name": "DATADataTypeState"
   },
   {
@@ -38,7 +38,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -59,21 +59,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -143,14 +143,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

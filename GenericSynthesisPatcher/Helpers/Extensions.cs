@@ -25,6 +25,19 @@ namespace GenericSynthesisPatcher.Helpers
              : JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<T>(token.CreateReader());
 
         /// <summary>
+        ///     Gets the value of the TriggeringRecordType field of a registration.
+        /// </summary>
+        /// <param name="registration">Registration to get value from.</param>
+        /// <returns>Record Type</returns>
+        /// <exception cref="InvalidOperationException">
+        ///     If TriggeringRecordType doesn't exist.
+        /// </exception>
+        public static RecordType GetRecordType (this ILoquiRegistration registration)
+            => registration.TryGetRecordType(out RecordType recordType)
+            ? recordType
+            : throw new InvalidOperationException($"Registration {registration.GetType().Name} does not have a valid RecordType.");
+
+        /// <summary>
         ///     Gets the singleton instance of a type. Type requires a public static field named "Instance".
         /// </summary>
         /// <param name="type">Type to get singleton of.</param>

@@ -15,6 +15,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Havok.Friction\": 7",
+    "Flags": 29,
+    "Name": "Havok.Friction"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Stone, Cloth, Dirt, Glass, Grass, Metal, Organic, Skin, Water, Wood, HeavyStone, HeavyMetal, HeavyWood, Chain, Snow, StoneStairs, ClothStairs, DirtStairs, GlassStairs, GrassStairs, MetalStairs, OrganicStairs, SkinStairs, WaterStairs, WoodStairs, HeavyStoneStairs, HeavyMetalStairs, HeavyWoodStairs, ChainStairs, SnowStairs, Elevator)",
+    "Example": "\"Havok.Material\": \"Stone\"",
+    "Flags": 13,
+    "Name": "Havok.Material"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Havok.Restitution\": 7",
+    "Flags": 29,
+    "Name": "Havok.Restitution"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"Icon\": \"Hello\"",
     "Flags": 28,
@@ -24,21 +45,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -51,7 +72,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"PotentialGrass\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "PotentialGrass"
   },
@@ -66,7 +87,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

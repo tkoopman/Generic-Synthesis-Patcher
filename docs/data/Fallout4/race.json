@@ -9,7 +9,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ActorEffect\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ActorEffect"
   },
@@ -37,28 +37,28 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AnimationSound\": \"123:Skyrim.esm\" or \"AnimationSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AnimationSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ArmorRace\": \"123:Skyrim.esm\" or \"ArmorRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ArmorRace"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"AttachParentSlots\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackRace\": \"123:Skyrim.esm\" or \"AttackRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackRace"
   },
@@ -72,28 +72,28 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BaseMovementDefault\": \"123:Skyrim.esm\" or \"BaseMovementDefault\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BaseMovementDefault"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BaseMovementDefaultFly\": \"123:Skyrim.esm\" or \"BaseMovementDefaultFly\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BaseMovementDefaultFly"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BaseMovementDefaultSneak\": \"123:Skyrim.esm\" or \"BaseMovementDefaultSneak\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BaseMovementDefaultSneak"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BaseMovementDefaultSwim\": \"123:Skyrim.esm\" or \"BaseMovementDefaultSwim\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BaseMovementDefaultSwim"
   },
@@ -120,6 +120,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX)",
+    "Example": "\"BipedBodyTemplate.FirstPersonFlags\": [ \"HairTop\", \"-FX\" ]",
+    "Flags": 93,
+    "Name": "BipedBodyTemplate.FirstPersonFlags"
+  },
+  {
+    "Aliases": "",
     "Description": "Possible values (HairTop, HairLong, FaceGenHead, Body, LeftHand, RightHand, TorsoUnderArmor, LeftArmUnderArmor, RightArmUnderArmor, LeftLegUnderArmor, RightLegUnderArmor, TorsoArmor, LeftArmArmor, RightArmArmor, LeftLegArmor, RightLegArmor, Headband, Eyes, Beard, Mouth, Neck, Ring, Scalp, Decapitation, Unnamed54, Unnamed55, Unnamed56, Unnamed57, Unnamed58, Shield, Pipboy, FX, None)",
     "Example": "\"BodyBipedObject\": \"HairTop\"",
     "Flags": 12,
@@ -135,7 +142,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BodyPartData\": \"123:Skyrim.esm\" or \"BodyPartData\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BodyPartData"
   },
@@ -149,7 +156,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CollarTextureSet\": \"123:Skyrim.esm\" or \"CollarTextureSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CollarTextureSet"
   },
@@ -184,14 +191,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DialogueQuest\": \"123:Skyrim.esm\" or \"DialogueQuest\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DialogueQuest"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DispemberBloodArt\": \"123:Skyrim.esm\" or \"DispemberBloodArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DispemberBloodArt"
   },
@@ -219,7 +226,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ExplodableDebris\": \"123:Skyrim.esm\" or \"ExplodableDebris\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ExplodableDebris"
   },
@@ -247,21 +254,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ExplodableExplosion\": \"123:Skyrim.esm\" or \"ExplodableExplosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ExplodableExplosion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ExplodableImpactDataSet\": \"123:Skyrim.esm\" or \"ExplodableImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ExplodableImpactDataSet"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ExplodableSubsegmentExplosion\": \"123:Skyrim.esm\" or \"ExplodableSubsegmentExplosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ExplodableSubsegmentExplosion"
   },
@@ -278,6 +285,4941 @@
     "Example": "",
     "Flags": 144,
     "Name": "FaceFxPhonemes"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Aah_LipBigAah.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Aah_LipBigAah.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BigAah_LipDST.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BigAah_LipDST.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.BMP_LipEee.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.BMP_LipEee.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.ChJSh_LipFV.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ChJSh_LipFV.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.DST_LipK.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.DST_LipK.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eee_LipL.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eee_LipL.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Eh_LipR.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Eh_LipR.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"FaceFxPhonemes.ForceNames\": true",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.ForceNames"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.FV_LipTh.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.FV_LipTh.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.I.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.I.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.I.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.K.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.K.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.K.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.N.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.N.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.N.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.Oh.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Oh.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Oh.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.OohQ.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.OohQ.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.OohQ.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.R.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.R.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.R.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.Th.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.Th.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.Th.ZH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AA\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AE\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AO\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AX\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.AY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.AY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.B\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.B"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.CH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.CH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.D\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.D"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.DH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.DH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.EH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.EH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.ER\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.ER"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.EY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.EY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.F\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.F"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.FLAP\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.FLAP"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.G\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.G"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.HH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.HH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.IH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.IH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.IY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.IY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.JH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.JH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.K\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.K"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.L\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.M\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.M"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.N\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.N"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FaceFxPhonemes.W.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.NG\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.NG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.OW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.OW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.OY\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.OY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.P\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.P"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.R\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.S\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.S"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.SH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.SH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.SHOTSIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.SHOTSIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.SIL\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.SIL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.T\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.T"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.TH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.TH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.UH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.UH"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.UW\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.UW"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.V\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.V"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.W\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.W"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.Y\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.Z\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FaceFxPhonemes.W.ZH\": 3.14",
+    "Flags": 29,
+    "Name": "FaceFxPhonemes.W.ZH"
   },
   {
     "Aliases": "",
@@ -318,7 +5260,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -366,14 +5308,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImpactDataSet\": \"123:Skyrim.esm\" or \"ImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImpactDataSet"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImpactMaterialType\": \"123:Skyrim.esm\" or \"ImpactMaterialType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImpactMaterialType"
   },
@@ -388,20 +5330,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -409,20 +5351,20 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MeatCapTextureSet\": \"123:Skyrim.esm\" or \"MeatCapTextureSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MeatCapTextureSet"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MorphRace\": \"123:Skyrim.esm\" or \"MorphRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MorphRace"
   },
@@ -471,7 +5413,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OnCrippleDebris\": \"123:Skyrim.esm\" or \"OnCrippleDebris\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OnCrippleDebris"
   },
@@ -499,14 +5441,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OnCrippleExplosion\": \"123:Skyrim.esm\" or \"OnCrippleExplosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OnCrippleExplosion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OnCrippleImpactDataSet\": \"123:Skyrim.esm\" or \"OnCrippleImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OnCrippleImpactDataSet"
   },
@@ -541,7 +5483,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SeverableDebris\": \"123:Skyrim.esm\" or \"SeverableDebris\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SeverableDebris"
   },
@@ -569,14 +5511,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SeverableExplosion\": \"123:Skyrim.esm\" or \"SeverableExplosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SeverableExplosion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SeverableImpactDataSet\": \"123:Skyrim.esm\" or \"SeverableImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SeverableImpactDataSet"
   },
@@ -604,28 +5546,28 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Skin\": \"123:Skyrim.esm\" or \"Skin\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Skin"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SoundCloseCorpse\": \"123:Skyrim.esm\" or \"SoundCloseCorpse\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SoundCloseCorpse"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SoundOpenCorpse\": \"123:Skyrim.esm\" or \"SoundOpenCorpse\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SoundOpenCorpse"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SubgraphAdditiveRace\": \"123:Skyrim.esm\" or \"SubgraphAdditiveRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SubgraphAdditiveRace"
   },
@@ -639,14 +5581,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SubgraphTemplateRace\": \"123:Skyrim.esm\" or \"SubgraphTemplateRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SubgraphTemplateRace"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"UnarmedWeapon\": \"123:Skyrim.esm\" or \"UnarmedWeapon\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "UnarmedWeapon"
   },
@@ -668,14 +5610,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {

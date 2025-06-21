@@ -16,7 +16,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ActorCellMarkerReference\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ActorCellMarkerReference"
   },
@@ -73,27 +73,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -114,7 +114,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LocationCellMarkerReference\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LocationCellMarkerReference"
   },
@@ -150,13 +150,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Music\": \"123:Skyrim.esm\" or \"Music\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Music"
   },
@@ -170,7 +170,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ParentLocation\": \"123:Skyrim.esm\" or \"ParentLocation\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ParentLocation"
   },
@@ -184,28 +184,28 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ReferenceCellPersistentReferences\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ReferenceCellPersistentReferences"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ReferenceCellStaticReferences\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ReferenceCellStaticReferences"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ReferenceCellUnique\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ReferenceCellUnique"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"UnreportedCrimeFaction\": \"123:Skyrim.esm\" or \"UnreportedCrimeFaction\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "UnreportedCrimeFaction"
   },
@@ -213,20 +213,20 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"WorldLocationMarkerRef\": \"123:Skyrim.esm\" or \"WorldLocationMarkerRef\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "WorldLocationMarkerRef"
   },

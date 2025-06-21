@@ -14,6 +14,83 @@
     "Name": "Decal"
   },
   {
+    "Aliases": "DODT.Color",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Decal.Color\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Decal.Color"
+  },
+  {
+    "Aliases": "DODT.Depth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.Depth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.Depth"
+  },
+  {
+    "Aliases": "DODT.Flags",
+    "Description": "Flags (Parallax, AlphaBlending, AlphaTesting, NoSubtextures)",
+    "Example": "\"Decal.Flags\": [ \"Parallax\", \"-NoSubtextures\" ]",
+    "Flags": 93,
+    "Name": "Decal.Flags"
+  },
+  {
+    "Aliases": "DODT.MaxHeight",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MaxHeight\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MaxHeight"
+  },
+  {
+    "Aliases": "DODT.MaxWidth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MaxWidth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MaxWidth"
+  },
+  {
+    "Aliases": "DODT.MinHeight",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MinHeight\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MinHeight"
+  },
+  {
+    "Aliases": "DODT.MinWidth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MinWidth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MinWidth"
+  },
+  {
+    "Aliases": "DODT.ParallaxPasses",
+    "Description": "Numeric value",
+    "Example": "\"Decal.ParallaxPasses\": 7",
+    "Flags": 29,
+    "Name": "Decal.ParallaxPasses"
+  },
+  {
+    "Aliases": "DODT.ParallaxScale",
+    "Description": "Decimal value",
+    "Example": "\"Decal.ParallaxScale\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.ParallaxScale"
+  },
+  {
+    "Aliases": "DODT.Shininess",
+    "Description": "Decimal value",
+    "Example": "\"Decal.Shininess\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.Shininess"
+  },
+  {
+    "Aliases": "DODT.Unknown",
+    "Description": "Numeric value",
+    "Example": "\"Decal.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Decal.Unknown"
+  },
+  {
     "Aliases": "",
     "Description": "",
     "Example": "",
@@ -52,7 +129,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -73,21 +150,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -112,6 +189,62 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "OBND.First",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
@@ -122,14 +255,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

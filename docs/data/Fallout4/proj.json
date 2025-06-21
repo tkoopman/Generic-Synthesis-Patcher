@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CollisionLayer\": \"123:Skyrim.esm\" or \"CollisionLayer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CollisionLayer"
   },
@@ -23,21 +23,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CountdownSound\": \"123:Skyrim.esm\" or \"CountdownSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CountdownSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DecalData\": \"123:Skyrim.esm\" or \"DecalData\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DecalData"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultWeaponSource\": \"123:Skyrim.esm\" or \"DefaultWeaponSource\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultWeaponSource"
   },
@@ -51,7 +51,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DisaleSound\": \"123:Skyrim.esm\" or \"DisaleSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DisaleSound"
   },
@@ -65,7 +65,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Explosion\": \"123:Skyrim.esm\" or \"Explosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Explosion"
   },
@@ -108,7 +108,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -129,14 +129,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -149,7 +149,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Light\": \"123:Skyrim.esm\" or \"Light\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Light"
   },
@@ -157,7 +157,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -169,8 +169,43 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "Flags": 29,
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "Flags": 93,
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Model.MaterialSwap\": \"123:Skyrim.esm\" or \"Model.MaterialSwap\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"MuzzleFlash\": \"123:Skyrim.esm\" or \"MuzzleFlash\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MuzzleFlash"
   },
@@ -204,6 +239,62 @@
   },
   {
     "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Range\": 3.14",
     "Flags": 28,
@@ -219,7 +310,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Sound\": \"123:Skyrim.esm\" or \"Sound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Sound"
   },
@@ -268,7 +359,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"VATSProjectile\": \"123:Skyrim.esm\" or \"VATSProjectile\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "VATSProjectile"
   },
@@ -276,14 +367,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Choices\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Choices"
   },
@@ -22,6 +22,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Possible values (Topic, Conversation, Combat, Persuasion, Detection, Service, Miscellaneous)",
+    "Example": "\"Data.DialogType\": \"Topic\"",
+    "Flags": 13,
+    "Name": "Data.DialogType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Goodbye, Random, SayOnce, RunImmediately, InfoRefusal, RandomEnd, RunForRumors)",
+    "Example": "\"Data.Flags\": [ \"Goodbye\", \"-RunForRumors\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"Data.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Data.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -31,20 +52,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LinkFrom\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LinkFrom"
   },
@@ -52,7 +73,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -65,14 +86,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PreviousItem\": \"123:Skyrim.esm\" or \"PreviousItem\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PreviousItem"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Quest\": \"123:Skyrim.esm\" or \"Quest\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Quest"
   },
@@ -86,14 +107,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Topic\": \"123:Skyrim.esm\" or \"Topic\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Topic"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Topics\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Topics"
   },
@@ -101,7 +122,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

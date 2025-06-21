@@ -12,6 +12,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     {
         public static readonly CellMaxHeightDataAction Instance = new();
 
+        // <inheritdoc />
+        public override bool AllowSubProperties => false;
+
         public override bool CanFill () => false;
 
         // <inheritdoc />

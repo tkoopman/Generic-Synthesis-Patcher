@@ -8,6 +8,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"Archetype.ActorValue\": \"Aggression\"",
+    "Flags": 13,
+    "Name": "Archetype.ActorValue"
+  },
+  {
+    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseCost\": 3.14",
     "Flags": 28,
@@ -16,14 +23,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CastingArt\": \"123:Skyrim.esm\" or \"CastingArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CastingArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CastingLight\": \"123:Skyrim.esm\" or \"CastingLight\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CastingLight"
   },
@@ -51,7 +58,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"CounterEffects\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "CounterEffects"
   },
@@ -65,7 +72,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DualCastArt\": \"123:Skyrim.esm\" or \"DualCastArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DualCastArt"
   },
@@ -86,35 +93,35 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantArt\": \"123:Skyrim.esm\" or \"EnchantArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantShader\": \"123:Skyrim.esm\" or \"EnchantShader\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantShader"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantVisuals\": \"123:Skyrim.esm\" or \"EnchantVisuals\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantVisuals"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipAbility\": \"123:Skyrim.esm\" or \"EquipAbility\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipAbility"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Explosion\": \"123:Skyrim.esm\" or \"Explosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Explosion"
   },
@@ -129,41 +136,41 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitEffectArt\": \"123:Skyrim.esm\" or \"HitEffectArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitEffectArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitShader\": \"123:Skyrim.esm\" or \"HitShader\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitShader"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitVisuals\": \"123:Skyrim.esm\" or \"HitVisuals\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitVisuals"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpaceModifier\": \"123:Skyrim.esm\" or \"ImageSpaceModifier\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpaceModifier"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImpactData\": \"123:Skyrim.esm\" or \"ImpactData\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImpactData"
   },
@@ -171,20 +178,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "KWDA",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -199,13 +206,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "MDOB",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MenuDisplayObject\": \"123:Skyrim.esm\" or \"MenuDisplayObject\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MenuDisplayObject"
   },
@@ -226,14 +233,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PerkToApply\": \"123:Skyrim.esm\" or \"PerkToApply\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PerkToApply"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Projectile\": \"123:Skyrim.esm\" or \"Projectile\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Projectile"
   },
@@ -346,14 +353,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -362,5 +369,19 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   }
 ]

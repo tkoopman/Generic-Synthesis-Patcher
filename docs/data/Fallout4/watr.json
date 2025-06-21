@@ -1,22 +1,22 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"AngularVelocity\": [1, 2, 3]",
     "Flags": 24,
     "Name": "AngularVelocity"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ConsumeSpell\": \"123:Skyrim.esm\" or \"ConsumeSpell\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ConsumeSpell"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ContactSpell\": \"123:Skyrim.esm\" or \"ContactSpell\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ContactSpell"
   },
@@ -150,7 +150,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -163,7 +163,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpace\": \"123:Skyrim.esm\" or \"ImageSpace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpace"
   },
@@ -171,20 +171,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"LinearVelocity\": [1, 2, 3]",
     "Flags": 24,
     "Name": "LinearVelocity"
   },
@@ -192,13 +192,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Material\": \"123:Skyrim.esm\" or \"Material\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Material"
   },
@@ -218,6 +218,48 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.AmplitudeScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.NoiseFalloff\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerOne.Texture\": \"Hello\"",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.UvScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.WindDirection\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerOne.WindSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerOne.WindSpeed"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -225,10 +267,94 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.AmplitudeScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.NoiseFalloff\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerThree.Texture\": \"Hello\"",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.UvScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.WindDirection\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerThree.WindSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerThree.WindSpeed"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "NoiseLayerTwo"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.AmplitudeScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.AmplitudeScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.NoiseFalloff\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.NoiseFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"NoiseLayerTwo.Texture\": \"Hello\"",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.Texture"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.UvScale\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.UvScale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.WindDirection\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"NoiseLayerTwo.WindSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "NoiseLayerTwo.WindSpeed"
   },
   {
     "Aliases": "",
@@ -240,7 +366,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OpenSound\": \"123:Skyrim.esm\" or \"OpenSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OpenSound"
   },
@@ -409,14 +535,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

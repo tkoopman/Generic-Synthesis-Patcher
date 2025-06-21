@@ -14,6 +14,41 @@
     "Name": "CloseRange"
   },
   {
+    "Aliases": "CSCR.CircleMult",
+    "Description": "Decimal value",
+    "Example": "\"CloseRange.CircleMult\": 3.14",
+    "Flags": 29,
+    "Name": "CloseRange.CircleMult"
+  },
+  {
+    "Aliases": "CSCR.FallbackMult",
+    "Description": "Decimal value",
+    "Example": "\"CloseRange.FallbackMult\": 3.14",
+    "Flags": 29,
+    "Name": "CloseRange.FallbackMult"
+  },
+  {
+    "Aliases": "CSCR.FlankDistance",
+    "Description": "Decimal value",
+    "Example": "\"CloseRange.FlankDistance\": 3.14",
+    "Flags": 29,
+    "Name": "CloseRange.FlankDistance"
+  },
+  {
+    "Aliases": "CSCR.StalkTime",
+    "Description": "Decimal value",
+    "Example": "\"CloseRange.StalkTime\": 3.14",
+    "Flags": 29,
+    "Name": "CloseRange.StalkTime"
+  },
+  {
+    "Aliases": "CSCR.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"CloseRange.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "CloseRange.Versioning"
+  },
+  {
     "Aliases": "",
     "Description": "Flags (Break0, Break1)",
     "Example": "\"CSGDDataTypeState\": [ \"Break0\", \"-Break1\" ]",
@@ -98,10 +133,73 @@
     "Name": "Flight"
   },
   {
+    "Aliases": "CSFL.DiveBombChance",
+    "Description": "Decimal value",
+    "Example": "\"Flight.DiveBombChance\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.DiveBombChance"
+  },
+  {
+    "Aliases": "CSFL.FlyingAttackChance",
+    "Description": "Decimal value",
+    "Example": "\"Flight.FlyingAttackChance\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.FlyingAttackChance"
+  },
+  {
+    "Aliases": "CSFL.GroundAttackChance",
+    "Description": "Decimal value",
+    "Example": "\"Flight.GroundAttackChance\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.GroundAttackChance"
+  },
+  {
+    "Aliases": "CSFL.GroundAttackTime",
+    "Description": "Decimal value",
+    "Example": "\"Flight.GroundAttackTime\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.GroundAttackTime"
+  },
+  {
+    "Aliases": "CSFL.HoverChance",
+    "Description": "Decimal value",
+    "Example": "\"Flight.HoverChance\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.HoverChance"
+  },
+  {
+    "Aliases": "CSFL.HoverTime",
+    "Description": "Decimal value",
+    "Example": "\"Flight.HoverTime\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.HoverTime"
+  },
+  {
+    "Aliases": "CSFL.PerchAttackChance",
+    "Description": "Decimal value",
+    "Example": "\"Flight.PerchAttackChance\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.PerchAttackChance"
+  },
+  {
+    "Aliases": "CSFL.PerchAttackTime",
+    "Description": "Decimal value",
+    "Example": "\"Flight.PerchAttackTime\": 3.14",
+    "Flags": 29,
+    "Name": "Flight.PerchAttackTime"
+  },
+  {
+    "Aliases": "CSFL.Versioning",
+    "Description": "Flags (Break0, Break1, Break2, Break3)",
+    "Example": "\"Flight.Versioning\": [ \"Break0\", \"-Break3\" ]",
+    "Flags": 95,
+    "Name": "Flight.Versioning"
+  },
+  {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -115,14 +213,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -143,7 +241,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -152,6 +250,69 @@
     "Example": "",
     "Flags": 144,
     "Name": "Melee"
+  },
+  {
+    "Aliases": "CSME.AttackStaggeredMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.AttackStaggeredMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.AttackStaggeredMult"
+  },
+  {
+    "Aliases": "CSME.BashAttackMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.BashAttackMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.BashAttackMult"
+  },
+  {
+    "Aliases": "CSME.BashMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.BashMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.BashMult"
+  },
+  {
+    "Aliases": "CSME.BashPowerAttackMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.BashPowerAttackMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.BashPowerAttackMult"
+  },
+  {
+    "Aliases": "CSME.BashRecoilMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.BashRecoilMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.BashRecoilMult"
+  },
+  {
+    "Aliases": "CSME.PowerAttackBlockingMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.PowerAttackBlockingMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.PowerAttackBlockingMult"
+  },
+  {
+    "Aliases": "CSME.PowerAttackStaggeredMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.PowerAttackStaggeredMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.PowerAttackStaggeredMult"
+  },
+  {
+    "Aliases": "CSME.SpecialAttackMult",
+    "Description": "Decimal value",
+    "Example": "\"Melee.SpecialAttackMult\": 3.14",
+    "Flags": 29,
+    "Name": "Melee.SpecialAttackMult"
+  },
+  {
+    "Aliases": "CSME.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"Melee.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Melee.Versioning"
   },
   {
     "Aliases": "",
@@ -171,14 +332,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

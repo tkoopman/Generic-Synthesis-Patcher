@@ -2,14 +2,14 @@
   {
     "Aliases": "BAMT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AlternateBlockMaterial\": \"123:Skyrim.esm\" or \"AlternateBlockMaterial\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AlternateBlockMaterial"
   },
   {
     "Aliases": "MODL",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Armature\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Armature"
   },
@@ -23,7 +23,7 @@
   {
     "Aliases": "BIDS",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BashImpactDataSet\": \"123:Skyrim.esm\" or \"BashImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BashImpactDataSet"
   },
@@ -33,6 +33,34 @@
     "Example": "",
     "Flags": 144,
     "Name": "BodyTemplate"
+  },
+  {
+    "Aliases": "BOD2.ActsLike44",
+    "Description": "True / False",
+    "Example": "\"BodyTemplate.ActsLike44\": true",
+    "Flags": 29,
+    "Name": "BodyTemplate.ActsLike44"
+  },
+  {
+    "Aliases": "BOD2.ArmorType",
+    "Description": "Possible values (LightArmor, HeavyArmor, Clothing)",
+    "Example": "\"BodyTemplate.ArmorType\": \"LightArmor\"",
+    "Flags": 13,
+    "Name": "BodyTemplate.ArmorType"
+  },
+  {
+    "Aliases": "BOD2.FirstPersonFlags",
+    "Description": "Flags (Head, Hair, Body, Hands, Forearms, Amulet, Ring, Feet, Calves, Shield, Tail, LongHair, Circlet, Ears, DecapitateHead, Decapitate, FX01)",
+    "Example": "\"BodyTemplate.FirstPersonFlags\": [ \"Head\", \"-FX01\" ]",
+    "Flags": 93,
+    "Name": "BodyTemplate.FirstPersonFlags"
+  },
+  {
+    "Aliases": "BOD2.Flags",
+    "Description": "Flags (ModulatesVoice, NonPlayable)",
+    "Example": "\"BodyTemplate.Flags\": [ \"ModulatesVoice\", \"-NonPlayable\" ]",
+    "Flags": 93,
+    "Name": "BodyTemplate.Flags"
   },
   {
     "Aliases": "DESC",
@@ -65,7 +93,7 @@
   {
     "Aliases": "ETYP",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipmentType\": \"123:Skyrim.esm\" or \"EquipmentType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipmentType"
   },
@@ -73,27 +101,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "KWDA",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -108,7 +136,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -126,30 +154,86 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "OBND.First",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "EITM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ObjectEffect\": \"123:Skyrim.esm\" or \"ObjectEffect\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ObjectEffect"
   },
   {
     "Aliases": "YNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PickUpSound\": \"123:Skyrim.esm\" or \"PickUpSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PickUpSound"
   },
   {
     "Aliases": "ZNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PutDownSound\": \"123:Skyrim.esm\" or \"PutDownSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PutDownSound"
   },
   {
     "Aliases": "RNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Race\": \"123:Skyrim.esm\" or \"Race\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Race"
   },
@@ -170,7 +254,7 @@
   {
     "Aliases": "TNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"TemplateArmor\": \"123:Skyrim.esm\" or \"TemplateArmor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "TemplateArmor"
   },
@@ -185,14 +269,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -201,6 +285,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "",

@@ -11,6 +11,9 @@ namespace GenericSynthesisPatcher.Games.Fallout4.Action
         public static readonly ObjectBoundsAction Instance = new();
 
         // <inheritdoc />
+        public override bool AllowSubProperties => true;
+
+        // <inheritdoc />
         public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
         {
             description = "Object bounds array of numbers. [x1, y1, z1, x2, y2, z2]";

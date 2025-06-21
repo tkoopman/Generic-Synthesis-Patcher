@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Climate\": \"123:Skyrim.esm\" or \"Climate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Climate"
   },
@@ -30,14 +30,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GlobalVariable\": \"123:Skyrim.esm\" or \"GlobalVariable\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GlobalVariable"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Int32 values",
+    "Example": "\"Grid\": [1, 2]",
     "Flags": 24,
     "Name": "Grid"
   },
@@ -45,14 +45,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -64,6 +64,83 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.DATA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Landscape.DATA"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Landscape.EditorID\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Landscape.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Landscape.IsCompressed\": true",
+    "Flags": 31,
+    "Name": "Landscape.IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Landscape.IsDeleted\": true",
+    "Flags": 31,
+    "Name": "Landscape.IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.MajorRecordFlagsRaw\": 7",
+    "Flags": 31,
+    "Name": "Landscape.MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Landscape.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 93,
+    "Name": "Landscape.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"Landscape.Textures\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 125,
+    "Name": "Landscape.Textures"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.VersionControl\": 7",
+    "Flags": 31,
+    "Name": "Landscape.VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexColors\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Landscape.VertexColors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexHeightMap\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Landscape.VertexHeightMap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Landscape.VertexNormals\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Landscape.VertexNormals"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -71,9 +148,72 @@
   },
   {
     "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.DirectionalColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.DirectionalFade\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalFade"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationXY\": 7",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalRotationXY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationZ\": 7",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalRotationZ"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogClipDistance\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogClipDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.FogColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogFar\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogFar"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogNear\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogNear"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -100,7 +240,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Owner\": \"123:Skyrim.esm\" or \"Owner\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Owner"
   },
@@ -113,6 +253,55 @@
   },
   {
     "Aliases": "",
+    "Description": "String value",
+    "Example": "\"PathGrid.EditorID\": \"Hello\"",
+    "Flags": 29,
+    "Name": "PathGrid.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"PathGrid.IsCompressed\": true",
+    "Flags": 31,
+    "Name": "PathGrid.IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"PathGrid.IsDeleted\": true",
+    "Flags": 31,
+    "Name": "PathGrid.IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PathGrid.MajorRecordFlagsRaw\": 7",
+    "Flags": 31,
+    "Name": "PathGrid.MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"PathGrid.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 93,
+    "Name": "PathGrid.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PathGrid.PGAG\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "PathGrid.PGAG"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"PathGrid.VersionControl\": 7",
+    "Flags": 31,
+    "Name": "PathGrid.VersionControl"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -122,13 +311,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"PersistentTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "PersistentTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Regions\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Regions"
   },
@@ -143,21 +332,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"TemporaryTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "TemporaryTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Timestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Timestamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -177,7 +366,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Water\": \"123:Skyrim.esm\" or \"Water\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Water"
   },

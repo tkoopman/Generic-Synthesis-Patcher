@@ -38,21 +38,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -66,7 +66,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -79,7 +79,7 @@
   {
     "Aliases": "PNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Quest\": \"123:Skyrim.esm\" or \"Quest\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Quest"
   },
@@ -99,6 +99,41 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused.QNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused.SCDA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused.SCRO\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused.SCRO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused.SCTX"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -106,16 +141,51 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused2.QNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused2.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused2.SCDA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused2.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused2.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused2.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused2.SCRO\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused2.SCRO"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Unused2.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Unused2.SCTX"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -124,6 +194,76 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.FileName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.FileName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.FileName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "",

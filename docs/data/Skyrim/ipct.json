@@ -14,6 +14,83 @@
     "Name": "Decal"
   },
   {
+    "Aliases": "DODT.Color",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Decal.Color\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Decal.Color"
+  },
+  {
+    "Aliases": "DODT.Depth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.Depth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.Depth"
+  },
+  {
+    "Aliases": "DODT.Flags",
+    "Description": "Flags (Parallax, AlphaBlending, AlphaTesting, NoSubtextures)",
+    "Example": "\"Decal.Flags\": [ \"Parallax\", \"-NoSubtextures\" ]",
+    "Flags": 93,
+    "Name": "Decal.Flags"
+  },
+  {
+    "Aliases": "DODT.MaxHeight",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MaxHeight\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MaxHeight"
+  },
+  {
+    "Aliases": "DODT.MaxWidth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MaxWidth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MaxWidth"
+  },
+  {
+    "Aliases": "DODT.MinHeight",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MinHeight\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MinHeight"
+  },
+  {
+    "Aliases": "DODT.MinWidth",
+    "Description": "Decimal value",
+    "Example": "\"Decal.MinWidth\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.MinWidth"
+  },
+  {
+    "Aliases": "DODT.ParallaxPasses",
+    "Description": "Numeric value",
+    "Example": "\"Decal.ParallaxPasses\": 7",
+    "Flags": 29,
+    "Name": "Decal.ParallaxPasses"
+  },
+  {
+    "Aliases": "DODT.ParallaxScale",
+    "Description": "Decimal value",
+    "Example": "\"Decal.ParallaxScale\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.ParallaxScale"
+  },
+  {
+    "Aliases": "DODT.Shininess",
+    "Description": "Decimal value",
+    "Example": "\"Decal.Shininess\": 3.14",
+    "Flags": 29,
+    "Name": "Decal.Shininess"
+  },
+  {
+    "Aliases": "DODT.Unknown",
+    "Description": "Numeric value",
+    "Example": "\"Decal.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Decal.Unknown"
+  },
+  {
     "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"Duration\": 3.14",
@@ -31,13 +108,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "NAM2",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Hazard\": \"123:Skyrim.esm\" or \"Hazard\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Hazard"
   },
@@ -45,21 +122,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -68,6 +145,13 @@
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
     "Flags": 16,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
   },
   {
     "Aliases": "",
@@ -100,7 +184,7 @@
   {
     "Aliases": "ENAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SecondaryTextureSet\": \"123:Skyrim.esm\" or \"SecondaryTextureSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SecondaryTextureSet"
   },
@@ -114,14 +198,14 @@
   {
     "Aliases": "SNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Sound1\": \"123:Skyrim.esm\" or \"Sound1\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Sound1"
   },
   {
     "Aliases": "NAM1",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Sound2\": \"123:Skyrim.esm\" or \"Sound2\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Sound2"
   },
@@ -135,7 +219,7 @@
   {
     "Aliases": "DNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"TextureSet\": \"123:Skyrim.esm\" or \"TextureSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "TextureSet"
   },
@@ -150,14 +234,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

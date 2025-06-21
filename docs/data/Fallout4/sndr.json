@@ -2,14 +2,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AlternateSoundFor\": \"123:Skyrim.esm\" or \"AlternateSoundFor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AlternateSoundFor"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Category\": \"123:Skyrim.esm\" or \"Category\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Category"
   },
@@ -30,7 +30,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Descriptors\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Descriptors"
   },
@@ -52,21 +52,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -78,9 +78,37 @@
   },
   {
     "Aliases": "",
+    "Description": "Possible values (None, Loop, EnvelopeFast, EnvelopeSlow)",
+    "Example": "\"LoopAndRumble.Loop\": \"None\"",
+    "Flags": 13,
+    "Name": "LoopAndRumble.Loop"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.RumbleValues\": 7",
+    "Flags": 29,
+    "Name": "LoopAndRumble.RumbleValues"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.Sidechain\": 7",
+    "Flags": 29,
+    "Name": "LoopAndRumble.Sidechain"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LoopAndRumble.Unknown\": 7",
+    "Flags": 29,
+    "Name": "LoopAndRumble.Unknown"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -93,7 +121,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OutputModel\": \"123:Skyrim.esm\" or \"OutputModel\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OutputModel"
   },
@@ -115,14 +143,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

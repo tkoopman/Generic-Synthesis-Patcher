@@ -8,6 +8,34 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Cost\": 7",
+    "Flags": 29,
+    "Name": "Data.Cost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ManualSpellCost, ImmuneToSilence1, PlayerStartSpell, ImmuneToSilence2, AoeIgnoresLos, ScriptEffectAlwaysApplies, DisallowAbsorbAndReflect, TouchSpellExplodesWithoutTarget)",
+    "Example": "\"Data.Flag\": [ \"ManualSpellCost\", \"-TouchSpellExplodesWithoutTarget\" ]",
+    "Flags": 93,
+    "Name": "Data.Flag"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Apprentice, Novice, Journeyman, Expert, Master)",
+    "Example": "\"Data.Level\": \"Apprentice\"",
+    "Flags": 13,
+    "Name": "Data.Level"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Spell, Disease, Power, LesserPower, Ability, Poison)",
+    "Example": "\"Data.Type\": \"Spell\"",
+    "Flags": 13,
+    "Name": "Data.Type"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -24,21 +52,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -59,7 +87,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

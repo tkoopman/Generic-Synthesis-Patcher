@@ -168,6 +168,12 @@ pre {
     filter: invert(100%) sepia(1%) saturate(3645%) hue-rotate(151deg) brightness(132%) contrast(73%);
 }
 
+#FilterDiv {
+    margin-left: auto;
+    margin-right: 0;
+    font-size: smaller;
+}
+
 @media only screen and (max-width:800px) {
     /* For tablets: */
     .menu a {

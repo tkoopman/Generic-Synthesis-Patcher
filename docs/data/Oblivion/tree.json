@@ -8,10 +8,80 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BillboardDimensions.Height\": 3.14",
+    "Flags": 29,
+    "Name": "BillboardDimensions.Height"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BillboardDimensions.Width\": 3.14",
+    "Flags": 29,
+    "Name": "BillboardDimensions.Width"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.BranchDimmingValue\": 3.14",
+    "Flags": 29,
+    "Name": "Data.BranchDimmingValue"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.LeafCurvature\": 3.14",
+    "Flags": 29,
+    "Name": "Data.LeafCurvature"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.LeafDimmingValue\": 3.14",
+    "Flags": 29,
+    "Name": "Data.LeafDimmingValue"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.MaximumLeafAngle\": 3.14",
+    "Flags": 29,
+    "Name": "Data.MaximumLeafAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.MinimumLeafAngle\": 3.14",
+    "Flags": 29,
+    "Name": "Data.MinimumLeafAngle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RockingSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RockingSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RustleSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RustleSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.ShadowRadius\": 7",
+    "Flags": 29,
+    "Name": "Data.ShadowRadius"
   },
   {
     "Aliases": "",
@@ -31,21 +101,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -54,6 +124,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Hashes"
   },
   {
     "Aliases": "",
@@ -73,7 +164,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

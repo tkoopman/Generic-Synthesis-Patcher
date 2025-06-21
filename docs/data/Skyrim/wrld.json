@@ -9,7 +9,7 @@
   {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Climate\": \"123:Skyrim.esm\" or \"Climate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Climate"
   },
@@ -19,6 +19,13 @@
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"CloudModel\"] } }]",
     "Flags": 16,
     "Name": "CloudModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"CloudModel.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "CloudModel.Data"
   },
   {
     "Aliases": "NAMA",
@@ -37,14 +44,14 @@
   {
     "Aliases": "XEZN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EncounterZone\": \"123:Skyrim.esm\" or \"EncounterZone\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EncounterZone"
   },
   {
     "Aliases": "WCTR",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Int16 values",
+    "Example": "\"FixedDimensionsCenterCell\": [1, 2]",
     "Flags": 24,
     "Name": "FixedDimensionsCenterCell"
   },
@@ -59,7 +66,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -79,7 +86,7 @@
   {
     "Aliases": "LTMP",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"InteriorLighting\": \"123:Skyrim.esm\" or \"InteriorLighting\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "InteriorLighting"
   },
@@ -87,14 +94,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -103,6 +110,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "LandDefaults"
+  },
+  {
+    "Aliases": "DNAM.DefaultLandHeight",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultLandHeight\": 3.14",
+    "Flags": 29,
+    "Name": "LandDefaults.DefaultLandHeight"
+  },
+  {
+    "Aliases": "DNAM.DefaultWaterHeight",
+    "Description": "Decimal value",
+    "Example": "\"LandDefaults.DefaultWaterHeight\": 3.14",
+    "Flags": 29,
+    "Name": "LandDefaults.DefaultWaterHeight"
   },
   {
     "Aliases": "",
@@ -114,14 +135,14 @@
   {
     "Aliases": "XLCN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Location\": \"123:Skyrim.esm\" or \"Location\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Location"
   },
   {
     "Aliases": "NAM3",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LodWater\": \"123:Skyrim.esm\" or \"LodWater\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LodWater"
   },
@@ -143,7 +164,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -152,6 +173,97 @@
     "Example": "",
     "Flags": 144,
     "Name": "MapData"
+  },
+  {
+    "Aliases": "MNAM.CameraInitialPitch",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraInitialPitch\": 3.14",
+    "Flags": 29,
+    "Name": "MapData.CameraInitialPitch"
+  },
+  {
+    "Aliases": "MNAM.CameraMaxHeight",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraMaxHeight\": 3.14",
+    "Flags": 29,
+    "Name": "MapData.CameraMaxHeight"
+  },
+  {
+    "Aliases": "MNAM.CameraMinHeight",
+    "Description": "Decimal value",
+    "Example": "\"MapData.CameraMinHeight\": 3.14",
+    "Flags": 29,
+    "Name": "MapData.CameraMinHeight"
+  },
+  {
+    "Aliases": "MNAM.NorthwestCellCoords",
+    "Description": "Array of 2 Int16 values",
+    "Example": "\"MapData.NorthwestCellCoords\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.NorthwestCellCoords"
+  },
+  {
+    "Aliases": "MNAM.NorthwestCellCoords.X",
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.NorthwestCellCoords.X"
+  },
+  {
+    "Aliases": "MNAM.NorthwestCellCoords.Y",
+    "Description": "Numeric value",
+    "Example": "\"MapData.NorthwestCellCoords.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.NorthwestCellCoords.Y"
+  },
+  {
+    "Aliases": "MNAM.SoutheastCellCoords",
+    "Description": "Array of 2 Int16 values",
+    "Example": "\"MapData.SoutheastCellCoords\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.SoutheastCellCoords"
+  },
+  {
+    "Aliases": "MNAM.SoutheastCellCoords.X",
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.SoutheastCellCoords.X"
+  },
+  {
+    "Aliases": "MNAM.SoutheastCellCoords.Y",
+    "Description": "Numeric value",
+    "Example": "\"MapData.SoutheastCellCoords.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.SoutheastCellCoords.Y"
+  },
+  {
+    "Aliases": "MNAM.UsableDimensions",
+    "Description": "Array of 2 Int32 values",
+    "Example": "\"MapData.UsableDimensions\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.UsableDimensions"
+  },
+  {
+    "Aliases": "MNAM.UsableDimensions.X",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.UsableDimensions.X"
+  },
+  {
+    "Aliases": "MNAM.UsableDimensions.Y",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.UsableDimensions.Y"
+  },
+  {
+    "Aliases": "MNAM.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"MapData.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "MapData.Versioning"
   },
   {
     "Aliases": "ICON",
@@ -170,7 +282,7 @@
   {
     "Aliases": "ZNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Music\": \"123:Skyrim.esm\" or \"Music\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Music"
   },
@@ -183,17 +295,45 @@
   },
   {
     "Aliases": "NAM9",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Single values",
+    "Example": "\"ObjectBoundsMax\": [1, 2]",
     "Flags": 24,
     "Name": "ObjectBoundsMax"
   },
   {
+    "Aliases": "NAM9.X",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.X\": 3.14",
+    "Flags": 29,
+    "Name": "ObjectBoundsMax.X"
+  },
+  {
+    "Aliases": "NAM9.Y",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMax.Y\": 3.14",
+    "Flags": 29,
+    "Name": "ObjectBoundsMax.Y"
+  },
+  {
     "Aliases": "NAM0",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Single values",
+    "Example": "\"ObjectBoundsMin\": [1, 2]",
     "Flags": 24,
     "Name": "ObjectBoundsMin"
+  },
+  {
+    "Aliases": "NAM0.X",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.X\": 3.14",
+    "Flags": 29,
+    "Name": "ObjectBoundsMin.X"
+  },
+  {
+    "Aliases": "NAM0.Y",
+    "Description": "Decimal value",
+    "Example": "\"ObjectBoundsMin.Y\": 3.14",
+    "Flags": 29,
+    "Name": "ObjectBoundsMin.Y"
   },
   {
     "Aliases": "OFST",
@@ -208,6 +348,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "Parent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (UseLandData, UseLodData, UseMapData, UseWaterData, UseClimateData, UseImageSpaceData, UseSkyCell)",
+    "Example": "\"Parent.Flags\": [ \"UseLandData\", \"-UseSkyCell\" ]",
+    "Flags": 93,
+    "Name": "Parent.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Parent.Worldspace\": \"123:Skyrim.esm\" or \"Parent.Worldspace\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Parent.Worldspace"
   },
   {
     "Aliases": "",
@@ -227,14 +381,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"SubCellsTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "SubCellsTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"SubCellsUnknown\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "SubCellsUnknown"
   },
   {
@@ -248,20 +402,20 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
     "Aliases": "NAM2",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Water\": \"123:Skyrim.esm\" or \"Water\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Water"
   },
@@ -281,10 +435,31 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"WorldMapCellOffset\": [1, 2, 3]",
     "Flags": 24,
     "Name": "WorldMapCellOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.X\": 3.14",
+    "Flags": 29,
+    "Name": "WorldMapCellOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Y\": 3.14",
+    "Flags": 29,
+    "Name": "WorldMapCellOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WorldMapCellOffset.Z\": 3.14",
+    "Flags": 29,
+    "Name": "WorldMapCellOffset.Z"
   },
   {
     "Aliases": "",

@@ -31,28 +31,28 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -77,6 +77,34 @@
     "Name": "Skill"
   },
   {
+    "Aliases": "AVSK.ImproveMult",
+    "Description": "Decimal value",
+    "Example": "\"Skill.ImproveMult\": 3.14",
+    "Flags": 29,
+    "Name": "Skill.ImproveMult"
+  },
+  {
+    "Aliases": "AVSK.ImproveOffset",
+    "Description": "Decimal value",
+    "Example": "\"Skill.ImproveOffset\": 3.14",
+    "Flags": 29,
+    "Name": "Skill.ImproveOffset"
+  },
+  {
+    "Aliases": "AVSK.OffsetMult",
+    "Description": "Decimal value",
+    "Example": "\"Skill.OffsetMult\": 3.14",
+    "Flags": 29,
+    "Name": "Skill.OffsetMult"
+  },
+  {
+    "Aliases": "AVSK.UseMult",
+    "Description": "Decimal value",
+    "Example": "\"Skill.UseMult\": 3.14",
+    "Flags": 29,
+    "Name": "Skill.UseMult"
+  },
+  {
     "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
@@ -87,14 +115,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

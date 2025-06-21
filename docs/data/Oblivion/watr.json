@@ -8,6 +8,195 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Damage\": 7",
+    "Flags": 29,
+    "Name": "Data.Damage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.DeepColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Data.DeepColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorDampner\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DisplacementSimulatorDampner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorFalloff\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DisplacementSimulatorFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorForce\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DisplacementSimulatorForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorStartingSize\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DisplacementSimulatorStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DisplacementSimulatorVelocity\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DisplacementSimulatorVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FogDistanceFarPlane\": 3.14",
+    "Flags": 29,
+    "Name": "Data.FogDistanceFarPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FogDistanceNearPlane\": 3.14",
+    "Flags": 29,
+    "Name": "Data.FogDistanceNearPlane"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.FresnelAmount\": 3.14",
+    "Flags": 29,
+    "Name": "Data.FresnelAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorDampner\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RainSimulatorDampner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorFalloff\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RainSimulatorFalloff"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorForce\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RainSimulatorForce"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorStartingSize\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RainSimulatorStartingSize"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RainSimulatorVelocity\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RainSimulatorVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.ReflectionColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Data.ReflectionColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ReflectivityAmount\": 3.14",
+    "Flags": 29,
+    "Name": "Data.ReflectivityAmount"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ScrollXSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.ScrollXSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.ScrollYSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.ScrollYSpeed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Data.ShallowColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Data.ShallowColor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.SunPower\": 3.14",
+    "Flags": 29,
+    "Name": "Data.SunPower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.TextureBlend\": 7",
+    "Flags": 29,
+    "Name": "Data.TextureBlend"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1, Break2, Break3)",
+    "Example": "\"Data.Versioning\": [ \"Break0\", \"-Break3\" ]",
+    "Flags": 95,
+    "Name": "Data.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WaveAmplitude\": 3.14",
+    "Flags": 29,
+    "Name": "Data.WaveAmplitude"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WaveFrequency\": 3.14",
+    "Flags": 29,
+    "Name": "Data.WaveFrequency"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WindDirection\": 3.14",
+    "Flags": 29,
+    "Name": "Data.WindDirection"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.WindVelocity\": 3.14",
+    "Flags": 29,
+    "Name": "Data.WindVelocity"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -24,21 +213,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -72,7 +261,28 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"RelatedWaters.RelatedWaterDaytime\": \"123:Skyrim.esm\" or \"RelatedWaters.RelatedWaterDaytime\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "RelatedWaters.RelatedWaterDaytime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"RelatedWaters.RelatedWaterNighttime\": \"123:Skyrim.esm\" or \"RelatedWaters.RelatedWaterNighttime\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "RelatedWaters.RelatedWaterNighttime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"RelatedWaters.RelatedWaterUnderwater\": \"123:Skyrim.esm\" or \"RelatedWaters.RelatedWaterUnderwater\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "RelatedWaters.RelatedWaterUnderwater"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Sound\": \"123:Skyrim.esm\" or \"Sound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Sound"
   },
@@ -87,7 +297,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

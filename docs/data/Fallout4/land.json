@@ -24,21 +24,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -52,7 +52,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -65,7 +65,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Textures\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Textures"
   },
@@ -73,14 +73,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -96,6 +96,41 @@
     "Example": "",
     "Flags": 144,
     "Name": "VertexHeightMap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"VertexHeightMap.Offset\": 3.14",
+    "Flags": 29,
+    "Name": "VertexHeightMap.Offset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Byte values",
+    "Example": "\"VertexHeightMap.Unknown\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "VertexHeightMap.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VertexHeightMap.Unknown.X\": 7",
+    "Flags": 29,
+    "Name": "VertexHeightMap.Unknown.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VertexHeightMap.Unknown.Y\": 7",
+    "Flags": 29,
+    "Name": "VertexHeightMap.Unknown.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VertexHeightMap.Unknown.Z\": 7",
+    "Flags": 29,
+    "Name": "VertexHeightMap.Unknown.Z"
   },
   {
     "Aliases": "",

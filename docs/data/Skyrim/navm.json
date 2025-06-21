@@ -7,6 +7,104 @@
     "Name": "Data"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.CrcHash\": 7",
+    "Flags": 29,
+    "Name": "Data.CrcHash"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Data.Max\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Data.Max"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Max.X\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Max.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Max.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Max.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Max.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Max.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.MaxDistanceX\": 3.14",
+    "Flags": 29,
+    "Name": "Data.MaxDistanceX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.MaxDistanceY\": 3.14",
+    "Flags": 29,
+    "Name": "Data.MaxDistanceY"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Data.Min\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Data.Min"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Min.X\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Min.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Min.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Min.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Min.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Min.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Data.NavmeshGrid\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Data.NavmeshGrid"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.NavmeshGridDivisor\": 7",
+    "Flags": 29,
+    "Name": "Data.NavmeshGridDivisor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.NavmeshVersion\": 7",
+    "Flags": 29,
+    "Name": "Data.NavmeshVersion"
+  },
+  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
@@ -17,21 +115,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -45,7 +143,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -80,14 +178,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

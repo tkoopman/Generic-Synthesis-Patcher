@@ -21,20 +21,17 @@ namespace GSPTestProject.GameData
                 case GameRelease.SkyrimSE:
                     GameName = "Skyrim";
                     BaseGame = GenericSynthesisPatcher.Games.Skyrim.SkyrimGame.Constructor(null!);
-                    Properties = getProperties(recordType);
                     break;
 
                 case GameRelease.Fallout4:
                     GameName = "Fallout4";
                     BaseGame = GenericSynthesisPatcher.Games.Fallout4.Fallout4Game.Constructor(null!);
-                    Properties = getProperties(recordType);
                     break;
 
                 case GameRelease.Oblivion:
                 case GameRelease.OblivionRE:
                     GameName = "Oblivion";
                     BaseGame = GenericSynthesisPatcher.Games.Oblivion.OblivionGame.Constructor(null!);
-                    Properties = getProperties(recordType);
                     break;
 
                 default:
@@ -46,20 +43,17 @@ namespace GSPTestProject.GameData
 
         public string GameName { get; }
         public GameRelease GameRelease { get; }
-        public IReadOnlyCollection<PropertyInfo> Properties { get; }
+
         public ILoquiRegistration RecordType { get; }
 
-        private static IReadOnlyCollection<PropertyInfo> getProperties (ILoquiRegistration recordType)
+        public static List<PropertyInfo> GetProperties (Type type)
         {
-            HashSet<PropertyInfo> properties = [];
-
-            foreach (var property in recordType.ClassType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy).Where(p => p.IsValidPropertyType()))
-                _ = properties.Add(property);
-
-            var list = properties.ToList();
+            var list = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy).Where(p => p.IsValidPropertyType()).ToList();
             list.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
 
-            return list.AsReadOnly();
+            return list;
         }
+
+        public List<PropertyInfo> GetProperties () => GetProperties(RecordType.ClassType);
     }
 }

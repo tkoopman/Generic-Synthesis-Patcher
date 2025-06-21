@@ -2,35 +2,35 @@
   {
     "Aliases": "BAMT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AlternateBlockMaterial\": \"123:Skyrim.esm\" or \"AlternateBlockMaterial\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AlternateBlockMaterial"
   },
   {
     "Aliases": "TNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackFailSound\": \"123:Skyrim.esm\" or \"AttackFailSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackFailSound"
   },
   {
     "Aliases": "NAM7",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackLoopSound\": \"123:Skyrim.esm\" or \"AttackLoopSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackLoopSound"
   },
   {
     "Aliases": "SNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackSound\": \"123:Skyrim.esm\" or \"AttackSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackSound"
   },
   {
     "Aliases": "XNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackSound2D\": \"123:Skyrim.esm\" or \"AttackSound2D\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackSound2D"
   },
@@ -42,9 +42,30 @@
     "Name": "BasicStats"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"BasicStats.Damage\": 7",
+    "Flags": 29,
+    "Name": "BasicStats.Damage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"BasicStats.Value\": 7",
+    "Flags": 29,
+    "Name": "BasicStats.Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BasicStats.Weight\": 3.14",
+    "Flags": 29,
+    "Name": "BasicStats.Weight"
+  },
+  {
     "Aliases": "BIDS",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"BlockBashImpact\": \"123:Skyrim.esm\" or \"BlockBashImpact\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "BlockBashImpact"
   },
@@ -57,10 +78,248 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Critical.Damage\": 7",
+    "Flags": 29,
+    "Name": "Critical.Damage"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Critical.Effect\": \"123:Skyrim.esm\" or \"Critical.Effect\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Critical.Effect"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (OnDeath)",
+    "Example": "\"Critical.Flags\": \"OnDeath\"",
+    "Flags": 93,
+    "Name": "Critical.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Critical.PercentMult\": 3.14",
+    "Flags": 29,
+    "Name": "Critical.PercentMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Critical.Unused\": 7",
+    "Flags": 29,
+    "Name": "Critical.Unused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Critical.Unused2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Critical.Unused2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Critical.Unused3\": 7",
+    "Flags": 29,
+    "Name": "Critical.Unused3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Critical.Unused4\": 7",
+    "Flags": 29,
+    "Name": "Critical.Unused4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"Critical.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Critical.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.AnimationAttackMult\": 3.14",
+    "Flags": 29,
+    "Name": "Data.AnimationAttackMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (HandToHand, OneHandSword, OneHandDagger, OneHandAxe, OneHandMace, TwoHandSword, TwoHandAxe, Bow, Staff, Crossbow)",
+    "Example": "\"Data.AnimationType\": \"HandToHand\"",
+    "Flags": 13,
+    "Name": "Data.AnimationType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (AttackLeft, AttackRight, Attack3, Attack4, Attack5, Attack6, Attack7, Attack8, AttackLoop, AttackSpin, AttackSpin2, PlaceMine, PlaceMine2, AttackThrow, AttackThrow2, AttackThrow3, AttackThrow4, AttackThrow5, Default)",
+    "Example": "\"Data.AttackAnimation\": \"AttackLeft\"",
+    "Flags": 13,
+    "Name": "Data.AttackAnimation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.BaseVATStoHitChance\": 7",
+    "Flags": 29,
+    "Name": "Data.BaseVATStoHitChance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.EmbeddedWeaponAV\": 7",
+    "Flags": 29,
+    "Name": "Data.EmbeddedWeaponAV"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (IgnoresNormalWeaponResistance, Automatic, HasScope, CantDrop, HideBackpack, EmbeddedWeapon, DontUseFirstPersonIsAnim, NonPlayable, PlayerOnly, NPCsUseAmmo, NoJamAfterReload, MinorCrime, RangeFixed, NotUsedInNormalCombat, DontUseThirdPersonISAnim, BurstShot, RumbleAlternate, LongBursts, NonHostile, BoundWeapon)",
+    "Example": "\"Data.Flags\": [ \"IgnoresNormalWeaponResistance\", \"-BoundWeapon\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.NumProjectiles\": 7",
+    "Flags": 29,
+    "Name": "Data.NumProjectiles"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (NoFormulaBehavior, DismemberOnly, ExplodeOnly, NoDismemberOrExplode)",
+    "Example": "\"Data.OnHit\": \"NoFormulaBehavior\"",
+    "Flags": 13,
+    "Name": "Data.OnHit"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RangeMax\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RangeMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RangeMin\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RangeMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Reach\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Reach"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Aggression, Confidence, Energy, Morality, Mood, Assistance, OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting, Health, Magicka, Stamina, HealRate, MagickaRate, StaminaRate, SpeedMult, InventoryWeight, CarryWeight, CriticalChance, MeleeDamage, UnarmedDamage, Mass, VoicePoints, VoiceRate, DamageResist, PoisonResist, ResistFire, ResistShock, ResistFrost, ResistMagic, ResistDisease, Paralysis, Invisibility, NightEye, DetectLifeRange, WaterBreathing, WaterWalking, Fame, Infamy, JumpingBonus, WardPower, RightItemCharge, ArmorPerks, ShieldPerks, WardDeflection, Variable01, Variable02, Variable03, Variable04, Variable05, Variable06, Variable07, Variable08, Variable09, Variable10, BowSpeedBonus, FavorActive, FavorsPerDay, FavorsPerDayTimer, LeftItemCharge, AbsorbChance, Blindness, WeaponSpeedMult, ShoutRecoveryMult, BowStaggerBonus, Telekinesis, FavorPointsBonus, LastBribedIntimidated, LastFlattered, MovementNoiseMult, BypassVendorStolenCheck, BypassVendorKeywordCheck, WaitingForPlayer, OneHandedModifier, TwoHandedModifier, MarksmanModifier, BlockModifier, SmithingModifier, HeavyArmorModifier, LightArmorModifier, PickpocketModifier, LockpickingModifier, SneakingModifier, AlchemyModifier, SpeechcraftModifier, AlterationModifier, ConjurationModifier, DestructionModifier, IllusionModifier, RestorationModifier, EnchantingModifier, OneHandedSkillAdvance, TwoHandedSkillAdvance, MarksmanSkillAdvance, BlockSkillAdvance, SmithingSkillAdvance, HeavyArmorSkillAdvance, LightArmorSkillAdvance, PickpocketSkillAdvance, LockpickingSkillAdvance, SneakingSkillAdvance, AlchemySkillAdvance, SpeechcraftSkillAdvance, AlterationSkillAdvance, ConjurationSkillAdvance, DestructionSkillAdvance, IllusionSkillAdvance, RestorationSkillAdvance, EnchantingSkillAdvance, LeftWeaponSpeedMultiply, DragonSouls, CombatHealthRegenMultiply, OneHandedPowerModifier, TwoHandedPowerModifier, MarksmanPowerModifier, BlockPowerModifier, SmithingPowerModifier, HeavyArmorPowerModifier, LightArmorPowerModifier, PickpocketPowerModifier, LockpickingPowerModifier, SneakingPowerModifier, AlchemyPowerModifier, SpeechcraftPowerModifier, AlterationPowerModifier, ConjurationPowerModifier, DestructionPowerModifier, IllusionPowerModifier, RestorationPowerModifier, EnchantingPowerModifier, DragonRend, AttackDamageMult, HealRateMult, MagickaRateMult, StaminaRateMult, WerewolfPerks, VampirePerks, GrabActorOffset, Grabbed, ReflectDamage, None)",
+    "Example": "\"Data.Resist\": \"Aggression\"",
+    "Flags": 13,
+    "Name": "Data.Resist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleDuration\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RumbleDuration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleLeftMotorStrength\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RumbleLeftMotorStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.RumbleRightMotorStrength\": 3.14",
+    "Flags": 29,
+    "Name": "Data.RumbleRightMotorStrength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.SightFOV\": 3.14",
+    "Flags": 29,
+    "Name": "Data.SightFOV"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (OneHanded, TwoHanded, Archery, Block, Smithing, HeavyArmor, LightArmor, Pickpocket, Lockpicking, Sneak, Alchemy, Speech, Alteration, Conjuration, Destruction, Illusion, Restoration, Enchanting)",
+    "Example": "\"Data.Skill\": \"OneHanded\"",
+    "Flags": 13,
+    "Name": "Data.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Speed\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Speed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Stagger\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Stagger"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Data.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unknown2\": 7",
+    "Flags": 29,
+    "Name": "Data.Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Data.Unknown3\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Data.Unknown3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unknown5\": 7",
+    "Flags": 29,
+    "Name": "Data.Unknown5"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Data.Unused\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Data.Unused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unused2\": 7",
+    "Flags": 29,
+    "Name": "Data.Unused2"
   },
   {
     "Aliases": "DESC",
@@ -100,21 +359,21 @@
   {
     "Aliases": "ETYP",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipmentType\": \"123:Skyrim.esm\" or \"EquipmentType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipmentType"
   },
   {
     "Aliases": "NAM9",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipSound\": \"123:Skyrim.esm\" or \"EquipSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipSound"
   },
   {
     "Aliases": "WNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FirstPersonModel\": \"123:Skyrim.esm\" or \"FirstPersonModel\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FirstPersonModel"
   },
@@ -122,7 +381,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -135,14 +394,14 @@
   {
     "Aliases": "UNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"IdleSound\": \"123:Skyrim.esm\" or \"IdleSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "IdleSound"
   },
   {
     "Aliases": "INAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImpactDataSet\": \"123:Skyrim.esm\" or \"ImpactDataSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImpactDataSet"
   },
@@ -150,20 +409,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "KWDA",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -178,7 +437,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -187,6 +446,13 @@
     "Example": "[{ \"types\": [\"Book\"], \"Forward\": { \"SomeMod.esp\": [\"Model\"] } }]",
     "Flags": 16,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
   },
   {
     "Aliases": "FULL",
@@ -203,23 +469,79 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "OBND.First",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "EITM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ObjectEffect\": \"123:Skyrim.esm\" or \"ObjectEffect\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ObjectEffect"
   },
   {
     "Aliases": "YNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PickUpSound\": \"123:Skyrim.esm\" or \"PickUpSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PickUpSound"
   },
   {
     "Aliases": "ZNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PutDownSound\": \"123:Skyrim.esm\" or \"PutDownSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PutDownSound"
   },
@@ -232,6 +554,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"ScopeModel.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "ScopeModel.Data"
+  },
+  {
+    "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "Flags": 92,
@@ -240,14 +569,14 @@
   {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Template\": \"123:Skyrim.esm\" or \"Template\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Template"
   },
   {
     "Aliases": "NAM8",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"UnequipSound\": \"123:Skyrim.esm\" or \"UnequipSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "UnequipSound"
   },
@@ -262,14 +591,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -278,5 +607,19 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   }
 ]

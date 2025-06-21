@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Enums.NET" Version="5.0.0" />
-    <PackageReference Include="GoriSynthCommon" Version="1.5.0" />
+    <PackageReference Include="GoriSynthCommon" Version="1.5.1" />
     <PackageReference Include="Mutagen.Bethesda.Fallout4" Version="0.50.2" />
     <PackageReference Include="Mutagen.Bethesda.Oblivion" Version="0.50.2" />
     <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.50.2" />

@@ -25,7 +25,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
         private SkyrimGame (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
 
         public override IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get; }
-
         protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public static SkyrimGame Constructor (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState)
@@ -35,27 +34,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
             game.IgnoreSubPropertiesOnTypes.Add(
                 [
-                    typeof(AMagicEffectArchetype),
                     typeof(Cell),
-                    typeof(CellMaxHeightData),
-                    typeof(DialogResponsesAdapter),
-                    typeof(FaceFxPhonemes),
-                    typeof(Landscape),
-                    typeof(LocationTargetRadius),
-                    typeof(Model),
-                    typeof(ObjectBounds),
-                    typeof(PackageAdapter),
-                    typeof(PerkAdapter),
-                    typeof(QuestAdapter),
-                    typeof(RegionGrasses),
-                    typeof(RegionLand),
-                    typeof(RegionMap),
-                    typeof(RegionObjects),
-                    typeof(RegionSounds),
-                    typeof(RegionWeather),
-                    typeof(SceneAdapter),
-                    typeof(VirtualMachineAdapter),
-                    typeof(WorldspaceMaxHeight),
+                    typeof(Destructible)
                 ]);
 
             game.addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);

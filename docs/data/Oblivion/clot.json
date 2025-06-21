@@ -8,10 +8,38 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Head, Hair, UpperBody, LowerBody, Hand, Foot, RightRing, LeftRing, Amulet, Weapon, BackWeapon, SideWeapon, Quiver, Shield, Torch, Tail)",
+    "Example": "\"ClothingFlags.BipedFlags\": [ \"Head\", \"-Tail\" ]",
+    "Flags": 93,
+    "Name": "ClothingFlags.BipedFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HideRings, HideAmulets, NonPlayable, HeavyArmor)",
+    "Example": "\"ClothingFlags.GeneralFlags\": [ \"HideRings\", \"-HeavyArmor\" ]",
+    "Flags": 93,
+    "Name": "ClothingFlags.GeneralFlags"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Value\": 7",
+    "Flags": 29,
+    "Name": "Data.Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Weight\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Weight"
   },
   {
     "Aliases": "",
@@ -23,7 +51,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Enchantment\": \"123:Skyrim.esm\" or \"Enchantment\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Enchantment"
   },
@@ -43,6 +71,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FemaleBipedModel.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "FemaleBipedModel.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FemaleBipedModel.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FemaleBipedModel.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FemaleBipedModel.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "FemaleBipedModel.Hashes"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"FemaleIcon\": \"Hello\"",
     "Flags": 28,
@@ -57,23 +106,44 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"FemaleWorldModel.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "FemaleWorldModel.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"FemaleWorldModel.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "FemaleWorldModel.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FemaleWorldModel.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "FemaleWorldModel.Hashes"
+  },
+  {
+    "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -82,6 +152,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "MaleBipedModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MaleBipedModel.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "MaleBipedModel.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MaleBipedModel.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "MaleBipedModel.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"MaleBipedModel.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "MaleBipedModel.Hashes"
   },
   {
     "Aliases": "",
@@ -96,6 +187,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "MaleWorldModel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"MaleWorldModel.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "MaleWorldModel.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MaleWorldModel.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "MaleWorldModel.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"MaleWorldModel.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "MaleWorldModel.Hashes"
   },
   {
     "Aliases": "",
@@ -114,7 +226,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Script\": \"123:Skyrim.esm\" or \"Script\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Script"
   },
@@ -122,7 +234,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

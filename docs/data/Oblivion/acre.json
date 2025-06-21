@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Base\": \"123:Skyrim.esm\" or \"Base\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Base"
   },
@@ -12,6 +12,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "DistantLODData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown0\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown0"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown1\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown2\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown2"
   },
   {
     "Aliases": "",
@@ -29,6 +50,20 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (SetEnableStateToOppositeOfParent)",
+    "Example": "\"EnableParent.Flags\": \"SetEnableStateToOppositeOfParent\"",
+    "Flags": 93,
+    "Name": "EnableParent.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"EnableParent.Reference\": \"123:Skyrim.esm\" or \"EnableParent.Reference\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "EnableParent.Reference"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FactionRank\": 7",
     "Flags": 28,
@@ -37,7 +72,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GlobalVariable\": \"123:Skyrim.esm\" or \"GlobalVariable\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GlobalVariable"
   },
@@ -45,14 +80,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -64,9 +99,65 @@
   },
   {
     "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Location.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Location.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Location.Rotation\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Location.Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -79,7 +170,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Owner\": \"123:Skyrim.esm\" or \"Owner\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Owner"
   },
@@ -101,7 +192,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

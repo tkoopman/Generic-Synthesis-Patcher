@@ -2,7 +2,7 @@
   {
     "Aliases": "SPLO",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ActorEffect\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ActorEffect"
   },
@@ -14,9 +14,86 @@
     "Name": "AIData"
   },
   {
+    "Aliases": "AIDT.Aggression",
+    "Description": "Possible values (Unaggressive, Aggressive, VeryAggressive, Frenzied)",
+    "Example": "\"AIData.Aggression\": \"Unaggressive\"",
+    "Flags": 13,
+    "Name": "AIData.Aggression"
+  },
+  {
+    "Aliases": "AIDT.AggroRadiusBehavior",
+    "Description": "True / False",
+    "Example": "\"AIData.AggroRadiusBehavior\": true",
+    "Flags": 29,
+    "Name": "AIData.AggroRadiusBehavior"
+  },
+  {
+    "Aliases": "AIDT.Assistance",
+    "Description": "Possible values (HelpsNobody, HelpsAllies, HelpsFriendsAndAllies)",
+    "Example": "\"AIData.Assistance\": \"HelpsNobody\"",
+    "Flags": 13,
+    "Name": "AIData.Assistance"
+  },
+  {
+    "Aliases": "AIDT.Attack",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Attack\": 7",
+    "Flags": 29,
+    "Name": "AIData.Attack"
+  },
+  {
+    "Aliases": "AIDT.Confidence",
+    "Description": "Possible values (Cowardly, Cautious, Average, Brave, Foolhardy)",
+    "Example": "\"AIData.Confidence\": \"Cowardly\"",
+    "Flags": 13,
+    "Name": "AIData.Confidence"
+  },
+  {
+    "Aliases": "AIDT.EnergyLevel",
+    "Description": "Numeric value",
+    "Example": "\"AIData.EnergyLevel\": 7",
+    "Flags": 29,
+    "Name": "AIData.EnergyLevel"
+  },
+  {
+    "Aliases": "AIDT.Mood",
+    "Description": "Possible values (Neutral, Angry, Fear, Happy, Sad, Surprised, Puzzled, Disgusted)",
+    "Example": "\"AIData.Mood\": \"Neutral\"",
+    "Flags": 13,
+    "Name": "AIData.Mood"
+  },
+  {
+    "Aliases": "AIDT.Responsibility",
+    "Description": "Possible values (AnyCrime, ViolenceAgainstEnemies, PropertyCrimeOnly, NoCrime)",
+    "Example": "\"AIData.Responsibility\": \"AnyCrime\"",
+    "Flags": 13,
+    "Name": "AIData.Responsibility"
+  },
+  {
+    "Aliases": "AIDT.Unused",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Unused\": 7",
+    "Flags": 29,
+    "Name": "AIData.Unused"
+  },
+  {
+    "Aliases": "AIDT.Warn",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Warn\": 7",
+    "Flags": 29,
+    "Name": "AIData.Warn"
+  },
+  {
+    "Aliases": "AIDT.WarnOrAttack",
+    "Description": "Numeric value",
+    "Example": "\"AIData.WarnOrAttack\": 7",
+    "Flags": 29,
+    "Name": "AIData.WarnOrAttack"
+  },
+  {
     "Aliases": "ATKR",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackRace\": \"123:Skyrim.esm\" or \"AttackRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackRace"
   },
@@ -30,21 +107,21 @@
   {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Class\": \"123:Skyrim.esm\" or \"Class\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Class"
   },
   {
     "Aliases": "ECOR",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatOverridePackageList\": \"123:Skyrim.esm\" or \"CombatOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatOverridePackageList"
   },
   {
     "Aliases": "ZNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatStyle\": \"123:Skyrim.esm\" or \"CombatStyle\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatStyle"
   },
@@ -56,30 +133,100 @@
     "Name": "Configuration"
   },
   {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.BleedoutOverride\": 7",
+    "Flags": 29,
+    "Name": "Configuration.BleedoutOverride"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMaxLevel\": 7",
+    "Flags": 29,
+    "Name": "Configuration.CalcMaxLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMinLevel\": 7",
+    "Flags": 29,
+    "Name": "Configuration.CalcMinLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.DispositionBase\": 7",
+    "Flags": 29,
+    "Name": "Configuration.DispositionBase"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Female, Essential, IsCharGenFacePreset, Respawn, AutoCalcStats, Unique, DoesntAffectStealthMeter, UseTemplate, Protected, Summonable, DoesNotBleed, BleedoutOverride, OppositeGenderAnims, SimpleActor, LoopedScript, LoopedAudio, IsGhost, Invulnerable)",
+    "Example": "\"Configuration.Flags\": [ \"Female\", \"-Invulnerable\" ]",
+    "Flags": 93,
+    "Name": "Configuration.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.HealthOffset\": 7",
+    "Flags": 29,
+    "Name": "Configuration.HealthOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.MagickaOffset\": 7",
+    "Flags": 29,
+    "Name": "Configuration.MagickaOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.SpeedMultiplier\": 7",
+    "Flags": 29,
+    "Name": "Configuration.SpeedMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.StaminaOffset\": 7",
+    "Flags": 29,
+    "Name": "Configuration.StaminaOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Traits, Stats, Factions, SpellList, AIData, AIPackages, ModelAnimation, BaseData, Inventory, Script, DefPackList, AttackData, Keywords)",
+    "Example": "\"Configuration.TemplateFlags\": [ \"Traits\", \"-Keywords\" ]",
+    "Flags": 93,
+    "Name": "Configuration.TemplateFlags"
+  },
+  {
     "Aliases": "CRIF",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CrimeFaction\": \"123:Skyrim.esm\" or \"CrimeFaction\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CrimeFaction"
   },
   {
     "Aliases": "INAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DeathItem\": \"123:Skyrim.esm\" or \"DeathItem\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DeathItem"
   },
   {
     "Aliases": "DOFT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultOutfit\": \"123:Skyrim.esm\" or \"DefaultOutfit\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultOutfit"
   },
   {
     "Aliases": "DPLT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultPackageList\": \"123:Skyrim.esm\" or \"DefaultPackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultPackageList"
   },
@@ -105,11 +252,172 @@
     "Name": "FaceMorph"
   },
   {
+    "Aliases": "NAM9.BrowsForwardVsBack",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsForwardVsBack\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.BrowsForwardVsBack"
+  },
+  {
+    "Aliases": "NAM9.BrowsInVsOut",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsInVsOut\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.BrowsInVsOut"
+  },
+  {
+    "Aliases": "NAM9.BrowsUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.BrowsUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.BrowsUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.CheeksForwardVsBack",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.CheeksForwardVsBack\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.CheeksForwardVsBack"
+  },
+  {
+    "Aliases": "NAM9.CheeksUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.CheeksUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.CheeksUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.ChinNarrowVsWide",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinNarrowVsWide\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.ChinNarrowVsWide"
+  },
+  {
+    "Aliases": "NAM9.ChinUnderbiteVsOverbite",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinUnderbiteVsOverbite\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.ChinUnderbiteVsOverbite"
+  },
+  {
+    "Aliases": "NAM9.ChinUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.ChinUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.ChinUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.EyesForwardVsBack",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesForwardVsBack\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.EyesForwardVsBack"
+  },
+  {
+    "Aliases": "NAM9.EyesInVsOut",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesInVsOut\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.EyesInVsOut"
+  },
+  {
+    "Aliases": "NAM9.EyesUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.EyesUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.EyesUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.JawForwardVsBack",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawForwardVsBack\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.JawForwardVsBack"
+  },
+  {
+    "Aliases": "NAM9.JawNarrowVsWide",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawNarrowVsWide\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.JawNarrowVsWide"
+  },
+  {
+    "Aliases": "NAM9.JawUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.JawUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.JawUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.LipsInVsOut",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.LipsInVsOut\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.LipsInVsOut"
+  },
+  {
+    "Aliases": "NAM9.LipsUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.LipsUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.LipsUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.NoseLongVsShort",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.NoseLongVsShort\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.NoseLongVsShort"
+  },
+  {
+    "Aliases": "NAM9.NoseUpVsDown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.NoseUpVsDown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.NoseUpVsDown"
+  },
+  {
+    "Aliases": "NAM9.Unknown",
+    "Description": "Decimal value",
+    "Example": "\"FaceMorph.Unknown\": 3.14",
+    "Flags": 29,
+    "Name": "FaceMorph.Unknown"
+  },
+  {
     "Aliases": "NAMA",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "FaceParts"
+  },
+  {
+    "Aliases": "NAMA.Eyes",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Eyes\": 7",
+    "Flags": 29,
+    "Name": "FaceParts.Eyes"
+  },
+  {
+    "Aliases": "NAMA.Mouth",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Mouth\": 7",
+    "Flags": 29,
+    "Name": "FaceParts.Mouth"
+  },
+  {
+    "Aliases": "NAMA.Nose",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Nose\": 7",
+    "Flags": 29,
+    "Name": "FaceParts.Nose"
+  },
+  {
+    "Aliases": "NAMA.Unknown",
+    "Description": "Numeric value",
+    "Example": "\"FaceParts.Unknown\": 7",
+    "Flags": 29,
+    "Name": "FaceParts.Unknown"
   },
   {
     "Aliases": "SNAM",
@@ -121,7 +429,7 @@
   {
     "Aliases": "ANAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FarAwayModel\": \"123:Skyrim.esm\" or \"FarAwayModel\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FarAwayModel"
   },
@@ -129,41 +437,41 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "GNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GiftFilter\": \"123:Skyrim.esm\" or \"GiftFilter\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GiftFilter"
   },
   {
     "Aliases": "GWOR",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GuardWarnOverridePackageList\": \"123:Skyrim.esm\" or \"GuardWarnOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GuardWarnOverridePackageList"
   },
   {
     "Aliases": "HCLF",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HairColor\": \"123:Skyrim.esm\" or \"HairColor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HairColor"
   },
   {
     "Aliases": "PNAM",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"HeadParts\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "HeadParts"
   },
   {
     "Aliases": "FTST",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HeadTexture\": \"123:Skyrim.esm\" or \"HeadTexture\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HeadTexture"
   },
@@ -178,14 +486,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -198,7 +506,7 @@
   {
     "Aliases": "KWDA",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -213,7 +521,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -238,16 +546,72 @@
     "Name": "ObjectBounds"
   },
   {
+    "Aliases": "OBND.First",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "OBND.First.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "OBND.First.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "OBND.First.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "OBND.Second",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "OBND.Second.X",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "OBND.Second.Y",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "OBND.Second.Z",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
     "Aliases": "OCOR",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ObserveDeadBodyOverridePackageList\": \"123:Skyrim.esm\" or \"ObserveDeadBodyOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ObserveDeadBodyOverridePackageList"
   },
   {
     "Aliases": "PKID",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Packages\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Packages"
   },
@@ -266,9 +630,58 @@
     "Name": "PlayerSkills"
   },
   {
+    "Aliases": "DNAM.FarAwayModelDistance",
+    "Description": "Decimal value",
+    "Example": "\"PlayerSkills.FarAwayModelDistance\": 3.14",
+    "Flags": 29,
+    "Name": "PlayerSkills.FarAwayModelDistance"
+  },
+  {
+    "Aliases": "DNAM.GearedUpWeapons",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.GearedUpWeapons\": 7",
+    "Flags": 29,
+    "Name": "PlayerSkills.GearedUpWeapons"
+  },
+  {
+    "Aliases": "DNAM.Health",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Health\": 7",
+    "Flags": 29,
+    "Name": "PlayerSkills.Health"
+  },
+  {
+    "Aliases": "DNAM.Magicka",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Magicka\": 7",
+    "Flags": 29,
+    "Name": "PlayerSkills.Magicka"
+  },
+  {
+    "Aliases": "DNAM.Stamina",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Stamina\": 7",
+    "Flags": 29,
+    "Name": "PlayerSkills.Stamina"
+  },
+  {
+    "Aliases": "DNAM.Unused",
+    "Description": "Numeric value",
+    "Example": "\"PlayerSkills.Unused\": 7",
+    "Flags": 29,
+    "Name": "PlayerSkills.Unused"
+  },
+  {
+    "Aliases": "DNAM.Unused2",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"PlayerSkills.Unused2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "PlayerSkills.Unused2"
+  },
+  {
     "Aliases": "RNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Race\": \"123:Skyrim.esm\" or \"Race\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Race"
   },
@@ -289,7 +702,7 @@
   {
     "Aliases": "SOFT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SleepingOutfit\": \"123:Skyrim.esm\" or \"SleepingOutfit\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SleepingOutfit"
   },
@@ -310,14 +723,14 @@
   {
     "Aliases": "SPOR",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SpectatorOverridePackageList\": \"123:Skyrim.esm\" or \"SpectatorOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SpectatorOverridePackageList"
   },
   {
     "Aliases": "TPLT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Template\": \"123:Skyrim.esm\" or \"Template\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Template"
   },
@@ -339,14 +752,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -357,9 +770,23 @@
     "Name": "VirtualMachineAdapter"
   },
   {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
     "Aliases": "VTCK",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Voice\": \"123:Skyrim.esm\" or \"Voice\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Voice"
   },
@@ -373,7 +800,7 @@
   {
     "Aliases": "WNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"WornArmor\": \"123:Skyrim.esm\" or \"WornArmor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "WornArmor"
   }

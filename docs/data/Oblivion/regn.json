@@ -22,6 +22,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Grasses.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Grasses.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"Grasses.Grasses\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 125,
+    "Name": "Grasses.Grasses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grasses.Priority\": 7",
+    "Flags": 29,
+    "Name": "Grasses.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"Icon\": \"Hello\"",
     "Flags": 28,
@@ -31,21 +52,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -64,10 +85,45 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"MapName.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "MapName.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MapName.Map\": \"Hello\"",
+    "Flags": 29,
+    "Name": "MapName.Map"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapName.Priority\": 7",
+    "Flags": 29,
+    "Name": "MapName.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "Objects"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Objects.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Objects.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Objects.Priority\": 7",
+    "Flags": 29,
+    "Name": "Objects.Priority"
   },
   {
     "Aliases": "",
@@ -85,9 +141,30 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Sounds.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Sounds.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Default, Public, Dungeon)",
+    "Example": "\"Sounds.MusicType\": \"Default\"",
+    "Flags": 13,
+    "Name": "Sounds.MusicType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Sounds.Priority\": 7",
+    "Flags": 29,
+    "Name": "Sounds.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -99,8 +176,22 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Weather.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Weather.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Weather.Priority\": 7",
+    "Flags": 29,
+    "Name": "Weather.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Worldspace\": \"123:Skyrim.esm\" or \"Worldspace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Worldspace"
   }

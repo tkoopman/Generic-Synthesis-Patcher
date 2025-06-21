@@ -23,7 +23,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipType\": \"123:Skyrim.esm\" or \"EquipType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipType"
   },
@@ -45,7 +45,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -54,6 +54,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "Icons"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Icons.MessageIcon"
   },
   {
     "Aliases": "",
@@ -66,20 +80,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
@@ -87,7 +101,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -96,6 +110,41 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "Flags": 29,
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "Flags": 93,
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Model.MaterialSwap\": \"123:Skyrim.esm\" or \"Model.MaterialSwap\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Model.MaterialSwap"
   },
   {
     "Aliases": "",
@@ -113,15 +162,71 @@
   },
   {
     "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PickUpSound\": \"123:Skyrim.esm\" or \"PickUpSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PickUpSound"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PutDownSound\": \"123:Skyrim.esm\" or \"PutDownSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PutDownSound"
   },
@@ -136,14 +241,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -152,6 +257,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "",

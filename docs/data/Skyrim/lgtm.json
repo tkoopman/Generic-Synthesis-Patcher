@@ -15,9 +15,72 @@
   },
   {
     "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalXMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalXMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalXPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalXPlus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalYMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalYMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalYPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalYPlus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalZMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalZMinus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.DirectionalZPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.DirectionalZPlus"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"AmbientColors.Scale\": 3.14",
+    "Flags": 29,
+    "Name": "AmbientColors.Scale"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"AmbientColors.Specular\": [40,50,60]",
+    "Flags": 25,
+    "Name": "AmbientColors.Specular"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"AmbientColors.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "AmbientColors.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "Flags (Break0)",
     "Example": "\"DATADataTypeState\": \"Break0\"",
-    "Flags": 92,
+    "Flags": 94,
     "Name": "DATADataTypeState"
   },
   {
@@ -26,6 +89,69 @@
     "Example": "",
     "Flags": 144,
     "Name": "DirectionalAmbientColors"
+  },
+  {
+    "Aliases": "DALC.DirectionalXMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalXMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalXMinus"
+  },
+  {
+    "Aliases": "DALC.DirectionalXPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalXPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalXPlus"
+  },
+  {
+    "Aliases": "DALC.DirectionalYMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalYMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalYMinus"
+  },
+  {
+    "Aliases": "DALC.DirectionalYPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalYPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalYPlus"
+  },
+  {
+    "Aliases": "DALC.DirectionalZMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalZMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalZMinus"
+  },
+  {
+    "Aliases": "DALC.DirectionalZPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.DirectionalZPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.DirectionalZPlus"
+  },
+  {
+    "Aliases": "DALC.Scale",
+    "Description": "Decimal value",
+    "Example": "\"DirectionalAmbientColors.Scale\": 3.14",
+    "Flags": 29,
+    "Name": "DirectionalAmbientColors.Scale"
+  },
+  {
+    "Aliases": "DALC.Specular",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"DirectionalAmbientColors.Specular\": [40,50,60]",
+    "Flags": 25,
+    "Name": "DirectionalAmbientColors.Specular"
+  },
+  {
+    "Aliases": "DALC.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"DirectionalAmbientColors.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "DirectionalAmbientColors.Versioning"
   },
   {
     "Aliases": "",
@@ -115,21 +241,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -150,7 +276,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -171,14 +297,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

@@ -16,6 +16,9 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Represents an action that can be performed on enum properties of records.
+    /// </summary>
     public class EnumsAction : IRecordAction
     {
         public static readonly EnumsAction Instance = new();
@@ -24,6 +27,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         private EnumsAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => false;
 
         public bool CanFill () => true;
 
@@ -115,9 +121,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if Enum value matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
             && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-            && curValue == originValue;
+            && curValue == originValue);
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 

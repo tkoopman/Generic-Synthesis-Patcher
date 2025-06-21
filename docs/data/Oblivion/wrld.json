@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Climate\": \"123:Skyrim.esm\" or \"Climate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Climate"
   },
@@ -31,21 +31,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -54,6 +54,69 @@
     "Example": "",
     "Flags": 144,
     "Name": "MapData"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 2 Int16 values",
+    "Example": "\"MapData.CellCoordinatesNWCell\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.CellCoordinatesNWCell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesNWCell.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.CellCoordinatesNWCell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesNWCell.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.CellCoordinatesNWCell.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 2 Int16 values",
+    "Example": "\"MapData.CellCoordinatesSECell\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.CellCoordinatesSECell"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesSECell.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.CellCoordinatesSECell.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.CellCoordinatesSECell.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.CellCoordinatesSECell.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 2 Int32 values",
+    "Example": "\"MapData.UsableDimensions\": [1, 2]",
+    "Flags": 25,
+    "Name": "MapData.UsableDimensions"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.X\": 7",
+    "Flags": 29,
+    "Name": "MapData.UsableDimensions.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"MapData.UsableDimensions.Y\": 7",
+    "Flags": 29,
+    "Name": "MapData.UsableDimensions.Y"
   },
   {
     "Aliases": "",
@@ -71,15 +134,15 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Single values",
+    "Example": "\"ObjectBoundsMax\": [1, 2]",
     "Flags": 24,
     "Name": "ObjectBoundsMax"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 2 Single values",
+    "Example": "\"ObjectBoundsMin\": [1, 2]",
     "Flags": 24,
     "Name": "ObjectBoundsMin"
   },
@@ -100,7 +163,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Parent\": \"123:Skyrim.esm\" or \"Parent\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Parent"
   },
@@ -113,6 +176,48 @@
   },
   {
     "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Road.EditorID\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Road.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Road.IsCompressed\": true",
+    "Flags": 31,
+    "Name": "Road.IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Road.IsDeleted\": true",
+    "Flags": 31,
+    "Name": "Road.IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Road.MajorRecordFlagsRaw\": 7",
+    "Flags": 31,
+    "Name": "Road.MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Road.OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 93,
+    "Name": "Road.OblivionMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Road.VersionControl\": 7",
+    "Flags": 31,
+    "Name": "Road.VersionControl"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -122,7 +227,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"SubCellsTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "SubCellsTimestamp"
   },
   {
@@ -136,13 +241,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Water\": \"123:Skyrim.esm\" or \"Water\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Water"
   }

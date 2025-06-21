@@ -8,6 +8,34 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (RandomFrequencyShift, PlayAtRandom, EnvironmentIgnored, RandomLocation, Loop, MenuSound, TwoDimensional, LFE360)",
+    "Example": "\"Data.Flags\": [ \"RandomFrequencyShift\", \"-LFE360\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.FrequencyAdjustment\": 7",
+    "Flags": 29,
+    "Name": "Data.FrequencyAdjustment"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.MaximumAttenuationDistance\": 7",
+    "Flags": 29,
+    "Name": "Data.MaximumAttenuationDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.MinimumAttenuationDistance\": 7",
+    "Flags": 29,
+    "Name": "Data.MinimumAttenuationDistance"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -24,21 +52,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -52,7 +80,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

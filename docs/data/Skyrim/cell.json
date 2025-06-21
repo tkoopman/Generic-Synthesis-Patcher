@@ -2,7 +2,7 @@
   {
     "Aliases": "XCAS",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AcousticSpace\": \"123:Skyrim.esm\" or \"AcousticSpace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AcousticSpace"
   },
@@ -16,7 +16,7 @@
   {
     "Aliases": "XEZN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EncounterZone\": \"123:Skyrim.esm\" or \"EncounterZone\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EncounterZone"
   },
@@ -38,7 +38,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -49,9 +49,37 @@
     "Name": "Grid"
   },
   {
+    "Aliases": "XCLX.Flags",
+    "Description": "Possible values (Quad1, Quad2, Quad3, Quad4)",
+    "Example": "\"Grid.Flags\": \"Quad1\"",
+    "Flags": 13,
+    "Name": "Grid.Flags"
+  },
+  {
+    "Aliases": "XCLX.Point",
+    "Description": "Array of 2 Int32 values",
+    "Example": "\"Grid.Point\": [1, 2]",
+    "Flags": 25,
+    "Name": "Grid.Point"
+  },
+  {
+    "Aliases": "XCLX.Point.X",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.X\": 7",
+    "Flags": 29,
+    "Name": "Grid.Point.X"
+  },
+  {
+    "Aliases": "XCLX.Point.Y",
+    "Description": "Numeric value",
+    "Example": "\"Grid.Point.Y\": 7",
+    "Flags": 29,
+    "Name": "Grid.Point.Y"
+  },
+  {
     "Aliases": "XCIM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpace\": \"123:Skyrim.esm\" or \"ImageSpace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpace"
   },
@@ -59,14 +87,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -77,6 +105,111 @@
     "Name": "Landscape"
   },
   {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Landscape.EditorID\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Landscape.EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (VertexNormalsHeightMap, VertexColors, Layers, MPCD)",
+    "Example": "\"Landscape.Flags\": [ \"VertexNormalsHeightMap\", \"-MPCD\" ]",
+    "Flags": 93,
+    "Name": "Landscape.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.FormVersion\": 7",
+    "Flags": 31,
+    "Name": "Landscape.FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Landscape.IsCompressed\": true",
+    "Flags": 31,
+    "Name": "Landscape.IsCompressed"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Landscape.IsDeleted\": true",
+    "Flags": 31,
+    "Name": "Landscape.IsDeleted"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.MajorRecordFlagsRaw\": 7",
+    "Flags": 31,
+    "Name": "Landscape.MajorRecordFlagsRaw"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"Landscape.SkyrimMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 93,
+    "Name": "Landscape.SkyrimMajorRecordFlags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"Landscape.Textures\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 125,
+    "Name": "Landscape.Textures"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.Version2\": 7",
+    "Flags": 31,
+    "Name": "Landscape.Version2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.VersionControl\": 7",
+    "Flags": 31,
+    "Name": "Landscape.VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Landscape.VertexHeightMap.Offset\": 3.14",
+    "Flags": 29,
+    "Name": "Landscape.VertexHeightMap.Offset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Byte values",
+    "Example": "\"Landscape.VertexHeightMap.Unknown\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Landscape.VertexHeightMap.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.VertexHeightMap.Unknown.X\": 7",
+    "Flags": 29,
+    "Name": "Landscape.VertexHeightMap.Unknown.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.VertexHeightMap.Unknown.Y\": 7",
+    "Flags": 29,
+    "Name": "Landscape.VertexHeightMap.Unknown.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Landscape.VertexHeightMap.Unknown.Z\": 7",
+    "Flags": 29,
+    "Name": "Landscape.VertexHeightMap.Unknown.Z"
+  },
+  {
     "Aliases": "XCLL",
     "Description": "",
     "Example": "",
@@ -84,9 +217,184 @@
     "Name": "Lighting"
   },
   {
+    "Aliases": "XCLL.AmbientColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColor"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalXMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalXMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalXMinus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalXPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalXPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalXPlus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalYMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalYMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalYMinus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalYPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalYPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalYPlus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalZMinus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalZMinus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalZMinus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.DirectionalZPlus",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.DirectionalZPlus\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.DirectionalZPlus"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.Scale",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.AmbientColors.Scale\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.AmbientColors.Scale"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.Specular",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.AmbientColors.Specular\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.AmbientColors.Specular"
+  },
+  {
+    "Aliases": "XCLL.AmbientColors.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"Lighting.AmbientColors.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Lighting.AmbientColors.Versioning"
+  },
+  {
+    "Aliases": "XCLL.DirectionalColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.DirectionalColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.DirectionalColor"
+  },
+  {
+    "Aliases": "XCLL.DirectionalFade",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.DirectionalFade\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalFade"
+  },
+  {
+    "Aliases": "XCLL.DirectionalRotationXY",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationXY\": 7",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalRotationXY"
+  },
+  {
+    "Aliases": "XCLL.DirectionalRotationZ",
+    "Description": "Numeric value",
+    "Example": "\"Lighting.DirectionalRotationZ\": 7",
+    "Flags": 29,
+    "Name": "Lighting.DirectionalRotationZ"
+  },
+  {
+    "Aliases": "XCLL.FogClipDistance",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogClipDistance\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogClipDistance"
+  },
+  {
+    "Aliases": "XCLL.FogFar",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogFar\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogFar"
+  },
+  {
+    "Aliases": "XCLL.FogFarColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogFarColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.FogFarColor"
+  },
+  {
+    "Aliases": "XCLL.FogMax",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogMax\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogMax"
+  },
+  {
+    "Aliases": "XCLL.FogNear",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogNear\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogNear"
+  },
+  {
+    "Aliases": "XCLL.FogNearColor",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Lighting.FogNearColor\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Lighting.FogNearColor"
+  },
+  {
+    "Aliases": "XCLL.FogPower",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.FogPower\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.FogPower"
+  },
+  {
+    "Aliases": "XCLL.Inherits",
+    "Description": "Flags (AmbientColor, DirectionalColor, FogColor, FogNear, FogFar, DirectionalRotation, DirectionalFade, ClipDistance, FogPower, FogMax, LightFadeDistances)",
+    "Example": "\"Lighting.Inherits\": [ \"AmbientColor\", \"-LightFadeDistances\" ]",
+    "Flags": 93,
+    "Name": "Lighting.Inherits"
+  },
+  {
+    "Aliases": "XCLL.LightFadeBegin",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeBegin\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.LightFadeBegin"
+  },
+  {
+    "Aliases": "XCLL.LightFadeEnd",
+    "Description": "Decimal value",
+    "Example": "\"Lighting.LightFadeEnd\": 3.14",
+    "Flags": 29,
+    "Name": "Lighting.LightFadeEnd"
+  },
+  {
+    "Aliases": "XCLL.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"Lighting.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Lighting.Versioning"
+  },
+  {
     "Aliases": "LTMP",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LightingTemplate\": \"123:Skyrim.esm\" or \"LightingTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LightingTemplate"
   },
@@ -100,14 +408,14 @@
   {
     "Aliases": "XLCN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Location\": \"123:Skyrim.esm\" or \"Location\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Location"
   },
   {
     "Aliases": "XILL",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LockList\": \"123:Skyrim.esm\" or \"LockList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LockList"
   },
@@ -122,7 +430,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -135,7 +443,7 @@
   {
     "Aliases": "XCMO",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Music\": \"123:Skyrim.esm\" or \"Music\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Music"
   },
@@ -163,7 +471,7 @@
   {
     "Aliases": "XOWN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Owner\": \"123:Skyrim.esm\" or \"Owner\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Owner"
   },
@@ -178,27 +486,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"PersistentTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "PersistentTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"PersistentUnknownGroupData\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "PersistentUnknownGroupData"
   },
   {
     "Aliases": "XCLR",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Regions\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Regions"
   },
   {
     "Aliases": "XCCM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SkyAndWeatherFromRegion\": \"123:Skyrim.esm\" or \"SkyAndWeatherFromRegion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SkyAndWeatherFromRegion"
   },
@@ -220,21 +528,21 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"TemporaryTimestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "TemporaryTimestamp"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"TemporaryUnknownGroupData\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "TemporaryUnknownGroupData"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Timestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Timestamp"
   },
   {
@@ -248,20 +556,20 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
     "Aliases": "XCWT",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Water\": \"123:Skyrim.esm\" or \"Water\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Water"
   },
@@ -292,6 +600,76 @@
     "Example": "",
     "Flags": 144,
     "Name": "WaterVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"WaterVelocity.Angle\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Angle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.X\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Y\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Z\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"WaterVelocity.Offset\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Offset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.X\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Y\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Z\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"WaterVelocity.Unknown\": 7",
+    "Flags": 29,
+    "Name": "WaterVelocity.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"WaterVelocity.Unknown2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Unknown2"
   },
   {
     "Aliases": "",

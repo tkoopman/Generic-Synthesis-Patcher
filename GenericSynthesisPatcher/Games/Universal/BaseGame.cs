@@ -46,21 +46,36 @@ namespace GenericSynthesisPatcher.Games.Universal
         public IReadOnlyCollection<PropertyAliasMapping> AliasMappings => propertyAliases.ToList().AsReadOnly();
 
         /// <summary>
+        ///     List of property names that should be hidden by default in documentation.
+        ///
+        ///     Any property name starting with Unknown or Unused automatically added so no need to
+        ///     list here.
+        /// </summary>
+
+        public virtual HashSet<string> HiddenProperties => [
+            "DATADataTypeState",
+            "FormVersion",
+            "IsCompressed",
+            "IsDeleted",
+            "MajorRecordFlagsRaw",
+            "PersistentTimestamp",
+            "PersistentUnknownGroupData",
+            "RawFloat",
+            "SubCellsTimestamp",
+            "SubCellsUnknown",
+            "TemporaryTimestamp",
+            "TemporaryUnknownGroupData",
+            "Timestamp",
+            "Version2",
+            "VersionControl",
+            "Versioning",
+            ];
+
+        /// <summary>
         ///     Types contained in this set will not be traversed for sub-properties.
         /// </summary>
         public HashSet<Type> IgnoreSubPropertiesOnTypes { get; protected set; } =
                     [
-                typeof(P2Double),
-                typeof(P2Float),
-                typeof(P2Int),
-                typeof(P2Int16),
-                typeof(P2UInt8),
-                typeof(P3Double),
-                typeof(P3Float),
-                typeof(P3Int),
-                typeof(P3Int16),
-                typeof(P3UInt16),
-                typeof(P3UInt8),
                 typeof(AssetLink<>),
                 typeof(ExtendedList<>),
                 typeof(FormLink<>),
@@ -127,7 +142,9 @@ namespace GenericSynthesisPatcher.Games.Universal
         };
 
         public abstract IPatcherState State { get; }
+
         protected abstract Type TypeOptionSolidifierMixIns { get; }
+
         private Dictionary<PropertyKey, PropertyAction?> PropertyMappings { get; } = [];
 
         private Dictionary<Type, IRecordAction?> TypeMappingsExact { get; } = new()
@@ -219,6 +236,22 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public ILoquiRegistration? GetRecordType (string name) => RecordTypes.TryGetValue(name, out var recordType) ? recordType : null;
 
+        public bool ShouldCheckForSupProperties (Type type)
+        {
+            type = type.RemoveNullable();
+            if (IgnoreSubPropertiesOnTypes.Contains(type))
+                return false;
+
+            if (type.IsGenericType)
+            {
+                type = type.GetGenericTypeDefinition();
+                if (IgnoreSubPropertiesOnTypes.Contains(type))
+                    return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         ///     Get the action for a given property name in a record type.
         /// </summary>
@@ -267,7 +300,7 @@ namespace GenericSynthesisPatcher.Games.Universal
                     continue;
                 }
 
-                if ((i < last) && IgnoreSubPropertiesOnTypes.Contains(property.PropertyType))
+                if ((i < last) && !ShouldCheckForSupProperties(property.PropertyType))
                     valid = false;
 
                 properties[i] = property;

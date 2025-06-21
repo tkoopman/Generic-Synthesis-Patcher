@@ -17,13 +17,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "GNAM",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Grasses\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Grasses"
   },
@@ -45,27 +45,27 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "MNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MaterialType\": \"123:Skyrim.esm\" or \"MaterialType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MaterialType"
   },
@@ -79,7 +79,7 @@
   {
     "Aliases": "TNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"TextureSet\": \"123:Skyrim.esm\" or \"TextureSet\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "TextureSet"
   },
@@ -94,14 +94,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

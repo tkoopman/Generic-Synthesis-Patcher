@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatStyle\": \"123:Skyrim.esm\" or \"CombatStyle\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatStyle"
   },
@@ -45,7 +45,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -54,6 +54,34 @@
     "Example": "",
     "Flags": 144,
     "Name": "IdleAnimations"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"IdleAnimations.Animations\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 125,
+    "Name": "IdleAnimations.Animations"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"IdleAnimations.IDLB\": 7",
+    "Flags": 29,
+    "Name": "IdleAnimations.IDLB"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"IdleAnimations.TimerSetting\": 3.14",
+    "Flags": 29,
+    "Name": "IdleAnimations.TimerSetting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Random, RunInSequence, RandomDoOnce, RunInSequenceDoOnce)",
+    "Example": "\"IdleAnimations.Type\": \"Random\"",
+    "Flags": 13,
+    "Name": "IdleAnimations.Type"
   },
   {
     "Aliases": "",
@@ -73,21 +101,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -99,10 +127,24 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OnBegin.Idle\": \"123:Skyrim.esm\" or \"OnBegin.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnBegin.Idle"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "OnChange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OnChange.Idle\": \"123:Skyrim.esm\" or \"OnChange.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnChange.Idle"
   },
   {
     "Aliases": "",
@@ -114,14 +156,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OnEnd.Idle\": \"123:Skyrim.esm\" or \"OnEnd.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnEnd.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OwnerQuest\": \"123:Skyrim.esm\" or \"OwnerQuest\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OwnerQuest"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PackageTemplate\": \"123:Skyrim.esm\" or \"PackageTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PackageTemplate"
   },
@@ -213,14 +262,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -229,6 +278,104 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.FragmentName"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.ScriptName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Local, Inherited, Removed, InheritedAndRemoved)",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.Script.Flags\": \"Local\"",
+    "Flags": 13,
+    "Name": "VirtualMachineAdapter.ScriptFragments.Script.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.Script.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.Script.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "",
