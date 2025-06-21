@@ -10,6 +10,9 @@ namespace GenericSynthesisPatcher.Games.Fallout4.Action
     {
         public static readonly WorldspaceMaxHeightAction Instance = new();
 
+        // <inheritdoc />
+        public override bool AllowSubProperties => false;
+
         public override bool CanFill () => false;
 
         // <inheritdoc />

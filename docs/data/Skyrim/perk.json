@@ -31,7 +31,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -52,14 +52,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -80,7 +80,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -93,7 +93,7 @@
   {
     "Aliases": "NNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"NextPerk\": \"123:Skyrim.esm\" or \"NextPerk\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "NextPerk"
   },
@@ -129,14 +129,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -145,5 +145,33 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.FileName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.FileName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.FileName"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   }
 ]

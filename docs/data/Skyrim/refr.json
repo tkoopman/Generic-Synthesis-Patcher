@@ -15,6 +15,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (ParentActivateOnly)",
+    "Example": "\"ActivateParents.Flags\": \"ParentActivateOnly\"",
+    "Flags": 93,
+    "Name": "ActivateParents.Flags"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -22,22 +29,36 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Alpha.Base\": 7",
+    "Flags": 29,
+    "Name": "Alpha.Base"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Alpha.Cutoff\": 7",
+    "Flags": 29,
+    "Name": "Alpha.Cutoff"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttachRef\": \"123:Skyrim.esm\" or \"AttachRef\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttachRef"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Base\": \"123:Skyrim.esm\" or \"Base\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Base"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"BoundHalfExtents\": [1, 2, 3]",
     "Flags": 24,
     "Name": "BoundHalfExtents"
   },
@@ -72,7 +93,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Emittance\": \"123:Skyrim.esm\" or \"Emittance\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Emittance"
   },
@@ -84,9 +105,37 @@
     "Name": "EnableParent"
   },
   {
+    "Aliases": "",
+    "Description": "Flags (SetEnableStateToOppositeOfParent, PopIn)",
+    "Example": "\"EnableParent.Flags\": [ \"SetEnableStateToOppositeOfParent\", \"-PopIn\" ]",
+    "Flags": 93,
+    "Name": "EnableParent.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"EnableParent.Reference\": \"123:Skyrim.esm\" or \"EnableParent.Reference\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "EnableParent.Reference"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"EnableParent.Unknown\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "EnableParent.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"EnableParent.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "EnableParent.Versioning"
+  },
+  {
     "Aliases": "XEZN",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EncounterZone\": \"123:Skyrim.esm\" or \"EncounterZone\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EncounterZone"
   },
@@ -108,7 +157,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -121,7 +170,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpace\": \"123:Skyrim.esm\" or \"ImageSpace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpace"
   },
@@ -129,14 +178,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -170,7 +219,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LeveledItemBaseObject\": \"123:Skyrim.esm\" or \"LeveledItemBaseObject\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LeveledItemBaseObject"
   },
@@ -190,8 +239,50 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LightData.EndDistanceCap\": 3.14",
+    "Flags": 29,
+    "Name": "LightData.EndDistanceCap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LightData.FadeOffset\": 3.14",
+    "Flags": 29,
+    "Name": "LightData.FadeOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LightData.FovOffset\": 3.14",
+    "Flags": 29,
+    "Name": "LightData.FovOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"LightData.ShadowDepthBias\": 3.14",
+    "Flags": 29,
+    "Name": "LightData.ShadowDepthBias"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"LightData.Unknown\": 7",
+    "Flags": 29,
+    "Name": "LightData.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"LightData.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "LightData.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LightingTemplate\": \"123:Skyrim.esm\" or \"LightingTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LightingTemplate"
   },
@@ -205,28 +296,28 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LinkedRooms\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LinkedRooms"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LitWater\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LitWater"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LocationReference\": \"123:Skyrim.esm\" or \"LocationReference\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LocationReference"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LocationRefTypes\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LocationRefTypes"
   },
@@ -239,9 +330,44 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (LeveledLock)",
+    "Example": "\"Lock.Flags\": \"LeveledLock\"",
+    "Flags": 93,
+    "Name": "Lock.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Lock.Key\": \"123:Skyrim.esm\" or \"Lock.Key\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Lock.Key"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Novice, Apprentice, Adept, Expert, Master, RequiresKey)",
+    "Example": "\"Lock.Level\": \"Novice\"",
+    "Flags": 13,
+    "Name": "Lock.Level"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Lock.Unused\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Lock.Unused"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Lock.Unused2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Lock.Unused2"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -253,8 +379,29 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Visible, CanTravelTo, ShowAllIsHidden)",
+    "Example": "\"MapMarker.Flags\": [ \"Visible\", \"-ShowAllIsHidden\" ]",
+    "Flags": 93,
+    "Name": "MapMarker.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MapMarker.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "MapMarker.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, City, Town, Settlement, Cave, Camp, Fort, NordicRuins, DwemerRuin, Shipwreck, Grove, Landmark, DragonLair, Farm, WoodMill, Mine, ImperialCamp, StormcloakCamp, Doomstone, WheatMill, Smelter, Stable, ImperialTower, Clearing, Pass, Altar, Rock, Lighthouse, OrcStronghold, GiantCamp, Shack, NordicTower, NordicDwelling, Docks, Shrine, RiftenCastle, RiftenCapitol, WindhelmCastle, WindhelmCapitol, WhiterunCastle, WhiterunCapitol, SolitudeCastle, SolitudeCapitol, MarkarthCastle, MarkarthCapitol, WinterholdCastle, WinterholdCapitol, MorthalCastle, MorthalCapitol, FalkreathCastle, FalkreathCapitol, DawnstarCastle, DawnstarCapitol, TempleOfMiraak, RavenRock, BeastStone, TelMithryn, ToSkyrim, ToSolstheim, CastleKarstaag)",
+    "Example": "\"MapMarker.Type\": \"None\"",
+    "Flags": 13,
+    "Name": "MapMarker.Type"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MultiboundReference\": \"123:Skyrim.esm\" or \"MultiboundReference\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MultiboundReference"
   },
@@ -267,6 +414,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"NavigationDoorLink.NavMesh\": \"123:Skyrim.esm\" or \"NavigationDoorLink.NavMesh\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "NavigationDoorLink.NavMesh"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NavigationDoorLink.TeleportMarkerTriangle\": 7",
+    "Flags": 29,
+    "Name": "NavigationDoorLink.TeleportMarkerTriangle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"NavigationDoorLink.Unused\": 7",
+    "Flags": 29,
+    "Name": "NavigationDoorLink.Unused"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -274,8 +442,78 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.Height\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.Height"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"OcclusionPlane.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "OcclusionPlane.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.RotationQ1\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.RotationQ1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.RotationQ2\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.RotationQ2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.RotationQ3\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.RotationQ3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.RotationQ4\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.RotationQ4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"OcclusionPlane.Width\": 3.14",
+    "Flags": 29,
+    "Name": "OcclusionPlane.Width"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Owner\": \"123:Skyrim.esm\" or \"Owner\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Owner"
   },
@@ -289,7 +527,35 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Patrol.Idle\": \"123:Skyrim.esm\" or \"Patrol.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Patrol.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Patrol.IdleTime\": 3.14",
+    "Flags": 29,
+    "Name": "Patrol.IdleTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Patrol.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Patrol.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Patrol.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Patrol.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"PersistentLocation\": \"123:Skyrim.esm\" or \"PersistentLocation\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PersistentLocation"
   },
@@ -299,6 +565,62 @@
     "Example": "",
     "Flags": 144,
     "Name": "Placement"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Placement.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Placement.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Placement.Rotation\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Placement.Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Placement.Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Placement.Rotation.Z"
   },
   {
     "Aliases": "",
@@ -313,6 +635,55 @@
     "Example": "",
     "Flags": 144,
     "Name": "Primitive"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Primitive.Bounds\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Primitive.Bounds"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Primitive.Bounds.X\": 3.14",
+    "Flags": 29,
+    "Name": "Primitive.Bounds.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Primitive.Bounds.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Primitive.Bounds.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Primitive.Bounds.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Primitive.Bounds.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Primitive.Color\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Primitive.Color"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, Box, Sphere, PortalBox)",
+    "Example": "\"Primitive.Type\": \"None\"",
+    "Flags": 13,
+    "Name": "Primitive.Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Primitive.Unknown\": 3.14",
+    "Flags": 29,
+    "Name": "Primitive.Unknown"
   },
   {
     "Aliases": "",
@@ -352,6 +723,76 @@
   {
     "Aliases": "",
     "Description": "Decimal value",
+    "Example": "\"RoomPortal.Height\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.Height"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"RoomPortal.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "RoomPortal.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.RotationQ1\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.RotationQ1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.RotationQ2\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.RotationQ2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.RotationQ3\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.RotationQ3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.RotationQ4\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.RotationQ4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RoomPortal.Width\": 3.14",
+    "Flags": 29,
+    "Name": "RoomPortal.Width"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
     "Example": "\"Scale\": 3.14",
     "Flags": 28,
     "Name": "Scale"
@@ -366,7 +807,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SpawnContainer\": \"123:Skyrim.esm\" or \"SpawnContainer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SpawnContainer"
   },
@@ -380,7 +821,77 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"TeleportDestination.Door\": \"123:Skyrim.esm\" or \"TeleportDestination.Door\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TeleportDestination.Door"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (NoAlarm)",
+    "Example": "\"TeleportDestination.Flags\": \"NoAlarm\"",
+    "Flags": 93,
+    "Name": "TeleportDestination.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"TeleportDestination.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "TeleportDestination.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"TeleportDestination.Rotation\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "TeleportDestination.Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TeleportMessageBox\": \"123:Skyrim.esm\" or \"TeleportMessageBox\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "TeleportMessageBox"
   },
@@ -395,14 +906,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -413,11 +924,95 @@
     "Name": "VirtualMachineAdapter"
   },
   {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
     "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "WaterVelocity"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"WaterVelocity.Angle\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Angle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.X\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Y\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Angle.Z\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Angle.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"WaterVelocity.Offset\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Offset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.X\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Y\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"WaterVelocity.Offset.Z\": 3.14",
+    "Flags": 29,
+    "Name": "WaterVelocity.Offset.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"WaterVelocity.Unknown\": 7",
+    "Flags": 29,
+    "Name": "WaterVelocity.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"WaterVelocity.Unknown2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "WaterVelocity.Unknown2"
   },
   {
     "Aliases": "",
@@ -436,14 +1031,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"XCZC\": \"123:Skyrim.esm\" or \"XCZC\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "XCZC"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"XCZR\": \"123:Skyrim.esm\" or \"XCZR\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "XCZR"
   },

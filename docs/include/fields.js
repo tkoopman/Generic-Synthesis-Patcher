@@ -3,6 +3,8 @@
 let gridApi;
 let dataTypes;
 let game;
+let showSubProperties;
+let showHidden;
 
 function getQueryParams(qs) {
     qs = qs.split('+').join(' ');
@@ -19,7 +21,6 @@ function getQueryParams(qs) {
 }
 
 function loadTypes(rt) {
-    const g = game.value;
     if (typeof rt === 'undefined')
         rt = dataTypes.value;
 
@@ -27,7 +28,7 @@ function loadTypes(rt) {
 
     let index = 0;
 
-    fetch('./data/' + g + '/types.json')
+    fetch('./data/' + game.value + '/types.json')
         .then(res => res.json())
         .then(data => {
             data.forEach(type => {
@@ -45,23 +46,25 @@ function loadTypes(rt) {
 }
 
 function loadType() {
-    let g = game.options[game.selectedIndex].getAttribute('value');
-    let rt = dataTypes.value;
     let name = dataTypes.options[dataTypes.selectedIndex].innerHTML.replace(/\s/g, '');
-    if (name.toLowerCase() == rt.toLowerCase()) {
-        name = rt;
+    if (name.toLowerCase() == dataTypes.value.toLowerCase()) {
+        name = dataTypes.value;
     } else {
-        name = rt + '; ' + name;
+        name = dataTypes.value + '; ' + name;
     }
     document.getElementById('typeAlias').innerHTML = name;
 
-    if (window.location.search != '' || dataTypes.selectedIndex != 0 || g != 'Skyrim')
-        queryString.push({ 'game': g, 'record': rt });
+    updateQueryString();
 
-    fetch('./data/' + g + '/' + rt.toLowerCase() + '.json')
+    fetch('./data/' + game.value + '/' + dataTypes.value.toLowerCase() + '.json')
         .then((response) => response.json())
         .then((data) => gridApi.setGridOption('rowData', data))
         .then(() => gridApi.autoSizeColumns([]));
+}
+
+function updateQueryString() {
+    if (window.location.search != '' || dataTypes.selectedIndex != 0 || game.value != 'Skyrim' || showHidden.checked || showSubProperties.value > 0)
+        queryString.push({ 'game': game.value, 'record': dataTypes.value, 'depth': (showSubProperties.value > 0) ? showSubProperties.value : null, 'hidden': (showHidden.checked) ? 'show' : null });
 }
 
 function flagImg(value, flag, img, title) {
@@ -100,10 +103,37 @@ function flagRenderer(params) {
 
     return flagSpan;
 }
+function isExternalFilterPresent() {
+    return !showHidden.checked || showSubProperties.value !== 3;
+}
+
+function doesExternalFilterPass(node) {
+    if (node.data) {
+        return (showHidden.checked || (node.data.Flags & 2) != 2) &&
+            (showSubProperties.value == 3 || node.data.Name.split('.').length - 1 <= showSubProperties.value);
+    }
+    return true;
+}
+function externalFilterChanged() {
+    gridApi.onFilterChanged();
+    updateQueryString();
+}
+
+function readQueryString() {
+    const q = getQueryParams(window.location.search);
+    game.value = (typeof q.game === 'undefined') ? 'Skyrim' : q.game;
+    if (typeof q.record !== 'undefined') dataTypes.value = q.record;
+    showHidden.checked = (q.hidden == 'show');
+    showSubProperties.value = (typeof q.depth === 'undefined') ? 0 : q.depth;
+
+    return q.record;
+}
 
 function onLoad() {
     game = document.getElementById('game');
     dataTypes = document.getElementById('dataTypes');
+    showSubProperties = document.getElementById('showSubProperties');
+    showHidden = document.getElementById('showHidden');
 
     const myTheme = agGrid.themeQuartz.withPart(agGrid.colorSchemeDarkBlue)
         .withParams({
@@ -122,8 +152,8 @@ function onLoad() {
             { field: 'Name' },
             { field: 'Aliases' },
             { field: 'Flags', headerName: 'Valid Uses', cellRenderer: flagRenderer, suppressHeaderFilterButton: true, sortable: false, width: 120 },
-            { field: 'Description', wrapText: true, autoHeight: true, flex: 1 },
-            { field: 'Example', wrapText: true, autoHeight: true, flex: 1 },
+            { field: 'Description', headerName: 'Fill Description', wrapText: true, autoHeight: true, flex: 1 },
+            { field: 'Example', headerName: 'Fill Example', wrapText: true, autoHeight: true, flex: 1 },
         ],
         autoSizeStrategy: {
             type: 'fitCellContents',
@@ -135,32 +165,19 @@ function onLoad() {
             checkboxes: false,
             enableClickSelection: true,
         },
+        isExternalFilterPresent: isExternalFilterPresent,
+        doesExternalFilterPass: doesExternalFilterPass,
     };
 
     gridApi = agGrid.createGrid(document.querySelector('#myGrid'), gridOptions);
 
-    const q = getQueryParams(window.location.search);
-    let g = q.game;
-    if (typeof g === 'undefined') g = 'Skyrim';
-    game.value = g;
-    if (typeof q.record !== 'undefined') dataTypes.value = q.record;
-
-    loadTypes(q.record);
+    loadTypes(readQueryString());
 
     addEventListener('popstate', function (e) {
-        const q = getQueryParams(window.location.search);
-        let g = q.game;
-        if (typeof g === 'undefined') {
-            g = 'Skyrim';
-        }
-        const gameChanged = game.value != g;
-        game.value = g;
-        if (typeof q.record !== 'undefined')
-            dataTypes.value = q.record;
-        else
-            dataTypes.selectedIndex = 0;
+        let g = game.value;
+        readQueryString();
 
-        if (gameChanged) {
+        if (g != game.value) {
             loadTypes(q.record);
         } else {
             loadType();
@@ -231,7 +248,13 @@ MIT License
         var params = queryString.parse(location.search);
         let changed = false;
         for (var key in setParams) {
-            if (params[key] != setParams[key]) {
+            if (setParams[key] === null) {
+                if (params.hasOwnProperty(key)) {
+                    changed = true;
+                    delete params[key];
+                }
+            }
+            else if (params[key] != setParams[key]) {
                 changed = true;
                 params[key] = setParams[key];
             }

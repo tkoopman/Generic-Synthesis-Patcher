@@ -15,6 +15,118 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Playable)",
+    "Example": "\"Data.Flags\": \"Playable\"",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost0.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost0.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost0.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost0.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost1.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost1.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost1.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost1.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost2.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost2.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost2.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost2.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost3.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost3.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost3.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost3.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost4.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost4.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost4.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost4.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost5.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost5.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost5.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost5.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.SkillBoost6.Boost\": 7",
+    "Flags": 29,
+    "Name": "Data.SkillBoost6.Boost"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck, Health, Magicka, Fatigue, Encumbrance, Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.SkillBoost6.Skill\": \"Strength\"",
+    "Flags": 13,
+    "Name": "Data.SkillBoost6.Skill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unused\": 7",
+    "Flags": 29,
+    "Name": "Data.Unused"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -44,7 +156,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Eyes\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Eyes"
   },
@@ -64,6 +176,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FaceGenData.AsymmetricGeometry\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "FaceGenData.AsymmetricGeometry"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FaceGenData.SymmetricGeometry\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "FaceGenData.SymmetricGeometry"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"FaceGenData.SymmetricTexture\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "FaceGenData.SymmetricTexture"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FaceGenFaceClamp\": 7",
     "Flags": 28,
@@ -79,7 +212,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Hairs\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Hairs"
   },
@@ -87,21 +220,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -142,7 +275,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Spells\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Spells"
   },
@@ -150,7 +283,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {

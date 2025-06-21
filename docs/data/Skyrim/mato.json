@@ -3,7 +3,7 @@
     "Aliases": "",
     "Description": "Flags (Break0, Break1, Break2)",
     "Example": "\"DATADataTypeState\": [ \"Break0\", \"-Break2\" ]",
-    "Flags": 92,
+    "Flags": 94,
     "Name": "DATADataTypeState"
   },
   {
@@ -12,6 +12,13 @@
     "Example": "",
     "Flags": 144,
     "Name": "DNAMs"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"DNAMs.Item\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "DNAMs.Item"
   },
   {
     "Aliases": "EDID",
@@ -45,7 +52,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -59,21 +66,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -92,6 +99,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"NoiseUvScale\": 3.14",
     "Flags": 28,
@@ -106,10 +120,31 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"ProjectionVector\": [1, 2, 3]",
     "Flags": 24,
     "Name": "ProjectionVector"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ProjectionVector.X\": 3.14",
+    "Flags": 29,
+    "Name": "ProjectionVector.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ProjectionVector.Y\": 3.14",
+    "Flags": 29,
+    "Name": "ProjectionVector.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"ProjectionVector.Z\": 3.14",
+    "Flags": 29,
+    "Name": "ProjectionVector.Z"
   },
   {
     "Aliases": "",
@@ -129,14 +164,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

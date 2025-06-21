@@ -16,6 +16,9 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Action that handles form links pointing to a single major records.
+    /// </summary>
     public class FormLinkAction<TMajor> : IRecordAction where TMajor : class, IMajorRecordGetter
     {
         public static readonly FormLinkAction<TMajor> Instance = new();
@@ -24,6 +27,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         private FormLinkAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => false;
 
         public bool CanFill () => true;
 
@@ -90,7 +96,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 var mc = AllRecordMods[mods.ElementAt(i)];
 
                 if (Mod.TryGetProperty<IFormLinkGetter<TMajor>>(mc.Record, proKeys.Property.PropertyName, out var curValue)
-                    && (!nonNull || curValue is not null && !curValue.IsNull))
+                    && (!nonNull || (curValue is not null && !curValue.IsNull)))
                 {
                     int historyIndex = history.IndexOf(curValue?.FormKey);
                     if (historyIndex == -1)
@@ -179,7 +185,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
         {
             description = "Form Key or Editor ID";
-            example = "";
+            example = $"""
+                        "{propertyName}": "123:Skyrim.esm" or "{propertyName}": "MyEditorID"
+                        """;
 
             return true;
         }

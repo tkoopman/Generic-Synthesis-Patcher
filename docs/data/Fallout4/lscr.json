@@ -38,27 +38,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LoadingScreenNif\": \"123:Skyrim.esm\" or \"LoadingScreenNif\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LoadingScreenNif"
   },
@@ -73,7 +73,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -85,8 +85,22 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Rotation.Max\": 7",
+    "Flags": 29,
+    "Name": "Rotation.Max"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Rotation.Min\": 7",
+    "Flags": 29,
+    "Name": "Rotation.Min"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Transform\": \"123:Skyrim.esm\" or \"Transform\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Transform"
   },
@@ -94,14 +108,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -110,5 +124,19 @@
     "Example": "",
     "Flags": 144,
     "Name": "Zoom"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Zoom.Max\": 3.14",
+    "Flags": 29,
+    "Name": "Zoom.Max"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Zoom.Min\": 3.14",
+    "Flags": 29,
+    "Name": "Zoom.Min"
   }
 ]

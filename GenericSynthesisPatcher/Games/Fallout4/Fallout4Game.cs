@@ -21,10 +21,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
     {
         private Fallout4Game () => State = null!;
 
-        private Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value)))
-        {
-            State = gameState;
-        }
+        private Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
 
         public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
 
@@ -37,26 +34,9 @@ namespace GenericSynthesisPatcher.Games.Fallout4
 
             game.IgnoreSubPropertiesOnTypes.Add(
                 [
-                typeof(AMagicEffectArchetype),
-                typeof(Cell),
-                typeof(CellMaxHeightData),
-                typeof(DialogResponsesAdapter),
-                typeof(FaceFxPhonemes),
-                typeof(Landscape),
-                typeof(LocationTargetRadius),
-                typeof(Model),
-                typeof(PackageAdapter),
-                typeof(PerkAdapter),
-                typeof(QuestAdapter),
-                typeof(RegionGrasses),
-                typeof(RegionLand),
-                typeof(RegionMap),
-                typeof(RegionObjects),
-                typeof(RegionSounds),
-                typeof(RegionWeather),
-                typeof(SceneAdapter),
-                typeof(VirtualMachineAdapter),
-                typeof(WorldspaceMaxHeight),
+                    typeof(Cell),
+                    typeof(Destructible),
+                    typeof(NavmeshGeometry),
                 ]);
 
             game.addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);

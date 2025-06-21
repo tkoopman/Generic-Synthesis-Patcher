@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Common;
+﻿using Common;
 
 using GenericSynthesisPatcher;
 using GenericSynthesisPatcher.Helpers;
@@ -29,8 +27,7 @@ namespace GSPTestProject
             var recordType = gameRecordType.RecordType;
             _ = TranslationMaskFactory.TryGetTranslationMaskType(recordType, out var mask);
 
-            var properties = gameRecordType.Properties.ToList();
-            properties.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
+            var properties = gameRecordType.GetProperties();
 
             foreach (var property in properties)
             {
@@ -50,19 +47,6 @@ namespace GSPTestProject
 
             Assert.Equal(count, valid);
             output.WriteLine($"{recordType.Name}: {valid}/{count}");
-        }
-
-        [Theory]
-        [ClassData(typeof(RecordTypes))]
-        public void ValidateStatelessData (GameRecordType gameRecordType)
-        {
-            var properties = gameRecordType.RecordType.ClassType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy).Where(p => p.IsValidPropertyType());
-
-            var statelessMissing = properties.Where(p => !gameRecordType.Properties.Contains(p));
-            Assert.Empty(statelessMissing);
-
-            var statelessExtra = gameRecordType.Properties.Where(p => ! properties.Contains(p));
-            Assert.Empty(statelessExtra);
         }
     }
 }

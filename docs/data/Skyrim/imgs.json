@@ -7,11 +7,81 @@
     "Name": "Cinematic"
   },
   {
+    "Aliases": "CNAM.Brightness",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Brightness\": 3.14",
+    "Flags": 29,
+    "Name": "Cinematic.Brightness"
+  },
+  {
+    "Aliases": "CNAM.Contrast",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Contrast\": 3.14",
+    "Flags": 29,
+    "Name": "Cinematic.Contrast"
+  },
+  {
+    "Aliases": "CNAM.Saturation",
+    "Description": "Decimal value",
+    "Example": "\"Cinematic.Saturation\": 3.14",
+    "Flags": 29,
+    "Name": "Cinematic.Saturation"
+  },
+  {
     "Aliases": "DNAM",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "DepthOfField"
+  },
+  {
+    "Aliases": "DNAM.BlurRadius",
+    "Description": "Numeric value",
+    "Example": "\"DepthOfField.BlurRadius\": 7",
+    "Flags": 29,
+    "Name": "DepthOfField.BlurRadius"
+  },
+  {
+    "Aliases": "DNAM.Distance",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Distance\": 3.14",
+    "Flags": 29,
+    "Name": "DepthOfField.Distance"
+  },
+  {
+    "Aliases": "DNAM.Range",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Range\": 3.14",
+    "Flags": 29,
+    "Name": "DepthOfField.Range"
+  },
+  {
+    "Aliases": "DNAM.Sky",
+    "Description": "True / False",
+    "Example": "\"DepthOfField.Sky\": true",
+    "Flags": 29,
+    "Name": "DepthOfField.Sky"
+  },
+  {
+    "Aliases": "DNAM.Strength",
+    "Description": "Decimal value",
+    "Example": "\"DepthOfField.Strength\": 3.14",
+    "Flags": 29,
+    "Name": "DepthOfField.Strength"
+  },
+  {
+    "Aliases": "DNAM.Unknown",
+    "Description": "Numeric value",
+    "Example": "\"DepthOfField.Unknown\": 7",
+    "Flags": 29,
+    "Name": "DepthOfField.Unknown"
+  },
+  {
+    "Aliases": "DNAM.Versioning",
+    "Description": "Flags (Break0)",
+    "Example": "\"DepthOfField.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "DepthOfField.Versioning"
   },
   {
     "Aliases": "EDID",
@@ -31,7 +101,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -42,24 +112,87 @@
     "Name": "Hdr"
   },
   {
+    "Aliases": "HNAM.BloomBlurRadius",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomBlurRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.BloomBlurRadius"
+  },
+  {
+    "Aliases": "HNAM.BloomScale",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomScale\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.BloomScale"
+  },
+  {
+    "Aliases": "HNAM.BloomThreshold",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.BloomThreshold\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.BloomThreshold"
+  },
+  {
+    "Aliases": "HNAM.EyeAdaptSpeed",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.EyeAdaptSpeed\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.EyeAdaptSpeed"
+  },
+  {
+    "Aliases": "HNAM.EyeAdaptStrength",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.EyeAdaptStrength\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.EyeAdaptStrength"
+  },
+  {
+    "Aliases": "HNAM.ReceiveBloomThreshold",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.ReceiveBloomThreshold\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.ReceiveBloomThreshold"
+  },
+  {
+    "Aliases": "HNAM.SkyScale",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.SkyScale\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.SkyScale"
+  },
+  {
+    "Aliases": "HNAM.SunlightScale",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.SunlightScale\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.SunlightScale"
+  },
+  {
+    "Aliases": "HNAM.White",
+    "Description": "Decimal value",
+    "Example": "\"Hdr.White\": 3.14",
+    "Flags": 29,
+    "Name": "Hdr.White"
+  },
+  {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -77,17 +210,31 @@
     "Name": "Tint"
   },
   {
+    "Aliases": "TNAM.Amount",
+    "Description": "Decimal value",
+    "Example": "\"Tint.Amount\": 3.14",
+    "Flags": 29,
+    "Name": "Tint.Amount"
+  },
+  {
+    "Aliases": "TNAM.Color",
+    "Description": "Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value (\"#0A0A0A0A\") or named color \"Blue\". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted.",
+    "Example": "\"Tint.Color\": [40,50,60]",
+    "Flags": 25,
+    "Name": "Tint.Color"
+  },
+  {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

@@ -2,7 +2,7 @@
   {
     "Aliases": "CNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatStyle\": \"123:Skyrim.esm\" or \"CombatStyle\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatStyle"
   },
@@ -38,7 +38,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -47,6 +47,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "IdleAnimations"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"IdleAnimations.Animations\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 125,
+    "Name": "IdleAnimations.Animations"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"IdleAnimations.TimerSetting\": 3.14",
+    "Flags": 29,
+    "Name": "IdleAnimations.TimerSetting"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Random, RunInSequence, RandomDoOnce, RunInSequenceDoOnce)",
+    "Example": "\"IdleAnimations.Type\": \"Random\"",
+    "Flags": 13,
+    "Name": "IdleAnimations.Type"
   },
   {
     "Aliases": "",
@@ -66,21 +87,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -92,10 +113,94 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OnBegin.Idle\": \"123:Skyrim.esm\" or \"OnBegin.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnBegin.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.QNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnBegin.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCDA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnBegin.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnBegin.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnBegin.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnBegin.TNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnBegin.TNAM"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "OnChange"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OnChange.Idle\": \"123:Skyrim.esm\" or \"OnChange.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnChange.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.QNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnChange.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCDA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnChange.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnChange.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnChange.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnChange.TNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnChange.TNAM"
   },
   {
     "Aliases": "",
@@ -105,16 +210,58 @@
     "Name": "OnEnd"
   },
   {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"OnEnd.Idle\": \"123:Skyrim.esm\" or \"OnEnd.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "OnEnd.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.QNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnEnd.QNAM"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCDA\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnEnd.SCDA"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCHR\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnEnd.SCHR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.SCTX\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnEnd.SCTX"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"OnEnd.TNAM\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "OnEnd.TNAM"
+  },
+  {
     "Aliases": "QNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"OwnerQuest\": \"123:Skyrim.esm\" or \"OwnerQuest\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "OwnerQuest"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PackageTemplate\": \"123:Skyrim.esm\" or \"PackageTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PackageTemplate"
   },
@@ -220,14 +367,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -236,6 +383,97 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.FileName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.FileName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.FileName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnChange.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnChange.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnChange.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnChange.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnChange.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   },
   {
     "Aliases": "XNAM",

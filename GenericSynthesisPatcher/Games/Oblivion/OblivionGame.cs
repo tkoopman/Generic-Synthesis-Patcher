@@ -1,7 +1,6 @@
 using System.Reflection;
 
 using GenericSynthesisPatcher.Games.Oblivion.Action;
-using GenericSynthesisPatcher.Games.Skyrim;
 using GenericSynthesisPatcher.Games.Universal.Action;
 
 using Loqui;
@@ -35,14 +34,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion
 
             game.IgnoreSubPropertiesOnTypes.Add(
                 [
-                typeof(Cell),
-                typeof(Landscape),
-                typeof(Model),
-                typeof(RegionGrasses),
-                typeof(RegionMap),
-                typeof(RegionObjects),
-                typeof(RegionSounds),
-                typeof(RegionWeather),
+                    typeof(Cell),
                 ]);
 
             return game;

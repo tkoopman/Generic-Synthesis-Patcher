@@ -16,6 +16,11 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     This is the default action for editable properties that are not assigned any other action.
+    ///
+    ///     As is used DeepCopyIn method from Mutagen, only supports Forward action.
+    /// </summary>
     public class DeepCopyInAction : IRecordAction
     {
         public static readonly DeepCopyInAction Instance = new();
@@ -24,6 +29,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         protected DeepCopyInAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => true;
 
         public virtual bool CanFill () => false;
 
@@ -105,14 +113,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        // <inheritdoc />
-        public virtual string GetDocumentationDescription (Type propertyType)
-            => throw new NotImplementedException();
-
-        // <inheritdoc />
-        public virtual string GetDocumentationExample (Type propertyType, string propertyName)
-            => throw new NotImplementedException();
-
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
                     => !Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue) || Mod.IsNullOrEmpty(curValue);
 
@@ -135,8 +135,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public virtual bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
         {
-            description = null;
-            example = null;
+            description = string.Empty;
+            example = string.Empty;
 
             return description is not null && example is not null;
         }

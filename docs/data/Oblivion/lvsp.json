@@ -1,6 +1,13 @@
 [
   {
     "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"ChanceNone\": \"30.5%\"",
+    "Flags": 24,
+    "Name": "ChanceNone"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -8,31 +15,38 @@
   },
   {
     "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "Entries"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (CalculateFromAllLevelsLessThanPlayers, CalculateForEachItemInCount, UseAll)",
+    "Example": "\"Flags\": [ \"CalculateFromAllLevelsLessThanPlayers\", \"-UseAll\" ]",
+    "Flags": 92,
+    "Name": "Flags"
+  },
+  {
+    "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
-  },
-  {
-    "Aliases": "",
-    "Description": "String value",
-    "Example": "\"Name\": \"Hello\"",
-    "Flags": 28,
-    "Name": "Name"
   },
   {
     "Aliases": "",
@@ -45,7 +59,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

@@ -8,8 +8,64 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Aggression\": 7",
+    "Flags": 29,
+    "Name": "AIData.Aggression"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Weapons, Armor, Clothing, Books, Ingredients, Lights, Apparatus, Miscellaneous, Spells, MagicItems, Potions, Training, Recharge, Repair)",
+    "Example": "\"AIData.BuySellServices\": [ \"Weapons\", \"-Repair\" ]",
+    "Flags": 93,
+    "Name": "AIData.BuySellServices"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Confidence\": 7",
+    "Flags": 29,
+    "Name": "AIData.Confidence"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.EnergyLevel\": 7",
+    "Flags": 29,
+    "Name": "AIData.EnergyLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.MaximumTrainingLevel\": 7",
+    "Flags": 29,
+    "Name": "AIData.MaximumTrainingLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Responsibility\": 7",
+    "Flags": 29,
+    "Name": "AIData.Responsibility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"AIData.Teaches\": \"Armorer\"",
+    "Flags": 13,
+    "Name": "AIData.Teaches"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"AIData.Unused\": 7",
+    "Flags": 29,
+    "Name": "AIData.Unused"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"AIPackages\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "AIPackages"
   },
@@ -23,14 +79,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Class\": \"123:Skyrim.esm\" or \"Class\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Class"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatStyle\": \"123:Skyrim.esm\" or \"CombatStyle\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatStyle"
   },
@@ -43,8 +99,57 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.BarterGold\": 7",
+    "Flags": 29,
+    "Name": "Configuration.BarterGold"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.BaseSpellPoints\": 7",
+    "Flags": 29,
+    "Name": "Configuration.BaseSpellPoints"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMax\": 7",
+    "Flags": 29,
+    "Name": "Configuration.CalcMax"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.CalcMin\": 7",
+    "Flags": 29,
+    "Name": "Configuration.CalcMin"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.Fatigue\": 7",
+    "Flags": 29,
+    "Name": "Configuration.Fatigue"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Female, Essential, Respawn, AutoCalcStats, PCLevelOffset, NoLowLevelProcessing, NoRumors, Summonable, NoPersuasion, CanCorpseCheck)",
+    "Example": "\"Configuration.Flags\": [ \"Female\", \"-CanCorpseCheck\" ]",
+    "Flags": 93,
+    "Name": "Configuration.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Configuration.LevelOffset\": 7",
+    "Flags": 29,
+    "Name": "Configuration.LevelOffset"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DeathItem\": \"123:Skyrim.esm\" or \"DeathItem\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DeathItem"
   },
@@ -58,7 +163,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Eyes\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Eyes"
   },
@@ -100,7 +205,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Hair\": \"123:Skyrim.esm\" or \"Hair\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Hair"
   },
@@ -122,14 +227,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -143,7 +248,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -152,6 +257,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Hashes"
   },
   {
     "Aliases": "",
@@ -170,21 +296,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Race\": \"123:Skyrim.esm\" or \"Race\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Race"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Script\": \"123:Skyrim.esm\" or \"Script\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Script"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Spells\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Spells"
   },
@@ -198,8 +324,218 @@
   {
     "Aliases": "",
     "Description": "Numeric value",
+    "Example": "\"Stats.Acrobatics\": 7",
+    "Flags": 29,
+    "Name": "Stats.Acrobatics"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Agility\": 7",
+    "Flags": 29,
+    "Name": "Stats.Agility"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Alchemy\": 7",
+    "Flags": 29,
+    "Name": "Stats.Alchemy"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Alteration\": 7",
+    "Flags": 29,
+    "Name": "Stats.Alteration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Armorer\": 7",
+    "Flags": 29,
+    "Name": "Stats.Armorer"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Athletics\": 7",
+    "Flags": 29,
+    "Name": "Stats.Athletics"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Blade\": 7",
+    "Flags": 29,
+    "Name": "Stats.Blade"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Block\": 7",
+    "Flags": 29,
+    "Name": "Stats.Block"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Blunt\": 7",
+    "Flags": 29,
+    "Name": "Stats.Blunt"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Conjuration\": 7",
+    "Flags": 29,
+    "Name": "Stats.Conjuration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Destruction\": 7",
+    "Flags": 29,
+    "Name": "Stats.Destruction"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Endurance\": 7",
+    "Flags": 29,
+    "Name": "Stats.Endurance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.HandToHand\": 7",
+    "Flags": 29,
+    "Name": "Stats.HandToHand"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Health\": 7",
+    "Flags": 29,
+    "Name": "Stats.Health"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.HeavyArmor\": 7",
+    "Flags": 29,
+    "Name": "Stats.HeavyArmor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Illusion\": 7",
+    "Flags": 29,
+    "Name": "Stats.Illusion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Intelligence\": 7",
+    "Flags": 29,
+    "Name": "Stats.Intelligence"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.LightArmor\": 7",
+    "Flags": 29,
+    "Name": "Stats.LightArmor"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Luck\": 7",
+    "Flags": 29,
+    "Name": "Stats.Luck"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Marksman\": 7",
+    "Flags": 29,
+    "Name": "Stats.Marksman"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Mercantile\": 7",
+    "Flags": 29,
+    "Name": "Stats.Mercantile"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Mysticism\": 7",
+    "Flags": 29,
+    "Name": "Stats.Mysticism"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Personality\": 7",
+    "Flags": 29,
+    "Name": "Stats.Personality"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Restoration\": 7",
+    "Flags": 29,
+    "Name": "Stats.Restoration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Security\": 7",
+    "Flags": 29,
+    "Name": "Stats.Security"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Sneak\": 7",
+    "Flags": 29,
+    "Name": "Stats.Sneak"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Speechcraft\": 7",
+    "Flags": 29,
+    "Name": "Stats.Speechcraft"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Speed\": 7",
+    "Flags": 29,
+    "Name": "Stats.Speed"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Strength\": 7",
+    "Flags": 29,
+    "Name": "Stats.Strength"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Stats.Willpower\": 7",
+    "Flags": 29,
+    "Name": "Stats.Willpower"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

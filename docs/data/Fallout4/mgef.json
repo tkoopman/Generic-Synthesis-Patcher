@@ -8,6 +8,13 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Archetype.ActorValue\": \"123:Skyrim.esm\" or \"Archetype.ActorValue\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Archetype.ActorValue"
+  },
+  {
+    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"BaseCost\": 3.14",
     "Flags": 28,
@@ -16,14 +23,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CastingArt\": \"123:Skyrim.esm\" or \"CastingArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CastingArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CastingLight\": \"123:Skyrim.esm\" or \"CastingLight\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CastingLight"
   },
@@ -58,7 +65,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"CounterEffects\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "CounterEffects"
   },
@@ -72,7 +79,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DualCastArt\": \"123:Skyrim.esm\" or \"DualCastArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DualCastArt"
   },
@@ -93,35 +100,35 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantArt\": \"123:Skyrim.esm\" or \"EnchantArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantShader\": \"123:Skyrim.esm\" or \"EnchantShader\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantShader"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnchantVisuals\": \"123:Skyrim.esm\" or \"EnchantVisuals\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EnchantVisuals"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EquipAbility\": \"123:Skyrim.esm\" or \"EquipAbility\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EquipAbility"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Explosion\": \"123:Skyrim.esm\" or \"Explosion\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Explosion"
   },
@@ -143,41 +150,41 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitEffectArt\": \"123:Skyrim.esm\" or \"HitEffectArt\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitEffectArt"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitShader\": \"123:Skyrim.esm\" or \"HitShader\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitShader"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HitVisuals\": \"123:Skyrim.esm\" or \"HitVisuals\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HitVisuals"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpaceModifier\": \"123:Skyrim.esm\" or \"ImageSpaceModifier\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpaceModifier"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImpactData\": \"123:Skyrim.esm\" or \"ImpactData\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImpactData"
   },
@@ -185,27 +192,27 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MagicSkill\": \"123:Skyrim.esm\" or \"MagicSkill\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MagicSkill"
   },
@@ -213,13 +220,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MenuDisplayObject\": \"123:Skyrim.esm\" or \"MenuDisplayObject\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MenuDisplayObject"
   },
@@ -240,21 +247,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PerkToApply\": \"123:Skyrim.esm\" or \"PerkToApply\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PerkToApply"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Projectile\": \"123:Skyrim.esm\" or \"Projectile\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Projectile"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ResistValue\": \"123:Skyrim.esm\" or \"ResistValue\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ResistValue"
   },
@@ -275,7 +282,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SecondActorValue\": \"123:Skyrim.esm\" or \"SecondActorValue\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SecondActorValue"
   },
@@ -353,14 +360,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -369,5 +376,19 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   }
 ]

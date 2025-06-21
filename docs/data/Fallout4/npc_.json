@@ -9,7 +9,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"ActorEffect\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "ActorEffect"
   },
@@ -51,7 +51,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AnimationSound\": \"123:Skyrim.esm\" or \"AnimationSound\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AnimationSound"
   },
@@ -65,14 +65,14 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"AttachParentSlots\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "AttachParentSlots"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AttackRace\": \"123:Skyrim.esm\" or \"AttackRace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AttackRace"
   },
@@ -96,6 +96,41 @@
     "Example": "",
     "Flags": 144,
     "Name": "BodyMorphRegionValues"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BodyMorphRegionValues.Arms\": 3.14",
+    "Flags": 29,
+    "Name": "BodyMorphRegionValues.Arms"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BodyMorphRegionValues.Head\": 3.14",
+    "Flags": 29,
+    "Name": "BodyMorphRegionValues.Head"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BodyMorphRegionValues.Legs\": 3.14",
+    "Flags": 29,
+    "Name": "BodyMorphRegionValues.Legs"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BodyMorphRegionValues.LowerTorso\": 3.14",
+    "Flags": 29,
+    "Name": "BodyMorphRegionValues.LowerTorso"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"BodyMorphRegionValues.UpperTorso\": 3.14",
+    "Flags": 29,
+    "Name": "BodyMorphRegionValues.UpperTorso"
   },
   {
     "Aliases": "",
@@ -128,21 +163,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Class\": \"123:Skyrim.esm\" or \"Class\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Class"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatOverridePackageList\": \"123:Skyrim.esm\" or \"CombatOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CombatStyle\": \"123:Skyrim.esm\" or \"CombatStyle\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CombatStyle"
   },
@@ -156,35 +191,35 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"CrimeFaction\": \"123:Skyrim.esm\" or \"CrimeFaction\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "CrimeFaction"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DeathItem\": \"123:Skyrim.esm\" or \"DeathItem\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DeathItem"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultOutfit\": \"123:Skyrim.esm\" or \"DefaultOutfit\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultOutfit"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultPackageList\": \"123:Skyrim.esm\" or \"DefaultPackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"DefaultTemplate\": \"123:Skyrim.esm\" or \"DefaultTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "DefaultTemplate"
   },
@@ -233,7 +268,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FacialHairColor\": \"123:Skyrim.esm\" or \"FacialHairColor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FacialHairColor"
   },
@@ -261,7 +296,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FarAwayModel\": \"123:Skyrim.esm\" or \"FarAwayModel\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FarAwayModel"
   },
@@ -282,21 +317,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FollowerCommandPackageList\": \"123:Skyrim.esm\" or \"FollowerCommandPackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FollowerCommandPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FollowerElevatorPackageList\": \"123:Skyrim.esm\" or \"FollowerElevatorPackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FollowerElevatorPackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ForcedLocRefType\": \"123:Skyrim.esm\" or \"ForcedLocRefType\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ForcedLocRefType"
   },
@@ -304,7 +339,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -317,35 +352,35 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GiftFilter\": \"123:Skyrim.esm\" or \"GiftFilter\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GiftFilter"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GuardWarnOverridePackageList\": \"123:Skyrim.esm\" or \"GuardWarnOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GuardWarnOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HairColor\": \"123:Skyrim.esm\" or \"HairColor\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HairColor"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"HeadParts\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "HeadParts"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"HeadTexture\": \"123:Skyrim.esm\" or \"HeadTexture\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "HeadTexture"
   },
@@ -366,7 +401,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"InheritsSoundsFrom\": \"123:Skyrim.esm\" or \"InheritsSoundsFrom\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "InheritsSoundsFrom"
   },
@@ -374,14 +409,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -394,21 +429,21 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Keywords\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Keywords"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LegendaryChance\": \"123:Skyrim.esm\" or \"LegendaryChance\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LegendaryChance"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LegendaryTemplate\": \"123:Skyrim.esm\" or \"LegendaryTemplate\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LegendaryTemplate"
   },
@@ -430,7 +465,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -471,7 +506,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"NativeTerminal\": \"123:Skyrim.esm\" or \"NativeTerminal\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "NativeTerminal"
   },
@@ -491,6 +526,62 @@
   },
   {
     "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.First\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.First"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.First.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.First.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"ObjectBounds.Second\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "ObjectBounds.Second"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.X\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Y\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"ObjectBounds.Second.Z\": 7",
+    "Flags": 29,
+    "Name": "ObjectBounds.Second.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -499,14 +590,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ObserveDeadBodyOverridePackageList\": \"123:Skyrim.esm\" or \"ObserveDeadBodyOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ObserveDeadBodyOverridePackageList"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"Packages\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "Packages"
   },
@@ -520,14 +611,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PowerArmorStand\": \"123:Skyrim.esm\" or \"PowerArmorStand\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PowerArmorStand"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PreviewTransform\": \"123:Skyrim.esm\" or \"PreviewTransform\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PreviewTransform"
   },
@@ -541,7 +632,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Race\": \"123:Skyrim.esm\" or \"Race\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Race"
   },
@@ -562,14 +653,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Skin\": \"123:Skyrim.esm\" or \"Skin\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Skin"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SleepingOutfit\": \"123:Skyrim.esm\" or \"SleepingOutfit\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SleepingOutfit"
   },
@@ -597,7 +688,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SpectatorOverridePackageList\": \"123:Skyrim.esm\" or \"SpectatorOverridePackageList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SpectatorOverridePackageList"
   },
@@ -607,6 +698,97 @@
     "Example": "",
     "Flags": 144,
     "Name": "TemplateActors"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.AiDataTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.AiDataTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.AiDataTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.AiPackagesTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.AiPackagesTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.AiPackagesTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.AttackDataTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.AttackDataTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.AttackDataTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.BaseDataTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.BaseDataTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.BaseDataTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.DefPackListTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.DefPackListTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.DefPackListTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.FactionsTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.FactionsTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.FactionsTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.InventoryTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.InventoryTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.InventoryTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.KeywordsTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.KeywordsTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.KeywordsTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.ModelOrAnimationTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.ModelOrAnimationTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.ModelOrAnimationTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.ScriptTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.ScriptTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.ScriptTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.SpellListTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.SpellListTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.SpellListTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.StatsTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.StatsTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.StatsTemplate"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TemplateActors.TraitTemplate\": \"123:Skyrim.esm\" or \"TemplateActors.TraitTemplate\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TemplateActors.TraitTemplate"
   },
   {
     "Aliases": "",
@@ -640,14 +822,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -659,8 +841,22 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Voice\": \"123:Skyrim.esm\" or \"Voice\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Voice"
   },
@@ -670,6 +866,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Weight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weight.Fat\": 3.14",
+    "Flags": 29,
+    "Name": "Weight.Fat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weight.Muscular\": 3.14",
+    "Flags": 29,
+    "Name": "Weight.Muscular"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weight.Thin\": 3.14",
+    "Flags": 29,
+    "Name": "Weight.Thin"
   },
   {
     "Aliases": "",

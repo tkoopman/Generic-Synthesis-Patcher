@@ -14,6 +14,14 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Most basic of action where the value can easily be set to a single value of type T. Type
+    ///     T must be a type that the defined <see cref="BaseGame.SerializerSettings" /> can auto read.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     Type T must be a type that the defined <see cref="BaseGame.SerializerSettings" /> can
+    ///     auto read.
+    /// </typeparam>
     public class BasicAction<T> : IRecordAction
     {
         public static readonly BasicAction<T> Instance = new();
@@ -22,6 +30,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         protected BasicAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => string.Equals(typeof(T).Namespace, "Noggog", StringComparison.Ordinal);
 
         public virtual bool CanFill () => true;
 
@@ -86,18 +97,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
-        // <inheritdoc />
-        public virtual string GetDocumentationDescription (Type propertyType)
-            => typeof(T).Equals(typeof(Percent)) ? "Decimal value between 0.00 - 1.00, or string ending in %"
-             : typeof(T).Equals(typeof(Color)) ? """Color value as number, array of 3 or 4 numbers, or a string in the format of either Hex value ("#0A0A0A0A") or named color "Blue". Array and Hex are ARGB. Alpha portion of ARGB may be ignored for some fields and can be omitted."""
-             : throw new NotImplementedException();
-
-        // <inheritdoc />
-        public virtual string GetDocumentationExample (Type propertyType, string propertyName)
-            => typeof(T).Equals(typeof(Percent)) ? $""" "{propertyName}": "30.5%" """
-             : typeof(T).Equals(typeof(Color)) ? $""" "{propertyName}": [40,50,60] """
-             : throw new NotImplementedException();
-
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
                     => !Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
 
@@ -136,6 +135,27 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 example = $"""
                            "{propertyName}": [40,50,60]
                            """;
+            }
+            else if (string.Equals(typeof(T).Namespace, "Noggog", StringComparison.Ordinal))
+            {
+                string? typeName = typeof(T).GetProperty("X")?.PropertyType.Name;
+                if (typeName is not null)
+                {
+                    if (typeof(T).GetProperty("Z") is not null)
+                    {
+                        description = $"Array of 3 {typeName} values";
+                        example = $"""
+                                   "{propertyName}": [1, 2, 3]
+                                   """;
+                    }
+                    else
+                    {
+                        description = $"Array of 2 {typeName} values";
+                        example = $"""
+                                   "{propertyName}": [1, 2]
+                                   """;
+                    }
+                }
             }
 
             return description is not null && example is not null;

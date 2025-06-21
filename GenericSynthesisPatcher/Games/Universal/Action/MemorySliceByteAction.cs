@@ -4,9 +4,15 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Represents an action that handles a memory slice of bytes.
+    /// </summary>
     public class MemorySliceByteAction : BasicGetterSetterAction<ReadOnlyMemorySlice<byte>, MemorySlice<byte>>
     {
         public static readonly MemorySliceByteAction Instance = new();
+
+        // <inheritdoc />
+        public override bool AllowSubProperties => false;
 
         // <inheritdoc />
         public override bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)

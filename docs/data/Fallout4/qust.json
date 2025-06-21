@@ -15,6 +15,41 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.DelayTime\": 3.14",
+    "Flags": 29,
+    "Name": "Data.DelayTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (StartGameEnabled, Completed, AddIdleTopicToHello, AllowRepeatedStages, StartsEnabled, DisplaysInHud, Failed, StageWait, RunOnce, ExcludeFromDialogExport, WarnOnAliasFillFailure, Active, RepeatsConditions, KeepInstance, WantDormant, HasDialogueData)",
+    "Example": "\"Data.Flags\": [ \"StartGameEnabled\", \"-HasDialogueData\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Priority\": 7",
+    "Flags": 29,
+    "Name": "Data.Priority"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (None, MainQuest, BrotherhoodOfSteel, Institute, Minutemen, Railroad, Misc, SideQuests, DLC01, DLC02, DLC03, DLC04, DLC05, DLC06, DLC07)",
+    "Example": "\"Data.Type\": \"None\"",
+    "Flags": 13,
+    "Name": "Data.Type"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unused\": 7",
+    "Flags": 29,
+    "Name": "Data.Unused"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "Flags": 28,
@@ -73,27 +108,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Location\": \"123:Skyrim.esm\" or \"Location\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Location"
   },
@@ -108,7 +143,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -128,14 +163,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"QuestCompletionXp\": \"123:Skyrim.esm\" or \"QuestCompletionXp\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "QuestCompletionXp"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"QuestGroup\": \"123:Skyrim.esm\" or \"QuestGroup\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "QuestGroup"
   },
@@ -163,7 +198,7 @@
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"TextDisplayGlobals\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "TextDisplayGlobals"
   },
@@ -171,7 +206,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Timestamp\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Timestamp"
   },
   {
@@ -192,14 +227,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -208,5 +243,47 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Local, Inherited, Removed, InheritedAndRemoved)",
+    "Example": "\"VirtualMachineAdapter.Script.Flags\": \"Local\"",
+    "Flags": 13,
+    "Name": "VirtualMachineAdapter.Script.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.Script.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Script.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"VirtualMachineAdapter.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "VirtualMachineAdapter.Versioning"
   }
 ]

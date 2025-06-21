@@ -9,7 +9,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Base\": \"123:Skyrim.esm\" or \"Base\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Base"
   },
@@ -43,6 +43,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown0\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown0"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown1\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DistantLODData.Unknown2\": 3.14",
+    "Flags": 29,
+    "Name": "DistantLODData.Unknown2"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -54,6 +75,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "EnableParent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (SetEnableStateToOppositeOfParent)",
+    "Example": "\"EnableParent.Flags\": \"SetEnableStateToOppositeOfParent\"",
+    "Flags": 93,
+    "Name": "EnableParent.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"EnableParent.Reference\": \"123:Skyrim.esm\" or \"EnableParent.Reference\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "EnableParent.Reference"
   },
   {
     "Aliases": "",
@@ -72,7 +107,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"GlobalVariable\": \"123:Skyrim.esm\" or \"GlobalVariable\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "GlobalVariable"
   },
@@ -87,14 +122,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -113,6 +148,62 @@
   },
   {
     "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Location.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Location.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Location.Rotation\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "Location.Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Rotation.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -120,9 +211,37 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (LeveledLock)",
+    "Example": "\"Lock.Flags\": \"LeveledLock\"",
+    "Flags": 93,
+    "Name": "Lock.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Lock.Key\": \"123:Skyrim.esm\" or \"Lock.Key\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Lock.Key"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Lock.LockLevel\": 7",
+    "Flags": 29,
+    "Name": "Lock.LockLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Lock.Unused\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Lock.Unused"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -131,6 +250,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "MapMarker"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Visible, CanTravelTo)",
+    "Example": "\"MapMarker.Flags\": [ \"Visible\", \"-CanTravelTo\" ]",
+    "Flags": 93,
+    "Name": "MapMarker.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"MapMarker.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "MapMarker.Name"
   },
   {
     "Aliases": "",
@@ -149,7 +282,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Owner\": \"123:Skyrim.esm\" or \"Owner\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Owner"
   },
@@ -177,7 +310,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Target\": \"123:Skyrim.esm\" or \"Target\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Target"
   },
@@ -190,9 +323,72 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"TeleportDestination.Destination\": \"123:Skyrim.esm\" or \"TeleportDestination.Destination\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "TeleportDestination.Destination"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"TeleportDestination.Position\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "TeleportDestination.Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Position.Z"
+  },
+  {
+    "Aliases": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"TeleportDestination.Rotation\": [1, 2, 3]",
+    "Flags": 25,
+    "Name": "TeleportDestination.Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"TeleportDestination.Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "TeleportDestination.Rotation.Z"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -219,7 +415,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"XRTM\": \"123:Skyrim.esm\" or \"XRTM\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "XRTM"
   }

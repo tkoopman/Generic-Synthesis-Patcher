@@ -2,7 +2,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"AudioOutputOverride\": \"123:Skyrim.esm\" or \"AudioOutputOverride\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "AudioOutputOverride"
   },
@@ -43,29 +43,43 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Goodbye, Random, SayOnce, RandomEnd, InvisibleContinue, WalkAway, WalkAwayInvisibleInMenu, ForceSubtitle, CanMoveWhileGreeting, NoLipFile, RequiresPostProcessing, AudioOutputOverride, SpendsFavorPoints)",
+    "Example": "\"Flags.Flags\": [ \"Goodbye\", \"-SpendsFavorPoints\" ]",
+    "Flags": 93,
+    "Name": "Flags.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Flags.ResetHours\": 3.14",
+    "Flags": 29,
+    "Name": "Flags.ResetHours"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LinkTo\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LinkTo"
   },
@@ -80,13 +94,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PreviousDialog\": \"123:Skyrim.esm\" or \"PreviousDialog\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PreviousDialog"
   },
@@ -100,7 +114,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ResponseData\": \"123:Skyrim.esm\" or \"ResponseData\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ResponseData"
   },
@@ -121,14 +135,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Speaker\": \"123:Skyrim.esm\" or \"Speaker\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Speaker"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Topic\": \"123:Skyrim.esm\" or \"Topic\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Topic"
   },
@@ -143,14 +157,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -161,9 +175,79 @@
     "Name": "VirtualMachineAdapter"
   },
   {
+    "Aliases": "VMAD.ObjectFormat",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.FileName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.FileName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.FileName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnBegin.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnBegin.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ExtraBindDataVersion",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ExtraBindDataVersion"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.FragmentName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.FragmentName"
+  },
+  {
+    "Aliases": "VMAD.ScriptFragments.OnEnd.ScriptName",
+    "Description": "String value",
+    "Example": "\"VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName\": \"Hello\"",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ScriptFragments.OnEnd.ScriptName"
+  },
+  {
+    "Aliases": "VMAD.Version",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
+  },
+  {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"WalkAwayTopic\": \"123:Skyrim.esm\" or \"WalkAwayTopic\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "WalkAwayTopic"
   }

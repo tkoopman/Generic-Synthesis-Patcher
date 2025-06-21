@@ -187,9 +187,9 @@ namespace GenericSynthesisPatcher
             foreach (var (key, subTotal) in subTotals)
             {
                 if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
-                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}   {subTotal.Stopwatch.Elapsed:c}");
+                    Console.WriteLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}   {subTotal.Stopwatch.Elapsed:c}");
                 else
-                    Console.WriteLine($"{key,-6} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
+                    Console.WriteLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
 
                 totals.Total += subTotal.Total;
                 totals.Matched += subTotal.Matched;
@@ -199,9 +199,9 @@ namespace GenericSynthesisPatcher
             }
 
             if (Global.Settings.Value.Logging.LogLevel == LogLevel.Trace)
-                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
+                Console.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
             else
-                Console.WriteLine($"{"Totals",-6} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+                Console.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
         }
 
         /// <summary>

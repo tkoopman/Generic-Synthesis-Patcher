@@ -20,6 +20,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         }
 
         // <inheritdoc />
+        public abstract bool AllowSubProperties { get; }
+
+        // <inheritdoc />
         public virtual bool CanFill () => true;
 
         // <inheritdoc />

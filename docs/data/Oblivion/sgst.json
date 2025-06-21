@@ -8,6 +8,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Uses\": 7",
+    "Flags": 29,
+    "Name": "Data.Uses"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Value\": 7",
+    "Flags": 29,
+    "Name": "Data.Value"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Data.Weight\": 3.14",
+    "Flags": 29,
+    "Name": "Data.Weight"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -31,21 +52,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -54,6 +75,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Model"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Model.BoundRadius\": 3.14",
+    "Flags": 29,
+    "Name": "Model.BoundRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Hashes\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Hashes"
   },
   {
     "Aliases": "",
@@ -72,7 +114,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Script\": \"123:Skyrim.esm\" or \"Script\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Script"
   },
@@ -80,7 +122,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

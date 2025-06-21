@@ -8,10 +8,115 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (AttenuatesWithDistance, AllowsRumble, AppliesDoppler, AppliesDistanceDelay, PlayerOutputModel, TryPlayOnController, CausesDucking, AvoidsDucking)",
+    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AvoidsDucking\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
+    "Flags": 25,
+    "Name": "Data.ReverbSendPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Data.Unknown"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
     "Name": "DynamicAttentuation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue1\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInCurveValue1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue2\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInCurveValue2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue3\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInCurveValue3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeInCurveValue4\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInCurveValue4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeInDistanceEnd\": 3.14",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInDistanceEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeInDistanceStart\": 3.14",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeInDistanceStart"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue1\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutCurveValue1"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue2\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutCurveValue2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue3\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutCurveValue3"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"DynamicAttentuation.FadeOutCurveValue4\": 7",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutCurveValue4"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeOutDistanceEnd\": 3.14",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutDistanceEnd"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"DynamicAttentuation.FadeOutDistanceStart\": 3.14",
+    "Flags": 29,
+    "Name": "DynamicAttentuation.FadeOutDistanceStart"
   },
   {
     "Aliases": "",
@@ -23,7 +128,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EffectChain\": \"123:Skyrim.esm\" or \"EffectChain\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EffectChain"
   },
@@ -38,28 +143,28 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -68,6 +173,174 @@
     "Example": "",
     "Flags": 144,
     "Name": "OutputChannels"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.BL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.BR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.C"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.LFE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.RL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.RR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.BL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.BR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.C"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.LFE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.RL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.RR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.BL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.BR"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.C"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.L"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.LFE"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.R"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.RL"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.RR"
   },
   {
     "Aliases": "",
@@ -87,14 +360,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

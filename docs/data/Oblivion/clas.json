@@ -8,6 +8,55 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Weapons, Armor, Clothing, Books, Ingredients, Lights, Apparatus, Miscellaneous, Spells, MagicItems, Potions, Training, Recharge, Repair)",
+    "Example": "\"Data.ClassServices\": [ \"Weapons\", \"-Repair\" ]",
+    "Flags": 93,
+    "Name": "Data.ClassServices"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Playable, Guard)",
+    "Example": "\"Data.Flags\": [ \"Playable\", \"-Guard\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Combat, Magic, Stealth)",
+    "Example": "\"Data.Specialization\": \"Combat\"",
+    "Flags": 13,
+    "Name": "Data.Specialization"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Training.MaximumTrainingLevel\": 7",
+    "Flags": 29,
+    "Name": "Data.Training.MaximumTrainingLevel"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Armorer, Athletics, Blade, Block, Blunt, HandToHand, HeavyArmor, Alchemy, Alteration, Conjuration, Destruction, Illusion, Mysticism, Restoration, Acrobatics, LightArmor, Marksman, Mercantile, Security, Sneak, Speechraft, None)",
+    "Example": "\"Data.Training.TrainedSkill\": \"Armorer\"",
+    "Flags": 13,
+    "Name": "Data.Training.TrainedSkill"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Training.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Data.Training.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"Data.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "Data.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"Description\": \"Hello\"",
     "Flags": 28,
@@ -31,21 +80,21 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -66,7 +115,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

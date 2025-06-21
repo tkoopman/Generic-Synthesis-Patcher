@@ -15,6 +15,20 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (OffersServices, MustReachLocation, MustComplete, LockDoorsAtPackageStart, LockDoorsAtPackageEnd, LockDoorsAtLocation, UnlockDoorsAtPackageStart, UnlockDoorsAtPackageEnd, UnlockDoorsAtLocation, ContinueIfPCNear, OncePerDay, Unused, SkipFalloutBehavior, AlwaysRun, AlwaysSneak, AllowSwimming, AllowFalls, ArmorUnequpped, WeaponsUnequipped, DefensiveCombat, UseHorse, NoIdleAnims)",
+    "Example": "\"Data.Flags\": [ \"OffersServices\", \"-NoIdleAnims\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Find, Follow, Escort, Eat, Sleep, Wander, Travel, Accompany, UseItemAt, Ambush, FleeNotCombat, CastMagic)",
+    "Example": "\"Data.Type\": \"Find\"",
+    "Flags": 13,
+    "Name": "Data.Type"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -24,14 +38,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -43,9 +57,30 @@
   },
   {
     "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Location.LocationReference\": \"123:Skyrim.esm\" or \"Location.LocationReference\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Location.LocationReference"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Location.Radius\": 3.14",
+    "Flags": 29,
+    "Name": "Location.Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (NearReference, InCell, NearCurrentLocation, NearEditorLocation, ObjectID, ObjectType)",
+    "Example": "\"Location.Type\": \"NearReference\"",
+    "Flags": 13,
+    "Name": "Location.Type"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -64,6 +99,41 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Schedule.Day\": 7",
+    "Flags": 29,
+    "Name": "Schedule.Day"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Weekday, Weekend, MondayWednesdayFriday, TuesdayThursday, Any)",
+    "Example": "\"Schedule.DayOfWeek\": \"Sunday\"",
+    "Flags": 13,
+    "Name": "Schedule.DayOfWeek"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Schedule.Duration\": 7",
+    "Flags": 29,
+    "Name": "Schedule.Duration"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (January, February, March, April, May, June, July, August, September, October, November, December, Any)",
+    "Example": "\"Schedule.Month\": \"January\"",
+    "Flags": 13,
+    "Name": "Schedule.Month"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Schedule.Time\": 7",
+    "Flags": 29,
+    "Name": "Schedule.Time"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -72,8 +142,29 @@
   {
     "Aliases": "",
     "Description": "Numeric value",
+    "Example": "\"Target.Count\": 7",
+    "Flags": 29,
+    "Name": "Target.Count"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Target.Object\": 7",
+    "Flags": 29,
+    "Name": "Target.Object"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (SpecificReference, ObjectID, ObjectType)",
+    "Example": "\"Target.ObjectType\": \"SpecificReference\"",
+    "Flags": 13,
+    "Name": "Target.ObjectType"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

@@ -25,6 +25,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
         }
 
+        // <inheritdoc />
+        public bool AllowSubProperties => true;
+
         public static int ForwardSkills (IReadOnlyDictionary<Skill, byte> from, IDictionary<Skill, byte> to)
         {
             int count = 0;

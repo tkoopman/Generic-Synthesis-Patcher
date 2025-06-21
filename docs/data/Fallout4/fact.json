@@ -15,6 +15,83 @@
   },
   {
     "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"CrimeValues.Arrest\": true",
+    "Flags": 29,
+    "Name": "CrimeValues.Arrest"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Assault\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Assault"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"CrimeValues.AttackOnSight\": true",
+    "Flags": 29,
+    "Name": "CrimeValues.AttackOnSight"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Escape\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Escape"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Murder\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Murder"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Pickpocket\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Pickpocket"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"CrimeValues.StealMult\": 3.14",
+    "Flags": 29,
+    "Name": "CrimeValues.StealMult"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Trespass\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Trespass"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.Unknown\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0, Break1)",
+    "Example": "\"CrimeValues.Versioning\": [ \"Break0\", \"-Break1\" ]",
+    "Flags": 95,
+    "Name": "CrimeValues.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"CrimeValues.WerewolfUnused\": 7",
+    "Flags": 29,
+    "Name": "CrimeValues.WerewolfUnused"
+  },
+  {
+    "Aliases": "",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
@@ -23,7 +100,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ExteriorJailMarker\": \"123:Skyrim.esm\" or \"ExteriorJailMarker\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ExteriorJailMarker"
   },
@@ -44,7 +121,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"FollowerWaitMarker\": \"123:Skyrim.esm\" or \"FollowerWaitMarker\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "FollowerWaitMarker"
   },
@@ -52,27 +129,27 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"JailOutfit\": \"123:Skyrim.esm\" or \"JailOutfit\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "JailOutfit"
   },
@@ -80,13 +157,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MerchantContainer\": \"123:Skyrim.esm\" or \"MerchantContainer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MerchantContainer"
   },
@@ -100,7 +177,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"PlayerInventoryContainer\": \"123:Skyrim.esm\" or \"PlayerInventoryContainer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PlayerInventoryContainer"
   },
@@ -121,21 +198,21 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"SharedCrimeFactionList\": \"123:Skyrim.esm\" or \"SharedCrimeFactionList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "SharedCrimeFactionList"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"StolenGoodsContainer\": \"123:Skyrim.esm\" or \"StolenGoodsContainer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "StolenGoodsContainer"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"VendorBuySellList\": \"123:Skyrim.esm\" or \"VendorBuySellList\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "VendorBuySellList"
   },
@@ -148,6 +225,27 @@
   },
   {
     "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorLocation.CollectionIndex\": 7",
+    "Flags": 29,
+    "Name": "VendorLocation.CollectionIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorLocation.Radius\": 7",
+    "Flags": 29,
+    "Name": "VendorLocation.Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"VendorLocation.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "VendorLocation.Versioning"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -155,16 +253,72 @@
   },
   {
     "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"VendorValues.BuySellEverythingNotInList\": true",
+    "Flags": 29,
+    "Name": "VendorValues.BuySellEverythingNotInList"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"VendorValues.BuysNonStolenItems\": true",
+    "Flags": 29,
+    "Name": "VendorValues.BuysNonStolenItems"
+  },
+  {
+    "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"VendorValues.BuysStolenItems\": true",
+    "Flags": 29,
+    "Name": "VendorValues.BuysStolenItems"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.EndHour\": 7",
+    "Flags": 29,
+    "Name": "VendorValues.EndHour"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.Radius\": 7",
+    "Flags": 29,
+    "Name": "VendorValues.Radius"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.StartHour\": 7",
+    "Flags": 29,
+    "Name": "VendorValues.StartHour"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.Unknown\": 7",
+    "Flags": 29,
+    "Name": "VendorValues.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VendorValues.Unknown2\": 7",
+    "Flags": 29,
+    "Name": "VendorValues.Unknown2"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

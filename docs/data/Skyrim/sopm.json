@@ -9,6 +9,41 @@
   {
     "Aliases": "",
     "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Attenuation.Curve\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Attenuation.Curve"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MaxDistance\": 3.14",
+    "Flags": 29,
+    "Name": "Attenuation.MaxDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Attenuation.MinDistance\": 3.14",
+    "Flags": 29,
+    "Name": "Attenuation.MinDistance"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Attenuation.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Attenuation.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Attenuation.Unknown2\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Attenuation.Unknown2"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
     "Example": "\"CNAM\": [0x1A,0x00,0x3F]",
     "Flags": 24,
     "Name": "CNAM"
@@ -19,6 +54,27 @@
     "Example": "",
     "Flags": 144,
     "Name": "Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (AttenuatesWithDistance, AllowsRumble)",
+    "Example": "\"Data.Flags\": [ \"AttenuatesWithDistance\", \"-AllowsRumble\" ]",
+    "Flags": 93,
+    "Name": "Data.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
+    "Example": "\"Data.ReverbSendPercent\": \"30.5%\"",
+    "Flags": 25,
+    "Name": "Data.ReverbSendPercent"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Data.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Data.Unknown"
   },
   {
     "Aliases": "EDID",
@@ -38,28 +94,28 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -68,6 +124,174 @@
     "Example": "",
     "Flags": 144,
     "Name": "OutputChannels"
+  },
+  {
+    "Aliases": "ONAM.Channel0.BL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.BL"
+  },
+  {
+    "Aliases": "ONAM.Channel0.BR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.BR"
+  },
+  {
+    "Aliases": "ONAM.Channel0.C",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.C"
+  },
+  {
+    "Aliases": "ONAM.Channel0.L",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.L"
+  },
+  {
+    "Aliases": "ONAM.Channel0.LFE",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.LFE"
+  },
+  {
+    "Aliases": "ONAM.Channel0.R",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.R"
+  },
+  {
+    "Aliases": "ONAM.Channel0.RL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.RL"
+  },
+  {
+    "Aliases": "ONAM.Channel0.RR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel0.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel0.RR"
+  },
+  {
+    "Aliases": "ONAM.Channel1.BL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.BL"
+  },
+  {
+    "Aliases": "ONAM.Channel1.BR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.BR"
+  },
+  {
+    "Aliases": "ONAM.Channel1.C",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.C"
+  },
+  {
+    "Aliases": "ONAM.Channel1.L",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.L"
+  },
+  {
+    "Aliases": "ONAM.Channel1.LFE",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.LFE"
+  },
+  {
+    "Aliases": "ONAM.Channel1.R",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.R"
+  },
+  {
+    "Aliases": "ONAM.Channel1.RL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.RL"
+  },
+  {
+    "Aliases": "ONAM.Channel1.RR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel1.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel1.RR"
+  },
+  {
+    "Aliases": "ONAM.Channel2.BL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.BL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.BL"
+  },
+  {
+    "Aliases": "ONAM.Channel2.BR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.BR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.BR"
+  },
+  {
+    "Aliases": "ONAM.Channel2.C",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.C\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.C"
+  },
+  {
+    "Aliases": "ONAM.Channel2.L",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.L\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.L"
+  },
+  {
+    "Aliases": "ONAM.Channel2.LFE",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.LFE\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.LFE"
+  },
+  {
+    "Aliases": "ONAM.Channel2.R",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.R\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.R"
+  },
+  {
+    "Aliases": "ONAM.Channel2.RL",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.RL\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.RL"
+  },
+  {
+    "Aliases": "ONAM.Channel2.RR",
+    "Description": "Numeric value",
+    "Example": "\"OutputChannels.Channel2.RR\": 7",
+    "Flags": 29,
+    "Name": "OutputChannels.Channel2.RR"
   },
   {
     "Aliases": "",
@@ -94,14 +318,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

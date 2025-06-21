@@ -36,12 +36,14 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
     {
         private const int ClassLogCode = 0x15;
 
+        // <inheritdoc />
+        public bool AllowSubProperties => false;
+
         /// <summary>
         ///     Add entry as detailed by this data object.
         /// </summary>
         /// <returns>
-        ///     Number of changes made to add entry. Should be 1 if successful else 0. -1 if major
-        ///     failure.
+        ///     Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.
         /// </returns>
         public int Add (ProcessingKeys proKeys, TActionData data)
         {
@@ -131,8 +133,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// </summary>
         /// <param name="source">Entry to add to list in patch record.</param>
         /// <returns>
-        ///     Number of changes made to add entry. Should be 1 if successful else 0. -1 if major
-        ///     failure.
+        ///     Number of changes made to add entry. Should be 1 if successful else 0. -1 if major failure.
         /// </returns>
         public int Forward (ProcessingKeys proKeys, IFormLinkContainerGetter source)
         {
@@ -312,8 +313,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// </summary>
         /// <param name="newList">Patch record list should match this list after replace.</param>
         /// <returns>
-        ///     Number of changes to complete replace. Each entry removed / added counts as 1
-        ///     change.
+        ///     Number of changes to complete replace. Each entry removed / added counts as 1 change.
         /// </returns>
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList)
         {

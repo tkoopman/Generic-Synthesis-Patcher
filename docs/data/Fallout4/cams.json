@@ -17,7 +17,7 @@
     "Aliases": "",
     "Description": "Flags (Break0, Break1)",
     "Example": "\"DATADataTypeState\": [ \"Break0\", \"-Break1\" ]",
-    "Flags": 92,
+    "Flags": 94,
     "Name": "DATADataTypeState"
   },
   {
@@ -45,13 +45,13 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ImageSpaceModifier\": \"123:Skyrim.esm\" or \"ImageSpaceModifier\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ImageSpaceModifier"
   },
@@ -59,14 +59,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -87,7 +87,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -114,16 +114,72 @@
   {
     "Aliases": "",
     "Description": "Decimal value",
+    "Example": "\"Model.ColorRemappingIndex\": 3.14",
+    "Flags": 29,
+    "Name": "Model.ColorRemappingIndex"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"Model.Data\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "Model.Data"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Model.File\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Model.File"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (HasFaceBonesModel, HasFirstPersonModel)",
+    "Example": "\"Model.Flags\": [ \"HasFaceBonesModel\", \"-HasFirstPersonModel\" ]",
+    "Flags": 93,
+    "Name": "Model.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Model.MaterialSwap\": \"123:Skyrim.esm\" or \"Model.MaterialSwap\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Model.MaterialSwap"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
     "Example": "\"NearTargetDistance\": 3.14",
     "Flags": 28,
     "Name": "NearTargetDistance"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"RotationOffset\": [1, 2, 3]",
     "Flags": 24,
     "Name": "RotationOffset"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.X\": 3.14",
+    "Flags": 29,
+    "Name": "RotationOffset.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.Y\": 3.14",
+    "Flags": 29,
+    "Name": "RotationOffset.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"RotationOffset.Z\": 3.14",
+    "Flags": 29,
+    "Name": "RotationOffset.Z"
   },
   {
     "Aliases": "",
@@ -171,14 +227,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

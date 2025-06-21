@@ -7,6 +7,12 @@ using GenericSynthesisPatcher.Helpers;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Extension to <see cref="BasicAction{T}" /> that allows for matching to be used.
+    ///
+    ///     Same restriction as BasicAction that value must be auto readable by the defined <see cref="BaseGame.SerializerSettings" />.
+    /// </summary>
+    /// <typeparam name="T">IConvertible data type.</typeparam>
     public class ConvertibleAction<T> : BasicAction<T> where T : IConvertible
     {
         public new static readonly ConvertibleAction<T> Instance = new();

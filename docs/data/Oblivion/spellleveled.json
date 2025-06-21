@@ -8,27 +8,6 @@
   },
   {
     "Aliases": "",
-    "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
-    "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
-    "Flags": 92,
-    "Name": "Fallout4MajorRecordFlags"
-  },
-  {
-    "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"FormVersion\": 7",
-    "Flags": 30,
-    "Name": "FormVersion"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "Impacts"
-  },
-  {
-    "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
     "Flags": 30,
@@ -50,10 +29,17 @@
   },
   {
     "Aliases": "",
-    "Description": "Numeric value",
-    "Example": "\"Version2\": 7",
-    "Flags": 30,
-    "Name": "Version2"
+    "Description": "String value",
+    "Example": "\"Name\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (ESM, Deleted, BorderRegion_ActorValue, TurnOffFire_ActorValue, CastsShadows, QuestItemPersistentReference, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
+    "Example": "\"OblivionMajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
+    "Flags": 92,
+    "Name": "OblivionMajorRecordFlags"
   },
   {
     "Aliases": "",

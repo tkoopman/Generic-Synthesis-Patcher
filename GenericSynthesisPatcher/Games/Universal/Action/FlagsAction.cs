@@ -19,6 +19,10 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Represents an action that can be performed on enum properties that contain the Flags
+    ///     attribute of records.
+    /// </summary>
     public class FlagsAction : IRecordAction
     {
         public static readonly FlagsAction Instance = new();
@@ -27,6 +31,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         private FlagsAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => false;
 
         public bool CanFill () => true;
 
@@ -55,7 +62,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             foreach (var flag in flags)
             {
                 if (flag.Value is null)
+                {
                     newFlags = (Enum)Enum.ToObject(flagType, 0);
+                }
                 else if (Enum.TryParse(flagType, flag.Value, true, out object? setFlag))
                 {
                     newFlags = flag.Operation == ListLogic.DEL
@@ -131,9 +140,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if flags match</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
+            || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
             && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-            && curValue == originValue;
+            && curValue == originValue);
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 

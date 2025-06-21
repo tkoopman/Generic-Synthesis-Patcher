@@ -31,7 +31,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -43,8 +43,8 @@
   },
   {
     "Aliases": "RNAM",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Int16 values",
+    "Example": "\"InitialRotation\": [1, 2, 3]",
     "Flags": 24,
     "Name": "InitialRotation"
   },
@@ -57,8 +57,8 @@
   },
   {
     "Aliases": "XNAM",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"InitialTranslationOffset\": [1, 2, 3]",
     "Flags": 24,
     "Name": "InitialTranslationOffset"
   },
@@ -66,20 +66,20 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
     "Aliases": "NNAM",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LoadingScreenNif\": \"123:Skyrim.esm\" or \"LoadingScreenNif\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LoadingScreenNif"
   },
@@ -94,7 +94,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -103,6 +103,20 @@
     "Example": "",
     "Flags": 144,
     "Name": "RotationOffsetConstraints"
+  },
+  {
+    "Aliases": "ONAM.Max",
+    "Description": "Numeric value",
+    "Example": "\"RotationOffsetConstraints.Max\": 7",
+    "Flags": 29,
+    "Name": "RotationOffsetConstraints.Max"
+  },
+  {
+    "Aliases": "ONAM.Min",
+    "Description": "Numeric value",
+    "Example": "\"RotationOffsetConstraints.Min\": 7",
+    "Flags": 29,
+    "Name": "RotationOffsetConstraints.Min"
   },
   {
     "Aliases": "",
@@ -115,14 +129,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   }
 ]

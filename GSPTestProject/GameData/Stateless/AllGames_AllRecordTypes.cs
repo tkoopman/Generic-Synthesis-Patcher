@@ -15,7 +15,7 @@ namespace GSPTestProject.GameData.Stateless
             foreach (object[] obj in new AllGames())
             {
                 var gameData = (Game)obj[0];
-                foreach (var recordType in gameData.RecordTypes)
+                foreach (var recordType in gameData.BaseGame.AllRecordTypes())
                     yield return new object[] { new GameRecordType(gameData.GameRelease, recordType) };
             }
         }

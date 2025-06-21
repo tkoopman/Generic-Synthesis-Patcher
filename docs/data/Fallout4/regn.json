@@ -17,7 +17,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -29,16 +29,58 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Grasses.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Grasses.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Grasses.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Grasses.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Grasses.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Grasses.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Grasses.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Grasses.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Grasses.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Grasses.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Grasses.Priority\": 7",
+    "Flags": 29,
+    "Name": "Grasses.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -47,6 +89,48 @@
     "Example": "",
     "Flags": 144,
     "Name": "Land"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Land.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Land.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Land.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Land.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Land.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Land.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Land.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Land.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Land.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Land.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Land.Priority\": 7",
+    "Flags": 29,
+    "Name": "Land.Priority"
   },
   {
     "Aliases": "",
@@ -59,7 +143,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
@@ -68,6 +152,55 @@
     "Example": "",
     "Flags": 144,
     "Name": "Map"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Map.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Map.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Map.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Map.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Map.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Map.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Map.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Map.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Map.Name\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Map.Name"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Map.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Map.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Map.Priority\": 7",
+    "Flags": 29,
+    "Name": "Map.Priority"
   },
   {
     "Aliases": "",
@@ -85,6 +218,48 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Objects.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Objects.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Objects.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Objects.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Objects.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Objects.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Objects.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Objects.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Objects.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Objects.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Objects.Priority\": 7",
+    "Flags": 29,
+    "Name": "Objects.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -99,16 +274,65 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Sounds.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Sounds.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Sounds.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Sounds.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Sounds.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Sounds.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Sounds.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Sounds.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Sounds.Music\": \"123:Skyrim.esm\" or \"Sounds.Music\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Sounds.Music"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Sounds.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Sounds.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Sounds.Priority\": 7",
+    "Flags": 29,
+    "Name": "Sounds.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -120,8 +344,50 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (Override)",
+    "Example": "\"Weather.Flags\": \"Override\"",
+    "Flags": 93,
+    "Name": "Weather.Flags"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Weather.Icons.InventoryImage\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Weather.Icons.InventoryImage"
+  },
+  {
+    "Aliases": "",
+    "Description": "String value",
+    "Example": "\"Weather.Icons.MessageIcon\": \"Hello\"",
+    "Flags": 29,
+    "Name": "Weather.Icons.MessageIcon"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weather.LodDisplayDistanceMultiplier\": 3.14",
+    "Flags": 29,
+    "Name": "Weather.LodDisplayDistanceMultiplier"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Weather.OcclusionAccuracyDist\": 3.14",
+    "Flags": 29,
+    "Name": "Weather.OcclusionAccuracyDist"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Weather.Priority\": 7",
+    "Flags": 29,
+    "Name": "Weather.Priority"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Worldspace\": \"123:Skyrim.esm\" or \"Worldspace\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Worldspace"
   }

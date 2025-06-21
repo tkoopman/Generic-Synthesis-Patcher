@@ -8,8 +8,15 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (ParentActivateOnly)",
+    "Example": "\"ActivateParents.Flags\": \"ParentActivateOnly\"",
+    "Flags": 93,
+    "Name": "ActivateParents.Flags"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Base\": \"123:Skyrim.esm\" or \"Base\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Base"
   },
@@ -37,7 +44,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Emittance\": \"123:Skyrim.esm\" or \"Emittance\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Emittance"
   },
@@ -50,8 +57,36 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (SetEnableStateToOppositeOfParent, PopIn)",
+    "Example": "\"EnableParent.Flags\": [ \"SetEnableStateToOppositeOfParent\", \"-PopIn\" ]",
+    "Flags": 93,
+    "Name": "EnableParent.Flags"
+  },
+  {
+    "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"EnableParent.Reference\": \"123:Skyrim.esm\" or \"EnableParent.Reference\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "EnableParent.Reference"
+  },
+  {
+    "Aliases": "",
+    "Description": "Memory slice in form of array of bytes",
+    "Example": "\"EnableParent.Unknown\": [0x1A,0x00,0x3F]",
+    "Flags": 25,
+    "Name": "EnableParent.Unknown"
+  },
+  {
+    "Aliases": "",
+    "Description": "Flags (Break0)",
+    "Example": "\"EnableParent.Versioning\": \"Break0\"",
+    "Flags": 95,
+    "Name": "EnableParent.Versioning"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"EncounterZone\": \"123:Skyrim.esm\" or \"EncounterZone\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "EncounterZone"
   },
@@ -80,7 +115,7 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"FormVersion\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "FormVersion"
   },
   {
@@ -108,14 +143,14 @@
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsCompressed\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsCompressed"
   },
   {
     "Aliases": "",
     "Description": "True / False",
     "Example": "\"IsDeleted\": true",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "IsDeleted"
   },
   {
@@ -142,7 +177,7 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Layer\": \"123:Skyrim.esm\" or \"Layer\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "Layer"
   },
@@ -163,14 +198,14 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"LocationReference\": \"123:Skyrim.esm\" or \"LocationReference\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "LocationReference"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "",
+    "Example": "\"LocationRefTypes\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
     "Name": "LocationRefTypes"
   },
@@ -185,20 +220,20 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"MajorRecordFlagsRaw\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "MajorRecordFlagsRaw"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MaterialSwap\": \"123:Skyrim.esm\" or \"MaterialSwap\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MaterialSwap"
   },
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"MultiboundReference\": \"123:Skyrim.esm\" or \"MultiboundReference\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "MultiboundReference"
   },
@@ -211,6 +246,27 @@
   },
   {
     "Aliases": "",
+    "Description": "True / False",
+    "Example": "\"Ownership.NoCrime\": true",
+    "Flags": 29,
+    "Name": "Ownership.NoCrime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Ownership.Owner\": \"123:Skyrim.esm\" or \"Ownership.Owner\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Ownership.Owner"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"Ownership.Unknown\": 7",
+    "Flags": 29,
+    "Name": "Ownership.Unknown"
+  },
+  {
+    "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
@@ -219,16 +275,58 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"Patrol.Idle\": \"123:Skyrim.esm\" or \"Patrol.Idle\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Patrol.Idle"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Patrol.IdleTime\": 3.14",
+    "Flags": 29,
+    "Name": "Patrol.IdleTime"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"Patrol.Topic\": \"123:Skyrim.esm\" or \"Patrol.Topic\": \"MyEditorID\"",
+    "Flags": 29,
+    "Name": "Patrol.Topic"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Key or Editor ID",
+    "Example": "\"PersistentLocation\": \"123:Skyrim.esm\" or \"PersistentLocation\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "PersistentLocation"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Position\": [1, 2, 3]",
     "Flags": 24,
     "Name": "Position"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.X\": 3.14",
+    "Flags": 29,
+    "Name": "Position.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Position.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Position.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Position.Z"
   },
   {
     "Aliases": "",
@@ -239,8 +337,8 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"RagdollBipedRotation\": [1, 2, 3]",
     "Flags": 24,
     "Name": "RagdollBipedRotation"
   },
@@ -254,16 +352,37 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "",
+    "Example": "\"ReferenceGroup\": \"123:Skyrim.esm\" or \"ReferenceGroup\": \"MyEditorID\"",
     "Flags": 28,
     "Name": "ReferenceGroup"
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
+    "Description": "Array of 3 Single values",
+    "Example": "\"Rotation\": [1, 2, 3]",
     "Flags": 24,
     "Name": "Rotation"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.X\": 3.14",
+    "Flags": 29,
+    "Name": "Rotation.X"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.Y\": 3.14",
+    "Flags": 29,
+    "Name": "Rotation.Y"
+  },
+  {
+    "Aliases": "",
+    "Description": "Decimal value",
+    "Example": "\"Rotation.Z\": 3.14",
+    "Flags": 29,
+    "Name": "Rotation.Z"
   },
   {
     "Aliases": "",
@@ -283,14 +402,14 @@
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"Version2\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "Version2"
   },
   {
     "Aliases": "",
     "Description": "Numeric value",
     "Example": "\"VersionControl\": 7",
-    "Flags": 28,
+    "Flags": 30,
     "Name": "VersionControl"
   },
   {
@@ -299,5 +418,19 @@
     "Example": "",
     "Flags": 144,
     "Name": "VirtualMachineAdapter"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.ObjectFormat\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.ObjectFormat"
+  },
+  {
+    "Aliases": "",
+    "Description": "Numeric value",
+    "Example": "\"VirtualMachineAdapter.Version\": 7",
+    "Flags": 29,
+    "Name": "VirtualMachineAdapter.Version"
   }
 ]

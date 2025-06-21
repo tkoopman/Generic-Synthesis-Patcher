@@ -12,6 +12,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     {
         public static readonly ModelAction Instance = new();
 
+        // <inheritdoc />
+        public override bool AllowSubProperties => true;
+
         public override bool CanFill () => false;
 
         // <inheritdoc />

@@ -18,6 +18,9 @@ using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
+    /// <summary>
+    ///     Action that handles form links pointing to a list of major records.
+    /// </summary>
     public class FormLinksAction<TMajor> : IRecordAction
         where TMajor : class, IMajorRecordGetter
     {
@@ -27,6 +30,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         private FormLinksAction ()
         {
         }
+
+        // <inheritdoc />
+        public bool AllowSubProperties => false;
 
         public bool CanFill () => true;
 
@@ -204,9 +210,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if all form keys match</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var checkValue)
+            || (Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var checkValue)
                 && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
-                && FormLinksAction<TMajor>.recordsMatch(checkValue, originValue);
+                && FormLinksAction<TMajor>.recordsMatch(checkValue, originValue));
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
@@ -277,7 +283,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         public bool TryGetDocumentation (Type propertyType, string propertyName, [NotNullWhen(true)] out string? description, [NotNullWhen(true)] out string? example)
         {
             description = "Form Keys or Editor IDs";
-            example = "";
+            example = $"""
+                        "{propertyName}": [ "123:Skyrim.esm", "MyEditorID" ]
+                        """;
 
             return true;
         }

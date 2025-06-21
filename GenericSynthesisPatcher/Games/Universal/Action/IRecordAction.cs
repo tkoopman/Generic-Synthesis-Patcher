@@ -8,6 +8,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 {
     public interface IRecordAction
     {
+        /// <summary>
+        ///     Returns true if properties that resolve to this action can also go deeper to sub-properties.
+        ///
+        ///     This only affects documentation generation.
+        /// </summary>
+        public bool AllowSubProperties { get; }
+
         public bool CanFill ();
 
         public bool CanForward ();
