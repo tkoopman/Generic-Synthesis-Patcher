@@ -32,23 +32,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Files\le_override.esp">
+    <None Update="Files\Skyrim\override.esp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Files\le_test.esp">
+    <None Update="Files\Skyrim\test.esp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Files\oblivion_override.esp">
+    <None Update="Files\Oblivion\override.esp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Files\oblivion_test.esp">
+    <None Update="Files\Oblivion\test.esp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Files\Plugins.txt">
+    <None Update="Files\Oblivion\Plugins.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\Skyrim\Plugins.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

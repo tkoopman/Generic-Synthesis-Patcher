@@ -5,6 +5,7 @@ using GenericSynthesisPatcher.Helpers;
 
 using GSPTestProject.GameData;
 using GSPTestProject.GameData.GlobalGame;
+using GSPTestProject.Helpers;
 
 using Mutagen.Bethesda;
 
@@ -13,8 +14,16 @@ using Xunit.Abstractions;
 namespace GSPTestProject
 {
     [Collection("Sequential")]
-    public abstract class GameTestsBase (ITestOutputHelper output)
+    public abstract class GameTestsBase
     {
+        public readonly ITestOutputHelper Output;
+
+        public GameTestsBase (ITestOutputHelper output)
+        {
+            Output = output;
+            LogHelper.Out = new TestOutputTextWritter(output);
+        }
+
         protected abstract GameRelease GameRelease { get; }
 
         [Theory]
@@ -37,16 +46,16 @@ namespace GSPTestProject
                 if (action.IsValid)
                 {
                     valid++;
-                    output.WriteLine($"{property.Name}: {action.Action.GetType().GetClassName()}");
+                    Output.WriteLine($"{property.Name}: {action.Action.GetType().GetClassName()}");
                 }
                 else
                 {
-                    output.WriteLine($"{property.Name}: !!! No Action Found !!!");
+                    Output.WriteLine($"{property.Name}: !!! No Action Found !!!");
                 }
             }
 
             Assert.Equal(count, valid);
-            output.WriteLine($"{recordType.Name}: {valid}/{count}");
+            Output.WriteLine($"{recordType.Name}: {valid}/{count}");
         }
     }
 }

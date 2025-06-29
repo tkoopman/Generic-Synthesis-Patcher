@@ -25,6 +25,17 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         private List<FormKeyListOperation>? formIDs;
         private int HashCode;
 
+        /// <summary>
+        ///     Details for DeepCopIn Action if required by this rule.
+        /// </summary>
+        [JsonProperty(PropertyName = "DeepCopyIn", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(SingleOrArrayConverter<GSPDeepCopyIn>))]
+        public List<GSPDeepCopyIn> DeepCopyIn { get; set; } = [];
+
+        /// <summary>
+        ///     List of EditorIDs to match against that will be included or excluded. If not set,
+        ///     not filter any records out by EditorID.
+        /// </summary>
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
         public List<ListOperation>? EditorID
@@ -59,13 +70,16 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         public List<ListOperation>? EditorIDNot { set => EditorIDDel = value; }
 
         /// <summary>
-        ///     Add Fill action(s) to this rule. This is only used for adding to joint Fill/Forward
-        ///     store.
+        ///     Add Fill action(s) to this rule. This is only used for adding to joint Fill/Forward store.
         /// </summary>
         [JsonProperty(PropertyName = "Fill", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
         public Dictionary<FilterOperation, JToken> Fill { get; set; } = [];
 
+        /// <summary>
+        ///     List of FormIDs to match against that will be included or excluded. If not set, not
+        ///     filter any records out by FormID.
+        /// </summary>
         [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
         public List<FormKeyListOperation>? FormID
@@ -134,7 +148,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         ///     ForwardType can change how Forwarding actions work.
         /// </summary>
         [JsonProperty(PropertyName = "ForwardType", NullValueHandling = NullValueHandling.Ignore)]
-        [Obsolete("""ForwardIndexedByField is deprecated. Should use "ForwardFlags": ["..."]""")]
+        [Obsolete("""ForwardType is deprecated. Should use "ForwardOptions": ["..."]""")]
         public ForwardOptions ForwardType
         {
             get => ForwardOptions;
@@ -146,12 +160,15 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             }
         }
 
+        /// <summary>
+        ///     If rule belongs to a group, this will point to the group that it belongs to.
+        /// </summary>
         [JsonIgnore]
         public GSPGroup? Group { get; private set; } = null;
 
         /// <summary>
-        ///     Add Forward action(s) to this rule. This is only used for adding to joint
-        ///     Fill/Forward store.
+        ///     Add filters to this rule that can filter on supported properties that are not
+        ///     EditorID or FormID.
         /// </summary>
         [JsonProperty(PropertyName = "Matches", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, JToken>))]
@@ -164,9 +181,21 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         [JsonConverter(typeof(DictionaryConverter<FilterOperation, List<ModKeyListOperation>>))]
         public Dictionary<FilterOperation, List<ModKeyListOperation>?> Merge { get; set; } = [];
 
+        /// <summary>
+        ///     If set to true, will only apply this rule if the winning record is set to the
+        ///     default value in the master record.
+        /// </summary>
         [JsonProperty(PropertyName = "OnlyIfDefault", NullValueHandling = NullValueHandling.Ignore)]
         public bool OnlyIfDefault { get; set; }
 
+        /// <summary>
+        ///     When a rule is in a group this is the method called to tell the rule the group it
+        ///     belongs to. Will also then validate this rule.
+        /// </summary>
+        /// <returns>True if rule validation passes, else false.</returns>
+        /// <exception cref="Exception">
+        ///     If rule already claimed by a group, or if if filters for types the parent don't include.
+        /// </exception>
         public bool ClaimAndValidate (GSPGroup group)
         {
             if (Group is not null)
@@ -196,8 +225,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         private readonly Dictionary<FilterOperation, object?> matchCache = [];
 
         /// <summary>
-        ///     Get the value data for a selected rule's action value key parsed to selected class
-        ///     type.
+        ///     Get the value data for a selected rule's action value key parsed to selected class type.
         /// </summary>
         public bool TryGetFillValueAs<T> (FilterOperation key, out T? valueAs) => tryGetValueAs(Fill, fillCache, key, out _, out valueAs);
 
@@ -214,8 +242,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// </param>
         /// <param name="fields">Output of field names from config for current key</param>
         /// <returns>
-        ///     If valid combination of fields and mods found in config will return true, else
-        ///     false.
+        ///     If valid combination of fields and mods found in config will return true, else false.
         /// </returns>
         public bool TryGetForward (ProcessingKeys proKeys, FilterOperation key, [NotNullWhen(true)] out IEnumerable<ModKey>? mods, [NotNullWhen(true)] out string[]? fields)
         {
@@ -233,7 +260,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                 return true;
             }
 
-            bool sortMods = proKeys.Rule.HasForwardType(ForwardOptions._sortMods);
+            bool sortMods = proKeys.Rule.HasForwardOption(ForwardOptions._sortMods);
             List<ModKey> buildMods = [];
             List<string> buildFields = [];
 
@@ -247,7 +274,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                     sortMods |= hasExcludeMods || !values.SafeAny();
 
                     if (hasIncludeMods && hasExcludeMods)
+                    {
                         Global.Logger.Log(ClassLogCode, $"When indexed by field, array of mods must not include both include and excluded mods.");
+                    }
                     else
                     {
                         if (hasExcludeMods || !values.SafeAny())
@@ -283,9 +312,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (buildMods.Count != 0 && buildFields.Count != 0)
             {
                 mods = sortMods
-                     ? proKeys.Rule.HasForwardType(ForwardOptions._randomMod)
+                     ? proKeys.Rule.HasForwardOption(ForwardOptions._randomMod)
                          ? buildMods.OrderBy(_ => proKeys.GetRandom().Next())
-                         : buildMods.OrderByDescending(Global.Game.LoadOrder.IndexOf)
+                         : buildMods.OrderByDescending(Global.Game.LoadOrder.IndexOf) // Descending so same highest to lowest priority as manually entered mod list
                      : buildMods;
 
                 fields = [.. buildFields];
@@ -304,8 +333,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         public bool TryGetMatchValueAs<T> (FilterOperation key, out bool fromCache, out T? valueAs) => tryGetValueAs(Match, matchCache, key, out fromCache, out valueAs);
 
         /// <summary>
-        ///     Get the value data for a selected rule's action value key parsed to selected class
-        ///     type.
+        ///     Get the value data for a selected rule's action value key parsed to selected class type.
         /// </summary>
         private static bool tryGetValueAs<T> (Dictionary<FilterOperation, JToken> values, Dictionary<FilterOperation, object?> cache, FilterOperation key, out bool fromCache, out T? valueAs)
         {
@@ -342,6 +370,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
         #endregion GetValues
 
+        /// <inheritdoc />
         public override int GetHashCode ()
         {
             if (HashCode == 0)
@@ -368,7 +397,12 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             return HashCode;
         }
 
-        public bool HasForwardType (ForwardOptions flag) => ForwardOptions.HasFlag(flag);
+        /// <summary>
+        ///     Checks if rule has a specific Forward Option flag set.
+        /// </summary>
+        /// <param name="flag">Flag you want to check for.</param>
+        /// <returns>True if flag is set on this rule.</returns>
+        public bool HasForwardOption (ForwardOptions flag) => ForwardOptions.HasFlag(flag);
 
         /// <summary>
         ///     Checks if rule filter(s) match current context's record.
@@ -403,6 +437,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             return true;
         }
 
+        /// <inheritdoc />
         public override bool Validate ()
         {
             if (!base.Validate())

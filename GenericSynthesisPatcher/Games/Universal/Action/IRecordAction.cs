@@ -37,7 +37,23 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// </returns>
         public int Fill (ProcessingKeys proKeys);
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods);
+        /// <summary>
+        ///     Find the Highest priority unique (HPU) context for current property.
+        /// </summary>
+        /// <param name="proKeys"></param>
+        /// <param name="AllRecordMods">
+        ///     All valid mods for this record in order highest to lowest as
+        ///     <see cref="Program.getAvailableMods(ProcessingKeys, IEnumerable{ModKey}, FormKey)" /> returns.
+        /// </param>
+        /// <param name="endNodes">
+        ///     List of all end nodes for this property. Needed so that HPU can honor explicit
+        ///     overrides of a mod.
+        /// </param>
+        /// <returns>
+        ///     Record Context with HPU value or null if no valid HPU found. So could be null if
+        ///     value never changes from origin or NonNull option used.
+        /// </returns>
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes);
 
         /// <summary>
         ///     Static fill of value from JSON rule
@@ -89,6 +105,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if this field matches</returns>
         public bool MatchesRule (ProcessingKeys proKeys);
 
+        /// <summary>
+        ///     Performs a merge of a property across multiple override instances.
+        /// </summary>
+        /// <returns>Number of changes made.</returns>
         public int Merge (ProcessingKeys proKeys);
 
         /// <summary>

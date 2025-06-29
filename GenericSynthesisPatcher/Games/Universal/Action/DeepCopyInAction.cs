@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
 
 using Microsoft.Extensions.Logging;
@@ -11,8 +10,6 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
-
-using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
@@ -33,57 +30,28 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public bool AllowSubProperties => true;
 
+        /// <inheritdoc />
         public virtual bool CanFill () => false;
 
+        /// <inheritdoc />
         public virtual bool CanForward () => true;
 
+        /// <inheritdoc />
         public virtual bool CanForwardSelfOnly () => false;
 
+        /// <inheritdoc />
         public virtual bool CanMatch () => false;
 
+        /// <inheritdoc />
         public virtual bool CanMerge () => false;
 
+        /// <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys) => throw new NotImplementedException();
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
-        {
-            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
-            List<object?> history = [];
-            int hpu = -1;
-            int hpuHistory = -1;
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<object>(proKeys, AllRecordMods, endNodes);
 
-            foreach (int i in indexes.Reverse())
-            {
-                var mc = AllRecordMods[mods.ElementAt(i)];
-
-                if (Mod.TryGetProperty<object>(mc.Record, proKeys.Property.PropertyName, out object? curValue)
-                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
-                {
-                    int historyIndex = history.IndexOf(curValue);
-                    if (historyIndex == -1)
-                    {
-                        historyIndex = history.Count;
-                        history.Add(curValue);
-                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
-                    }
-
-                    if (validMods is null || validMods.Contains(mc.ModKey))
-                    {
-                        // If this a valid mod to be selected then check when it's value was added
-                        // to history and if higher or equal we found new HPU.
-                        if (hpuHistory <= historyIndex)
-                        {
-                            hpu = i;
-                            hpuHistory = historyIndex;
-                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
-                        }
-                    }
-                }
-            }
-
-            return hpu;
-        }
-
+        /// <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
         {
             if (!TranslationMaskFactory.TryCreate(proKeys.Property.RecordType, false, [proKeys.Property.PropertyName], out var mask)
@@ -111,25 +79,27 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return 1;
         }
 
+        /// <inheritdoc />
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
                     => !Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue) || Mod.IsNullOrEmpty(curValue);
 
+        /// <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if value matches</returns>
+        /// <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
             || (Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue)
             && Mod.TryGetProperty(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out object? originValue)
             && Equals(curValue, originValue));
 
+        /// <inheritdoc />
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public virtual int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         // <inheritdoc />

@@ -35,5 +35,13 @@ namespace GSPTestProject
 
             Assert.NotEmpty(Global.Game.AllRecordTypes());
         }
+
+        [Fact]
+        public void LoadOrder ()
+        {
+            Output.WriteLine($"Load Order:");
+            foreach (var mod in Global.Game.LoadOrder)
+                Output.WriteLine($"  {mod.FileName}");
+        }
     }
 }

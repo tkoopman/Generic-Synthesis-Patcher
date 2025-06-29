@@ -25,9 +25,15 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
     {
         private const int ClassLogCode = 0x03;
 
+        /// <summary>
+        ///     Unique ID for the file this rule exists in.
+        /// </summary>
         [JsonIgnore]
         public int ConfigFile { get; internal set; }
 
+        /// <summary>
+        ///     Unique ID for the rule in the file this rule exists in.
+        /// </summary>
         [JsonIgnore]
         public int ConfigRule { get; internal set; }
 
@@ -51,14 +57,14 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// overwrite changes the other made. </summary>
         [DefaultValue(0)]
         [JsonProperty(PropertyName = "Priority")]
-        public int Priority { get; private set; }
+        public int Priority { get; set; }
 
         /// <summary>
         ///     List of record types this rule should match
         /// </summary>
         [JsonProperty(PropertyName = "Types")]
         [JsonConverter(typeof(SingleOrArrayConverter<ILoquiRegistration>))]
-        public IEnumerable<ILoquiRegistration> Types { get; protected set; } = [];
+        public IEnumerable<ILoquiRegistration> Types { get; internal set; } = [];
 
         #region Masters
 
@@ -108,21 +114,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
         private FilterLogic patchedByLogic = FilterLogic.Default;
 
-        [JsonProperty(PropertyName = "&PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedAnd
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patchedByLogic = FilterLogic.AND;
-                patchedBy ??= [];
-                patchedBy.Add(value);
-            }
-        }
-
         /// <summary>
         ///     List of mods that if this record was patched by will either include or exclude it
         ///     from matching.
@@ -140,6 +131,21 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
                 patchedByLogic = FilterLogic.Default;
                 patchedBy = value;
+            }
+        }
+
+        [JsonProperty(PropertyName = "&PatchedBy")]
+        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
+        public List<ModKeyListOperation>? PatchedByAnd
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.AND;
+                patchedBy ??= [];
+                patchedBy.Add(value);
             }
         }
 
@@ -187,6 +193,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
              : other == this ? 0
              : Priority.CompareTo(other.Priority);
 
+        // <inheritdoc />
         public override int GetHashCode ()
         {
             var hash = new HashCode();

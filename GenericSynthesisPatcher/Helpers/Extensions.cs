@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Helpers
         ///     token type.
         /// </summary>
         public static T? Deserialize<T> (this JToken token)
-                            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
+            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
              : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
              : JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<T>(token.CreateReader());
 

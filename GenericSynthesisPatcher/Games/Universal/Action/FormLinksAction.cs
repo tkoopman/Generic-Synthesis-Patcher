@@ -34,16 +34,22 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public bool AllowSubProperties => false;
 
+        // <inheritdoc />
         public bool CanFill () => true;
 
+        // <inheritdoc />
         public bool CanForward () => true;
 
+        // <inheritdoc />
         public bool CanForwardSelfOnly () => true;
 
+        // <inheritdoc />
         public bool CanMatch () => true;
 
+        // <inheritdoc />
         public bool CanMerge () => true;
 
+        // <inheritdoc />
         public int Fill (ProcessingKeys proKeys)
         {
             if (proKeys.Record is IFormLinkContainerGetter record)
@@ -105,8 +111,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return -1;
         }
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods) => throw new NotImplementedException("ForwardOption HPU invalid on this field.");
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => throw new NotImplementedException("ForwardOption HPU invalid on this field.");
 
+        // <inheritdoc />
         public int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
         {
             if (proKeys.Record is IFormLinkContainerGetter record)
@@ -148,6 +156,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return -1;
         }
 
+        // <inheritdoc />
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
         {
             if (proKeys.Record is IFormLinkContainerGetter)
@@ -201,21 +210,21 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return -1;
         }
 
+        // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
                     => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if all form keys match</returns>
+        // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
             || (Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var checkValue)
                 && Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
                 && FormLinksAction<TMajor>.recordsMatch(checkValue, originValue));
 
+        // <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
+        // <inheritdoc />
         public bool MatchesRule (ProcessingKeys proKeys)
         {
             if (!proKeys.TryGetMatchValueAs(out bool fromCache, out List<FormKeyListOperation<TMajor>>? matches))
@@ -233,6 +242,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return MatchesHelper.Matches(curLinks?.Select(l => l.FormKey), proKeys.RuleKey.Operation, matches, propertyName: proKeys.Property.PropertyName);
         }
 
+        // <inheritdoc />
         public int Merge (ProcessingKeys proKeys)
         {
             Global.UpdateLoggers(ClassLogCode);
@@ -245,6 +255,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return root is not null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
         }
 
+        // <inheritdoc />
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkGetter<TMajor>>? inputList)
         {
             if (inputList is not IReadOnlyList<IFormLinkGetter<TMajor>> newList || !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))

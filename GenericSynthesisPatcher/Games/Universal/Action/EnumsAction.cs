@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 
@@ -31,16 +30,22 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public bool AllowSubProperties => false;
 
+        // <inheritdoc />
         public bool CanFill () => true;
 
+        // <inheritdoc />
         public bool CanForward () => false;
 
+        // <inheritdoc />
         public bool CanForwardSelfOnly () => false;
 
+        // <inheritdoc />
         public bool CanMatch () => true;
 
+        // <inheritdoc />
         public bool CanMerge () => false;
 
+        // <inheritdoc />
         public int Fill (ProcessingKeys proKeys)
         {
             if (!proKeys.TryGetFillValueAs(out string? setValueStr) || setValueStr is null)
@@ -69,64 +74,30 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return 1;
         }
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
-        {
-            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
-            List<Enum?> history = [];
-            int hpu = -1;
-            int hpuHistory = -1;
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<Enum>(proKeys, AllRecordMods, endNodes);
 
-            foreach (int i in indexes.Reverse())
-            {
-                var mc = AllRecordMods[mods.ElementAt(i)];
-
-                if (Mod.TryGetProperty<Enum>(mc.Record, proKeys.Property.PropertyName, out var curValue)
-                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
-                {
-                    int historyIndex = history.IndexOf(curValue);
-                    if (historyIndex == -1)
-                    {
-                        historyIndex = history.Count;
-                        history.Add(curValue);
-                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
-                    }
-
-                    if (validMods is null || validMods.Contains(mc.ModKey))
-                    {
-                        // If this a valid mod to be selected then check when it's value was added
-                        // to history and if higher or equal we found new HPU.
-                        if (hpuHistory <= historyIndex)
-                        {
-                            hpu = i;
-                            hpuHistory = historyIndex;
-                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
-                        }
-                    }
-                }
-            }
-
-            return hpu;
-        }
-
+        // <inheritdoc />
         public int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if Enum value matches</returns>
+        // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
             || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
             && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
             && curValue == originValue);
 
+        // <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
+        // <inheritdoc />
         public bool MatchesRule (ProcessingKeys proKeys)
         {
             if (proKeys.RuleKey.Operation != FilterLogic.OR)
@@ -182,6 +153,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             return result;
         }
 
+        // <inheritdoc />
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         // <inheritdoc />
