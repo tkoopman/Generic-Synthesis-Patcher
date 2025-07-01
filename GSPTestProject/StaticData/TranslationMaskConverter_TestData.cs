@@ -185,6 +185,60 @@ namespace GSPTestProject.StaticData
                     Model = new Mutagen.Bethesda.Skyrim.Model.TranslationMask(true, true)
                 }
             };
+
+            yield return new object[]
+            {
+                """
+                {
+                    "defaultOn": false,
+                    "WorldModel": true
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
+                {
+                    WorldModel = new(new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true), new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true))
+                }
+            };
+
+            yield return new object[]
+            {
+                """
+                {
+                    "defaultOn": false,
+                    "WorldModel": {
+                        "DefaultOn": true,
+                        "OnOverall": true
+                    }
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
+                {
+                    WorldModel = new(new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true, true), new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true, true))
+                }
+            };
+
+            yield return new object[]
+            {
+                """
+                {
+                    "defaultOn": false,
+                    "WorldModel": {
+                        "Male": {
+                            "DefaultOn": false,
+                            "OnOverall": true
+                        },
+                        "Female": {
+                            "DefaultOn": true,
+                            "OnOverall": false
+                        }
+                    }
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
+                {
+                    WorldModel = new(new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(false, true), new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true, false))
+                }
+            };
         }
 
         IEnumerator IEnumerable.GetEnumerator () => GetEnumerator();

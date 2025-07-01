@@ -13,7 +13,7 @@ namespace GSPTestProject
     {
         private readonly JsonSerializerSettings _serializerSettings = new()
         {
-            Converters = [new TranslationMaskConverter()],
+            Converters = [new TranslationMaskConverter(), new GenderedItemConverter()],
         };
 
         private readonly TranslationMaskConverter_Comparer _translationMaskComparer = new();

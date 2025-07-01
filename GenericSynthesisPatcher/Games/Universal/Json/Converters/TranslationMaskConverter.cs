@@ -1,9 +1,13 @@
 ﻿using Common;
 
+using GenericSynthesisPatcher.Helpers;
+
 using Loqui;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+using Noggog;
 
 namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
@@ -40,38 +44,34 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
                         defaultOn = !jObject.Values().Any() || !jObject.Values().Any(v => v.Type != JTokenType.Boolean || v.Value<bool>());
                     }
 
-                    bool onOverAll = (bool)(con.GetParameters()[1].DefaultValue ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} does not have a public constructor that takes one boolean parameter."));
-                    var mask = con.Invoke([defaultOn, onOverAll]) as ITranslationMask ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} failed to create.");
-
-                    // Set any included properties on the mask
-                    foreach (var field in objectType.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+                    if (!tryBoolValue(jObject, "OnOverall", out bool onOverall))
                     {
-                        if (field.IsInitOnly)
-                            continue; // Skip readonly fields
+                        // OnOverall is not specified, default to true
+                        onOverall = (bool)(con.GetParameters()[1].DefaultValue ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} does not have a public constructor that takes one boolean parameter."));
+                    }
 
-                        var jToken = jObject.GetValue(field.Name, StringComparison.OrdinalIgnoreCase);
-                        if (jToken is null)
-                            continue;
+                    var mask = con.Invoke([defaultOn, onOverall]) as ITranslationMask ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} failed to create.");
 
-                        if (field.FieldType == typeof(bool))
+                    foreach (var property in jObject.Properties().Where(p => !p.Name.Equals("DefaultOn", StringComparison.OrdinalIgnoreCase) && !p.Name.Equals("OnOverall", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        if (property.Value.Type == JTokenType.Boolean)
                         {
-                            if (jToken.Type != JTokenType.Boolean)
-                                throw new JsonSerializationException($"Expected boolean value for '{field.Name}' but found {jToken.Type}.");
-                            field.SetValue(mask, jToken.Value<bool>());
-                            continue;
+                            // If the property is a boolean, set it directly
+                            _ = mask.TrySetValue(property.Name, property.Value.Value<bool>(), StringComparison.OrdinalIgnoreCase);
                         }
-
-                        if (!field.FieldType.IsAssignableTo(typeof(ITranslationMask)))
-                            continue;
-
-                        if (jToken.Type is JTokenType.Boolean or JTokenType.Object)
+                        else if (property.Value.Type == JTokenType.Object)
                         {
-                            object? pValue = serializer.Deserialize(jToken.CreateReader(), field.FieldType);
-                            field.SetValue(mask, pValue);
-                            continue;
+                            // If the property is an object, deserialize it
+                            if (mask.TryGetMaskField(property.Name, StringComparison.OrdinalIgnoreCase, out var field))
+                            {
+                                object? obj = serializer.Deserialize(property.Value.CreateReader(), field.FieldType) ?? throw new JsonSerializationException($"Failed to deserialize '{property.Name}' into {field.FieldType.GetClassName()}.");
+                                field.SetValue(mask, obj);
+                            }
                         }
-
-                        throw new JsonSerializationException($"Expected boolean or object value for '{field.Name}' but found {jToken.Type}.");
+                        else
+                        {
+                            throw new JsonSerializationException($"Expected boolean or object value for '{property.Name}' but found {property.Value.Type}.");
+                        }
                     }
 
                     return mask;

@@ -129,6 +129,7 @@ namespace GenericSynthesisPatcher.Games.Universal
             [
                 new ColorConverter(),
                 new FormKeyConverter(),
+                new GenderedItemConverter(),
                 new ModKeyConverter(),
                 new NoggogPxConverter(),
                 new OperationsConverter(),
