@@ -77,6 +77,7 @@ namespace GSPTestProject
         public void ConfirmDetectedRecordTypesComparedToMajorRecordTypeEnumerator ()
         {
             var recordTypes = new Dictionary<string, ILoquiRegistration>(StringComparer.OrdinalIgnoreCase);
+            List<ILoquiRegistration> invalids = [];
 
             foreach (var recordType in MajorRecordTypeEnumerator.GetMajorRecordTypesFor(Global.Game.State.GameRelease.ToCategory()))
             {
@@ -88,7 +89,7 @@ namespace GSPTestProject
 
                 if (Global.Game.TypeOptionSolidifierMixIns.GetMethod(registration.Name, BindingFlags.Public | BindingFlags.Static, [ModGetterType]) is null)
                 {
-                    Output.WriteLine($"No TypeOptionSolidifierMixIns for {registration.Name} - {registration.ClassType.Name} - {registration.GetterType.Name} - {registration.SetterType.Name}");
+                    invalids.Add(registration);
                     continue;
                 }
 
@@ -109,16 +110,43 @@ namespace GSPTestProject
 
                 _ = Global.Game.GetRecords(item); // Just run to make sure it doesn't throw exception. Can't actually get records in this test.
 
-                Output.WriteLine($"{prefix}{item.ClassType.Name} - {item.GetterType.Name} - {item.SetterType.Name} - {item.IsValidRecordType()}");
+                Output.WriteLine($"{prefix}{toDebugOutput(item)}");
             }
 
             foreach (var item in missing)
             {
-                Output.WriteLine($"--- {item.ClassType.Name} - {item.GetterType.Name} - {item.SetterType.Name}");
+                Output.WriteLine($"--- {toDebugOutput(item)}");
+            }
+
+            foreach (var invalid in invalids)
+            {
+                bool found = false;
+                foreach (var item in list)
+                {
+                    if (invalid.GetterType.IsAssignableTo(item.GetterType) &&
+                        invalid.SetterType.IsAssignableTo(item.SetterType) &&
+                        invalid.ClassType.IsAssignableTo(item.ClassType))
+                    {
+                        found = true;
+                        Output.WriteLine($"***{item.Name}*** {toDebugOutput(invalid)}");
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Output.WriteLine($"!!! {toDebugOutput(invalid)} !!!");
+                }
             }
 
             Assert.Empty(missing);
             Assert.Empty(extra);
+        }
+
+        private static string toDebugOutput (ILoquiRegistration registration)
+        {
+            _ = registration.TryGetRecordType(out var type);
+            return $"{registration.Name} ({type.Type}) | Class: {registration.ClassType.Name} | Base: {registration.ClassType.BaseType?.Name} | Getter: {registration.GetterType.Name} | Setter: {registration.SetterType.Name}";
         }
     }
 }

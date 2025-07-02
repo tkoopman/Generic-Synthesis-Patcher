@@ -9,6 +9,8 @@ using GSPTestProject.GameData;
 using GSPTestProject.GameData.Stateless;
 using GSPTestProject.JsonData;
 
+using Loqui;
+
 using Mutagen.Bethesda.Oblivion;
 
 using Newtonsoft.Json;
@@ -76,7 +78,14 @@ namespace GSPTestProject
             List<Property> properties = [];
             var aliases = gameRecordType.BaseGame.AliasMappings.Where(a => a.Type is null || a.Type == gameRecordType.RecordType.ClassType);
 
-            addProperties(gameRecordType, aliases, properties, gameRecordType.RecordType.ClassType);
+            addProperties(gameRecordType.BaseGame, gameRecordType.RecordType, aliases, properties, gameRecordType.RecordType.ClassType);
+            foreach (var subType in gameRecordType.SubTypes)
+            {
+                Assert.True(gameRecordType.RecordType.TryGetRecordType(out var subRecordID));
+                string subClassID = subType.ClassType.Name.SeparateWords();
+                Output.WriteLine($"Checking sub-type: {subClassID} for {gameRecordType.RecordType.Name}");
+                addProperties(gameRecordType.BaseGame, subType, aliases, properties, subType.ClassType, subClassID: subClassID);
+            }
 
             using var writer = new StringWriter();
             using var jsonWriter = new JsonTextWriter(writer);
@@ -121,6 +130,8 @@ namespace GSPTestProject
             {
                 if (recordType.TryGetRecordType(out var type))
                 {
+                    // In Oblivion found 2 different recordTypes with the same 4 letter type, so
+                    // added this so only first will add alias
                     if (gameData.BaseGame.GetRecordType(type.Type) != recordType)
                         allTypes.Add(new Types(recordType.Name.SeparateWords(), recordType.Name));
                     else
@@ -165,7 +176,7 @@ namespace GSPTestProject
         [GeneratedRegex(@"^un(?:used|known)\w*$")]
         private static partial Regex UnusedUnknown ();
 
-        private void addProperties (GameRecordType gameRecordType, IEnumerable<GenericSynthesisPatcher.Games.Universal.PropertyAliasMapping>? aliases, List<Property> properties, Type parent, string? parentName = null, IEnumerable<string>? parentAliases = null)
+        private void addProperties (BaseGame baseGame, ILoquiRegistration recordType, IEnumerable<PropertyAliasMapping>? aliases, List<Property> properties, Type parent, string? parentName = null, IEnumerable<string>? parentAliases = null, string? subClassID = null)
         {
             var checkProperties = GameRecordType.GetProperties(parent);
 
@@ -174,6 +185,9 @@ namespace GSPTestProject
                 string name = parentName is null
                     ? property.Name
                     : $"{parentName}.{property.Name}";
+
+                if (subClassID is not null && properties.Any(p => p.Name.Equals(name)))
+                    continue; // Skip if property already exists in the list
 
                 var alias = aliases?.Where(a => string.Equals(a.RealPropertyName, property.Name, StringComparison.Ordinal));
                 if (alias.SafeAny(a => a.Type is not null))
@@ -185,24 +199,30 @@ namespace GSPTestProject
                     ? parentAliases.Select(a => $"{a}.{property.Name}")
                     : [];
 
-                var propertyAction = gameRecordType.BaseGame.GetAction(gameRecordType.RecordType, name);
+                var propertyAction = baseGame.GetAction(recordType, name);
                 if (!propertyAction.IsValid)
                 {
-                    Output.WriteLine($"Invalid property action for {gameRecordType.RecordType.ClassType.GetClassName()}.{name}. Type of: {property.PropertyType.GetClassName()}");
+                    Output.WriteLine($"Invalid property action for {recordType.ClassType.GetClassName()}.{name}. Type of: {property.PropertyType.GetClassName()}");
 
-                    checkForSubProperties(gameRecordType, properties, property.PropertyType, name, propertyAction, propertyAliases);
+                    checkForSubProperties(baseGame, recordType, properties, property.PropertyType, name, propertyAction, propertyAliases, subClassID);
                     continue;
                 }
 
                 if (!propertyAction.Action.TryGetDocumentation(property.PropertyType, name, out string? description, out string? example) || (propertyAction.Action.CanFill() && (string.IsNullOrWhiteSpace(description) || string.IsNullOrWhiteSpace(example))))
                     Output.WriteLine($"Failed to get documentation. Property {property.Name} Action: {propertyAction.Action.GetType().GetClassName()} Type: {property.PropertyType.GetClassName()}");
 
+                if (subClassID is not null)
+                {
+                    name += " *"; // Indicate this is a sub-property
+                    description = $"* Only valid for '{subClassID}' record types.<br />" + (description ?? string.Empty);
+                }
+
                 var flags = PropertyFlags.None;
 
                 if (parentName is not null)
                     flags |= PropertyFlags.SubProperty;
 
-                if (UnusedUnknown().IsMatch(property.Name) || gameRecordType.BaseGame.HiddenProperties.Contains(property.Name))
+                if (UnusedUnknown().IsMatch(property.Name) || baseGame.HiddenProperties.Contains(property.Name))
                     flags |= PropertyFlags.Hidden;
 
                 if (propertyAction.Action.CanMatch())
@@ -223,14 +243,14 @@ namespace GSPTestProject
                 if (propertyAction.Action.GetType() == typeof(GenericSynthesisPatcher.Games.Universal.Action.DeepCopyInAction))
                     flags |= PropertyFlags.DeepCopyIn;
 
-                properties.Add(new Property(name, string.Join(';', propertyAliases), flags, description ?? "", example ?? ""));
+                properties.Add(new Property(name, string.Join(';', propertyAliases), flags, description ?? string.Empty, example ?? string.Empty));
 
                 // Check to see if we should search for sub-properties
-                checkForSubProperties(gameRecordType, properties, property.PropertyType, name, propertyAction, propertyAliases);
+                checkForSubProperties(baseGame, recordType, properties, property.PropertyType, name, propertyAction, propertyAliases, subClassID);
             }
         }
 
-        private void checkForSubProperties (GameRecordType gameRecordType, List<Property> properties, Type propertyType, string name, PropertyAction propertyAction, IEnumerable<string> propertyAliases)
+        private void checkForSubProperties (BaseGame baseGame, ILoquiRegistration recordType, List<Property> properties, Type propertyType, string name, PropertyAction propertyAction, IEnumerable<string> propertyAliases, string? subClassID)
         {
             /// To check for sub-properties type needs to be:
             /// - Currently assigned an invalid Action or action allows sub-properties
@@ -245,7 +265,7 @@ namespace GSPTestProject
                 && !propertyType.IsGenericTypeDefinition
                 && !propertyType.IsPrimitive
                 && !propertyType.IsEnum
-                && gameRecordType.BaseGame.ShouldCheckForSupProperties(propertyType))
+                && baseGame.ShouldCheckForSupProperties(propertyType))
             {
                 // Next check if the property is constructible is nullable
                 if (propertyType.IsNullable())
@@ -266,7 +286,7 @@ namespace GSPTestProject
                     }
                 }
 
-                addProperties(gameRecordType, null, properties, propertyType, name, propertyAliases);
+                addProperties(baseGame, recordType, null, properties, propertyType, name, propertyAliases, subClassID);
             }
         }
 

@@ -99,7 +99,7 @@ namespace GenericSynthesisPatcher
                 foreach (var context in ProcessTypeRecords)
                 {
                     counts.Total++;
-                    var proKeys = new ProcessingKeys(rtm, context);
+                    var proKeys = new ProcessingKeys(context);
 
                     foreach (var rule in Rules)
                     {
@@ -125,7 +125,7 @@ namespace GenericSynthesisPatcher
                                 if (Global.Settings.Value.Logging.NoisyLogs.GroupMatched)
                                     Global.TraceLogger?.Log(ClassLogCode, $"Matched group. Processing Rules.");
 
-                                var gProKeys = new ProcessingKeys(rtm, context, proKeys);
+                                var gProKeys = new ProcessingKeys(context, proKeys);
                                 int count = 0;
                                 foreach (var groupRule in proKeys.Group.Rules)
                                 {

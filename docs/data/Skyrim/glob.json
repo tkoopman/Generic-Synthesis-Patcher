@@ -68,5 +68,40 @@
     "Example": "\"VersionControl\": 7",
     "Flags": 30,
     "Name": "VersionControl"
+  },
+  {
+    "Aliases": "FLTV",
+    "Description": "* Only valid for 'Global Float' record types.<br />Decimal value",
+    "Example": "\"Data\": 3.14",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "FLTV",
+    "Description": "* Only valid for 'Global Int' record types.<br />Numeric value",
+    "Example": "\"Data\": 7",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "FLTV",
+    "Description": "* Only valid for 'Global Short' record types.<br />Numeric value",
+    "Example": "\"Data\": 7",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "FLTV",
+    "Description": "* Only valid for 'Global Unknown' record types.<br />Decimal value",
+    "Example": "\"Data\": 3.14",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Unknown' record types.<br />Numeric value",
+    "Example": "\"TypeChar\": 7",
+    "Flags": 28,
+    "Name": "TypeChar *"
   }
 ]

@@ -2,6 +2,10 @@
 
 using GSPTestProject.GameData.GlobalGame.Fixtures;
 
+using GSPTestProject.GameData.Stateless;
+
+using Mutagen.Bethesda;
+
 using Global = GenericSynthesisPatcher.Global;
 
 namespace GSPTestProject.GameData.GlobalGame
@@ -18,8 +22,9 @@ namespace GSPTestProject.GameData.GlobalGame
     {
         public IEnumerator<object?[]> GetEnumerator ()
         {
+            var gameCategory = Global.Game.State.GameRelease.ToCategory();
             foreach (var recordType in Global.Game.AllRecordTypes())
-                yield return [new GameRecordType(Global.Game.State.GameRelease, recordType)];
+                yield return [new GameRecordType(Global.Game.State.GameRelease, recordType, AllGames_AllRecordTypes.GetSubTypes(gameCategory, recordType))];
         }
 
         IEnumerator IEnumerable.GetEnumerator () => GetEnumerator();

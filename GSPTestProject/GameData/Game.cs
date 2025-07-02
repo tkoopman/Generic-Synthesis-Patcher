@@ -4,37 +4,26 @@ using Mutagen.Bethesda;
 
 namespace GSPTestProject.GameData
 {
-    public sealed class Game
+    public class Game
     {
         public Game (GameRelease gameRelease)
         {
             GameRelease = gameRelease;
-            switch (gameRelease)
+            GameCategory = gameRelease.ToCategory();
+            GameName = GameCategory.ToString();
+
+            BaseGame = gameRelease switch
             {
-                case GameRelease.SkyrimLE:
-                case GameRelease.SkyrimSE:
-                    GameName = "Skyrim";
-                    BaseGame = GenericSynthesisPatcher.Games.Skyrim.SkyrimGame.Constructor(null!);
-                    break;
-
-                case GameRelease.Fallout4:
-                    GameName = "Fallout4";
-                    BaseGame = GenericSynthesisPatcher.Games.Fallout4.Fallout4Game.Constructor(null!);
-                    break;
-
-                case GameRelease.Oblivion:
-                case GameRelease.OblivionRE:
-                    GameName = "Oblivion";
-                    BaseGame = GenericSynthesisPatcher.Games.Oblivion.OblivionGame.Constructor(null!);
-                    break;
-
-                default:
-                    throw new NotSupportedException($"Game release {gameRelease} is not supported.");
-            }
+                GameRelease.SkyrimLE or GameRelease.SkyrimSE => GenericSynthesisPatcher.Games.Skyrim.SkyrimGame.Constructor(null!),
+                GameRelease.Fallout4 => GenericSynthesisPatcher.Games.Fallout4.Fallout4Game.Constructor(null!),
+                GameRelease.Oblivion or GameRelease.OblivionRE => GenericSynthesisPatcher.Games.Oblivion.OblivionGame.Constructor(null!),
+                _ => throw new NotSupportedException($"Game release {gameRelease} is not supported."),
+            };
         }
 
         public BaseGame BaseGame { get; }
 
+        public GameCategory GameCategory { get; }
         public string GameName { get; }
         public GameRelease GameRelease { get; }
     }

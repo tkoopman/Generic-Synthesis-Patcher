@@ -225,13 +225,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ObjectTemplates"
-  },
-  {
-    "Aliases": "",
     "Description": "Form Key or Editor ID",
     "Example": "\"PickUpSound\": \"123:Skyrim.esm\" or \"PickUpSound\": \"MyEditorID\"",
     "Flags": 28,

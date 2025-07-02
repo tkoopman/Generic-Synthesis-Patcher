@@ -285,7 +285,7 @@ namespace GenericSynthesisPatcher.Games.Universal
                 {
                     if (i == 0)
                     {
-                        string? rpn = Global.Game.GetRealPropertyName(recordType, propertyNames[i]);
+                        string? rpn = GetRealPropertyName(recordType, propertyNames[i]);
                         if (rpn is not null)
                         {
                             propertyNames[0] = rpn;

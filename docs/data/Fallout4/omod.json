@@ -201,5 +201,12 @@
     "Example": "\"VersionControl\": 7",
     "Flags": 30,
     "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Unknown Object Modification' record types.<br />",
+    "Example": "",
+    "Flags": 144,
+    "Name": "ModificationType *"
   }
 ]

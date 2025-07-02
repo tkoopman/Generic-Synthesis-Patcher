@@ -40,5 +40,33 @@
     "Example": "\"VersionControl\": 7",
     "Flags": 30,
     "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Game Setting Float' record types.<br />Decimal value",
+    "Example": "\"Data\": 3.14",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Game Setting Int' record types.<br />Numeric value",
+    "Example": "\"Data\": 7",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Game Setting Int' record types.<br />Decimal value",
+    "Example": "\"RawData\": 3.14",
+    "Flags": 28,
+    "Name": "RawData *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Game Setting String' record types.<br />String value",
+    "Example": "\"Data\": \"Hello\"",
+    "Flags": 28,
+    "Name": "Data *"
   }
 ]
