@@ -61,19 +61,21 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 return 0;
             }
 
+            if (proKeys.Record.Equals(forwardContext.Record, majorMask))
+            {
+                Global.TraceLogger?.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as already equal", propertyName: proKeys.Property.PropertyName);
+                return 0;
+            }
+
             if (proKeys.GetPatchRecord() is not IMajorRecordInternal patchRecord)
             {
                 Global.Logger.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as invalid record type for DeepCopyIn", propertyName: proKeys.Property.PropertyName, logLevel: LogLevel.Warning);
                 return 0;
             }
 
-            if (patchRecord.Equals(forwardContext.Record, majorMask))
-            {
-                Global.TraceLogger?.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as already equal", propertyName: proKeys.Property.PropertyName);
-                return 0;
-            }
+            Global.TraceLogger?.LogAction(ClassLogCode, "Calling DeepCopyIn to update property.", propertyName: proKeys.Property.PropertyName);
 
-            Global.TraceLogger?.Log(ClassLogCode, "Calling DeepCopyIn to update property.", propertyName: proKeys.Property.PropertyName);
+            // TODO: Add ErrorMask and validate
             patchRecord.DeepCopyIn(forwardContext.Record, majorMask);
 
             return 1;

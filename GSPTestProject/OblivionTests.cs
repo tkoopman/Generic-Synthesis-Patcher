@@ -4,6 +4,7 @@ using Loqui;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Oblivion;
+using Mutagen.Bethesda.Plugins.Order;
 
 using Xunit.Abstractions;
 
@@ -17,6 +18,8 @@ namespace GSPTestProject
 #pragma warning restore CS9113 // Parameter is unread.
     {
         protected override GameRelease GameRelease => GameRelease.OblivionRE;
+
+        protected override Type ModGetterType => typeof(IEnumerable<IModListing<IOblivionModGetter>>);
 
         [Fact]
         public void ConfirmAllRecordTypes ()

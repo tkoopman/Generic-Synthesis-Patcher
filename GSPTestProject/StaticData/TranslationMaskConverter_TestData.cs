@@ -236,7 +236,38 @@ namespace GSPTestProject.StaticData
                 """,
                 new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
                 {
-                    WorldModel = new(new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(false, true), new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true, false))
+                    WorldModel = new(new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(false, true), new Mutagen.Bethesda.Skyrim.ArmorModel.TranslationMask(true, false)),
+                }
+            };
+
+            yield return new object[]
+            {
+                """
+                {
+                    "defaultOn": false,
+                    "Priority": {
+                        "Male": false,
+                        "Female": true
+                    }
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.ArmorAddon.TranslationMask(false)
+                {
+                    Priority = new(false, true),
+                }
+            };
+
+            yield return new object[]
+            {
+                """
+                {
+                    "defaultOn": false,
+                    "Priority": true
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.ArmorAddon.TranslationMask(false)
+                {
+                    Priority = new(true, true),
                 }
             };
         }

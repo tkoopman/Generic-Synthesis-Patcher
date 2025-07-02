@@ -4,6 +4,7 @@ using GenericSynthesisPatcher.Helpers;
 using Loqui;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,9 +51,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// </summary>
         /// <param name="type">ITranslationMask type</param>
         /// <returns>Mask or null if invalid</returns>
-        public ITranslationMask? GetMask (Type type)
-            => MaskData is null
-             ? FromID != FormKey.Null ? null : TranslationMaskFactory.TryCreate(type, true, out var allMask) ? allMask : null
-             : JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize(MaskData.CreateReader(), type) as ITranslationMask;
+        public MajorRecord.TranslationMask? GetMask (Type type)
+        {
+            var mask = MaskData is null
+                     ? FromID != FormKey.Null ? null : TranslationMaskFactory.TryCreate(type, true, out var allMask) ? allMask : null
+                     : JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize(MaskData.CreateReader(), type) as ITranslationMask;
+
+            return mask as MajorRecord.TranslationMask;
+        }
     }
 }

@@ -144,7 +144,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public abstract IPatcherState State { get; }
 
-        protected abstract Type TypeOptionSolidifierMixIns { get; }
+        public abstract Type TypeOptionSolidifierMixIns { get; }
 
         private Dictionary<PropertyKey, PropertyAction?> PropertyMappings { get; } = [];
 

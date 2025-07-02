@@ -24,7 +24,7 @@ namespace GenericSynthesisPatcher.Games.Oblivion
 
         public override IPatcherState<IOblivionMod, IOblivionModGetter> State { get; }
 
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public static OblivionGame Constructor (IPatcherState<IOblivionMod, IOblivionModGetter> gameState)
         {

@@ -3,6 +3,7 @@
 using Loqui;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Skyrim;
 
 using Xunit.Abstractions;
@@ -17,6 +18,8 @@ namespace GSPTestProject
 #pragma warning restore CS9113 // Parameter is unread.
     {
         protected override GameRelease GameRelease => GameRelease.SkyrimSE;
+
+        protected override Type ModGetterType => typeof(IEnumerable<IModListing<ISkyrimModGetter>>);
 
         [Fact]
         public void ConfirmAllRecordTypes ()

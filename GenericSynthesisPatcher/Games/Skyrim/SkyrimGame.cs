@@ -25,7 +25,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim
         private SkyrimGame (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
 
         public override IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get; }
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public static SkyrimGame Constructor (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState)
         {

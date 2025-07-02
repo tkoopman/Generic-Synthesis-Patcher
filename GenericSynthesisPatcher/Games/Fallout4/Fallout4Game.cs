@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4
 
         public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
 
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public static Fallout4Game Constructor (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState)
         {
