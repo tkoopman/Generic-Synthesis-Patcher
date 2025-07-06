@@ -214,7 +214,7 @@ namespace GSPTestProject
                 if (subClassID is not null)
                 {
                     name += " *"; // Indicate this is a sub-property
-                    description = $"* Only valid for '{subClassID}' record types.<br />" + (description ?? string.Empty);
+                    description = $"* Only valid for '{subClassID}' record types. " + (description ?? string.Empty);
                 }
 
                 var flags = PropertyFlags.None;

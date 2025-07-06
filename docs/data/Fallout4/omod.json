@@ -204,7 +204,7 @@
   },
   {
     "Aliases": "",
-    "Description": "* Only valid for 'Unknown Object Modification' record types.<br />",
+    "Description": "* Only valid for 'Unknown Object Modification' record types. ",
     "Example": "",
     "Flags": 144,
     "Name": "ModificationType *"
