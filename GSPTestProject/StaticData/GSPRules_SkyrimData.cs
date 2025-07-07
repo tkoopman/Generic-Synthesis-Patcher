@@ -6,7 +6,7 @@ using Mutagen.Bethesda.Skyrim;
 
 namespace GSPTestProject.StaticData
 {
-    public class SkyrimRules_TestData : IEnumerable<object?[]>
+    public class GSPRules_SkyrimData : IEnumerable<object?[]>
     {
         public IEnumerator<object?[]> GetEnumerator ()
         {

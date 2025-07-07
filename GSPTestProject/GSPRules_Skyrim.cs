@@ -18,11 +18,11 @@ using Xunit.Abstractions;
 namespace GSPTestProject
 {
     [Collection("Sequential")]
-    public class SkyrimRulesTests : IClassFixture<SkyrimSEFixture>
+    public class GSPRules_Skyrim : IClassFixture<SkyrimSEFixture>
     {
         private readonly SkyrimSEFixture _skyrimSEFixture;
 
-        public SkyrimRulesTests (SkyrimSEFixture skyrimSEFixture, ITestOutputHelper output)
+        public GSPRules_Skyrim (SkyrimSEFixture skyrimSEFixture, ITestOutputHelper output)
         {
             _skyrimSEFixture = skyrimSEFixture;
             Output = output;
@@ -44,7 +44,7 @@ namespace GSPTestProject
         }
 
         [Theory]
-        [ClassData(typeof(SkyrimRules_TestData))]
+        [ClassData(typeof(GSPRules_SkyrimData))]
         public void LoadRules (string json, bool expectedValidate, Func<List<GSPBase>, bool>? customValidate)
         {
             HashSet <ILoquiRegistration> enabledTypes = [];

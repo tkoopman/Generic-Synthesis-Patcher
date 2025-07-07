@@ -2,13 +2,13 @@
 
 namespace GSPTestProject.StaticData
 {
-    internal class TranslationMaskConverter_TestData : IEnumerable<object[]>
+    internal class TranslationMaskConverter_SkyrimData : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator ()
         {
-            // DefaultOn should be true if no properties are defined
             yield return new object[]
             {
+                "Empty Json. DefaultOn should be true if no properties are defined",
                 """
                 {
                 }
@@ -16,10 +16,9 @@ namespace GSPTestProject.StaticData
                 new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true)
             };
 
-            // DefaultOn should be false as only true entries, even though that property is not a
-            // valid property.
             yield return new object[]
             {
+                "Only invalid true entries. DefaultOn should be false.",
                 """
                 {
                     "something": true
@@ -28,10 +27,9 @@ namespace GSPTestProject.StaticData
                 new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(false)
             };
 
-            // DefaultOn should be true as only false entries, even though that property is not a
-            // valid property.
             yield return new object[]
             {
+                "Only invalid false entries. DefaultOn should be true.",
                 """
                 {
                     "something": false
@@ -40,22 +38,23 @@ namespace GSPTestProject.StaticData
                 new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true)
             };
 
-            // Basic boolean value
             yield return new object[]
             {
+                "Basic boolean (true)",
                 "true",
                 (Mutagen.Bethesda.Skyrim.Weapon.TranslationMask)true
             };
 
-            // Basic boolean value
             yield return new object[]
             {
+                "Basic boolean (false)",
                 "false",
                 (Mutagen.Bethesda.Skyrim.Weapon.TranslationMask)false
             };
 
             yield return new object[]
             {
+                "Basic valid Json object 1",
                 """
                 {
                     "defaultOn": true
@@ -66,6 +65,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Basic valid Json object 2",
                 """
                 {
                     "defaultOn": false
@@ -76,6 +76,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Basic valid Json object 3",
                 """
                 {
                     "defaultOn": true,
@@ -87,6 +88,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Basic valid Json object 4",
                 """
                 {
                     "defaultOn": false,
@@ -98,6 +100,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Json object with multiple fields set, including an ITranslationMask field.",
                 """
                 {
                     "defaultOn": true,
@@ -120,10 +123,9 @@ namespace GSPTestProject.StaticData
                 }
             };
 
-            // DefaultOn should be false as at least 1 value not False. Just because it would equate
-            // to false it still defined as non False value
             yield return new object[]
             {
+                "DefaultOn should be false as at least 1 value not False. Just because it would equate to false it still defined as non False value",
                 """
                 {
                     "ObjectEffect": false,
@@ -143,10 +145,9 @@ namespace GSPTestProject.StaticData
                 }
             };
 
-            // DefaultOn should be true as all defined properties are false. Even though
-            // ObjectBounds could be defined as a TranslationMask object.
             yield return new object[]
             {
+                "DefaultOn should be true as all defined properties are bool false.",
                 """
                 {
                     "OnOverall": false,
@@ -165,6 +166,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test fields of ITranslationMask type being set by bool and Json objects",
                 """
                 {
                     "defaultOn": true,
@@ -188,6 +190,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test gendered ITranslationMask field being set to single bool value.",
                 """
                 {
                     "defaultOn": false,
@@ -202,6 +205,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test gendered ITranslationMask field being set to single Json object value.",
                 """
                 {
                     "defaultOn": false,
@@ -219,6 +223,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test gendered ITranslationMask field being set with separate male/female Json object values.",
                 """
                 {
                     "defaultOn": false,
@@ -242,6 +247,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test gendered ITranslationMask field being set with separate male/female bool values.",
                 """
                 {
                     "defaultOn": false,
@@ -259,6 +265,7 @@ namespace GSPTestProject.StaticData
 
             yield return new object[]
             {
+                "Test gendered bool field being set with separate male/female values.",
                 """
                 {
                     "defaultOn": false,
@@ -268,6 +275,20 @@ namespace GSPTestProject.StaticData
                 new Mutagen.Bethesda.Skyrim.ArmorAddon.TranslationMask(false)
                 {
                     Priority = new(true, true),
+                }
+            };
+
+            yield return new object[]
+            {
+                "Test setting field value using alias",
+                """
+                {
+                    "full": true
+                }
+                """,
+                new Mutagen.Bethesda.Skyrim.Npc.TranslationMask(false)
+                {
+                    Name = true,
                 }
             };
         }

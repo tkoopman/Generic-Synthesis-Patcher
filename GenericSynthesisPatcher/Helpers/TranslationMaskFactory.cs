@@ -93,6 +93,19 @@ namespace GenericSynthesisPatcher.Helpers
             return mask is not null;
         }
 
+        /// <summary>
+        ///     Attempts to get a field from the translation mask by its name.
+        ///
+        ///     In order will attempt to find by:
+        ///     - Exact match
+        ///     - Match using string comparison (e.g. OrdinalIgnoreCase)
+        ///     - Checks if it is a known alias
+        /// </summary>
+        /// <param name="mask">Mask to get field from.</param>
+        /// <param name="maskEntry">Name of field to get.</param>
+        /// <param name="comparer">Comparer to try if exact match not found.</param>
+        /// <param name="field">FieldInfo output if found.</param>
+        /// <returns>True if field info found.</returns>
         public static bool TryGetMaskField (this ITranslationMask mask, string maskEntry, StringComparison comparer, [NotNullWhen(true)] out FieldInfo? field)
         {
             field = null;
@@ -110,10 +123,18 @@ namespace GenericSynthesisPatcher.Helpers
                 }
 
                 if (field is null)
-                    return false;
+                {
+                    if (Global.Game is not null && TryGetParentClass(mask.GetType(), out var rego))
+                    {
+                        // Try to get the real property name from the game context
+                        string? realName = Global.Game.GetRealPropertyName(rego, maskEntry);
+                        if (realName is not null)
+                            field = mask.GetType().GetField(realName, BindingFlags.Public | BindingFlags.Instance);
+                    }
+                }
             }
 
-            if (field.IsInitOnly)
+            if (field is null || field.IsInitOnly)
                 return false; // Can set readonly field
 
             return true;
@@ -374,11 +395,7 @@ namespace GenericSynthesisPatcher.Helpers
             foreach (string param in toggleEntries)
             {
                 if (!mask.TrySetValue(param, !defaultOn, comparer))
-                {
-                    string? realName = Global.Game?.GetRealPropertyName(registration, param);
-                    if (realName is null || !mask.TrySetValue(realName, !defaultOn))
-                        setAll = false; // Unable to set value for this entry
-                }
+                    setAll = false; // Unable to set value for this entry
             }
 
             return setAll;

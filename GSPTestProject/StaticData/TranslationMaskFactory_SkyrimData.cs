@@ -8,7 +8,7 @@ using Mutagen.Bethesda.Plugins.Records;
 
 namespace GSPTestProject.StaticData
 {
-    internal class TranslationMaskFactory_TestData
+    internal class TranslationMaskFactory_SkyrimData
     {
         internal class SetValueAdvanced_TestData : IEnumerable<object[]>
         {
@@ -16,6 +16,7 @@ namespace GSPTestProject.StaticData
             {
                 yield return new object[]
                 {
+                    "Simple test 1",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -29,9 +30,10 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Checks doesn't error on trying to set bool value to null",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
-                    { // Shouldn't allow setting bool value to null
+                    {
                         {"EditorID", ((ITranslationMask?)null, false)},
                     },
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
@@ -39,6 +41,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Checks can set ITranslationMask field using bool",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -52,6 +55,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Checks setting ITranslationMask field to valid object",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -65,9 +69,10 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Checks setting ITranslationMask object to incorrect object type",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
-                    { // Incorrect ITranslationMask type
+                    {
                         {"BodyTemplate", (new Mutagen.Bethesda.Skyrim.Cell.TranslationMask(true), false)},
                     },
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
@@ -75,6 +80,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Checks setting ITranslationMask field to null",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
                     {
                         BodyTemplate = true,
@@ -88,6 +94,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Tests setting Gendered ITranslationMask object using single bool (Assign to both genders)",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -101,6 +108,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Tests setting Gendered ITranslationMask object using single ITranslationMask object (Assign to both genders)",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -114,6 +122,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Tests setting Gendered ITranslationMask object using valid gender object",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
                     {
@@ -127,9 +136,10 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Tests setting Gendered ITranslationMask object using gendered object with incorrect ITranslationMask type",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false),
                     new Dictionary<string, (object?, bool)>
-                    { // Incorrect ITranslationMask type
+                    {
                         {"WorldModel", (new GenderedItem<Mutagen.Bethesda.Skyrim.Armor.TranslationMask>(new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(true, false), new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false, true)), false)},
                     },
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
@@ -137,6 +147,7 @@ namespace GSPTestProject.StaticData
 
                 yield return new object[]
                 {
+                    "Tests setting Gendered ITranslationMask object to null",
                     new Mutagen.Bethesda.Skyrim.Armor.TranslationMask(false)
                     {
                         WorldModel = new(true, true),
@@ -156,113 +167,113 @@ namespace GSPTestProject.StaticData
         {
             public IEnumerator<object?[]> GetEnumerator ()
             {
-                // Incorrect Type
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon),
-                true,
-                null,
-                (IEnumerable<string>)[],
-                StringComparison.Ordinal,
-                false,
-                null,
+                    "Fail as type is an ITranslationMask",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon),
+                    true,
+                    null,
+                    (IEnumerable<string>)[],
+                    StringComparison.Ordinal,
+                    false,
+                    null,
                 };
 
-                // Basic true
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                null,
-                (IEnumerable<string>)[],
-                StringComparison.Ordinal,
-                true,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true),
+                    "Basic bool (true) test",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    null,
+                    (IEnumerable<string>)[],
+                    StringComparison.Ordinal,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true),
                 };
 
-                // Basic false
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                false,
-                null,
-                (IEnumerable<string>)[],
-                StringComparison.Ordinal,
-                true,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(false),
+                    "Basic bool (false) test",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    false,
+                    null,
+                    (IEnumerable<string>)[],
+                    StringComparison.Ordinal,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(false),
                 };
 
-                // Fails but returns mask with model not set as incorrect case
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                null,
-                (IEnumerable<string>)["Name", "model"],
-                StringComparison.Ordinal,
-                false,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false},
+                    "Partial success. Fail to toggle model as won't exact match",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    null,
+                    (IEnumerable<string>)["Name", "model"],
+                    StringComparison.Ordinal,
+                    false,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false},
                 };
 
-                // Success as case insensitive
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                null,
-                (IEnumerable<string>)["Name", "model"],
-                StringComparison.OrdinalIgnoreCase,
-                true,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false, Model = false},
+                    "Basic test with case insensitive match toggle",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    null,
+                    (IEnumerable<string>)["Name", "model"],
+                    StringComparison.OrdinalIgnoreCase,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false, Model = false},
                 };
 
-                // Fails but returns mask with model not set as incorrect case
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                false,
-                (IEnumerable<string>)["Name"],
-                StringComparison.Ordinal,
-                true,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true, false) {Name = false},
+                    "Basic test with exact match toggle",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    false,
+                    (IEnumerable<string>)["Name"],
+                    StringComparison.Ordinal,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true, false) {Name = false},
                 };
 
-                // Fails but returns mask with model not set as incorrect case
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                true,
-                (IEnumerable<string>)[],
-                StringComparison.Ordinal,
-                true,
-                (Mutagen.Bethesda.Skyrim.Weapon.TranslationMask)true,
+                    "Basic bool test",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    true,
+                    (IEnumerable<string>)[],
+                    StringComparison.Ordinal,
+                    true,
+                    (Mutagen.Bethesda.Skyrim.Weapon.TranslationMask)true,
                 };
 
-                // Incorrect Type
                 Assert.True(TranslationMaskFactory.TryGetTranslationMaskType(Mutagen.Bethesda.Skyrim.Npc.StaticRegistration, out var mask));
                 yield return new object?[]
                 {
-                mask,
-                false,
-                null,
-                (IEnumerable<string>)["VirtualMachineAdapter"],
-                StringComparison.Ordinal,
-                true,
-                new Mutagen.Bethesda.Skyrim.Npc.TranslationMask(false) {VirtualMachineAdapter = new(true, true)},
+                    "Toggle ITranslatedMask field type",
+                    mask,
+                    false,
+                    null,
+                    (IEnumerable<string>)["VirtualMachineAdapter"],
+                    StringComparison.Ordinal,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Npc.TranslationMask(false) {VirtualMachineAdapter = new(true, true)},
                 };
 
-                // Success using alias
                 yield return new object?[]
                 {
-                typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
-                true,
-                null,
-                (IEnumerable<string>)["full", "model"],
-                StringComparison.OrdinalIgnoreCase,
-                true,
-                new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false, Model = false},
+                    "Toggle using alias",
+                    typeof(Mutagen.Bethesda.Skyrim.Weapon.TranslationMask),
+                    true,
+                    null,
+                    (IEnumerable<string>)["full", "model"],
+                    StringComparison.OrdinalIgnoreCase,
+                    true,
+                    new Mutagen.Bethesda.Skyrim.Weapon.TranslationMask(true) {Name = false, Model = false},
                 };
             }
 

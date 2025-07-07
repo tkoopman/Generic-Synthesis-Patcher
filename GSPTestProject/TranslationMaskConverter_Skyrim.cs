@@ -1,5 +1,6 @@
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 
+using GSPTestProject.GameData.GlobalGame.Fixtures;
 using GSPTestProject.Helpers;
 using GSPTestProject.StaticData;
 
@@ -9,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace GSPTestProject
 {
-    public class TranslationMaskConverterTests
+    public class TranslationMaskConverter_Skyrim : IClassFixture<SkyrimSEFixture>
     {
         private readonly JsonSerializerSettings _serializerSettings = new()
         {
@@ -19,8 +20,8 @@ namespace GSPTestProject
         private readonly TranslationMaskConverter_Comparer _translationMaskComparer = new();
 
         [Theory]
-        [ClassData(typeof(TranslationMaskConverter_TestData))]
-        public void TranslationMaskConverter_Theory (string json, ITranslationMask expected)
+        [ClassData(typeof(TranslationMaskConverter_SkyrimData))]
+        public void TranslationMaskConverter_Theory (string testName, string json, ITranslationMask expected)
         {
             // Test boolean input
             var mask = JsonConvert.DeserializeObject(json, expected.GetType(), _serializerSettings) as ITranslationMask;

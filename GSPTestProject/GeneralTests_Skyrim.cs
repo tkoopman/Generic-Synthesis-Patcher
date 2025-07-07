@@ -14,7 +14,7 @@ namespace GSPTestProject
 {
 #pragma warning disable CS9113 // Parameter is unread.
 
-    public sealed class SkyrimTests (SkyrimSEFixture skyrimFixture, ITestOutputHelper output) : GameTestsBase(output), IClassFixture<SkyrimSEFixture>
+    public sealed class GeneralTests_Skyrim (SkyrimSEFixture skyrimFixture, ITestOutputHelper output) : GeneralTests_Base(output), IClassFixture<SkyrimSEFixture>
 #pragma warning restore CS9113 // Parameter is unread.
     {
         protected override GameRelease GameRelease => GameRelease.SkyrimSE;

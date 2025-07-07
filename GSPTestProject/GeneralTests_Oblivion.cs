@@ -14,7 +14,7 @@ namespace GSPTestProject
 {
 #pragma warning disable CS9113 // Parameter is unread.
 
-    public sealed class OblivionTests (OblivionFixture oblivionFixture, ITestOutputHelper output) : GameTestsBase(output), IClassFixture<OblivionFixture>
+    public sealed class GeneralTests_Oblivion (OblivionFixture oblivionFixture, ITestOutputHelper output) : GeneralTests_Base(output), IClassFixture<OblivionFixture>
 #pragma warning restore CS9113 // Parameter is unread.
     {
         protected override GameRelease GameRelease => GameRelease.OblivionRE;

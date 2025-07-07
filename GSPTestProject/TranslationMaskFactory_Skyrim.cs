@@ -14,13 +14,13 @@ using Mutagen.Bethesda.Plugins.Records;
 
 namespace GSPTestProject
 {
-    public class TranslationMaskFactoryTests : IClassFixture<SkyrimSEFixture>
+    public class TranslationMaskFactory_Skyrim : IClassFixture<SkyrimSEFixture>
     {
         private readonly TranslationMaskConverter_Comparer _translationMaskComparer = new();
 
         [Theory]
-        [ClassData(typeof(TranslationMaskFactory_TestData.SetValueAdvanced_TestData))]
-        public void SetValueAdvanced_Tests (ITranslationMask startingMask, Dictionary<string, (object?, bool)> setFields, ITranslationMask? expectedResult)
+        [ClassData(typeof(TranslationMaskFactory_SkyrimData.SetValueAdvanced_TestData))]
+        public void SetValueAdvanced_Tests (string testName, ITranslationMask startingMask, Dictionary<string, (object?, bool)> setFields, ITranslationMask? expectedResult)
         {
             foreach (var (fieldName, (value, expected)) in setFields)
             {
@@ -60,8 +60,8 @@ namespace GSPTestProject
         }
 
         [Theory]
-        [ClassData(typeof(TranslationMaskFactory_TestData.TryCreate_TestData))]
-        public void TryCreate_Tests (Type type, bool defaultOn, bool? onOverall, IEnumerable<string> toggleEntries, StringComparison comparison, bool expected, ITranslationMask? expectedMask)
+        [ClassData(typeof(TranslationMaskFactory_SkyrimData.TryCreate_TestData))]
+        public void TryCreate_Tests (string testName, Type type, bool defaultOn, bool? onOverall, IEnumerable<string> toggleEntries, StringComparison comparison, bool expected, ITranslationMask? expectedMask)
         {
             // Act
             bool result = TranslationMaskFactory.tryCreateInternal(type, defaultOn, onOverall, toggleEntries, comparison, out var mask);

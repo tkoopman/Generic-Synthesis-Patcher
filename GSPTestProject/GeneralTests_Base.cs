@@ -20,11 +20,11 @@ using Xunit.Abstractions;
 namespace GSPTestProject
 {
     [Collection("Sequential")]
-    public abstract class GameTestsBase
+    public abstract class GeneralTests_Base
     {
         public readonly ITestOutputHelper Output;
 
-        public GameTestsBase (ITestOutputHelper output)
+        public GeneralTests_Base (ITestOutputHelper output)
         {
             Output = output;
             LogHelper.Out = new TestOutputTextWritter(output);
