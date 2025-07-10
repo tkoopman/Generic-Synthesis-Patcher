@@ -340,7 +340,7 @@ namespace GenericSynthesisPatcher.Games.Universal
                 throw new ArgumentException("Cannot add exact match for a generic type definition.", nameof(type));
 
             if (TypeMappingsExact.ContainsKey(type))
-                Global.Logger.Log(0, $"Exact match for {type.GetClassName()} already exists, overwriting with {action?.GetType().GetClassName() ?? "null"}", logLevel: Microsoft.Extensions.Logging.LogLevel.Trace);
+                throw new ArgumentException($"Exact match for {type.GetClassName()} already exists, overwriting with {action?.GetType().GetClassName() ?? "null"}", nameof(type));
 
             TypeMappingsExact[type] = action;
         }

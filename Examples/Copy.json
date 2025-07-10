@@ -1,0 +1,22 @@
+/*
+  Copy original NPC visuals. No use for real world.
+*/
+
+[
+  {
+    "types": "NPC",
+    "Copy": {
+      "FromMod": "Skyrim.esm",
+      "Mask": {
+        "FaceMorph": true,
+        "FaceParts": true,
+        "HairColor": true,
+        "HeadParts": true,
+        "HeadTexture": true,
+        "TextureLighting": true,
+        "TintLayers": true,
+        "Weight": true
+      }
+    }
+  }
+]

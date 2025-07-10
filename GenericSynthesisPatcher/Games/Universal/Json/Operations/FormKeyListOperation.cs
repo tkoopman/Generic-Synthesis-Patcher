@@ -13,6 +13,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 {
     public class FormKeyListOperation<TMajor> : FormKeyListOperation where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
+        private const int ClassLogCode = 0x1D;
         private bool exists;
         private bool existsChecked;
 
@@ -36,7 +37,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
                 exists = Global.Game.State.LinkCache.TryResolve<TMajor>(Value, out _);
 
                 if (!exists)
-                    Global.Logger.Log(0xFF, $"Unable to find {Value} to link to.", logLevel: LogLevel.Warning);
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, $"Unable to find {Value} to link to.", ClassLogCode);
 
                 existsChecked = true;
             }
@@ -49,7 +50,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
             if (value is null)
                 return FormKey.Null;
 
-            if (!Mod.TryFindFormKey<TMajor>(value, out var formKey, out existsChecked))
+            if (!Mod.TryFindFormKey<TMajor>(value, out var formKey, out existsChecked, ClassLogCode))
                 throw new JsonSerializationException($"Unable to parse \"{value}\" into valid FormKey or EditorID");
 
             exists = existsChecked;

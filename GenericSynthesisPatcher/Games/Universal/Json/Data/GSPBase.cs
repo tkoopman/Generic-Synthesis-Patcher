@@ -23,7 +23,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
     [SuppressMessage("Design", "CA1036:Override methods on comparable types", Justification = "Just used for sorting")]
     public abstract class GSPBase : IComparable<GSPBase>
     {
-        private const int ClassLogCode = 0x03;
+        private const int ClassLogCode = 0x1A;
 
         /// <summary>
         ///     Unique ID for the file this rule exists in.
@@ -206,6 +206,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             return hash.ToHashCode();
         }
 
+        public virtual string GetLogRuleID () => $"{ConfigFile}.{ConfigRule}";
+
         /// <summary>
         ///     Checks if current context matches filters. When overridden should always check base
         ///     matches first, and only do extra checks if base returned true, for best performance.
@@ -216,28 +218,28 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         {
             if (!Types.Contains(proKeys.Type))
             {
-                if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchFailed)
-                    Global.TraceLogger?.Log(ClassLogCode, "Matched: False", propertyName: "Record Type");
+                if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.NotMatched)
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchFailure, "Record Type: Matched: False", ClassLogCode);
                 return false;
             }
 
-            if (Global.Settings.Value.Logging.NoisyLogs.TypeMatchSuccessful)
-                Global.TraceLogger?.Log(ClassLogCode, "Matched: True", propertyName: "Record Type");
+            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.Matched)
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Record Type: Matched: True", ClassLogCode);
 
-            if (Masters is not null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, nameof(Masters), Global.Settings.Value.Logging.NoisyLogs.MastersMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.MastersMatchFailed))
+            if (Masters is not null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeMasters))
                 return false;
 
             if (PatchedBy is not null)
             {
                 var all = Global.Game.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Select(m => m.ModKey);
-                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, nameof(PatchedBy)))
+                if (!MatchesHelper.Matches(all, patchedByLogic, PatchedBy, Global.Settings.Logging.NoisyLogs.MatchLogs.IncludePatchedBy))
                     return false;
             }
 
             if (Patched.HasValue)
             {
                 bool result = Patched.Value ? proKeys.HasPatchRecord : !proKeys.HasPatchRecord;
-                Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Has patch record: {proKeys.HasPatchRecord}", propertyName: nameof(Patched));
+                Global.Logger.WriteLog(LogLevel.Trace, result ? LogType.MatchSuccess : LogType.MatchFailure, $"Patched: Matched: {result} Has patch record: {proKeys.HasPatchRecord}", ClassLogCode);
                 return result;
             }
 
@@ -253,13 +255,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "Readability")]
         public virtual bool Validate ()
         {
-            if (Debug)
-                LogHelper.WriteLog(LogLevel.Debug, ClassLogCode, "Debug / Trace logging enabled for this rule.", rule: this);
+            if (Debug) // Not using Global.DebugLogger as needs to output even if debugging only enabled for certain rules / records.
+                Global.Logger.WriteLog(LogLevel.Debug, LogType.GeneralConfig, "Debug / Trace logging enabled for this rule.", ClassLogCode, includePrefix: GetLogRuleID());
 
-            if (Masters.SafeAny() && !MatchesHelper.Validate(Masters, $"Masters: "))
+            if (Masters.SafeAny() && !MatchesHelper.Validate(Masters))
                 return false;
 
-            if (patchedByLogic != FilterLogic.AND && PatchedBy.SafeAny() && !MatchesHelper.Validate(patchedByLogic, PatchedBy, "PatchedBy: "))
+            if (patchedByLogic != FilterLogic.AND && PatchedBy.SafeAny() && !MatchesHelper.Validate(patchedByLogic, PatchedBy))
                 return false;
 
             return true;

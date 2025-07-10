@@ -14,13 +14,13 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Action
     public class ContainerItemsAction : FormLinksWithDataAction<ContainerItemsData, IItemGetter, ContainerItem>
     {
         public static readonly ContainerItemsAction Instance = new();
-        private const int ClassLogCode = 0x16;
+        private const int ClassLogCode = 0xC1;
 
         public override ContainerItem? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not IContainerItemGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to add item. No Items?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, $"Failed to add item. No Items?", ClassLogCode);
                 return null;
             }
 

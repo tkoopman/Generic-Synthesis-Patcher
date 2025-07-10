@@ -14,7 +14,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
     [JsonConverter(typeof(GSPBaseConverter))]
     public class GSPGroup : GSPBase
     {
-        private const int ClassLogCode = 0x05;
+        private const int ClassLogCode = 0x1B;
 
         /// <summary>
         ///     Rules contained in this group.
@@ -55,7 +55,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             // Output message if groups types defined and all rule types defined but combined to
             // less than current group types.
             if (Types.Any() && AllTypes.Count < Types.Count())
-                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, $"Reducing group's Types to {AllTypes.Count} from {Types.Count()} as extra types not used.", rule: this);
+                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Reducing group's Types to {AllTypes.Count} from {Types.Count()} as extra types not used.", ClassLogCode, includePrefix: GetLogRuleID());
 
             Types = AllTypes.ToList().AsReadOnly();
 

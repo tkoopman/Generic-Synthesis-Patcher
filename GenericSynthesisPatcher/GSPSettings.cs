@@ -40,47 +40,76 @@ namespace GenericSynthesisPatcher
 
         public class GSPLogNoise
         {
+            [MaintainOrder(2)]
+            public ActionLogNoise ActionLogs { get; set; } = new();
+
             [MaintainOrder(100)]
             public bool Cache { get; set; } = true;
 
-            [MaintainOrder(100)]
-            public bool CallingAction { get; set; } = true;
-
-            [MaintainOrder(4)]
-            public bool EditorIDMatchFailed { get; set; } = true;
-
-            [MaintainOrder(4)]
-            public bool EditorIDMatchSuccessful { get; set; } = true;
-
-            [MaintainOrder(3)]
-            public bool FormIDMatchFailed { get; set; } = true;
-
-            [MaintainOrder(3)]
-            public bool FormIDMatchSuccessful { get; set; } = true;
-
-            [MaintainOrder(100)]
-            public bool GroupMatched { get; set; } = true;
-
-            [MaintainOrder(2)]
-            public bool MastersMatchFailed { get; set; } = true;
-
-            [MaintainOrder(2)]
-            public bool MastersMatchSuccessful { get; set; } = true;
-
-            [MaintainOrder(100)]
-            public bool MergeNoOverwrites { get; set; } = true;
-
-            [MaintainOrder(5)]
-            public bool RegexMatchFailed { get; set; } = true;
-
-            [MaintainOrder(5)]
-            public bool RegexMatchSuccessful { get; set; } = true;
-
             [MaintainOrder(1)]
-            public bool TypeMatchFailed { get; set; } = true;
+            public MatchLogNoise MatchLogs { get; set; } = new();
 
-            [MaintainOrder(1)]
-            public bool TypeMatchSuccessful { get; set; } = true;
+            public class ActionLogNoise
+            {
+                [Tooltip("Include logging when an action is called.")]
+                [MaintainOrder(1)]
+                public bool ActionCalled { get; set; } = false;
+
+                [Tooltip("Include all other logging when an action is processing.")]
+                [MaintainOrder(4)]
+                public bool ActionOther { get; set; } = false;
+
+                [Tooltip("Include logging when an action is skipped as nothing to do on the current record (ie already match value or no record found to forward from).")]
+                [MaintainOrder(2)]
+                public bool ActionSkipped { get; set; } = false;
+
+                [Tooltip("Include logging when an action made a change to a record.")]
+                [MaintainOrder(3)]
+                public bool RecordUpdated { get; set; } = true;
+            }
+
+            public class MatchLogNoise
+            {
+                [Tooltip("Include logging matches against EditorID if logging matched or not matched.")]
+                [MaintainOrder(6)]
+                public bool IncludeEditorID { get; set; } = false;
+
+                [Tooltip("Include logging matches against FormID if logging matched or not matched.")]
+                [MaintainOrder(5)]
+                public bool IncludeFormID { get; set; } = false;
+
+                [Tooltip("Include logging matches against a group.")]
+                [MaintainOrder(4)]
+                public bool IncludeGroup { get; set; } = false;
+
+                [Tooltip("Include logging matches against Masters if logging matched or not matched.")]
+                [MaintainOrder(7)]
+                public bool IncludeMasters { get; set; } = false;
+
+                [Tooltip("Include logging OnlyIfDefault option results.")]
+                [MaintainOrder(8)]
+                public bool IncludeOnlyIfDefault { get; set; } = false;
+
+                [Tooltip("Include logging PatchedBy option results.")]
+                [MaintainOrder(8)]
+                public bool IncludePatchedBy { get; set; } = false;
+
+                [Tooltip("Include logging matches against Regex values if logging matched or not matched.")]
+                [MaintainOrder(9)]
+                public bool IncludeRegex { get; set; } = false;
+
+                [Tooltip("Include logging matches against record type if logging matched or not matched.")]
+                [MaintainOrder(3)]
+                public bool IncludeType { get; set; } = false;
+
+                [Tooltip("Log when a match is found for a rule.")]
+                [MaintainOrder(1)]
+                public bool Matched { get; set; } = true;
+
+                [Tooltip("Log when a match is not found for a rule.")]
+                [MaintainOrder(2)]
+                public bool NotMatched { get; set; } = true;
+            }
         }
     }
 }

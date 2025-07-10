@@ -90,7 +90,7 @@ namespace GSPTestProject.StaticData
                     {
                         // GSPBase
                         "Types": "NPC",
-                        "DeepCopyIn": [
+                        "Copy": [
                         {
                             "FormID": "800:Skyrim.esm",
                             "FromMod": "Skyrim.esm",

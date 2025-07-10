@@ -6,8 +6,6 @@ using GenericSynthesisPatcher.Games.Skyrim.Json.Action;
 using GenericSynthesisPatcher.Games.Universal.Action;
 using GenericSynthesisPatcher.Helpers;
 
-using Microsoft.Extensions.Logging;
-
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -18,7 +16,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class PlayerSkillsAction : IRecordAction
     {
         public static readonly PlayerSkillsAction Instance = new();
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0xA7;
 
         protected PlayerSkillsAction ()
         {
@@ -108,7 +106,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         /// <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys)
         {
-            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
                 || !proKeys.TryGetFillValueAs(out PlayerSkillsData? newValue)
                 || curValue is null
                 || newValue is null)
@@ -119,23 +117,20 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             if (newValue.NonNullEquals(curValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
-            {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue, ClassLogCode))
                 return -1;
-            }
 
             return newValue.UpdateRecord(updateValue);
         }
 
         /// <inheritdoc />
-        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<IPlayerSkillsGetter>(proKeys, AllRecordMods, endNodes);
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<IPlayerSkillsGetter>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
         /// <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
         {
-            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-                || !Mod.TryGetProperty<IPlayerSkillsGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+                || !Mod.TryGetProperty<IPlayerSkillsGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue, ClassLogCode)
                 || curValue is null
                 || newValue is null)
             {
@@ -145,11 +140,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             if (curValue.Equals(newValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
-            {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue, ClassLogCode))
                 return -1;
-            }
 
             int count = 0;
 
@@ -176,13 +168,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
 
         /// <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null;
+            => !Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || curValue is null;
 
         /// <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
-                && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+                && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue, ClassLogCode)
                 && curValue is not null && originValue is not null
                 && curValue.FarAwayModelDistance == originValue.FarAwayModelDistance
                 && curValue.GearedUpWeapons == originValue.GearedUpWeapons

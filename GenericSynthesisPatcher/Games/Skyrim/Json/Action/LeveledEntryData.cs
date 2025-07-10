@@ -1,5 +1,7 @@
 using GenericSynthesisPatcher.Games.Universal.Json.Action;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 
@@ -11,6 +13,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
+        private const int ClassLogCode = 0xAA;
+
         [JsonProperty(PropertyName = "ItemCondition")]
         public float ItemCondition { get; set; } = -1;
 
@@ -21,7 +25,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         {
             if (Owner is null && ItemCondition == -1)
             {
-                Global.TraceLogger?.Log(0xFF, $"No extra data to add");
+                Global.Logger.WriteLog(LogLevel.Trace, Helpers.LogType.RecordProcessing, $"No extra data to add", ClassLogCode);
                 return null;
             }
 

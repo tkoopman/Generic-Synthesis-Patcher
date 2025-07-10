@@ -5,6 +5,8 @@ using Common;
 
 using GenericSynthesisPatcher.Helpers;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
@@ -24,7 +26,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
     public class BasicAction<T> : IRecordAction
     {
         public static readonly BasicAction<T> Instance = new();
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0x11;
 
         protected BasicAction ()
         {
@@ -50,18 +52,18 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         /// <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys)
-                    => !Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+                    => !Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
                     || !proKeys.TryGetFillValueAs(out T? newValue)
                     ? -1
                     : performFill(proKeys, curValue, newValue);
 
         /// <inheritdoc />
-        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<T>(proKeys, AllRecordMods, endNodes);
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<T>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
         /// <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
-            => Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-             && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+            => Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+             && Mod.TryGetProperty<T>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue, ClassLogCode)
              ? performFill(proKeys, curValue, newValue)
              : -1;
 
@@ -70,7 +72,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         /// <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-                    => !Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
+                    => !Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || Mod.IsNullOrEmpty(curValue);
 
         /// <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
@@ -81,8 +83,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <returns>True if value matches</returns>
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
-            && Mod.TryGetProperty<T>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            || (Mod.TryGetProperty<T>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+            && Mod.TryGetProperty<T>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue, ClassLogCode)
             && Equals(curValue, originValue));
 
         /// <inheritdoc />
@@ -141,10 +143,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (Equals(curValue, newValue))
                 return 0;
 
-            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue, ClassLogCode))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: proKeys.Property.PropertyName);
+            Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, LogWriter.RecordUpdated, ClassLogCode);
             return 1;
         }
     }

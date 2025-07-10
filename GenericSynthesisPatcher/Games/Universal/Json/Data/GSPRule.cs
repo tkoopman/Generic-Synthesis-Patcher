@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 {
     public class GSPRule : GSPBase
     {
-        private const int ClassLogCode = 0x04;
+        private const int ClassLogCode = 0x1C;
         private List<ListOperation>? editorIDs;
         private List<FormKeyListOperation>? formIDs;
         private int HashCode;
@@ -28,7 +28,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// <summary>
         ///     Details for DeepCopIn Action if required by this rule.
         /// </summary>
-        [JsonProperty(PropertyName = "DeepCopyIn", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "Copy", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(SingleOrArrayConverter<GSPDeepCopyIn>))]
         public List<GSPDeepCopyIn> DeepCopyIn { get; set; } = [];
 
@@ -132,7 +132,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             get => ForwardOptions.HasFlag(ForwardOptions.IndexedByField);
             set
             {
-                Global.Logger.Log(0, """ForwardIndexedByField is deprecated. Should use "ForwardOptions": ["IndexedByField"]""", logLevel: LogLevel.Warning);
+                Global.Logger.WriteLog(LogLevel.Warning, LogType.GeneralConfigFailure, """ForwardIndexedByField is deprecated. Should use "ForwardOptions": ["IndexedByField"]""", ClassLogCode);
 
                 ForwardOptions = ForwardOptions.SetFlag(ForwardOptions.IndexedByField, value);
             }
@@ -154,7 +154,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             get => ForwardOptions;
             set
             {
-                Global.Logger.Log(0, """ForwardType is deprecated. Should use "ForwardOptions": ["..."]""", logLevel: LogLevel.Warning);
+                Global.Logger.WriteLog(LogLevel.Warning, LogType.GeneralConfigFailure, """ForwardType is deprecated. Should use "ForwardOptions": ["..."]""", ClassLogCode);
 
                 ForwardOptions |= value;
             }
@@ -209,7 +209,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
                 throw new Exception($"Record under group tries to filter for Type(s) that are excluded at by group.");
 
             if (Priority != 0)
-                LogHelper.WriteLog(LogLevel.Information, ClassLogCode, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", rule: this);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", ClassLogCode, includePrefix: GetLogRuleID());
 
             bool valid = Validate();
             if (!Types.Any())
@@ -275,7 +275,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
                     if (hasIncludeMods && hasExcludeMods)
                     {
-                        Global.Logger.Log(ClassLogCode, $"When indexed by field, array of mods must not include both include and excluded mods.");
+                        Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, $"When indexed by field, array of mods must not include both include and excluded mods.", ClassLogCode);
                     }
                     else
                     {
@@ -340,8 +340,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (cache.TryGetValue(key, out object? cachedValue))
             {
                 fromCache = true;
-                if (Global.Settings.Value.Logging.NoisyLogs.Cache)
-                    Global.TraceLogger?.Log(ClassLogCode, $"Got value for {key.Value} from cache.");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.Cache, $"Got value for {key.Value} from cache.", ClassLogCode);
 
                 if (cachedValue is T v)
                 {
@@ -415,27 +414,34 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (!base.Matches(proKeys))
                 return false;
 
-            if (FormID is not null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, "Matched FormID: ", Global.Settings.Value.Logging.NoisyLogs.FormIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.FormIDMatchFailed))
+            if (FormID is not null && !MatchesHelper.Matches(proKeys.Record.FormKey, FormID, Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeFormID))
                 return false;
 
-            if (EditorID is not null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, "Matched EditorID: ", Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchSuccessful, Global.Settings.Value.Logging.NoisyLogs.EditorIDMatchFailed))
+            if (EditorID is not null && !MatchesHelper.Matches(proKeys.Record.EditorID, EditorID, Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeEditorID))
                 return false;
 
             foreach (var x in Match)
             {
-                if (!proKeys.SetProperty(x.Key, x.Key.Value) || !proKeys.Property.Action.CanMatch())
+                if (!proKeys.SetProperty(x.Key, x.Key.Value, ClassLogCode))
+                    return false;
+
+                if (!proKeys.Property.Action.CanMatch())
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, $"Matched {x.Key}: No match enabled RPM for field.");
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {x.Key}: No match enabled action for field.", ClassLogCode);
                     return false;
                 }
 
-                Global.TraceLogger?.LogAction(ClassLogCode, $"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesRule)}", propertyName: proKeys.Property.PropertyName);
+                Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesRule)}", ClassLogCode);
                 if (!proKeys.Property.Action.MatchesRule(proKeys))
                     return false;
             }
 
+            Global.Logger.CurrentPropertyName = null; // Clear property name after matching so next rule doesn't use same property name.
+
             return true;
         }
+
+        public override string GetLogRuleID () => Group is null ? base.GetLogRuleID() : $"{Group.GetLogRuleID()}.{ConfigRule}";
 
         /// <inheritdoc />
         public override bool Validate ()
@@ -445,7 +451,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             if (!Types.Any())
             {
-                LogHelper.WriteLog(LogLevel.Critical, ClassLogCode, "Rules must specify record type(s) either directly in the rule or via type(s) added at a group level.", rule: this);
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Rules must specify record type(s) either directly in the rule or via type(s) added at a group level.", ClassLogCode, includePrefix: GetLogRuleID());
                 return false;
             }
 

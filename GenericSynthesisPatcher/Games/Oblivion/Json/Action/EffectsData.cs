@@ -3,10 +3,11 @@ using System.ComponentModel;
 using GenericSynthesisPatcher.Games.Universal.Json.Action;
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Synthesis;
 
 using Newtonsoft.Json;
 
@@ -14,6 +15,8 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Json.Action
 {
     public class EffectsData (FormKeyListOperation<IMagicEffectGetter> formKey, uint area, uint duration, uint magnitude) : FormLinksWithDataActionDataBase<IMagicEffectGetter, Effect>
     {
+        private const int ClassLogCode = 0xC3;
+
         [JsonProperty(PropertyName = "Area", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
         public uint Area { get; set; } = area;
@@ -52,10 +55,9 @@ namespace GenericSynthesisPatcher.Games.Oblivion.Json.Action
         public override Effect ToActionData ()
         {
             var effect = new Effect();
-            IPatcherState<IOblivionMod, IOblivionModGetter> state = Global.Game.State as IPatcherState<IOblivionMod, IOblivionModGetter> ?? throw new InvalidCastException();
             if (!Global.Game.State.LinkCache.TryResolve<IMagicEffect>(FormKey.Value, out var rec))
             {
-                Global.Logger.Log(0x00, $"Unable to find Magic Effect {FormKey.Value}", Microsoft.Extensions.Logging.LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordNotFound, $"Unable to find Magic Effect {FormKey.Value}", ClassLogCode);
                 return null!;
             }
 

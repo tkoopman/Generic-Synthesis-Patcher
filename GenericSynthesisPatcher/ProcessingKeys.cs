@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 using Common;
 
@@ -9,6 +10,8 @@ using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 
 using Loqui;
+
+using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda.Oblivion;
@@ -29,7 +32,7 @@ namespace GenericSynthesisPatcher
     /// </param>
     public class ProcessingKeys (IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
     {
-        private const int ClassLogCode = 0xFF;
+        private const int ClassLogCode = 0x02;
         private IMajorRecordGetter? origin;
         private IMajorRecord? patchRecord;
         private Random? random;
@@ -113,12 +116,17 @@ namespace GenericSynthesisPatcher
 
             bool result = false;
 
-            Global.TraceLogger?.LogAction(ClassLogCode, $"{Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: Property.PropertyName);
+            Global.Logger.LogAction($"{Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", ClassLogCode);
 
             if (!Property.Action.MatchesOrigin(this))
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginNotMatch, "OnlyIfDefault: Did not match - skipping", ClassLogCode);
+
                 result = true;
+            }
+            else
+            {
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginMatch, "OnlyIfDefault: Matched", ClassLogCode);
             }
 
             return result;
@@ -179,7 +187,7 @@ namespace GenericSynthesisPatcher
         /// <returns>True if valid property found for current record type</returns>
         [MemberNotNullWhen(true, nameof(RuleKey))]
         [MemberNotNullWhen(true, nameof(RuleBase))]
-        public bool SetProperty (FilterOperation ruleKey, string name)
+        public bool SetProperty (FilterOperation ruleKey, string name, int classCode, [CallerLineNumber] int line = 0)
         {
             if (RuleBase is null)
                 throw new InvalidOperationException("Must set rule first.");
@@ -189,9 +197,12 @@ namespace GenericSynthesisPatcher
             if (Property.IsValid)
             {
                 RuleKey = ruleKey;
+                Global.Logger.CurrentPropertyName = Property.PropertyName;
                 return true;
             }
 
+            Global.Logger.LogMissingProperty(name, classCode, line);
+            Global.Logger.CurrentPropertyName = null;
             this.ruleKey = null;
             return false;
         }

@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
@@ -8,6 +10,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 {
     public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperation<TMajor> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {
+        private const int ClassLogCode = -1;
+
         // Required for OperationsConverter
         public FormKeyListOperationAdvanced (string value) : base(value) { }
 
@@ -42,8 +46,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
             bool result = Regex.IsMatch(link.EditorID);
 
-            if ((Global.Settings.Value.Logging.NoisyLogs.RegexMatchFailed && !result) || (Global.Settings.Value.Logging.NoisyLogs.RegexMatchSuccessful && result))
-                Global.TraceLogger?.WriteLine($"Regex: {Regex} Value: {link.EditorID} IsMatch: {result}");
+            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeRegex)
+                Global.Logger.WriteLog(LogLevel.Trace, result ? Helpers.LogType.MatchSuccess : Helpers.LogType.MatchFailure, $"Regex: {Regex} Value: {link.EditorID} IsMatch: {result}", ClassLogCode);
 
             return result;
         }

@@ -1,6 +1,5 @@
 ﻿using GenericSynthesisPatcher;
 using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Helpers;
 
 using GSPTestProject.GameData;
 using GSPTestProject.GameData.GlobalGame.Fixtures;
@@ -26,7 +25,7 @@ namespace GSPTestProject
         {
             _skyrimSEFixture = skyrimSEFixture;
             Output = output;
-            LogHelper.Out = new TestOutputTextWritter(output);
+            Global.Logger.Out = new TestOutputTextWritter(output);
         }
 
         public ITestOutputHelper Output { get; }

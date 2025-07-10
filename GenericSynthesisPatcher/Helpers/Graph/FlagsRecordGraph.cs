@@ -2,6 +2,8 @@ using Common;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 
+using Microsoft.Extensions.Logging;
+
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 
@@ -9,6 +11,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 {
     public class FlagsRecordGraph : FlagsRecordNode, IRecordNode
     {
+        private const int ClassLogCode = -1;
+
         private FlagsRecordGraph (IModContext<IMajorRecordGetter> context, IReadOnlyList<ModKeyListOperation>? modKeys, string propertyName) : base(context.ModKey, context.Record, modKeys, propertyName)
         {
         }
@@ -19,7 +23,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             if (proKeys.Context.IsMaster())
             {
-                Global.TraceLogger?.WriteLine("No record overwrites found");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.NoOverwrites, "No record overwrites found", ClassLogCode);
                 return null;
             }
 
@@ -28,17 +32,17 @@ namespace GenericSynthesisPatcher.Helpers.Graph
             var root = new FlagsRecordGraph(master, modKeys, proKeys.Property.PropertyName);
             populate(root);
 
-            if (Global.TraceLogger is not null)
+            if (Global.Logger.CurrentLogLevel == LogLevel.Trace)
             {
-                Global.TraceLogger?.WriteLine("Graph Pre Cleanup");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, "Graph Pre Cleanup", ClassLogCode);
                 root.print(string.Empty);
             }
 
             root.cleanUp();
 
-            if (Global.TraceLogger is not null)
+            if (Global.Logger.CurrentLogLevel == LogLevel.Trace)
             {
-                Global.TraceLogger?.WriteLine("Graph Post Cleanup");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, "Graph Post Cleanup", ClassLogCode);
                 root.print(string.Empty);
             }
 

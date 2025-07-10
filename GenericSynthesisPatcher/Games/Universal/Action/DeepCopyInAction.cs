@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
     public class DeepCopyInAction : IRecordAction
     {
         public static readonly DeepCopyInAction Instance = new();
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0x14;
 
         protected DeepCopyInAction ()
         {
@@ -49,7 +49,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         public virtual int Fill (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         /// <inheritdoc />
-        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<object>(proKeys, AllRecordMods, endNodes);
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<object>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
         /// <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
@@ -57,23 +57,23 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!TranslationMaskFactory.TryCreate(proKeys.Property.RecordType, false, [proKeys.Property.PropertyName], out var mask)
                 || mask is not MajorRecord.TranslationMask majorMask)
             {
-                Global.Logger.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as couldn't find suitable translation mask. {mask?.GetType().GetClassName()}", propertyName: proKeys.Property.PropertyName, logLevel: LogLevel.Warning);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as couldn't find suitable translation mask. {mask?.GetType().GetClassName()}", ClassLogCode);
                 return 0;
             }
 
             if (proKeys.Record.Equals(forwardContext.Record, majorMask))
             {
-                Global.TraceLogger?.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as already equal", propertyName: proKeys.Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
                 return 0;
             }
 
             if (proKeys.GetPatchRecord() is not IMajorRecordInternal patchRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as invalid record type for DeepCopyIn", propertyName: proKeys.Property.PropertyName, logLevel: LogLevel.Warning);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No changes to {proKeys.Property.PropertyName} in {forwardContext.ModKey} as invalid record type for DeepCopyIn", ClassLogCode);
                 return 0;
             }
 
-            Global.TraceLogger?.LogAction(ClassLogCode, "Calling DeepCopyIn to update property.", propertyName: proKeys.Property.PropertyName);
+            Global.Logger.LogAction("Calling DeepCopyIn to update property.", ClassLogCode);
 
             // TODO: Add ErrorMask and validate
             patchRecord.DeepCopyIn(forwardContext.Record, majorMask);
@@ -86,7 +86,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         /// <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-                    => !Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue) || Mod.IsNullOrEmpty(curValue);
+                    => !Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue, ClassLogCode) || Mod.IsNullOrEmpty(curValue);
 
         /// <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
@@ -94,8 +94,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue)
-            && Mod.TryGetProperty(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out object? originValue)
+            || (Mod.TryGetProperty(recordContext.Record, proKeys.Property.PropertyName, out object? curValue, ClassLogCode)
+            && Mod.TryGetProperty(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out object? originValue, ClassLogCode)
             && Equals(curValue, originValue));
 
         /// <inheritdoc />

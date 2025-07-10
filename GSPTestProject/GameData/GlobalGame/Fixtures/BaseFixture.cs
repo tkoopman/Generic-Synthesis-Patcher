@@ -34,8 +34,7 @@ namespace GSPTestProject.GameData.GlobalGame.Fixtures
             new PatcherPreferences(),
             Synthesis.Bethesda.Constants.SynthesisModKey);
 
-            Global.SetState(state);
-            Global.settings = new Lazy<GSPSettings>(() => new GSPSettings());
+            Global.Initialize(state, new GSPSettings());
         }
 
         public abstract Mutagen.Bethesda.GameRelease GameRelease { get; }

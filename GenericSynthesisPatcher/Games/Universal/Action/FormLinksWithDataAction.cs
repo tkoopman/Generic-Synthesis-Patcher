@@ -34,7 +34,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
-        private const int ClassLogCode = 0x15;
+        private const int ClassLogCode = 0x19;
 
         // <inheritdoc />
         public bool AllowSubProperties => false;
@@ -47,7 +47,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// </returns>
         public int Add (ProcessingKeys proKeys, TActionData data)
         {
-            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items, ClassLogCode))
                 return -1;
 
             items.Add(data.ToActionData());
@@ -74,7 +74,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList) || !TryGetFillValueAs(proKeys, out var links))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList, ClassLogCode) || !TryGetFillValueAs(proKeys, out var links))
                     return -1;
 
                 int changes = 0;
@@ -86,11 +86,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                     {
                         if (curList is not null && curList.Count > 0)
                         {
-                            if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName))
-                            {
-                                Global.Logger.Log(ClassLogCode, LogHelper.MissingProperty, logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+                            if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, ClassLogCode))
                                 return -1;
-                            }
 
                             curList = [];
                             changes++;
@@ -115,12 +112,12 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 }
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
+                    Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{changes} {LogWriter.RecordUpdatedChanges}", ClassLogCode);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
+            Global.Logger.LogInvalidTypeFound("IFormLinkContainerGetter", proKeys.Record.GetType().Name, ClassLogCode);
             return -1;
         }
 
@@ -146,12 +143,12 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             var newEntry = CreateFrom(source);
 
-            if (newEntry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (newEntry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items, ClassLogCode))
                 return -1;
 
             items.Add(newEntry);
 
-            Global.TraceLogger?.Log(ClassLogCode, $"Added {newEntry}");
+            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordUpdated, $"{LogWriter.RecordUpdated} - added {ToString(newEntry)}", ClassLogCode);
 
             return 1;
         }
@@ -161,27 +158,27 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList, ClassLogCode))
                     return -1;
 
-                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList, ClassLogCode))
                     return -1;
 
                 if (curList.SequenceEqualNullable(newList))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: proKeys.Property.PropertyName);
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
                     return 0;
                 }
 
                 int changes = Replace(proKeys, newList);
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
+                    Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{changes} {LogWriter.RecordUpdatedChanges}", ClassLogCode);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
+            Global.Logger.LogInvalidTypeFound("IFormLinkContainerGetter", proKeys.Record.GetType().Name, ClassLogCode);
 
             return -1;
         }
@@ -191,10 +188,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             if (proKeys.Record is IFormLinkContainerGetter)
             {
-                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList, ClassLogCode))
                     return -1;
 
-                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList))
+                if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(forwardContext.Record, proKeys.Property.PropertyName, out var newList, ClassLogCode))
                     return -1;
 
                 if (!newList.SafeAny())
@@ -202,7 +199,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
                 if (curList.SequenceEqualNullable(newList))
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.PropertyIsEqual, propertyName: proKeys.Property.PropertyName);
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
                     return 0;
                 }
 
@@ -230,24 +227,24 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 }
 
                 if (changes > 0)
-                    Global.DebugLogger?.Log(ClassLogCode, $"{changes} change(s).", propertyName: proKeys.Property.PropertyName);
+                    Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{changes} {LogWriter.RecordUpdatedChanges}", ClassLogCode);
 
                 return changes;
             }
 
-            Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, proKeys.Property.PropertyName, "IFormLinkContainerGetter", proKeys.Record.GetType().Name);
+            Global.Logger.LogInvalidTypeFound("IFormLinkContainerGetter", proKeys.Record.GetType().Name, ClassLogCode);
             return -1;
         }
 
         // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-                    => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null || !curValue.Any();
+                    => !Mod.TryGetProperty<IReadOnlyList<IFormLinkGetter<TMajor>>>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || curValue is null || !curValue.Any();
 
         // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(recordContext.Record, proKeys.Property.PropertyName, out var curList)
-                && Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originList)
+            || (Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(recordContext.Record, proKeys.Property.PropertyName, out var curList, ClassLogCode)
+                && Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originList, ClassLogCode)
                 && recordsMatch(curList, originList));
 
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
@@ -269,20 +266,20 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!fromCache && !MatchesHelper.Validate(proKeys.RuleKey.Operation, matches))
                 throw new InvalidDataException("Json data for matches invalid");
 
-            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks))
+            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curLinks, ClassLogCode))
                 return false; // Property must not exist for this record.
 
-            return MatchesHelper.Matches(curLinks?.Select(GetFormKeyFromRecord), proKeys.RuleKey.Operation, matches, propertyName: proKeys.Property.PropertyName);
+            return MatchesHelper.Matches(curLinks?.Select(GetFormKeyFromRecord), proKeys.RuleKey.Operation, matches);
         }
 
         // <inheritdoc />
         public int Merge (ProcessingKeys proKeys)
         {
-            Global.UpdateLoggers(ClassLogCode);
+            Global.Logger.UpdateDefaultCallingLocation(ClassLogCode);
 
             var root = RecordGraph<IFormLinkContainerGetter>.Create(
                 proKeys,
-                record => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(record, proKeys.Property.PropertyName, out var value) ? value : null,
+                record => Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(record, proKeys.Property.PropertyName, out var value, ClassLogCode) ? value : null,
                 ToString);
 
             return root is not null && root.Merge(out var newList) ? Replace(proKeys, newList) : 0;
@@ -300,16 +297,16 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         {
             var entry = CreateFrom(remove);
 
-            if (entry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items))
+            if (entry is null || !Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var items, ClassLogCode))
                 return -1;
 
             if (items.Remove(entry))
             {
-                Global.TraceLogger?.Log(ClassLogCode, $"Removed {entry}");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordUpdated, $"{LogWriter.RecordUpdated} - removed {ToString(entry)}", ClassLogCode);
                 return 1;
             }
 
-            Global.Logger.Log(ClassLogCode, $"Failed to remove {ToString(remove)}", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+            Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"Failed to remove {ToString(remove)}", ClassLogCode);
             return 0;
         }
 
@@ -322,9 +319,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// </returns>
         public int Replace (ProcessingKeys proKeys, IEnumerable<IFormLinkContainerGetter>? newList)
         {
-            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList))
+            if (!Mod.TryGetProperty<IReadOnlyList<IFormLinkContainerGetter>>(proKeys.Record, proKeys.Property.PropertyName, out var curList, ClassLogCode))
             {
-                Global.Logger.Log(ClassLogCode, "Failed to replace entries", logLevel: LogLevel.Error, propertyName: proKeys.Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "Failed to replace entries", ClassLogCode);
                 return -1;
             }
 
@@ -334,16 +331,27 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!add.Any() && !del.Any())
                 return 0;
 
-            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _))
+            if (!Mod.TryGetPropertyValueForEditing<ExtendedList<TData>>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out _, ClassLogCode))
                 return -1;
 
+            int changes = 0;
+
             foreach (var d in del)
+            {
                 _ = Remove(proKeys, d);
+                changes++;
+            }
 
             foreach (var a in add)
+            {
                 _ = Forward(proKeys, a);
+                changes++;
+            }
 
-            return add.Count() + del.Count();
+            if (changes > 0)
+                Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{changes} {LogWriter.RecordUpdatedChanges}", ClassLogCode);
+
+            return changes;
         }
 
         // <inheritdoc />

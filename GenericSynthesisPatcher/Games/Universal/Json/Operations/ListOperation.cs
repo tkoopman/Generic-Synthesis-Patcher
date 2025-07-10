@@ -2,6 +2,8 @@ using System.Text.RegularExpressions;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 
+using Microsoft.Extensions.Logging;
+
 using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
@@ -9,6 +11,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
     [JsonConverter(typeof(OperationsConverter))]
     public sealed class ListOperation : ListOperation<string>
     {
+        private const int ClassLogCode = -1;
+
         // Required for OperationsConverter
         public ListOperation (string? value) : base(value) { }
 
@@ -33,8 +37,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
 
             bool result = Regex.IsMatch(check);
 
-            if (Global.Settings.Value.Logging.NoisyLogs.RegexMatchFailed && !result || Global.Settings.Value.Logging.NoisyLogs.RegexMatchSuccessful && result)
-                Global.TraceLogger?.WriteLine($"Regex: {Regex} Value: {check} IsMatch: {result}");
+            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeRegex)
+                Global.Logger.WriteLog(LogLevel.Trace, result ? Helpers.LogType.MatchSuccess : Helpers.LogType.MatchFailure, $"Regex: {Regex} Value: {check} IsMatch: {result}", ClassLogCode);
 
             return result;
         }

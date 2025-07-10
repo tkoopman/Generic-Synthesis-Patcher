@@ -27,7 +27,7 @@ namespace GSPTestProject
         public GeneralTests_Base (ITestOutputHelper output)
         {
             Output = output;
-            LogHelper.Out = new TestOutputTextWritter(output);
+            Global.Logger.Out = new TestOutputTextWritter(output);
         }
 
         protected abstract GameRelease GameRelease { get; }

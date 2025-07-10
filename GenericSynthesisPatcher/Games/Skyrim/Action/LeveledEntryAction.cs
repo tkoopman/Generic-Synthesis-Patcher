@@ -16,13 +16,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
-        private const int ClassLogCode = 0x18;
+        private const int ClassLogCode = 0xA3;
 
         protected ExtraData? createExtraData (ILoquiObject source)
         {
-            if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData) || sourceData is null)
+            if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData, ClassLogCode) || sourceData is null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, $"No extra data to copy", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"No extra data to copy", ClassLogCode);
                 return null;
             }
 

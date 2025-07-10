@@ -1,8 +1,12 @@
-﻿using GSPTestProject.GameData.GlobalGame.Fixtures;
+﻿using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Helpers;
+
+using GSPTestProject.GameData.GlobalGame.Fixtures;
 
 using Loqui;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Skyrim;
 
@@ -20,6 +24,28 @@ namespace GSPTestProject
         protected override GameRelease GameRelease => GameRelease.SkyrimSE;
 
         protected override Type ModGetterType => typeof(IEnumerable<IModListing<ISkyrimModGetter>>);
+
+        [Fact]
+        public void CalculateLogLevel_Check ()
+        {
+            // Should be Trace as we don't filter if no rule or context provided
+            Global.Settings.Logging.LogLevel = Microsoft.Extensions.Logging.LogLevel.Trace;
+            var logLevel = LogWriter.calculateCurrentLogLevel(null, FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+
+            // Should be Trace as Debug is set on rule
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule() { Debug = true }, FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+
+            // Should be Information as no option set to allow Trace
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule(), FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Information, logLevel);
+
+            // Should be Trace as All is set
+            Global.Settings.Logging.All = true;
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule(), FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+        }
 
         [Fact]
         public void ConfirmAllRecordTypes ()
