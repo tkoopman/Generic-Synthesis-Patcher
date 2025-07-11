@@ -101,7 +101,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         public bool MatchesRule (ProcessingKeys proKeys)
         {
             if (proKeys.RuleKey.Operation != FilterLogic.OR)
-                Global.Logger.WriteLog(LogLevel.Warning, LogType.GeneralConfigFailure, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Warning, LogType.GeneralConfigFailure, "Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", ClassLogCode);
 
             if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode))
                 return false;

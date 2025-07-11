@@ -25,7 +25,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         {
             if (Owner is null && ItemCondition == -1)
             {
-                Global.Logger.WriteLog(LogLevel.Trace, Helpers.LogType.RecordProcessing, $"No extra data to add", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Trace, Helpers.LogType.RecordProcessing, "No extra data to add", ClassLogCode);
                 return null;
             }
 

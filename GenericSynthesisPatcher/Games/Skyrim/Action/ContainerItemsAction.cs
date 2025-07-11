@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
             if (source is not IContainerEntryGetter sourceRecord)
             {
-                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, $"Failed to add item. No Items?", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add item. No Items?", ClassLogCode);
                 return null;
             }
 

@@ -68,7 +68,7 @@ namespace GSPTestProject
         [Fact]
         public void LoadOrder ()
         {
-            Output.WriteLine($"Load Order:");
+            Output.WriteLine("Load Order:");
             foreach (var mod in Global.Game.LoadOrder)
                 Output.WriteLine($"  {mod.FileName}");
         }

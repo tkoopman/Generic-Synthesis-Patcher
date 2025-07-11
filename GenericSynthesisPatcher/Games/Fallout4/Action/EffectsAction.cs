@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Fallout4.Action
         {
             if (source is not IEffectGetter sourceRecord)
             {
-                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, $"Failed to add effect. No Effects?", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add effect. No Effects?", ClassLogCode);
                 return null;
             }
 

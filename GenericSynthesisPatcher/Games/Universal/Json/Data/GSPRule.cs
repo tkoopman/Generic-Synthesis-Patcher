@@ -206,7 +206,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             if (!Types.Any())
                 Types = Group.Types;  // This may also be NONE but we do extra check for that after validation.
             else if (Group.Types.Any() && Types.Any(t => !Group.Types.Contains(t)))
-                throw new Exception($"Record under group tries to filter for Type(s) that are excluded at by group.");
+                throw new Exception("Record under group tries to filter for Type(s) that are excluded at by group.");
 
             if (Priority != 0)
                 Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", ClassLogCode, includePrefix: GetLogRuleID());
@@ -275,7 +275,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
                     if (hasIncludeMods && hasExcludeMods)
                     {
-                        Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, $"When indexed by field, array of mods must not include both include and excluded mods.", ClassLogCode);
+                        Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "When indexed by field, array of mods must not include both include and excluded mods.", ClassLogCode);
                     }
                     else
                     {
@@ -396,6 +396,8 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
             return HashCode;
         }
 
+        public override string GetLogRuleID () => Group is null ? base.GetLogRuleID() : $"{Group.GetLogRuleID()}.{ConfigRule}";
+
         /// <summary>
         ///     Checks if rule has a specific Forward Option flag set.
         /// </summary>
@@ -440,8 +442,6 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             return true;
         }
-
-        public override string GetLogRuleID () => Group is null ? base.GetLogRuleID() : $"{Group.GetLogRuleID()}.{ConfigRule}";
 
         /// <inheritdoc />
         public override bool Validate ()

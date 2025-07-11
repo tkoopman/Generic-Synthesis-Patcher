@@ -123,7 +123,7 @@ namespace GenericSynthesisPatcher
                             else if (proKeys.IsGroup)
                             {
                                 if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeGroup)
-                                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, $"Matched group. Processing Rules.", ClassLogCode);
+                                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Matched group. Processing Rules.", ClassLogCode);
 
                                 var gProKeys = new ProcessingKeys(context, proKeys);
                                 int count = 0;
@@ -176,7 +176,7 @@ namespace GenericSynthesisPatcher
 
             Global.Logger.Out.WriteLine();
 
-            Global.Logger.Out.WriteLine($"Record Type Totals");
+            Global.Logger.Out.WriteLine("Record Type Totals");
             Global.Logger.Out.WriteLine($"{"Type",-15} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");
 
             var totals = new Counts();
@@ -342,14 +342,14 @@ namespace GenericSynthesisPatcher
 
             if (!proKeys.Record.Registration.TryGetTranslationMaskType(out var maskType))
             {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No valid mask type found for DeepCopyIn action.", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask type found for DeepCopyIn action.", ClassLogCode);
                 return -1;
             }
 
             var mask = action.GetMask(maskType);
             if (mask is null)
             {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No valid mask found for DeepCopyIn action.", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask found for DeepCopyIn action.", ClassLogCode);
                 return -1;
             }
 
@@ -361,7 +361,7 @@ namespace GenericSynthesisPatcher
             var fromContext = AllRecordMods.FirstOrDefault();
             if (fromContext is null)
             {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"No valid record found for DeepCopyIn action.", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, "No valid record found for DeepCopyIn action.", ClassLogCode);
                 return -1;
             }
 

@@ -19,7 +19,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
             if (source is not ILeveledSpellEntryGetter sourceRecord)
             {
-                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, $"Failed to create entry data?", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to create entry data?", ClassLogCode);
                 return null;
             }
 

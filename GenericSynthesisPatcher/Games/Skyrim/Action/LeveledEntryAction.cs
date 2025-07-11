@@ -22,7 +22,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         {
             if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData, ClassLogCode) || sourceData is null)
             {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"No extra data to copy", ClassLogCode);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, "No extra data to copy", ClassLogCode);
                 return null;
             }
 
