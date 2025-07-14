@@ -2,7 +2,7 @@ using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Data
+namespace GenericSynthesisPatcher.Rules
 {
     [Flags]
     [JsonConverter(typeof(FlagConverter))]
@@ -22,16 +22,14 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         ///     own entries to the list.
         ///     <para>
         ///         If combined with Default flag, the first mod in the list will do a default
-        ///         forward replacing current value, while all other mods in list will do
-        ///         SelfMasterOnly
+        ///         forward replacing current value, while all other mods in list will do SelfMasterOnly
         ///     </para>
         /// </summary>
         SelfMasterOnly = 1 << 2,
 
         /// <summary>
         ///     Changes the configuration from being indexed by mod name, with potentially multiple
-        ///     fields per mod, to being indexed by field name with potentially multiple mods per
-        ///     field.
+        ///     fields per mod, to being indexed by field name with potentially multiple mods per field.
         /// </summary>
         IndexedByField = 1 << 3,
 
@@ -50,8 +48,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         NonDefault = Default | _nonDefaultMod | IndexedByField,
 
         /// <summary>
-        ///     Makes it so when multiple mods listed, filters out any that have the null or empty
-        ///     value.
+        ///     Makes it so when multiple mods listed, filters out any that have the null or empty value.
         ///     <para>Enables Default and IndexByField flags as well.</para>
         ///     <para>Ignored if used with SelfMasterOnly flag.</para>
         /// </summary>
@@ -72,9 +69,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// <summary>
         ///     Makes it so if multiple mods listed, instead of using first mod that contains the
         ///     record, it will pick a random mod from the list of mods containing the record.
-        ///     <para>
-        ///         If used without Sort then random mod is picked per record from valid mods.
-        ///     </para>
+        ///     <para>If used without Sort then random mod is picked per record from valid mods.</para>
         ///     <para>
         ///         However if used with Sort then will instead sort mods into randomized order, but
         ///         that same order will be used for all records, leaving actual selection down to

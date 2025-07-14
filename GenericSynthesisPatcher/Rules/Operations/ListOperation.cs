@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
     public sealed class ListOperation : ListOperation<string>

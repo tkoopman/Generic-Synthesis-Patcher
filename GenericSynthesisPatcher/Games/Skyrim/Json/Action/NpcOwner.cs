@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;

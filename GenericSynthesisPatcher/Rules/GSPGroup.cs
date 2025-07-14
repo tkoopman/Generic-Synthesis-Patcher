@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Data
+namespace GenericSynthesisPatcher.Rules
 {
     [JsonConverter(typeof(GSPBaseConverter))]
     public class GSPGroup : GSPBase
@@ -29,6 +29,48 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
         /// </summary>
         [JsonProperty(PropertyName = "SingleMatch")]
         public bool SingleMatch { get; set; } = false;
+
+        /// <summary>
+        ///     Will check all rules in group for matches and run actions on matching rules.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">
+        ///     proKeys parameter is not pointing to this rule.
+        /// </exception>
+        public override int RunActions (ProcessingKeys proKeys)
+        {
+            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeGroup)
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Matched group. Processing Rules.", ClassLogCode);
+
+            var gProKeys = new ProcessingKeys(proKeys.Context, proKeys);
+            int ruleCount = 0;
+            int changesTotal = -1;
+            foreach (var groupRule in Rules)
+            {
+                _ = gProKeys.SetRule(groupRule);
+                Global.Logger.UpdateCurrentProcess(groupRule, proKeys.Context, ClassLogCode);
+
+                ruleCount++;
+                if (groupRule.Matches(gProKeys))
+                {
+                    int changed = groupRule.RunActions(gProKeys);
+                    if (changed >= 0) // -1 would mean failed OnlyIfDefault check
+                    {
+                        changesTotal = (changesTotal == -1) ? changed : changesTotal + changed;
+
+                        if (SingleMatch)
+                        {
+                            if (ruleCount != Rules.Count)
+                                Global.Logger.WriteLog(LogLevel.Trace, LogType.SkippingRule, $"Skipping remaining rules in group due to SingleMatch. Checked {ruleCount}/{Rules.Count}", ClassLogCode);
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return changesTotal;
+        }
 
         public override bool Validate ()
         {

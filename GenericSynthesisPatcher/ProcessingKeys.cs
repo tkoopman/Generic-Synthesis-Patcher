@@ -5,9 +5,9 @@ using Common;
 
 using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Games.Universal.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Loqui;
 
@@ -149,21 +149,16 @@ namespace GenericSynthesisPatcher
         /// <returns>Editable version of current record</returns>
         public IMajorRecord GetPatchRecord ()
         {
-            if (Parent is null)
-            {
-                patchRecord = Context switch
+            patchRecord ??= Parent is null
+                ? Context switch
                 {
                     //TODO Add other games
                     IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((ISkyrimMod)Global.Game.State.PatchMod),
                     IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IFallout4Mod)Global.Game.State.PatchMod),
                     IModContext<IOblivionMod, IOblivionModGetter, IOblivionMajorRecord, IOblivionMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IOblivionMod)Global.Game.State.PatchMod),
                     _ => throw new InvalidCastException(),
-                };
-            }
-            else
-            {
-                patchRecord ??= Parent.GetPatchRecord();
-            }
+                }
+                : Parent.GetPatchRecord();
 
             return patchRecord;
         }

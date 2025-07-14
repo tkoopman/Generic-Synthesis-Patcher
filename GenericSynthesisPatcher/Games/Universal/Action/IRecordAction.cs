@@ -43,7 +43,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         /// <param name="proKeys"></param>
         /// <param name="AllRecordMods">
         ///     All valid mods for this record in order highest to lowest as
-        ///     <see cref="Program.getAvailableMods(ProcessingKeys, IEnumerable{ModKey}, FormKey)" /> returns.
+        ///     <see cref="GSPRule.getAvailableMods(ProcessingKeys, IEnumerable{ModKey}, FormKey)" /> returns.
         /// </param>
         /// <param name="endNodes">
         ///     List of all end nodes for this property. Needed so that HPU can honor explicit

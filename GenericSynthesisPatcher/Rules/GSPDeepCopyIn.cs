@@ -9,7 +9,7 @@ using Mutagen.Bethesda.Plugins.Records;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Data
+namespace GenericSynthesisPatcher.Rules
 {
     public class GSPDeepCopyIn
     {

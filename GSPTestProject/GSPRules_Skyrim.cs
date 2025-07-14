@@ -1,7 +1,7 @@
 ﻿using GenericSynthesisPatcher;
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Rules;
+using GenericSynthesisPatcher.Rules.Loaders;
 
-using GSPTestProject.GameData;
 using GSPTestProject.GameData.GlobalGame.Fixtures;
 using GSPTestProject.Helpers;
 using GSPTestProject.StaticData;
@@ -30,16 +30,20 @@ namespace GSPTestProject
 
         public ITestOutputHelper Output { get; }
 
-        [Theory]
-        [ClassData(typeof(ExampleRules))]
-        public void CheckExamples (string json)
+        [Fact]
+        public void CheckExampleRules ()
         {
-            using var jsonFile = new StringReader(json);
-            using var jsonReader = new JsonTextReader(jsonFile);
-            var rules = JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<List<GSPBase>>(jsonReader);
+            string ExampleDirectory = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../Examples/"));
 
-            foreach (var rule in rules ?? [])
-                Assert.True(rule.Validate());
+            Assert.True(GSPJson.TryLoadRules(1, ExampleDirectory, out var rules));
+
+            int maxConfigFile = rules.Max(x => x.ConfigFile);
+            int actualCount = Directory.GetFiles(ExampleDirectory).Count(x => Path.GetExtension(x).Equals(".json", StringComparison.OrdinalIgnoreCase));
+
+            Assert.Equal(actualCount, maxConfigFile);
+
+            var missingConfigFiles = Enumerable.Range(1, maxConfigFile).Except(rules.Select(x => x.ConfigFile).Distinct());
+            Assert.Empty(missingConfigFiles);
         }
 
         [Theory]

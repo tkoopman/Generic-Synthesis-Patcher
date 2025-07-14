@@ -1,5 +1,5 @@
-﻿using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Helpers;
+﻿using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules;
 
 using GSPTestProject.GameData.GlobalGame.Fixtures;
 

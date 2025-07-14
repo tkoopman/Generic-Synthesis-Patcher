@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Rules;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

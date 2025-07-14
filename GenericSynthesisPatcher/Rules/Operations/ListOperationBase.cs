@@ -2,11 +2,10 @@ using System.Collections.ObjectModel;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Json.Operations;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
     public abstract class ListOperationBase<TValue> : OperationBase<ListLogic>

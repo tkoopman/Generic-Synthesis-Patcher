@@ -3,9 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using Common;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Helpers.Graph;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Microsoft.Extensions.Logging;
 

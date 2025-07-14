@@ -6,7 +6,7 @@ using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     public class FormKeyListOperationAdvanced<TMajor> : FormKeyListOperation<TMajor> where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {

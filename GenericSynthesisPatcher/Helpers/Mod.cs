@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Rules;
 
 using Loqui;
 

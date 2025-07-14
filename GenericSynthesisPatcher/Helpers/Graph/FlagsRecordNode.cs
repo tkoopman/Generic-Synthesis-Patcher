@@ -1,6 +1,6 @@
 using EnumsNET;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Microsoft.Extensions.Logging;
 

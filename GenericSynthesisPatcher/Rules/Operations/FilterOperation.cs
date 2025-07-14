@@ -1,11 +1,10 @@
 using System.Collections.ObjectModel;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
-using GenericSynthesisPatcher.Json.Operations;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     [JsonConverter(typeof(OperationsConverter))]
     public class FilterOperation (string value) : FilterOperation<string>(value);
@@ -36,7 +35,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
         public override bool Equals (object? obj)
                     => obj is FilterOperation<T> other
                     && Operation == other.Operation
-                    && ((Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase))
+                    && (Value is string v && v.Equals(other.Value as string, StringComparison.OrdinalIgnoreCase)
                     || Value.Equals(other.Value));
 
         public override int GetHashCode ()

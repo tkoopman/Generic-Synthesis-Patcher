@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     public enum ListLogic
     {

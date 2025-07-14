@@ -5,19 +5,22 @@ using Common;
 
 using DynamicData;
 
+using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Loqui;
 
 using Microsoft.Extensions.Logging;
 
+using Mutagen.Bethesda.Plugins;
+
 using Newtonsoft.Json;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Data
+namespace GenericSynthesisPatcher.Rules
 {
     [JsonConverter(typeof(GSPBaseConverter))]
     [SuppressMessage("Design", "CA1036:Override methods on comparable types", Justification = "Just used for sorting")]
@@ -245,6 +248,29 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Data
 
             return true;
         }
+
+        /// <summary>
+        ///     Run the actions for this rule.
+        /// </summary>
+        /// <param name="proKeys">
+        ///     Keys of record to run actions against. <see cref="ProcessingKeys.Context" /> will
+        ///     already be set to the context of the record to process actions against.
+        ///     <see cref="ProcessingKeys.RuleBase" /> will already be set to this instance.
+        ///
+        ///     You should call
+        ///     <see cref="ProcessingKeys.SetProperty(FilterOperation, string, int, int)" /> before
+        ///     processing each property of an action (if appropriate)
+        /// </param>
+        /// <returns>
+        ///     Number of changes made by the actions to this record. Where possible this should be
+        ///     as detailed of a count as possible. So if multiple simple fields are changed then
+        ///     could be counted per field, but if a list was edited then each add / remove should
+        ///     be counted as a single change.
+        ///
+        ///     Return -1 if all actions were skipped due to OnlyIfDefault check failing. Otherwise
+        ///     should return 0 if no changes made, or count of changes made.
+        /// </returns>
+        public abstract int RunActions (ProcessingKeys proKeys);
 
         /// <summary>
         ///     Checks for anything that may make this rule invalid and possibly cause issues. Any

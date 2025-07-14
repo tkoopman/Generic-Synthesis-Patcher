@@ -1,7 +1,7 @@
 using System.ComponentModel;
 
 using GenericSynthesisPatcher.Games.Universal.Json.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Mutagen.Bethesda.Oblivion;
 using Mutagen.Bethesda.Plugins.Records;

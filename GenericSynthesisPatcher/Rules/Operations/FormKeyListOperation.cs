@@ -9,7 +9,7 @@ using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     public class FormKeyListOperation<TMajor> : FormKeyListOperation where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
     {

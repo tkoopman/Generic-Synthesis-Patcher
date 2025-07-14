@@ -1,4 +1,4 @@
-namespace GenericSynthesisPatcher.Games.Universal.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     public enum FilterLogic
     {

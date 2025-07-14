@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 namespace GenericSynthesisPatcher.Helpers
 {

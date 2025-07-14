@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 using Noggog;
 
-namespace GenericSynthesisPatcher.Json.Operations
+namespace GenericSynthesisPatcher.Rules.Operations
 {
     public abstract class OperationBase<TPrefix, TSuffix> : OperationBase<TPrefix>
         where TPrefix : struct, Enum

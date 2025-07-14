@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
+using GenericSynthesisPatcher.Rules;
 
 using Mutagen.Bethesda.Skyrim;
 

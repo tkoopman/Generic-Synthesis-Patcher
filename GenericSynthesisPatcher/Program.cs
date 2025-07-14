@@ -1,15 +1,9 @@
 using System.Data;
 
-using Common;
-
-using DynamicData;
-
 using GenericSynthesisPatcher.Games.Universal;
-using GenericSynthesisPatcher.Games.Universal.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
-using GenericSynthesisPatcher.Helpers.Graph;
+using GenericSynthesisPatcher.Rules;
+using GenericSynthesisPatcher.Rules.Loaders;
 
 using Loqui;
 
@@ -17,25 +11,19 @@ using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Synthesis;
-
-using Newtonsoft.Json;
-
-using Noggog;
 
 namespace GenericSynthesisPatcher
 {
     public partial class Program
     {
-        private const int ClassLogCode = 0x01;
-
         /// <summary>
         ///     Record of all record properties that have been updated. Used to detect when a
         ///     property is updated by 2 different processes.
         /// </summary>
-        private static readonly List<(ILoquiRegistration Type, FormKey FormKey, GSPRule Rule, PropertyAction Property, int Changes)> RecordUpdates = [];
+        internal static readonly List<(ILoquiRegistration Type, FormKey FormKey, GSPRule Rule, PropertyAction Property, int Changes)> RecordUpdates = [];
+
+        private const int ClassLogCode = 0x01;
 
         public static async Task<int> Main (string[] args)
         {
@@ -82,9 +70,37 @@ namespace GenericSynthesisPatcher
                     ), ClassLogCode);
             }
 
-            var (Rules, EnabledTypes) = loadRules();
-            if (Rules.Count == 0)
+            List<GSPBase> Rules = [];
+            if (!GSPJson.TryLoadRules(1, out var rules))
+            {
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Failed to load rules. Exiting.", ClassLogCode);
                 return;
+            }
+
+            Rules.AddRange(rules);
+
+            if (Rules.Count == 0)
+            {
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "No rules loaded. Exiting.", ClassLogCode);
+                return;
+            }
+
+            Rules.Sort();
+
+            HashSet<ILoquiRegistration> EnabledTypes = [.. Rules.SelectMany(r => r.Types)];
+
+            int groupCount = Rules.Count(r => r is GSPGroup);
+            int ruleCount = Rules.Count - groupCount;
+
+            if (groupCount > 0)
+            {
+                int groupRuleCount = Rules.Sum(r => r is GSPGroup group ? group.Rules.Count : 0);
+                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Rules: {ruleCount} Groups: {groupCount} Group Rules: {groupRuleCount}", ClassLogCode);
+            }
+            else
+            {
+                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Loaded {ruleCount} rules.", ClassLogCode);
+            }
 
             // subTotals values = (Total, Matched, Updated, Changes)
             SortedDictionary<string, Counts> subTotals = [];
@@ -109,49 +125,13 @@ namespace GenericSynthesisPatcher
 
                         if (rule.Matches(proKeys))
                         {
-                            if (proKeys.IsRule)
+                            int changed = rule.RunActions(proKeys);
+                            if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                             {
-                                int changed = processRule(proKeys);
-                                if (changed >= 0) // -1 would mean failed OnlyIfDefault check
-                                {
-                                    counts.Matched++;
-                                    if (changed > 0)
-                                        counts.Updated++;
-                                    counts.Changes += changed;
-                                }
-                            }
-                            else if (proKeys.IsGroup)
-                            {
-                                if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeGroup)
-                                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Matched group. Processing Rules.", ClassLogCode);
-
-                                var gProKeys = new ProcessingKeys(context, proKeys);
-                                int count = 0;
-                                foreach (var groupRule in proKeys.Group.Rules)
-                                {
-                                    _ = gProKeys.SetRule(groupRule);
-                                    Global.Logger.UpdateCurrentProcess(groupRule, context, ClassLogCode);
-
-                                    count++;
-                                    if (groupRule.Matches(gProKeys))
-                                    {
-                                        int changed = processRule(gProKeys);
-                                        if (changed >= 0) // -1 would mean failed OnlyIfDefault check
-                                        {
-                                            counts.Matched++;
-                                            if (changed > 0)
-                                                counts.Updated++;
-                                            counts.Changes += changed;
-
-                                            if (proKeys.Group.SingleMatch)
-                                            {
-                                                if (count != proKeys.Group.Rules.Count)
-                                                    Global.Logger.WriteLog(LogLevel.Trace, LogType.SkippingRule, $"Skipping remaining rules in group due to SingleMatch. Checked {count}/{proKeys.Group.Rules.Count}", ClassLogCode);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
+                                counts.Matched++;
+                                if (changed > 0)
+                                    counts.Updated++;
+                                counts.Changes += changed;
                             }
                         }
                     }
@@ -200,490 +180,6 @@ namespace GenericSynthesisPatcher
                 Global.Logger.Out.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
             else
                 Global.Logger.Out.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
-        }
-
-        /// <summary>
-        ///     Returns list of all valid record contexts for the given form key and mods. Does not
-        ///     fully filter out <see cref="ForwardOptions.NonDefault" /> or
-        ///     <see cref="ForwardOptions.NonNull" /> mods.
-        /// </summary>
-        /// <param name="proKeys">Used to get ForwardOptions</param>
-        /// <param name="mods">List of valid mods to select from, in highest to lowest priority.</param>
-        /// <param name="formKey">FormKey to get contexts for</param>
-        /// <returns>
-        ///     Ordered based on forward options list of valid records. (Randomized or ordered in
-        ///     same order as <see cref="mods" />, which should already be in highest to lowest priority.
-        /// </returns>
-        internal static IEnumerable<IModContext<IMajorRecordGetter>> getAvailableMods (ProcessingKeys proKeys, IEnumerable<ModKey> mods, FormKey formKey)
-        {
-            if (mods is null || !mods.Any())
-                return [];
-
-            bool nonDefault = proKeys.Rule.HasForwardOption(ForwardOptions._nonDefaultMod);
-            bool randomize = proKeys.Rule.HasForwardOption(ForwardOptions._randomMod) && !proKeys.Rule.HasForwardOption(ForwardOptions._sortMods);
-
-            var AllRecordMods = nonDefault
-                ? Global.Game.State.LinkCache.ResolveAllSimpleContexts(formKey, proKeys.Record.Registration.GetterType).Where(m => !m.ModKey.Equals(formKey.ModKey) && mods.Contains(m.ModKey))
-                : Global.Game.State.LinkCache.ResolveAllSimpleContexts(formKey, proKeys.Record.Registration.GetterType).Where(m => mods.Contains(m.ModKey));
-
-            if (AllRecordMods.Count() > 1)
-            { // Sort if more than 1 record
-                if (randomize)
-                {
-                    var r = proKeys.GetRandom();
-                    AllRecordMods = AllRecordMods.OrderBy(_ => r.Next());
-                }
-                else
-                {
-                    AllRecordMods = AllRecordMods.OrderBy(m => mods.IndexOf(m.ModKey));
-                }
-            }
-
-            return AllRecordMods;
-        }
-
-        /// <summary>
-        ///     Loads all JSON configuration files from GSP data folder
-        /// </summary>
-        /// <returns>List of rules</returns>
-        private static (List<GSPBase>, IEnumerable<ILoquiRegistration>) loadRules ()
-        {
-            var loadedRules = new List<GSPBase>();
-            HashSet <ILoquiRegistration> enabledTypes = [];
-
-            string dataFolder = Global.Settings.Folder;
-            dataFolder = dataFolder.Replace("{SkyrimData}", Global.Game.State.DataFolderPath);
-            dataFolder = dataFolder.Replace("{GameData}", Global.Game.State.DataFolderPath);
-            dataFolder = dataFolder.Replace("{SynthesisData}", Global.Game.State.ExtraSettingsDataPath);
-
-            if (!Directory.Exists(dataFolder))
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, $"Missing data folder: {dataFolder}", ClassLogCode);
-                return ([], []);
-            }
-
-            int count = 0;
-
-            var files = Directory.GetFiles(dataFolder).Where(x => x.EndsWith(".json", StringComparison.OrdinalIgnoreCase));
-            int countFile = 0;
-            foreach (string? f in files)
-            {
-                if (f.Equals(Path.Combine(Global.Game.State.ExtraSettingsDataPath ?? "", "settings.json"), StringComparison.OrdinalIgnoreCase))
-                {   // Skip settings.json in Extra settings data path as that is the Synthesis config file.
-                    Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Skipping: {f}", ClassLogCode);
-                }
-                else
-                {
-                    Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Loading config file #{++countFile}: {f}", ClassLogCode);
-                    List<GSPBase>? rules = null;
-                    using (var jsonFile = File.OpenText(f))
-                    {
-                        using var jsonReader = new JsonTextReader(jsonFile);
-                        rules = JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<List<GSPBase>>(jsonReader);
-                    }
-
-                    int countRule = 1;
-                    foreach (var rule in rules ?? [])
-                    {
-                        rule.ConfigFile = countFile;
-                        rule.ConfigRule = countRule++;
-
-                        if (!rule.Validate())
-                        {
-                            Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Error validating rules.", ClassLogCode, includePrefix: rule.GetLogRuleID());
-                            enabledTypes.Clear();
-                            return ([], []);
-                        }
-
-                        if (rule is GSPGroup group)
-                            count += group.Rules.Count;
-                        else
-                            count++;
-
-                        loadedRules.Add(rule);
-                        enabledTypes.Add(rule.Types);
-                    }
-                }
-            }
-
-            if (loadedRules.Count == 0)
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, $"No rules found in data location: {dataFolder}", ClassLogCode);
-                return ([], []);
-            }
-
-            loadedRules.Sort();
-
-            if (loadedRules.Count != count)
-                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Loaded {loadedRules.Count} primary rules and {count} total rules.", ClassLogCode);
-            else
-                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Loaded {count} total rules.", ClassLogCode);
-
-            return (loadedRules, enabledTypes.ToList().AsReadOnly());
-        }
-
-        /// <summary>
-        ///     Process a Forward rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processDeepCopyInRecord (ProcessingKeys proKeys, GSPDeepCopyIn action)
-        {
-            var from = action.FromID == FormKey.Null ? proKeys.Record.FormKey : action.FromID;
-            bool fromSameID = from == proKeys.Record.FormKey;
-
-            // If not coping over from another record then skip if already master record
-            if (fromSameID && proKeys.Context.IsMaster())
-                return -1;
-
-            if (!proKeys.Record.Registration.TryGetTranslationMaskType(out var maskType))
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask type found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
-
-            var mask = action.GetMask(maskType);
-            if (mask is null)
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
-
-            var AllRecordMods =
-                fromSameID || action.FromMod.SafeAny()
-                ? getAvailableMods(proKeys, action.FromMod, from)
-                : [Global.Game.State.LinkCache.ResolveSimpleContext(from, proKeys.Record.Registration.GetterType, ResolveTarget.Winner)];
-
-            var fromContext = AllRecordMods.FirstOrDefault();
-            if (fromContext is null)
-            {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, "No valid record found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
-
-            if (proKeys.Record.Equals(fromContext.Record, mask))
-            {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
-                return 0;
-            }
-
-            if (proKeys.GetPatchRecord() is not IMajorRecordInternal patchRecord)
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No changes to {proKeys.Property.PropertyName} invalid record type for DeepCopyIn", ClassLogCode);
-                return 0;
-            }
-
-            Global.Logger.LogAction("Calling DeepCopyIn to update property.", ClassLogCode);
-
-            // TODO: Add ErrorMask and validate
-            patchRecord.DeepCopyIn(fromContext.Record, mask);
-
-            if (Global.Logger.CurrentLogLevel <= LogLevel.Debug)
-            {
-                string fromStr = fromSameID ? fromContext.ModKey.FileName
-                    : fromContext.IsMaster() ? from.ToString() : $"{from} in {fromContext.ModKey}";
-
-                Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{LogWriter.RecordUpdated} - DeepCopyIn performed from {fromStr}", ClassLogCode);
-            }
-
-            return 1;
-        }
-
-        /// <summary>
-        ///     Process a fill rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processFillRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
-        {
-            if (!proKeys.SetProperty(ruleKey, ruleKey.Value, ClassLogCode))
-                return -1;
-
-            if (!proKeys.Property.Action.CanFill())
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {ruleKey.Value}: No fill enabled action for field.", ClassLogCode);
-                return -1;
-            }
-
-            if (proKeys.CheckOnlyIfDefault())
-                return -1;
-
-            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Fill)}", ClassLogCode);
-            int changed = proKeys.Property.Action.Fill(proKeys);
-
-            if (changed > 0)
-                RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, proKeys.Rule, proKeys.Property, changed));
-
-            return changed;
-        }
-
-        /// <summary>
-        ///     Process a Forward rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processForwardRecord (ProcessingKeys proKeys, FilterOperation ruleKey)
-        {
-            // Don't waste time if record is master with no overwrites
-            if (proKeys.Context.IsMaster())
-                return -1;
-
-            if (!proKeys.Rule.TryGetForward(proKeys, ruleKey, out var mods, out string[]? fields))
-                return -1;
-
-            var AllRecordMods = getAvailableMods(proKeys, mods, proKeys.Record.FormKey);
-            if (!AllRecordMods.Any())
-                return -1;
-
-            bool nonDefault = proKeys.Rule.HasForwardOption(ForwardOptions._nonDefaultMod);
-            bool nonNull = proKeys.Rule.HasForwardOption(ForwardOptions._nonNullMod);
-            bool selfMasterOnly = proKeys.Rule.HasForwardOption(ForwardOptions.SelfMasterOnly);
-
-            int changed = 0;
-            foreach (string field in fields)
-            {
-                if (!proKeys.SetProperty(ruleKey, field, ClassLogCode))
-                    continue;
-
-                if (!proKeys.Property.Action.CanForward() || (selfMasterOnly && !proKeys.Property.Action.CanForwardSelfOnly()))
-                {
-                    Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {field}: No forward enabled action for field.", ClassLogCode);
-                    continue;
-                }
-
-                if (proKeys.Rule.HasForwardOption(ForwardOptions._hpu))
-                {
-                    var graph = ForwardRecordGraph.Create(proKeys);
-                    var endNodes = graph?.GetEndNodes(mods);
-                    if (endNodes is null)
-                        continue;
-
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"End nodes: {string.Join(',', endNodes)}", ClassLogCode);
-
-                    var mc = proKeys.Property.Action.FindHPUIndex(proKeys, AllRecordMods, endNodes);
-                    if (mc is not null)
-                    {
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. From Mod: {mc.ModKey.FileName}.", ClassLogCode);
-                        Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
-                        changed += proKeys.Property.Action.Forward(proKeys, mc);
-                    }
-                    else
-                    {
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. Skipping as no valid mod found.", ClassLogCode);
-                    }
-                }
-                else if (selfMasterOnly)
-                {
-                    changed = processForwardSelfMasterOnly(proKeys, mods, AllRecordMods);
-                }
-                else
-                {   // Default Forward Type
-                    if (proKeys.CheckOnlyIfDefault())
-                        continue;
-
-                    // Only forward single record but can loop until valid record found if
-                    // nonDefault and or nonNull used
-                    foreach (var modContext in AllRecordMods)
-                    {
-                        if (nonNull && proKeys.Property.Action.IsNullOrEmpty(proKeys, modContext))
-                        {
-                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as has null/empty value and NonNull option used.", ClassLogCode);
-                            continue;
-                        }
-
-                        if (nonDefault && proKeys.Property.Action.MatchesOrigin(proKeys, modContext))
-                        {
-                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as matches origin and NonDefault option used.", ClassLogCode);
-                            continue;
-                        }
-
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {Enum.GetName(proKeys.Rule.ForwardOptions)} From Mod: {modContext.ModKey.FileName}.", ClassLogCode);
-                        Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
-                        int changes = proKeys.Property.Action.Forward(proKeys, modContext);
-                        if (changes > 0)
-                            changed += changes;
-
-                        // If we got to here then we have found a valid mod to forward from so can
-                        // stop processing
-                        break;
-                    }
-                }
-
-                if (changed > 0)
-                    RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, proKeys.Rule, proKeys.Property, changed));
-            }
-
-            return changed;
-        }
-
-        /// <summary>
-        ///     Process a Forward of type SelfMasterOnly rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processForwardSelfMasterOnly (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods)
-        {
-            bool firstMod = true;
-            int changed = 0;
-
-            if (mods.First() != AllRecordMods.First().ModKey)
-            {   // If first mod is not the same as the first mod in AllRecordMods then we don't forward
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as doesn't contain record in {mods.First()}.", ClassLogCode);
-                return 0;
-            }
-
-            foreach (var mod in AllRecordMods)
-            {
-                if (firstMod && proKeys.CheckOnlyIfDefault())
-                    return 0;
-
-                if (firstMod && proKeys.Rule.ForwardOptions.HasFlag(ForwardOptions.DefaultThenSelfMasterOnly))
-                {  // First mod of DefaultThenSelfMasterOnly
-                    if (proKeys.CheckOnlyIfDefault())
-                        break;
-
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
-
-                    int changes = proKeys.Property.Action.Forward(proKeys, mod);
-                    if (changes < 0)
-                    {   // If default forward fails we do not continue with the SelfMasterOnly forwards
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as default forward from {mods.First()} failed.", ClassLogCode);
-                        return 0;
-                    }
-
-                    changed += changes;
-                }
-                else
-                {   //  SelfMasterOnly
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
-
-                    int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, mod);
-                    if (changes > 0)
-                        changed += changes;
-                }
-
-                firstMod = false;
-            }
-
-            return changed;
-        }
-
-        /// <summary>
-        ///     Process a Merge rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processMergeRecord (ProcessingKeys proKeys)
-        {
-            if (!proKeys.Property.Action.CanMerge())
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, "No merge action found", ClassLogCode);
-                return -1;
-            }
-
-            if (proKeys.CheckOnlyIfDefault())
-                return -1;
-
-            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Merge)}", ClassLogCode);
-            int changed = proKeys.Property.Action.Merge(proKeys);
-
-            if (changed > 0)
-                RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, proKeys.Rule, proKeys.Property, changed));
-
-            return changed;
-        }
-
-        /// <summary>
-        ///     Process rule against current record
-        /// </summary>
-        /// <param name="proKeys">Current processing keys</param>
-        /// <param name="ruleKey">Current key of current rule</param>
-        /// <returns>
-        ///     Number of updates made to current record. -1 if record didn't meet requirements for
-        ///     this rule
-        /// </returns>
-        private static int processRule (ProcessingKeys proKeys)
-        {
-            var rule = proKeys.Rule;
-
-            // We want result to be 0 if no actions so it works with SingleMatch
-            if (!rule.Fill.SafeAny() && !rule.Forward.SafeAny() && !rule.Merge.SafeAny() && !rule.DeepCopyIn.SafeAny())
-            {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.SkippingRule, "Rule contains no actions.", ClassLogCode);
-                return 0;
-            }
-
-            int changes = -1;
-
-            foreach (var dci in rule.DeepCopyIn)
-            {
-                int changed = processDeepCopyInRecord(proKeys, dci);
-                if (changed >= 0)
-                    changes = (changes == -1) ? changed : changes + changed;
-            }
-
-            if (rule.Merge.Count > 0)
-            {
-                int versions = Global.Game.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Count();
-                switch (versions)
-                {
-                    case < 2:
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.NoOverwrites, "Doesn't have any overwrites to merge with.", ClassLogCode);
-                        break;
-
-                    default:
-                        foreach (var x in rule.Merge)
-                        {
-                            if (!proKeys.SetProperty(x.Key, x.Key.Value, ClassLogCode))
-                                continue;
-
-                            int changed = processMergeRecord(proKeys);
-
-                            if (changed >= 0)
-                                changes = (changes == -1) ? changed : changes + changed;
-                        }
-
-                        break;
-                }
-            }
-
-            foreach (var x in rule.Forward)
-            {
-                int changed = processForwardRecord(proKeys, x.Key);
-
-                if (changed >= 0)
-                    changes = (changes == -1) ? changed : changes + changed;
-            }
-
-            foreach (var x in rule.Fill)
-            {
-                int changed = processFillRecord(proKeys, x.Key);
-
-                if (changed >= 0)
-                    changes = (changes == -1) ? changed : changes + changed;
-            }
-
-            return changes;
         }
     }
 }
