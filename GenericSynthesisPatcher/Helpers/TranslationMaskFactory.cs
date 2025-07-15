@@ -9,8 +9,113 @@ using Mutagen.Bethesda.Plugins.Records;
 
 namespace GenericSynthesisPatcher.Helpers
 {
+    /// <summary>
+    ///     Methods for working with <see cref="Loqui.ITranslationMask" /> classes used by Mutagen.
+    ///
+    ///     NOTE: Probably won't work with non-Mutagen ITranslationMask classes, unless they follow
+    ///     the same implementation of DefaultOn and OnOverall which isn't part of the
+    ///     ITranslationMask interface.
+    /// </summary>
     public static class TranslationMaskFactory
     {
+        /// <summary>
+        ///     Get all valid fields from mask. Excludes non-writable (DefaultOn) and OnOverall.
+        /// </summary>
+        public static IEnumerable<FieldInfo> GetAllFields (this ITranslationMask mask)
+            => mask.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance).Where(f => IsValidMaskField(f) && !f.Name.Equals(nameof(MajorRecord.TranslationMask.OnOverall), StringComparison.Ordinal));
+
+        /// <summary>
+        ///     Gets the DefaultOn value of a mask
+        /// </summary>
+        /// <exception cref="ArgumentException">DefaultOn doesn't exist</exception>
+        public static bool GetDefaultOn (this ITranslationMask mask)
+        {
+            var field = mask.GetType().GetField(nameof(MajorRecord.TranslationMask.DefaultOn), BindingFlags.Public | BindingFlags.Instance);
+            return field is not null && field.GetValue(mask) is bool value
+                ? value
+                : throw new ArgumentException("Mask doesn't contain DefaultOn field");
+        }
+
+        /// <summary>
+        ///     Return list of field names that are enabled on a mask
+        /// </summary>
+        public static List<string> GetEnabled (this ITranslationMask mask)
+        {
+            bool defaultOn = mask.GetDefaultOn();
+
+            List<string> enabled = [];
+
+            var fields = mask.GetAllFields().ToList();
+            fields.Sort((lhs, rhs) => string.Compare(lhs?.Name, rhs?.Name, StringComparison.OrdinalIgnoreCase));
+
+            foreach (var field in fields)
+            {
+                object? value = field.GetValue(mask);
+                if (isEnabled(value, defaultOn))
+                    enabled.Add(field.Name);
+            }
+
+            return enabled;
+        }
+
+        /// <summary>
+        ///     Gets all fields and values that are not set to DefaultOn.
+        /// </summary>
+        public static IEnumerable<(string name, object value)> GetNonDefault (this ITranslationMask mask)
+        {
+            bool defaultOn = mask.GetDefaultOn();
+            List<(string name, object value)> fields = [];
+
+            foreach (var field in mask.GetAllFields())
+            {
+                object? value = field.GetValue(mask);
+                switch (value)
+                {
+                    case null:
+                        break;
+
+                    case bool boolValue:
+                        if (boolValue != defaultOn)
+                            fields.Add((field.Name, boolValue));
+                        break;
+
+                    default:
+                        fields.Add((field.Name, value));
+                        break;
+                }
+            }
+
+            return fields;
+        }
+
+        public static bool GetOnOverall (this ITranslationMask mask)
+        {
+            var field = mask.GetType().GetField(nameof(MajorRecord.TranslationMask.OnOverall), BindingFlags.Public | BindingFlags.Instance);
+            return field is not null && field.GetValue(mask) is bool value
+                ? value
+                : throw new ArgumentException("Mask doesn't contain OnOverall field");
+        }
+
+        public static bool IsValidMaskField (FieldInfo? field) => field is not null && !field.IsInitOnly && IsValidMaskField(field.FieldType);
+
+        public static bool IsValidMaskField (Type FieldType, bool allowGendered = true)
+        {
+            if (FieldType == typeof(bool) || FieldType.IsAssignableTo(typeof(ITranslationMask)))
+                return true;
+
+            if (allowGendered)
+            {
+                var properties = FieldType.Explode(2);
+                if (properties.Length == 2 && (properties[0] == typeof(IGenderedItem<>) || properties[0] == typeof(GenderedItem<>)))
+                {
+                    return IsValidMaskField(properties[1], false);
+                }
+            }
+
+            // Must be false
+            return false;
+        }
+
         /// <inheritdoc cref="TryCreate(Type, bool, bool, IEnumerable{string}, out ITranslationMask?, StringComparison)" />
         public static bool TryCreate (ILoquiRegistration recordType, bool defaultOn, IEnumerable<string> toggleEntries, [NotNullWhen(true)] out ITranslationMask? mask, StringComparison comparer = StringComparison.Ordinal)
         {
@@ -134,10 +239,7 @@ namespace GenericSynthesisPatcher.Helpers
                 }
             }
 
-            if (field is null || field.IsInitOnly)
-                return false; // Can set readonly field
-
-            return true;
+            return IsValidMaskField(field);
         }
 
         /// <summary>
@@ -309,7 +411,9 @@ namespace GenericSynthesisPatcher.Helpers
             if (!TryGetMaskField(mask, maskEntry, comparer, out var field))
                 return false;
 
-            if (field.FieldType == typeof(bool) || field.FieldType.IsAssignableTo(typeof(ITranslationMask)))
+            // While TryGetMaskField already confirmed isValidMaskField, use again but don't allow
+            // Gendered and return false, so only Gendered continues
+            if (IsValidMaskField(field.FieldType, false))
                 return false;
 
             // Handle null value case
@@ -345,7 +449,9 @@ namespace GenericSynthesisPatcher.Helpers
             if (!TryGetMaskField(mask, maskEntry, comparer, out var field))
                 return false;
 
-            if (field.FieldType == typeof(bool) || field.FieldType.IsAssignableTo(typeof(ITranslationMask)))
+            // While TryGetMaskField already confirmed isValidMaskField, use again but don't allow
+            // Gendered and return false, so only Gendered continues
+            if (IsValidMaskField(field.FieldType, false))
                 return false;
 
             // Handle null value case
@@ -399,6 +505,25 @@ namespace GenericSynthesisPatcher.Helpers
             }
 
             return setAll;
+        }
+
+        private static bool isEnabled (object? value, bool defaultOn)
+        {
+            switch (value)
+            {
+                case null:
+                    return defaultOn;
+
+                case bool boolValue:
+                    return boolValue;
+
+                case ITranslationMask mask:
+                    return (!mask.GetCrystal()?.CopyNothing) ?? defaultOn;
+
+                default:
+                    var properties = value.GetType().Explode(2);
+                    return properties.Length == 2 && (properties[0] == typeof(IGenderedItem<>) || properties[0] == typeof(GenderedItem<>)) ? true : throw new ArgumentException($"Invalid mask value type: {value.GetType().GetClassName()}");
+            }
         }
     }
 }

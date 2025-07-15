@@ -1,7 +1,5 @@
 ﻿using Common;
 
-using Loqui;
-
 using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
@@ -10,10 +8,7 @@ using Newtonsoft.Json.Linq;
 namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
     /// <summary>
-    ///     Converter for <see cref="ITranslationMask" /> implementations. Must have constructor
-    ///     that takes two boolean parameters:
-    ///     defaultOn: If not defined in JSON, the will default to true IF all defined properties
-    ///     are false. Else it will default to false
+    ///     Converter for <see cref="GenderedItem" /> implementations.
     /// </summary>
     public class GenderedItemConverter : JsonConverter
     {
@@ -54,6 +49,41 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             throw new JsonSerializationException($"Failed to create instance of {objectType.GetClassName()} with provided values.");
         }
 
-        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
+        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            var property = value.GetType().GetProperty(nameof(MaleFemaleGender.Female), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            if (property is null)
+                throw new JsonSerializationException($"Type {value.GetType().GetClassName()} doesn't seem to be correct IGenderedItem<T> type");
+
+            object? female = property.GetValue(value);
+
+            property = value.GetType().GetProperty(nameof(MaleFemaleGender.Male), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            if (property is null)
+                throw new JsonSerializationException($"Type {value.GetType().GetClassName()} doesn't seem to be correct IGenderedItem<T> type");
+
+            object? male = property.GetValue(value);
+
+            if (Equals(female, male))
+            {
+                serializer.Serialize(writer, female);
+                return;
+            }
+
+            writer.WriteStartObject();
+
+            writer.WritePropertyName(nameof(MaleFemaleGender.Female));
+            serializer.Serialize(writer, female);
+
+            writer.WritePropertyName(nameof(MaleFemaleGender.Male));
+            serializer.Serialize(writer, male);
+
+            writer.WriteEndObject();
+        }
     }
 }

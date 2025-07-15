@@ -4,6 +4,8 @@ using GenericSynthesisPatcher.Helpers;
 
 using Loqui;
 
+using Mutagen.Bethesda.Plugins.Records;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,10 +14,11 @@ using Noggog;
 namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
     /// <summary>
-    ///     Converter for <see cref="ITranslationMask" /> implementations. Must have constructor
-    ///     that takes two boolean parameters:
-    ///     defaultOn: If not defined in JSON, the will default to true IF all defined properties
-    ///     are false. Else it will default to false
+    ///     Converter for <see cref="ITranslationMask" /> implementations.
+    ///
+    ///     NOTE: Probably won't work with non-Mutagen ITranslationMask classes, unless they follow
+    ///     the same implementation of DefaultOn and OnOverall which isn't part of the
+    ///     ITranslationMask interface.
     /// </summary>
     public class TranslationMaskConverter : JsonConverter
     {
@@ -52,7 +55,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 
                     var mask = con.Invoke([defaultOn, onOverall]) as ITranslationMask ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} failed to create.");
 
-                    foreach (var property in jObject.Properties().Where(p => !p.Name.Equals("DefaultOn", StringComparison.OrdinalIgnoreCase) && !p.Name.Equals("OnOverall", StringComparison.OrdinalIgnoreCase)))
+                    foreach (var property in jObject.Properties().Where(p => !p.Name.Equals(nameof(MajorRecord.TranslationMask.DefaultOn), StringComparison.OrdinalIgnoreCase) && !p.Name.Equals(nameof(MajorRecord.TranslationMask.OnOverall), StringComparison.OrdinalIgnoreCase)))
                     {
                         if (property.Value.Type == JTokenType.Boolean)
                         {
@@ -81,7 +84,61 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             }
         }
 
-        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
+        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            if (value is not ITranslationMask mask)
+                throw new JsonSerializationException($"Expected ITranslationMask object but found {value.GetType().GetClassName()}");
+
+            bool defaultOn = mask.GetDefaultOn();
+            bool onOverall = mask.GetOnOverall();
+            var nonDefaults = mask.GetNonDefault();
+            bool outputDefaultOn = false;
+
+            if (!nonDefaults.Any())
+            {
+                if (defaultOn == onOverall)
+                {
+                    writer.WriteValue(defaultOn);
+                    return;
+                }
+
+                outputDefaultOn = true;
+            }
+
+            if (!outputDefaultOn)
+            {
+                bool allBool = !nonDefaults.Any(x => x.value is not bool);
+                outputDefaultOn = !allBool;
+            }
+
+            writer.WriteStartObject();
+
+            if (outputDefaultOn)
+            {
+                writer.WritePropertyName(nameof(MajorRecord.TranslationMask.DefaultOn));
+                writer.WriteValue(defaultOn);
+            }
+
+            if (!onOverall)
+            {
+                writer.WritePropertyName(nameof(MajorRecord.TranslationMask.OnOverall));
+                writer.WriteValue(onOverall);
+            }
+
+            foreach (var (name, maskValue) in nonDefaults)
+            {
+                writer.WritePropertyName(name);
+                serializer.Serialize(writer, maskValue);
+            }
+
+            writer.WriteEndObject();
+        }
 
         private static bool tryBoolValue (JObject jObject, string name, out bool value)
         {

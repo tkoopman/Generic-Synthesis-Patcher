@@ -606,6 +606,17 @@ namespace GenericSynthesisPatcher.Rules
                 return -1;
             }
 
+            if (OnlyIfDefault)
+            {
+                if (!proKeys.Record.Equals(proKeys.GetOriginRecord(), mask))
+                {
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginNotMatch, "DeepCopyIn OnlyIfDefault: Did not match - skipping", ClassLogCode);
+                    return -1;
+                }
+
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginMatch, "DeepCopyIn OnlyIfDefault: Matched", ClassLogCode);
+            }
+
             var AllRecordMods =
                 fromSameID || action.FromMod.SafeAny()
                 ? getAvailableMods(proKeys, action.FromMod, from)
@@ -632,11 +643,15 @@ namespace GenericSynthesisPatcher.Rules
 
             Global.Logger.LogAction("Calling DeepCopyIn to update property.", ClassLogCode);
 
-            // TODO: CheckOnlyIfDefault
-            // TODO: Add ErrorMask and validate
-            patchRecord.DeepCopyIn(fromContext.Record, mask);
+            patchRecord.DeepCopyIn(fromContext.Record, out var errorMask, mask);
+            if (errorMask.IsInError())
+            {
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, $"DeepCopyIn returned with errors.{Environment.NewLine}{errorMask}", ClassLogCode);
+                return 0;
+            }
 
-            // TODO: Look at adding any changed fields to Program.RecordUpdates
+            foreach (string fieldName in mask.GetEnabled())
+                Program.RecordUpdates.Add((proKeys.Record.Registration, proKeys.Record.FormKey, this, fieldName, 1));
 
             if (Global.Logger.CurrentLogLevel <= LogLevel.Debug)
             {
@@ -673,7 +688,7 @@ namespace GenericSynthesisPatcher.Rules
             int changed = proKeys.Property.Action.Fill(proKeys);
 
             if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property, changed));
+                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
 
             return changed;
         }
@@ -778,7 +793,7 @@ namespace GenericSynthesisPatcher.Rules
                 }
 
                 if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                    Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property, changed));
+                    Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
             }
 
             return changed;
@@ -865,7 +880,7 @@ namespace GenericSynthesisPatcher.Rules
             int changed = proKeys.Property.Action.Merge(proKeys);
 
             if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property, changed));
+                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
 
             return changed;
         }

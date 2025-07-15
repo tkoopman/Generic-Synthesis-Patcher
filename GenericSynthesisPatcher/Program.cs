@@ -1,6 +1,5 @@
 using System.Data;
 
-using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Rules;
 using GenericSynthesisPatcher.Rules.Loaders;
@@ -19,9 +18,10 @@ namespace GenericSynthesisPatcher
     {
         /// <summary>
         ///     Record of all record properties that have been updated. Used to detect when a
-        ///     property is updated by 2 different processes.
+        ///     property is updated by 2 or more different actions / rules.
         /// </summary>
-        internal static readonly List<(ILoquiRegistration Type, FormKey FormKey, GSPRule Rule, PropertyAction Property, int Changes)> RecordUpdates = [];
+        /// TODO: Currently if property that includes sub-properties is changed twice once at main and then at sub-property it won't be shown as a warning
+        internal static readonly List<(ILoquiRegistration Type, FormKey FormKey, GSPRule Rule, string Property, int Changes)> RecordUpdates = [];
 
         private const int ClassLogCode = 0x01;
 
@@ -147,12 +147,12 @@ namespace GenericSynthesisPatcher
             Global.Logger.PrintCounts();
             Global.Logger.Out.WriteLine();
 
-            var updates = RecordUpdates.GroupBy(g => (g.Type, g.FormKey, g.Property.PropertyName),
+            var updates = RecordUpdates.GroupBy(g => (g.Type, g.FormKey, g.Property),
                                                 g => (g.Rule, g.Changes), (k, data) => new { Key = k, Rules = data.Select(d => d.Rule).Count(), Changes = data.Select(d => d.Changes).Sum() })
                                        .Where(g => g.Rules > 1);
 
             foreach (var update in updates)
-                Global.Logger.Out.WriteLine($"Warning: Record {update.Key.FormKey} had {update.Key.PropertyName} updated by {update.Rules} different rules, with total of {update.Changes} changes.");
+                Global.Logger.Out.WriteLine($"Warning: Record {update.Key.FormKey} had {update.Key.Property} updated by {update.Rules} different rules, with total of {update.Changes} changes.");
 
             Global.Logger.Out.WriteLine();
 

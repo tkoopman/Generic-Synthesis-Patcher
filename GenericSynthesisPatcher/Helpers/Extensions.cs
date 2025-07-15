@@ -7,6 +7,7 @@ using Common;
 using Loqui;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -33,7 +34,7 @@ namespace GenericSynthesisPatcher.Helpers
         ///     If TriggeringRecordType doesn't exist.
         /// </exception>
         public static RecordType GetRecordType (this ILoquiRegistration registration)
-            => registration.TryGetRecordType(out RecordType recordType)
+            => registration.TryGetRecordType(out var recordType)
             ? recordType
             : throw new InvalidOperationException($"Registration {registration.GetType().Name} does not have a valid RecordType.");
 

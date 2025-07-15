@@ -12,10 +12,13 @@ using Loqui;
 
 using Mutagen.Bethesda.Plugins.Records;
 
+using Xunit.Abstractions;
+
 namespace GSPTestProject
 {
-    public class TranslationMaskFactory_Skyrim : IClassFixture<SkyrimSEFixture>
+    public class TranslationMaskFactory_Skyrim (SkyrimSEFixture skyrimFixture, ITestOutputHelper output) : IClassFixture<SkyrimSEFixture>
     {
+        public readonly ITestOutputHelper Output = output;
         private readonly TranslationMaskConverter_Comparer _translationMaskComparer = new();
 
         [Theory]
@@ -56,6 +59,8 @@ namespace GSPTestProject
                 }
             }
 
+            Output.WriteLine(string.Join(", ", startingMask.GetEnabled()));
+
             Assert.Equal(expectedResult, startingMask, _translationMaskComparer);
         }
 
@@ -68,6 +73,10 @@ namespace GSPTestProject
 
             // Assert
             Assert.Equal(expected, result);
+
+            if (mask is not null)
+                Output.WriteLine(string.Join(", ", mask.GetEnabled()));
+
             if (expectedMask is null)
             {
                 Assert.Null(mask);
