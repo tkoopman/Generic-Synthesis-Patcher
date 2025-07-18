@@ -9,6 +9,12 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="gsp-config.schema.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gsp-config.schema.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Enums.NET" Version="5.0.0" />

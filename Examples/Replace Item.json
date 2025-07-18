@@ -7,9 +7,9 @@
 
 [
   {
-    "types": [ "Container", "NPC" ],
-    "Matches": { "Items": "12EB7:Skyrim.esm" },
-    "Fill": {
+    "types": [ "container", "npc" ],
+    "matches": { "Items": "12EB7:Skyrim.esm" },
+    "fill": {
       "Items": [
         { "Item": "-12EB7:Skyrim.esm" },
         { "Item": "4D91:HearthFires.esm" }
@@ -17,9 +17,9 @@
     }
   },
   {
-    "types": "LeveledItem",
-    "Matches": { "Entries": "12EB7:Skyrim.esm" },
-    "Fill": {
+    "types": "leveledItem",
+    "matches": { "Entries": "12EB7:Skyrim.esm" },
+    "fill": {
       "Entries": [
         { "Item": "-12EB7:Skyrim.esm" },
         { "Item": "4D91:HearthFires.esm" }

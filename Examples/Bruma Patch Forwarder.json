@@ -4,15 +4,15 @@
 
 [
   {
-    "types": [ "CELL" ],
-    "Masters": "BSHeartland.esm",
-    "OnlyIfDefault": true,
-    "Forward": { "BSHeartland - Unofficial Fixes.esp": "XCCM" }
+    "types": "cell",
+    "masters": "BSHeartland.esm",
+    "onlyIfDefault": true,
+    "forward": { "BSHeartland - Unofficial Fixes.esp": "XCCM" }
   },
   {
-    "types": [ "BOOK" ],
-    "Masters": "BSAssets.esm",
-    "OnlyIfDefault": true,
-    "Forward": { "BSHeartland - Unofficial Fixes.esp": "BookText" }
+    "types": "book",
+    "masters": "BSAssets.esm",
+    "onlyIfDefault": true,
+    "forward": { "BSHeartland - Unofficial Fixes.esp": "BookText" }
   }
 ]

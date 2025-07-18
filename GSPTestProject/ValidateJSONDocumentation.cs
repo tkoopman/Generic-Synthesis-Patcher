@@ -14,6 +14,7 @@ using Loqui;
 using Mutagen.Bethesda.Oblivion;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using Xunit.Abstractions;
 
@@ -21,7 +22,9 @@ namespace GSPTestProject
 {
     public partial class ValidateJSONDocumentation
     {
-        public readonly string DocumentationPath = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../docs/data/"));
+        public static readonly string DocumentationPath = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../docs/data/"));
+
+        public static readonly string SchemaPath = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../GenericSynthesisPatcher/"));
 
         /// <summary>
         ///     If set to <c>true</c>, the test will update the JSON files with the expected content
@@ -64,6 +67,77 @@ namespace GSPTestProject
             }
 
             Assert.Empty(files);
+        }
+
+        [Theory]
+        [ClassData(typeof(AllGames))]
+        public void CheckJsonSchema (Game gameData)
+        {
+            string gameFileName = $"gsp-config-{gameData.GameCategory.ToString().ToLower()}.schema.json";
+            string gameFilePath = Path.Join(SchemaPath, gameFileName);
+
+            List<string> allTypes = [];
+            foreach (var rt in gameData.BaseGame.AllRecordTypes())
+            {
+                if (rt.TryGetRecordType(out var _))
+                    allTypes.Add(char.ToLowerInvariant(rt.Name[0]) + rt.Name[1..]);
+            }
+
+            allTypes.Sort((a, b) => string.Compare(a, b, StringComparison.OrdinalIgnoreCase));
+
+            using var writer = new StringWriter();
+            using var jsonWriter = new JsonTextWriter(writer);
+
+            var serializer = new JsonSerializer
+            {
+                Formatting = Formatting.None,
+            };
+
+            var assembly = typeof(GenericSynthesisPatcher.Global).Assembly;
+            using var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.gsp-config.schema.json") ?? throw new Exception();
+
+            TextReader reader = new StreamReader(stream);
+            string rawSchema = reader.ReadToEnd();
+
+            var schema = JObject.Parse(rawSchema);
+            var def = schema["definitions"];
+            Assert.NotNull(def);
+            var recordType = def["recordType"] as JObject;
+            Assert.NotNull(recordType);
+
+            // Create json array of types and add to recordTypes definition
+            var jsonTypes = JArray.FromObject(allTypes);
+            recordType.Add("enum", jsonTypes);
+
+            // Update $id to game specific URL
+            string? id = (schema["$id"] as JValue)?.Value as string;
+            Assert.NotNull(id);
+            var uri = new Uri(id);
+            uri = new Uri(uri, $"./{gameFileName}");
+            schema["$id"] = JValue.FromObject(uri.ToString());
+
+            serializer.Serialize(writer, schema);
+            string expect = writer.ToString();
+            bool match = compareFile(expect, gameFilePath);
+
+            if (!match)
+            {
+                Output.WriteLine($"Expected content does not match for {gameFilePath}");
+                if (InPlaceUpdate)
+                {
+                    File.WriteAllText(gameFilePath, expect);
+                    Output.WriteLine($"Updated {gameFileName} with expected content.");
+
+                    // Confirm it now matches
+                    match = compareFile(expect, gameFilePath);
+                }
+                else
+                {
+                    Output.WriteLine(expect);
+                }
+            }
+
+            Assert.True(match);
         }
 
         [Theory]

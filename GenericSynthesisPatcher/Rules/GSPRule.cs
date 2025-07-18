@@ -219,8 +219,6 @@ namespace GenericSynthesisPatcher.Rules
                 Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "You have defined a rule priority, for a rule in a group. Group member priorities are ignored. Order in file is processing order.", ClassLogCode, includePrefix: GetLogRuleID());
 
             bool valid = Validate();
-            if (!Types.Any())
-                Types = Global.Game.AllRecordTypes();
 
             return valid;
         }

@@ -4,101 +4,101 @@
 
 [
   {
-    "types": "Container",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "container",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Items": [] } }
+      { "merge": { "Items": [ ] } }
     ]
   },
   {
-    "types": [ "Ammunition", "Armor", "Container", "Ingestible", "Ingredient" ],
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": [ "ammunition", "armor", "container", "ingestible", "ingredient" ],
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
       {
-        "Merge": { "Keywords": [ "-Immersive Sounds - Compendium.esp" ] }
+        "merge": { "Keywords": [ "-Immersive Sounds - Compendium.esp" ] }
       }
     ]
   },
   {
-    "types": "FormList",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "formList",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Items": [] } }
+      { "merge": { "Items": [ ] } }
     ]
   },
   {
-    "types": [ "Ingestible", "Ingredient" ],
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": [ "ingestible", "ingredient" ],
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Effects": [] } }
+      { "merge": { "Effects": [ ] } }
     ]
   },
   {
-    "types": "LeveledItem",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "leveledItem",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Entries": [] } }
+      { "merge": { "Entries": [ ] } }
     ]
   },
   {
-    "types": "LeveledNpc",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "leveledNpc",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Entries": [] } }
+      { "merge": { "Entries": [ ] } }
     ]
   },
   {
-    "types": "LeveledSpell",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "leveledSpell",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Entries": [] } }
+      { "merge": { "Entries": [ ] } }
     ]
   },
   {
-    "types": "Faction",
-    "SingleMatch": true,
-    "Rules": [
-      // Add sections here with no actions to exclude from merge
-      // { "FormID": [] },
-      // { "Masters": [] },
+    "types": "faction",
+    "singleMatch": true,
+    "rules": [
+      // Add sections here to exclude from merge
+      // { "!formID": [] },
+      // { "!masters": [] },
 
       // For everything else just do basic merge
-      { "Merge": { "Relations": [] } }
+      { "merge": { "Relations": [ ] } }
     ]
   }
 ]

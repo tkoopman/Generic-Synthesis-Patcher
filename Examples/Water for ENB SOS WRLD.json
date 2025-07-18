@@ -1,12 +1,9 @@
-/*
-  Forwards Water for ENB Shades of Skyrim water & LOD fields to make sure they not overwritten.
-*/
-
 [
   {
-    "types": "WRLD",
-    "Masters": [ "Skyrim.esm", "Dawnguard.esm", "Dragonborn.esm" ],
-    "OnlyIfDefault": true,
-    "Forward": { "Water for ENB (Shades of Skyrim).esp": [ "Water", "LodWater" ] }
+    "$comment": "Forwards Water for ENB Shades of Skyrim water & LOD fields to make sure they not overwritten.",
+    "types": [ "worldspace" ],
+    "masters": [ "Skyrim.esm", "Dawnguard.esm", "Dragonborn.esm" ],
+    "onlyIfDefault": true,
+    "forward": { "Water for ENB (Shades of Skyrim).esp": [ "Water", "LodWater" ] }
   }
 ]

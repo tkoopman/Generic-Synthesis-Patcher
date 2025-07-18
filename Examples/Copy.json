@@ -4,10 +4,10 @@
 
 [
   {
-    "types": "NPC",
-    "Copy": {
-      "FromMod": "Skyrim.esm",
-      "Mask": {
+    "types": "npc",
+    "copy": {
+      "fromMod": "Skyrim.esm",
+      "mask": {
         "FaceMorph": true,
         "FaceParts": true,
         "HairColor": true,

@@ -13,7 +13,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             var jObject = JObject.Load(reader);
 
             // Create target object based on JObject
-            var target = jObject["Rules"] is not null ? new GSPGroup() : (GSPBase)new GSPRule();
+            var target = jObject.GetValue("rules", StringComparison.OrdinalIgnoreCase) is not null ? new GSPGroup() : (GSPBase)new GSPRule();
 
             // Populate the object properties
             serializer.Populate(jObject.CreateReader(), target);

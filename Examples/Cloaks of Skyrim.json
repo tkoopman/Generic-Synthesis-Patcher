@@ -5,21 +5,21 @@
 
 [
   {
-    "types": "Outfit",
-    "Masters": "Skyrim.esm",
-    "ForwardOptions": "SelfMasterOnly",
-    "Forward": { "Cloaks.esp": "Items" }
+    "types": "outfit",
+    "masters": "Skyrim.esm",
+    "forwardOptions": "selfMasterOnly",
+    "forward": { "Cloaks.esp": "Items" }
   },
   {
-    "types": "Outfit",
-    "Masters": "Dawnguard.esm",
-    "ForwardOptions": "SelfMasterOnly",
-    "Forward": { "Cloaks - Dawnguard.esp": "Items" }
+    "types": "outfit",
+    "masters": "Dawnguard.esm",
+    "forwardOptions": "selfMasterOnly",
+    "forward": { "Cloaks - Dawnguard.esp": "Items" }
   },
   {
-    "types": "Armor",
-    "Masters": "Cloaks.esp",
-    "Matches": { "Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide" ] },
-    "Fill": { "Keywords": "Survival_ArmorWarm" }
+    "types": "armor",
+    "masters": "Cloaks.esp",
+    "matches": { "Keywords": [ "ArmorMaterialLeather", "ArmorMaterialHide" ] },
+    "fill": { "Keywords": "Survival_ArmorWarm" }
   }
 ]

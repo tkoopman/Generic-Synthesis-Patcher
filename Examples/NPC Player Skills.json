@@ -8,16 +8,16 @@
 
 [
   {
-    "types": [ "NPC" ],
-    "ForwardOptions": [ "IndexedByField" ],
-    "OnlyIfDefault": true,
+    "types": "npc",
+    "forwardOptions": [ "indexedByField" ],
+    "onlyIfDefault": true,
     "forward": {
       "PlayerSkills": [ "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim creation club content patch.esl", "unofficial skyrim special edition patch.esp" ]
     }
   },
   {
-    "types": [ "NPC" ],
-    "FormID": "7:Skyrim.esm",
+    "types": "npc",
+    "formID": "7:Skyrim.esm",
     "fill": {
       "PlayerSkills": {
         "FarAwayModelDistance": 0,

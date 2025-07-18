@@ -57,9 +57,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
                 return;
             }
 
-            var property = value.GetType().GetProperty(nameof(MaleFemaleGender.Female), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            if (property is null)
-                throw new JsonSerializationException($"Type {value.GetType().GetClassName()} doesn't seem to be correct IGenderedItem<T> type");
+            var property = value.GetType().GetProperty(nameof(MaleFemaleGender.Female), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance) ?? throw new JsonSerializationException($"Type {value.GetType().GetClassName()} doesn't seem to be correct IGenderedItem<T> type");
 
             object? female = property.GetValue(value);
 

@@ -6,16 +6,16 @@
 
 [
   {
-    "Types": "Faction",
-    "Masters": [
+    "types": "faction",
+    "masters": [
       "Skyrim.esm",
       "Dawnguard.esm",
       "Dragonborn.esm",
       "BSHeartland.esm",
       "ForgottenCity.esp"
     ],
-    "SingleMatch": true,
-    "Rules": [
+    "singleMatch": true,
+    "rules": [
       {
         "formID": [
           "000013:Skyrim.esm",
