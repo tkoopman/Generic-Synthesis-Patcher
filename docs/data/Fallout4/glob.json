@@ -68,5 +68,40 @@
     "Example": "\"VersionControl\": 7",
     "Flags": 30,
     "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Bool' record types. True / False",
+    "Example": "\"Data\": true",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Float' record types. Decimal value",
+    "Example": "\"Data\": 3.14",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Float' record types. True / False",
+    "Example": "\"OutputChar\": true",
+    "Flags": 28,
+    "Name": "OutputChar *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Int' record types. Numeric value",
+    "Example": "\"Data\": 7",
+    "Flags": 28,
+    "Name": "Data *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Global Short' record types. Numeric value",
+    "Example": "\"Data\": 7",
+    "Flags": 28,
+    "Name": "Data *"
   }
 ]

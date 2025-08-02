@@ -13,13 +13,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class LeveledSpellAction : LeveledEntryAction<LeveledSpellData, ISpellRecordGetter, LeveledSpellEntry>
     {
         public static readonly LeveledSpellAction Instance = new();
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0xA6;
 
         public override LeveledSpellEntry? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not ILeveledSpellEntryGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to create entry data?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to create entry data?", ClassLogCode);
                 return null;
             }
 

@@ -1,0 +1,107 @@
+﻿using System.Collections;
+
+using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules;
+
+using GSPTestProject.GameData.GlobalGame.Fixtures;
+
+using Loqui;
+
+using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Order;
+using Mutagen.Bethesda.Skyrim;
+
+using Xunit.Abstractions;
+
+using Global = GenericSynthesisPatcher.Global;
+
+namespace GSPTestProject
+{
+#pragma warning disable CS9113 // Parameter is unread.
+
+    public sealed class GeneralTests_Skyrim (SkyrimSEFixture skyrimFixture, ITestOutputHelper output) : GeneralTests_Base(output), IClassFixture<SkyrimSEFixture>
+#pragma warning restore CS9113 // Parameter is unread.
+    {
+        protected override GameRelease GameRelease => GameRelease.SkyrimSE;
+
+        protected override Type ModGetterType => typeof(IEnumerable<IModListing<ISkyrimModGetter>>);
+
+        [Fact]
+        public void CalculateLogLevel_Check ()
+        {
+            // Should be Trace as we don't filter if no rule or context provided
+            Global.Settings.Logging.LogLevel = Microsoft.Extensions.Logging.LogLevel.Trace;
+            var logLevel = LogWriter.calculateCurrentLogLevel(null, FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+
+            // Should be Trace as Debug is set on rule
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule() { Debug = true }, FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+
+            // Should be Information as no option set to allow Trace
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule(), FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Information, logLevel);
+
+            // Should be Trace as All is set
+            Global.Settings.Logging.All = true;
+            logLevel = LogWriter.calculateCurrentLogLevel(new GSPRule(), FormKey.Null);
+            Assert.Equal(Microsoft.Extensions.Logging.LogLevel.Trace, logLevel);
+        }
+
+        [Fact]
+        public void ConfirmAllRecordTypes ()
+        {
+            foreach (var method in typeof(TypeOptionSolidifierMixIns).GetMethods())
+            {
+                if (!method.ReturnType.IsGenericType || method.ReturnType.GenericTypeArguments.Length == 0)
+                    continue;
+
+                var returnType = method.ReturnType.GenericTypeArguments[^1];
+
+                var regoProperty = returnType.GetProperty("StaticRegistration");
+                if (regoProperty?.GetValue(null) is ILoquiRegistration rego)
+                    _ = Global.Game.GetRecords(rego);
+            }
+
+            Assert.NotEmpty(Global.Game.AllRecordTypes());
+        }
+
+        [Fact]
+        public void LoadOrder ()
+        {
+            Output.WriteLine("Load Order:");
+            foreach (var mod in Global.Game.LoadOrder)
+                Output.WriteLine($"  {mod.FileName}");
+        }
+
+        [Theory]
+        [ClassData(typeof(Data_TryConvertFormID))]
+        public void Test_TryConvertFormID (FormID formID, FormKey expected)
+        {
+            var result = Global.Game.FormIDToFormKeyConverter(formID);
+            Assert.Equal(expected, result);
+        }
+
+        public class Data_TryConvertFormID : IEnumerable<object?[]>
+        {
+            public IEnumerator<object?[]> GetEnumerator ()
+            {
+                yield return new object?[] {
+                    new FormID(0x00000007),
+                    new FormKey("Skyrim.esm", 0x000007)
+                };
+                yield return new object?[] {
+                    new FormID(0x04123456),
+                    new FormKey("Dragonborn.esm", 0x123456)
+                };
+                yield return new object?[] {
+                    new FormID(0x05123456),
+                    FormKey.Null
+                };
+            }
+
+            IEnumerator IEnumerable.GetEnumerator () => GetEnumerator();
+        }
+    }
+}

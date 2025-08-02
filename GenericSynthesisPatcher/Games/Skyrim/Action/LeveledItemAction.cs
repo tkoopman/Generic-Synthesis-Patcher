@@ -13,13 +13,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class LeveledItemAction : LeveledEntryAction<LeveledItemData, IItemGetter, LeveledItemEntry>
     {
         public static readonly LeveledItemAction Instance = new();
-        private const int ClassLogCode = 0x1A;
+        private const int ClassLogCode = 0xA4;
 
         public override LeveledItemEntry? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not ILeveledItemEntryGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to create entry data?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to create entry data?", ClassLogCode);
                 return null;
             }
 

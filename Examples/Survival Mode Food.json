@@ -5,9 +5,9 @@
 
 [
   {
-    "Types": "Ingestible",
-    "SingleMatch": true,
-    "Rules": [
+    "types": "ingestible",
+    "singleMatch": true,
+    "rules": [
       {
         "formID": [
           "FAA:CookingAdventuresInSkyrim.esp",
@@ -77,11 +77,11 @@
           "AA14:1KwamaCreatures.esp",
           "826:Lively Farms.esp"
         ],
-        "Fill": {
+        "fill": {
           "effects": [
             {
               "effect": "002EE1:Update.esm",
-              "comment": "Survival_FoodRestoreHungerVerySmall"
+              "$comment": "Survival_FoodRestoreHungerVerySmall"
             }
           ]
         }
@@ -117,11 +117,11 @@
           "801:slightly Better Honey Pot BOS.esp",
           "D62:slightly Better Honey Pot BOS.esp"
         ],
-        "Fill": {
+        "fill": {
           "effects": [
             {
               "effect": "002EE2:Update.esm",
-              "comment": "Survival_FoodRestoreHungerSmall"
+              "$comment": "Survival_FoodRestoreHungerSmall"
             }
           ]
         }
@@ -167,11 +167,11 @@
           "83D:Shalks.esp",
           "83E:Shalks.esp"
         ],
-        "Fill": {
+        "fill": {
           "effects": [
             {
               "effect": "002EE3:Update.esm",
-              "comment": "Survival_FoodRestoreHungerMedium"
+              "$comment": "Survival_FoodRestoreHungerMedium"
             }
           ]
         }
@@ -221,11 +221,11 @@
           "02D281:Northpoint.esp",
           "02D282:Northpoint.esp"
         ],
-        "Fill": {
+        "fill": {
           "effects": [
             {
               "effect": "002EE4:Update.esm",
-              "comment": "Survival_FoodRestoreHungerLarge"
+              "$comment": "Survival_FoodRestoreHungerLarge"
             }
           ]
         }

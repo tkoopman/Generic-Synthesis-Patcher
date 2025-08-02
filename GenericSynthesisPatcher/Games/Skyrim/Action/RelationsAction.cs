@@ -14,13 +14,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class RelationsAction : FormLinksWithDataAction<RelationsData, IRelatableGetter, Relation>
     {
         public static readonly RelationsAction Instance = new();
-        private const int ClassLogCode = 0x1D;
+        private const int ClassLogCode = 0xA9;
 
         public override Relation? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not IRelationGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to add item. No Items?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add item. No Items?", ClassLogCode);
                 return null;
             }
 

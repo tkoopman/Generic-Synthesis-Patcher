@@ -54,5 +54,19 @@
     "Example": "\"VersionControl\": 7",
     "Flags": 30,
     "Name": "VersionControl"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Damage Type' record types. ",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DamageTypes *"
+  },
+  {
+    "Aliases": "",
+    "Description": "* Only valid for 'Damage Type Indexed' record types. ",
+    "Example": "",
+    "Flags": 144,
+    "Name": "DamageTypes *"
   }
 ]

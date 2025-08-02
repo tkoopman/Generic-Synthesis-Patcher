@@ -11,6 +11,7 @@ using GenericSynthesisPatcher.Helpers;
 
 using Loqui;
 
+using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Assets;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -28,29 +29,22 @@ namespace GenericSynthesisPatcher.Games.Universal
     /// <summary>
     ///     Base class for all games supported by Generic Synthesis Patcher.
     /// </summary>
-    public abstract class BaseGame
+    /// <param name="loadOrder">
+    ///     Load order of the game. May use null! in xUnit testing just avoid calls that require it.
+    /// </param>
+    public abstract class BaseGame (LoadOrder<IModListingGetter> loadOrder)
     {
         private readonly HashSet<PropertyAliasMapping> propertyAliases = [];
         private ReadOnlyDictionary<string, ILoquiRegistration>? _recordTypes;
-
-        public BaseGame (LoadOrder<IModListingGetter> loadOrder) => LoadOrder = loadOrder;
-
-        /// <summary>
-        ///     Create stateless version. Many functions won't work. Only designed for use by Testing.
-        /// </summary>
-        internal BaseGame () => LoadOrder = null!;
 
         /// <summary>
         ///     All known property alias mappings. Used to find aliases for documentation.
         /// </summary>
         public IReadOnlyCollection<PropertyAliasMapping> AliasMappings => propertyAliases.ToList().AsReadOnly();
 
-        /// <summary>
-        ///     List of property names that should be hidden by default in documentation.
-        ///
-        ///     Any property name starting with Unknown or Unused automatically added so no need to
-        ///     list here.
-        /// </summary>
+        public abstract GameCategory GameCategory { get; }
+
+        public abstract GameRelease GameRelease { get; }
 
         public virtual HashSet<string> HiddenProperties => [
             "DATADataTypeState",
@@ -72,6 +66,12 @@ namespace GenericSynthesisPatcher.Games.Universal
             ];
 
         /// <summary>
+        ///     List of property names that should be hidden by default in documentation.
+        ///
+        ///     Any property name starting with Unknown or Unused automatically added so no need to
+        ///     list here.
+        /// </summary>
+        /// <summary>
         ///     Types contained in this set will not be traversed for sub-properties.
         /// </summary>
         public HashSet<Type> IgnoreSubPropertiesOnTypes { get; protected set; } =
@@ -89,7 +89,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         /// <summary>
         ///     Load order of the game.
         /// </summary>
-        public LoadOrder<IModListingGetter> LoadOrder { get; }
+        public LoadOrder<IModListingGetter> LoadOrder { get; } = loadOrder!;
 
         /// <summary>
         ///     All record types that are supported by this game.
@@ -128,13 +128,16 @@ namespace GenericSynthesisPatcher.Games.Universal
             Converters =
             [
                 new ColorConverter(),
+                new FlagConverter(),
                 new FormKeyConverter(),
+                new GenderedItemConverter(),
                 new ModKeyConverter(),
                 new NoggogPxConverter(),
                 new OperationsConverter(),
                 new PercentConverter(),
+                new RecordIDConverter(),
                 new RecordTypeConverter(),
-                new TranslationMaskConverter()
+                new TranslationMaskConverter(),
             ],
             DefaultValueHandling = DefaultValueHandling.Ignore,
             MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -143,7 +146,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public abstract IPatcherState State { get; }
 
-        protected abstract Type TypeOptionSolidifierMixIns { get; }
+        public abstract Type TypeOptionSolidifierMixIns { get; }
 
         private Dictionary<PropertyKey, PropertyAction?> PropertyMappings { get; } = [];
 
@@ -179,6 +182,11 @@ namespace GenericSynthesisPatcher.Games.Universal
         };
 
         public IEnumerable<ILoquiRegistration> AllRecordTypes () => new HashSet<ILoquiRegistration>(RecordTypes.Values);
+
+        /// <summary>
+        ///     Attempt to convert FormID into FormKey
+        /// </summary>
+        public virtual FormKey FormIDToFormKeyConverter (FormID formID) => FormKey.Null;
 
         /// <summary>
         ///     Get the action for a given property name in a record type. propertyName will be
@@ -284,7 +292,7 @@ namespace GenericSynthesisPatcher.Games.Universal
                 {
                     if (i == 0)
                     {
-                        string? rpn = Global.Game.GetRealPropertyName(recordType, propertyNames[i]);
+                        string? rpn = GetRealPropertyName(recordType, propertyNames[i]);
                         if (rpn is not null)
                         {
                             propertyNames[0] = rpn;
@@ -311,6 +319,9 @@ namespace GenericSynthesisPatcher.Games.Universal
             correctedPropertyName = string.Join('.', name);
             return valid;
         }
+
+        protected static LoadOrder<IModListingGetter>? constructLoadOrder (IEnumerable<IModListingGetter>? loadOrder)
+            => loadOrder is null ? null : new LoadOrder<IModListingGetter>(loadOrder);
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         protected void AddAlias (ILoquiRegistration? recordType, string propertyName, string? realPropertyName)
@@ -339,7 +350,7 @@ namespace GenericSynthesisPatcher.Games.Universal
                 throw new ArgumentException("Cannot add exact match for a generic type definition.", nameof(type));
 
             if (TypeMappingsExact.ContainsKey(type))
-                Global.Logger.Log(0, $"Exact match for {type.GetClassName()} already exists, overwriting with {action?.GetType().GetClassName() ?? "null"}", logLevel: Microsoft.Extensions.Logging.LogLevel.Trace);
+                throw new ArgumentException($"Exact match for {type.GetClassName()} already exists, overwriting with {action?.GetType().GetClassName() ?? "null"}", nameof(type));
 
             TypeMappingsExact[type] = action;
         }

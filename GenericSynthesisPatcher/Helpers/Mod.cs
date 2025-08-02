@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Common;
+
+using GenericSynthesisPatcher.Rules;
 
 using Loqui;
 
@@ -19,8 +22,6 @@ namespace GenericSynthesisPatcher.Helpers
 {
     internal static class Mod
     {
-        private const int ClassLogCode = 0x02;
-
         /// <summary>
         ///     Used to clear a property back to default instance of it's type. Good for clearing
         ///     list field's by setting it back to an empty list. Does not check if current value
@@ -29,12 +30,12 @@ namespace GenericSynthesisPatcher.Helpers
         /// <param name="patchRecord">Editable version of the record to clear property on</param>
         /// <param name="propertyName">Name of property to clear</param>
         /// <returns>True if successfully cleared.</returns>
-        public static bool ClearProperty (IMajorRecord patchRecord, string propertyName)
+        public static bool ClearProperty (IMajorRecord patchRecord, string propertyName, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             var property = patchRecord.GetType().GetProperty(propertyName);
             if (property is null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
+                Global.Logger.LogMissingProperty(propertyName, callerClassCode, line: line);
                 return false;
             }
 
@@ -42,14 +43,60 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (value is null)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} value for clear.", logLevel: LogLevel.Error, propertyName: propertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"Failed to construct new {property.PropertyType} value for clear.", callerClassCode, line: line);
                 return false;
             }
 
             property.SetValue(patchRecord, value);
 
-            Global.TraceLogger?.Log(ClassLogCode, "Cleared value.", propertyName: propertyName);
+            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordUpdated, "Cleared value.", callerClassCode, line: line);
             return true;
+        }
+
+        /// <inheritdoc cref="GenericSynthesisPatcher.Games.Universal.Action.IRecordAction.FindHPUIndex(ProcessingKeys, IEnumerable{IModContext{IMajorRecordGetter}}, IEnumerable{ModKey}?)" />
+        public static IModContext<IMajorRecordGetter>? FindHPUIndex<T> (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes, int callerClassCode, [CallerLineNumber] int line = 0)
+        {
+            bool nonNull = proKeys.Rule.HasForwardOption(ForwardOptions._nonNullMod);
+
+            /// Get value from origin record as it shouldn't be included in AllRecordMods as would
+            /// of been filtered out in Program.getAvailableMods due to NonDefault being set by HPU
+            if (!Mod.TryGetProperty<T>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var defaultValue, callerClassCode, line))
+                return null;
+
+            List<T?> history = [defaultValue];
+            IModContext<IMajorRecordGetter>? hpu = null;
+            int hpuHistory = -1;
+
+            // We process in reverse as AllRecordMods is highest to lowest, and we want lowest to highest
+            foreach (var mc in AllRecordMods.Reverse())
+            {
+                if (Mod.TryGetProperty<T>(mc.Record, proKeys.Property.PropertyName, out var curValue, callerClassCode, line)
+                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
+                {
+                    int historyIndex = history.IndexOf(curValue);
+                    if (historyIndex == -1)
+                    {
+                        historyIndex = history.Count;
+                        history.Add(curValue);
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. Added value from {mc.ModKey} to history", callerClassCode, line: line);
+                    }
+
+                    // Keep out of history check as could of been added to history by a non-end node mod
+                    if (endNodes is null || endNodes.Contains(mc.ModKey))
+                    {
+                        // If this a valid mod to be selected then check when it's value was added
+                        // to history and if higher or equal we found new HPU
+                        if (hpuHistory <= historyIndex)
+                        {
+                            hpu = mc;
+                            hpuHistory = historyIndex;
+                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. Updated HPU to {mc.ModKey}.", callerClassCode, line: line);
+                        }
+                    }
+                }
+            }
+
+            return hpu;
         }
 
         /// <summary>
@@ -72,7 +119,15 @@ namespace GenericSynthesisPatcher.Helpers
             : value is IEnumerable valueList ? !valueList.Any()
             : value is null || value.Equals(default(T));
 
-        public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
+        /// <summary>
+        ///     Attempts to find a record from the input string.
+        /// </summary>
+        /// <typeparam name="TMajor">Record type trying to find.</typeparam>
+        /// <param name="input">FormKey or EditorID of record to find.</param>
+        /// <param name="formKey">FormKey of found record.</param>
+        /// <param name="wasEditorID">Was input an EditorID. False if was FormKey.</param>
+        /// <returns>True if record found.</returns>
+        public static bool TryFindFormKey<TMajor> (string input, out FormKey formKey, out bool wasEditorID, int callerClassCode, [CallerLineNumber] int line = 0) where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         {
             wasEditorID = false;
             if (FormKey.TryFactory(SynthCommon.FixFormKey(input), out formKey))
@@ -82,14 +137,30 @@ namespace GenericSynthesisPatcher.Helpers
             {
                 wasEditorID = true;
                 formKey = record.FormKey;
-                Global.TraceLogger?.Log(ClassLogCode, $"Mapped EditorID \"{input}\" to FormKey {formKey}");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordFound, $"Mapped EditorID \"{input}\" to FormKey {formKey}", callerClassCode, line: line);
                 return true;
             }
 
             return false;
         }
 
-        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType)
+        /// <summary>
+        ///     Attempts to get a property from the a record.
+        /// </summary>
+        /// <typeparam name="T">
+        ///     Property type to return. Property must be assignable to this else will fail.
+        /// </typeparam>
+        /// <param name="fromRecord">Record to retrieve property from</param>
+        /// <param name="propertyName">Name of property to get</param>
+        /// <param name="value">
+        ///     Output of the value assigned to the property. Can be null even if successfully
+        ///     retrieved if property it self is nullable.
+        /// </param>
+        /// <param name="propertyType">Actual property type.</param>
+        /// <returns>
+        ///     True if property exists, is successfully gotten and is assignable to T, else false.
+        /// </returns>
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, [NotNullWhen(true)] out Type? propertyType, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             if (fromRecord is null)
             {
@@ -98,7 +169,7 @@ namespace GenericSynthesisPatcher.Helpers
                 return false;
             }
 
-            if (tryGetPropertyFromHierarchy(fromRecord, propertyName, false, out object? _value, out _, out var property) && convertPropertyNullable(propertyName, property, _value, out value))
+            if (tryGetPropertyFromHierarchy(fromRecord, propertyName, false, out object? _value, out _, out var property, callerClassCode, line) && convertPropertyNullable(property, _value, out value, callerClassCode, line))
             {
                 propertyType = property.PropertyType;
                 return true;
@@ -109,59 +180,118 @@ namespace GenericSynthesisPatcher.Helpers
             return false;
         }
 
-        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value) => TryGetProperty(fromRecord, propertyName, out value, out _);
+        /// <inheritdoc cref="Mod.TryGetProperty{T}(object?, string, out T?, out Type?)" />
+        public static bool TryGetProperty<T> (object? fromRecord, string propertyName, out T? value, int callerClassCode, [CallerLineNumber] int line = 0) => TryGetProperty(fromRecord, propertyName, out value, out _, callerClassCode, line);
 
-        public static bool TryGetPropertyForSetting<T> (ILoquiObject patchRecord, string propertyName, out T? value, [NotNullWhen(true)] out object? parent, [NotNullWhen(true)] out PropertyInfo? property)
+        /// <summary>
+        ///     Attempts to get a property value for editing. This means if currently the property
+        ///     is set to null, it will try to create a new default value for the property.
+        /// </summary>
+        /// <typeparam name="T">Property type.</typeparam>
+        /// <param name="patchRecord">The writable patch record.</param>
+        /// <param name="propertyName">Name of the property to set.</param>
+        /// <param name="value">Output of the property value.</param>
+        /// <param name="parent">Output of the parent object to call set on.</param>
+        /// <param name="property">PropertyInfo of the property to set.</param>
+        /// <returns>True if property exists, and is valid property you can set.</returns>
+        public static bool TryGetPropertyForSetting<T> (ILoquiObject patchRecord, string propertyName, out T? value, [NotNullWhen(true)] out object? parent, [NotNullWhen(true)] out PropertyInfo? property, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             value = default;
-            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property) && property.IsValidPropertyType() && convertPropertyNullable(propertyName, property, _value, out value);
+            return tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out parent, out property, callerClassCode, line) && property.IsValidPropertyType() && convertPropertyNullable(property, _value, out value, callerClassCode, line);
         }
 
-        public static bool TryGetPropertyValueForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value)
+        /// <summary>
+        ///     Attempts to get a property value for editing. This means if currently the property
+        ///     is set to null, it will try to create a new default value for the property.
+        /// </summary>
+        /// <typeparam name="T">Property type.</typeparam>
+        /// <param name="patchRecord">The writable patch record.</param>
+        /// <param name="propertyName">Name of the property to set.</param>
+        /// <param name="value">Output of the property value.</param>
+        /// <returns>
+        ///     True if property exists, was not null, or non-null default value for it was able to
+        ///     be set and returned.
+        /// </returns>
+        public static bool TryGetPropertyValueForEditing<T> (IMajorRecord patchRecord, string propertyName, [NotNullWhen(true)] out T? value, int callerClassCode, [CallerLineNumber] int line = 0)
         {
-            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property) || !property.IsValidPropertyType() || parent is null)
+            value = default;
+            if (!tryGetPropertyFromHierarchy(patchRecord, propertyName, true, out object? _value, out object? parent, out var property, callerClassCode, line))
+                return false;
+
+            if (!property.IsValidPropertyType() || parent is null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
-                value = default;
+                Global.Logger.LogMissingProperty(propertyName, callerClassCode, line: line);
                 return false;
             }
 
-            if (convertProperty(propertyName, property, _value, out value))
+            if (convertProperty(property, _value, out value, callerClassCode, line))
                 return true;
 
-            _value = setDefaultPropertyValue(parent, property);
+            _value = setDefaultPropertyValue(parent, property, callerClassCode, line);
 
-            if (convertProperty(propertyName, property, _value, out value))
-            {
-                Global.TraceLogger?.Log(ClassLogCode, "Created new value for editing.", propertyName: propertyName);
-                return true;
-            }
-
-            Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} value for editing.", logLevel: LogLevel.Error, propertyName: propertyName);
-            return false;
+            return convertProperty(property, _value, out value, callerClassCode, line);
         }
 
-        public static bool TrySetProperty<T> (IMajorRecord patchRecord, string propertyName, T? value)
+        /// <summary>
+        ///     Attempts to set a property on a record to the specified value.
+        /// </summary>
+        /// <typeparam name="T">Value type</typeparam>
+        /// <param name="patchRecord">The writable patch record.</param>
+        /// <param name="propertyName">Name of the property to set.</param>
+        /// <param name="value">Value to set.</param>
+        /// <returns>True if property exists and was set to the new value.</returns>
+        public static bool TrySetProperty<T> (IMajorRecord patchRecord, string propertyName, T? value, int callerClassCode, [CallerLineNumber] int line = 0)
         {
-            if (!TryGetPropertyForSetting<T>(patchRecord, propertyName, out _, out object? parent, out var property))
+            if (!TryGetPropertyForSetting<T>(patchRecord, propertyName, out _, out object? parent, out var property, callerClassCode, line))
+                return false;
+
+            try
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
+                if (value is null)
+                    property.SetValue(parent, null);
+                else if (value is string strValue && property.PropertyType == typeof(TranslatedString))
+                    property.SetValue(parent, new TranslatedString(Language.English, strValue));
+                else
+                    property.SetValue(parent, value);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"Failed to set property to new value. {ex.Message}", callerClassCode, line: line);
                 return false;
             }
-
-            if (value is null)
-                property.SetValue(parent, null);
-            else if (value is string strValue && property.PropertyType == typeof(TranslatedString))
-                property.SetValue(parent, new TranslatedString(Language.English, strValue));
-            else
-                property.SetValue(parent, value);
-
-            return true;
         }
 
-        private static bool convertProperty<T> (string propertyName, PropertyInfo property, object? input, [NotNullWhen(true)] out T? output) => convertPropertyNullable(propertyName, property, input, out output) && output is not null;
+        /// <summary>
+        ///     Converts the input value to the specified type T.
+        /// </summary>
+        /// <typeparam name="T">Output type</typeparam>
+        /// <param name="propertyName">Property name. Just used for logging.</param>
+        /// <param name="property">PropertyInfo of the input value.</param>
+        /// <param name="input">Input property value</param>
+        /// <param name="output">
+        ///     Output of converted value. If input is null and T is struct will return default
+        ///     struct value.
+        /// </param>
+        /// <returns>
+        ///     True if input was successfully converted to output type and output is not null.
+        /// </returns>
+        private static bool convertProperty<T> (PropertyInfo property, object? input, [NotNullWhen(true)] out T? output, int callerClassCode, [CallerLineNumber] int line = 0) => convertPropertyNullable(property, input, out output, callerClassCode, line) && output is not null;
 
-        private static bool convertPropertyNullable<T> (string propertyName, PropertyInfo property, object? input, out T? output)
+        /// <summary>
+        ///     Converts the input value to the specified type T, if possible supporting nullable values.
+        /// </summary>
+        /// <typeparam name="T">Output type</typeparam>
+        /// <param name="propertyName">Property name. Just used for logging.</param>
+        /// <param name="property">PropertyInfo of the input value.</param>
+        /// <param name="input">Input property value</param>
+        /// <param name="output">
+        ///     Output of converted value. If input is null and T is struct will return default
+        ///     struct value.
+        /// </param>
+        /// <returns>True if input was successfully converted to output type.</returns>
+        private static bool convertPropertyNullable<T> (PropertyInfo property, object? input, out T? output, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             output = default;
 
@@ -181,7 +311,7 @@ namespace GenericSynthesisPatcher.Helpers
 
             if (input is not T value)
             {
-                Global.DebugLogger?.LogInvalidTypeFound(ClassLogCode, propertyName, typeof(T).FullName ?? typeof(T).Name, input.GetType().FullName ?? input.GetType().Name);
+                Global.Logger.LogInvalidTypeFound(typeof(T).FullName ?? typeof(T).Name, input.GetType().FullName ?? input.GetType().Name, callerClassCode, line: line);
                 return false;
             }
 
@@ -189,11 +319,20 @@ namespace GenericSynthesisPatcher.Helpers
             return true;
         }
 
-        private static object? setDefaultPropertyValue (object? parent, PropertyInfo property)
+        /// <summary>
+        ///     Sets property to the default non-null value of the property type.
+        /// </summary>
+        /// <param name="parent">Parent object that property exists on.</param>
+        /// <param name="property">PropertyInfo of the property to set to default.</param>
+        /// <returns>
+        ///     Default value that property was just set to. Null if couldn't find property or
+        ///     failed to set to default value.
+        /// </returns>
+        private static object? setDefaultPropertyValue (object? parent, PropertyInfo property, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             if (!property.IsValidPropertyType())
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} parent value for editing as not writable.", logLevel: LogLevel.Error, propertyName: property.Name);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"Failed to construct new {property.PropertyType} as invalid property type.", callerClassCode, line: line);
                 return null;
             }
 
@@ -202,12 +341,12 @@ namespace GenericSynthesisPatcher.Helpers
                 object? _value = System.Activator.CreateInstance(property.PropertyType);
 
                 property.SetValue(parent, _value);
-                Global.TraceLogger?.Log(ClassLogCode, "Created new value for editing.", propertyName: property.Name);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordUpdated, "Created new value for editing.", callerClassCode, line: line);
                 return _value;
             }
             catch { }
 
-            Global.Logger.Log(ClassLogCode, $"Failed to construct new {property.PropertyType} value for editing.", logLevel: LogLevel.Error, propertyName: property.Name);
+            Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"Failed to construct new {property.PropertyType} value for editing.", callerClassCode, line: line);
             return null;
         }
 
@@ -227,7 +366,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// <returns>
         ///     True if property name existed, even if result of valid property was null
         /// </returns>
-        private static bool tryGetPropertyFromHierarchy (object from, string propertyName, bool createParents, out object? value, out object? parent, [NotNullWhen(true)] out PropertyInfo? property)
+        private static bool tryGetPropertyFromHierarchy (object from, string propertyName, bool createParents, out object? value, out object? parent, [NotNullWhen(true)] out PropertyInfo? property, int callerClassCode, [CallerLineNumber] int line = 0)
         {
             parent = from;
             var parentType = from.GetType();
@@ -242,7 +381,7 @@ namespace GenericSynthesisPatcher.Helpers
                 property = parentType.GetProperty(name);
                 if (property is null)
                 {
-                    Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
+                    Global.Logger.LogMissingProperty(propertyName, callerClassCode, line: line);
                     return false;
                 }
 
@@ -252,7 +391,7 @@ namespace GenericSynthesisPatcher.Helpers
                 {
                     if (propertyValue is null && createParents)
                     {
-                        propertyValue = setDefaultPropertyValue(parent, property);
+                        propertyValue = setDefaultPropertyValue(parent, property, callerClassCode, line);
                         if (propertyValue is null)
                             return false;
                     }
@@ -269,7 +408,7 @@ namespace GenericSynthesisPatcher.Helpers
             // Check property is not null one last time just for off chance propertyNames had no entries
             if (property is null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.MissingProperty, propertyName: propertyName);
+                Global.Logger.LogMissingProperty(propertyName, callerClassCode, line: line);
                 return false;
             }
 

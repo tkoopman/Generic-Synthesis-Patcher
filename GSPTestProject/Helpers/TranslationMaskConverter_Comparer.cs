@@ -4,7 +4,7 @@ using Loqui;
 
 namespace GSPTestProject.Helpers
 {
-    internal class TranslationMaskConverter_Comparer : IEqualityComparer<ITranslationMask>
+    internal class TranslationMaskConverter_Comparer : IEqualityComparer<ITranslationMask?>
     {
         public bool Equals (ITranslationMask? x, ITranslationMask? y)
         {

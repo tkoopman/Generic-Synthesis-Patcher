@@ -19,31 +19,35 @@ namespace GenericSynthesisPatcher.Games.Fallout4
 {
     public class Fallout4Game : Universal.BaseGame
     {
-        private Fallout4Game () => State = null!;
-
-        private Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
-
-        public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
-
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
-
-        public static Fallout4Game Constructor (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState)
+        /// <summary>
+        ///     Create new Fallout 4 Game instance.
+        /// </summary>
+        /// <param name="gameState">
+        ///     Patcher state. Can use null! in xUnit testing as long as you don't call anything
+        ///     that requires State or LoadOrder.
+        /// </param>
+        public Fallout4Game (IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState) : base(constructLoadOrder(gameState?.LoadOrder.Select(m => (IModListingGetter)m.Value))!)
         {
-            var game = gameState is null ? new Fallout4Game () : new Fallout4Game(gameState);
-            game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+            State = gameState!;
 
-            game.IgnoreSubPropertiesOnTypes.Add(
+            SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+
+            IgnoreSubPropertiesOnTypes.Add(
                 [
                     typeof(Cell),
                     typeof(Destructible),
                     typeof(NavmeshGeometry),
                 ]);
 
-            game.addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
-            game.addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
-
-            return game;
+            addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
+            addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
         }
+
+        public override GameCategory GameCategory => GameCategory.Fallout4;
+        public override GameRelease GameRelease => State?.GameRelease ?? GameRelease.Fallout4;
+        public override IPatcherState<IFallout4Mod, IFallout4ModGetter> State { get; }
+
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
         {

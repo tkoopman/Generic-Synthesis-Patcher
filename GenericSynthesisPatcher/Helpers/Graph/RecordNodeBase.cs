@@ -2,7 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 
 using DynamicData;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
+
+using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -21,6 +23,8 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
     public abstract class RecordNodeBase (ModKey modKey, IMajorRecordGetter record, IReadOnlyList<ModKeyListOperation>? modKeys) : IRecordNode
     {
+        private const int ClassLogCode = -1;
+
         private readonly List<RecordNodeBase> overwrites = [];
         private readonly List<RecordNodeBase> overwrittenBy = [];
 
@@ -60,16 +64,16 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 var m = root.ModKeys?.FirstOrDefault(m => m.Value.Equals(all.ElementAt(i).ModKey));
                 if (m is not null && m.Operation == ListLogic.NOT)
                 {
-                    Global.TraceLogger?.WriteLine($"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}");
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Merge {root.ModKey.FileName}. Excluding {all.ElementAt(i).ModKey.FileName}", ClassLogCode);
                     continue;
                 }
 
                 var node = root.createChild(all.ElementAt(i), root.ModKeys);
                 int index = Global.Game.State.LinkCache.ListedOrder.IndexOf(node.ModKey, static (i, k) => i.ModKey == k);
 
-                Global.TraceLogger?.WriteLine($"Creating graph node {node.ModKey} under {root.ModKey}");
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Creating graph node {node.ModKey} under {root.ModKey}", ClassLogCode);
 
-                var masters = Global.Settings.Value.DynamicMods.Contains(all.ElementAt(i).ModKey)
+                var masters = Global.Settings.DynamicMods.Contains(all.ElementAt(i).ModKey)
                     ? [all.ElementAt(i + 1).ModKey]
                     : Global.Game.State.LinkCache.ListedOrder[index].MasterReferences.Select(m => m.Master);
 
@@ -82,13 +86,13 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 {
                     if (root.tryFindRecord(nodeMaster, out var nodeOverwrites))
                     {
-                        Global.TraceLogger?.WriteLine($"{nodeOverwrites.ModKey} overwritten by {node.ModKey}");
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"{nodeOverwrites.ModKey} overwritten by {node.ModKey}", ClassLogCode);
                         nodeOverwrites.overwrittenBy.Add(node);
                         node.overwrites.Add(nodeOverwrites);
                     }
                     else
                     {
-                        Global.TraceLogger?.WriteLine($"{nodeMaster} not found on graph.");
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"{nodeMaster} not found on graph.", ClassLogCode);
                     }
                 }
             }
@@ -118,7 +122,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
 
             if (overwrittenBy.Count == 0)
             {
-                Global.TraceLogger?.WriteLine(line);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, line, ClassLogCode);
                 return;
             }
 

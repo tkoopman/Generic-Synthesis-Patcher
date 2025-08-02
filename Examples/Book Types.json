@@ -4,16 +4,15 @@
 
 [
   {
-    "Types": "Book",
-    "SingleMatch": true,
-    "Rules": [
+    "types": "book",
+    "singleMatch": true,
+    "rules": [
       {
-        "Matches": { "InventoryArt": "+/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" },
-        "Fill": { "Type": "NoteOrScroll" }
+        "matches": { "InventoryArt": "/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" },
+        "fill": { "Type": "NoteOrScroll" }
       },
       {
-        "Matches": { "InventoryArt": "-/^(?!.*(?:(?:Book)|(?:Journal)|(?:Tome))).*((?:Note)|(?:Scroll)|(?:Paper)|(?:Map)|(?:Recipe)).*$/" },
-        "Fill": { "Type": "BookOrTome" }
+        "fill": { "Type": "BookOrTome" }
       }
     ]
   }

@@ -13,13 +13,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class LeveledNpcAction : LeveledEntryAction<LeveledNpcData, INpcSpawnGetter, LeveledNpcEntry>
     {
         public static readonly LeveledNpcAction Instance = new();
-        private const int ClassLogCode = 0x19;
+        private const int ClassLogCode = 0xA5;
 
         public override LeveledNpcEntry? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not ILeveledNpcEntryGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to create entry data?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to create entry data?", ClassLogCode);
                 return null;
             }
 

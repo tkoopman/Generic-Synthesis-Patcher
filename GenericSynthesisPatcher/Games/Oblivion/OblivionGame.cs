@@ -18,27 +18,31 @@ namespace GenericSynthesisPatcher.Games.Oblivion
 {
     public class OblivionGame : Universal.BaseGame
     {
-        private OblivionGame () => State = null!;
+        /// <summary>
+        ///     Create new Oblivion Game instance.
+        /// </summary>
+        /// <param name="gameState">
+        ///     Patcher state. Can use null! in xUnit testing as long as you don't call anything
+        ///     that requires State or LoadOrder.
+        /// </param>
 
-        private OblivionGame (IPatcherState<IOblivionMod, IOblivionModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
-
-        public override IPatcherState<IOblivionMod, IOblivionModGetter> State { get; }
-
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
-
-        public static OblivionGame Constructor (IPatcherState<IOblivionMod, IOblivionModGetter> gameState)
+        public OblivionGame (IPatcherState<IOblivionMod, IOblivionModGetter> gameState) : base(constructLoadOrder(gameState?.LoadOrder.Select(m => (IModListingGetter)m.Value))!)
         {
-            var game = gameState is null ? new OblivionGame () : new OblivionGame(gameState);
+            State = gameState!;
 
-            //game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+            //SerializerSettings.Converters.Add(new ObjectBoundsConverter());
 
-            game.IgnoreSubPropertiesOnTypes.Add(
+            IgnoreSubPropertiesOnTypes.Add(
                 [
                     typeof(Cell),
                 ]);
-
-            return game;
         }
+
+        public override GameCategory GameCategory => GameCategory.Oblivion;
+        public override GameRelease GameRelease => State?.GameRelease ?? GameRelease.OblivionRE;
+        public override IPatcherState<IOblivionMod, IOblivionModGetter> State { get; }
+
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
 
         public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
         {

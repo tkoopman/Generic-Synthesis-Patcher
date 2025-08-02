@@ -7,7 +7,9 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
     public class DictionaryConverter<TKey, TValue> : JsonConverter where TKey : notnull
     {
-        public override bool CanConvert (Type objectType) => objectType.IsEnum;
+        public override bool CanWrite => false;
+
+        public override bool CanConvert (Type objectType) => objectType.Equals(typeof(IDictionary<TKey, TValue>));
 
         public override object? ReadJson (JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {

@@ -2,8 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
+
+using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -13,7 +14,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 {
     public abstract class BasicGetterSetterAction<TGetter, TSetter> : IRecordAction
     {
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0x12;
 
         protected BasicGetterSetterAction ()
         {
@@ -39,7 +40,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         // <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys)
-            => !Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+            => !Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
             || !proKeys.TryGetFillValueAs(out TSetter? newValue)
             ? -1
             : performFill(proKeys, curValue, newValue);
@@ -47,50 +48,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys, TGetter? curValue, TGetter? newValue) => performFill(proKeys, curValue, getSetter(newValue));
 
-        // <inheritdoc />
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
-        {
-            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
-            List<TGetter?> history = [];
-            int hpu = -1;
-            int hpuHistory = -1;
-
-            foreach (int i in indexes.Reverse())
-            {
-                var mc = AllRecordMods[mods.ElementAt(i)];
-
-                if (Mod.TryGetProperty<TGetter>(mc.Record, proKeys.Property.PropertyName, out var curValue)
-                    && (!nonNull || curValue is not null))
-                {
-                    int historyIndex = history.IndexOf(curValue);
-                    if (historyIndex == -1)
-                    {
-                        historyIndex = history.Count;
-                        history.Add(curValue);
-                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
-                    }
-
-                    if (validMods is null || validMods.Contains(mc.ModKey))
-                    {
-                        // If this a valid mod to be selected then check when it's value was added
-                        // to history and if higher or equal we found new HPU.
-                        if (hpuHistory <= historyIndex)
-                        {
-                            hpu = i;
-                            hpuHistory = historyIndex;
-                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
-                        }
-                    }
-                }
-            }
-
-            return hpu;
-        }
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<TGetter>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
         // <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
-            => Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-            && Mod.TryGetProperty<TGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+            => Mod.TryGetProperty<TGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+            && Mod.TryGetProperty<TGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue, ClassLogCode)
             ? Fill(proKeys, curValue, newValue)
             : -1;
 
@@ -99,13 +63,13 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
 
         // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null;
+            => !Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || curValue is null;
 
         // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
-                && Mod.TryGetProperty<TGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            || (Mod.TryGetProperty<TGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+                && Mod.TryGetProperty<TGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue, ClassLogCode)
                 && Equals(curValue, originValue));
 
         // <inheritdoc />
@@ -152,10 +116,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (compareValues(curValue, newValue))
                 return 0;
 
-            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, newValue, ClassLogCode))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, "Changed.", propertyName: proKeys.Property.PropertyName);
+            Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, LogWriter.RecordUpdated, ClassLogCode);
             return 1;
         }
     }

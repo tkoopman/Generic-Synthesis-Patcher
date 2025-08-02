@@ -14,13 +14,13 @@ namespace GenericSynthesisPatcher.Games.Fallout4.Action
     public class EffectsAction : FormLinksWithDataAction<EffectsData, IMagicEffectGetter, Effect>
     {
         public static readonly EffectsAction Instance = new();
-        private const int ClassLogCode = 0x17;
+        private const int ClassLogCode = 0xE2;
 
         public override Effect? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not IEffectGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to add effect. No Effects?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add effect. No Effects?", ClassLogCode);
                 return null;
             }
 

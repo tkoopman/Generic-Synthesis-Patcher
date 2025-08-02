@@ -1,17 +1,24 @@
 ﻿using Common;
 
+using GenericSynthesisPatcher.Helpers;
+
 using Loqui;
+
+using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
     /// <summary>
-    ///     Converter for <see cref="ITranslationMask" /> implementations. Must have constructor
-    ///     that takes two boolean parameters:
-    ///     defaultOn: If not defined in JSON, the will default to true IF all defined properties
-    ///     are false. Else it will default to false
+    ///     Converter for <see cref="ITranslationMask" /> implementations.
+    ///
+    ///     NOTE: Probably won't work with non-Mutagen ITranslationMask classes, unless they follow
+    ///     the same implementation of DefaultOn and OnOverall which isn't part of the
+    ///     ITranslationMask interface.
     /// </summary>
     public class TranslationMaskConverter : JsonConverter
     {
@@ -40,38 +47,34 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
                         defaultOn = !jObject.Values().Any() || !jObject.Values().Any(v => v.Type != JTokenType.Boolean || v.Value<bool>());
                     }
 
-                    bool onOverAll = (bool)(con.GetParameters()[1].DefaultValue ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} does not have a public constructor that takes one boolean parameter."));
-                    var mask = con.Invoke([defaultOn, onOverAll]) as ITranslationMask ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} failed to create.");
-
-                    // Set any included properties on the mask
-                    foreach (var field in objectType.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+                    if (!tryBoolValue(jObject, "OnOverall", out bool onOverall))
                     {
-                        if (field.IsInitOnly)
-                            continue; // Skip readonly fields
+                        // OnOverall is not specified, default to true
+                        onOverall = (bool)(con.GetParameters()[1].DefaultValue ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} does not have a public constructor that takes one boolean parameter."));
+                    }
 
-                        var jToken = jObject.GetValue(field.Name, StringComparison.OrdinalIgnoreCase);
-                        if (jToken is null)
-                            continue;
+                    var mask = con.Invoke([defaultOn, onOverall]) as ITranslationMask ?? throw new JsonSerializationException($"Type {objectType.GetClassName()} failed to create.");
 
-                        if (field.FieldType == typeof(bool))
+                    foreach (var property in jObject.Properties().Where(p => !p.Name.Equals(nameof(MajorRecord.TranslationMask.DefaultOn), StringComparison.OrdinalIgnoreCase) && !p.Name.Equals(nameof(MajorRecord.TranslationMask.OnOverall), StringComparison.OrdinalIgnoreCase)))
+                    {
+                        if (property.Value.Type == JTokenType.Boolean)
                         {
-                            if (jToken.Type != JTokenType.Boolean)
-                                throw new JsonSerializationException($"Expected boolean value for '{field.Name}' but found {jToken.Type}.");
-                            field.SetValue(mask, jToken.Value<bool>());
-                            continue;
+                            // If the property is a boolean, set it directly
+                            _ = mask.TrySetValue(property.Name, property.Value.Value<bool>(), StringComparison.OrdinalIgnoreCase);
                         }
-
-                        if (!field.FieldType.IsAssignableTo(typeof(ITranslationMask)))
-                            continue;
-
-                        if (jToken.Type is JTokenType.Boolean or JTokenType.Object)
+                        else if (property.Value.Type == JTokenType.Object)
                         {
-                            object? pValue = serializer.Deserialize(jToken.CreateReader(), field.FieldType);
-                            field.SetValue(mask, pValue);
-                            continue;
+                            // If the property is an object, deserialize it
+                            if (mask.TryGetMaskField(property.Name, StringComparison.OrdinalIgnoreCase, out var field))
+                            {
+                                object? obj = serializer.Deserialize(property.Value.CreateReader(), field.FieldType) ?? throw new JsonSerializationException($"Failed to deserialize '{property.Name}' into {field.FieldType.GetClassName()}.");
+                                field.SetValue(mask, obj);
+                            }
                         }
-
-                        throw new JsonSerializationException($"Expected boolean or object value for '{field.Name}' but found {jToken.Type}.");
+                        else
+                        {
+                            throw new JsonSerializationException($"Expected boolean or object value for '{property.Name}' but found {property.Value.Type}.");
+                        }
                     }
 
                     return mask;
@@ -81,7 +84,61 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             }
         }
 
-        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
+        public override void WriteJson (JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            if (value is not ITranslationMask mask)
+                throw new JsonSerializationException($"Expected ITranslationMask object but found {value.GetType().GetClassName()}");
+
+            bool defaultOn = mask.GetDefaultOn();
+            bool onOverall = mask.GetOnOverall();
+            var nonDefaults = mask.GetNonDefault();
+            bool outputDefaultOn = false;
+
+            if (!nonDefaults.Any())
+            {
+                if (defaultOn == onOverall)
+                {
+                    writer.WriteValue(defaultOn);
+                    return;
+                }
+
+                outputDefaultOn = true;
+            }
+
+            if (!outputDefaultOn)
+            {
+                bool allBool = !nonDefaults.Any(x => x.value is not bool);
+                outputDefaultOn = !allBool;
+            }
+
+            writer.WriteStartObject();
+
+            if (outputDefaultOn)
+            {
+                writer.WritePropertyName(nameof(MajorRecord.TranslationMask.DefaultOn));
+                writer.WriteValue(defaultOn);
+            }
+
+            if (!onOverall)
+            {
+                writer.WritePropertyName(nameof(MajorRecord.TranslationMask.OnOverall));
+                writer.WriteValue(onOverall);
+            }
+
+            foreach (var (name, maskValue) in nonDefaults)
+            {
+                writer.WritePropertyName(name);
+                serializer.Serialize(writer, maskValue);
+            }
+
+            writer.WriteEndObject();
+        }
 
         private static bool tryBoolValue (JObject jObject, string name, out bool value)
         {

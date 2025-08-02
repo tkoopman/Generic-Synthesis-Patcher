@@ -1,14 +1,17 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 using Common;
 
 using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Games.Universal.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Loqui;
+
+using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda.Oblivion;
@@ -27,9 +30,9 @@ namespace GenericSynthesisPatcher
     /// <param name="parent">
     ///     Parent key for when processing groups. Parent is always for the same context.
     /// </param>
-    public class ProcessingKeys (ILoquiRegistration rtm, IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
+    public class ProcessingKeys (IModContext<IMajorRecordGetter> context, ProcessingKeys? parent = null)
     {
-        private const int ClassLogCode = 0xFF;
+        private const int ClassLogCode = 0x02;
         private IMajorRecordGetter? origin;
         private IMajorRecord? patchRecord;
         private Random? random;
@@ -76,8 +79,7 @@ namespace GenericSynthesisPatcher
         public IMajorRecordGetter Record => HasPatchRecord ? (patchRecord ?? GetPatchRecord()) : (IMajorRecordGetter)(Context.Record ?? throw new Exception());
 
         /// <summary>
-        ///     Gets current rule being processed. If current is a group and not a rule will throw
-        ///     InvalidOperationException
+        ///     Gets current rule being processed. If current is a group and not a rule will throw InvalidOperationException
         /// </summary>
         public GSPRule Rule => RuleBase as GSPRule ?? throw new InvalidOperationException("Rule not currently set");
 
@@ -89,7 +91,7 @@ namespace GenericSynthesisPatcher
         /// <summary>
         ///     Gets current record type mapping being processed
         /// </summary>
-        public ILoquiRegistration Type { get; } = rtm;
+        public ILoquiRegistration Type { get; } = context.Record.Registration;
 
         /// <summary>
         ///     Parent processing key
@@ -114,12 +116,17 @@ namespace GenericSynthesisPatcher
 
             bool result = false;
 
-            Global.TraceLogger?.LogAction(ClassLogCode, $"{Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", propertyName: Property.PropertyName);
+            Global.Logger.LogAction($"{Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.MatchesOrigin)}", ClassLogCode);
 
             if (!Property.Action.MatchesOrigin(this))
             {
-                Global.TraceLogger?.Log(ClassLogCode, LogHelper.OriginMismatch, propertyName: Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginNotMatch, "OnlyIfDefault: Did not match - skipping", ClassLogCode);
+
                 result = true;
+            }
+            else
+            {
+                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginMatch, "OnlyIfDefault: Matched", ClassLogCode);
             }
 
             return result;
@@ -128,9 +135,7 @@ namespace GenericSynthesisPatcher
         /// <summary>
         ///     Gets the master of the current record, and caches result
         /// </summary>
-        /// <returns>
-        ///     Overwritten master record. Null if current record context is the master.
-        /// </returns>
+        /// <returns>Overwritten master record. Null if current record context is the master.</returns>
         public IMajorRecordGetter GetOriginRecord ()
         {
             origin ??= Mod.FindOriginContext(Context).Record;
@@ -144,21 +149,16 @@ namespace GenericSynthesisPatcher
         /// <returns>Editable version of current record</returns>
         public IMajorRecord GetPatchRecord ()
         {
-            if (Parent is null)
-            {
-                patchRecord = Context switch
+            patchRecord ??= Parent is null
+                ? Context switch
                 {
                     //TODO Add other games
                     IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((ISkyrimMod)Global.Game.State.PatchMod),
                     IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IFallout4Mod)Global.Game.State.PatchMod),
                     IModContext<IOblivionMod, IOblivionModGetter, IOblivionMajorRecord, IOblivionMajorRecordGetter> gameContext => gameContext.GetOrAddAsOverride((IOblivionMod)Global.Game.State.PatchMod),
                     _ => throw new InvalidCastException(),
-                };
-            }
-            else
-            {
-                patchRecord ??= Parent.GetPatchRecord();
-            }
+                }
+                : Parent.GetPatchRecord();
 
             return patchRecord;
         }
@@ -182,7 +182,7 @@ namespace GenericSynthesisPatcher
         /// <returns>True if valid property found for current record type</returns>
         [MemberNotNullWhen(true, nameof(RuleKey))]
         [MemberNotNullWhen(true, nameof(RuleBase))]
-        public bool SetProperty (FilterOperation ruleKey, string name)
+        public bool SetProperty (FilterOperation ruleKey, string name, int classCode, [CallerLineNumber] int line = 0)
         {
             if (RuleBase is null)
                 throw new InvalidOperationException("Must set rule first.");
@@ -192,9 +192,12 @@ namespace GenericSynthesisPatcher
             if (Property.IsValid)
             {
                 RuleKey = ruleKey;
+                Global.Logger.CurrentPropertyName = Property.PropertyName;
                 return true;
             }
 
+            Global.Logger.LogMissingProperty(name, classCode, line);
+            Global.Logger.CurrentPropertyName = null;
             this.ruleKey = null;
             return false;
         }
@@ -214,8 +217,7 @@ namespace GenericSynthesisPatcher
         }
 
         /// <summary>
-        ///     Get the fill data for a current rule's action value key parsed to selected class
-        ///     type.
+        ///     Get the fill data for a current rule's action value key parsed to selected class type.
         /// </summary>
         /// <typeparam name="T">Type of the output data to read from JSON</typeparam>
         /// <param name="valueAs">Output data</param>
@@ -226,8 +228,7 @@ namespace GenericSynthesisPatcher
         public bool TryGetFillValueAs<T> (out T? valueAs) => RuleKey is not null ? Rule.TryGetFillValueAs(RuleKey, out valueAs) : throw new InvalidOperationException("Property not set");
 
         /// <summary>
-        ///     Get the match data for a current rule's action value key parsed to selected class
-        ///     type.
+        ///     Get the match data for a current rule's action value key parsed to selected class type.
         /// </summary>
         /// <typeparam name="T">Type of the output data to read from JSON</typeparam>
         /// <param name="valueAs">Output data</param>

@@ -7,6 +7,7 @@ using Common;
 using Loqui;
 
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Records;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -20,7 +21,7 @@ namespace GenericSynthesisPatcher.Helpers
         ///     token type.
         /// </summary>
         public static T? Deserialize<T> (this JToken token)
-                            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
+            => typeof(T) == typeof(string) && token.Type == JTokenType.String ? (T?)(object)token.ToString()
              : typeof(T).IsAssignableTo(typeof(IEnumerable)) && token.Type != JTokenType.Array ? JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<T>(new JArray(token).CreateReader())
              : JsonSerializer.Create(Global.Game.SerializerSettings).Deserialize<T>(token.CreateReader());
 
@@ -33,7 +34,7 @@ namespace GenericSynthesisPatcher.Helpers
         ///     If TriggeringRecordType doesn't exist.
         /// </exception>
         public static RecordType GetRecordType (this ILoquiRegistration registration)
-            => registration.TryGetRecordType(out RecordType recordType)
+            => registration.TryGetRecordType(out var recordType)
             ? recordType
             : throw new InvalidOperationException($"Registration {registration.GetType().Name} does not have a valid RecordType.");
 

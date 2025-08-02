@@ -4,10 +4,7 @@ using Common;
 
 using GenericSynthesisPatcher.Games.Skyrim.Json.Action;
 using GenericSynthesisPatcher.Games.Universal.Action;
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
 using GenericSynthesisPatcher.Helpers;
-
-using Microsoft.Extensions.Logging;
 
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -19,7 +16,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class PlayerSkillsAction : IRecordAction
     {
         public static readonly PlayerSkillsAction Instance = new();
-        private const int ClassLogCode = 0x1B;
+        private const int ClassLogCode = 0xA7;
 
         protected PlayerSkillsAction ()
         {
@@ -28,6 +25,10 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
         // <inheritdoc />
         public bool AllowSubProperties => true;
 
+        /// <summary>
+        ///     Updates the skill values from one skill dictionary to another.
+        /// </summary>
+        /// <returns>Number of changes made</returns>
         public static int ForwardSkills (IReadOnlyDictionary<Skill, byte> from, IDictionary<Skill, byte> to)
         {
             int count = 0;
@@ -44,6 +45,10 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             return count;
         }
 
+        /// <summary>
+        ///     Updates the stats (Health, Stamina, Magicka) from one IPlayerSkillsGetter to another IPlayerSkills.
+        /// </summary>
+        /// <returns>Number of changes made</returns>
         public static int ForwardStats (IPlayerSkillsGetter from, IPlayerSkills to)
         {
             int count = 0;
@@ -69,6 +74,9 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             return count;
         }
 
+        /// <summary>
+        ///     Compares two skill dictionaries for equality.
+        /// </summary>
         public static bool SkillsEqual (IReadOnlyDictionary<Skill, byte> l, IReadOnlyDictionary<Skill, byte> r)
         {
             foreach (var skill in Enum.GetValues<Skill>())
@@ -80,19 +88,25 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             return true;
         }
 
+        /// <inheritdoc />
         public virtual bool CanFill () => true;
 
+        /// <inheritdoc />
         public virtual bool CanForward () => true;
 
+        /// <inheritdoc />
         public virtual bool CanForwardSelfOnly () => false;
 
+        /// <inheritdoc />
         public virtual bool CanMatch () => false;
 
+        /// <inheritdoc />
         public virtual bool CanMerge () => false;
 
+        /// <inheritdoc />
         public virtual int Fill (ProcessingKeys proKeys)
         {
-            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
+            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
                 || !proKeys.TryGetFillValueAs(out PlayerSkillsData? newValue)
                 || curValue is null
                 || newValue is null)
@@ -103,58 +117,20 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             if (newValue.NonNullEquals(curValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
-            {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue, ClassLogCode))
                 return -1;
-            }
 
             return newValue.UpdateRecord(updateValue);
         }
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
-        {
-            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
-            List<IPlayerSkillsGetter?> history = [];
-            int hpu = -1;
-            int hpuHistory = -1;
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<IPlayerSkillsGetter>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
-            foreach (int i in indexes.Reverse())
-            {
-                var mc = AllRecordMods[mods.ElementAt(i)];
-
-                if (Mod.TryGetProperty<IPlayerSkillsGetter>(mc.Record, proKeys.Property.PropertyName, out var curValue)
-                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
-                {
-                    int historyIndex = history.IndexOf(curValue);
-                    if (historyIndex == -1)
-                    {
-                        historyIndex = history.Count;
-                        history.Add(curValue);
-                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
-                    }
-
-                    if (validMods is null || validMods.Contains(mc.ModKey))
-                    {
-                        // If this a valid mod to be selected then check when it's value was added
-                        // to history and if higher or equal we found new HPU.
-                        if (hpuHistory <= historyIndex)
-                        {
-                            hpu = i;
-                            hpuHistory = historyIndex;
-                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
-                        }
-                    }
-                }
-            }
-
-            return hpu;
-        }
-
+        /// <inheritdoc />
         public virtual int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext)
         {
-            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue)
-                || !Mod.TryGetProperty<IPlayerSkillsGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue)
+            if (!Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+                || !Mod.TryGetProperty<IPlayerSkillsGetter>(forwardContext.Record, proKeys.Property.PropertyName, out var newValue, ClassLogCode)
                 || curValue is null
                 || newValue is null)
             {
@@ -164,11 +140,8 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             if (curValue.Equals(newValue))
                 return 0;
 
-            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue))
-            {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, "Error getting property to set", rule: proKeys.Rule, context: proKeys.Context, propertyName: proKeys.Property.PropertyName);
+            if (!Mod.TryGetPropertyValueForEditing<IPlayerSkills>(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, out var updateValue, ClassLogCode))
                 return -1;
-            }
 
             int count = 0;
 
@@ -190,19 +163,18 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
             return count;
         }
 
+        /// <inheritdoc />
         public virtual int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null;
+            => !Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || curValue is null;
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if all player skills data matches</returns>
+        /// <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
-                && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            || (Mod.TryGetProperty<IPlayerSkillsGetter>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+                && Mod.TryGetProperty<IPlayerSkillsGetter>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue, ClassLogCode)
                 && curValue is not null && originValue is not null
                 && curValue.FarAwayModelDistance == originValue.FarAwayModelDistance
                 && curValue.GearedUpWeapons == originValue.GearedUpWeapons
@@ -212,10 +184,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
                 && SkillsEqual(curValue.SkillOffsets, originValue.SkillOffsets)
                 && SkillsEqual(curValue.SkillValues, originValue.SkillValues));
 
+        /// <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
+        /// <inheritdoc />
         public virtual bool MatchesRule (ProcessingKeys proKeys) => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public virtual int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         // <inheritdoc />

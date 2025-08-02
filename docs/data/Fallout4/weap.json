@@ -610,13 +610,6 @@
   },
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ObjectTemplates"
-  },
-  {
-    "Aliases": "",
     "Description": "Possible values (Normal, DismemberOnly, ExplodeOnly, NoDismemberOrExplode)",
     "Example": "\"OnHit\": \"Normal\"",
     "Flags": 12,

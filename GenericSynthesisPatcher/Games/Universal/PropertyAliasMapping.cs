@@ -4,6 +4,7 @@ namespace GenericSynthesisPatcher.Games.Universal
 {
     public readonly struct PropertyAliasMapping (Type? type, string propertyName, string? realPropertyName)
     {
+        private readonly int _hashcode = HashCode.Combine(type, propertyName.GetHashCode(StringComparison.OrdinalIgnoreCase));
         public string PropertyName { get; } = propertyName;
         public string? RealPropertyName { get; } = realPropertyName;
         public Type? Type { get; } = type;
@@ -16,6 +17,6 @@ namespace GenericSynthesisPatcher.Games.Universal
 
         public bool Equals (PropertyAliasMapping other) => Type == other.Type && PropertyName.Equals(other.PropertyName, StringComparison.OrdinalIgnoreCase);
 
-        public override int GetHashCode () => (Type?.GetHashCode() ?? 0) ^ PropertyName.GetHashCode(StringComparison.OrdinalIgnoreCase);
+        public override int GetHashCode () => _hashcode;
     }
 }

@@ -7,43 +7,43 @@
 [
   // Basic merge for all outfit items
   {
-    "types": "Outfit",
-    "Merge": "Items"
+    "types": "outfit",
+    "merge": "Items"
   },
 
   // Basic merge for multiple types and fields with basic exclude
   {
-    "types": [ "ALCH", "INGR" ],
-    "-FormID": "065C37:Skyrim.esm",
-    "Merge": [ "Effects", "Keywords" ]
+    "types": [ "ingestible", "ingredient" ],
+    "!formID": "065C37:Skyrim.esm",
+    "merge": [ "Effects", "Keywords" ]
   },
 
   // Using group to have more control
   {
-    "types": "CONT",
-    "SingleMatch": true,
-    "Rules": [
+    "types": "container",
+    "singleMatch": true,
+    "rules": [
       // First rule has no actions, however due to SingleMatch will act as way to exclude anything that matches it from further rules.
       // In this case we matching anything added by SkyrimsUniqueTreasures.esp so they won't be merged by following rules.
       // NOTE: We actually matching "Masters" not excluding "-Matches" as we want the excluded (from the rest of the rules) items to match this rule with no actions
       //       If this was "-Masters" then only SkyrimsUniqueTreasures.esp records will continue into other rules in this group.
-      { "Masters": "SkyrimsUniqueTreasures.esp" },
+      { "masters": "SkyrimsUniqueTreasures.esp" },
 
       // Here for this single record we will do a merge but anything in unofficial skyrim special edition patch.esp cannot be removed
       {
-        "FormID": "0A29AE:Skyrim.esm",
-        "Merge": { "Items": "unofficial skyrim special edition patch.esp" }
+        "formID": "0A29AE:Skyrim.esm",
+        "merge": { "Items": "unofficial skyrim special edition patch.esp" }
       },
 
       // This will match any record that has EditorID ending with ChestBoss, and do a merge but excluding unofficial skyrim special edition patch.esp
       {
-        "EditorID": "/ChestBoss$/",
-        "Merge": { "Items": "-unofficial skyrim special edition patch.esp" }
+        "editorID": "/ChestBoss$/",
+        "merge": { "Items": "-unofficial skyrim special edition patch.esp" }
       },
 
       // For everything else just do basic merge
       {
-        "Merge": "Items"
+        "merge": "Items"
       }
     ]
   }

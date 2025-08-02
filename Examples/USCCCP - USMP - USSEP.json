@@ -6,14 +6,14 @@
 
 [
   {
-    "Priority": -100,
-    "PatchedBy": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
-    "Rules": [
+    "priority": -100,
+    "patchedBy": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
+    "rules": [
       {
-        "types": "CELL",
-        "OnlyIfDefault": true,
-        "ForwardOptions": [ "IndexedByField" ],
-        "Forward": {
+        "types": [ "cell" ],
+        "onlyIfDefault": true,
+        "forwardOptions": [ "indexedByField" ],
+        "forward": {
           "AcousticSpace": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "EncounterZone": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "LightingTemplate": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
@@ -27,20 +27,20 @@
         }
       },
       {
-        "types": "Location",
-        "OnlyIfDefault": true,
-        "ForwardOptions": [ "IndexedByField" ],
-        "Forward": {
+        "types": [ "location" ],
+        "onlyIfDefault": true,
+        "forwardOptions": [ "indexedByField" ],
+        "forward": {
           "Name": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "ParentLocation": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "WorldLocationMarkerRef": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]
         }
       },
       {
-        "types": "NPC",
-        "OnlyIfDefault": true,
-        "ForwardOptions": [ "IndexedByField" ],
-        "Forward": {
+        "types": [ "npc" ],
+        "onlyIfDefault": true,
+        "forwardOptions": [ "indexedByField" ],
+        "forward": {
           "Class": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "CombatStyle": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "CrimeFaction": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
@@ -50,10 +50,10 @@
         }
       },
       {
-        "types": "Worldspace",
-        "OnlyIfDefault": true,
-        "ForwardOptions": [ "IndexedByField" ],
-        "Forward": {
+        "types": [ "worldspace" ],
+        "onlyIfDefault": true,
+        "forwardOptions": [ "indexedByField" ],
+        "forward": {
           "Climate": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "EncounterZone": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ],
           "Location": [ "unofficial skyrim creation club content patch.esl", "Unofficial Skyrim Modders Patch.esp", "unofficial skyrim special edition patch.esp" ]

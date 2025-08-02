@@ -2,9 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Data;
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -22,7 +21,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
     public class EnumsAction : IRecordAction
     {
         public static readonly EnumsAction Instance = new();
-        private const int ClassLogCode = 0x11;
+        private const int ClassLogCode = 0x15;
 
         private EnumsAction ()
         {
@@ -31,108 +30,80 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
         // <inheritdoc />
         public bool AllowSubProperties => false;
 
+        // <inheritdoc />
         public bool CanFill () => true;
 
+        // <inheritdoc />
         public bool CanForward () => false;
 
+        // <inheritdoc />
         public bool CanForwardSelfOnly () => false;
 
+        // <inheritdoc />
         public bool CanMatch () => true;
 
+        // <inheritdoc />
         public bool CanMerge () => false;
 
+        // <inheritdoc />
         public int Fill (ProcessingKeys proKeys)
         {
             if (!proKeys.TryGetFillValueAs(out string? setValueStr) || setValueStr is null)
             {
-                Global.TraceLogger?.Log(ClassLogCode, $"No {proKeys.Property.PropertyName} to set.", propertyName: proKeys.Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, "Unable to read value to set", ClassLogCode);
                 return -1;
             }
 
-            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue) || curValue is null)
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || curValue is null)
                 return -1;
 
             var enumType = curValue.GetType();
             if (!Enum.TryParse(enumType, setValueStr, true, out object? setValue))
             {
-                Global.Logger.Log(ClassLogCode, $"{setValueStr} is not a valid value for {proKeys.Property.PropertyName}.", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, $"{setValueStr} is not a valid value.", ClassLogCode);
                 return -1;
             }
 
             if (curValue.Equals(setValue))
                 return 0;
 
-            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, setValue))
+            if (!Mod.TrySetProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, setValue, ClassLogCode))
                 return -1;
 
-            Global.DebugLogger?.Log(ClassLogCode, "Updated.", propertyName: proKeys.Property.PropertyName);
+            Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, LogWriter.RecordUpdated, ClassLogCode);
             return 1;
         }
 
-        public int FindHPUIndex (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<int> indexes, Dictionary<ModKey, IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? validMods)
-        {
-            bool nonNull = proKeys.Rule.HasForwardType(ForwardOptions._nonNullMod);
-            List<Enum?> history = [];
-            int hpu = -1;
-            int hpuHistory = -1;
+        /// <inheritdoc />
+        public IModContext<IMajorRecordGetter>? FindHPUIndex (ProcessingKeys proKeys, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods, IEnumerable<ModKey>? endNodes) => Mod.FindHPUIndex<Enum>(proKeys, AllRecordMods, endNodes, ClassLogCode);
 
-            foreach (int i in indexes.Reverse())
-            {
-                var mc = AllRecordMods[mods.ElementAt(i)];
-
-                if (Mod.TryGetProperty<Enum>(mc.Record, proKeys.Property.PropertyName, out var curValue)
-                    && (!nonNull || !Mod.IsNullOrEmpty(curValue)))
-                {
-                    int historyIndex = history.IndexOf(curValue);
-                    if (historyIndex == -1)
-                    {
-                        historyIndex = history.Count;
-                        history.Add(curValue);
-                        Global.TraceLogger?.Log(ClassLogCode, $"Added value from {mc.ModKey} to history", propertyName: proKeys.Property.PropertyName);
-                    }
-
-                    if (validMods is null || validMods.Contains(mc.ModKey))
-                    {
-                        // If this a valid mod to be selected then check when it's value was added
-                        // to history and if higher or equal we found new HPU.
-                        if (hpuHistory <= historyIndex)
-                        {
-                            hpu = i;
-                            hpuHistory = historyIndex;
-                            Global.TraceLogger?.Log(ClassLogCode, $"Updated HPU value to {mc.ModKey} with index of {i} and history index of {historyIndex}", propertyName: proKeys.Property.PropertyName);
-                        }
-                    }
-                }
-            }
-
-            return hpu;
-        }
-
+        // <inheritdoc />
         public int Forward (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public int ForwardSelfOnly (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> forwardContext) => throw new NotImplementedException();
 
+        // <inheritdoc />
         public virtual bool IsNullOrEmpty (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
-            => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue) || Mod.IsNullOrEmpty(curValue);
+            => !Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode) || Mod.IsNullOrEmpty(curValue);
 
-        /// <summary>
-        ///     Called when GSPRule.OnlyIfDefault is true
-        /// </summary>
-        /// <returns>True if Enum value matches</returns>
+        // <inheritdoc />
         public virtual bool MatchesOrigin (ProcessingKeys proKeys, IModContext<IMajorRecordGetter> recordContext)
             => recordContext.IsMaster()
-            || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue)
-            && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue)
+            || (Mod.TryGetProperty<Enum>(recordContext.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode)
+            && Mod.TryGetProperty<Enum>(proKeys.GetOriginRecord(), proKeys.Property.PropertyName, out var originValue, ClassLogCode)
             && curValue == originValue);
 
+        // <inheritdoc />
         public bool MatchesOrigin (ProcessingKeys proKeys) => MatchesOrigin(proKeys, proKeys.Context);
 
+        // <inheritdoc />
         public bool MatchesRule (ProcessingKeys proKeys)
         {
             if (proKeys.RuleKey.Operation != FilterLogic.OR)
-                Global.Logger.Log(ClassLogCode, $"Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", logLevel: LogLevel.Warning, propertyName: proKeys.Property.PropertyName);
+                Global.Logger.WriteLog(LogLevel.Warning, LogType.GeneralConfigFailure, "Invalid operation for checking a single value. Default OR only valid for this property. Continuing check as OR.", ClassLogCode);
 
-            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+            if (!Mod.TryGetProperty<Enum>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode))
                 return false;
 
             int includesChecked = 0; // Only count !Neg
@@ -157,7 +128,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 loopFinished = false;
                 if (!Enum.TryParse(valueType, checkValueOp.Value, true, out object? checkValue) || checkValue is null)
                 {
-                    Global.Logger.Log(ClassLogCode, $"{checkValueOp.Value} is not a valid value for enum type {valueType.Name}. Ignoring this entry.", logLevel: LogLevel.Warning);
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, $"{checkValueOp.Value} is not a valid value for enum type {valueType.Name}. Ignoring this entry.", ClassLogCode);
                     loopFinished = true;
                     continue;
                 }
@@ -178,10 +149,11 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (loopFinished)
                 result = includesChecked == 0;
 
-            Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Trigger: {matchedOn}", propertyName: proKeys.Property.PropertyName);
+            Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, $"Matched: {result} Trigger: {matchedOn}", ClassLogCode);
             return result;
         }
 
+        // <inheritdoc />
         public int Merge (ProcessingKeys proKeys) => throw new NotImplementedException();
 
         // <inheritdoc />

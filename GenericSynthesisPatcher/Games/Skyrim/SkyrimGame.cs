@@ -7,6 +7,7 @@ using GenericSynthesisPatcher.Games.Universal.Action;
 using Loqui;
 
 using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Aspects;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Order;
@@ -20,30 +21,135 @@ namespace GenericSynthesisPatcher.Games.Skyrim
 {
     public class SkyrimGame : Universal.BaseGame
     {
-        private SkyrimGame () => State = null!;
+        private readonly int _hasDLC;
 
-        private SkyrimGame (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState) : base(new(gameState.LoadOrder.Select(m => (IModListingGetter)m.Value))) => State = gameState;
-
-        public override IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get; }
-        protected override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
-
-        public static SkyrimGame Constructor (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState)
+        /// <summary>
+        ///     Create new Skyrim Game instance.
+        /// </summary>
+        /// <param name="gameState">
+        ///     Patcher state. Can use null! in xUnit testing as long as you don't call anything
+        ///     that requires State or LoadOrder.
+        /// </param>
+        public SkyrimGame (IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState) : base(constructLoadOrder(gameState?.LoadOrder.Select(m => (IModListingGetter)m.Value))!)
         {
-            var game = gameState is null ? new SkyrimGame () : new SkyrimGame(gameState);
+            State = gameState!;
 
-            game.SerializerSettings.Converters.Add(new ObjectBoundsConverter());
-            game.IgnoreSubPropertiesOnTypes.Add(
+            _hasDLC = gameState is null || (GameRelease != GameRelease.SkyrimLE && GameRelease != GameRelease.EnderalLE) ? 4
+                : !gameState.LoadOrder.PriorityOrder.Any(m => m.ModKey.Name == "Update.esm") ? 0
+                : !gameState.LoadOrder.PriorityOrder.Any(m => m.ModKey.Name == "Dawnguard.esm") ? 1
+                : !gameState.LoadOrder.PriorityOrder.Any(m => m.ModKey.Name == "HearthFires.esm") ? 2
+                : !gameState.LoadOrder.PriorityOrder.Any(m => m.ModKey.Name == "Dragonborn.esm") ? 3
+                : 4;
+
+            SerializerSettings.Converters.Add(new ObjectBoundsConverter());
+            IgnoreSubPropertiesOnTypes.Add(
                 [
                     typeof(Cell),
                     typeof(Destructible)
                 ]);
 
-            game.addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
-            game.addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
-            game.addExactMatch(typeof(Model), ModelAction.Instance);
+            addExactMatch(typeof(WorldspaceMaxHeight), WorldspaceMaxHeightAction.Instance);
+            addExactMatch(typeof(CellMaxHeightData), CellMaxHeightDataAction.Instance);
+            addExactMatch(typeof(Model), ModelAction.Instance);
 
-            #region Aliases
+            addAliases(this);
+        }
 
+        public override GameCategory GameCategory => GameCategory.Skyrim;
+
+        public override GameRelease GameRelease => State?.GameRelease ?? GameRelease.SkyrimSE;
+
+        public override IPatcherState<ISkyrimMod, ISkyrimModGetter> State { get; }
+
+        public override Type TypeOptionSolidifierMixIns => typeof(TypeOptionSolidifierMixIns);
+
+        public override FormKey FormIDToFormKeyConverter (FormID formID)
+        {
+            uint modID = formID.MasterIndex(MasterStyle.Full);
+
+            if (_hasDLC < modID)
+                return FormKey.Null;
+
+            string? modKey = modID switch
+            {
+                0x00u => "Skyrim",
+                0x01u => "Update",
+                0x02u => "Dawnguard",
+                0x03u => "HearthFires",
+                0x04u => "Dragonborn",
+                _ => null,
+            };
+
+            return modKey is null ? FormKey.Null : new FormKey(new ModKey(modKey, ModType.Master), formID.Id(MasterStyle.Full));
+        }
+
+        public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
+        {
+            var m = typeof(TypeOptionSolidifierMixIns).GetMethod(recordType.Name, BindingFlags.Public | BindingFlags.Static, [typeof(IEnumerable<IModListing<ISkyrimModGetter>>)]) ?? throw new InvalidOperationException($"No method found for record type {recordType.Name}.");
+
+            object records = m.Invoke(null, [State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting()]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
+
+            m = records.GetType().GetMethod("WinningContextOverrides", BindingFlags.Public | BindingFlags.Instance, [typeof(bool)]);
+            if (m is null)
+            {
+                m = records.GetType().GetMethod("WinningContextOverrides", BindingFlags.Public | BindingFlags.Instance, [typeof(ILinkCache), typeof(bool)]);
+                return (IEnumerable<IModContext<IMajorRecordGetter>>)(m?.Invoke(records, [State.LinkCache, false]) ?? throw new InvalidOperationException($"Failed to call WinningContextOverrides method found for record type {recordType.Name}."));
+            }
+
+            return (IEnumerable<IModContext<IMajorRecordGetter>>)(m.Invoke(records, [false]) ?? throw new InvalidOperationException($"Failed to call WinningContextOverrides method found for record type {recordType.Name}."));
+        }
+
+        protected override IRecordAction? discoverAction (Type[] explodedType)
+        {
+            var result = base.discoverAction(explodedType);
+            if (result is not null)
+                return result;
+
+            switch (explodedType.Length)
+            {
+                case 1:
+                    if (explodedType[0].IsAssignableTo(typeof(IObjectBoundsGetter)))
+                        return ObjectBoundsAction.Instance;
+
+                    if (explodedType[0].IsAssignableTo(typeof(IPlayerSkillsGetter)))
+                        return PlayerSkillsAction.Instance;
+
+                    return null;
+
+                case 2:
+                    if (explodedType[0] == typeof(ExtendedList<>))
+                    {
+                        if (explodedType[1].IsAssignableTo(typeof(IContainerEntryGetter)))
+                            return ContainerItemsAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(IEffectGetter)))
+                            return EffectsAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(ILeveledItemEntryGetter)))
+                            return LeveledItemAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(ILeveledNpcEntryGetter)))
+                            return LeveledNpcAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(ILeveledSpellEntryGetter)))
+                            return LeveledSpellAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(IRankPlacementGetter)))
+                            return RankPlacementAction.Instance;
+
+                        if (explodedType[1].IsAssignableTo(typeof(IRelationGetter)))
+                            return RelationsAction.Instance;
+                    }
+
+                    return null;
+
+                default:
+                    return null;
+            }
+        }
+
+        private static void addAliases (SkyrimGame game)
+        {
 #pragma warning disable format
 
             // Global Aliases
@@ -567,75 +673,6 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             game.AddAlias(IWorldspaceGetter.StaticRegistration            , "XWEM"       , nameof(IWorldspaceGetter.WaterEnvironmentMap));
             game.AddAlias(IWorldspaceGetter.StaticRegistration            , "ZNAM"       , nameof(IWorldspaceGetter.Music));
 #pragma warning restore format
-
-            #endregion Aliases
-
-            return game;
-        }
-
-        public override IEnumerable<IModContext<IMajorRecordGetter>> GetRecords (ILoquiRegistration recordType)
-        {
-            var m = typeof(TypeOptionSolidifierMixIns).GetMethod(recordType.Name, BindingFlags.Public | BindingFlags.Static, [typeof(IEnumerable<IModListing<ISkyrimModGetter>>)]) ?? throw new InvalidOperationException($"No method found for record type {recordType.Name}.");
-
-            object records = m.Invoke(null, [State.LoadOrder.PriorityOrder.OnlyEnabledAndExisting()]) ?? throw new InvalidOperationException($"Failed to call method for record type {recordType.Name}.");
-
-            m = records.GetType().GetMethod("WinningContextOverrides", BindingFlags.Public | BindingFlags.Instance, [typeof(bool)]);
-            if (m is null)
-            {
-                m = records.GetType().GetMethod("WinningContextOverrides", BindingFlags.Public | BindingFlags.Instance, [typeof(ILinkCache), typeof(bool)]);
-                return (IEnumerable<IModContext<IMajorRecordGetter>>)(m?.Invoke(records, [State.LinkCache, false]) ?? throw new InvalidOperationException($"Failed to call WinningContextOverrides method found for record type {recordType.Name}."));
-            }
-
-            return (IEnumerable<IModContext<IMajorRecordGetter>>)(m.Invoke(records, [false]) ?? throw new InvalidOperationException($"Failed to call WinningContextOverrides method found for record type {recordType.Name}."));
-        }
-
-        protected override IRecordAction? discoverAction (Type[] explodedType)
-        {
-            var result = base.discoverAction(explodedType);
-            if (result is not null)
-                return result;
-
-            switch (explodedType.Length)
-            {
-                case 1:
-                    if (explodedType[0].IsAssignableTo(typeof(IObjectBoundsGetter)))
-                        return ObjectBoundsAction.Instance;
-
-                    if (explodedType[0].IsAssignableTo(typeof(IPlayerSkillsGetter)))
-                        return PlayerSkillsAction.Instance;
-
-                    return null;
-
-                case 2:
-                    if (explodedType[0] == typeof(ExtendedList<>))
-                    {
-                        if (explodedType[1].IsAssignableTo(typeof(IContainerEntryGetter)))
-                            return ContainerItemsAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(IEffectGetter)))
-                            return EffectsAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(ILeveledItemEntryGetter)))
-                            return LeveledItemAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(ILeveledNpcEntryGetter)))
-                            return LeveledNpcAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(ILeveledSpellEntryGetter)))
-                            return LeveledSpellAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(IRankPlacementGetter)))
-                            return RankPlacementAction.Instance;
-
-                        if (explodedType[1].IsAssignableTo(typeof(IRelationGetter)))
-                            return RelationsAction.Instance;
-                    }
-
-                    return null;
-
-                default:
-                    return null;
-            }
         }
     }
 }

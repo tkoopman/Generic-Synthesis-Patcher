@@ -14,13 +14,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class RankPlacementAction : FormLinksWithDataAction<RankPlacementData, IFactionGetter, RankPlacement>
     {
         public static readonly RankPlacementAction Instance = new();
-        private const int ClassLogCode = 0x16;
+        private const int ClassLogCode = 0xA8;
 
         public override RankPlacement? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not IRankPlacementGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to add item. No Items?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add item. No Items?", ClassLogCode);
                 return null;
             }
 

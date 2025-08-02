@@ -14,13 +14,13 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     public class ContainerItemsAction : FormLinksWithDataAction<ContainerItemsData, IItemGetter, ContainerEntry>
     {
         public static readonly ContainerItemsAction Instance = new();
-        private const int ClassLogCode = 0x16;
+        private const int ClassLogCode = 0xA1;
 
         public override ContainerEntry? CreateFrom (IFormLinkContainerGetter source)
         {
             if (source is not IContainerEntryGetter sourceRecord)
             {
-                Global.Logger.Log(ClassLogCode, $"Failed to add item. No Items?", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordUpdateFailure, "Failed to add item. No Items?", ClassLogCode);
                 return null;
             }
 

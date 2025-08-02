@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
 using GenericSynthesisPatcher.Helpers;
+using GenericSynthesisPatcher.Rules.Operations;
 
 namespace GenericSynthesisPatcher.Games.Universal.Action
 {
@@ -16,6 +16,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
     public class ConvertibleAction<T> : BasicAction<T> where T : IConvertible
     {
         public new static readonly ConvertibleAction<T> Instance = new();
+        private const int ClassLogCode = 0x13;
 
         private ConvertibleAction () : base()
         {
@@ -35,10 +36,10 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
             if (!fromCache && !MatchesHelper.Validate(matches))
                 throw new InvalidDataException("Json data for matches invalid");
 
-            if (!Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue))
+            if (!Mod.TryGetProperty<T>(proKeys.Record, proKeys.Property.PropertyName, out var curValue, ClassLogCode))
                 return false;
 
-            return MatchesHelper.Matches(curValue, matches, propertyName: proKeys.Property.PropertyName);
+            return MatchesHelper.Matches(curValue, matches);
         }
 
         // <inheritdoc />

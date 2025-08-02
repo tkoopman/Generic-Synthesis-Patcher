@@ -19,16 +19,14 @@ public static class Utility
     public static readonly string BuildFailureFile = "Files/BuildFailure.txt";
     public static readonly string BuildSuccessFile = "Files/BuildSuccess.txt";
     public static readonly string BuildSuccessNonEnglishFile = "Files/BuildSuccessNonEnglish.txt";
-    public static readonly string LePathToOverrideFile = "Files/le_override.esp";
-    public static readonly string LePathToTestFile = "Files/le_test.esp";
-    public static readonly string OblivionPathToOverrideFile = "Files/oblivion_override.esp";
-    public static readonly string OblivionPathToTestFile = "Files/oblivion_test.esp";
+    public static readonly string LePath = "Files/Skyrim/";
+    public static readonly string OblivionPath = "Files/Oblivion/";
     public static readonly string Other2FileName = "other2.esp";
     public static readonly string OtherFileName = "other.esp";
     public static readonly string OverallTempFolderPath = "SynthesisUnitTests";
     public static readonly string OverrideFileName = "override.esp";
     public static readonly ModKey OverrideModKey = new("override", ModType.Plugin);
-    public static readonly FilePath PluginPath = "Files/Plugins.txt";
+    public static readonly string PluginFileName = "Plugins.txt";
     public static readonly ModKey RandomModKey = new("Random", ModType.Plugin);
     public static readonly ModKey SynthesisModKey = new("Synthesis", ModType.Plugin);
     public static readonly string TestFileName = "test.esp";
@@ -66,30 +64,29 @@ public static class Utility
     {
         var baseFolder = new DirectoryPath(BaseFolder);
         var dataFolder = new DirectoryPath($"{BaseFolder}/DataFolder");
-        var pluginPath = Path.Combine(BaseFolder, PluginPath);
-        string testPath, overridePath;
+        string filesPath;
         switch (release)
         {
             case GameRelease.Oblivion:
-                testPath = OblivionPathToTestFile;
-                overridePath = OblivionPathToOverrideFile;
+                filesPath = OblivionPath;
                 break;
 
             case GameRelease.SkyrimLE:
             case GameRelease.SkyrimSE:
-                testPath = LePathToTestFile;
-                overridePath = LePathToOverrideFile;
+                filesPath = LePath;
                 break;
 
             default:
                 throw new NotImplementedException();
         }
 
+        string pluginPath = Path.Combine(BaseFolder, PluginFileName);
+
         var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>()
         {
-            { Path.Combine(dataFolder.Path, TestFileName), new MockFileData(File.ReadAllBytes(testPath)) },
-            { Path.Combine(dataFolder.Path, OverrideFileName), new MockFileData(File.ReadAllBytes(overridePath)) },
-            { pluginPath, new MockFileData(File.ReadAllBytes(PluginPath)) },
+            { Path.Combine(dataFolder.Path, TestFileName), new MockFileData(File.ReadAllBytes(Path.Combine(filesPath, TestFileName))) },
+            { Path.Combine(dataFolder.Path, OverrideFileName), new MockFileData(File.ReadAllBytes(Path.Combine(filesPath, OverrideFileName))) },
+            { pluginPath, new MockFileData(File.ReadAllBytes(Path.Combine(filesPath, PluginFileName))) },
         });
 
         return new TestEnvironment(

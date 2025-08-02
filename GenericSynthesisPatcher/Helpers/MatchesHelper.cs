@@ -1,6 +1,6 @@
 using Common;
 
-using GenericSynthesisPatcher.Games.Universal.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -8,19 +8,15 @@ namespace GenericSynthesisPatcher.Helpers
 {
     public static class MatchesHelper
     {
-        private const int ClassLogCode = 0x07;
+        private const int ClassLogCode = 0x03;
 
-        public static bool Matches<TValue> (IEnumerable<TValue>? values, FilterLogic logic, IEnumerable<ListOperationBase<TValue>>? matches, string? propertyName = null, bool debugSuccess = true, bool debugFailure = true) => Matches(values, logic, matches, static (l, r) => MyEqualityComparer.Equals(l, r), propertyName, debugSuccess, debugFailure);
+        public static bool Matches<TValue> (IEnumerable<TValue>? values, FilterLogic logic, IEnumerable<ListOperationBase<TValue>>? matches, bool debug = true) => Matches(values, logic, matches, static (l, r) => MyEqualityComparer.Equals(l, r), debug);
 
         /// <summary>
         ///     Performs match operation against a list of values. Assumes you have validated pre
         ///     running this.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="matches"></param>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public static bool Matches<TValue> (IEnumerable<TValue>? values, FilterLogic logic, IEnumerable<ListOperationBase<TValue>>? matches, Func<ListOperationBase<TValue>, TValue?, bool> predicate, string? propertyName = null, bool debugSuccess = true, bool debugFailure = true)
+        public static bool Matches<TValue> (IEnumerable<TValue>? values, FilterLogic logic, IEnumerable<ListOperationBase<TValue>>? matches, Func<ListOperationBase<TValue>, TValue?, bool> predicate, bool debug = true)
         {
             if (!matches.SafeAny())
                 return true;
@@ -78,8 +74,8 @@ namespace GenericSynthesisPatcher.Helpers
                 };
             }
 
-            if ((debugFailure && !result) || (debugSuccess && result))
-                Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Operation: {logic} Trigger: {matchedOn}", propertyName: propertyName);
+            if (debug)
+                Global.Logger.WriteLog(LogLevel.Trace, result ? LogType.MatchSuccess : LogType.MatchFailure, $"Matched: {result} Operation: {logic} Trigger: {matchedOn}", ClassLogCode);
 
             return result;
         }
@@ -91,8 +87,8 @@ namespace GenericSynthesisPatcher.Helpers
         /// <param name="value"></param>
         /// <param name="matches"></param>
         /// <returns></returns>
-        public static bool Matches<TValue> (TValue? value, IEnumerable<ListOperationBase<TValue>>? matches, string? propertyName = null, bool debugSuccess = true, bool debugFailure = true)
-            => Matches(value, matches, static (l, r) => MyEqualityComparer.Equals(l, r), propertyName, debugSuccess, debugFailure);
+        public static bool Matches<TValue> (TValue? value, IEnumerable<ListOperationBase<TValue>>? matches, bool debug = true)
+            => Matches(value, matches, static (l, r) => MyEqualityComparer.Equals(l, r), debug);
 
         /// <summary>
         ///     Performs match operation against a single value. Assumes you have validated pre
@@ -102,8 +98,8 @@ namespace GenericSynthesisPatcher.Helpers
         /// <param name="matches"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static bool Matches<TValue, TListValue> (TValue? value, IEnumerable<ListOperationBase<TListValue>>? matches, Func<ListOperationBase<TListValue>, TValue?, bool> predicate, string? propertyName = null, bool debugSuccess = true, bool debugFailure = true)
-        {
+        public static bool Matches<TValue, TListValue> (TValue? value, IEnumerable<ListOperationBase<TListValue>>? matches, Func<ListOperationBase<TListValue>, TValue?, bool> predicate, bool debug = true)
+        { // TODO: Fix to make better performance now moving to HashSets
             if (!matches.SafeAny())
                 return true;
 
@@ -111,8 +107,8 @@ namespace GenericSynthesisPatcher.Helpers
             bool isNeg = matches.First().Operation == ListLogic.NOT;
             bool result = isNeg ? !hasEntry : hasEntry;
 
-            if ((debugFailure && !result) || (debugSuccess && result))
-                Global.TraceLogger?.Log(ClassLogCode, $"Matched: {result} Found: {hasEntry} Not: {isNeg}", propertyName: propertyName);
+            if (debug)
+                Global.Logger.WriteLog(LogLevel.Trace, result ? LogType.MatchSuccess : LogType.MatchFailure, $"Matched: {result} Found: {hasEntry} Not: {isNeg}", ClassLogCode);
 
             return result;
         }
@@ -121,11 +117,11 @@ namespace GenericSynthesisPatcher.Helpers
         ///     Validates matches based on matching a list of values field.
         /// </summary>
         /// <returns>True if valid</returns>
-        public static bool Validate<T> (FilterLogic logic, IEnumerable<ListOperationBase<T>>? matches, string? propertyName = null)
+        public static bool Validate<T> (FilterLogic logic, IEnumerable<ListOperationBase<T>>? matches)
         {
             if (logic != FilterLogic.AND && matches.SafeAny() && matches.Any(m => m.Operation == ListLogic.NOT) && matches.Any(m => m.Operation != ListLogic.NOT))
             {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"Includes both include and exclude values to match against, which does not compute for matching against a list of values unless using AND operation.", propertyName: propertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "Includes both include and exclude values to match against, which does not compute for matching against a list of values unless using AND operation.", ClassLogCode);
                 return false;
             }
 
@@ -136,11 +132,12 @@ namespace GenericSynthesisPatcher.Helpers
         ///     Validates matches based on matching a single value field.
         /// </summary>
         /// <returns>True if valid</returns>
-        public static bool Validate<T> (IEnumerable<ListOperationBase<T>>? matches, string? propertyName = null)
+        public static bool Validate<T> (IEnumerable<ListOperationBase<T>>? matches)
         {
             if (matches.SafeAny() && matches.Any(m => m.Operation == ListLogic.NOT) && matches.Any(m => m.Operation != ListLogic.NOT))
             {
-                LogHelper.WriteLog(LogLevel.Error, ClassLogCode, $"Includes both include and exclude values to match against, which does not compute for matching against a single value.", propertyName: propertyName);
+                Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "Includes both include and exclude values to match against, which does not compute for matching against a single value.", ClassLogCode);
+
                 return false;
             }
 

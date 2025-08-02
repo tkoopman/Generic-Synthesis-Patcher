@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Json.Operations;
+using GenericSynthesisPatcher.Rules.Operations;
 
 using Microsoft.Extensions.Logging;
 
@@ -8,6 +8,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
 {
     public partial class OperationsConverter : JsonConverter
     {
+        private const int ClassLogCode = 0x1E;
         public override bool CanWrite => false;
 
         public override bool CanConvert (Type objectType) => objectType.GetType().IsAssignableTo(typeof(OperationBase<,>));
@@ -19,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Json.Converters
             var constructor = objectType.GetConstructor([typeof(string)]);
             if (constructor is null)
             {
-                Global.Logger.Log(0xFF, "Failed to construct new value form JSON.", logLevel: LogLevel.Error);
+                Global.Logger.WriteLog(LogLevel.Error, Helpers.LogType.RecordActionInvalid, "Failed to construct new value form JSON.", ClassLogCode);
                 return false;
             }
 
