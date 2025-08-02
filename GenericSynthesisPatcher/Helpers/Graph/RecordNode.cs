@@ -80,7 +80,7 @@ namespace GenericSynthesisPatcher.Helpers.Graph
                 int f = WorkingList.AddMissing(forceAdds);
                 Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Merge All. Force Added: {f}/{forceAdds.Count}", ClassLogCode);
 
-                return add.Any() || remove.Any() || f > 0;
+                return add.Any() || remove.Any() || f != 0;
             }
             else
             {

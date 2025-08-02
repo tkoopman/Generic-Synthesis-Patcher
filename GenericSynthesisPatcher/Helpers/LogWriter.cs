@@ -10,6 +10,8 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Records;
 
+using Noggog;
+
 namespace GenericSynthesisPatcher.Helpers
 {
     public class LogWriter : TextWriter
@@ -78,18 +80,38 @@ namespace GenericSynthesisPatcher.Helpers
         /// </summary>
         public TextWriter Out
         {
-            get => _out ?? Console.Out;
+            protected get => _out ?? Console.Out;
 
             set => _out = value;
         }
+
+        protected bool BlockWrittenTo { get; private set; }
 
         public override void Flush ()
         {
             string log = _log.ToString();
             _ = _log.Clear();
 
+            log = log.TrimEnd(['\r', '\n']);
+
             if (!string.IsNullOrEmpty(log))
                 WriteLog(DefaultLogLevel, DefaultLogType, log, DefaultCallingClassLogCode, line: DefaultCallingLine);
+        }
+
+        /// <summary>
+        ///     Output summary of the total number of each log severity that has been printed to output.
+        /// </summary>
+        public string? GetCounts ()
+        {
+            var sw = new StringWriter();
+            for (int i = (int)LogLevel.Warning; i <= (int)LogLevel.Critical; i++)
+            {
+                if (Count[i] != 0)
+                    sw.WriteLine($"{(LogLevel)i}: {Count[i]:N0}");
+            }
+
+            string result = sw.ToString();
+            return result.IsNullOrWhitespace() ? null : result;
         }
 
         public bool IsLogLevelEnabled (LogLevel logLevel, LogType logType)
@@ -143,16 +165,12 @@ namespace GenericSynthesisPatcher.Helpers
 
         public void LogMissingProperty (string propertyName, int classCode, [CallerLineNumber] int line = 0) => WriteLog(LogLevel.Error, LogType.PropertyNotExist, $"Property missing or no valid action found for: {propertyName}.", classCode, line: line);
 
-        /// <summary>
-        ///     Output summary of the total number of each log severity that has been printed to output.
-        /// </summary>
-        public void PrintCounts ()
+        public void StartNewBlock ()
         {
-            for (int i = (int)LogLevel.Warning; i <= (int)LogLevel.Critical; i++)
-            {
-                if (Count[i] > 0)
-                    Out.WriteLine($"{(LogLevel)i}: {Count[i]:N0}");
-            }
+            if (BlockWrittenTo)
+                Out.WriteLine();
+
+            BlockWrittenTo = false;
         }
 
         /// <summary>
@@ -264,7 +282,30 @@ namespace GenericSynthesisPatcher.Helpers
 
             _ = sb.Append(log);
 
+            BlockWrittenTo = true;
             Out.WriteLine(sb.ToString());
+        }
+
+        /// <summary>
+        ///     Writes string with blank line as separator at start, but only if string is not empty.
+        /// </summary>
+        /// <remarks>
+        ///     This method writes the string provided as is, without adding standard logging format.
+        /// </remarks>
+        public void WriteRawBlock (string? str)
+        {
+            if (str.IsNullOrWhitespace())
+                return;
+
+            StartNewBlock();
+            Out.WriteLine(str);
+            StartNewBlock();
+        }
+
+        public void WriteRawLine (string? str)
+        {
+            BlockWrittenTo = true;
+            Out.WriteLine(str);
         }
 
         internal static LogLevel calculateCurrentLogLevel (GSPBase? rule, FormKey formKey)

@@ -29,7 +29,8 @@ namespace GSPTestProject
         public void Test_LoadExternalKIDData ()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            Assert.True(KidLoader.TryLoadRules(0, @"E:\Temp\KIDData\", out var rules));
+            var loader = new KidLoader();
+            Assert.True(loader.LoadRules(0, @"E:\Temp\KIDData\"));
 
             watch.Stop();
             Output.WriteLine($"Load Rules: {watch.Elapsed}");
@@ -39,7 +40,7 @@ namespace GSPTestProject
 
             var index = new IndexedRecordIDs<KidRule>();
 
-            foreach (var rule in rules)
+            foreach (var rule in loader.Rules!)
             {
                 if (rule is KidRule kidRule)
                 {
@@ -117,15 +118,15 @@ namespace GSPTestProject
             foreach (string w in toFindWildCards)
             {
                 int count = index.InternalFindAll(w, RecordID.Field.EditorID).Count();
-                Assert.True(count > 0);
+                Assert.NotEqual(0, count);
 
                 for (int i = 0; i < 1000; i++)
                 {
                     string r = random[rnd.Next(random.Count)];
                     count = index.InternalFindAll($"{w}{r}", RecordID.Field.EditorID).Count();
-                    Assert.True(count > 0);
+                    Assert.NotEqual(0, count);
                     count = index.InternalFindAll($"{r}{w}", RecordID.Field.EditorID).Count();
-                    Assert.True(count > 0);
+                    Assert.NotEqual(0, count);
                 }
             }
 

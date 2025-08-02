@@ -15,8 +15,10 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
         public const int DEFAULTCHANCE = 100;
         private const string KID_GSP_PREFIX = "; Handled by GSP - ";
 
-        public KidIniLine (string line)
+        public KidIniLine (int lineNumber, string line)
         {
+            LineNumber = lineNumber;
+
             // Has line been processed by GSP in past?
             WasHandledByGsp = KIDGspPrefixRegex().IsMatch(line);
             Line = WasHandledByGsp ? KIDGspPrefixRegex().Replace(line, string.Empty).TrimStart() : line;
@@ -39,8 +41,8 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
 
             _ = SynthCommon.TryConvertToBethesdaID(parts[0].Trim(), out var keyword);
             Keyword = keyword;
-            Strings = cleanString(parts[2], out string? strings) ? [.. strings.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0)] : [];
-            Traits = parts.Length > 3 && cleanString(parts[3], out string? traits) ? [.. traits.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0)] : [];
+            Strings = cleanString(parts[2], out string? strings) ? [.. strings.Split(',').Select(s => s.Trim()).Where(s => s.Length != 0)] : [];
+            Traits = parts.Length > 3 && cleanString(parts[3], out string? traits) ? [.. traits.Split(',').Select(s => s.Trim()).Where(s => s.Length != 0)] : [];
             Chance = parts.Length > 4 && cleanString(parts[4], out string? sChance) ? (int.TryParse(sChance, out int chance) ? chance : -1) : DEFAULTCHANCE;
         }
 
@@ -59,9 +61,20 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
         }
 
         public int Chance { get; internal set; } = DEFAULTCHANCE;
+
+        /// <summary>
+        ///     Has this line been successfully converted into a GSP Rule
+        /// </summary>
         public bool HandledByGsp { get; set; }
+
         public RecordID Keyword { get; }
+
+        /// <summary>
+        ///     Original line from INI file, with GSP Prefix removed if it existed.
+        /// </summary>
         public string Line { get; }
+
+        public int LineNumber { get; }
 
         /// <summary>
         ///     Returns if the line seems to be valid basic format for KID entry. This is just basic
@@ -77,11 +90,17 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
             && Strings is not null
             && Traits is not null
             && Chance is > 0 && Chance <= DEFAULTCHANCE
-            && (Strings.Length > 0 || Traits.Length > 0);
+            && (Strings.Length != 0 || Traits.Length != 0);
 
         public string[]? Strings { get; }
+
         public string[]? Traits { get; }
+
         public ILoquiRegistration? Type { get; }
+
+        /// <summary>
+        ///     Was line masked as handled by GSP when read from file.
+        /// </summary>
         public bool WasHandledByGsp { get; }
 
         public bool Equals (KidIniLine? other)
@@ -107,9 +126,10 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
 
         public override int GetHashCode () => HashCode.Combine(Keyword, Type, Chance);
 
+        public override string ToString () => HandledByGsp ? $"{KID_GSP_PREFIX}{Line}" : Line;
+
         private static bool cleanString (string? input, [NotNullWhen(true)] out string? output)
         {
-            output = null;
             input = input?.Trim();
 
             output = input is null || input.Length == 0 || input.Equals("NONE", StringComparison.OrdinalIgnoreCase) ? null : input;

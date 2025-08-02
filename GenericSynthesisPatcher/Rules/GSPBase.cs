@@ -99,7 +99,7 @@ namespace GenericSynthesisPatcher.Rules
             exclude = [];
             FullyIndexed = PatchedBy is null || PatchedBy.Count == 0;
 
-            if (Masters is not null && Masters.Count > 0)
+            if (Masters is not null && Masters.Count != 0)
             {
                 foreach (var m in Masters)
                 {
@@ -121,7 +121,7 @@ namespace GenericSynthesisPatcher.Rules
                 }
             }
 
-            return include.Count > 0 || exclude.Count > 0;
+            return include.Count != 0 || exclude.Count != 0;
         }
 
         #region Masters
@@ -156,7 +156,7 @@ namespace GenericSynthesisPatcher.Rules
 
                 masters = [];
                 foreach (var v in value ?? [])
-                    masters.Add(v.Inverse());
+                    _ = masters.Add(v.Inverse());
             }
         }
 
@@ -219,7 +219,7 @@ namespace GenericSynthesisPatcher.Rules
                 patchedByLogic = FilterLogic.Default;
                 patchedBy = [];
                 foreach (var v in value ?? [])
-                    patchedBy.Add(v.Inverse());
+                    _ = patchedBy.Add(v.Inverse());
             }
         }
 

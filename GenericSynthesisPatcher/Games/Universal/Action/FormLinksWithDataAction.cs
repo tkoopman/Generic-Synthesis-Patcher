@@ -84,7 +84,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                     // Check if action wanting to clear all
                     if (actionData?.FormKey is null || actionData.FormKey.Value == FormKey.Null)
                     {
-                        if (curList is not null && curList.Count > 0)
+                        if (curList is not null && curList.Count != 0)
                         {
                             if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, ClassLogCode))
                                 return -1;

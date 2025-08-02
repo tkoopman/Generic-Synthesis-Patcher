@@ -98,8 +98,8 @@ namespace GenericSynthesisPatcher.Rules
 
             // Output message if groups types defined and all rule types defined but combined to
             // less than current group types.
-            if (Types.Any() && AllTypes.Count < Types.Count())
-                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Reducing group's Types to {AllTypes.Count} from {Types.Count()} as extra types not used.", ClassLogCode, includePrefix: GetLogRuleID());
+            if (Types.Count != 0 && AllTypes.Count < Types.Count)
+                Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Reducing group's Types to {AllTypes.Count} from {Types.Count} as extra types not used.", ClassLogCode, includePrefix: GetLogRuleID());
 
             Types = [.. AllTypes];
 

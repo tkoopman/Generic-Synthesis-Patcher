@@ -67,7 +67,7 @@ namespace GenericSynthesisPatcher.Rules
 
                 editorIDs = [];
                 foreach (var v in value)
-                    editorIDs.Add(v.Inverse());
+                    _ = editorIDs.Add(v.Inverse());
             }
         }
 
@@ -111,7 +111,7 @@ namespace GenericSynthesisPatcher.Rules
 
                 formIDs = [];
                 foreach (var v in value)
-                    formIDs.Add(v.Inverse());
+                    _ = formIDs.Add(v.Inverse());
             }
         }
 
@@ -211,9 +211,9 @@ namespace GenericSynthesisPatcher.Rules
 
             Group = group;
 
-            if (!Types.Any())
+            if (Types.Count == 0)
                 Types = Group.Types;  // This may also be NONE but we do extra check for that after validation.
-            else if (Group.Types.Any() && Types.Any(t => !Group.Types.Contains(t)))
+            else if (Group.Types.Count != 0 && Types.Any(t => !Group.Types.Contains(t)))
                 throw new Exception("Record under group tries to filter for Type(s) that are excluded at by group.");
 
             if (Priority != 0)
@@ -461,7 +461,7 @@ namespace GenericSynthesisPatcher.Rules
                 }
             }
 
-            return include.Count > 0 || exclude.Count > 0;
+            return include.Count != 0 || exclude.Count != 0;
         }
 
         public override string GetLogRuleID () => Group is null ? base.GetLogRuleID() : $"{Group.GetLogRuleID()}.{ConfigRule}";
@@ -529,7 +529,7 @@ namespace GenericSynthesisPatcher.Rules
                     changes = (changes == -1) ? changed : changes + changed;
             }
 
-            if (Merge.Count > 0)
+            if (Merge.Count != 0)
             {
                 int versions = Global.Game.State.LinkCache.ResolveAllSimpleContexts(proKeys.Record.FormKey, proKeys.Record.Registration.GetterType).Count();
                 switch (versions)
@@ -584,7 +584,7 @@ namespace GenericSynthesisPatcher.Rules
             if (!base.Validate())
                 return false;
 
-            if (!Types.Any())
+            if (Types.Count == 0)
             {
                 Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Rules must specify record type(s) either directly in the rule or via type(s) added at a group level.", ClassLogCode, includePrefix: GetLogRuleID());
                 return false;

@@ -25,6 +25,9 @@ namespace GenericSynthesisPatcher
 
         private const int ClassLogCode = 0x01;
 
+        // subTotals values = (Total, Matched, Updated, Changes)
+        private static readonly SortedDictionary<string, Counts> SubTotals = [];
+
         public static async Task<int> Main (string[] args)
         {
             if (args.Length == 0)
@@ -71,44 +74,89 @@ namespace GenericSynthesisPatcher
             }
 
             List<GSPBase> Rules = [];
-
+            List<IGSPConfigs> Loaders = [];
             if (!Global.Settings.LoadGSPConfigs)
             {
                 Global.Logger.WriteLog(LogLevel.Information, LogType.CONFIG, "Loading of GSP JSON config files is disabled in settings.", ClassLogCode);
             }
-            else if (GSPJson.TryLoadRules(1, out var rules))
-            {
-                Rules.AddRange(rules);
-            }
             else
             {
-                Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Failed to load rules. Exiting.", ClassLogCode);
-                return;
+                var loader = new GSPJson();
+                Loaders.Add(loader);
+
+                if (loader.LoadRules(1))
+                {
+                    Rules.AddRange(loader.Rules);
+                }
+                else
+                {
+                    Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Failed to load rules. Exiting.", ClassLogCode);
+                    return;
+                }
             }
 
             if (Global.Settings.LoadKIDConfigs)
             {
-                int configFile = Rules.Count > 0 ? Rules.Max(r => r.ConfigFile) : 1;
-                if (GenericSynthesisPatcher.Rules.Loaders.KID.KidLoader.TryLoadRules(configFile, out var rules))
-                {
-                    Rules.AddRange(rules);
-                }
+                int configFile = Rules.Count != 0 ? Rules.Max(r => r.ConfigFile) : 1;
+                var loader = new GenericSynthesisPatcher.Rules.Loaders.KID.KidLoader();
+                Loaders.Add(loader);
+
+                if (loader.LoadRules(configFile))
+                    Rules.AddRange(loader.Rules);
             }
 
+            bool result = RunPatch(Rules);
+
+            Global.Logger.StartNewBlock();
+
+            foreach (var loader in Loaders)
+                loader.Close(result);
+
+            Global.Logger.WriteRawBlock(Global.Logger.GetCounts());
+
+            if (result)
+            {
+                Global.Logger.WriteRawLine("Record Type Totals");
+                Global.Logger.WriteRawLine($"{"Type",-15} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");
+
+                var totals = new Counts();
+                TimeSpan ts = new();
+
+                foreach (var (key, subTotal) in SubTotals)
+                {
+                    if (Global.Settings.Logging.LogLevel == LogLevel.Trace)
+                        Global.Logger.WriteRawLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}   {subTotal.Stopwatch.Elapsed:c}");
+                    else
+                        Global.Logger.WriteRawLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
+
+                    totals.Total += subTotal.Total;
+                    totals.Matched += subTotal.Matched;
+                    totals.Updated += subTotal.Updated;
+                    totals.Changes += subTotal.Changes;
+                    ts = ts.Add(subTotal.Stopwatch.Elapsed);
+                }
+
+                if (Global.Settings.Logging.LogLevel == LogLevel.Trace)
+                    Global.Logger.WriteRawLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
+                else
+                    Global.Logger.WriteRawLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+            }
+        }
+
+        public static bool RunPatch (List<GSPBase> Rules)
+        {
             if (Rules.Count == 0)
             {
                 Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "No rules loaded. Exiting.", ClassLogCode);
-                return;
+                return false;
             }
-
-            Rules.Sort();
 
             HashSet<ILoquiRegistration> EnabledTypes = [.. Rules.SelectMany(r => r.Types)];
 
             int groupCount = Rules.Count(r => r is GSPGroup);
             int ruleCount = Rules.Count - groupCount;
 
-            if (groupCount > 0)
+            if (groupCount != 0)
             {
                 int groupRuleCount = Rules.Sum(r => r is GSPGroup group ? group.Rules.Count : 0);
                 Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Rules: {ruleCount} Groups: {groupCount} Group Rules: {groupRuleCount}", ClassLogCode);
@@ -118,20 +166,16 @@ namespace GenericSynthesisPatcher
                 Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Loaded {ruleCount} rules.", ClassLogCode);
             }
 
-            // subTotals values = (Total, Matched, Updated, Changes)
-            SortedDictionary<string, Counts> subTotals = [];
-
             foreach (var rtm in EnabledTypes)
             {
                 var ruleFinder = new RuleFinder();
                 ruleFinder.AddRules(Rules.Where(r => r.Types.Contains(rtm)));
 
-                if (Global.Logger.CurrentLogLevel == LogLevel.Trace)
-                    ruleFinder.PrintStats(Global.Logger.Out);
+                ruleFinder.PrintStats(Global.Logger);
 
                 var ProcessTypeRecords = Global.Game.GetRecords(rtm);
                 var counts = new Counts();
-                subTotals.Add(rtm.Name, counts);
+                SubTotals.Add(rtm.Name, counts);
 
                 counts.Stopwatch.Start();
                 foreach (var context in ProcessTypeRecords)
@@ -162,44 +206,20 @@ namespace GenericSynthesisPatcher
 
             Global.Logger.UpdateCurrentProcess(null, null, ClassLogCode);
             Global.Logger.DefaultLogLevel = LogLevel.Information;
-            Global.Logger.Out.WriteLine("Completed");
-            Global.Logger.Out.WriteLine();
-            Global.Logger.PrintCounts();
-            Global.Logger.Out.WriteLine();
+            Global.Logger.WriteRawLine("Completed");
+
+            Global.Logger.StartNewBlock();
 
             var updates = RecordUpdates.GroupBy(g => (g.Type, g.FormKey, g.Property),
                                                 g => (g.Rule, g.Changes), (k, data) => new { Key = k, Rules = data.Select(d => d.Rule).Count(), Changes = data.Select(d => d.Changes).Sum() })
                                        .Where(g => g.Rules > 1);
 
             foreach (var update in updates)
-                Global.Logger.Out.WriteLine($"Warning: Record {update.Key.FormKey} had {update.Key.Property} updated by {update.Rules} different rules, with total of {update.Changes} changes.");
+                Global.Logger.WriteLog(LogLevel.Information, LogType.CONFIG, $"Record {update.Key.FormKey} had {update.Key.Property} updated by {update.Rules} different rules, with total of {update.Changes} changes.", ClassLogCode);
 
-            Global.Logger.Out.WriteLine();
+            Global.Logger.StartNewBlock();
 
-            Global.Logger.Out.WriteLine("Record Type Totals");
-            Global.Logger.Out.WriteLine($"{"Type",-15} {"Total",10} {"Matched",10} {"Updated",10} {"Changes",10}");
-
-            var totals = new Counts();
-            TimeSpan ts = new();
-
-            foreach (var (key, subTotal) in subTotals)
-            {
-                if (Global.Settings.Logging.LogLevel == LogLevel.Trace)
-                    Global.Logger.Out.WriteLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}   {subTotal.Stopwatch.Elapsed:c}");
-                else
-                    Global.Logger.Out.WriteLine($"{key,-15} {subTotal.Total,10:N0} {subTotal.Matched,10:N0} {subTotal.Updated,10:N0} {subTotal.Changes,10:N0}");
-
-                totals.Total += subTotal.Total;
-                totals.Matched += subTotal.Matched;
-                totals.Updated += subTotal.Updated;
-                totals.Changes += subTotal.Changes;
-                ts = ts.Add(subTotal.Stopwatch.Elapsed);
-            }
-
-            if (Global.Settings.Logging.LogLevel == LogLevel.Trace)
-                Global.Logger.Out.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}   {ts:c}");
-            else
-                Global.Logger.Out.WriteLine($"{"Totals",-15} {totals.Total,10:N0} {totals.Matched,10:N0} {totals.Updated,10:N0} {totals.Changes,10:N0}");
+            return true;
         }
     }
 }

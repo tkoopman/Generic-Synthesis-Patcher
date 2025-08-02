@@ -24,10 +24,10 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
         {
             lines = [];
 
+            int lineNumber = 1;
+
             foreach (string line in contents.Lines())
-            {
-                lines.Add(new KidIniLine(line));
-            }
+                lines.Add(new KidIniLine(lineNumber++, line));
         }
 
         /// <summary>
@@ -105,5 +105,14 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
         ///     Not really used in GSP, so just returns the hash code of the line count and first line.
         /// </summary>
         public override int GetHashCode () => lines.Count == 0 ? 0 : HashCode.Combine(lines.Count, lines[0].Line);
+
+        public override string ToString ()
+        {
+            var sw = new StringWriter ();
+            foreach (var line in lines)
+                sw.WriteLine(line.ToString());
+
+            return sw.ToString();
+        }
     }
 }

@@ -35,14 +35,15 @@ namespace GSPTestProject
         {
             string ExampleDirectory = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../Examples/"));
 
-            Assert.True(GSPJson.TryLoadRules(1, ExampleDirectory, out var rules));
+            var loader = new GSPJson();
+            Assert.True(loader.LoadRules(1, ExampleDirectory));
 
-            int maxConfigFile = rules.Max(x => x.ConfigFile);
+            int maxConfigFile = loader.Rules!.Max(x => x.ConfigFile);
             int actualCount = Directory.GetFiles(ExampleDirectory).Count(x => Path.GetExtension(x).Equals(".json", StringComparison.OrdinalIgnoreCase));
 
             Assert.Equal(actualCount, maxConfigFile);
 
-            var missingConfigFiles = Enumerable.Range(1, maxConfigFile).Except(rules.Select(x => x.ConfigFile).Distinct());
+            var missingConfigFiles = Enumerable.Range(1, maxConfigFile).Except(loader.Rules!.Select(x => x.ConfigFile).Distinct());
             Assert.Empty(missingConfigFiles);
         }
 

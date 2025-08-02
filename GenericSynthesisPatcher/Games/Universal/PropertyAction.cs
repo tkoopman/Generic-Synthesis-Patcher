@@ -20,7 +20,7 @@ namespace GenericSynthesisPatcher.Games.Universal
         /// <param name="action">Record action to use or null if no valid action found.</param>
         public PropertyAction (ILoquiRegistration? recordType, PropertyInfo[] properties, string propertyName, IRecordAction? action)
         {
-            bool valid = properties.Length > 0 && properties[^1] is not null;
+            bool valid = properties.Length != 0 && properties[^1] is not null;
 
             if (action is not null && (recordType is null || !valid))
                 throw new ArgumentException("Action is not null so recordType and properties must be specified.", nameof(properties));

@@ -9,7 +9,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders
     ///     once all rules are loaded if multiple sources.
     /// </summary>
     /// <returns>List of rules</returns>
-    public interface IGSPConfigs : IEnumerable<GSPBase>
+    public interface IGSPConfigs
     {
         /// <summary>
         ///     Get number of top level rules loaded
@@ -17,7 +17,19 @@ namespace GenericSynthesisPatcher.Rules.Loaders
         public int Count { get; }
 
         /// <summary>
-        ///     Creates new instance.
+        ///     Access loaded rules. Null if you have not called <see cref="LoadRules(int)" /> yet,
+        ///     or that call failed.
+        /// </summary>
+        public IEnumerable<GSPBase>? Rules { get; }
+
+        /// <summary>
+        ///     Run after GSP has finished processing, and is about to close.
+        /// </summary>
+        /// <param name="successful">True if no critical errors during the run.</param>
+        public void Close (bool successful);
+
+        /// <summary>
+        ///     Load rules if possible. Can access rules via <see cref="Rules" /> after loaded.
         /// </summary>
         /// <param name="fileCount">
         ///     As configs could be loaded from multiple sources, this is the file count to start
@@ -25,14 +37,11 @@ namespace GenericSynthesisPatcher.Rules.Loaders
         ///
         ///     Each file you load rules from should have a unique file count, starting at this value.
         /// </param>
-        /// <param name="rules">
-        ///     Rules to be added to patcher's list of rules. Maybe empty list if no critical
-        ///     errors, but no rules found to load.
-        /// </param>
         /// <returns>
         ///     True no rules loaded or ALL loaded rules passed <see cref="GSPBase.Validate" />,
         ///     else false.
         /// </returns>
-        public static abstract bool TryLoadRules (int fileCount, [NotNullWhen(true)] out IGSPConfigs? rules);
+        [MemberNotNullWhen(true, nameof(Rules))]
+        public bool LoadRules (int fileCount);
     }
 }

@@ -42,13 +42,13 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
 
         public List<RecordID> NotStrings { get; }
 
-        public static GSPBase? Convert (KidIniLine kidIniLine)
+        public static KidRule? Convert (KidIniLine kidIniLine)
         {
             if (!kidIniLine.SeemsValid)
                 return null;
 
             // Currently unsupported features
-            if (kidIniLine.Traits.Length > 0 || kidIniLine.Chance != KidIniLine.DEFAULTCHANCE)
+            if (kidIniLine.Traits.Length != 0 || kidIniLine.Chance != KidIniLine.DEFAULTCHANCE)
                 return null;
 
             // Keyword needs to be either FormKey or EditorID, but KID supports FormID for DLC so
@@ -139,7 +139,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
             {
                 if (str.Contains('+'))
                 {
-                    foreach (string s in str.Split('+').Select(s => s.Trim()).Where(s => s.Length > 0))
+                    foreach (string s in str.Split('+').Select(s => s.Trim()).Where(s => s.Length != 0))
                         recordIDs.Add((Logic.ALL, SynthCommon.ConvertToBethesdaID(s, Global.Game.FormIDToFormKeyConverter)));
                 }
                 else
@@ -165,7 +165,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
         {
             _ = base.GetIndexableData(out include, out exclude);
 
-            if (AllStrings.Count > 0)
+            if (AllStrings.Count != 0)
             {
                 // Only need to add one as if it doesn't match doesn't matter if others do
                 include.Add(AllStrings.First());
@@ -178,7 +178,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
             foreach (var id in NotStrings)
                 exclude.Add(id);
 
-            return include.Count > 0 || exclude.Count > 0;
+            return include.Count != 0 || exclude.Count != 0;
         }
 
         public override bool Matches (ProcessingKeys proKeys)

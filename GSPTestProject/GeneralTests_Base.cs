@@ -42,7 +42,8 @@ namespace GSPTestProject
             int valid = 0;
 
             var recordType = gameRecordType.RecordType;
-            _ = TranslationMaskFactory.TryGetTranslationMaskType(recordType, out var mask);
+
+            _ = TranslationMaskFactory.TryGetTranslationMaskType(recordType, out _);
 
             var properties = gameRecordType.GetProperties();
 

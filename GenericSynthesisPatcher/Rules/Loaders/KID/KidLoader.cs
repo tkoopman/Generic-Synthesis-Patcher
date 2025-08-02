@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Extensions.Logging;
 
@@ -11,15 +10,65 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
     public partial class KidLoader : IGSPConfigs
     {
         private const int ClassLogCode = 0x1F;
-        private readonly Dictionary<string, KidIniFile> KidFiles;
-        private readonly List<GSPBase> Rules = [];
 
-        private KidLoader (int fileCount, Dictionary<string, KidIniFile> kidFiles)
+        public KidLoader ()
         {
-            KidFiles = kidFiles;
-            fileCount = fileCount - 1;
+        }
 
-            foreach (var file in kidFiles)
+        public int Count => Rules?.Count ?? 0;
+        public Dictionary<string, KidIniFile>? IniFiles { get; private set; }
+        public List<KidRule>? Rules { get; private set; }
+
+        IEnumerable<GSPBase>? IGSPConfigs.Rules => Rules;
+
+        public void Close (bool successful)
+        {
+            if (!successful || IniFiles is null)
+                return;
+
+            int countDel = 0;
+            int countNew = 0;
+            int count = 0;
+
+            foreach (var (path, file) in IniFiles)
+            {
+                foreach (var line in file.lines)
+                {
+                    if (line.HandledByGsp)
+                    {
+                        count++;
+                        if (!line.WasHandledByGsp)
+                            countNew++;
+
+                        continue;
+                    }
+
+                    if (line.WasHandledByGsp)
+                        countDel++;
+                }
+
+                bool save = Global.Settings.KIDComments && (countNew != 0 || countDel != 0);
+                Global.Logger.WriteLine($"{Path.GetFileName(path)}. GSP Processed: {count} Added: {countNew} Removed: {countDel}{(save ? " - Saving file." : string.Empty)}");
+
+                if (save)
+                {
+                    string contents = file.ToString();
+                    File.WriteAllText(path, contents);
+                }
+            }
+        }
+
+        [MemberNotNullWhen(true, nameof(Rules))]
+        public bool LoadRules (int fileCount) => LoadRules(fileCount, Global.Game.State.DataFolderPath);
+
+        public bool LoadRules (int fileCount, string path)
+        {
+            IniFiles = KidIniFile.Load(path);
+            Rules = [];
+
+            fileCount--;
+
+            foreach (var file in IniFiles)
             {
                 Global.Logger.WriteLog(LogLevel.Information, Helpers.LogType.CONFIG, $"Loading config file #{++fileCount}: {file.Key}", ClassLogCode);
                 int lineNum = 0;
@@ -37,6 +86,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
                     if (kidRule is not null)
                     {
                         kidRule.ConfigFile = fileCount;
+                        kidRule.ConfigRule = line.LineNumber;
                         line.HandledByGsp = true;
                         loaded++;
                         Rules.Add(kidRule);
@@ -50,32 +100,7 @@ namespace GenericSynthesisPatcher.Rules.Loaders.KID
                 Global.Logger.WriteLog(LogLevel.Debug, Helpers.LogType.CONFIG, $"Loaded {loaded} of {validLines} rules from {Path.GetFileName(file.Key)}", ClassLogCode);
             }
 
-            foreach (var b in Rules.GroupBy(a => a.Types.Single().Name))
-            { // Need to pre filter rules by Type in main program
-                Console.WriteLine($"{b.Key}: {b.Count()}");
-            }
-        }
-
-        public int Count => Rules.Count;
-
-        public static bool TryLoadRules (int fileCount, [NotNullWhen(true)] out IGSPConfigs? rules)
-        {
-            KidLoader loadedRules = new(fileCount, KidIniFile.Load(Global.Game.State.DataFolderPath));
-            rules = loadedRules;
-
-            return rules.Count > 0;
-        }
-
-        public IEnumerator<GSPBase> GetEnumerator () => ((IEnumerable<GSPBase>)Rules).GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator () => GetEnumerator();
-
-        internal static bool TryLoadRules (int fileCount, string path, [NotNullWhen(true)] out IGSPConfigs? rules)
-        {
-            KidLoader loadedRules = new(fileCount, KidIniFile.Load(path));
-            rules = loadedRules;
-
-            return rules.Count > 0;
+            return true;
         }
     }
 }

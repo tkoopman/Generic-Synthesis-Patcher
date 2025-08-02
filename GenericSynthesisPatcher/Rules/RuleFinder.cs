@@ -30,7 +30,7 @@ namespace GenericSynthesisPatcher.Rules
                     excludeIndex.Add(e, rule);
 
                 // If only excluded items add to extra list to quickly access
-                if (exclude.Count > 0 && include.Count == 0)
+                if (exclude.Count != 0 && include.Count == 0)
                     excludOnlyIndexed.Add(rule);
 
                 return true;

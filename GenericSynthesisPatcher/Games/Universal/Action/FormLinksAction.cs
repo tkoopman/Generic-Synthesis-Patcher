@@ -62,7 +62,7 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                 {
                     if (actionKey.Value == FormKey.Null)
                     {
-                        if (curList is not null && curList.Count > 0)
+                        if (curList is not null && curList.Count != 0)
                         {
                             if (!Mod.ClearProperty(proKeys.GetPatchRecord(), proKeys.Property.PropertyName, ClassLogCode))
                                 return -1;
