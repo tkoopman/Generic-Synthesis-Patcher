@@ -1,4 +1,5 @@
-﻿using GenericSynthesisPatcher.Games.Universal.Json.Converters;
+﻿using Common.JsonConverters;
+
 using GenericSynthesisPatcher.Helpers;
 
 using Loqui;
@@ -29,7 +30,7 @@ namespace GenericSynthesisPatcher.Rules
         ///
         ///     When multiple mods are specified, it will select mod based on <see cref="GSPRule.ForwardOptions" />
         /// </summary>
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKey>))]
+        [JsonConverter(typeof(ListConverter<ModKey>))]
         public List<ModKey> FromMod { get; set; } = [];
 
         /// <summary>

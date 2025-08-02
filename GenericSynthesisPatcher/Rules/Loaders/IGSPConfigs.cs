@@ -12,6 +12,11 @@ namespace GenericSynthesisPatcher.Rules.Loaders
     public interface IGSPConfigs : IEnumerable<GSPBase>
     {
         /// <summary>
+        ///     Get number of top level rules loaded
+        /// </summary>
+        public int Count { get; }
+
+        /// <summary>
         ///     Creates new instance.
         /// </summary>
         /// <param name="fileCount">

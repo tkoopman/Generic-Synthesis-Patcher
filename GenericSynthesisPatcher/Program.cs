@@ -71,13 +71,29 @@ namespace GenericSynthesisPatcher
             }
 
             List<GSPBase> Rules = [];
-            if (!GSPJson.TryLoadRules(1, out var rules))
+
+            if (!Global.Settings.LoadGSPConfigs)
+            {
+                Global.Logger.WriteLog(LogLevel.Information, LogType.CONFIG, "Loading of GSP JSON config files is disabled in settings.", ClassLogCode);
+            }
+            else if (GSPJson.TryLoadRules(1, out var rules))
+            {
+                Rules.AddRange(rules);
+            }
+            else
             {
                 Global.Logger.WriteLog(LogLevel.Critical, LogType.GeneralConfigFailure, "Failed to load rules. Exiting.", ClassLogCode);
                 return;
             }
 
-            Rules.AddRange(rules);
+            if (Global.Settings.LoadKIDConfigs)
+            {
+                int configFile = Rules.Count > 0 ? Rules.Max(r => r.ConfigFile) : 1;
+                if (GenericSynthesisPatcher.Rules.Loaders.KID.KidLoader.TryLoadRules(configFile, out var rules))
+                {
+                    Rules.AddRange(rules);
+                }
+            }
 
             if (Rules.Count == 0)
             {
@@ -107,6 +123,12 @@ namespace GenericSynthesisPatcher
 
             foreach (var rtm in EnabledTypes)
             {
+                var ruleFinder = new RuleFinder();
+                ruleFinder.AddRules(Rules.Where(r => r.Types.Contains(rtm)));
+
+                if (Global.Logger.CurrentLogLevel == LogLevel.Trace)
+                    ruleFinder.PrintStats(Global.Logger.Out);
+
                 var ProcessTypeRecords = Global.Game.GetRecords(rtm);
                 var counts = new Counts();
                 subTotals.Add(rtm.Name, counts);
@@ -117,22 +139,20 @@ namespace GenericSynthesisPatcher
                     counts.Total++;
                     var proKeys = new ProcessingKeys(context);
 
-                    foreach (var rule in Rules)
+                    var currentRules = ruleFinder.Rules(proKeys);
+
+                    foreach (var rule in currentRules)
                     {
                         Global.Logger.UpdateCurrentProcess(rule, context, ClassLogCode);
 
                         _ = proKeys.SetRule(rule);
-
-                        if (rule.Matches(proKeys))
+                        int changed = rule.RunActions(proKeys);
+                        if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                         {
-                            int changed = rule.RunActions(proKeys);
-                            if (changed >= 0) // -1 would mean failed OnlyIfDefault check
-                            {
-                                counts.Matched++;
-                                if (changed > 0)
-                                    counts.Updated++;
-                                counts.Changes += changed;
-                            }
+                            counts.Matched++;
+                            if (changed > 0)
+                                counts.Updated++;
+                            counts.Changes += changed;
                         }
                     }
                 }

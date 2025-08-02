@@ -1,3 +1,5 @@
+using Common.JsonConverters;
+
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
 
@@ -21,7 +23,7 @@ namespace GenericSynthesisPatcher.Rules
         ///     NOTE: Rule Priority is ignored when in a group. Only the Group's Priority is used.
         /// </summary>
         [JsonProperty(PropertyName = "Rules", Required = Required.Always)]
-        [JsonConverter(typeof(SingleOrArrayConverter<GSPRule>))]
+        [JsonConverter(typeof(ListConverter<GSPRule>))]
         public List<GSPRule> Rules { get; set; } = [];
 
         /// <summary>
@@ -99,7 +101,7 @@ namespace GenericSynthesisPatcher.Rules
             if (Types.Any() && AllTypes.Count < Types.Count())
                 Global.Logger.WriteLog(LogLevel.Information, LogType.GeneralConfig, $"Reducing group's Types to {AllTypes.Count} from {Types.Count()} as extra types not used.", ClassLogCode, includePrefix: GetLogRuleID());
 
-            Types = AllTypes.ToList().AsReadOnly();
+            Types = [.. AllTypes];
 
             return true;
         }

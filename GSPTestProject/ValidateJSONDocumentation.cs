@@ -73,7 +73,7 @@ namespace GSPTestProject
         [ClassData(typeof(AllGames))]
         public void CheckJsonSchema (Game gameData)
         {
-            string gameFileName = $"gsp-config-{gameData.GameCategory.ToString().ToLower()}.schema.json";
+            string gameFileName = $"gsp-config-{gameData.GameName.ToLower()}.schema.json";
             string gameFilePath = Path.Join(SchemaPath, gameFileName);
 
             List<string> allTypes = [];

@@ -8,23 +8,18 @@ namespace GSPTestProject.GameData
     {
         public Game (GameRelease gameRelease)
         {
-            GameRelease = gameRelease;
-            GameCategory = gameRelease.ToCategory();
-            GameName = GameCategory.ToString();
-
+            // Initialize the base game based on the provided game release.
             BaseGame = gameRelease switch
             {
-                GameRelease.SkyrimLE or GameRelease.SkyrimSE => GenericSynthesisPatcher.Games.Skyrim.SkyrimGame.Constructor(null!),
-                GameRelease.Fallout4 => GenericSynthesisPatcher.Games.Fallout4.Fallout4Game.Constructor(null!),
-                GameRelease.Oblivion or GameRelease.OblivionRE => GenericSynthesisPatcher.Games.Oblivion.OblivionGame.Constructor(null!),
+                GameRelease.SkyrimLE or GameRelease.SkyrimSE => new GenericSynthesisPatcher.Games.Skyrim.SkyrimGame(null!),
+                GameRelease.Fallout4 => new GenericSynthesisPatcher.Games.Fallout4.Fallout4Game(null!),
+                GameRelease.Oblivion or GameRelease.OblivionRE => new GenericSynthesisPatcher.Games.Oblivion.OblivionGame(null!),
                 _ => throw new NotSupportedException($"Game release {gameRelease} is not supported."),
             };
         }
 
         public BaseGame BaseGame { get; }
 
-        public GameCategory GameCategory { get; }
-        public string GameName { get; }
-        public GameRelease GameRelease { get; }
+        public string GameName => BaseGame.GameCategory.ToString();
     }
 }

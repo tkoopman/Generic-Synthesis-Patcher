@@ -2,10 +2,10 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 using Common;
+using Common.JsonConverters;
 
 using DynamicData;
 
-using GenericSynthesisPatcher.Games.Universal;
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Rules.Operations;
@@ -13,8 +13,6 @@ using GenericSynthesisPatcher.Rules.Operations;
 using Loqui;
 
 using Microsoft.Extensions.Logging;
-
-using Mutagen.Bethesda.Plugins;
 
 using Newtonsoft.Json;
 
@@ -26,6 +24,7 @@ namespace GenericSynthesisPatcher.Rules
     [SuppressMessage("Design", "CA1036:Override methods on comparable types", Justification = "Just used for sorting")]
     public abstract class GSPBase : IComparable<GSPBase>
     {
+        internal bool _foundViaIndex;
         private const int ClassLogCode = 0x1A;
 
         /// <summary>
@@ -47,6 +46,8 @@ namespace GenericSynthesisPatcher.Rules
         [JsonProperty(PropertyName = "Debug")]
         public bool Debug { get; set; }
 
+        public bool FullyIndexed { get; protected set; }
+
         /// <summary>
         ///     If set will check if record has already been patched by another GSP rule or not. If
         ///     you don't care exclude or set to null
@@ -66,127 +67,10 @@ namespace GenericSynthesisPatcher.Rules
         ///     List of record types this rule should match
         /// </summary>
         [JsonProperty(PropertyName = "Types")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ILoquiRegistration>))]
-        public IEnumerable<ILoquiRegistration> Types { get; internal set; } = [];
+        [JsonConverter(typeof(ListConverter<ILoquiRegistration>))]
+        public HashSet<ILoquiRegistration> Types { get; internal set; } = [];
 
-        #region Masters
-
-        private List<ModKeyListOperation>? masters;
-
-        /// <summary>
-        ///     List of masters that should be either included or excluded from matching
-        /// </summary>
-        [JsonProperty(PropertyName = "Masters")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? Masters
-        {
-            get => masters;
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                masters = value;
-            }
-        }
-
-        [JsonProperty(PropertyName = "-Masters")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? MastersDel
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                masters = [];
-                foreach (var v in value ?? [])
-                    masters.Add(v.Inverse());
-            }
-        }
-
-        [JsonProperty(PropertyName = "!Masters")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
-
-        #endregion Masters
-
-        #region PatchedBy
-
-        private List<ModKeyListOperation>? patchedBy;
-
-        private FilterLogic patchedByLogic = FilterLogic.Default;
-
-        /// <summary>
-        ///     List of mods that if this record was patched by will either include or exclude it
-        ///     from matching.
-        ///     Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
-        /// </summary>
-        [JsonProperty(PropertyName = "PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedBy
-        {
-            get => patchedBy;
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patchedByLogic = FilterLogic.Default;
-                patchedBy = value;
-            }
-        }
-
-        [JsonProperty(PropertyName = "&PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedByAnd
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patchedByLogic = FilterLogic.AND;
-                patchedBy ??= [];
-                patchedBy.Add(value);
-            }
-        }
-
-        [JsonProperty(PropertyName = "-PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedByDel
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patchedByLogic = FilterLogic.Default;
-                patchedBy = [];
-                foreach (var v in value ?? [])
-                    patchedBy.Add(v.Inverse());
-            }
-        }
-
-        [JsonProperty(PropertyName = "!PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedByNot { set => PatchedByDel = value; }
-
-        [JsonProperty(PropertyName = "^PatchedBy")]
-        [JsonConverter(typeof(SingleOrArrayConverter<ModKeyListOperation>))]
-        public List<ModKeyListOperation>? PatchedXOR
-        {
-            set
-            {
-                if (!value.SafeAny())
-                    return;
-
-                patchedByLogic = FilterLogic.XOR;
-                patchedBy = value;
-            }
-        }
-
-        #endregion PatchedBy
+        protected bool FoundViaIndex => _foundViaIndex;
 
         /// <summary>
         ///     Should only be used for sorting by Priority
@@ -209,6 +93,156 @@ namespace GenericSynthesisPatcher.Rules
             return hash.ToHashCode();
         }
 
+        public virtual bool GetIndexableData (out List<RecordID> include, out List<RecordID> exclude)
+        {
+            include = [];
+            exclude = [];
+            FullyIndexed = PatchedBy is null || PatchedBy.Count == 0;
+
+            if (Masters is not null && Masters.Count > 0)
+            {
+                foreach (var m in Masters)
+                {
+                    var recordID = new RecordID(m.Value, RecordID.EqualsOptions.ModKey);
+                    switch (m.Operation)
+                    {
+                        case ListLogic.NOT:
+                            exclude.Add(recordID);
+                            break;
+
+                        case ListLogic.ADD:
+                            include.Add(recordID);
+                            break;
+
+                        default:
+                            FullyIndexed = false;
+                            break;
+                    }
+                }
+            }
+
+            return include.Count > 0 || exclude.Count > 0;
+        }
+
+        #region Masters
+
+        private HashSet<ModKeyListOperation>? masters;
+
+        /// <summary>
+        ///     List of masters that should be either included or excluded from matching
+        /// </summary>
+        [JsonProperty(PropertyName = "Masters")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? Masters
+        {
+            get => masters;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                masters = value;
+            }
+        }
+
+        [JsonProperty(PropertyName = "-Masters")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? MastersDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                masters = [];
+                foreach (var v in value ?? [])
+                    masters.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!Masters")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? MastersNot { set => MastersDel = value; }
+
+        #endregion Masters
+
+        #region PatchedBy
+
+        private HashSet<ModKeyListOperation>? patchedBy;
+
+        private FilterLogic patchedByLogic = FilterLogic.Default;
+
+        /// <summary>
+        ///     List of mods that if this record was patched by will either include or exclude it
+        ///     from matching.
+        ///     Note: Record will never matched PatchedBy of it's master mod. Use Masters for that.
+        /// </summary>
+        [JsonProperty(PropertyName = "PatchedBy")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? PatchedBy
+        {
+            get => patchedBy;
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy = value;
+            }
+        }
+
+        [JsonProperty(PropertyName = "&PatchedBy")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? PatchedByAnd
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.AND;
+                patchedBy ??= [];
+                patchedBy.Add(value);
+            }
+        }
+
+        [JsonProperty(PropertyName = "-PatchedBy")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? PatchedByDel
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.Default;
+                patchedBy = [];
+                foreach (var v in value ?? [])
+                    patchedBy.Add(v.Inverse());
+            }
+        }
+
+        [JsonProperty(PropertyName = "!PatchedBy")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? PatchedByNot { set => PatchedByDel = value; }
+
+        [JsonProperty(PropertyName = "^PatchedBy")]
+        [JsonConverter(typeof(ListConverter<ModKeyListOperation>))]
+        public HashSet<ModKeyListOperation>? PatchedXOR
+        {
+            set
+            {
+                if (!value.SafeAny())
+                    return;
+
+                patchedByLogic = FilterLogic.XOR;
+                patchedBy = value;
+            }
+        }
+
+        #endregion PatchedBy
+
         public virtual string GetLogRuleID () => $"{ConfigFile}.{ConfigRule}";
 
         /// <summary>
@@ -219,15 +253,20 @@ namespace GenericSynthesisPatcher.Rules
         /// <returns>Returns true if context matches filters.</returns>
         public virtual bool Matches (ProcessingKeys proKeys)
         {
-            if (!Types.Contains(proKeys.Type))
+            if (this is GSPRule rule && rule.Group is not null)
             {
-                if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.NotMatched)
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchFailure, "Record Type: Matched: False", ClassLogCode);
-                return false;
-            }
+                // No longer check type on main rules as pre-filtered. However still need to check
+                // on rules that belong to a group.
+                if (!Types.Contains(proKeys.Type))
+                {
+                    if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.NotMatched)
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchFailure, "Record Type: Matched: False", ClassLogCode);
+                    return false;
+                }
 
-            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.Matched)
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Record Type: Matched: True", ClassLogCode);
+                if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeType && Global.Settings.Logging.NoisyLogs.MatchLogs.Matched)
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Record Type: Matched: True", ClassLogCode);
+            }
 
             if (Masters is not null && !MatchesHelper.Matches(proKeys.Record.FormKey.ModKey, Masters, Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeMasters))
                 return false;

@@ -1,4 +1,6 @@
-﻿using GenericSynthesisPatcher.Helpers;
+﻿using System.Collections;
+
+using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Rules;
 
 using GSPTestProject.GameData.GlobalGame.Fixtures;
@@ -71,6 +73,35 @@ namespace GSPTestProject
             Output.WriteLine("Load Order:");
             foreach (var mod in Global.Game.LoadOrder)
                 Output.WriteLine($"  {mod.FileName}");
+        }
+
+        [Theory]
+        [ClassData(typeof(Data_TryConvertFormID))]
+        public void Test_TryConvertFormID (FormID formID, FormKey expected)
+        {
+            var result = Global.Game.FormIDToFormKeyConverter(formID);
+            Assert.Equal(expected, result);
+        }
+
+        public class Data_TryConvertFormID : IEnumerable<object?[]>
+        {
+            public IEnumerator<object?[]> GetEnumerator ()
+            {
+                yield return new object?[] {
+                    new FormID(0x00000007),
+                    new FormKey("Skyrim.esm", 0x000007)
+                };
+                yield return new object?[] {
+                    new FormID(0x04123456),
+                    new FormKey("Dragonborn.esm", 0x123456)
+                };
+                yield return new object?[] {
+                    new FormID(0x05123456),
+                    FormKey.Null
+                };
+            }
+
+            IEnumerator IEnumerable.GetEnumerator () => GetEnumerator();
         }
     }
 }

@@ -7,12 +7,28 @@ namespace GenericSynthesisPatcher
 {
     public class GSPSettings
     {
+        [MaintainOrder(10)]
         [Tooltip("Add any other Dynamic Patch Mods like SynthEBD to this list if they exist prior to this mod in load order. Causes them to be treated slightly differently in merges and similar actions.")]
         public HashSet<ModKey> DynamicMods { get; set; } = [];
 
+        [MaintainOrder(2)]
+        [SettingName("GSP Folder")]
         [Tooltip("JSON config files location. {GameData} or {SynthesisData} valid dynamic values to start folder with. {SynthesisData} can be used alone, but for {GameData} you should add a sub-folder.")]
         public string Folder { get; set; } = "{GameData}\\GSP";
 
+        [MaintainOrder(4)]
+        [Tooltip("If enabled will comment out lines in KID INI files that were successfully loaded into GSP. Further GSP runs will still see and process these lines, but KID itself will not.")]
+        public bool KIDComments { get; set; } = true;
+
+        [MaintainOrder(1)]
+        [Tooltip("If disabled will not load any GSP JSON configuration files")]
+        public bool LoadGSPConfigs { get; set; } = true;
+
+        [MaintainOrder(3)]
+        [Tooltip("If enabled will load Keyword Item Distributor (KID) INI files and apply supported entries.")]
+        public bool LoadKIDConfigs { get; set; } = false;
+
+        [MaintainOrder(20)]
         [Tooltip("Logging Options")]
         public GSPLogging Logging { get; set; } = new();
 
@@ -100,6 +116,7 @@ namespace GenericSynthesisPatcher
 
                 [Tooltip("Include logging matches against record type if logging matched or not matched.")]
                 [MaintainOrder(3)]
+                [Ignore] // Ignored as no longer checking Type in Matches due to pre-filtering rules to current type
                 public bool IncludeType { get; set; } = false;
 
                 [Tooltip("Log when a match is found for a rule.")]

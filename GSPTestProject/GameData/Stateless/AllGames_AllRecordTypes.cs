@@ -40,7 +40,7 @@ namespace GSPTestProject.GameData.Stateless
             {
                 var gameData = (Game)obj[0];
                 foreach (var recordType in gameData.BaseGame.AllRecordTypes())
-                    yield return new object[] { new GameRecordType(gameData.GameRelease, recordType, GetSubTypes(gameData.GameCategory, recordType)) };
+                    yield return new object[] { new GameRecordType(gameData.BaseGame.GameRelease, recordType, GetSubTypes(gameData.BaseGame.GameCategory, recordType)) };
             }
         }
 

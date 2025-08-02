@@ -99,7 +99,7 @@ namespace GenericSynthesisPatcher.Helpers
         /// <param name="predicate"></param>
         /// <returns></returns>
         public static bool Matches<TValue, TListValue> (TValue? value, IEnumerable<ListOperationBase<TListValue>>? matches, Func<ListOperationBase<TListValue>, TValue?, bool> predicate, bool debug = true)
-        {
+        { // TODO: Fix to make better performance now moving to HashSets
             if (!matches.SafeAny())
                 return true;
 
@@ -137,6 +137,7 @@ namespace GenericSynthesisPatcher.Helpers
             if (matches.SafeAny() && matches.Any(m => m.Operation == ListLogic.NOT) && matches.Any(m => m.Operation != ListLogic.NOT))
             {
                 Global.Logger.WriteLog(LogLevel.Error, LogType.GeneralConfigFailure, "Includes both include and exclude values to match against, which does not compute for matching against a single value.", ClassLogCode);
+
                 return false;
             }
 

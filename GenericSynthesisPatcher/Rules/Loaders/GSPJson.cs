@@ -18,6 +18,8 @@ namespace GenericSynthesisPatcher.Rules.Loaders
         private GSPJson ()
         { }
 
+        public int Count => Rules.Count;
+
         /// <param name="gspConfigsPath">Directory to load JSON files from.</param>
         /// <inheritdoc cref="IGSPConfigs.TryLoadRules(int, out IGSPConfigs?)" />
         public static bool TryLoadRules (int fileCount, string gspConfigsPath, [NotNullWhen(true)] out IGSPConfigs? rules)

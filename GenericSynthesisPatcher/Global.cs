@@ -39,9 +39,9 @@ namespace GenericSynthesisPatcher
             //TODO Add games
             Game = state switch
             {
-                IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState => Games.Skyrim.SkyrimGame.Constructor(gameState),
-                IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState => Games.Fallout4.Fallout4Game.Constructor(gameState),
-                IPatcherState<IOblivionMod, IOblivionModGetter> gameState => Games.Oblivion.OblivionGame.Constructor(gameState),
+                IPatcherState<ISkyrimMod, ISkyrimModGetter> gameState => new Games.Skyrim.SkyrimGame(gameState),
+                IPatcherState<IFallout4Mod, IFallout4ModGetter> gameState => new Games.Fallout4.Fallout4Game(gameState),
+                IPatcherState<IOblivionMod, IOblivionModGetter> gameState => new Games.Oblivion.OblivionGame(gameState),
                 _ => throw new InvalidCastException(),
             };
         }

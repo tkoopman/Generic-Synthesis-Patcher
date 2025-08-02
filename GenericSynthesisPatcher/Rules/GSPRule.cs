@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 using Common;
+using Common.JsonConverters;
 
 using DynamicData;
 
@@ -26,15 +27,15 @@ namespace GenericSynthesisPatcher.Rules
     public class GSPRule : GSPBase
     {
         private const int ClassLogCode = 0x1C;
-        private List<ListOperation>? editorIDs;
-        private List<FormKeyListOperation>? formIDs;
+        private HashSet<ListOperation>? editorIDs;
+        private HashSet<FormKeyListOperation>? formIDs;
         private int HashCode;
 
         /// <summary>
         ///     Details for DeepCopIn Action if required by this rule.
         /// </summary>
         [JsonProperty(PropertyName = "Copy", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<GSPDeepCopyIn>))]
+        [JsonConverter(typeof(ListConverter<GSPDeepCopyIn>))]
         public List<GSPDeepCopyIn> DeepCopyIn { get; set; } = [];
 
         /// <summary>
@@ -42,8 +43,8 @@ namespace GenericSynthesisPatcher.Rules
         ///     not filter any records out by EditorID.
         /// </summary>
         [JsonProperty(PropertyName = "EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? EditorID
+        [JsonConverter(typeof(ListConverter<ListOperation>))]
+        public HashSet<ListOperation>? EditorID
         {
             get => editorIDs;
             set
@@ -56,8 +57,8 @@ namespace GenericSynthesisPatcher.Rules
         }
 
         [JsonProperty(PropertyName = "-EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? EditorIDDel
+        [JsonConverter(typeof(ListConverter<ListOperation>))]
+        public HashSet<ListOperation>? EditorIDDel
         {
             set
             {
@@ -71,8 +72,8 @@ namespace GenericSynthesisPatcher.Rules
         }
 
         [JsonProperty(PropertyName = "!EditorID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<ListOperation>))]
-        public List<ListOperation>? EditorIDNot { set => EditorIDDel = value; }
+        [JsonConverter(typeof(ListConverter<ListOperation>))]
+        public HashSet<ListOperation>? EditorIDNot { set => EditorIDDel = value; }
 
         /// <summary>
         ///     Add Fill action(s) to this rule. This is only used for adding to joint Fill/Forward store.
@@ -86,8 +87,8 @@ namespace GenericSynthesisPatcher.Rules
         ///     filter any records out by FormID.
         /// </summary>
         [JsonProperty(PropertyName = "FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
-        public List<FormKeyListOperation>? FormID
+        [JsonConverter(typeof(ListConverter<FormKeyListOperation>))]
+        public HashSet<FormKeyListOperation>? FormID
         {
             get => formIDs;
             set
@@ -100,8 +101,8 @@ namespace GenericSynthesisPatcher.Rules
         }
 
         [JsonProperty(PropertyName = "-FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
-        public List<FormKeyListOperation>? FormIDDel
+        [JsonConverter(typeof(ListConverter<FormKeyListOperation>))]
+        public HashSet<FormKeyListOperation>? FormIDDel
         {
             set
             {
@@ -115,8 +116,8 @@ namespace GenericSynthesisPatcher.Rules
         }
 
         [JsonProperty(PropertyName = "!FormID", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<FormKeyListOperation>))]
-        public List<FormKeyListOperation>? FormIDNot { set => FormIDDel = value; }
+        [JsonConverter(typeof(ListConverter<FormKeyListOperation>))]
+        public HashSet<FormKeyListOperation>? FormIDNot { set => FormIDDel = value; }
 
         /// <summary>
         ///     Add Forward action(s) to this rule. This is only used for adding to joint
@@ -399,6 +400,68 @@ namespace GenericSynthesisPatcher.Rules
             }
 
             return HashCode;
+        }
+
+        /// <inheritdoc />
+        public override bool GetIndexableData (out List<RecordID> include, out List<RecordID> exclude)
+        {
+            _ = base.GetIndexableData(out include, out exclude);
+
+            // No indexing of Match entries
+            FullyIndexed = FullyIndexed && Match.Count == 0;
+
+            if (FormID is not null)
+            {
+                foreach (var id in FormID)
+                {
+                    switch (id.Operation)
+                    {
+                        case ListLogic.ADD:
+                            include.Add(new RecordID(id.Value, RecordID.EqualsOptions.FormKey));
+                            break;
+
+                        case ListLogic.NOT:
+                            exclude.Add(new RecordID(id.Value, RecordID.EqualsOptions.FormKey));
+                            break;
+
+                        default:
+                            FullyIndexed = false;
+                            break;
+                    }
+                }
+            }
+
+            if (EditorID is not null)
+            {
+                foreach (var id in EditorID)
+                {
+                    if (id.Regex is not null)
+                    {
+                        FullyIndexed = false;
+                        continue;
+                    }
+
+                    if (id.Value is not null)
+                    {
+                        switch (id.Operation)
+                        {
+                            case ListLogic.ADD:
+                                include.Add(new RecordID(IDType.Name, id.Value, false, RecordID.EqualsOptions.EditorID));
+                                break;
+
+                            case ListLogic.NOT:
+                                exclude.Add(new RecordID(IDType.Name, id.Value, false, RecordID.EqualsOptions.EditorID));
+                                break;
+
+                            default:
+                                FullyIndexed = false;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return include.Count > 0 || exclude.Count > 0;
         }
 
         public override string GetLogRuleID () => Group is null ? base.GetLogRuleID() : $"{Group.GetLogRuleID()}.{ConfigRule}";

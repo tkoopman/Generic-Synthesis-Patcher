@@ -1,4 +1,4 @@
-using GenericSynthesisPatcher.Games.Universal.Json.Converters;
+using Common.JsonConverters;
 
 using Newtonsoft.Json;
 

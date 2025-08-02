@@ -1,3 +1,5 @@
+using Common.JsonConverters;
+
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 
 using GSPTestProject.GameData.GlobalGame.Fixtures;
