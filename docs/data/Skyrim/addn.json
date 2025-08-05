@@ -1,17 +1,17 @@
 [
   {
-    "Aliases": "",
-    "Description": "True / False",
-    "Example": "\"AlwaysLoaded\": true",
-    "Flags": 28,
-    "Name": "AlwaysLoaded"
-  },
-  {
     "Aliases": "EDID",
     "Description": "String value",
     "Example": "\"EditorID\": \"Hello\"",
     "Flags": 28,
     "Name": "EditorID"
+  },
+  {
+    "Aliases": "",
+    "Description": "Possible values (MasterParticleSystem, AlwaysLoaded)",
+    "Example": "\"Flags\": \"MasterParticleSystem\"",
+    "Flags": 12,
+    "Name": "Flags"
   },
   {
     "Aliases": "",

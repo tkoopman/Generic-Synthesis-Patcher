@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="./include/main.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generic Synthesis Patcher</title>
+</head>
+<body>
+    <div class="box">
+        <header>
+            <h2>Generic Synthesis Patcher</h2>
+        </header>
+        <nav class="menu">
+            <a style="margin-left:auto;" href="index.html">About</a>
+            <a class="active" href="settings.html">Settings</a>
+            <a href="config.html">Config</a>
+            <a href="fields.html">Implemented Fields</a>
+            <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978" target="_blank">Nexus Link</a>
+        </nav>
+        <div class="main">
+            <h1>Synthesis GSP Settings</h1>
+            <p>
+                Generic Synthesis Patcher has a few settings that are set inside Synthesis.<br />
+                NOTE: You can have a patcher in your Synthesis list twice using different settings if required.
+            </p>
+
+            <img src="./img/synthconfig.png" alt="Synthesis Settings" />
+
+            <div class="setting">
+                <div class="label">Load GSP Configs:</div>
+                <div>
+                    When enabled will load the <a href="config.html">GSP JSON configuration</a> files from the GSP Folder listed below. Enabled by default but can disable if you only want this instance of patcher to read alternative config files.
+                </div>
+            </div>
+            <div class="setting">
+                <div class="label">GSP Folder:</div>
+                <div>
+                    This is where the GSP JSON config files should be located. By default this is set to "{SkyrimData}\GSP", so you can add GSP JSON config files like normal mods in your mod manager.<br />
+                    If you have multiple Synthesis groups that contain GSP, you should make sure each copy of GSP points to a different folder. In this case you could set it to "{SynthesisData}" and store the JSON config files in the standard Synthesis data folder.
+                </div>
+            </div>
+
+            <div class="setting">
+                <div class="label">Load KID Configs:</div>
+                <div>
+                    When enabled will load <a href="https://www.nexusmods.com/skyrimspecialedition/mods/55728" target="_blank">Keyword Item Distributor (KID)</a> INI files from your Skyrim's data folder. Disabled by default.
+                </div>
+            </div>
+            <div class="setting">
+                <div class="label">KID Comments:</div>
+                <div>
+                    When enabled and using above KID configs, GSP will comment out any KID INI line that was successfully loaded in to GSP. This will mean KID will not try and also apply the same changes unnecessarily.<br />
+                    Any KID line that contains KID features currently not supported by GSP, will be left alone so KID can still apply them.
+                    GSP will still process lines commented out by GSP in future runs automatically, and even uncomment lines it maybe no longer supports.
+                    Currently Traits and Chance are unsupported.<br />
+                    Lines will be commented out with "; Handled by GSP - " being added to the start of the line. If you manually change this to anything else GSP will not recognize it as a valid GSP comment and ignore it. You can safely update / reinstall KID INI files, GSP reads lines with that specific prefix just the same as any non-commented line.
+                </div>
+            </div>
+
+            <div class="setting">
+                <div class="label">Dynamic Mods:</div>
+                <div>
+                    You should add all other mods that exist prior to this patcher in the load order here, that are also dynamically generated patches. This includes any of the following the may exist lower in the load order:
+                    <ul>
+                        <li>Synthesis group's patches</li>
+                        <li>SynthEBD patch</li>
+                        <li>Bash patches</li>
+                    </ul>
+                    This will ensure these mods are still processed, but when performing some actions like Merge or HPU, listed mods have special handling.<br />
+                    No need to add mods that exist after this mod in the load order, as they are automatically ignored by Synthesis patches.
+                </div>
+            </div>
+
+            <h2>Logging</h2>
+
+            <img src="./img/synthconfig-logging.png" alt="Synthesis Logging Settings" />
+
+            <div class="setting">
+                <div class="label">Log Level:</div>
+                <div>
+                    Set what log level you want to output. Default is Info, but you can set to Debug or Trace for more detailed logs.<br />
+                    When set to either Debug or Trace, you must specify what logs at Debug / Trace levels. By default nothing does, so use one of these methods:
+                    <ul>
+                        <li>Using <a href="config.html#debug" class="good">Debug</a> option against Rule(s) and/or Group(s)</li>
+                        <li>Entering a <font class="good">Form Key</font> (012345:Skyrim.esm) in the Logging Global settings.</li>
+                        <li>
+                            Select "<font class="bad">Debug / Trace All</font>" option in Global settings. However this can produce a ridiculously large amount of logs.<br />
+                            Do not use this option when wanting help or reporting bugs.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="setting">
+                <div class="label">Noisy Debug &amp; Trace Logs:</div>
+                <div>
+                    Can help further reduce the amount of logs generated by turning on/off specific log types. If in doubt leave all on.<br />
+                    However if you are trying to troubleshoot a specific issue like why a merge action produced a certain result, you could disable all the "Match" logs without much concern.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,48 +1,6 @@
 [
   {
     "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ActorCellEnablePoint"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ActorCellEncounterCell"
-  },
-  {
-    "Aliases": "",
-    "Description": "Form Keys or Editor IDs",
-    "Example": "\"ActorCellMarkerReference\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
-    "Flags": 124,
-    "Name": "ActorCellMarkerReference"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ActorCellPersistentReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ActorCellStaticReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "ActorCellUniques"
-  },
-  {
-    "Aliases": "",
     "Description": "Decimal value",
     "Example": "\"ActorFadeMult\": 3.14",
     "Flags": 28,
@@ -64,6 +22,20 @@
   },
   {
     "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EnableParentReferencesAdded"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "EnableParentReferencesStatic"
+  },
+  {
+    "Aliases": "",
     "Description": "Flags (ESM, NotPlayable, Deleted, InitiallyDisabled, Ignored, VisibleWhenDistant, Dangerous_OffLimits_InteriorCell, Compressed, CantWait)",
     "Example": "\"Fallout4MajorRecordFlags\": [ \"ESM\", \"-CantWait\" ]",
     "Flags": 92,
@@ -75,6 +47,20 @@
     "Example": "\"FormVersion\": 7",
     "Flags": 30,
     "Name": "FormVersion"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"InitiallyDisabledReferencesAdded\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 124,
+    "Name": "InitiallyDisabledReferencesAdded"
+  },
+  {
+    "Aliases": "",
+    "Description": "Form Keys or Editor IDs",
+    "Example": "\"InitiallyDisabledReferencesStatic\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Flags": 124,
+    "Name": "InitiallyDisabledReferencesStatic"
   },
   {
     "Aliases": "",
@@ -102,42 +88,21 @@
     "Description": "",
     "Example": "",
     "Flags": 144,
-    "Name": "LocationCellEnablePoint"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "LocationCellEncounterCell"
+    "Name": "LocationRefTypeReferencesAdded"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "\"LocationCellMarkerReference\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Example": "\"LocationRefTypeReferencesRemoved\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
-    "Name": "LocationCellMarkerReference"
+    "Name": "LocationRefTypeReferencesRemoved"
   },
   {
     "Aliases": "",
     "Description": "",
     "Example": "",
     "Flags": 144,
-    "Name": "LocationCellPersistentReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "LocationCellStaticReferences"
-  },
-  {
-    "Aliases": "",
-    "Description": "",
-    "Example": "",
-    "Flags": 144,
-    "Name": "LocationCellUniques"
+    "Name": "LocationRefTypeReferencesStatic"
   },
   {
     "Aliases": "",
@@ -179,28 +144,42 @@
     "Description": "",
     "Example": "",
     "Flags": 144,
-    "Name": "ReferenceCellEncounterCell"
+    "Name": "PersistentActorReferencesAdded"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "\"ReferenceCellPersistentReferences\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Example": "\"PersistentActorReferencesRemoved\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
-    "Name": "ReferenceCellPersistentReferences"
+    "Name": "PersistentActorReferencesRemoved"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "PersistentActorReferencesStatic"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "UniqueActorReferencesAdded"
   },
   {
     "Aliases": "",
     "Description": "Form Keys or Editor IDs",
-    "Example": "\"ReferenceCellStaticReferences\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
+    "Example": "\"UniqueActorReferencesRemoved\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
     "Flags": 124,
-    "Name": "ReferenceCellStaticReferences"
+    "Name": "UniqueActorReferencesRemoved"
   },
   {
     "Aliases": "",
-    "Description": "Form Keys or Editor IDs",
-    "Example": "\"ReferenceCellUnique\": [ \"123:Skyrim.esm\", \"MyEditorID\" ]",
-    "Flags": 124,
-    "Name": "ReferenceCellUnique"
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "UniqueActorReferencesStatic"
   },
   {
     "Aliases": "",
@@ -236,5 +215,26 @@
     "Example": "\"WorldLocationRadius\": 3.14",
     "Flags": 28,
     "Name": "WorldLocationRadius"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WorldspaceCellsAdded"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WorldspaceCellsRemoved"
+  },
+  {
+    "Aliases": "",
+    "Description": "",
+    "Example": "",
+    "Flags": 144,
+    "Name": "WorldspaceCellsStatic"
   }
 ]

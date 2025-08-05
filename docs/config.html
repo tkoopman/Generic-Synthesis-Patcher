@@ -12,6 +12,7 @@
         </header>
         <nav class="menu">
             <a style="margin-left:auto;" href="index.html">About</a>
+            <a href="settings.html">Settings</a>
             <a class="active" href="config.html">Config</a>
             <a href="./fields.html">Implemented Fields</a>
             <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978" target="_blank">Nexus Link</a>
@@ -22,11 +23,10 @@
             <a href="#actions">Actions</a>
             <a href="#group">Groups</a>
             <a href="#debug">Debug</a>
-            <a href="#global">Global</a>
         </nav>
         <div class="main" id="main">
             Most configuration is done in JSON files. Below is a guide to the JSON format used by the Generic Synthesis Patcher.<br />
-            You can also configure <a href="#global">global</a> settings in the Synthesis settings page.<br />
+            You can also configure <a href="settings.html">global settings</a> on the Synthesis settings page.<br />
             <section id="rule">
                 <h1>Group / Rule Properties</h1>
 
@@ -183,17 +183,17 @@
                             <li>To clear all current values use null as first element in list.</li>
                             <li>Surrounded multiple entries with \[ ]</li>
                         </ul>
-                        <pre>
-                {
-                "Types": "Ingestible",
-                "FormID": "FAA:CookingAdventuresInSkyrim.esp",
-                "Fill":
-                {
-                "Name" : "My Name for This",
-                "Effects": [ null, { "effect": "002EE1:Update.esm" } ]
-                }
-                }
-              </pre>
+<pre>
+{
+    "Types": "Ingestible",
+    "FormID": "FAA:CookingAdventuresInSkyrim.esp",
+    "Fill":
+    {
+        "Name" : "My Name for This",
+        "Effects": [ null, { "effect": "002EE1:Update.esm" } ]
+    }
+}
+</pre>
                     </div>
                 </div>
 
@@ -221,14 +221,14 @@
                                 It will not remove any current items from winning records. If however it is combined with the Default option, then the first mod in the list will perform the Default forward, while all other listed mods will perform SelfMasterOnly.<br />
                                 Below example would make sure any cloaks that "Cloaks - Dawnguard.esp" added to outfits would be added to winning records if it was removed by another patch.<br />
                                 However the couple of changes it makes like adding back "Vampire Boots" [00B5DE:Dawnguard.esm] that the original Cloaks.esp removed would not be forwarded.<br />
-                                <pre>
-                    {
-                    "types": "Outfit",
-                    "Masters": "Dawnguard.esm",
-                    "ForwardOptions": ["SelfMasterOnly"],
-                    "Forward": { "Cloaks - Dawnguard.esp": "Items" }
-                    }
-                  </pre>
+<pre>
+{
+    "types": "Outfit",
+    "Masters": "Dawnguard.esm",
+    "ForwardOptions": ["SelfMasterOnly"],
+    "Forward": { "Cloaks - Dawnguard.esp": "Items" }
+}
+</pre>
                             </div>
                         </div>
                         <div class="setting">
@@ -240,14 +240,14 @@
                                 Depending on what you are doing one or the other may be more efficient for you to read. Inside the patcher both produce the same result.<br />
                                 If used with ForwardOption of Default, as only a single mods value would be copied over it will pick the first mod from the list that contains this record.<br />
                                 Below example will forward record from PrvtI_HeavyArmory.esp unless it doesn't contain the record in which case Immersive Weapons.esp will be tried.<br />
-                                <pre>
-                    {
-                    "types": [ "NPC" ],
-                    "OnlyIfDefault": true,
-                    "ForwardOptions": ["IndexedByField"],
-                    "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
-                    }
-                  </pre>
+<pre>
+{
+    "types": [ "NPC" ],
+    "OnlyIfDefault": true,
+    "ForwardOptions": ["IndexedByField"],
+    "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+}
+</pre>
                             </div>
                         </div>
                         <div class="setting">
@@ -293,14 +293,14 @@
                                 Automatically adds <font class="good">Default</font> and <font class="good">IndexedByField</font> options.<br />
                                 Crazy if used with <font class="bad">SelfMasterOnly</font> and <font class="bad">Sort</font> together (Which mod is first and as such does the Default forward would be random), ignored if just used with SelfMasterOnly.<br />
                                 Below example is the random version of the above example for IndexedByField.
-                                <pre>
-                    {
-                    "types": [ "NPC" ],
-                    "OnlyIfDefault": true,
-                    "ForwardOptions": "DefaultRandom",
-                    "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
-                    }
-                  </pre>
+<pre>
+{
+    "types": [ "NPC" ],
+    "OnlyIfDefault": true,
+    "ForwardOptions": "DefaultRandom",
+    "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+}
+</pre>
                             </div>
                         </div>
                         <div class="setting">
@@ -310,14 +310,14 @@
                                 The first mod listed for a field will use the Default method. All others will follow using the SelfMasterOnly method.<br />
                                 NOTE: The first mod must contain the record and if OnlyIfDefault set, pass that check, else it will not apply any of the SelfMasterOnly forwards.<br />
                                 All other mods do not check OnlyIfDefault, and can fail to find matching record without stopping the processing of other mods.
-                                <pre>
-                    {
-                    "types": [ "Outfit" ],
-                    "Masters": "Dawnguard.esm",
-                    "ForwardOptions": "DefaultThenSelfMasterOnly",
-                    "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
-                    }
-                  </pre>
+<pre>
+{
+    "types": [ "Outfit" ],
+    "Masters": "Dawnguard.esm",
+    "ForwardOptions": "DefaultThenSelfMasterOnly",
+    "Forward": { "Items": [ "Unofficial Skyrim Modders Patch.esp", "Cloaks - Dawnguard.esp" ] }
+}
+</pre>
                             </div>
                         </div>
                     </div>
@@ -336,6 +336,27 @@
                     <div>
                         This is like Bashing but with a lot more control, as you cannot only merge just the fields you want, but use filters to only merge the records you want.<br />
                         You also can tell the merge to exclude a plug-in or force the values of a plug-in to not be removed. Please see <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/blob/master/Examples/Merges%20Template.json" target="_blank">Merge Example.json</a>
+                    </div>
+                </div>
+
+                <div class="setting">
+                    <div class="label">Copy</div>
+                    <div>
+                        v4.0 added the new action Copy. This is an advanced feature that will require knowledge of Mutagen Translation Masks, used by DeepCopyIn methods.<br />
+                        Copy can be seen similar to Forward, as it take values and brings them forward. However you can be as granular or wide as translation masks allow, which for some property types could be more than GSP other methods support.<br />
+                        It also supports copying from another record ID of the same type.
+                        <div class="setting">
+                            <div class="label">FromID</div>
+                            <div>FormKey of record to copy from. If not provided will copy from the same record, like forward does.</div>
+                        </div>
+                        <div class="setting">
+                            <div class="label">FromMod</div>
+                            <div>Mod to copy record from. If you provided FromID, then you can leave this out in which case it will copy from the winning version of that record. If you didn't include FromID you must include FromMod else nothing will happen as record already set to winning version.</div>
+                        </div>
+                        <div class="setting">
+                            <div class="label">Mask</div>
+                            <div>This is the Translation Mask to use for the copy. I need to add more examples and details but for now as long as you know the Translatation Mask in c# I can assit in the JSON format needed over on Nexus.</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -362,52 +383,59 @@
 
                 Example - Both rules in this group must be Factions in Skyrim.esm, it will also stop search for rules once it find a match for a record.<br />
                 SingleMatch not necessary in this example, as only a single rule would match anyway, but still saves processing time by having it.
-                <pre>
-            [
+<pre>
+[
+    {
+        "Types": "Faction",
+        "Masters": "Skyrim.esm",
+        "SingleMatch": true,
+        "Rules":
+        [
             {
-            "Types": "Faction",
-            "Masters": "Skyrim.esm",
-            "SingleMatch": true,
-            "Rules": [
-            {
-            "FormID": [
-            "000013:Skyrim.esm",
-            "01C4ED:Skyrim.esm",
-            ...
-            ],
-            "Fill": {
-            "flags": [
-            "IgnoreMurder",
-            "IgnoreAssault",
-            "IgnoreStealing",
-            "IgnoreTrespass",
-            "DoNotReportCrimesAgainstMembers",
-            "IgnorePickpocket",
-            "IgnoreWerewolf"
-            ]
-            }
+                "FormID":
+                [
+                    "000013:Skyrim.esm",
+                    "01C4ED:Skyrim.esm",
+                    ...
+                ],
+                "Fill":
+                {
+                    "flags":
+                    [
+                        "IgnoreMurder",
+                        "IgnoreAssault",
+                        "IgnoreStealing",
+                        "IgnoreTrespass",
+                        "DoNotReportCrimesAgainstMembers",
+                        "IgnorePickpocket",
+                        "IgnoreWerewolf"
+                    ]
+                }
             },
             {
-            "FormID": [
-            "01BCC0:Skyrim.esm",
-            "025F95:Skyrim.esm",
-            ...
-            ],
-            "Fill": {
-            "flags": [
-            "IgnoreMurder",
-            "IgnoreAssault",
-            "IgnoreStealing",
-            "IgnoreTrespass",
-            "IgnorePickpocket",
-            "-IgnoreWerewolf"
-            ]
+                "FormID":
+                [
+                    "01BCC0:Skyrim.esm",
+                    "025F95:Skyrim.esm",
+                    ...
+                ],
+                "Fill":
+                {
+                    "flags":
+                    [
+                        "IgnoreMurder",
+                        "IgnoreAssault",
+                        "IgnoreStealing",
+                        "IgnoreTrespass",
+                        "IgnorePickpocket",
+                        "-IgnoreWerewolf"
+                    ]
+                }
             }
-            }
-            ]
-            }
-            ]
-          </pre>
+        ]
+    }
+]
+</pre>
             </section>
             <section id="debug">
                 <h2>Debug / Trace Logging</h2>
@@ -419,15 +447,15 @@
                     <div class="label">Debug</div>
                     <div>
                         True or False (Default).
-                        <pre>
-                {
-                "types": [ "NPC" ],
-                "OnlyIfDefault": true,
-                "ForwardOptions": "DefaultRandom",
-                "Debug": true,
-                "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
-                }
-              </pre>
+<pre>
+{
+    "types": [ "NPC" ],
+    "OnlyIfDefault": true,
+    "ForwardOptions": "DefaultRandom",
+    "Debug": true,
+    "Forward": { "Items": [ "PrvtI_HeavyArmory.esp", "Immersive Weapons.esp" ] }
+}
+</pre>
                     </div>
                 </div>
 
@@ -449,57 +477,6 @@
                         or if you using Nexus you <strong>must</strong> use spoiler tags.
                     </li>
                 </ol>
-            </section>
-            <section id="global">
-                <h1>Global - Synthesis Settings</h1>
-
-                <p>
-                    Here is where global settings for GSP are.<br />
-                    <img src="./img/synthconfig.png" alt="Synthesis Settings" />
-                </p>
-
-                <div class="setting">
-                    <div class="label">Dynamic Mods:</div>
-                    <div>
-                        You should add all other mods that exist prior to this patcher in the load order here, that are also dynamically generated patches. This includes any of the following the may exist lower in the load order:
-                        <ul>
-                            <li>Synthesis group's patches</li>
-                            <li>SynthEBD patch</li>
-                            <li>Bash patches</li>
-                        </ul>
-                        This will ensure these mods are still processed, but when performing some actions like Merge or HPU, listed mods have special handling.<br />
-                        No need to add mods that exist after this mod in the load order, as they are automatically ignored by Synthesis patches.
-                    </div>
-                </div>
-                <div class="setting">
-                    <div class="label">Folder:</div>
-                    <div>
-                        This is where the GSP JSON config files should be located. By default this is set to "{SkyrimData}\GSP", so you can add GSP JSON config files like normal mods in your mod manager.<br />
-                        If you have multiple Synthesis groups that contain GSP, you should make sure each copy of GSP points to a different folder. In this case you could set it to "{SynthesisData}" and store the JSON config files in the standard Synthesis data folder.
-                    </div>
-                </div>
-                <div class="setting">
-                    <div class="label">Log Level:</div>
-                    <div>
-                        Set what log level you want to output. Default is Info, but you can set to Debug or Trace for more detailed logs.<br />
-                        When set to either Debug or Trace, you must specify what logs at Debug / Trace levels. By default nothing does, so use one of these methods:
-                        <ul>
-                            <li>Using <a href="#debug" class="good">Debug</a> option against Rule(s) and/or Group(s)</li>
-                            <li>Entering a <font class="good">Form Key</font> (012345:Skyrim.esm) in the Logging Global settings.</li>
-                            <li>
-                                Select "<font class="bad">Debug / Trace All</font>" option in Global settings. However this can produce a ridiculously large amount of logs.<br />
-                                Do not use this option when wanting help or reporting bugs.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="setting">
-                    <div class="label">Noisy Debug &Aacute; Trace Logs:</div>
-                    <div>
-                        Can help further reduce the amount of logs generated by turning on/off specific log types. If in doubt leave all on.<br />
-                        However if you are trying to troubleshoot a specific issue like why a merge action, produced a certain result, you could disable all the "Match" logs without much concern.
-                    </div>
-                </div>
             </section>
         </div>
         <br />

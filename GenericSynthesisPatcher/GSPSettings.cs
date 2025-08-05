@@ -60,7 +60,7 @@ namespace GenericSynthesisPatcher
             public ActionLogNoise ActionLogs { get; set; } = new();
 
             [MaintainOrder(100)]
-            public bool Cache { get; set; } = true;
+            public bool Cache { get; set; } = false;
 
             [MaintainOrder(1)]
             public MatchLogNoise MatchLogs { get; set; } = new();
@@ -121,11 +121,11 @@ namespace GenericSynthesisPatcher
 
                 [Tooltip("Log when a match is found for a rule.")]
                 [MaintainOrder(1)]
-                public bool Matched { get; set; } = true;
+                public bool Matched { get; set; } = false;
 
                 [Tooltip("Log when a match is not found for a rule.")]
                 [MaintainOrder(2)]
-                public bool NotMatched { get; set; } = true;
+                public bool NotMatched { get; set; } = false;
             }
         }
     }

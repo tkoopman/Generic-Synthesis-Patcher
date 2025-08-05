@@ -605,7 +605,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim
             game.AddAlias(IStoryManagerQuestNodeGetter.StaticRegistration , "XNAM"       , nameof(IStoryManagerQuestNodeGetter.MaxConcurrentQuests));
 
             game.AddAlias(ITalkingActivatorGetter.StaticRegistration      , "SNAM"       , nameof(ITalkingActivatorGetter.LoopingSound));
-            game.AddAlias(ITalkingActivatorGetter.StaticRegistration      , "VNAM"       , nameof(ITalkingActivatorGetter.VoiceType));
+            game.AddAlias(ITalkingActivatorGetter.StaticRegistration      , "VNAM"       , nameof(ITalkingActivatorGetter.Voice));
 
             game.AddAlias(ITextureSetGetter.StaticRegistration            , "DNAM"       , nameof(ITextureSetGetter.Flags));
             game.AddAlias(ITextureSetGetter.StaticRegistration            , "DODT"       , nameof(ITextureSetGetter.Decal));

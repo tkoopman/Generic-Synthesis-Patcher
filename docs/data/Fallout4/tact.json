@@ -233,8 +233,8 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "\"VoiceType\": \"123:Skyrim.esm\" or \"VoiceType\": \"MyEditorID\"",
+    "Example": "\"Voice\": \"123:Skyrim.esm\" or \"Voice\": \"MyEditorID\"",
     "Flags": 28,
-    "Name": "VoiceType"
+    "Name": "Voice"
   }
 ]

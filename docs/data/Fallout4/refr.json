@@ -478,9 +478,9 @@
   {
     "Aliases": "",
     "Description": "Form Key or Editor ID",
-    "Example": "\"MultiboundReference\": \"123:Skyrim.esm\" or \"MultiboundReference\": \"MyEditorID\"",
+    "Example": "\"MultiBoundReference\": \"123:Skyrim.esm\" or \"MultiBoundReference\": \"MyEditorID\"",
     "Flags": 28,
-    "Name": "MultiboundReference"
+    "Name": "MultiBoundReference"
   },
   {
     "Aliases": "",

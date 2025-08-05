@@ -11,9 +11,10 @@
             <h2>Generic Synthesis Patcher</h2>
         </header>
         <nav class="menu">
-            <a class="active" style="margin-left:auto;" href="./index.html">About</a>
-            <a href="./config.html">Config</a>
-            <a href="./fields.html">Implemented Fields</a>
+            <a class="active" style="margin-left:auto;" href="index.html">About</a>
+            <a href="settings.html">Settings</a>
+            <a href="config.html">Config</a>
+            <a href="fields.html">Implemented Fields</a>
             <a href="https://www.nexusmods.com/skyrimspecialedition/mods/130978" target="_blank">Nexus Link</a>
         </nav>
         <div class="main">
@@ -22,6 +23,10 @@
                 Generic Synthesis Patcher uses JSON configuration files to apply patches to many different record types.<br />
                 It has a number of ways to filter for records to apply actions to, including matching against most implemented fields, and even using RegEx against strings or Editor IDs and also 3 main actions, fill, forward and merge.<br />
                 Rules can even be grouped to share some common filters, or stop processing rules after one has matched.
+            </p>
+            <p>
+                As of v4.0 you can optionally load <a href="https://www.nexusmods.com/skyrimspecialedition/mods/55728" target="_blank">Keyword Item Distributor (KID)</a> INI files, to apply those keyword changes. I did this for people like me who like to be able to review changes made in xEdit, and it might even help with load times.
+                See <a href="settings.html">Settings</a> for enabling this option.
             </p>
 
             Once a record has matched a rule following actions could be applied:
@@ -43,7 +48,7 @@
                 Please see <a href="./config.html">config help</a>, <a href="./fields.html">implemented fields</a> and <a href="https://github.com/tkoopman/Generic-Synthesis-Patcher/tree/master/Examples">examples on GitHub</a> for more details.
             </p>
 
-            While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order, or even be used post bash to assist in fixing anything missed by bash.<br />
+            While this is not intended to replace more specific / complex Synthesis patchers, it can do a lot of more generic changes and fixes to your load order, or even be used post bash to assist in fixing anything missed / broken by bash.<br />
             A number of current patchers would however fit into this generic category.<br />
             I have only tested this with latest Skyrim SE however it should work on other versions.
 
