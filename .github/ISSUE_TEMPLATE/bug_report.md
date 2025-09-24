@@ -11,6 +11,7 @@ assignees: ''
 GSP Version:
 Mutagen Version:
 Synthesis Version:
+GSP initialized for: [Skyrim, Fallout 4, Oblivion]
 
 **Describe the bug**
 A clear and concise description of what the bug is.
