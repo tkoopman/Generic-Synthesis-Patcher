@@ -1,5 +1,6 @@
 using Common.JsonConverters;
 
+using GenericSynthesisPatcher.Exceptions;
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
 
@@ -41,37 +42,50 @@ namespace GenericSynthesisPatcher.Rules
         /// </exception>
         public override int RunActions (ProcessingKeys proKeys)
         {
-            if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeGroup)
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Matched group. Processing Rules.", ClassLogCode);
-
-            var gProKeys = new ProcessingKeys(proKeys.Context, proKeys);
-            int ruleCount = 0;
-            int changesTotal = -1;
-            foreach (var groupRule in Rules)
+            try
             {
-                _ = gProKeys.SetRule(groupRule);
-                Global.Logger.UpdateCurrentProcess(groupRule, proKeys.Context, ClassLogCode);
+                if (Global.Settings.Logging.NoisyLogs.MatchLogs.IncludeGroup)
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.MatchSuccess, "Matched group. Processing Rules.", ClassLogCode);
 
-                ruleCount++;
-                if (groupRule.Matches(gProKeys))
+                var gProKeys = new ProcessingKeys(proKeys.Context, proKeys);
+                int ruleCount = 0;
+                int changesTotal = -1;
+                foreach (var groupRule in Rules)
                 {
-                    int changed = groupRule.RunActions(gProKeys);
-                    if (changed >= 0) // -1 would mean failed OnlyIfDefault check
+                    _ = gProKeys.SetRule(groupRule);
+                    Global.Logger.UpdateCurrentProcess(groupRule, proKeys.Context, ClassLogCode);
+
+                    ruleCount++;
+                    if (groupRule.Matches(gProKeys))
                     {
-                        changesTotal = (changesTotal == -1) ? changed : changesTotal + changed;
-
-                        if (SingleMatch)
+                        int changed = groupRule.RunActions(gProKeys);
+                        if (changed >= 0) // -1 would mean failed OnlyIfDefault check
                         {
-                            if (ruleCount != Rules.Count)
-                                Global.Logger.WriteLog(LogLevel.Trace, LogType.SkippingRule, $"Skipping remaining rules in group due to SingleMatch. Checked {ruleCount}/{Rules.Count}", ClassLogCode);
+                            changesTotal = (changesTotal == -1) ? changed : changesTotal + changed;
 
-                            break;
+                            if (SingleMatch)
+                            {
+                                if (ruleCount != Rules.Count)
+                                    Global.Logger.WriteLog(LogLevel.Trace, LogType.SkippingRule, $"Skipping remaining rules in group due to SingleMatch. Checked {ruleCount}/{Rules.Count}", ClassLogCode);
+
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            return changesTotal;
+                return changesTotal;
+            }
+            catch (GSPActionException ex)
+            {
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, ex.Message, ClassLogCode);
+                return Global.Settings.Logging.ContinueOnError ? 0 : throw new GSPActionException(proKeys, "Group Processing", ex);
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, ex.Message, ClassLogCode);
+                throw new GSPActionException(proKeys, "Group Processing", ex);
+            }
         }
 
         public override bool Validate ()

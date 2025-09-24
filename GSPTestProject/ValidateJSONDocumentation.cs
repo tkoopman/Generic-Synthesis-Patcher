@@ -247,6 +247,14 @@ namespace GSPTestProject
             Assert.True(match);
         }
 
+        [Fact]
+        public void OutputVersion ()
+        {
+            Output.WriteLine($"GSP Version: {GenericSynthesisPatcher.Global.Version}");
+            Output.WriteLine($"Mutagen Version: {GenericSynthesisPatcher.Global.MutagenVersion}");
+            Output.WriteLine($"Synthesis Version: {GenericSynthesisPatcher.Global.SynthesisVersion}");
+        }
+
         [GeneratedRegex(@"^un(?:used|known)\w*$")]
         private static partial Regex UnusedUnknown ();
 

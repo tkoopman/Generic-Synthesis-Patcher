@@ -1,5 +1,6 @@
 using System.Data;
 
+using GenericSynthesisPatcher.Exceptions;
 using GenericSynthesisPatcher.Helpers;
 using GenericSynthesisPatcher.Rules;
 using GenericSynthesisPatcher.Rules.Loaders;
@@ -30,6 +31,8 @@ namespace GenericSynthesisPatcher
 
         public static async Task<int> Main (string[] args)
         {
+            Console.WriteLine($"GSP Version: {Global.Version}");
+
             if (args.Length == 0)
                 return -1;
 
@@ -190,13 +193,30 @@ namespace GenericSynthesisPatcher
                         Global.Logger.UpdateCurrentProcess(rule, context, ClassLogCode);
 
                         _ = proKeys.SetRule(rule);
-                        int changed = rule.RunActions(proKeys);
-                        if (changed >= 0) // -1 would mean failed OnlyIfDefault check
+                        try
                         {
-                            counts.Matched++;
-                            if (changed > 0)
-                                counts.Updated++;
-                            counts.Changes += changed;
+                            int changed = rule.RunActions(proKeys);
+                            if (changed >= 0) // -1 would mean failed OnlyIfDefault check
+                            {
+                                counts.Matched++;
+                                if (changed > 0)
+                                    counts.Updated++;
+                                counts.Changes += changed;
+                            }
+                        }
+                        catch (GSPActionException ex)
+                        {
+                            Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, ex.Message, ClassLogCode);
+
+                            if (Global.Settings.Logging.ContinueOnError)
+                                continue;
+
+                            throw; // Rethrow to stop processing as this is a critical error
+                        }
+                        catch (Exception ex)
+                        {
+                            Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, ex.Message, ClassLogCode);
+                            throw; // Rethrow to stop processing as this is a critical error
                         }
                     }
                 }

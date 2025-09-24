@@ -74,7 +74,20 @@ namespace GenericSynthesisPatcher.Games.Universal.Action
                         continue;
                     }
 
-                    var curKey = curList?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.Value) ?? false, null);
+                    IFormLinkGetter<TMajor>? curKey;
+
+                    try
+                    {
+                        curKey = curList?.SingleOrDefault(k => k?.FormKey.Equals(actionKey.Value) ?? false, null);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, $"Multiple entries found matching {actionKey.Value} in {proKeys.Property.PropertyName}. [{(curList is not null ? string.Join(',', curList.Select(k => k.FormKey.ToString())) : "")}]", ClassLogCode);
+                        if (Global.Settings.Logging.ContinueOnError)
+                            continue;
+
+                        throw;
+                    }
 
                     if ((curKey is not null && actionKey.Operation == ListLogic.DEL) || (curKey is null && actionKey.Operation == ListLogic.ADD))
                     {

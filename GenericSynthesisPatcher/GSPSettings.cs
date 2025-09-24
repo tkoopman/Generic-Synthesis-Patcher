@@ -39,6 +39,11 @@ namespace GenericSynthesisPatcher
             [MaintainOrder(3)]
             public bool All { get; set; }
 
+            [Tooltip("WARNING: If unexpected error found updating a record, will skip that update and continue. However as it was an unexpected error this may cause problems. Review logs to see errors.")]
+            [SettingName("Attempt to continue on unexpected exceptions")]
+            [MaintainOrder(0)]
+            public bool ContinueOnError { get; set; }
+
             [Tooltip("Use in conjunction with Log Level of Debug or Trace. Must include any leading 0s.")]
             [SettingName("Enable Debug & Trace on Form Key")]
             [MaintainOrder(2)]

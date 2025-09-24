@@ -5,6 +5,7 @@ using Common.JsonConverters;
 
 using DynamicData;
 
+using GenericSynthesisPatcher.Exceptions;
 using GenericSynthesisPatcher.Games.Universal.Action;
 using GenericSynthesisPatcher.Games.Universal.Json.Converters;
 using GenericSynthesisPatcher.Helpers;
@@ -649,80 +650,93 @@ namespace GenericSynthesisPatcher.Rules
         {
             var from = action.FromID == FormKey.Null ? proKeys.Record.FormKey : action.FromID;
             bool fromSameID = from == proKeys.Record.FormKey;
+            Type? maskType = null;
+            IModContext<IMajorRecordGetter>? fromContext = null;
 
-            // If not coping over from another record then skip if already master record
-            if (fromSameID && proKeys.Context.IsMaster())
-                return -1;
-
-            if (!proKeys.Record.Registration.TryGetTranslationMaskType(out var maskType))
+            try
             {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask type found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
+                // If not coping over from another record then skip if already master record
+                if (fromSameID && proKeys.Context.IsMaster())
+                    return -1;
 
-            var mask = action.GetMask(maskType);
-            if (mask is null)
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
-
-            if (OnlyIfDefault)
-            {
-                if (!proKeys.Record.Equals(proKeys.GetOriginRecord(), mask))
+                if (!proKeys.Record.Registration.TryGetTranslationMaskType(out maskType))
                 {
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginNotMatch, "DeepCopyIn OnlyIfDefault: Did not match - skipping", ClassLogCode);
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask type found for DeepCopyIn action.", ClassLogCode);
                     return -1;
                 }
 
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginMatch, "DeepCopyIn OnlyIfDefault: Matched", ClassLogCode);
-            }
+                var mask = action.GetMask(maskType);
+                if (mask is null)
+                {
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, "No valid mask found for DeepCopyIn action.", ClassLogCode);
+                    return -1;
+                }
 
-            var AllRecordMods =
+                if (OnlyIfDefault)
+                {
+                    if (!proKeys.Record.Equals(proKeys.GetOriginRecord(), mask))
+                    {
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginNotMatch, "DeepCopyIn OnlyIfDefault: Did not match - skipping", ClassLogCode);
+                        return -1;
+                    }
+
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.OriginMatch, "DeepCopyIn OnlyIfDefault: Matched", ClassLogCode);
+                }
+
+                var AllRecordMods =
                 fromSameID || action.FromMod.SafeAny()
                 ? getAvailableMods(proKeys, action.FromMod, from)
                 : [Global.Game.State.LinkCache.ResolveSimpleContext(from, proKeys.Record.Registration.GetterType, ResolveTarget.Winner)];
 
-            var fromContext = AllRecordMods.FirstOrDefault();
-            if (fromContext is null)
-            {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, "No valid record found for DeepCopyIn action.", ClassLogCode);
-                return -1;
-            }
+                fromContext = AllRecordMods.FirstOrDefault();
+                if (fromContext is null)
+                {
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, "No valid record found for DeepCopyIn action.", ClassLogCode);
+                    return -1;
+                }
 
-            if (proKeys.Record.Equals(fromContext.Record, mask))
-            {
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
-                return 0;
-            }
+                if (proKeys.Record.Equals(fromContext.Record, mask))
+                {
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.NoUpdateAlreadyMatches, LogWriter.PropertyIsEqual, ClassLogCode);
+                    return 0;
+                }
 
-            if (proKeys.GetPatchRecord() is not IMajorRecordInternal patchRecord)
-            {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No changes to {proKeys.Property.PropertyName} invalid record type for DeepCopyIn", ClassLogCode);
-                return 0;
-            }
+                if (proKeys.GetPatchRecord() is not IMajorRecordInternal patchRecord)
+                {
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordUpdateFailure, $"No changes to {proKeys.Property.PropertyName} invalid record type for DeepCopyIn", ClassLogCode);
+                    return 0;
+                }
 
-            Global.Logger.LogAction("Calling DeepCopyIn to update property.", ClassLogCode);
+                Global.Logger.LogAction("Calling DeepCopyIn to update property.", ClassLogCode);
 
-            patchRecord.DeepCopyIn(fromContext.Record, out var errorMask, mask);
-            if (errorMask.IsInError())
-            {
-                Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, $"DeepCopyIn returned with errors.{Environment.NewLine}{errorMask}", ClassLogCode);
-                return 0;
-            }
+                patchRecord.DeepCopyIn(fromContext.Record, out var errorMask, mask);
+                if (errorMask.IsInError())
+                {
+                    Global.Logger.WriteLog(LogLevel.Critical, LogType.RecordUpdateFailure, $"DeepCopyIn returned with errors.{Environment.NewLine}{errorMask}", ClassLogCode);
+                    return 0;
+                }
 
-            foreach (string fieldName in mask.GetEnabled())
-                Program.RecordUpdates.Add((proKeys.Record.Registration, proKeys.Record.FormKey, this, fieldName, 1));
+                foreach (string fieldName in mask.GetEnabled())
+                    Program.RecordUpdates.Add((proKeys.Record.Registration, proKeys.Record.FormKey, this, fieldName, 1));
 
-            if (Global.Logger.CurrentLogLevel <= LogLevel.Debug)
-            {
-                string fromStr = fromSameID ? fromContext.ModKey.FileName
+                if (Global.Logger.CurrentLogLevel <= LogLevel.Debug)
+                {
+                    string fromStr = fromSameID ? fromContext.ModKey.FileName
                     : fromContext.IsMaster() ? from.ToString() : $"{from} in {fromContext.ModKey}";
 
-                Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{LogWriter.RecordUpdated} - DeepCopyIn performed from {fromStr}", ClassLogCode);
-            }
+                    Global.Logger.WriteLog(LogLevel.Debug, LogType.RecordUpdated, $"{LogWriter.RecordUpdated} - DeepCopyIn performed from {fromStr}", ClassLogCode);
+                }
 
-            return 1;
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                var e = new GSPActionException(proKeys, "DeepCopyIn", ex);
+                e.Data.Add("From", from);
+                e.Data.Add("MaskType", maskType?.GetClassName() ?? "Unknown");
+                e.Data.Add("FromMod", fromContext?.ModKey.FileName ?? "Not found");
+                throw e;
+            }
         }
 
         /// <summary>
@@ -736,22 +750,29 @@ namespace GenericSynthesisPatcher.Rules
         /// </returns>
         private int processFillAction (ProcessingKeys proKeys)
         {
-            if (!proKeys.Property.Action.CanFill())
+            try
             {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {proKeys.RuleKey.Value}: No fill enabled action for field.", ClassLogCode);
-                return -1;
+                if (!proKeys.Property.Action.CanFill())
+                {
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {proKeys.RuleKey.Value}: No fill enabled action for field.", ClassLogCode);
+                    return -1;
+                }
+
+                if (proKeys.CheckOnlyIfDefault())
+                    return -1;
+
+                Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Fill)}", ClassLogCode);
+                int changed = proKeys.Property.Action.Fill(proKeys);
+
+                if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
+                    Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
+
+                return changed;
             }
-
-            if (proKeys.CheckOnlyIfDefault())
-                return -1;
-
-            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Fill)}", ClassLogCode);
-            int changed = proKeys.Property.Action.Fill(proKeys);
-
-            if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
-
-            return changed;
+            catch (Exception ex)
+            {
+                throw new GSPActionException(proKeys, "Fill", ex);
+            }
         }
 
         /// <summary>
@@ -768,96 +789,103 @@ namespace GenericSynthesisPatcher.Rules
         /// </returns>
         private int processForwardAction (ProcessingKeys proKeys, FilterOperation ruleKey)
         {
-            // Don't waste time if record is master with no overwrites
-            if (proKeys.Context.IsMaster())
-                return -1;
-
-            if (!tryGetForward(proKeys, ruleKey, out var mods, out string[]? fields))
-                return -1;
-
-            var AllRecordMods = getAvailableMods(proKeys, mods, proKeys.Record.FormKey);
-            if (!AllRecordMods.Any())
-                return -1;
-
-            bool nonDefault = HasForwardOption(ForwardOptions._nonDefaultMod);
-            bool nonNull = HasForwardOption(ForwardOptions._nonNullMod);
-            bool selfMasterOnly = HasForwardOption(ForwardOptions.SelfMasterOnly);
-
-            int changed = 0;
-            foreach (string field in fields)
+            try
             {
-                if (!proKeys.SetProperty(ruleKey, field, ClassLogCode))
-                    continue;
+                // Don't waste time if record is master with no overwrites
+                if (proKeys.Context.IsMaster())
+                    return -1;
 
-                if (!proKeys.Property.Action.CanForward() || (selfMasterOnly && !proKeys.Property.Action.CanForwardSelfOnly()))
-                {
-                    Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {field}: No forward enabled action for field.", ClassLogCode);
-                    continue;
-                }
+                if (!tryGetForward(proKeys, ruleKey, out var mods, out string[]? fields))
+                    return -1;
 
-                if (HasForwardOption(ForwardOptions._hpu))
+                var AllRecordMods = getAvailableMods(proKeys, mods, proKeys.Record.FormKey);
+                if (!AllRecordMods.Any())
+                    return -1;
+
+                bool nonDefault = HasForwardOption(ForwardOptions._nonDefaultMod);
+                bool nonNull = HasForwardOption(ForwardOptions._nonNullMod);
+                bool selfMasterOnly = HasForwardOption(ForwardOptions.SelfMasterOnly);
+
+                int changed = 0;
+                foreach (string field in fields)
                 {
-                    var graph = ForwardRecordGraph.Create(proKeys);
-                    var endNodes = graph?.GetEndNodes(mods);
-                    if (endNodes is null)
+                    if (!proKeys.SetProperty(ruleKey, field, ClassLogCode))
                         continue;
 
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"End nodes: {string.Join(',', endNodes)}", ClassLogCode);
-
-                    var mc = proKeys.Property.Action.FindHPUIndex(proKeys, AllRecordMods, endNodes);
-                    if (mc is not null)
+                    if (!proKeys.Property.Action.CanForward() || (selfMasterOnly && !proKeys.Property.Action.CanForwardSelfOnly()))
                     {
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. From Mod: {mc.ModKey.FileName}.", ClassLogCode);
-                        Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
-                        changed += proKeys.Property.Action.Forward(proKeys, mc);
+                        Global.Logger.WriteLog(LogLevel.Error, LogType.MatchFailure, $"Matched {field}: No forward enabled action for field.", ClassLogCode);
+                        continue;
+                    }
+
+                    if (HasForwardOption(ForwardOptions._hpu))
+                    {
+                        var graph = ForwardRecordGraph.Create(proKeys);
+                        var endNodes = graph?.GetEndNodes(mods);
+                        if (endNodes is null)
+                            continue;
+
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"End nodes: {string.Join(',', endNodes)}", ClassLogCode);
+
+                        var mc = proKeys.Property.Action.FindHPUIndex(proKeys, AllRecordMods, endNodes);
+                        if (mc is not null)
+                        {
+                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. From Mod: {mc.ModKey.FileName}.", ClassLogCode);
+                            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
+                            changed += proKeys.Property.Action.Forward(proKeys, mc);
+                        }
+                        else
+                        {
+                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. Skipping as no valid mod found.", ClassLogCode);
+                        }
+                    }
+                    else if (selfMasterOnly)
+                    {
+                        changed = processForwardSelfMasterOnly(proKeys, mods, AllRecordMods);
                     }
                     else
-                    {
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.HPU)}. Skipping as no valid mod found.", ClassLogCode);
-                    }
-                }
-                else if (selfMasterOnly)
-                {
-                    changed = processForwardSelfMasterOnly(proKeys, mods, AllRecordMods);
-                }
-                else
-                {   // Default Forward Type
-                    if (proKeys.CheckOnlyIfDefault())
-                        continue;
-
-                    // Only forward single record but can loop until valid record found if
-                    // nonDefault and or nonNull used
-                    foreach (var modContext in AllRecordMods)
-                    {
-                        if (nonNull && proKeys.Property.Action.IsNullOrEmpty(proKeys, modContext))
-                        {
-                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as has null/empty value and NonNull option used.", ClassLogCode);
+                    {   // Default Forward Type
+                        if (proKeys.CheckOnlyIfDefault())
                             continue;
-                        }
 
-                        if (nonDefault && proKeys.Property.Action.MatchesOrigin(proKeys, modContext))
+                        // Only forward single record but can loop until valid record found if
+                        // nonDefault and or nonNull used
+                        foreach (var modContext in AllRecordMods)
                         {
-                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as matches origin and NonDefault option used.", ClassLogCode);
-                            continue;
+                            if (nonNull && proKeys.Property.Action.IsNullOrEmpty(proKeys, modContext))
+                            {
+                                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as has null/empty value and NonNull option used.", ClassLogCode);
+                                continue;
+                            }
+
+                            if (nonDefault && proKeys.Property.Action.MatchesOrigin(proKeys, modContext))
+                            {
+                                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {Enum.GetName(ForwardOptions)}. Skipping from mod {modContext.ModKey.FileName} as matches origin and NonDefault option used.", ClassLogCode);
+                                continue;
+                            }
+
+                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {Enum.GetName(ForwardOptions)} From Mod: {modContext.ModKey.FileName}.", ClassLogCode);
+                            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
+                            int changes = proKeys.Property.Action.Forward(proKeys, modContext);
+                            if (changes > 0)
+                                changed += changes;
+
+                            // If we got to here then we have found a valid mod to forward from so
+                            // can stop processing
+                            break;
                         }
-
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {Enum.GetName(ForwardOptions)} From Mod: {modContext.ModKey.FileName}.", ClassLogCode);
-                        Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Forward)}", ClassLogCode);
-                        int changes = proKeys.Property.Action.Forward(proKeys, modContext);
-                        if (changes > 0)
-                            changed += changes;
-
-                        // If we got to here then we have found a valid mod to forward from so can
-                        // stop processing
-                        break;
                     }
+
+                    if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
+                        Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
                 }
 
-                if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                    Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
+                return changed;
             }
-
-            return changed;
+            catch (Exception ex)
+            {
+                throw new GSPActionException(proKeys, "Forward", ex);
+            }
         }
 
         /// <summary>
@@ -871,49 +899,56 @@ namespace GenericSynthesisPatcher.Rules
         /// </returns>
         private int processForwardSelfMasterOnly (ProcessingKeys proKeys, IEnumerable<ModKey> mods, IEnumerable<IModContext<IMajorRecordGetter>> AllRecordMods)
         {
-            bool firstMod = true;
-            int changed = 0;
-
-            if (mods.First() != AllRecordMods.First().ModKey)
-            {   // If first mod is not the same as the first mod in AllRecordMods then we don't forward
-                Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as doesn't contain record in {mods.First()}.", ClassLogCode);
-                return 0;
-            }
-
-            foreach (var mod in AllRecordMods)
+            try
             {
-                if (firstMod && proKeys.CheckOnlyIfDefault())
+                bool firstMod = true;
+                int changed = 0;
+
+                if (mods.First() != AllRecordMods.First().ModKey)
+                {   // If first mod is not the same as the first mod in AllRecordMods then we don't forward
+                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as doesn't contain record in {mods.First()}.", ClassLogCode);
                     return 0;
+                }
 
-                if (firstMod && ForwardOptions.HasFlag(ForwardOptions.DefaultThenSelfMasterOnly))
-                {  // First mod of DefaultThenSelfMasterOnly
-                    if (proKeys.CheckOnlyIfDefault())
-                        break;
-
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
-
-                    int changes = proKeys.Property.Action.Forward(proKeys, mod);
-                    if (changes < 0)
-                    {   // If default forward fails we do not continue with the SelfMasterOnly forwards
-                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as default forward from {mods.First()} failed.", ClassLogCode);
+                foreach (var mod in AllRecordMods)
+                {
+                    if (firstMod && proKeys.CheckOnlyIfDefault())
                         return 0;
+
+                    if (firstMod && ForwardOptions.HasFlag(ForwardOptions.DefaultThenSelfMasterOnly))
+                    {  // First mod of DefaultThenSelfMasterOnly
+                        if (proKeys.CheckOnlyIfDefault())
+                            break;
+
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
+
+                        int changes = proKeys.Property.Action.Forward(proKeys, mod);
+                        if (changes < 0)
+                        {   // If default forward fails we do not continue with the SelfMasterOnly forwards
+                            Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessSkipped, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)}. Skipping as default forward from {mods.First()} failed.", ClassLogCode);
+                            return 0;
+                        }
+
+                        changed += changes;
+                    }
+                    else
+                    {   //  SelfMasterOnly
+                        Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
+
+                        int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, mod);
+                        if (changes > 0)
+                            changed += changes;
                     }
 
-                    changed += changes;
-                }
-                else
-                {   //  SelfMasterOnly
-                    Global.Logger.WriteLog(LogLevel.Trace, LogType.RecordProcessing, $"Forwarding Type: {nameof(ForwardOptions.DefaultThenSelfMasterOnly)} From: {mod.ModKey.FileName}.", ClassLogCode);
-
-                    int changes = proKeys.Property.Action.ForwardSelfOnly(proKeys, mod);
-                    if (changes > 0)
-                        changed += changes;
+                    firstMod = false;
                 }
 
-                firstMod = false;
+                return changed;
             }
-
-            return changed;
+            catch (Exception ex)
+            {
+                throw new GSPActionException(proKeys, "Forward Self Only", ex);
+            }
         }
 
         /// <summary>
@@ -928,22 +963,29 @@ namespace GenericSynthesisPatcher.Rules
         /// </returns>
         private int processMerge (ProcessingKeys proKeys)
         {
-            if (!proKeys.Property.Action.CanMerge())
+            try
             {
-                Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, "No merge action found", ClassLogCode);
-                return -1;
+                if (!proKeys.Property.Action.CanMerge())
+                {
+                    Global.Logger.WriteLog(LogLevel.Error, LogType.RecordActionInvalid, "No merge action found", ClassLogCode);
+                    return -1;
+                }
+
+                if (proKeys.CheckOnlyIfDefault())
+                    return -1;
+
+                Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Merge)}", ClassLogCode);
+                int changed = proKeys.Property.Action.Merge(proKeys);
+
+                if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
+                    Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
+
+                return changed;
             }
-
-            if (proKeys.CheckOnlyIfDefault())
-                return -1;
-
-            Global.Logger.LogAction($"{proKeys.Property.Action.GetType().GetClassName()}.{nameof(IRecordAction.Merge)}", ClassLogCode);
-            int changed = proKeys.Property.Action.Merge(proKeys);
-
-            if (changed > 0) // TODO: Change this so that not using static field in Program class - This way for now as this code use to be in that class
-                Program.RecordUpdates.Add((proKeys.Type, proKeys.Record.FormKey, this, proKeys.Property.PropertyName, changed));
-
-            return changed;
+            catch (Exception ex)
+            {
+                throw new GSPActionException(proKeys, "Merge", ex);
+            }
         }
     }
 }
