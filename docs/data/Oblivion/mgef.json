@@ -36,8 +36,8 @@
   },
   {
     "Aliases": "",
-    "Description": "Flags (Hostile, Recover, Detrimental, MagnitudePercent, Self, Touch, Target, NoDuration, NoMagnitude, NoArea, FXPersist, Spellmaking, Enchanting, NoIngredient, UNKNOWN_14, UNKNOWN_15, UseWeapon, UseArmor, UseCreature, UseSkill, UseAttribute, UNKNWOWN_21, UNKNWOWN_22, UNKNWOWN_23, UseActorValue, SprayProjectileOrFog, BoltProjectile, NoHitEffect, UNKNOWN_28, UNKNOWN_29, UNKNOWN_30)",
-    "Example": "\"Data.Flags\": [ \"Hostile\", \"-UNKNOWN_30\" ]",
+    "Description": "Flags (Hostile, Recover, Detrimental, MagnitudePercent, Self, Touch, Target, NoDuration, NoMagnitude, NoArea, FXPersist, Spellmaking, Enchanting, NoIngredient, UseWeapon, UseArmor, UseCreature, UseSkill, UseAttribute, UseActorValue, SprayProjectileOrFog, BoltProjectile, NoHitEffect)",
+    "Example": "\"Data.Flags\": [ \"Hostile\", \"-NoHitEffect\" ]",
     "Flags": 93,
     "Name": "Data.Flags"
   },

@@ -120,9 +120,9 @@
   },
   {
     "Aliases": "DNAM",
-    "Description": "Flags (MagicCasting, MagicHitEffect, EnchantmentEffect)",
-    "Example": "\"Type\": [ \"MagicCasting\", \"-EnchantmentEffect\" ]",
-    "Flags": 92,
+    "Description": "Possible values (MagicCasting, MagicHitEffect, EnchantmentEffect)",
+    "Example": "\"Type\": \"MagicCasting\"",
+    "Flags": 12,
     "Name": "Type"
   },
   {
