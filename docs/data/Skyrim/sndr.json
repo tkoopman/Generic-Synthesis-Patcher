@@ -99,16 +99,16 @@
   },
   {
     "Aliases": "",
-    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
-    "Example": "\"PercentFrequencyShift\": \"30.5%\"",
-    "Flags": 24,
+    "Description": "Numeric value",
+    "Example": "\"PercentFrequencyShift\": 7",
+    "Flags": 28,
     "Name": "PercentFrequencyShift"
   },
   {
     "Aliases": "",
-    "Description": "Decimal value between 0.00 - 1.00, or string ending in %",
-    "Example": "\"PercentFrequencyVariance\": \"30.5%\"",
-    "Flags": 24,
+    "Description": "Numeric value",
+    "Example": "\"PercentFrequencyVariance\": 7",
+    "Flags": 28,
     "Name": "PercentFrequencyVariance"
   },
   {

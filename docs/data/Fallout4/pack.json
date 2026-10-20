@@ -85,17 +85,17 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions, OffForImportantScene)",
+    "Example": "\"InterruptFlags\": [ \"HellosToPlayer\", \"-OffForImportantScene\" ]",
+    "Flags": 92,
+    "Name": "InterruptFlags"
+  },
+  {
+    "Aliases": "",
     "Description": "Possible values (None, Spectator, ObserveDead, GuardWarn, Combat, CommandTravel, CommandActivate, LeaveWorkstation)",
     "Example": "\"InterruptOverride\": \"None\"",
     "Flags": 12,
     "Name": "InterruptOverride"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions, OffForImportantScene)",
-    "Example": "\"InteruptFlags\": [ \"HellosToPlayer\", \"-OffForImportantScene\" ]",
-    "Flags": 92,
-    "Name": "InteruptFlags"
   },
   {
     "Aliases": "",

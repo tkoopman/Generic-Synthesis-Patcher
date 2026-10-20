@@ -8,8 +8,8 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <AssemblyVersion>4.0.1.25267</AssemblyVersion>
-    <FileVersion>4.0.1.267</FileVersion>
+    <AssemblyVersion>4.0.2.293</AssemblyVersion>
+    <FileVersion>4.0.2.293</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <ShouldCreateLogs>True</ShouldCreateLogs>

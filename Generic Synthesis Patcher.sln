@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.11.35312.102
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.12224.323 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericSynthesisPatcher", "GenericSynthesisPatcher\GenericSynthesisPatcher.csproj", "{8BA2E1B7-DD65-42B6-A780-17E4037A3C1B}"
 EndProject
@@ -26,5 +26,19 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E31913BF-9823-48A6-8ACA-FC6E9E878B83}
+	EndGlobalSection
+	GlobalSection(AutomaticVersions) = postSolution
+		PrimaryVersionType = AssemblyVersionAttribute
+		UpdateAssemblyVersion = True
+		UpdateAssemblyFileVersion = True
+		UpdateAssemblyInfoVersion = True
+		ShouldCreateLogs = True
+		AdvancedSettingsExpanded = True
+		AssemblyVersionSettings = None.IncrementOnDemandWithResetOnIncrease.IncrementOnDemandWithResetOnIncrease.DayOfYearStamp
+		AssemblyFileVersionSettings = None.IncrementOnDemandWithResetOnIncrease.IncrementOnDemandWithResetOnIncrease.DayOfYearStamp
+		UpdatePackageVersion = False
+		AssemblyInfoVersionSemVerSettings = AssemblyVersion.IncrementWithAutoReset.None
+		AssemblyInfoVersionType = SemVer1
+		InheritWinAppVersionFrom = None
 	EndGlobalSection
 EndGlobal

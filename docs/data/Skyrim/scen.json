@@ -29,7 +29,7 @@
   },
   {
     "Aliases": "FNAM",
-    "Description": "Flags (BeginOnQuestStart, StopQuestOnEnd, RepeatConditionsWhileTrue, Interruptable)",
+    "Description": "Flags (BeginOnQuestStart, StopQuestOnEnd, ShowAllText, RepeatConditionsWhileTrue, Interruptable)",
     "Example": "\"Flags\": [ \"BeginOnQuestStart\", \"-Interruptable\" ]",
     "Flags": 92,
     "Name": "Flags"

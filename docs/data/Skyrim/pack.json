@@ -71,17 +71,17 @@
   },
   {
     "Aliases": "",
+    "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions)",
+    "Example": "\"InterruptFlags\": [ \"HellosToPlayer\", \"-WorldInteractions\" ]",
+    "Flags": 92,
+    "Name": "InterruptFlags"
+  },
+  {
+    "Aliases": "",
     "Description": "Possible values (None, Spectator, ObserveDead, GuardWarn, Combat)",
     "Example": "\"InterruptOverride\": \"None\"",
     "Flags": 12,
     "Name": "InterruptOverride"
-  },
-  {
-    "Aliases": "",
-    "Description": "Flags (HellosToPlayer, RandomConversations, ObserveCombatBehavior, GreetCorpseBehavior, ReactionToPlayerActions, FriendlyFireComments, AggroRadiusBehavior, AllowIdleChatter, WorldInteractions)",
-    "Example": "\"InteruptFlags\": [ \"HellosToPlayer\", \"-WorldInteractions\" ]",
-    "Flags": 92,
-    "Name": "InteruptFlags"
   },
   {
     "Aliases": "",
