@@ -33,7 +33,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         public override OwnerTarget ToActionData ()
         {
             if (Faction is null || Faction.Value == FormKey.Null)
-                return new NoOwner();
+                return new UntypedOwner();
 
             var owner = new Mutagen.Bethesda.Skyrim.FactionOwner
             {

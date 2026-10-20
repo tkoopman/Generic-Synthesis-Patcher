@@ -52,7 +52,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
                     break;
 
                 default:
-                    extraData.Owner = new NoOwner();
+                    extraData.Owner = new UntypedOwner();
                     break;
             }
 

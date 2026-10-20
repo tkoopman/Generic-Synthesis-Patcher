@@ -32,7 +32,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
             var extraData = new ExtraData
             {
                 ItemCondition = ItemCondition,
-                Owner = Owner?.ToActionData() ?? new NoOwner(),
+                Owner = Owner?.ToActionData() ?? new UntypedOwner(),
             };
 
             return extraData;

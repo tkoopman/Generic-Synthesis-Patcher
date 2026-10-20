@@ -34,7 +34,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         public override OwnerTarget ToActionData ()
         {
             if (IsNull())
-                return new NoOwner();
+                return new UntypedOwner();
 
             var owner = new Mutagen.Bethesda.Skyrim.NpcOwner();
             if (NPC is not null && NPC.Value != FormKey.Null)
